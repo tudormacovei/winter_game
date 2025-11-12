@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc01kpxj88dy8"]
+
+[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://object_manipulation/objects/milk_carton.tscn" id="1_is2ab"]
+[ext_resource type="Script" uid="uid://bhh4wa5b2nnlg" path="res://object_manipulation/object_rotator.gd" id="1_uybdy"]
+
+[node name="ObjectRotator" type="Node3D"]
+script = ExtResource("1_uybdy")
+
+[node name="Object_Root" parent="." instance=ExtResource("1_is2ab")]

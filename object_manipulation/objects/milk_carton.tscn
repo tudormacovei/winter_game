@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://wbmtaxw68vkw"]
+
+[ext_resource type="PackedScene" uid="uid://c6o22afpevqhy" path="res://3d_assets/milk_carton.blend" id="1_eumth"]
+
+[node name="Object_Root" type="Node3D"]
+
+[node name="milk_carton" parent="." instance=ExtResource("1_eumth")]
