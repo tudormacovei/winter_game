@@ -2,18 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxpq3vpnpdqug"
-path.s3tc="res://.godot/imported/bottle_cap Base Color.png-aec61c16635f28b1bbfad145c104a57c.s3tc.ctex"
+uid="uid://dmt67pckiovej"
+path.s3tc="res://.godot/imported/milk_carton_bottle_cap Base Color.png-e5474694905c3bfb51eb8559251473c4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
+generator_parameters={
+"md5": "ec9b7a69117bdbebec0c2c86a4cf5978"
+}
 
 [deps]
 
-source_file="res://3d_assets/textures/bottle_cap Base Color.png"
-dest_files=["res://.godot/imported/bottle_cap Base Color.png-aec61c16635f28b1bbfad145c104a57c.s3tc.ctex"]
+source_file="res://3d_assets/milk_carton_bottle_cap Base Color.png"
+dest_files=["res://.godot/imported/milk_carton_bottle_cap Base Color.png-e5474694905c3bfb51eb8559251473c4.s3tc.ctex"]
 
 [params]
 
