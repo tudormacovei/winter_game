@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://qq7fn5km1o4b"]
+
+[ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
+
+[sub_resource type="Environment" id="Environment_8pwe6"]
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
+
+[node name="workspace" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.0010784268, -0.0041418076, -2.995707)
+mesh = SubResource("PlaneMesh_8pwe6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 50.0
+script = ExtResource("1_jt3v7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8pwe6")
+camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
