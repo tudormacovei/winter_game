@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://de6i82a3il87d" path="res://main_game_view/materials/pastel_yellow.tres" id="3_i0vej"]
 [ext_resource type="Material" uid="uid://b5qkcsma2jofn" path="res://main_game_view/materials/dark_red.tres" id="3_kvbp6"]
 [ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://object_manipulation/object_rotator.tscn" id="4_xo82b"]
+[ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
 
@@ -14,8 +15,6 @@
 ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
-
-[sub_resource type="Compositor" id="Compositor_kvbp6"]
 
 [node name="workspace" type="Node3D"]
 
@@ -60,7 +59,6 @@ script = ExtResource("1_jt3v7")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8pwe6")
 camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
-compositor = SubResource("Compositor_kvbp6")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.7284288)
@@ -101,3 +99,10 @@ light_energy = 0.5
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.42365292, -0.7597821, 0.49320307, -0.75856656, -2.848215e-08, 0.6515956, -0.49507076, -0.6501777, -0.5763455, -3.8702822, 0, 0)
 light_energy = 0.3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_kvbp6")
