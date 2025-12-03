@@ -1,6 +1,7 @@
 extends Node3D
 
 enum RotatorState {
+	OnTable, # Resting on the table, cannot be interacted with except by clicking to begin the interaction
 	Stationary,
 	RotatingLeft,
 	RotatingRight,
@@ -8,7 +9,7 @@ enum RotatorState {
 	RotatingBottom
 }
 
-var rotatorState = RotatorState.Stationary
+var rotatorState = RotatorState.OnTable
 var rotationRemaining = 0.0
 var elapsedTime = 0.0
 
@@ -21,7 +22,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	handle_rotation(delta)
-	pass
+	#print("test")
 
 func _input(event: InputEvent) -> void:
 	# disregard input if rotation ongoing
@@ -54,6 +55,9 @@ func ease_function(x : float) -> float:
 # the rotate(...) function. That way it will be much easier to set custom
 # rotation curves to handle the animation 
 func handle_rotation(delta: float) -> void:
+	if rotatorState == RotatorState.OnTable:
+		return
+	
 	# to_rotate is from 0.0 to 1.0 here
 	var to_rotate = delta / ANIMATION_TIME * ease_function(rotationRemaining) 
 	
@@ -68,17 +72,74 @@ func handle_rotation(delta: float) -> void:
 	
 	match rotatorState:
 		RotatorState.RotatingBottom:
-			$Object_Root.rotate(Vector3.RIGHT, to_rotate)
+			$Object.rotate(Vector3.RIGHT, to_rotate)
 			pass
 		RotatorState.RotatingUp:
-			$Object_Root.rotate(Vector3.RIGHT, -to_rotate)
+			$Object.rotate(Vector3.RIGHT, -to_rotate)
 			pass
 		RotatorState.RotatingLeft:
-			$Object_Root.rotate(Vector3.UP, -to_rotate)
+			$Object.rotate(Vector3.UP, -to_rotate)
 			pass
 		RotatorState.RotatingRight:
-			$Object_Root.rotate(Vector3.UP, to_rotate)
+			$Object.rotate(Vector3.UP, to_rotate)
 			pass
 
 	if rotationRemaining == 0.0:
 		rotatorState = RotatorState.Stationary
+
+
+@export var outline_material : Material
+var _original_mesh: Mesh = null
+
+# Add outline to mesh and lift it slightly
+func _on_object_mouse_entered() -> void:
+	var mesh_instance := $Object.get_child(0) as MeshInstance3D
+	if mesh_instance == null:
+		return
+	if outline_material == null:
+		push_error("outline_material not set!")
+		return
+
+	if _original_mesh != null:
+		return  # already applied outline
+
+	var mesh := mesh_instance.mesh
+	if mesh == null:
+		return
+	else:
+		_original_mesh = mesh
+
+	# Duplicate mesh so we don't modify the imported/shared resource
+	var mesh_clone := mesh.duplicate()
+	mesh_instance.mesh = mesh_clone
+
+	# Apply next_pass to each surface
+	for i in range(mesh.get_surface_count()):
+		var base_mat: Material = mesh_clone.surface_get_material(i)
+		if base_mat == null:
+			base_mat = StandardMaterial3D.new()
+
+		var new_mat := base_mat.duplicate()
+		new_mat.next_pass = outline_material
+
+		mesh_clone.surface_set_material(i, new_mat)
+		
+	$Object.position.z += 0.1
+	rotatorState = RotatorState.Stationary
+
+# Restore original mesh without outline material and original position
+func _on_object_mouse_exited() -> void:
+	# Restore original mesh
+	var mesh_instance := $Object.get_child(0) as MeshInstance3D
+	if mesh_instance == null: # 'as' keyword casts to null on type mismatch
+		return
+
+	# if somehow we are in the case where we exit an object we have not entered
+	if _original_mesh == null:
+		return
+
+	mesh_instance.mesh = _original_mesh
+	_original_mesh = null
+	
+	$Object.position.z -= 0.1
+	rotatorState = RotatorState.OnTable
