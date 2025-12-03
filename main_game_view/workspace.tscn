@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=13 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Material" uid="uid://3504gcpvku0f" path="res://main_game_view/materials/white.tres" id="1_dkgyy"]
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="Material" uid="uid://ckao64resnyu5" path="res://main_game_view/materials/grey.tres" id="1_q336l"]
 [ext_resource type="Material" uid="uid://bgnv3408a5txv" path="res://main_game_view/materials/olive_green.tres" id="2_7cfoo"]
+[ext_resource type="Material" uid="uid://d0rrs65alkyrs" path="res://main_game_view/materials/off_black.tres" id="3_6aodu"]
 [ext_resource type="Material" uid="uid://de6i82a3il87d" path="res://main_game_view/materials/pastel_yellow.tres" id="3_i0vej"]
 [ext_resource type="Material" uid="uid://b5qkcsma2jofn" path="res://main_game_view/materials/dark_red.tres" id="3_kvbp6"]
 [ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://object_manipulation/object_rotator.tscn" id="4_xo82b"]
@@ -18,41 +19,52 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="workspace" type="Node3D"]
 
-[node name="DialogueView" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, -0.0010784268, -0.0041418076, -4.431217)
+[node name="DialogueView" type="Node3D" parent="."]
+
+[node name="DialogueViewBackground" type="MeshInstance3D" parent="DialogueView"]
+transform = Transform3D(5.163039, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, -0.0010784268, -0.0041418076, -4.431217)
 material_override = ExtResource("1_q336l")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../..")
 
 [node name="Dialogue_Background2" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(1.0407827, 0, 0, 0, 1, 1.7763568e-15, 0, 0, 0.41652045, 0, 0.22104311, 0.66763985)
+transform = Transform3D(5.170317, 0, 0, 0, -1.7484555e-07, -1.6660818, 0, 4, -7.2826744e-08, -0.0010784268, -2.6747012, -3.5470448)
 material_override = ExtResource("2_7cfoo")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_8pwe6")
 skeleton = NodePath("../..")
 
 [node name="Dialogue_Background3" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(0.20114696, 0, 0, 0, 1, 1.7763568e-15, 0, 0, 0.29835084, -0.3513974, 0.14023495, 0.2671403)
+transform = Transform3D(0.80458784, 0, 0, 0, -1.7484555e-07, -1.1934034, 0, 4, -5.2165312e-08, -1.406668, -1.072703, -3.8702774)
 material_override = ExtResource("3_kvbp6")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_8pwe6")
 skeleton = NodePath("../..")
 
 [node name="Dialogue_Background4" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(0.100301534, 0, 0, 0, 0.72968733, 4.440892e-16, 0, 0, 0.10553913, -0.3513974, 0.14023495, -0.21596727)
+transform = Transform3D(0.40120614, 0, 0, 0, -1.2758258e-07, -0.4221565, 0, 2.9187493, -1.8453045e-08, -1.406668, 0.85972726, -3.8702774)
 material_override = ExtResource("1_dkgyy")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_8pwe6")
 skeleton = NodePath("../..")
 
 [node name="Dialogue_Background5" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(0.031213261, -2.7812703e-08, -0.056637354, 1.1253045e-09, 0.99999994, -8.892298e-10, 0.025743961, -9.989872e-09, 0.06866997, -0.012871787, 0.1600815, -0.15168951)
+transform = Transform3D(0.124853045, -1.1125081e-07, -0.22654942, -0.102975845, -1.3488605e-07, -0.27467987, 8.881784e-16, 3.9999998, -1.5563558e-08, -0.052565575, 0.60261625, -3.7908912)
 material_override = ExtResource("3_kvbp6")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../DialogueViewBackground")
+
+[node name="Dialogue_Background6" type="MeshInstance3D" parent="DialogueView"]
+transform = Transform3D(2.4978786, 0, 0, 0, 0.31420797, -0.20983483, 0, 2.4883661, 0.15272424, -0.0010784268, -0.76505363, -0.9739411)
+material_override = ExtResource("3_6aodu")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../DialogueViewBackground")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 1.7484555e-07, 0, -1.7484555e-07, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 fov = 50.0
 script = ExtResource("1_jt3v7")
 
@@ -64,29 +76,33 @@ camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.7284288)
 text = "This is the dialogue view"
 
-[node name="WorkbenchView" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.3208376, 0, 0, 0, 4, 0, 0, 0, 0.9477355, -0.0010784268, -1.3744134, -0.21590245)
+[node name="WorkbenchView" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1738847, -0.04025507)
+
+[node name="WorkbenchBackground" type="MeshInstance3D" parent="WorkbenchView"]
+transform = Transform3D(2.0515313, 0, 0, 0, 4, 0, 0, 0, 0.9477355, -0.0010784268, -0.31450438, -0.21590245)
 material_override = ExtResource("3_i0vej")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../..")
 
 [node name="Label3D2" type="Label3D" parent="WorkbenchView"]
-transform = Transform3D(0.75709534, 0, 0, 0, -1.0927847e-08, 0.25, 0, -1.0551466, -4.612191e-08, 0.00081647193, 0.015469283, -0.44617897)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711374e-08, 0, -0.25262725, -0.6387621)
 text = "This is the workbench"
 font_size = 24
 
 [node name="ObjectRotator" parent="WorkbenchView" instance=ExtResource("4_xo82b")]
-transform = Transform3D(0.75709534, 0, 0, 0, -1.0927847e-08, 0.25, 0, -1.0551466, -4.612192e-08, 0.0039198594, 0.061763763, -0.048258588)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711378e-08, 0.004099071, -0.06744933, -0.26163882)
 
 [node name="Label3D3" type="Label3D" parent="WorkbenchView"]
-transform = Transform3D(0.75709534, 0, 0, 0, -1.0927847e-08, 0.24999999, 0, -1.0551466, -4.6121908e-08, 0.00081647193, 0.015469283, 0.47866374)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 0.99999994, 0, -0.9999999, -4.371137e-08, 0, -0.25262725, 0.23774418)
 modulate = Color(0.749467, 0.31661773, 0.16700774, 1)
 text = "steal zone"
 font_size = 16
 outline_size = 4
 
 [node name="Label3D4" type="Label3D" parent="WorkbenchView"]
-transform = Transform3D(-5.2117983e-08, -1.0551465, -4.612191e-08, 0, -1.0927846e-08, 0.24999999, -1.1923205, 4.6121908e-08, 5.9867315e-15, 0.5899992, 0.015469283, -0.03779961)
+transform = Transform3D(-6.883939e-08, -1.3936771, -6.0919554e-08, 0, -4.3711385e-08, 0.99999994, -1.1300044, 4.371137e-08, 5.673838e-15, 0.7782147, -0.25262725, -0.25172648)
 modulate = Color(0.34509805, 0.76862746, 0.3647059, 1)
 text = "done zome"
 font_size = 30
