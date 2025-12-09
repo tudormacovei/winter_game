@@ -5,18 +5,18 @@ var WORK_AREA_ROTATION = -80.0
 var ANIMATION_TIME = 0.4
 
 enum CameraState {
-	Stationary,
-	Rotating
+	STATIONARY,
+	ROTATING
 }
 
 enum CameraFocus {
-	DialogueArea,
-	WorkArea
+	DIALOGUE_AREA,
+	WORK_AREA
 }
 
-var camera_state = CameraState.Stationary
-var camera_focus = CameraFocus.DialogueArea
-var rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rotation animation
+var _camera_state = CameraState.STATIONARY
+var _camera_focus = CameraFocus.DIALOGUE_AREA
+var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rotation animation
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,30 +36,30 @@ func symmetrical_smooth(x: float):
 	return (sin(x*PI - PI / 2) + 1) / 2.0
 
 func handle_rotation(delta: float):
-	if camera_state == CameraState.Stationary:
+	if _camera_state == CameraState.STATIONARY:
 		return
 	
 	var animation_increment = delta / ANIMATION_TIME
-	rotation_tracker += animation_increment
-	var begin_rotation = DIALOGUE_ROTATION if camera_focus == CameraFocus.WorkArea else WORK_AREA_ROTATION
-	var end_rotation = WORK_AREA_ROTATION if camera_focus == CameraFocus.WorkArea else DIALOGUE_ROTATION
-	var new_rotation = lerpf(begin_rotation, end_rotation, symmetrical_smooth(rotation_tracker))
+	_rotation_tracker += animation_increment
+	var begin_rotation = DIALOGUE_ROTATION if _camera_focus == CameraFocus.WORK_AREA else WORK_AREA_ROTATION
+	var end_rotation = WORK_AREA_ROTATION if _camera_focus == CameraFocus.WORK_AREA else DIALOGUE_ROTATION
+	var new_rotation = lerpf(begin_rotation, end_rotation, symmetrical_smooth(_rotation_tracker))
 	$".".rotation_degrees.x = new_rotation
 	
-	if rotation_tracker >= 1.0:
-		camera_state = CameraState.Stationary
-		rotation_tracker = 0.0
+	if _rotation_tracker >= 1.0:
+		_camera_state = CameraState.STATIONARY
+		_rotation_tracker = 0.0
 
 # sets variables to toggle the camera view between dialogue view to the work area view
 func toggle_view():
 	# If we are rotation then we are interrupting a rotation with a toggle
 	# To go the other direction we need the complement - if we have a little left to the original destination, 
 	# then we have a long way back
-	if camera_state == CameraState.Rotating:
-		rotation_tracker = 1.0 - rotation_tracker
-	camera_state = CameraState.Rotating
+	if _camera_state == CameraState.ROTATING:
+		_rotation_tracker = 1.0 - _rotation_tracker
+	_camera_state = CameraState.ROTATING
 		
-	if camera_focus == CameraFocus.DialogueArea:
-		camera_focus = CameraFocus.WorkArea
+	if _camera_focus == CameraFocus.DIALOGUE_AREA:
+		_camera_focus = CameraFocus.WORK_AREA
 	else:
-		camera_focus = CameraFocus.DialogueArea
+		_camera_focus = CameraFocus.DIALOGUE_AREA

@@ -17,7 +17,7 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
 
-[node name="workspace" type="Node3D"]
+[node name="Workspace" type="Node3D"]
 
 [node name="DialogueView" type="Node3D" parent="."]
 
