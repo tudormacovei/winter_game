@@ -68,6 +68,9 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 fov = 50.0
 script = ExtResource("1_jt3v7")
 
+[node name="FocusPosition" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1055619)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8pwe6")
 camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
@@ -91,8 +94,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711374e
 text = "This is the workbench"
 font_size = 24
 
-[node name="ObjectRotator" parent="WorkbenchView" instance=ExtResource("4_xo82b")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711378e-08, 0.004099071, -0.06744933, -0.26163882)
+[node name="ObjectRotator" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711378e-08, 0.21070021, -0.06744933, -0.26163882)
+focus_position = NodePath("../../Camera3D/FocusPosition")
 
 [node name="Label3D3" type="Label3D" parent="WorkbenchView"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 0.99999994, 0, -0.9999999, -4.371137e-08, 0, -0.25262725, 0.23774418)
@@ -107,6 +111,10 @@ modulate = Color(0.34509805, 0.76862746, 0.3647059, 1)
 text = "done zome"
 font_size = 30
 outline_size = 2
+
+[node name="ObjectRotator2" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711378e-08, -0.83010775, -0.06744933, -0.26163882)
+focus_position = NodePath("../../Camera3D/FocusPosition")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.96592593, 1.13133405e-08, -0.2588191, 0.2578759, 0.085295156, 0.9624058, 0.022076022, -0.9963557, 0.08238878, -3.8702822, 0, 0)
