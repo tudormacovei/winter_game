@@ -1,7 +1,13 @@
-~ start
-Character: So what's on your mind today?
+~ initialize_local_variables
+# NOTE: These vars are only relevant for and will only be used in this dialogue and will be deleted after it ends. 
+do Variables.add_local("knows_secret", false) # Does MC know the character's deepest darkest secret?
+=> start
+
+~ start 
+Character: So what's on your mind today? 
 - The weather is crazy, right? => branch_weather
 - I wanna know your deepest darkest secret, please => branch_secrets
+# NOTE: "knows_of_cat" is a global variable that is relevant / can be accessed from other dialogues
 - How's Fluffels? [if Variables.get_var("knows_of_cat") == true] => branch_cat 
 => END
 
@@ -13,8 +19,11 @@ Character: I actually like it. And my cat Fluffels likes it too. [do Variables.s
 
 ~ branch_cat
 Character: She died.
-- I'm sorry to hear
-- I didn't like her anyways
+- I'm sorry to hear 
+	Character: Yeah... thanks
+- I didn't like her anyways 
+	if Variables.get_var("knows_secret")
+		Character: To let you in on another secret... I didn't like her either...
 => start
 
 ~ branch_secrets
@@ -22,14 +31,16 @@ Character: Nope
 - Please?
 	Character: No!
 	- Please
-	- Okay
-		if not Variables.get_var("is_MC_ugly") # NOTE: This variable is already set by default to true 
+# NOTE: "is_MC_ugly" variable is global and already set by default to true. 
+# Try to change it to false in global_variables.tres to see all dialogue play out!
+		if not Variables.get_var("is_MC_ugly")
 			Character: You're pretty so I'll tell you.
-			Character: I once woke up with a spider in my pants. 
+			Character: I once woke up with a spider in my pants. [do Variables.set_var("knows_secret", true)]
 			- That's not so bad
 			- That's so embarassing! 
 		else
 			Character: You're ugly and I said [pulse]NO[/pulse]
 			- Okay...
+	- Okay
 - Okay
 => start
