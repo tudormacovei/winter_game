@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bbyat1fjhi4tu"
+path="res://.godot/imported/showcase.dialogue-28d31e29eb47036a2e951f316c579a99.tres"
+
+[deps]
+
+source_file="res://dialogue/showcase.dialogue"
+dest_files=["res://.godot/imported/showcase.dialogue-28d31e29eb47036a2e951f316c579a99.tres"]
+
+[params]
+
+defaults=true

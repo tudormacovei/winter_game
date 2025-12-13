@@ -6,7 +6,7 @@ Character: So what's on your mind today?
 => END
 
 ~ branch_weather
-Character: I actually like it. And my cat Fluffels likes it too. [do Variables.set_var("knows_of_cat", true) ]
+Character: I actually like it. And my cat Fluffels likes it too. [do Variables.set_var("knows_of_cat", true)]
 - Weird...
 - I get it.
 => start
