@@ -1,67 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=9 format=3 uid="uid://qq7fn5km1o4b"]
 
-[ext_resource type="Material" uid="uid://3504gcpvku0f" path="res://main_game_view/materials/white.tres" id="1_dkgyy"]
-[ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
-[ext_resource type="Material" uid="uid://ckao64resnyu5" path="res://main_game_view/materials/grey.tres" id="1_q336l"]
-[ext_resource type="Material" uid="uid://bgnv3408a5txv" path="res://main_game_view/materials/olive_green.tres" id="2_7cfoo"]
-[ext_resource type="Material" uid="uid://d0rrs65alkyrs" path="res://main_game_view/materials/off_black.tres" id="3_6aodu"]
-[ext_resource type="Material" uid="uid://de6i82a3il87d" path="res://main_game_view/materials/pastel_yellow.tres" id="3_i0vej"]
-[ext_resource type="Material" uid="uid://b5qkcsma2jofn" path="res://main_game_view/materials/dark_red.tres" id="3_kvbp6"]
-[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://object_manipulation/object_rotator.tscn" id="4_xo82b"]
+[ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scenes/main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
+[ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
+[ext_resource type="Material" uid="uid://de6i82a3il87d" path="res://scenes/main_game_view/materials/pastel_yellow.tres" id="3_i0vej"]
+[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="4_xo82b"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
+
 [node name="Workspace" type="Node3D"]
 
-[node name="DialogueView" type="Node3D" parent="."]
-
-[node name="DialogueViewBackground" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(5.163039, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, -0.0010784268, -0.0041418076, -4.431217)
-material_override = ExtResource("1_q336l")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
-
-[node name="Dialogue_Background2" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(5.170317, 0, 0, 0, -1.7484555e-07, -1.6660818, 0, 4, -7.2826744e-08, -0.0010784268, -2.6747012, -3.5470448)
-material_override = ExtResource("2_7cfoo")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
-
-[node name="Dialogue_Background3" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(0.80458784, 0, 0, 0, -1.7484555e-07, -1.1934034, 0, 4, -5.2165312e-08, -1.406668, -1.072703, -3.8702774)
-material_override = ExtResource("3_kvbp6")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
-
-[node name="Dialogue_Background4" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(0.40120614, 0, 0, 0, -1.2758258e-07, -0.4221565, 0, 2.9187493, -1.8453045e-08, -1.406668, 0.85972726, -3.8702774)
-material_override = ExtResource("1_dkgyy")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
-
-[node name="Dialogue_Background5" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(0.124853045, -1.1125081e-07, -0.22654942, -0.102975845, -1.3488605e-07, -0.27467987, 8.881784e-16, 3.9999998, -1.5563558e-08, -0.052565575, 0.60261625, -3.7908912)
-material_override = ExtResource("3_kvbp6")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../DialogueViewBackground")
-
-[node name="Dialogue_Background6" type="MeshInstance3D" parent="DialogueView"]
-transform = Transform3D(2.4978786, 0, 0, 0, 0.31420797, -0.20983483, 0, 2.4883661, 0.15272424, -0.0010784268, -0.76505363, -0.9739411)
-material_override = ExtResource("3_6aodu")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../DialogueViewBackground")
+[node name="DialogueView" parent="." instance=ExtResource("1_w2y3b")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)

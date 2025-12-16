@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bil841httn5by"]
 
-[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://object_manipulation/object_rotator.tscn" id="1_d84ec"]
+[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="1_d84ec"]
 
 [node name="Scene_Root" type="Node3D"]
 

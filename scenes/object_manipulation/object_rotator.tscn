@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc01kpxj88dy8"]
 
-[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://object_manipulation/objects/milk_carton.tscn" id="1_is2ab"]
-[ext_resource type="Script" uid="uid://bhh4wa5b2nnlg" path="res://object_manipulation/object_rotator.gd" id="1_uybdy"]
+[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="1_is2ab"]
+[ext_resource type="Script" uid="uid://bhh4wa5b2nnlg" path="res://scenes/object_manipulation/object_rotator.gd" id="1_uybdy"]
 [ext_resource type="Material" uid="uid://lh5rtw0dljba" path="res://3d_assets/materials/white_outline.tres" id="2_1acb4"]
 
 [node name="ObjectRotator" type="Node3D"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck2v4ahcemn45"]
+
+[ext_resource type="Material" uid="uid://ckao64resnyu5" path="res://scenes/main_game_view/materials/grey.tres" id="1_7ypkw"]
+[ext_resource type="Material" uid="uid://bgnv3408a5txv" path="res://scenes/main_game_view/materials/olive_green.tres" id="2_sybs4"]
+[ext_resource type="Material" uid="uid://b5qkcsma2jofn" path="res://scenes/main_game_view/materials/dark_red.tres" id="3_pnv4g"]
+[ext_resource type="Material" uid="uid://3504gcpvku0f" path="res://scenes/main_game_view/materials/white.tres" id="4_4f5l2"]
+[ext_resource type="Material" uid="uid://d0rrs65alkyrs" path="res://scenes/main_game_view/materials/off_black.tres" id="5_pkseh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
+
+[node name="DialogueView" type="Node3D"]
+
+[node name="DialogueViewBackground" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.163039, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, -0.0010784268, -0.0041418076, -4.431217)
+material_override = ExtResource("1_7ypkw")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../..")
+
+[node name="Dialogue_Background2" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.170317, 0, 0, 0, -1.7484555e-07, -1.6660818, 0, 4, -7.2826744e-08, -0.0010784268, -2.6747012, -3.5470448)
+material_override = ExtResource("2_sybs4")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../..")
+
+[node name="Dialogue_Background3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.80458784, 0, 0, 0, -1.7484555e-07, -1.1934034, 0, 4, -5.2165312e-08, -1.406668, -1.072703, -3.8702774)
+material_override = ExtResource("3_pnv4g")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../..")
+
+[node name="Dialogue_Background4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.40120614, 0, 0, 0, -1.2758258e-07, -0.4221565, 0, 2.9187493, -1.8453045e-08, -1.406668, 0.85972726, -3.8702774)
+material_override = ExtResource("4_4f5l2")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../..")
+
+[node name="Dialogue_Background5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.124853045, -1.1125081e-07, -0.22654942, -0.102975845, -1.3488605e-07, -0.27467987, 8.881784e-16, 3.9999998, -1.5563558e-08, -0.052565575, 0.60261625, -3.7908912)
+material_override = ExtResource("3_pnv4g")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../DialogueViewBackground")
+
+[node name="Dialogue_Background6" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.4978786, 0, 0, 0, 0.31420797, -0.20983483, 0, 2.4883661, 0.15272424, -0.0010784268, -0.76505363, -0.9739411)
+material_override = ExtResource("5_pkseh")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8pwe6")
+skeleton = NodePath("../DialogueViewBackground")
