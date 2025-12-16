@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="winter_game"
-run/main_scene="uid://bil841httn5by"
+run/main_scene="uid://qq7fn5km1o4b"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
