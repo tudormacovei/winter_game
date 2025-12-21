@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://i5qiolqusxix"]
+
+[ext_resource type="PackedScene" uid="uid://dxea46wkfx4ce" path="res://3d_assets/stickers/Sticker.glb" id="1_hk4ui"]
+
+[node name="StickerBase" type="Node3D"]
+
+[node name="Sticker" parent="." instance=ExtResource("1_hk4ui")]
