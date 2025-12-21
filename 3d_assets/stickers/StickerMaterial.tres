@@ -4,8 +4,9 @@
 
 [resource]
 resource_name = "StickerMaterial"
-transparency = 1
+transparency = 4
 cull_mode = 2
 albedo_texture = ExtResource("1_dvi3c")
 roughness = 0.5
-emission = Color(1, 1, 1, 1)
+emission_enabled = true
+emission_texture = ExtResource("1_dvi3c")

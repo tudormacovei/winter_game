@@ -9,10 +9,12 @@ background_energy_multiplier = 0.0
 [node name="StickerTest" type="Node3D"]
 
 [node name="StickerBase" parent="." instance=ExtResource("1_3ctbt")]
-cylinder_origin = Vector3(0, 0, 1)
+transform = Transform3D(1.0000002, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+cylinder_origin = Vector3(2.09, 0, 0)
+cylinder_radius = Vector2(0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 29.96554, 0)
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 6.377022e-08, 0.7294463, 0.6840381, 5.9800506e-08, 0.6840381, -0.7294463, 0, 1.3947544, -1.707634)
 environment = SubResource("Environment_vowdq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
