@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bktr4eceqgheb"]
+[gd_scene load_steps=13 format=3 uid="uid://bktr4eceqgheb"]
 
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_5sgtx"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_j8juc"]
+[ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_kvndo"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_kvndo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -119,7 +120,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -219.0
+offset_top = -720.0
+offset_bottom = -501.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -127,6 +129,7 @@ grow_vertical = 0
 clip_children = 2
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("2_kvndo")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer"]
 layout_mode = 2
@@ -161,7 +164,8 @@ size_flags_vertical = 8
 
 [node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
 unique_name_in_owner = true
-polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
+position = Vector2(16, 0)
+polygon = PackedVector2Array(0, 0, 10, 10, 14.967194, 5.032799, 20, 0, 12.179443, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
 libraries = {
@@ -177,20 +181,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -290.5
-offset_top = -35.0
-offset_right = 290.5
-offset_bottom = 35.0
+offset_left = -640.0
+offset_top = -155.0
+offset_right = -59.0
+offset_bottom = -84.99933
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("3_kvndo")
-response_template = NodePath("ResponseExample")
+response_template = NodePath("MarginContainer/ResponseExample")
 
-[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/ResponsesMenu"]
 layout_mode = 2
+
+[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_kvndo")
 text = "Response example"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
