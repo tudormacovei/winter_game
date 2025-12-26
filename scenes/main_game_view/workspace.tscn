@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=8 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scenes/main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
-[ext_resource type="Material" uid="uid://de6i82a3il87d" path="res://scenes/main_game_view/materials/pastel_yellow.tres" id="3_i0vej"]
+[ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="4_8yn6g"]
 [ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="4_xo82b"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
@@ -11,14 +11,12 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
-
 [node name="Workspace" type="Node3D"]
 
 [node name="DialogueView" parent="." instance=ExtResource("1_w2y3b")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 fov = 50.0
 script = ExtResource("1_jt3v7")
 
@@ -29,46 +27,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1055619)
 environment = SubResource("Environment_8pwe6")
 camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.7284288)
-text = "This is the dialogue view"
-
 [node name="WorkbenchView" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1738847, -0.04025507)
+transform = Transform3D(1, 0, 0, 0, 0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, -1.1738847, -0.04025507)
 
-[node name="WorkbenchBackground" type="MeshInstance3D" parent="WorkbenchView"]
-transform = Transform3D(2.0515313, 0, 0, 0, 4, 0, 0, 0, 0.9477355, -0.0010784268, -0.31450438, -0.21590245)
-material_override = ExtResource("3_i0vej")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
-
-[node name="Label3D2" type="Label3D" parent="WorkbenchView"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711374e-08, 0, -0.25262725, -0.6387621)
-text = "This is the workbench"
-font_size = 24
-
-[node name="ObjectRotator" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
+[node name="PlaceholderObject1" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711378e-08, 0.21070021, -0.06744933, -0.26163882)
 focus_position = NodePath("../../Camera3D/FocusPosition")
 
-[node name="Label3D3" type="Label3D" parent="WorkbenchView"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 0.99999994, 0, -0.9999999, -4.371137e-08, 0, -0.25262725, 0.23774418)
-modulate = Color(0.749467, 0.31661773, 0.16700774, 1)
-text = "steal zone"
-font_size = 16
-outline_size = 4
-
-[node name="Label3D4" type="Label3D" parent="WorkbenchView"]
-transform = Transform3D(-6.883939e-08, -1.3936771, -6.0919554e-08, 0, -4.3711385e-08, 0.99999994, -1.1300044, 4.371137e-08, 5.673838e-15, 0.7782147, -0.25262725, -0.25172648)
-modulate = Color(0.34509805, 0.76862746, 0.3647059, 1)
-text = "done zome"
-font_size = 30
-outline_size = 2
-
-[node name="ObjectRotator2" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
+[node name="PlaceholderObject2" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -0.9999999, -4.3711378e-08, -0.83010775, -0.06744933, -0.26163882)
 focus_position = NodePath("../../Camera3D/FocusPosition")
+
+[node name="Sprite3D" type="Sprite3D" parent="WorkbenchView"]
+transform = Transform3D(1, 0, 0, 0, 8.940697e-08, 1.000001, 0, -1.000001, 8.940697e-08, 0, -0.23480654, -0.16693169)
+pixel_size = 0.0007
+texture = ExtResource("4_8yn6g")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.96592593, 1.13133405e-08, -0.2588191, 0.2578759, 0.085295156, 0.9624058, 0.022076022, -0.9963557, 0.08238878, -3.8702822, 0, 0)

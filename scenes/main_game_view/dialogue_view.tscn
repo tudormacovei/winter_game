@@ -1,53 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=5 format=3 uid="uid://ck2v4ahcemn45"]
 
-[ext_resource type="Material" uid="uid://ckao64resnyu5" path="res://scenes/main_game_view/materials/grey.tres" id="1_7ypkw"]
-[ext_resource type="Material" uid="uid://bgnv3408a5txv" path="res://scenes/main_game_view/materials/olive_green.tres" id="2_sybs4"]
-[ext_resource type="Material" uid="uid://b5qkcsma2jofn" path="res://scenes/main_game_view/materials/dark_red.tres" id="3_pnv4g"]
-[ext_resource type="Material" uid="uid://3504gcpvku0f" path="res://scenes/main_game_view/materials/white.tres" id="4_4f5l2"]
-[ext_resource type="Material" uid="uid://d0rrs65alkyrs" path="res://scenes/main_game_view/materials/off_black.tres" id="5_pkseh"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_8pwe6"]
+[ext_resource type="Texture2D" uid="uid://ddfhywfx6lq6t" path="res://2d_assets/backgrounds/DialogueView_Background.webp" id="2_kbq0g"]
+[ext_resource type="Texture2D" uid="uid://bar82r5cjhkus" path="res://2d_assets/other/DialogueView_Table.webp" id="3_isxcp"]
+[ext_resource type="Texture2D" uid="uid://b02me1app15jj" path="res://2d_assets/characters/DialogueView_NPC.webp" id="4_08sga"]
+[ext_resource type="Texture2D" uid="uid://c66nv75f08dqa" path="res://2d_assets/other/Workshop_Inbetween.webp" id="4_kbq0g"]
 
 [node name="DialogueView" type="Node3D"]
 
-[node name="DialogueViewBackground" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.163039, 0, 0, 0, -1.7484555e-07, -4, 0, 4, -1.7484555e-07, -0.0010784268, -0.0041418076, -4.431217)
-material_override = ExtResource("1_7ypkw")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
+[node name="DialogueBackground" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
+pixel_size = 0.002
+texture = ExtResource("2_kbq0g")
 
-[node name="Dialogue_Background2" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.170317, 0, 0, 0, -1.7484555e-07, -1.6660818, 0, 4, -7.2826744e-08, -0.0010784268, -2.6747012, -3.5470448)
-material_override = ExtResource("2_sybs4")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
+[node name="DialogueForeground" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9)
+pixel_size = 0.002
+texture = ExtResource("3_isxcp")
 
-[node name="Dialogue_Background3" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.80458784, 0, 0, 0, -1.7484555e-07, -1.1934034, 0, 4, -5.2165312e-08, -1.406668, -1.072703, -3.8702774)
-material_override = ExtResource("3_pnv4g")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
+[node name="DialogueCharacterTexture" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.92)
+pixel_size = 0.002
+texture = ExtResource("4_08sga")
 
-[node name="Dialogue_Background4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.40120614, 0, 0, 0, -1.2758258e-07, -0.4221565, 0, 2.9187493, -1.8453045e-08, -1.406668, 0.85972726, -3.8702774)
-material_override = ExtResource("4_4f5l2")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../..")
-
-[node name="Dialogue_Background5" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.124853045, -1.1125081e-07, -0.22654942, -0.102975845, -1.3488605e-07, -0.27467987, 8.881784e-16, 3.9999998, -1.5563558e-08, -0.052565575, 0.60261625, -3.7908912)
-material_override = ExtResource("3_pnv4g")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../DialogueViewBackground")
-
-[node name="Dialogue_Background6" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.4978786, 0, 0, 0, 0.31420797, -0.20983483, 0, 2.4883661, 0.15272424, -0.0010784268, -0.76505363, -0.9739411)
-material_override = ExtResource("5_pkseh")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_8pwe6")
-skeleton = NodePath("../DialogueViewBackground")
+[node name="DialogueInbetweenTexture" type="Sprite3D" parent="."]
+transform = Transform3D(1.145, 0, 0, 0, 0.9645327, 0.61701035, 0, -0.61701035, 0.9645327, 0, -0.7979435, -0.9693927)
+pixel_size = 0.0005
+texture = ExtResource("4_kbq0g")
