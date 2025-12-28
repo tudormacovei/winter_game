@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://0b7vbosvb14x"]
+
+[ext_resource type="Script" uid="uid://dxo2gf6oehl36" path="res://scenes/sticker_interaction/sticker_click/sticker_click_interaction.gd" id="1_iwyti"]
+[ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_iwyti"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3rrf"]
+size = Vector3(2, 0.1, 2)
+
+[node name="Sticker" type="Area3D"]
+script = ExtResource("1_iwyti")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_iwyti")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_b3rrf")

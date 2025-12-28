@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://rqn51eeja1ox"]
+[gd_scene load_steps=5 format=3 uid="uid://rqn51eeja1ox"]
 
-[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_base/sticker_base.tscn" id="1_3ctbt"]
+[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="1_3ctbt"]
 [ext_resource type="PackedScene" uid="uid://wesuvbb5vbef" path="res://3d_assets/milk_carton.glb" id="2_vowdq"]
+[ext_resource type="PackedScene" uid="uid://0b7vbosvb14x" path="res://scenes/sticker_interaction/stickers/sticker.tscn" id="3_dj5ns"]
 
 [sub_resource type="Environment" id="Environment_vowdq"]
 background_energy_multiplier = 0.0
@@ -10,6 +11,7 @@ background_energy_multiplier = 0.0
 
 [node name="StickerBase" parent="." instance=ExtResource("1_3ctbt")]
 transform = Transform3D(1.0000002, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+visible = false
 cylinder_origin = Vector3(2.09, 0, 0)
 cylinder_radius = Vector2(0.5, 0)
 
@@ -22,3 +24,5 @@ transform = Transform3D(1, 0, 0, 0, 0.1397089, 0.9901926, 0, -0.9901926, 0.13970
 
 [node name="milk_carton" parent="." instance=ExtResource("2_vowdq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0001244843, 0, 1.4120009)
+
+[node name="StickerClick" parent="." instance=ExtResource("3_dj5ns")]

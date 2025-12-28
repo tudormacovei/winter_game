@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://i5qiolqusxix"]
-
-[ext_resource type="Script" uid="uid://cr5fw7w2xidk8" path="res://scenes/sticker_interaction/sticker_base/sticker_base.gd" id="1_7nm4c"]
-[ext_resource type="PackedScene" uid="uid://dxea46wkfx4ce" path="res://3d_assets/stickers/Sticker.glb" id="1_hk4ui"]
-
-[node name="StickerBase" type="Node3D"]
-script = ExtResource("1_7nm4c")
-
-[node name="Sticker" parent="." instance=ExtResource("1_hk4ui")]
