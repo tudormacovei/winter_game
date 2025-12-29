@@ -1,11 +1,6 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
-# TODOs for this and response menu
-#TODO[ziana]: Set anchors and sizing correctly. 
-#TODO[ziana]: Set styles correctly for button (on disabled, on hover etc)
-#TODO[ziana]: Set alignment of this container so that it grows downwards not in both directions.
-
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
