@@ -1,6 +1,11 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+# TODOs for this and response menu
+#TODO[ziana]: Set anchors and sizing correctly. 
+#TODO[ziana]: Set styles correctly for button (on disabled, on hover etc)
+#TODO[ziana]: Set alignment of this container so that it grows downwards not in both directions.
+
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
@@ -69,7 +74,7 @@ var mutation_cooldown: Timer = Timer.new()
 
 
 func _ready() -> void:
-	balloon.hide()
+	#balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 	# If the responses menu doesn't have a next action set, use this one
@@ -85,7 +90,7 @@ func _ready() -> void:
 		start()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 

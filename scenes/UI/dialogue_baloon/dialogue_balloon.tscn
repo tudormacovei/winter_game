@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_5sgtx"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_j8juc"]
 [ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_kvndo"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_kvndo"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_kvndo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -100,48 +100,44 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="ExampleBalloon" type="CanvasLayer"]
+[node name="DialogueBalloon" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_5sgtx")
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon"]
+[node name="MarginContainerDialogue" type="MarginContainer" parent="Balloon"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -720.0
-offset_bottom = -501.0
+anchors_preset = -1
+offset_left = 701.0
+offset_top = 84.0
+offset_right = 1261.0
+offset_bottom = 302.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainerDialogue"]
 clip_children = 2
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("2_kvndo")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainerDialogue/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
@@ -151,52 +147,50 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_j8juc")]
+[node name="DialogueLabel" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_j8juc")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Dialogue..."
 
-[node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+[node name="Progress" type="Polygon2D" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer/Control"]
 unique_name_in_owner = true
-position = Vector2(16, 0)
-polygon = PackedVector2Array(0, 0, 10, 10, 14.967194, 5.032799, 20, 0, 12.179443, 0)
+position = Vector2(11, 0)
+polygon = PackedVector2Array(0, 0, 10, 10, 20, 0, 12.179443, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer/Control"]
 libraries = {
 &"": SubResource("AnimationLibrary_1337t")
 }
 autoplay = "progress"
 
-[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" node_paths=PackedStringArray("response_template")]
+[node name="MarginContainerResponses" type="MarginContainer" parent="Balloon"]
+layout_mode = 0
+offset_left = 701.0
+offset_top = 290.0
+offset_right = 952.0
+offset_bottom = 358.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainerResponses"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainerResponses/VBoxContainer" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -155.0
-offset_right = -59.0
-offset_bottom = -84.99933
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_vertical = 8
+theme = ExtResource("2_kvndo")
 theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("3_kvndo")
-response_template = NodePath("MarginContainer/ResponseExample")
+response_template = NodePath("ResponseExample")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon/ResponsesMenu"]
-layout_mode = 2
-
-[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu/MarginContainer"]
+[node name="ResponseExample" type="Button" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu"]
 layout_mode = 2
 theme = ExtResource("2_kvndo")
 text = "Response example"
@@ -205,4 +199,4 @@ text = "Response example"
 unique_name_in_owner = true
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
-[connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
+[connection signal="response_selected" from="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
