@@ -1,7 +1,11 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3 uid="uid://c3pfis3nstlxn"]
+[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=3 format=3 uid="uid://c3pfis3nstlxn"]
 
-[ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_xrgyh"]
+[ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_454m6"]
+[ext_resource type="Texture2D" uid="uid://boepxj12cgepx" path="res://2d_assets/characters/DialogueView_NPC_1.png" id="2_t1e80"]
 
 [resource]
-script = ExtResource("1_xrgyh")
+script = ExtResource("1_454m6")
+character_id = "NPC_1"
+description = "This is the first NPC"
+sprite = ExtResource("2_t1e80")
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
