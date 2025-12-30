@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3 uid="uid://c3pfis3nstlxn"]
+
+[ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_xrgyh"]
+
+[resource]
+script = ExtResource("1_xrgyh")
+metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

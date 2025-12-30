@@ -1,7 +1,7 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
-# TODO[ziana]: Show dialogue state bubble when in workspace view
+# TODO: Show dialogue state bubble when in workspace view
 
 const CameraControlScript = preload("res://scenes/main_game_view/scripts/camera_control.gd")
 

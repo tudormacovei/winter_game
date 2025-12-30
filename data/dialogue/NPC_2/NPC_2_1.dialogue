@@ -1,0 +1,10 @@
+~ start 
+NPC_2: Hello I am NPC 2.
+- Cool
+	NPC_2: Nice
+	=> END
+- Nice
+	NPC_2: Cool
+	=> END
+=> END
+
