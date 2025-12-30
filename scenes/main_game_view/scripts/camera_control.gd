@@ -1,3 +1,4 @@
+class_name CameraControl
 extends Camera3D
 
 var DIALOGUE_ROTATION = 0.0
@@ -13,6 +14,8 @@ enum CameraFocus {
 	DIALOGUE_AREA,
 	WORK_AREA
 }
+
+signal camera_focus_changed(current_focus)
 
 var _camera_state = CameraState.STATIONARY
 var _camera_focus = CameraFocus.DIALOGUE_AREA
@@ -33,7 +36,7 @@ func _input(event: InputEvent) -> void:
 # smoothes out a value between 0 and 1
 # function is symmetrical with respect to (0.5, 0.5)
 func symmetrical_smooth(x: float):
-	return (sin(x*PI - PI / 2) + 1) / 2.0
+	return (sin(x * PI - PI / 2) + 1) / 2.0
 
 func handle_rotation(delta: float):
 	if _camera_state == CameraState.STATIONARY:
@@ -63,3 +66,5 @@ func toggle_view():
 		_camera_focus = CameraFocus.WORK_AREA
 	else:
 		_camera_focus = CameraFocus.DIALOGUE_AREA
+
+	emit_signal("camera_focus_changed", _camera_focus)

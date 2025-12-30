@@ -1,6 +1,10 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+# TODO[ziana]: Show dialogue state bubble when in workspace view
+
+const CameraControlScript = preload("res://scenes/main_game_view/scripts/camera_control.gd")
+
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
@@ -19,6 +23,8 @@ extends CanvasLayer
 
 ## A sound player for voice lines (if they exist).
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
+
+@onready var camera: CameraControl = %Camera3D
 
 ## Temporary game states
 var temporary_game_states: Array = []
@@ -69,8 +75,10 @@ var mutation_cooldown: Timer = Timer.new()
 
 
 func _ready() -> void:
-	#balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
+
+	if camera and camera.has_signal("camera_focus_changed"):
+		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
@@ -89,11 +97,10 @@ func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 
-
+## Consume input when balloon is visible, otherwise propagate it
 func _unhandled_input(_event: InputEvent) -> void:
-	# Only the balloon is allowed to handle input while it's showing
-	get_viewport().set_input_as_handled()
-
+	if is_instance_valid(balloon) and balloon.visible:
+		get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
 	## Detect a change of locale and update the current dialogue line to show the new language
@@ -209,5 +216,12 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
+func _on_camera_focus_changed(current_focus) -> void:
+	if current_focus == CameraControl.CameraFocus.WORK_AREA:
+		balloon.hide()
+	elif current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+		# Delay showing the ballon until the camera rotation is complete
+		await get_tree().create_timer(camera.ANIMATION_TIME).timeout
+		balloon.show()
 
 #endregion

@@ -116,9 +116,9 @@ theme = SubResource("Theme_qq3yp")
 layout_mode = 1
 anchors_preset = -1
 offset_left = 495.0
-offset_top = 85.0
+offset_top = 135.0
 offset_right = 1255.0
-offset_bottom = 202.00009
+offset_bottom = 252.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -176,9 +176,9 @@ autoplay = "progress"
 [node name="MarginContainerResponses" type="MarginContainer" parent="Balloon"]
 layout_mode = 0
 offset_left = 495.0
-offset_top = 180.0
+offset_top = 230.0
 offset_right = 745.99963
-offset_bottom = 247.99998
+offset_bottom = 298.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainerResponses"]
 layout_mode = 2

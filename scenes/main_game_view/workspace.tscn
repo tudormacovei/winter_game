@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=10 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scenes/main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="4_8yn6g"]
 [ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="4_xo82b"]
+[ext_resource type="PackedScene" uid="uid://bktr4eceqgheb" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.tscn" id="6_mp6x8"]
+[ext_resource type="Resource" uid="uid://duodbfog3u28y" path="res://data/dialogue/showcase.dialogue" id="7_x8h8r"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
@@ -16,6 +18,7 @@ ambient_light_color = Color(1, 1, 1, 1)
 [node name="DialogueView" parent="." instance=ExtResource("1_w2y3b")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 fov = 50.0
 script = ExtResource("1_jt3v7")
@@ -57,3 +60,7 @@ light_energy = 0.3
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_kvbp6")
+
+[node name="DialogueBalloon" parent="CanvasLayer" instance=ExtResource("6_mp6x8")]
+dialogue_resource = ExtResource("7_x8h8r")
+auto_start = true
