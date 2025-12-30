@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Utils="*res://scripts/utils.gd"
 Variables="*res://scripts/systems/variables/variable_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 

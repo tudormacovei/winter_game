@@ -32,10 +32,4 @@ func _update_id_from_filename():
             notify_property_list_changed() # Update Inspector display
             print("Day ID for file %s updated to %d based on filename." % [file_name, day_id])
     else:
-            _debug_error("File %s does not match naming convention 'day_<number>.tres'" % file_name)
-
-#TODO[ziana]: Make a new Utils Autoload script instead of defining this function again
-static func _debug_error(message: String):
-    push_error(message)
-    if OS.has_feature("debug"):
-        OS.alert(message)
+        Utils.debug_error("File %s does not match naming convention 'day_<number>.tres'" % file_name)
