@@ -4,7 +4,7 @@ extends Node3D
 @export var focus_position: Node3D
 
 # outline of object on mouse hover
-@export var outline_material : Material
+@export var outline_material: Material
 
 enum RotatorState {
 	ON_TABLE, # Resting on the table, cannot be interacted with except by clicking to begin the interaction
@@ -29,9 +29,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_handle_rotation(delta)
 
-func _input(event: InputEvent) -> void:	
+func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
-		print("LOG: Mouse Click")
+		# print("LOG: Mouse Click")
 		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
 			_rotator_state = RotatorState.STATIONARY
 			# TODO: remove outline on focus gain
@@ -62,8 +62,8 @@ func _input(event: InputEvent) -> void:
 
 # takes value of a value x between 0.0 and 1.0 and applies a nonlinear
 # transformation that keeps the endpoints at 0.0 and 1.0, respectively
-func ease_function(x : float) -> float:
-	return (x*x + 0.2)/2
+func ease_function(x: float) -> float:
+	return (x * x + 0.2) / 2
 
 # Handles the rotation of the object with an ease-in and ease-out animation
 # TODO:This method of handling the rotation is not good, should be switched
@@ -75,7 +75,7 @@ func _handle_rotation(delta: float) -> void:
 		return
 	
 	# to_rotate is from 0.0 to 1.0 here
-	var to_rotate = delta / ANIMATION_TIME * ease_function(_rotation_remaining) 
+	var to_rotate = delta / ANIMATION_TIME * ease_function(_rotation_remaining)
 	
 	if to_rotate > _rotation_remaining:
 		to_rotate = _rotation_remaining
@@ -117,7 +117,7 @@ func _on_object_mouse_entered() -> void:
 		return
 
 	if _original_mesh != null:
-		return  # already applied outline
+		return # already applied outline
 
 	var mesh := mesh_instance.mesh
 	if mesh == null:
