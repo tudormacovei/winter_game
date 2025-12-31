@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=6 format=3 uid="uid://brby2v1rlbwg8"]
+
+[ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
+[ext_resource type="Resource" uid="uid://d0g4y7qnfxc0" path="res://data/characters/NPC_2.tres" id="2_7circ"]
+[ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="2_jitoe"]
+[ext_resource type="Resource" uid="uid://ch0e1ug6uhjup" path="res://data/dialogue/NPC_2/NPC_2_2.dialogue" id="3_uxq47"]
+
+[sub_resource type="Resource" id="Resource_ylnnp"]
+script = ExtResource("1_5ihi8")
+character = ExtResource("2_7circ")
+dialogue = ExtResource("3_uxq47")
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[resource]
+script = ExtResource("2_jitoe")
+day_id = 2
+interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_ylnnp")])
+metadata/_custom_type_script = "uid://bta87oci6xlf5"
