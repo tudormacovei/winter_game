@@ -1,11 +1,6 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
-# TODO: Show dialogue state bubble when in workspace view
-
-const CameraControlScript = preload("res://scenes/main_game_view/scripts/camera_control.gd")
-
-
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
 
@@ -23,8 +18,6 @@ const CameraControlScript = preload("res://scenes/main_game_view/scripts/camera_
 
 ## A sound player for voice lines (if they exist).
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
-
-@onready var camera: CameraControl = %Camera3D
 
 ## Temporary game states
 var temporary_game_states: Array = []
@@ -76,9 +69,6 @@ var mutation_cooldown: Timer = Timer.new()
 
 func _ready() -> void:
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
-
-	if camera and camera.has_signal("camera_focus_changed"):
-		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 
 	# If the responses menu doesn't have a next action set, use this one
 	if responses_menu.next_action.is_empty():
@@ -215,13 +205,5 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
-
-func _on_camera_focus_changed(current_focus) -> void:
-	if current_focus == CameraControl.CameraFocus.WORK_AREA:
-		balloon.hide()
-	elif current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		# Delay showing the ballon until the camera rotation is complete
-		await get_tree().create_timer(camera.ANIMATION_TIME).timeout
-		balloon.show()
 
 #endregion

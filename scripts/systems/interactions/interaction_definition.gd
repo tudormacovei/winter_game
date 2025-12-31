@@ -1,13 +1,16 @@
 ## Holds all data about a specific interaction. 
 ## An interaction is defined as a single meeting between the player and an NPC and it is made up of:
+## - A character
 ## - A dialogue
 ## - [TODO] Some object(s) that the character brings with them
 ##
 ## Only meant to exist as a resource part of a [code]DayDefinition[/code], not as a standalone file.
-class_name InteractionDefintion
+class_name InteractionDefinition
 extends Resource
 
-#TODO: Add variables for objects 
-#TODO[ziana]: When implementing, figure out if character_id var is necessary or if it can be inferred from the dialogue
+const CharacterResource := preload("res://scripts/systems/interactions/character_definition.gd")
 
-@export var dialogue: Array[Resource] = []
+@export var character: CharacterResource
+@export var dialogue: Resource
+
+#TODO: Add variables for objects 

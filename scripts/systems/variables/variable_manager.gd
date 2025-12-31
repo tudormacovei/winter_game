@@ -42,9 +42,6 @@ func add_local(var_name: String, initial_value):
 	variables[var_name] = initial_value
 	_local_variables_keys.append(var_name)
 
-func _on_dialogue_ended(resource):
-	# TODO[ziana]: Test this after scene set-up is done!
+func _on_dialogue_ended(_resource):
 	for key in _local_variables_keys:
 		variables.erase(key)
-	
-	print("VariableManager:_on_dialogue_ended Cleared locals, dialogue finished:", resource)

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scenes/main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
+[ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/game_manager.gd" id="1_x8h8r"]
 [ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="4_8yn6g"]
 [ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="4_xo82b"]
-[ext_resource type="PackedScene" uid="uid://bktr4eceqgheb" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.tscn" id="6_mp6x8"]
-[ext_resource type="Resource" uid="uid://duodbfog3u28y" path="res://data/dialogue/showcase.dialogue" id="7_x8h8r"]
+[ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
@@ -16,19 +16,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 [node name="Workspace" type="Node3D"]
 
 [node name="DialogueView" parent="." instance=ExtResource("1_w2y3b")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
-fov = 50.0
-script = ExtResource("1_jt3v7")
-
-[node name="FocusPosition" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1055619)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8pwe6")
-camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
 
 [node name="WorkbenchView" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, -1.1738847, -0.04025507)
@@ -46,6 +33,29 @@ transform = Transform3D(1, 0, 0, 0, 8.940697e-08, 1.000001, 0, -1.000001, 8.9406
 pixel_size = 0.0007
 texture = ExtResource("4_8yn6g")
 
+[node name="Managers" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_x8h8r")
+metadata/_custom_type_script = "uid://dyhn8xx75acn4"
+
+[node name="UIManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("5_mp6x8")
+metadata/_custom_type_script = "uid://dgcq710oaye20"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+fov = 50.0
+script = ExtResource("1_jt3v7")
+
+[node name="FocusPosition" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1055619)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8pwe6")
+camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.96592593, 1.13133405e-08, -0.2588191, 0.2578759, 0.085295156, 0.9624058, 0.022076022, -0.9963557, 0.08238878, -3.8702822, 0, 0)
 light_energy = 0.5
@@ -54,13 +64,9 @@ light_energy = 0.5
 transform = Transform3D(0.42365292, -0.7597821, 0.49320307, -0.75856656, -2.848215e-08, 0.6515956, -0.49507076, -0.6501777, -0.5763455, -3.8702822, 0, 0)
 light_energy = 0.3
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MotionBlurLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="MotionBlurTextureRect" type="TextureRect" parent="MotionBlurLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_kvbp6")
-
-[node name="DialogueBalloon" parent="CanvasLayer" instance=ExtResource("6_mp6x8")]
-dialogue_resource = ExtResource("7_x8h8r")
-auto_start = true
