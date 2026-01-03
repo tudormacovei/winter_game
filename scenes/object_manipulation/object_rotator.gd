@@ -6,6 +6,8 @@ extends Node3D
 # outline of object on mouse hover
 @export var outline_material: Material
 
+signal object_interactible(is_interactible: bool)
+
 enum RotatorState {
 	ON_TABLE, # Resting on the table, cannot be interacted with except by clicking to begin the interaction
 	STATIONARY,
@@ -18,12 +20,45 @@ enum RotatorState {
 var _rotator_state = RotatorState.ON_TABLE
 var _rotation_remaining = 0.0
 var _is_mouse_on_object = false
+var _sticker_total: int = 0 # set at initialization time, then readonly constant
+var _completed_stickers: int = 0
 
 static var ANIMATION_TIME = 0.1
 
+# TODO: I would really like to move utility functions like this to a different place
+# but I can't find a way to do it rn
+func get_all_children(node) -> Array:
+	var nodes : Array = []
+	
+	for N in node.get_children():
+		if N.get_child_count() > 0:
+			nodes.append(N)
+			nodes.append_array(get_all_children(N))
+		else:
+			nodes.append(N)
+	return nodes
+	
+func _set_state(state: RotatorState):
+	_rotator_state = state
+	if state == RotatorState.STATIONARY:
+		object_interactible.emit(true)
+	else:
+		object_interactible.emit(false)
+
+func _on_sticker_completed():
+	_completed_stickers += 1
+	print("Completed " + str(_completed_stickers) + " stickers!")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# TOOD:
+	# Find all children with the sticker script
+	for child in get_all_children(self):
+		if child is Sticker:
+			_sticker_total += 1
+			
+			child.connect("sticker_completed", _on_sticker_completed)
+			connect("object_interactible", child._on_object_interactible_change)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -33,11 +68,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
 		# print("LOG: Mouse Click")
 		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
-			_rotator_state = RotatorState.STATIONARY
+			_set_state(RotatorState.STATIONARY)
 			# TODO: remove outline on focus gain
 			$Object.global_position = focus_position.global_position
 		if _rotator_state == RotatorState.STATIONARY && !_is_mouse_on_object:
-			_rotator_state = RotatorState.ON_TABLE
+			_set_state(RotatorState.ON_TABLE)
 			# TODO: add outline on focus loss
 			$Object.position = Vector3.ZERO
 
@@ -48,16 +83,16 @@ func _input(event: InputEvent) -> void:
 	# would be cool to be able to use a match block here, but looks like
 	# it wouldn't really work because of the function call :/
 	if event.is_action_pressed("object_rotate_bottom"):
-		_rotator_state = RotatorState.ROTATING_BOTTOM
+		_set_state(RotatorState.ROTATING_BOTTOM)
 		_rotation_remaining = 1.0
 	if event.is_action_pressed("object_rotate_top"):
-		_rotator_state = RotatorState.ROTATING_UP
+		_set_state(RotatorState.ROTATING_UP)
 		_rotation_remaining = 1.0
 	if event.is_action_pressed("object_rotate_left"):
-		_rotator_state = RotatorState.ROTATING_LEFT
+		_set_state(RotatorState.ROTATING_LEFT)
 		_rotation_remaining = 1.0
 	if event.is_action_pressed("object_rotate_right"):
-		_rotator_state = RotatorState.ROTATING_RIGHT
+		_set_state(RotatorState.ROTATING_RIGHT)
 		_rotation_remaining = 1.0
 
 # takes value of a value x between 0.0 and 1.0 and applies a nonlinear

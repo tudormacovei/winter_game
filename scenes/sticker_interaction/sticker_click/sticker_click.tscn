@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://xns6vbm564vw"]
+[gd_scene load_steps=3 format=3 uid="uid://xns6vbm564vw"]
 
+[ext_resource type="Script" uid="uid://dxo2gf6oehl36" path="res://scenes/sticker_interaction/sticker_click/sticker_click_interaction.gd" id="1_iwyti"]
 [ext_resource type="PackedScene" uid="uid://0b7vbosvb14x" path="res://scenes/sticker_interaction/stickers/sticker.tscn" id="1_pl408"]
 
 [node name="StickerClick" type="Node3D"]
 
 [node name="Sticker" parent="." instance=ExtResource("1_pl408")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
+script = ExtResource("1_iwyti")
+
+[connection signal="mouse_entered" from="Sticker" to="Sticker" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Sticker" to="Sticker" method="_on_mouse_exited"]
