@@ -6,8 +6,8 @@ do Variables.add_local("asked_about_item", false)
 
 ~ start 
 do Variables.set_var("is_door_open", true)
-*A young boy rushes in, leaving the door open behind him and dropping something on the floor without noticing.
-Micah: Mooooooornin' Keeper! Is Sarah awake yet? 
+*A young boy rushes in, leaving the door open behind him and dropping something on the floor without noticing. He leaves a bag on the table. 
+Micah: Mooornin' Keeper! Got a few thingies here for you to work your magic on. Is Sarah awake yet? 
 - Close the door, you rascal. => branch_door 	
 - You dropped something on the floor there. => branch_item
 - No, Micah, she's still asleep. => branch_sarah 
