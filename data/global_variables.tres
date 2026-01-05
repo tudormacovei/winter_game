@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=6 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=13 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
 [ext_resource type="Script" uid="uid://bfhsr0au341ym" path="res://scripts/systems/variables/globals_definition.gd" id="2_cr3hu"]
@@ -16,13 +16,55 @@ description = "Does MC know of NPCs cat?"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_2wlhm"]
+script = ExtResource("1_vywdb")
+name = "is_door_open"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_vywdb"]
 script = ExtResource("1_vywdb")
 name = "micah_angry"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_cr3hu"]
+script = ExtResource("1_vywdb")
+name = "wrong_foot_sarah"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_3cr31"]
+script = ExtResource("1_vywdb")
+name = "sarah_okay_with_mary_dying"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_fq0ol"]
+script = ExtResource("1_vywdb")
+name = "is_sarah_happy"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_lwloc"]
+script = ExtResource("1_vywdb")
+name = "does_micah_hate_you"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_qwwlc"]
+script = ExtResource("1_vywdb")
+name = "does_micah_like_you"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_dvws4"]
+script = ExtResource("1_vywdb")
+name = "is_micah_doubtful"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_twevi"), SubResource("Resource_g20sc"), SubResource("Resource_vywdb")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_twevi"), SubResource("Resource_g20sc"), SubResource("Resource_2wlhm"), SubResource("Resource_vywdb"), SubResource("Resource_cr3hu"), SubResource("Resource_3cr31"), SubResource("Resource_fq0ol"), SubResource("Resource_lwloc"), SubResource("Resource_qwwlc"), SubResource("Resource_dvws4")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"

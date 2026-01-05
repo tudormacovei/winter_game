@@ -1,13 +1,307 @@
 ~ initialize_local_variables
+do Variables.add_local("asked_feeling", false)
+do Variables.add_local("blamed_for_sleeping", false)
+do Variables.add_local("huh", false)
 => start
 
 ~ start 
-NPC_2: Hello I am NPC 2.
-- Cool
-	NPC_2: Nice
-	=> END
-- Nice
-	NPC_2: Cool
-	=> END
+*A little girl comes in through the other door. It's Sarah. You can tell that she just woke up.
+Sarah: Morning.
+- You sure slept a lot. => branch_fight
+- Morning, Sarah. How are you feeling? => branch_feeling
+
+
+~ branch_fight 
+do Variables.set_var("blamed_for_sleeping", true)
+Sarah: Oh, well I'm sorry I stayed up till midnight to help you close shop.
+- I didn't mean it like that. 
+	Sarah: What then?
+	- I just wanted to make sure everything is okay. => branch_mary
+	- You should watch your tone. 
+		Sarah: YOU should remember that you're not my father. 
+		do Variables.set_var("wrong_foot_sarah", true)
+		- Thank the Goddess I'm not.  ^^^
+			Sarah: So stop trying to be. => branch_main
+		- No, but I'm taking care of you and feeding you, so watch that tone. ^^^
+			Sarah: Whatever. => branch_main
+		- Okay, I'm sorry. ^^^
+			do Variables.set_Var("wrong_foot_sarah", false)
+			Sarah: Whatever. => branch_main
+	- Just forget it. => branch_main
+- You should watch your tone. 
+	Sarah: YOU should remember that you're not my father. 
+	- Thank the Goddess I'm not.
+	do Variables.set_var("wrong_foot_sarah", true)
+		Sarah: So stop trying to be. => branch_main
+	- No, but I'm taking care of you and feeding you, so watch that tone. 
+	do Variables.set_var("wrong_foot_sarah", true)
+		Sarah: Whatever. => branch_main
+	- Okay, I'm sorry.
+		Sarah: Whatever. => branch_main
+- And I appreciate it. Come on Sarah, what's wrong? => branch_mary
+
+~ branch_feeling
+do Variables.set_var("asked_feeling", true)
+Sarah: I'm fine, I guess. A bit tired.
+- Well, you did oversleep. => branch_fight
+- Come on, Sarah. Is there something wrong? => branch_mary
+- Okay then. => branch_main 
+
+~ branch_mary
+if Variables.get_var("huh") == false	
+	Sarah: They're killing Mary tonight. 
+else
+	Sarah: ...
+- So?
+	Sarah: So nothing. I don't know. 
+	- Are you questioning the Goddess's will?
+		Sarah: No! Of course not. I'm just saying. 
+		Sarah: Sucks that she couldn't see the error of her ways.
+		- Yeah. It does. => branch_main
+		- Not our problem. 
+			Sarah: I think it should be everyone's problem.
+			- What I mean is, we should rejoice, not shed tears. 
+				Sarah: ...
+				- One less reprobate in our ranks. 
+					Sarah: You're right. Forgive me. My mind got clouded for some reason. 
+					do Variables.set_var("sarah_okay_with_mary_dying", true)
+					=> branch_main
+			- What I mean is, there's nothing we can do about it. 
+				Sarah: What if there were? 
+				- What do you mean?
+					Sarah: Maybe you could talk to her before the ceremony? Get her to see the light?
+					- I could try.
+						Sarah: Please do. Maybe she can be saved yet. => branch_main
+					- Not my problem. 
+						Sarah: Yeah, you already said that. Whatever, just forget it. => branch_main
+					- And what should I tell her?
+						Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+						Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+						Sarah: Isn't that beautiful? 
+						- Okay Sarah, I'll try.
+							Sarah: Thank you. 
+							do Variables.set_var("is_sarah_happy", true)
+							=> branch_main
+						- Don't think that would help. People have already tried.
+							Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+				- Stop that, Sarah. Now. That's blasphemy. 
+					Sarah: Okay. Sorry. => branch_main
+		- Everything happens for a reason. 
+			Sarah: Maybe she can be saved and maybe there could be a reason for that. 
+			- That's not how it works. 
+				Sarah: Okay. Forget it. => branch_main
+			- And what should I tell her?
+				Sarah: Well, just make her see her husband's death as something good. Something she should be happy about.
+				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+				Sarah: Isn't that beautiful? 
+				- Okay Sarah, I'll try.
+					Sarah: Thank you. 
+					do Variables.set_var("is_sarah_happy", true)
+					=> branch_main
+				- Don't think that would help. People have already tried. 
+					Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+			- It's not up to us to pick a reason, Sarah. It is as the Goddess wills it. 
+				Sarah: Yeah, I know that. Forgive me. 
+				do Variables.set_var("sarah_okay_with_mary_dying", true)
+				=> branch_main
+	- It's fucked up, I guess.
+		Sarah: So maybe there's something we could do about it?
+		- Like what?
+			Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+			Sarah: Isn't that beautiful? 
+			- Okay Sarah, I'll try.
+				Sarah: Thank you. 
+				do Variables.set_var("is_sarah_happy", true)
+				=> branch_main
+			- Don't think that would help. People have already tried.
+				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+		- That's blasphemous, Sarah. 
+			Sarah: Okay, whatever. => branch_main
+	- There's nothing we can do about it, Sarah.
+		Sarah: What if there were?
+		- Stop that, Sarah. Now. That's blasphemous.
+			Sarah: Okay. Sorry. => branch_main
+		- What are you talking about?
+			Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+			Sarah: Isn't that beautiful? 
+			- Okay Sarah, I'll try.
+				Sarah: Thank you. 
+				do Variables.set_var("is_sarah_happy", true)
+				=> branch_main
+			- Don't think that would help. People have already tried.
+				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+- Yes, they are. 
+	Sarah: ...
+	- What is it?
+		Sarah: Nevermind. Forget it. 
+		- Are you questioning the Goddess's will?	
+			Sarah: No! Of course not. I'm just saying. 
+			Sarah: Sucks that she couldn't see the error of her ways.
+			- Yeah. It does. => branch_main
+			- Not our problem. 
+				Sarah: I think it should be everyone's problem.
+				- What I mean is, we should rejoice, not shed tears. 
+					Sarah: ...
+					- One less reprobate in our ranks. 
+					do Variables.set_var("sarah_okay_with_mary_dying", true)
+						Sarah: You're right. Forgive me. My mind got clouded for some reason. => branch_main
+				- What I mean is, there's nothing we can do about it. 
+					Sarah: What if there were? 
+					- What do you mean?
+						Sarah: Maybe you could talk to her before the ceremony? Get her to see the light?
+						- I could try.
+							Sarah: Please do. Maybe she can be saved yet. => branch_main
+						- Not my problem. 
+							Sarah: Yeah, you already said that. Whatever, just forget it. => branch_main
+						- And what should I tell her?
+							Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+							Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+							Sarah: Isn't that beautiful? 
+							- Okay Sarah, I'll try.
+								Sarah: Thank you. 
+								do Variables.set_var("is_sarah_happy", true)
+								=> branch_main
+							- Don't think that would help. People have already tried.
+								Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+					- Stop that. Now. 
+						Sarah: Okay. Sorry. => branch_main
+			- Everything happens for a reason. 
+				Sarah: Maybe she can be saved and maybe there could be a reason for that. 
+				- That's not how it works. 
+					Sarah: Okay. Forget it. => branch_main
+				- And what should I tell her?
+					Sarah: Well, just make her see her husband's death as something good. Something she should be happy about.
+					Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+					Sarah: Isn't that beautiful? 
+					- Okay Sarah, I'll try.
+						Sarah: Thank you. 
+						do Variables.set_var("is_sarah_happy", true)
+						=> branch_main
+					- Don't think that would help. People have already tried. 
+						Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+				- It's not up to us to pick a reason, Sarah. It is as the Goddess wills it. 
+					Sarah: Yeah, I know that. Forgive me. 
+					do Variables.set_var("sarah_okay_with_mary_dying", true)
+					=> branch_main
+		- It's fucked up, I know. 
+			Sarah: So maybe there's something we could do about it?
+			- Like what?
+				Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+				Sarah: Isn't that beautiful? 
+				- Okay Sarah, I'll try.
+					Sarah: Thank you. 
+					do Variables.set_var("is_sarah_happy", true)
+					=> branch_main
+				- Don't think that would help. People have already tried.
+					Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+			- Let's not take it that far, Sarah. 
+				Sarah: Okay, whatever. => branch_main
+		- There's nothing we can do about it, Sarah.
+			Sarah: What if there were?
+			- Stop that, Sarah. Now. 
+				Sarah: Okay. Sorry. => branch_main
+			- What are you talking about?
+				Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+				Sarah: Isn't that beautiful? 
+				- Okay Sarah, I'll try.
+					Sarah: Thank you. 
+					do Variables.set_var("is_sarah_happy", true)
+					=> branch_main
+				- Don't think that would help. People have already tried.
+					Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+	- Do you not agree with it?
+		Sarah: It's not that I don't agree with it. It is as the Goddess wills it, and all that. 
+		Sarah: I'm just wondering whether there's something we can still do to save her?
+		- Like what?
+			Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
+			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+			Sarah: Isn't that beautiful? 
+			- Okay Sarah, I'll try.
+				Sarah: Thank you. 
+				do Variables.set_var("is_sarah_happy", true)
+				=> branch_main
+			- Don't think that would help. People have already tried.
+				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+			- That's blasphemous. 
+				Sarah: I guess so. Forget I said anything. Sorry.
+				do Variables.set_var("sarah_okay_with_mary_dying", true)
+				=> branch_main
+		- You're not really making sense there, Sarah. 
+			Sarah: Nevermind. Forget it. => branch_main
+		- Wish we could. Sadly, there's nothing that can be done.
+			Sarah: Maybe you could try to convince her that her husband's death was good. Something she should be happy about.
+			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+			Sarah: Isn't that beautiful? 
+			- I said there's nothing we can do, Sarah. It'd be blasphemy. 
+				Sarah: I guess so. Forget I said anything. Sorry.
+				do Variables.set_var("sarah_okay_with_mary_dying", true)
+				=> branch_main
+			- Okay Sarah, I'll try.
+				Sarah: Thank you. 
+				do Variables.set_var("is_sarah_happy", true)
+				=> branch_main
+			- Don't think that would help. People have already tried.
+				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
+	- ... 
+		Sarah: ...
+		- ... => branch_main
+- I know. It's horrible. 
+	Sarah: Right?? It's not like she can control her feelings or anything. Let her grieve, I say. 
+	Sarah: I was a bit sad too, when Daddy died. Took me a while to realize that he was filth and had to go.
+	Sarah: But in this case, Henry did nothing wrong. He just fell off the ladder while picking apples. He was helping the natural order. 
+	Sarah: It's a dumb rule anyway. The Goddess should know better. 
+	- You're getting ahead of yourself, Sarah...
+		Sarah: You're right, I'm sorry. It's just that I really don't think Mary's done anything wrong. 
+		- Well, that's not up to us to decide. You know that
+			Sarah: Guess so. => branch_main
+		- Take it up with the Goddess, then. I'm sure she'll be happy to hear it. 
+			Sarah: Pfft. => branch_main
+	- That's the devil talking, girl! I should whip you here and now!
+		Sarah: Well, you also said it's horrible, remember? Whip me and I'll have everyone know you're a blasphemer too!
+		do Variables.set_var("wrong_foot_sarah", true)
+		 - Just... don't ever talk that way again. => branch_main
+	- Took the words right out of my mouth. 
+		Sarah: I'm so glad we see eye to eye!
+		- So, what should we do, then?
+			Sarah: Maybe you could try to convince her that her husband's death was good. Something she should be happy about.
+			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+			Sarah: Isn't that beautiful? 
+			- Okay Sarah, I'll try. I promise. 
+				Sarah: Thank you. Really. 
+				do Variables.set_var("is_sarah_happy", true)
+				=> branch_main
+		- I'll try and talk to her. 
+			Sarah: Thanks!
+			do Variables.set_var("is_sarah_happy", true)
+			=> branch_main
+- What??? => branch_huh
+#need this to stop showing up if it's already been picked
+
+
+~ branch_huh
+Sarah: You okay? You're the one who told me yesterday. 
+- Oh, I forgot I told you. Of course. 
+do Variables.set_var("huh", true) 
+=> branch_mary
+
+~ branch_main 
+Sarah: ...
+- Micah asked me to tell you he's looking for you. %%%
+	if Variables.get_var("is_sarah_happy") == true
+		Sarah: Oh yeah? I'll go look for him then! See you. 
+		- Bye, Sarah. => END!
+	else
+		Sarah: Not really feeling up to it now, think I'll just be in my room. 
+		=> END
+- That's it then. 
+if Variables.get_var("wrong_foot_sarah") == true
+	Sarah: *Leaves without saying a word. => END
+else
+	Sarah: I'll be in my room. => END
+
 => END
 
