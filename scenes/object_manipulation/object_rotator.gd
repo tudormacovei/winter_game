@@ -51,14 +51,13 @@ func _on_sticker_completed():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# TOOD:
-	# Find all children with the sticker script
 	for child in get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
 			
 			child.connect("sticker_completed", _on_sticker_completed)
 			connect("object_interactible", child._on_object_interactible_change)
+			_set_state(RotatorState.ON_TABLE) # for signal emission
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -66,15 +65,17 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
-		# print("LOG: Mouse Click")
 		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
 			_set_state(RotatorState.STATIONARY)
-			# TODO: remove outline on focus gain
 			$Object.global_position = focus_position.global_position
+			_remove_outline()
+			get_viewport().set_input_as_handled()
+			return
 		if _rotator_state == RotatorState.STATIONARY && !_is_mouse_on_object:
 			_set_state(RotatorState.ON_TABLE)
-			# TODO: add outline on focus loss
 			$Object.position = Vector3.ZERO
+			get_viewport().set_input_as_handled()
+			return
 
 	# Object can only rotate from stationary beginning
 	if _rotator_state != RotatorState.STATIONARY:
@@ -136,14 +137,11 @@ func _handle_rotation(delta: float) -> void:
 			pass
 
 	if _rotation_remaining <= 0.0:
-		_rotator_state = RotatorState.STATIONARY
+		_set_state(RotatorState.STATIONARY)
 
 var _original_mesh: Mesh = null
 
-# Add outline to mesh and lift it slightly
-func _on_object_mouse_entered() -> void:
-	_is_mouse_on_object = true
-
+func _apply_outline():
 	var mesh_instance := $Object.get_child(0) as MeshInstance3D
 	if mesh_instance == null:
 		return
@@ -169,18 +167,14 @@ func _on_object_mouse_entered() -> void:
 		var base_mat: Material = mesh_clone.surface_get_material(i)
 		if base_mat == null:
 			base_mat = StandardMaterial3D.new()
-
 		var new_mat := base_mat.duplicate()
 		new_mat.next_pass = outline_material
-
 		mesh_clone.surface_set_material(i, new_mat)
-		
+
 	$Object.position.z += 0.1
 
-# Restore original mesh without outline material and original position
-func _on_object_mouse_exited() -> void:
-	_is_mouse_on_object = false
 
+func _remove_outline():
 	# Restore original mesh
 	var mesh_instance := $Object.get_child(0) as MeshInstance3D
 	if mesh_instance == null: # 'as' keyword casts to null on type mismatch
@@ -192,5 +186,19 @@ func _on_object_mouse_exited() -> void:
 
 	mesh_instance.mesh = _original_mesh
 	_original_mesh = null
-	
 	$Object.position.z -= 0.1
+
+
+# Add outline to mesh and lift it slightly
+func _on_object_mouse_entered() -> void:
+	#print("INFO:: Mouse entered object")
+	_is_mouse_on_object = true
+	if _rotator_state == RotatorState.ON_TABLE:
+		_apply_outline()
+
+# Restore original mesh without outline material and original position
+func _on_object_mouse_exited() -> void:
+	#print("INFO:: Mouse exited object")
+	_is_mouse_on_object = false
+	if _rotator_state == RotatorState.ON_TABLE:
+		_remove_outline()
