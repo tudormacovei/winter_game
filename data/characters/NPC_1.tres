@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_454m6")
 character_id = "NPC_1"
+display_name = "Micah"
 description = "This is the first NPC"
 sprite = ExtResource("2_t1e80")
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

@@ -40,4 +40,3 @@ Generated at: 2026-01-05 22:35:34
 [9] is_micah_doubtful
   Description: 
   Default: false
-
