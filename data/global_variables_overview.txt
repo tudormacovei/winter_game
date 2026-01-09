@@ -1,8 +1,7 @@
-Generated at: 2026-01-05 22:35:34
+Generated at: 2026-01-09 23:27:22
 ----------------------------------------
 
 [0] is_MC_ugly
-  Description: 
   Default: true
 
 [1] knows_of_cat
@@ -10,33 +9,37 @@ Generated at: 2026-01-05 22:35:34
   Default: false
 
 [2] is_door_open
-  Description: 
   Default: false
 
 [3] micah_angry
-  Description: 
   Default: false
 
 [4] wrong_foot_sarah
-  Description: 
   Default: false
 
 [5] sarah_okay_with_mary_dying
-  Description: 
   Default: false
 
 [6] is_sarah_happy
-  Description: 
   Default: false
 
 [7] does_micah_hate_you
-  Description: 
   Default: false
 
 [8] does_micah_like_you
-  Description: 
   Default: false
 
 [9] is_micah_doubtful
-  Description: 
   Default: false
+
+Character ID: NPC_1
+  [0] relationship
+    Default: 5
+
+  [1] wrong_foot
+    Default: false
+
+Character ID: NPC_2
+  [0] relationship
+    Default: 7
+
