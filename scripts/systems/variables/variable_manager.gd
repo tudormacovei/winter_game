@@ -1,5 +1,6 @@
 ## Manages all variables in the game:
 ## - state variables - global and local (only accessed in a single dialogue)
+## - character-specific global variables
 class_name VariableManager
 extends Node
 
@@ -23,6 +24,11 @@ func get_var(var_name: String) -> Variant:
 		return
 		
 	return variables.get(var_name)
+
+func get_char_var(character_id: String, var_name: String) -> Variant:
+	# Character specific variable names are stored as: character_id + "_" + var_name
+	var actual_var_name := "%s_%s" % [character_id, var_name]
+	return get_var(actual_var_name)
 
 func set_var(var_name: String, value):
 	if not variables.has(var_name):

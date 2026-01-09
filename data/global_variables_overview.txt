@@ -34,12 +34,11 @@ Generated at: 2026-01-09 23:27:22
 
 Character ID: NPC_1
   [0] relationship
-    Default: 5
+	Default: 5
 
   [1] wrong_foot
-    Default: false
+	Default: false
 
 Character ID: NPC_2
   [0] relationship
-    Default: 7
-
+	Default: 7
