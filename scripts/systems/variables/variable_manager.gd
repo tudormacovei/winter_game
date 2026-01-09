@@ -40,6 +40,11 @@ func set_var(var_name: String, value):
 	
 	variables[var_name] = value
 
+func set_char_var(character_id: String, var_name: String, value):
+	# Character specific variable names are stored as: character_id + "_" + var_name
+	var actual_var_name := "%s_%s" % [character_id, var_name]
+	set_var(actual_var_name, value)
+
 func add_local(var_name: String, initial_value):
 	if variables.has(var_name):
 		Utils.debug_error("Variable '%s' already exists! You cannot add it again!" % var_name)
