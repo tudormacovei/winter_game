@@ -1,6 +1,9 @@
 @tool
 extends Node
 
+const DAY_RESOURCES_PATH: String = "res://data/days/"
+const CHARACTER_RESOURCES_PATH: String = "res://data/characters/"
+
 func debug_error(message: String):
     push_error(message)
     if OS.has_feature("debug"):

@@ -6,9 +6,6 @@ extends Node
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
 const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
 
-const DAY_RESOURCES_PATH: String = "res://data/days/"
-const CHARACTER_RESOURCES_PATH: String = "res://data/characters/"
-
 var current_day_index: int = -1
 var current_interaction_index: int = -1
 
@@ -33,7 +30,7 @@ func _ready():
 func _load_day_resources():
 	_day_resources.clear()
 
-	var dir = DirAccess.open(DAY_RESOURCES_PATH)
+	var dir = DirAccess.open(Utils.DAY_RESOURCES_PATH)
 	if dir:
 		dir.list_dir_begin()
 		var files = []
@@ -44,7 +41,7 @@ func _load_day_resources():
 		# Sort filenames alphabetically
 		files.sort()
 		for f in files:
-			var resource = load(DAY_RESOURCES_PATH + f)
+			var resource = load(Utils.DAY_RESOURCES_PATH + f)
 			if resource and resource is DayDefinition:
 				_day_resources.append(resource)
 				print("GameManager: Loaded day from file '%s'" % f)
@@ -54,7 +51,7 @@ func _load_day_resources():
 func _load_character_resources():
 	_character_dict.clear()
 
-	var dir = DirAccess.open(CHARACTER_RESOURCES_PATH)
+	var dir = DirAccess.open(Utils.CHARACTER_RESOURCES_PATH)
 	if dir:
 		dir.list_dir_begin()
 		var files = []
@@ -63,7 +60,7 @@ func _load_character_resources():
 				files.append(file_name)
 
 		for f in files:
-			var resource = load(CHARACTER_RESOURCES_PATH + f)
+			var resource = load(Utils.CHARACTER_RESOURCES_PATH + f)
 			if resource and resource is CharacterDefinition:
 				if resource.character_id in _character_dict:
 					push_warning("Character resource '%s' has duplicate id '%s' and will be skipped." % [f, resource.character_id])
