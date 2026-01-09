@@ -114,7 +114,13 @@ func _on_dialogue_line_started(dialogue_line):
 	# Set character sprite
 	if dialogue_line.character.is_empty():
 		character_node.texture = null
-	else:
-		character_node.texture = _character_dict[dialogue_line.character].sprite
+		return
+
+	if not _character_dict.has(dialogue_line.character):
+		Utils.debug_error("Dialogue line references unknown character '%s'" % dialogue_line.character)
+		character_node.texture = null
+		return
+		
+	character_node.texture = _character_dict[dialogue_line.character].sprite
 
 #endregion
