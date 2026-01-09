@@ -3,13 +3,13 @@
 class_name GlobalVariablesDefinition
 extends Resource
 
-const VariableDefinition = preload("res://scripts/systems/variables/variable_definition.gd")
-const GlobalsCharacterDefinition = preload("res://scripts/systems/variables/globals_characters_definition.gd")
+const VariableDefinitionClass = preload("res://scripts/systems/variables/variable_definition.gd")
+const GlobalsCharacterDefinitionClass = preload("res://scripts/systems/variables/globals_characters_definition.gd")
 
 ## General global variable definitions
-@export var definitions: Array[VariableDefinition] = []
+@export var definitions: Array[VariableDefinitionClass] = []
 ## Character-specific global variable definitions
-@export var character_definitions: Array[GlobalsCharacterDefinition] = []
+@export var character_definitions: Array[GlobalsCharacterDefinitionClass] = []
 
 #region Tool Variables
 
