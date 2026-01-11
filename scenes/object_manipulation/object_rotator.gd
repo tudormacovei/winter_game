@@ -25,6 +25,7 @@ var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
 
 static var ANIMATION_TIME = 0.1
+static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # scale of object on mouse hover
 
 # TODO: I would really like to move utility functions like this to a different place
 # but I can't find a way to do it rn
@@ -41,7 +42,7 @@ func get_all_children(node) -> Array:
 	
 func _set_state(state: RotatorState):
 	_rotator_state = state
-	print("Set state to " + str(state))
+	#print("Set state to " + str(state))
 	if state == RotatorState.STATIONARY:
 		object_interactible.emit(true)
 	else:
@@ -84,7 +85,7 @@ func _input(event: InputEvent) -> void:
 			return
 	
 	if event.is_action_pressed("mouse_click_right"):
-		print("Right click detected!")
+		#print("Right click detected!")
 		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
 			_set_state(RotatorState.DRAGGING)
 			
@@ -168,10 +169,11 @@ func _handle_drag():
 	var distance_to_plane_intersect := -origin.y/direction.y
 	var intersect = origin + direction * distance_to_plane_intersect # interesect on XZ plane (y=0)
 	self.global_position = intersect
+	_place_object_on_xz_plane($Object) # intersect y coord is incorrect, update to correct one
 	
-	print("Ray origin: " + str(origin))
-	print("Direction vector " + str(direction))
-	print("Distance to plane intersect: " + str(distance_to_plane_intersect))
+	#print("Ray origin: " + str(origin))
+	#print("Direction vector " + str(direction))
+	#print("Distance to plane intersect: " + str(distance_to_plane_intersect))
 
 var _original_mesh: Mesh = null
 
@@ -205,7 +207,7 @@ func _apply_outline():
 		new_mat.next_pass = outline_material
 		mesh_clone.surface_set_material(i, new_mat)
 
-	$Object.position.z += 0.1
+	$Object.scale = HOVERED_SCALE
 
 
 func _remove_outline():
@@ -220,7 +222,7 @@ func _remove_outline():
 
 	mesh_instance.mesh = _original_mesh
 	_original_mesh = null
-	$Object.position.z -= 0.1
+	$Object.scale = Vector3.ONE
 
 
 # Add outline to mesh and lift it slightly
@@ -241,7 +243,7 @@ func _on_object_mouse_exited() -> void:
 func _place_object_on_xz_plane(object: Node3D):
 	var bbox: AABB = _calculate_bounding_box(object, false)
 	global_position.y = bbox.size.y / 2
-	print("Set object y coordinate to: " + str(global_position.y))
+	#print("Set object y coordinate to: " + str(global_position.y))
 
 # TODO: move _calculate_bounding_box to utils
 func _calculate_bounding_box(parent : Node3D, include_top_level_transform: bool) -> AABB:
