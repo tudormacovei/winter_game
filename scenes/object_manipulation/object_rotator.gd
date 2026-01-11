@@ -15,6 +15,7 @@ enum RotatorState {
 	ROTATING_RIGHT,
 	ROTATING_UP,
 	ROTATING_BOTTOM,
+	DRAGGING, # being dragged around the workspace
 }
 
 var _rotator_state = RotatorState.ON_TABLE
@@ -40,6 +41,7 @@ func get_all_children(node) -> Array:
 	
 func _set_state(state: RotatorState):
 	_rotator_state = state
+	print("Set state to " + str(state))
 	if state == RotatorState.STATIONARY:
 		object_interactible.emit(true)
 	else:
@@ -57,11 +59,12 @@ func _ready() -> void:
 			
 			child.connect("sticker_completed", _on_sticker_completed)
 			connect("object_interactible", child._on_object_interactible_change)
-			_set_state(RotatorState.ON_TABLE) # for signal emission
+			_set_state(RotatorState.ON_TABLE)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_handle_rotation(delta)
+	_handle_drag()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
@@ -76,13 +79,20 @@ func _input(event: InputEvent) -> void:
 			$Object.position = Vector3.ZERO
 			get_viewport().set_input_as_handled()
 			return
+	
+	if event.is_action_pressed("mouse_click_right"):
+		print("Right click detected!")
+		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
+			_set_state(RotatorState.DRAGGING)
+			
+	if event.is_action_released("mouse_click_right"):
+		if _rotator_state == RotatorState.DRAGGING:
+			_set_state(RotatorState.ON_TABLE)
 
 	# Object can only rotate from stationary beginning
 	if _rotator_state != RotatorState.STATIONARY:
 		return
 	
-	# would be cool to be able to use a match block here, but looks like
-	# it wouldn't really work because of the function call :/
 	if event.is_action_pressed("object_rotate_bottom"):
 		_set_state(RotatorState.ROTATING_BOTTOM)
 		_rotation_remaining = 1.0
@@ -107,7 +117,8 @@ func ease_function(x: float) -> float:
 # the rotate(...) function. That way it will be much easier to set custom
 # rotation curves to handle the animation 
 func _handle_rotation(delta: float) -> void:
-	if _rotator_state == RotatorState.ON_TABLE:
+	if _rotator_state not in [RotatorState.ROTATING_LEFT, RotatorState.ROTATING_RIGHT,
+								RotatorState.ROTATING_UP, RotatorState.ROTATING_BOTTOM]:
 		return
 	
 	# to_rotate is from 0.0 to 1.0 here
@@ -138,6 +149,26 @@ func _handle_rotation(delta: float) -> void:
 
 	if _rotation_remaining <= 0.0:
 		_set_state(RotatorState.STATIONARY)
+
+func _handle_drag():
+	if _rotator_state != RotatorState.DRAGGING:
+		return
+	# Get intersect between raycast from viewport + mouse and XZ plane
+	# Assumption: objects and scene is setup so object ALWAYS sit on the workbench plane
+	# if they are at position y=0! So their origin has to be offset
+	
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	var origin: Vector3 = camera.project_ray_origin(mouse_pos)
+	var direction: Vector3 = camera.project_ray_normal(mouse_pos)
+	
+	var distance_to_plane_intersect := -origin.y/direction.y
+	var intersect = origin + direction * distance_to_plane_intersect # interesect on XZ plane (y=0)
+	self.global_position = intersect
+	
+	print("Ray origin: " + str(origin))
+	print("Direction vector " + str(direction))
+	print("Distance to plane intersect: " + str(distance_to_plane_intersect))
 
 var _original_mesh: Mesh = null
 
