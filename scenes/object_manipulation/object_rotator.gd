@@ -46,6 +46,8 @@ func _set_state(state: RotatorState):
 		object_interactible.emit(true)
 	else:
 		object_interactible.emit(false)
+	if state == RotatorState.ON_TABLE:
+		_place_object_on_xz_plane($Object)
 
 func _on_sticker_completed():
 	_completed_stickers += 1
@@ -60,6 +62,7 @@ func _ready() -> void:
 			child.connect("sticker_completed", _on_sticker_completed)
 			connect("object_interactible", child._on_object_interactible_change)
 			_set_state(RotatorState.ON_TABLE)
+	_place_object_on_xz_plane($Object)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -233,3 +236,27 @@ func _on_object_mouse_exited() -> void:
 	_is_mouse_on_object = false
 	if _rotator_state == RotatorState.ON_TABLE:
 		_remove_outline()
+		
+# ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
+func _place_object_on_xz_plane(object: Node3D):
+	var bbox: AABB = _calculate_bounding_box(object, false)
+	global_position.y = bbox.size.y / 2
+	print("Set object y coordinate to: " + str(global_position.y))
+
+# TODO: move _calculate_bounding_box to utils
+func _calculate_bounding_box(parent : Node3D, include_top_level_transform: bool) -> AABB:
+	var bounds: AABB = AABB()
+	if parent is VisualInstance3D:
+		bounds = parent.get_aabb();
+
+	for i in range(parent.get_child_count()):
+		var child : Node3D = parent.get_child(i)
+		if child:
+			var child_bounds : AABB = _calculate_bounding_box(child, true)
+			if bounds.size == Vector3.ZERO && parent:
+				bounds = child_bounds
+			else:
+				bounds = bounds.merge(child_bounds)
+	if include_top_level_transform:
+		bounds = parent.transform * bounds
+	return bounds
