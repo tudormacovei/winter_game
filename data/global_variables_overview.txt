@@ -1,44 +1,20 @@
-Generated at: 2026-01-09 23:27:22
+Generated at: 2026-01-12 22:37:31
 ----------------------------------------
 
-[0] is_MC_ugly
-  Default: true
-
-[1] knows_of_cat
-  Description: Does MC know of NPCs cat?
-  Default: false
-
-[2] is_door_open
-  Default: false
-
-[3] micah_angry
-  Default: false
-
-[4] wrong_foot_sarah
-  Default: false
-
-[5] sarah_okay_with_mary_dying
-  Default: false
-
-[6] is_sarah_happy
-  Default: false
-
-[7] does_micah_hate_you
-  Default: false
-
-[8] does_micah_like_you
-  Default: false
-
-[9] is_micah_doubtful
+[0] prog_is_door_open
+  Description: TODO: Needs implementation
   Default: false
 
 Character ID: NPC_1
   [0] relationship
-	Default: 5
+	Default: 3
 
-  [1] wrong_foot
-	Default: false
+  [1] doubt
+	Default: 2
 
 Character ID: NPC_2
   [0] relationship
-	Default: 7
+	Default: 3
+
+  [1] ok_with_mary_dying
+	Default: false

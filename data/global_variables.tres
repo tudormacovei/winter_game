@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=19 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=11 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -7,96 +7,48 @@
 [sub_resource type="Resource" id="Resource_t7f3i"]
 script = ExtResource("1_vywdb")
 name = "relationship"
-default_value = 5
+default_value = 3
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
-[sub_resource type="Resource" id="Resource_3mlpw"]
+[sub_resource type="Resource" id="Resource_lwloc"]
 script = ExtResource("1_vywdb")
-name = "wrong_foot"
-default_value = false
+name = "doubt"
+default_value = 2
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_h5qkm"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_1"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_t7f3i"), SubResource("Resource_3mlpw")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_t7f3i"), SubResource("Resource_lwloc")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_p42go"]
 script = ExtResource("1_vywdb")
 name = "relationship"
-default_value = 7
+default_value = 3
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_cr3hu"]
+script = ExtResource("1_vywdb")
+name = "ok_with_mary_dying"
+default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_s4nex"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_2"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_p42go")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_p42go"), SubResource("Resource_cr3hu")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
-
-[sub_resource type="Resource" id="Resource_twevi"]
-script = ExtResource("1_vywdb")
-name = "is_MC_ugly"
-default_value = true
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_g20sc"]
-script = ExtResource("1_vywdb")
-name = "knows_of_cat"
-description = "Does MC know of NPCs cat?"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_2wlhm"]
 script = ExtResource("1_vywdb")
-name = "is_door_open"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_vywdb"]
-script = ExtResource("1_vywdb")
-name = "micah_angry"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_cr3hu"]
-script = ExtResource("1_vywdb")
-name = "wrong_foot_sarah"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_3cr31"]
-script = ExtResource("1_vywdb")
-name = "sarah_okay_with_mary_dying"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_fq0ol"]
-script = ExtResource("1_vywdb")
-name = "is_sarah_happy"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_lwloc"]
-script = ExtResource("1_vywdb")
-name = "does_micah_hate_you"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_qwwlc"]
-script = ExtResource("1_vywdb")
-name = "does_micah_like_you"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_dvws4"]
-script = ExtResource("1_vywdb")
-name = "is_micah_doubtful"
+name = "prog_is_door_open"
+description = "TODO: Needs implementation"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_twevi"), SubResource("Resource_g20sc"), SubResource("Resource_2wlhm"), SubResource("Resource_vywdb"), SubResource("Resource_cr3hu"), SubResource("Resource_3cr31"), SubResource("Resource_fq0ol"), SubResource("Resource_lwloc"), SubResource("Resource_qwwlc"), SubResource("Resource_dvws4")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_2wlhm")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_h5qkm"), SubResource("Resource_s4nex")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"

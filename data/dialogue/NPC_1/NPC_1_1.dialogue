@@ -37,10 +37,10 @@ Micah: Phew, all good.
 Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmuck of a husband or sumthin'. No idea why it ain't been thrown' 'way yet.
 - You shouldn't speak ill of the dead, boy.
 	Micah: My pa used to say he was a filthy sinner, bloke got what was comin' to him! 
-	- Your pa died too, didn't he? [do Variables.set_var("micah_angry", true)]
+	- Your pa died too, didn't he? [do Variables.set_char_var("NPC_1", "relationship", 2)]
 		*His face changes instantly. You can see a tear form up in his eyes.
 		Micah: My pa was 10 times the man that bitch's husband was, you bonehead. 
-		- I'm sorry, Micah, I shouldn't have mentioned it. [do Variables.set_var("micah_angry", false)]
+		- I'm sorry, Micah, I shouldn't have mentioned it. [do Variables.set_char_var("NPC_1", "relationship", 3)]
 			if Variables.get_var("asked_about_sarah") == false
 				Micah: S'all good, I guess. So, where's Sarah?
 				- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
@@ -50,7 +50,7 @@ Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmu
 		- I won't let you speak that way to me in my own house. Now fuck off. 
 			Micah: Fuck you then. => END
 		- Oh yeah? If I'm the bonehead, why am I not the one 6 feet under now then?
-			*Micah looks at you for a second and then rushes outside. [do Variables.set_var("does_micah_hate_you", true) ]
+			*Micah looks at you for a second and then rushes outside. [do Variables.set_char_var("NPC_1", "relationship", 1)]
 			=> END
 	- Nevertheless, you shouldn't speak that way about him.
 		Micah: ...
@@ -59,7 +59,7 @@ Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmu
 			- That's for the Goddess to decide. 
 				Micah: Guess you're right. I can get a tad hot-headed when it comes to this stuff sometimes. Least that's what my pa used to say. 
 				- You miss him, don't you, Micah?
-					Micah: *he stares at you for a moment and then tries to change the subject [do Variables.set_var("does_micah_like_you", true) ]
+					Micah: *he stares at you for a moment and then tries to change the subject [do Variables.set_char_var("NPC_1", "relationship", 4)]
 					if Variables.get_var("asked_about_sarah") == false
 						Micah: No. He was taken for a reason. So where's Sarah?
 						- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
@@ -104,7 +104,7 @@ Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmu
 					Micah: But then why not let us all see the damn thing? Sure could see it on Sarah's father, I'll tell you that. 
 					Micah: And why are you the only one who can spot it on things that ain't alive? 
 					Micah: Boggles the mind, it does. She works in mysterious ways, our Goddess.
-					- You raise a good point there, Micah. [do Variables.set_var("does_micah_like_you", true) ]
+					- You raise a good point there, Micah. [do Variables.set_char_var("NPC_1", "relationship", 4) ]
 						*He's obviously proud of that, he must've come up with it himself.
 						if Variables.get_var("asked_about_sarah") == false
 							Micah: So, where's Sarah?
@@ -129,7 +129,7 @@ Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmu
 						- Bye, Micah. => END
 	- Fixing 'em is how I make a living, Micah. We all gotta play our part here.
 		Micah: Guess you're right. Wish I wouldn't have to touch them bastards neither but I don't have much of a choice. 
-		- We need these to survive, Micah. Don't forget that. [do Variables.set_var("is_micah_doubtful", true)]
+		- We need these to survive, Micah. Don't forget that. [do Variables.set_char_var("NPC_1", "doubt",3)]
 			Micah: Do we, really?
 			if Variables.get_var("asked_about_sarah") == false
 				Micah: Anyway, where's Sarah?
@@ -161,7 +161,7 @@ Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmu
 					Micah: Well, I better leave now.
 					- Bye, Micah. => END
 			- Not sure how I feel about that, Micah.  
-				do Variables.set_var("is_micah_doubtful", true)
+				do Variables.set_char_var("NPC_1", "doubt", 3)
 			if Variables.get_var("asked_about_sarah") == false
 				Micah: Anyway, where's Sarah?
 				- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
@@ -169,7 +169,7 @@ Micah: Just an old watch you'll have to fix for widow Mary. Belonged to her shmu
 				Micah: Guess I better leave now.
 				- Bye, Micah. => END
 	- And what makes you or your old man an authority on sin, boy? 
-		do Variables.set_var("micah_angry", true)
+		do Variables.set_char_var("NPC_1", "relationship", 2)
 	if Variables.get_var("asked_about_sarah") == false
 		Micah: Well, forget it, I shouldn't have brought it up. Anyway, where's Sarah?
 		- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
@@ -196,9 +196,9 @@ Micah: Let her know I'm looking for her when she wakes up, will you?
 		- Bye, Micah. => END
 - Don't think I will.
 	Micah: And why's that?
-	- She's got better things to do than hang out with the likes of you. [do Variables.set_var("does_micah_hate_you", true)]
+	- She's got better things to do than hang out with the likes of you. [do Variables.set_char_var("NPC_1", "relationship", 1)]
 		Micah: *Storms out. => END
-	- You two can sort it out yourselves. [do Variables.set_var("micah_angry", true)]
+	- You two can sort it out yourselves. [do Variables.set_char_var("NPC_1", "relationship", 2)]
 		Micah: Miserable old prick. => END
 	- Just playing, Micah. Sure I'll tell her. 
 		Micah: Hah. Could get used to you jokin' around more, Keeper. Suits ya. Anyway, be seein' ya.
