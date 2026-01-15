@@ -5,7 +5,7 @@ do Variables.add_local("asked_about_item", false)
 => start
 
 ~ start 
-*A young boy rushes in, leaving the door open behind him and dropping something on the floor without noticing. He leaves a bag on the table. [do Variables.set_var("is_door_open", true)]
+*A young boy rushes in, leaving the door open behind him and dropping something on the floor without noticing. He leaves a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
 Micah: Mooornin' Keeper! Got a few thingies here for you to work your magic on. Is Sarah awake yet? 
 - Close the door, you rascal. => branch_door 	
 - You dropped something on the floor there. => branch_item
@@ -15,19 +15,19 @@ Micah: Mooornin' Keeper! Got a few thingies here for you to work your magic on. 
 	
 ~ branch_door
 Micah: Woke up on the wrong side of the bed this morning, huh? 
-*He closes the door. [do Variables.set_var("is_door_open", false)]
+*He closes the door. [do Variables.set_var("prog_is_door_open", false)]
 Micah: So? She up yet or not?
 - No, Micah, she's still asleep. => branch_sarah
 - What's that on the floor? => branch_item
 
 
 ~ branch_door_2
-*He closes the door. [do Variables.set_var("is_door_open", false)]
+*He closes the door. [do Variables.set_var("prog_is_door_open", false)]
 - What's that on the floor? => branch_item
 	
 	
 ~ branch_item
-if Variables.get_var("is_door_open") == false
+if Variables.get_var("prog_is_door_open") == false
 	Micah: Oh Goddess, I'm all over the place this mornin'. Hope I ain't broke it. 
 else 
 	Micah: Oh. Hope I ain't broke it. 
@@ -184,7 +184,7 @@ Micah: Let her know I'm looking for her when she wakes up, will you?
 	do Variables.set_var("asked_about_sarah", true)
 	Micah: Thanks much! 
 	if Variables.get_var("asked_about_item") == false
-		if Variables.get_var("is_door_open") == true 
+		if Variables.get_var("prog_is_door_open") == true 
 			Micah: ...
 			- Close the door, please. => branch_door_2
 			- You dropped something on the floor there. => branch_item
