@@ -20,5 +20,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.0
 [node name="StickerClick3" parent="Object" instance=ExtResource("4_saawi")]
 transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0.085890025, 0.038366497, 0.006817028)
 
+[connection signal="area_entered" from="Object" to="." method="_on_object_area_entered"]
+[connection signal="area_exited" from="Object" to="." method="_on_object_area_exited"]
 [connection signal="mouse_entered" from="Object" to="." method="_on_object_mouse_entered"]
 [connection signal="mouse_exited" from="Object" to="." method="_on_object_mouse_exited"]
