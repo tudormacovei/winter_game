@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=9 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scenes/main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/game_manager.gd" id="1_x8h8r"]
-[ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="4_8yn6g"]
-[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="4_xo82b"]
+[ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
@@ -17,23 +16,10 @@ ambient_light_color = Color(1, 1, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0)
 
 [node name="DialogueView" parent="." instance=ExtResource("1_w2y3b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3785387, 0)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.3369119, 0.23607965)
 
-[node name="WorkbenchView" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, -1.795346, -0.04025507)
-
-[node name="PlaceholderObject1" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
-transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -1.4901161e-08, 0.21070021, 1.9021664, -0.6089353)
-focus_position = NodePath("../../Camera3D/FocusPosition")
-
-[node name="PlaceholderObject2" parent="WorkbenchView" node_paths=PackedStringArray("focus_position") instance=ExtResource("4_xo82b")]
-transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -1.4901161e-08, -0.83010775, 1.9021664, -0.6089353)
-focus_position = NodePath("../../Camera3D/FocusPosition")
-
-[node name="WorkbenchTexture" type="Sprite3D" parent="WorkbenchView"]
-transform = Transform3D(1, 0, 0, 0, 1.1920929e-07, 1.0000013, 0, -1.0000013, 1.1920929e-07, 0, 1.7348092, -0.51422817)
-pixel_size = 0.0007
-texture = ExtResource("4_8yn6g")
+[node name="WorkbenchView" parent="." instance=ExtResource("2_ckfyi")]
+transform = Transform3D(1, 0, 0, 0, 0.98480767, -0.17364818, 0, 0.17364818, 0.98480767, 0, 0, 0)
 
 [node name="Managers" type="Node" parent="."]
 
@@ -48,7 +34,7 @@ metadata/_custom_type_script = "uid://dgcq710oaye20"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3785387, 0)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 4.4703484e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.3369119, 0.23607965)
 fov = 50.0
 script = ExtResource("1_jt3v7")
 

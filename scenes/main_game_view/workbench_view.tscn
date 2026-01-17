@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bntkja5x3is5f"]
+
+[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="1_xcqvh"]
+[ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="2_qyrgi"]
+
+[node name="WorkbenchView" type="Node3D"]
+
+[node name="PlaceholderObject1" parent="." instance=ExtResource("1_xcqvh")]
+transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -1.4901161e-08, 0.21070021, 0.14790407, -0.031719625)
+
+[node name="PlaceholderObject2" parent="." instance=ExtResource("1_xcqvh")]
+transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -1.4901161e-08, -0.83010775, 0.14790407, -0.031719625)
+
+[node name="WorkbenchTexture" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.1920929e-07, 1.0000013, 0, -1.0000013, 1.1920929e-07, 0, -0.01, 0)
+pixel_size = 0.0007
+texture = ExtResource("2_qyrgi")
