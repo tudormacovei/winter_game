@@ -1,4 +1,4 @@
-Generated at: 2026-01-12 22:37:31
+Generated at: 2026-01-18 01:15:45
 ----------------------------------------
 
 [0] prog_is_door_open
@@ -17,4 +17,18 @@ Character ID: NPC_2
 	Default: 3
 
   [1] ok_with_mary_dying
+	Default: false
+
+Character ID: NPC_3
+  [0] opened_up
+	Default: 0
+
+  [1] watch_state
+	Description: 0 - stays with you, 1 - refused to give it to her, 2 - gave it to her, 3 - gave it to her and will lie to the elders, 4 - promised to give it to her untouched once you find it
+	Default: 0
+
+  [2] relationship
+	Default: 4
+
+  [3] thinks_watch_is_fixed
 	Default: false

@@ -1,8 +1,529 @@
 ~ initialize_local_variables
+do Variables.add_local("lied", false)
 => start
 
 ~ start 
+*The widow walks in with a heavy step. She's even harder to read than usual. 
+Mary: Good day, Keeper. Time is short, so I'll be brief. I want the watch back. Untouched. 
+- Hello, Mary. Why is that? => branch_why
+- That's not possible. I haven't cleansed it yet. => branch_no
+- Forget the watch. How are you feeling?
+	Mary: I can't just forget it. It's important to me. 
+	Mary: I won't let you preside over my feelings, Keeper. Not today. Even if it's under the guise of caring about them.
+	- You're right. I'm sorry, Mary. Here's your watch, untouched. I'm going to need a replacement for the ceremony, though. [do Variables.set_char_var("NPC_3", "relationship", 5)] [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+		Mary: Thank you. I brought an old rag of mine. Should suffice. 
+		- Yeah, it will. May I ask why you don't want the watch cleansed?
+			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+			*Her face turns reflective.
+			Mary: Henry was my man. I loved him. I still do.
+			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it. Thanks for sharing it with me.
+				Mary: Figured I might as well, considering.
+				- At the risk of being untoward, how are you feeling, otherwise? => branch_next
+				- Goodbye, Mary. 
+					Mary: Farewell, Keeper. => END
+				- May the Goddess have mercy on your soul, Mary. 
+					Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+			- I'm having second thoughts about this, Mary. I'm taking the watch back. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: Hah. That's what I get for oversharing. Should have known better. 
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. 
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. => END
+		- Yeah, it's good enough. At the risk of being untoward, how are you feeling, otherwise? => branch_next
+		- It's good enough. Goodbye, Mary. 
+			Mary: Farewell, Keeper. => END
+		- It will. May the Goddess have mercy on your soul. 
+			Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+	- I was just trying to be nice, Mary.
+		Mary: I'd say I appreciate it, but like I said, time is short. May I have my watch back?
+		- No, you may not. It's not done yet. => branch_no
+		- Here you go. Haven't had the chance to cleanse it yet. I'm going to need a replacement for the ceremony, though.  [do Variables.set_char_var("NPC_3", "relationship", 5)] [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+			Mary: Good. Thank you. I brought an old rag of mine. Should suffice. 
+			- Yeah, it will. May I ask why you don't want the watch cleansed?
+				Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+				*Her face turns reflective.
+				Mary: Henry was my man. I loved him. I still do.
+				Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+				Mary: In practice, however, he was a shell of his former self. 
+				Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+				Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+				Mary: To remember him as he was before, now, in my final moments. 
+				Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+				- I get it. Thanks for sharing it with me.
+					Mary: Figured I might as well, considering.
+					- At the risk of being untoward, how are you feeling, otherwise? => branch_next
+					- Goodbye, Mary. 
+						Mary: Farewell, Keeper. => END
+					- May the Goddess have mercy on your soul, Mary. 
+						Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+				- I'm having second thoughts about this. I'm taking the watch back. 
+					Mary: Hah. That's what I get for oversharing. Should have known better. 
+					Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+					- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+						Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+						Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. => END
+			- Yeah, it's good enough. So, at the risk of being untoward, how are you feeling, Mary? => branch_next
+			- It's good enough. Goodbye, Mary.
+				Mary: Farewell, Keeper. => END
+			- It will. May the Goddess have mercy on your soul. 
+				Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+		- Why do you want it? => branch_why
+	- Sheesh, I'm definitely not going to miss you. 
+		Mary: Can't say I much care about that anymore. Give me the watch. 
+		- Here, take it. I'm going to need a replacement for the ceremony though. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 3)]
+			Mary: Here's an old rag of mine. Should be good enough. Farewell. 
+			- May the Goddess have mercy on your soul. 
+				*She hears you but doesn't stop. => END
+			- Goodbye. => END
+		- No. I haven't cleansed it yet. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: You're just as brainwashed as the rest of them, aren't you?. No matter. I've made my peace with the fact. Keep it.
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. => END
+		- Don't much care for your tone, myself. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: I don't have time for this. Shame on you. Keep the watch. 
+			- May the Goddess have mercy on your soul. 
+				*She storms out. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
+				*She pauses for a second. Then she storms out. => END
+- (LIE) I cleansed it already. [do Variables.set_char_var("NPC_3", "thinks_watch_is_fixed", true)]  => branch_lie_1
+- (LIE) I can't seem to find it. Must have misplaced it. [do Variables.set_var("lied", true)]
+	Mary: ...
+	Mary: Just let me know once you find it. And leave it as it is, Keeper. I beg you. 
+	- Will do, Mary. I'll have Micah bring it to you later. I'm going to need a replacement for the ceremony, though. [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+		Mary: Brought an old rag of mine. Should be good enough. 
+		- It will suffice. So, why don't you want the watch cleansed?
+			Mary: I despise the practice. It dawned on me just now, as my time on this Earth nears its end. 
+			*Her face turns reflective.
+			Mary: Henry was my man. I loved him. I still do.
+			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)]
+				Mary: Figured I might as well, considering. 
+				- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+			- I'm having second thoughts about this, Mary. Think I'll hold on to the watch and cleanse it, once I find it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: How little words matter these days.
+				Mary: That's what I get for oversharing. Should have known better.
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+		- It is. Goodbye, Mary. [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)]
+			Mary: Farewell, Keeper. => END
+	- You know I can't do that.  => branch_no
+	- I can't promise anything.  
+		Mary: Just... think about it, will you? For me.
+		- I'll see. Goodbye, Mary.
+			Mary: Farewell. And hurry, Keeper. My time is running out. => END
+		- I will. How are you feeling, Mary? => branch_next
+	- Why? => branch_why_lie
+		
+		
+~ branch_why		
+Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if that means I won't be able to have it with me at the ceremony. 
+- You know I can't do that, Mary. The watch is filled with sin. => branch_no
+- I assume you have a replacement for the ceremony ready for me, then. 
+	Mary: Brought an old rag of mine. That should be good enough. Do what you will with it. 
+	- Yeah, that should work. May I ask why you don't want the watch cleansed?
+		Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+		*Her face turns reflective.
+		Mary: Henry was my man. I loved him. I still do.
+		Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+		Mary: In practice, however, he was a shell of his former self. 
+		Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+		Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+		Mary: To remember him as he was before, now, in my final moments. 
+		Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+		- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+			Mary: Figured I might as well, considering. 
+			- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+		- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: Hah, that's what I get for oversharing. Should have known better.
+			Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. => END
+	- Good enough, indeed. How are you feeling otherwise, Mary? [do Variables.set_char_var("NPC_3", "relationship", 5)] => branch_next
+- I'll just tell them it's cleansed. That way, you'll be able to have it with you at the ceremony as well. 
+	Mary: I can't have you risk your neck for me, Keeper. They'll know. They always do.
+	- Don't worry about it, Mary. I'll handle it. Here it is. Just make not to forget it tonight. [do Variables.set_char_var("NPC_3", "relationship", 6)] [do Variables.set_char_var("NPC_3", "watch_state", 3)]
+		*Face turns hopeful.
+		Mary: I don't know what I've done to deserve your kindness. I appreciate it, Keeper. 
+		- It's the least I can do. How are you feeling, otherwise? => branch_next
+		- Don't mention it. Goodbye. 
+			Mary: Farewell, Keeper. => END
+	- You're right. It would be foolish. Take the watch. I'll need a replacement for the ceremony, though. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+		Mary: Here's an old rag of mine. Should be good enough. Do what you will with it.
+		- Yeah, that should work. Can I ask why you don't want the watch cleansed?
+			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+			*Her face turns reflective.
+			Mary: Henry was my man. I loved him. I still do.
+			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+				Mary: Figured I might as well, considering. 
+				- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+			- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: Hah, that's what I get for oversharing. Should have known better.
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+		- Good enough, indeed. How are you feeling otherwise, Mary? [do Variables.set_char_var("NPC_3", "relationship", 5)] => branch_next
+- (LIE) I cleansed it already. => branch_lie_1
+- (LIE) I can't seem to find it. Must have misplaced it. [do Variables.set_var("lied", true)]
+	Mary: ...
+	Mary: Just let me know once you find it. And leave it as it is, Keeper. I beg you. 
+	- Will do, Mary. I'll have Micah bring it to you later. I'm going to need a replacement for the ceremony, though. [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+		Mary: Brought an old rag of mine. Should be good enough. 
+		- It will suffice. So, why don't you want the watch cleansed?
+			Mary: I despise the practice. It dawned on me just now, as my time on this Earth nears its end. 
+			Mary: Henry was my man. I loved him. I still do.
+			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)]
+				Mary: Figured I might as well, considering. 
+				- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+			- I'm having second thoughts about this, Mary. Think I'll hold on to the watch and cleanse it, once I find it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: How little words matter these days.
+				Mary: That's what I get for oversharing. Should have known better. 
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+		- It is. Goodbye, Mary. [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)]
+			Mary: Farewell, Keeper. => END
+	- You know I can't do that.  => branch_no
+	- I can't promise anything.  
+		Mary: Just... think about it, will you? For me.
+		- I'll see. Goodbye, Mary.
+			Mary: Farewell. And hurry, Keeper. My time is running out. => END
+		- I will. How are you feeling, Mary? => branch_next
 
-	=> END
+~ branch_why_lie
+Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if that means I won't be able to have it with me at the ceremony. 
+- You know I can't do that, Mary. The watch is filled with sin. => branch_no
+- So be it. I'll have Micah bring it to you later. I'm going to need a replacement for the ceremony, though. 
+	Mary: Brought an old rag of mine. That should be good enough. Do what you will with it. 
+	- Yeah, that should work. May I ask why you don't want the watch cleansed?
+		Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+		*Her face turns reflective.
+		Mary: Henry was my man. I loved him. I still do.
+		Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+		Mary: In practice, however, he was a shell of his former self. 
+		Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+		Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+		Mary: To remember him as he was before, now, in my final moments. 
+		Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+		- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 4)] [do Variables.set_char_var("NPC_3", "relationship", 5)] [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)]
+			Mary: Figured I might as well, considering. 
+			- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+		- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: Hah, that's what I get for oversharing. Should have known better.
+			Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+	- Good enough, indeed. How are you feeling otherwise, Mary? [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)] [do Variables.set_char_var("NPC_3", "relationship", 5)]  => branch_next
+- I'll just tell them it's cleansed. That way, you'll be able to have it at the ceremony. 
+	Mary: I can't have you risk your neck for me, Keeper. They'll know. They always do.
+	- Don't worry, Mary. I'll handle it. I'll have Micah bring it over once I find it. [do Variables.set_char_var("NPC_3", "relationship", 6)] [do Variables.set_char_var("NPC_3", "watch_state", 3)] [do Variables.set_char_var("NPC_3", "promised_to_give_watch", true)]
+		*Face turns hopeful.
+		Mary: I don't know what I've done to deserve your kindness. I appreciate it, Keeper. 
+		- It's the least I can do. How are you feeling, otherwise? => branch_next
+	- You're right. It would be foolish. I'll have Micah bring you the watch once I find it. I'll need a replacement for the ceremony, though. [do Variables.set_char_var("NPC_3", "watch_state", 4)]
+		Mary: Here's an old rag of mine. Should be good enough. Do what you will with it.
+		- Yeah, that should work. Can I ask why you don't want the watch cleansed?
+			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+			*Her face turns reflective.
+			Mary: Henry was my man. I loved him. I still do.
+			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 4)] [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+				Mary: Figured I might as well, considering. 
+				- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+			- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: Hah, that's what I get for oversharing. Should have known better.
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+		- Good enough, indeed. How are you feeling otherwise, Mary? [do Variables.set_char_var("NPC_3", "relationship", 5)] => branch_next
+- (LIE) I cleansed it already. => branch_lie_1
+	
+	
+~ branch_no
+Mary: Please, Keeper. It's the last thing I have of his. I don't want it tinkered with in any way. 
+Mary: Consider it my final wish. 
+- Alright. I'll do it as a favour to you, given the circumstances. I assume you brought a replacement for the ceremony?
+	Mary: Here's an old rag of mine. Should be good enough. Do what you will with it. 
+	- Yeah, that should work. May I ask why you don't want the watch cleansed?
+		Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+		*Her face turns reflective.
+		Mary: Henry was my man. I loved him. I still do.
+		Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
+		Mary: In practice, however, he was a shell of his former self. 
+		Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+		Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+		Mary: To remember him as he was before, now, in my final moments. 
+		Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+		- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)]
+			Mary: Figured I might as well, considering. 
+			- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+		- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: Hah, that's what I get for oversharing. Should have known better.
+			Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+	- Good enough, indeed. How are you feeling otherwise, Mary? [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)] => branch_next 
+- I said no, Mary. I have to rid it of its evil. 
+	Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+	- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+		Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+	- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+		Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+- Why does it matter so much to not have it cleansed?
+	Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
+	*Her face turns reflective.
+	Mary: Henry was my man. I loved him. I still do. 
+	Mary: ...
+	Mary: Please, Keeper. Just give it back. [do Variables.set_char_var("NPC_3", "opened_up", 1)]
+	- You're holding back. Tell me. 
+		Mary: ...
+		Mary: I'll tell you if you promise me you'll do it. 
+		- Okay. I promise.
+			Mary: Thank you, Keeper.
+			Mary: ...
+			Mary: Henry wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+				Mary: Figured I might as well, considering. 
+				- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+			- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: How little words matter these days. 
+				Mary: That's what I get for oversharing. Should have known better. 
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+		- The watch stays with me until it's cleansed. 
+			Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+		- Why the secrecy? 
+			Mary: I asked you a simple thing, Keeper. As a friend. You ask me all these questions... 
+			Mary: You don't know death like I do. It's been living in my home for months, gnawing at what's left of my soul. 
+			Mary: Tonight I'm finally meeting it head on. I just wanted it to be on my own terms. 
+			Mary: No matter. Keep the watch. Do what you will. Goodbye. 
+			- Mary, wait... [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+				*She doesn't. => END
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+				*She hears you but doesn't stop. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
+				*She hears you and stops for a second. Then she keeps going. => END
+	- The answer is still no, Mary. 
+		Mary: Guess you're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+		- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+			Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+			Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+	- Okay. Consider it a favour, given the circumstances. I assume you brought a replacement for the ceremony?
+		Mary: Here's an old rag of mine. Should be good enough. Do what you will with it. 
+		- Yeah, that should work. You were holding back before. What is it you're not telling me?
+			Mary: ...
+			Mary: Henry wasn't the same after we joined the cult. In theory, he was free of sin.  
+			Mary: In practice, however, he was a shell of his former self. 
+			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
+			Mary: I know it's just a watch. But I want it to stay as it is, no purification, no nothing. 
+			Mary: To remember him as he was before, now, in my final moments. 
+			Mary: For what it's worth, anyway. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
+			- I get it, Mary. Thanks for sharing it with me. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)]
+				Mary: Figured I might as well, considering. 
+				- Might as well go all the way, then. How are you feeling, otherwise? => branch_next
+			- I'm having second thoughts about this, Mary. Think I'll hold on to the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				Mary: Hah, that's what I get for oversharing. Should have known better.
+				Mary: Seems you're just as brainwashed as the rest of them. No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+					Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+		- Good enough, indeed. How are you feeling otherwise, Mary? [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)] => branch_next 
+
+	
+~ branch_lie_1
+Mary: Of all the days to make haste. [do Variables.set_char_var("NPC_3", "thinks_watch_is_fixed", true)]
+Mary: I guess it doesn't really matter that much anymore anyway. Give it to me as it is. 
+Mary: Might as well go ahead and use it for the ceremony now.  
+- I'll have Micah bring it over once I find it, but you won't be able to use it as a sacrificial item. I'd have to give it to the Elders myself, as you well know. [do Variables.set_char_var("NPC_3", "watch_state", 2)]  [do Variables.set_char_var("NPC_3", "relationship", 5)]
+	Mary: I was hoping an exception could have been made. No matter. I brought an old rag of mine as a replacement. Should suffice. 
+	- No exceptions when it comes to the ceremonies, sadly. The rag will sufice. May I ask why, exactly, you didn't want it cleansed?
+		Mary: Guess it doesn't matter anymore now, does it? No point talking about it.
+		- Guess it doesn't. So, how are you feeling, otherwise? => branch_next
+		- Yeah. Goodbye then, Mary. 
+			Mary: Farewell. 
+		- May the Goddess have mercy on your soul.
+			Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+	- Yeah, it's good enough. So, how are you feeling, otherwise? => branch_next
+	- It will. May the Goddess have mercy on your soul. 
+		Mary: Don't much care whether she does or not. Farewell, Keeper. => END 
+	- It's good enough. Goodbye, Mary.
+		Mary: Farewell, Keeper. 
+- I can't do that. I have to give the ceremonial item directly to the Elders. 
+	Mary: I know the rules, Keeper. I'm asking you to make an exception.
+	- Like I said. Can't do it. No exceptions when it comes to the ceremonies. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+		Mary: Can't or won't? You're a sad, cold person, Keeper. Denying a dying woman's final wish.
+		Mary: No matter. I've made peace with the fact. Keep it. 
+		- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+			Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+			Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. => END
+	- I'll have Micah bring it over. But you need to bring me a replacement for the ceremony. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship",5)]
+		Mary: Here's an old rag of mine. Should be good enough. Do what you will with it.
+		- Yeah, it will suffice. May I ask why, exactly, you didn't want it cleansed?
+			Mary: Guess it doesn't matter anymore now, does it? No point talking about it.
+			- Guess it doesn't. So, how are you feeling, otherwise? => branch_next
+			- Yeah. Goodbye then, Mary. 
+				Mary: Farewell. => END
+			- May the Goddess have mercy on your soul.
+				Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+		- Yeah, it's good enough. So, how are you feeling, otherwise? => branch_next
+		- It will. May the Goddess have mercy on your soul. 
+			Mary: Don't much care whether she does or not. Farewell, Keeper. => END 
+		- It's good enough. Goodbye, Mary.
+			Mary: Farewell, Keeper. => END
+- I didn't get around to it yet, actually. Don't know why I lied. [do Variables.set_char_var("NPC_3", "thinks_watch_is_fixed", false)]
+	Mary: ...
+	Mary: Okay then. Give it to me.
+	- (LIE) I can't seem to find it. Must have misplaced it.
+		Mary: I don't have time for this. I don't know if you're making fun of me or if you're just incompetent. 
+		Mary: Eiter way, shame on you. Keep the watch. Farewell. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+		- Mary, wait...
+			*She doesn't. => END
+		- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+			*She hears you but doesn't stop. => END
+		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
+			*She hears you and stops for a second. Then she keeps going. => END
+	- Can't do that. Gotta cleanse it first. 
+		Mary: I know the rules, Keeper. I'm asking you to make an exception.
+		- Like I said. Can't do it. No exceptions when it comes to the ceremonies. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: Can't or won't? You're a sad, cold person, Keeper. Denying a dying woman's final wish.
+			Mary: No matter. I've made peace with the fact. Keep it. 
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. => END
+		- I'll give it to you. But you need to bring me a replacement for the ceremony. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship",5)]
+			Mary: Here's an old rag of mine. Should be good enough. Do what you will with it.
+			- Yeah, that should work. May I ask why you don't want the watch cleansed?
+				Mary: So you can make fun of me some more, Keeper? No, you may not. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+				- Mary, wait...
+				*She doesn't. => END
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. 
+				*She hears you but doesn't stop. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
+				*She hears you and stops for a second. Then she keeps going. => END
+			- Good enough, indeed. How are you feeling otherwise, Mary?
+				Mary: Not sure I want to spend my last few hours talking to you after that whole farce. Goodbye, Keeper. [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+				- Mary, wait...
+				*She doesn't. => END
+				- I'm sorry, Mary. May the Goddess have mercy on your soul. 
+				*She hears you but doesn't stop. => END
+				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
+				*She hears you and stops for a second. Then she keeps going. => END
+	- Here you go. I assume you brought a replacement for the ceremony, then. 
+		Mary: Here's an old rag of mine. Should be good enough. Do what you will with it.
+		- Yeah, that should work. May I ask why you don't want the watch cleansed?
+			Mary: So you can make fun of me some more, Keeper? No, you may not. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+			- Mary, wait...
+			*She doesn't. => END
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
+			*She hears you but doesn't stop. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
+			*She hears you and stops for a second. Then she keeps going. => END
+		- Good enough, indeed. How are you feeling otherwise, Mary?
+			Mary: Not sure I want to spend my last few hours talking to you after that whole farce. Goodbye, Keeper. [do Variables.set_char_var("NPC_3", "relationship", 2)] 
+			- Mary, wait...
+			*She doesn't. => END
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
+			*She hears you but doesn't stop. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
+			*She hears you and stops for a second. Then she keeps going. => END
+- (LIE) Actually, I can't seem to find it. Must have misplaced it after cleansing it. 
+	Mary: ...
+	Mary: Guess it doesn't matter that much anymore anyway.
+	Mary: If you do find it, please let me know. 
+	- I'll have Micah Bring it over. Goodbye, Mary.
+		Mary: Farewell. => END
+	- I'll tell Micah to bring it over. How are you feeling otherwise, Mary? => branch_next
+	- I have to give it directly to the Elders once I find it. 
+		Mary: I know the rules, Keeper. I'm asking you to make an exception.
+		- Like I said. Can't do that. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+			Mary: Can't or won't? You're a sad, cold person, Keeper. Denying a dying woman's final wish.
+			Mary: No matter. I've made peace with the fact. Keep it. 
+			Mary: Farewell, Keeper. 
+			- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
+				Mary: Don't much care whether she does or not. Goodbye, Keeper. => END
+			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. [do Variables.set_char_var("NPC_3", "relationship", 1)]
+				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. => END
+		- Fine. Given the circumstances. I'll have Micah bring it over. You won't be able to use it as a sacrificial item, though. I'll need a replacement.
+			Mary: Here's an old rag of mine. Should be good enough. Do what you will with it.
+			- Yeah, it will suffice. May I ask why, exactly, you didn't want it cleansed?
+				Mary: Guess it doesn't matter anymore now, does it? No point talking about it.
+				- Guess it doesn't. So, how are you feeling, otherwise? => branch_next
+				- Yeah. Goodbye then, Mary. 
+					Mary: Farewell. => END
+				- May the Goddess have mercy on your soul.
+					Mary: Don't much care whether she does or not. Farewell, Keeper. => END
+			- Yeah, it's good enough. So, how are you feeling, otherwise? => branch_next
+			- It will. May the Goddess have mercy on your soul. 
+				Mary: Don't much care whether she does or not. Farewell, Keeper. => END 
+			- It's good enough. Goodbye, Mary.
+				Mary: Farewell, Keeper. => END
+	
+	
+	
+~ branch_next
+if Variables.get_char_var("NPC_3", "relationship") == 5
+
+elif Variables.get_char_var("NPC_3", "relationship") == 6
+
+elif Variables.get_char_var("NPC_3", "relationship") == 4
+
 => END
 
