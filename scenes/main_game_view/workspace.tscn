@@ -19,6 +19,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.984
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.3369119, 0.23607965)
 
 [node name="WorkbenchView" parent="." instance=ExtResource("2_ckfyi")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.98480767, -0.17364818, 0, 0.17364818, 0.98480767, 0, 0, 0)
 
 [node name="Managers" type="Node" parent="."]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bntkja5x3is5f"]
+[gd_scene load_steps=5 format=3 uid="uid://bntkja5x3is5f"]
 
+[ext_resource type="Script" uid="uid://fhtjg3on0yx1" path="res://scenes/main_game_view/workbench.gd" id="1_qyrgi"]
 [ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="1_xcqvh"]
 [ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="2_qyrgi"]
 
@@ -7,6 +8,7 @@
 size = Vector3(0.38, 0.225, 0.985)
 
 [node name="WorkbenchView" type="Node3D"]
+script = ExtResource("1_qyrgi")
 
 [node name="PlaceholderObject1" parent="." node_paths=PackedStringArray("focus_position", "object_completed_area") instance=ExtResource("1_xcqvh")]
 transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -1.4901161e-08, 0.21070021, 0.14790407, -0.031719625)

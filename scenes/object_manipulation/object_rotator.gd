@@ -1,8 +1,10 @@
+class_name ObjectRotator
 extends Node3D
 
 # position of the object when it is in focus
 @export var focus_position: Node3D
 @export var object_completed_area: Area3D # if object overlaps this area, complete the object
+@export var object: ObjectWithStickers 
 
 # outline of object on mouse hover
 @export var outline_material: Material

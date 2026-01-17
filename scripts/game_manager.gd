@@ -12,6 +12,7 @@ var current_interaction_index: int = -1
 var _day_resources: Array[DayDefinition] = []
 var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
 
+@onready var workbench: Workbench = %WorkbenchView 
 @onready var ui_manager := %UIManager
 @onready var character_node := get_node("/root/Workspace/DialogueView/DialogueCharacterTexture")
 
@@ -98,6 +99,9 @@ func _play_next_interaction():
 	# Start the interaction
 	var dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
 	ui_manager.balloon_layer = dialogue_balloon
+	
+	for object in interaction.objects:
+		workbench.add_object(object)
 	print("GameManager: Starting day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 
 #region Signals
