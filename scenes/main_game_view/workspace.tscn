@@ -38,9 +38,6 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 4.4703484e-08, 0, -2.9802322e-08,
 fov = 50.0
 script = ExtResource("1_jt3v7")
 
-[node name="FocusPosition" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1055619)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8pwe6")
 camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")

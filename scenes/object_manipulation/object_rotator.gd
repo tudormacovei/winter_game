@@ -2,6 +2,7 @@ extends Node3D
 
 # position of the object when it is in focus
 @export var focus_position: Node3D
+@export var object_completed_area: Area3D # if object overlaps this area, complete the object
 
 # outline of object on mouse hover
 @export var outline_material: Material
@@ -23,6 +24,7 @@ var _rotation_remaining = 0.0
 var _is_mouse_on_object = false
 var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
+var _is_pending_completion: bool = false
 
 static var ANIMATION_TIME = 0.1
 static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # scale of object on mouse hover
@@ -69,6 +71,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_handle_rotation(delta)
 	_handle_drag()
+	# wait for player to place object on table before complete
+	if _is_pending_completion and _rotator_state == RotatorState.ON_TABLE:
+		complete_object()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
@@ -238,7 +243,21 @@ func _on_object_mouse_exited() -> void:
 	_is_mouse_on_object = false
 	if _rotator_state == RotatorState.ON_TABLE:
 		_remove_outline()
-		
+
+
+func _on_object_area_entered(area: Area3D) -> void:
+	# wait for player to place the object on the table before completing it
+	if area == object_completed_area:
+		_is_pending_completion = true
+
+func _on_object_area_exited(area: Area3D) -> void:
+	if area == object_completed_area:
+		_is_pending_completion = false
+
+func complete_object():
+	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
+	queue_free()
+
 # ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):
 	var bbox: AABB = _calculate_bounding_box(object, false)
