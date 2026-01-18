@@ -8,4 +8,4 @@ class_name InteractionDefinition
 extends Resource
 
 @export var dialogue: Resource
-@export var objects: Array[Resource]
+@export var objects: Array[PackedScene]

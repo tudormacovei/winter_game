@@ -1,26 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc01kpxj88dy8"]
+[gd_scene load_steps=3 format=3 uid="uid://bc01kpxj88dy8"]
 
-[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="1_is2ab"]
 [ext_resource type="Script" uid="uid://bhh4wa5b2nnlg" path="res://scenes/object_manipulation/object_rotator.gd" id="1_uybdy"]
 [ext_resource type="Material" uid="uid://lh5rtw0dljba" path="res://3d_assets/materials/white_outline.tres" id="2_1acb4"]
-[ext_resource type="PackedScene" uid="uid://xns6vbm564vw" path="res://scenes/sticker_interaction/sticker_click/sticker_click.tscn" id="4_saawi"]
 
 [node name="ObjectRotator" type="Node3D"]
 script = ExtResource("1_uybdy")
 outline_material = ExtResource("2_1acb4")
-
-[node name="Object" parent="." instance=ExtResource("1_is2ab")]
-
-[node name="StickerClick" parent="Object" instance=ExtResource("4_saawi")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.004762113, 0, 0.09893876)
-
-[node name="StickerClick2" parent="Object" instance=ExtResource("4_saawi")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.004762113, -0.113783106, -0.075560324)
-
-[node name="StickerClick3" parent="Object" instance=ExtResource("4_saawi")]
-transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0.085890025, 0.038366497, 0.006817028)
-
-[connection signal="area_entered" from="Object" to="." method="_on_object_area_entered"]
-[connection signal="area_exited" from="Object" to="." method="_on_object_area_exited"]
-[connection signal="mouse_entered" from="Object" to="." method="_on_object_mouse_entered"]
-[connection signal="mouse_exited" from="Object" to="." method="_on_object_mouse_exited"]

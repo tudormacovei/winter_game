@@ -1,13 +1,15 @@
 class_name ObjectRotator
 extends Node3D
 
-# position of the object when it is in focus
-@export var focus_position: Node3D
-@export var object_completed_area: Area3D # if object overlaps this area, complete the object
-@export var object: ObjectWithStickers 
+# TODO: separate the exports into different sections
 
-# outline of object on mouse hover
-@export var outline_material: Material
+# THESE EXPORTS BELOW ARE JUST FOR DEBUG PURPOSES!
+@export var focus_position: Node3D # position of the object when it is in focus
+@export var object_completed_area: Area3D # if object overlaps this area, complete the object
+@export var object_scene: PackedScene # the object to load into the rotator
+
+# The exports below are actually used in all instances
+@export var outline_material: Material # outline of object on mouse hover
 
 signal object_interactible(is_interactible: bool)
 
@@ -21,6 +23,7 @@ enum RotatorState {
 	DRAGGING, # being dragged around the workspace
 }
 
+var _object: ObjectWithStickers = null
 var _rotator_state = RotatorState.ON_TABLE
 var _rotation_remaining = 0.0
 var _is_mouse_on_object = false
@@ -30,6 +33,12 @@ var _is_pending_completion: bool = false
 
 static var ANIMATION_TIME = 0.1
 static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # scale of object on mouse hover
+
+# Set all data needed for correct functionality
+func set_spawn_data(focus_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
+	self.focus_position = focus_position
+	self.object_completed_area = object_completed_area
+	self.object_scene = object_scene
 
 # TODO: I would really like to move utility functions like this to a different place
 # but I can't find a way to do it rn
@@ -52,7 +61,7 @@ func _set_state(state: RotatorState):
 	else:
 		object_interactible.emit(false)
 	if state == RotatorState.ON_TABLE:
-		_place_object_on_xz_plane($Object)
+		_place_object_on_xz_plane(_object)
 
 func _on_sticker_completed():
 	_completed_stickers += 1
@@ -60,6 +69,21 @@ func _on_sticker_completed():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if object_scene == null:
+		print("ObjectRotator: Attempted to instantiate null object scene. Aborting...")
+		queue_free() # delete self due to lack of child object
+
+	_object = object_scene.instantiate()
+	if not(_object is ObjectWithStickers):
+		print("ObjectRotator: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
+	add_child(_object)
+	_place_object_on_xz_plane(_object)
+	
+	_object.mouse_entered.connect(_on_object_mouse_entered)
+	_object.mouse_exited.connect(_on_object_mouse_exited)
+	_object.area_entered.connect(_on_object_area_entered)
+	_object.area_exited.connect(_on_object_area_exited)
+	
 	for child in get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
@@ -67,7 +91,6 @@ func _ready() -> void:
 			child.connect("sticker_completed", _on_sticker_completed)
 			connect("object_interactible", child._on_object_interactible_change)
 			_set_state(RotatorState.ON_TABLE)
-	_place_object_on_xz_plane($Object)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -81,13 +104,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
 		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
 			_set_state(RotatorState.STATIONARY)
-			$Object.global_position = focus_position.global_position
+			_object.global_position = focus_position.global_position
 			_remove_outline()
 			get_viewport().set_input_as_handled()
 			return
 		if _rotator_state == RotatorState.STATIONARY && !_is_mouse_on_object:
 			_set_state(RotatorState.ON_TABLE)
-			$Object.position = Vector3.ZERO
+			_object.position = Vector3.ZERO
 			get_viewport().set_input_as_handled()
 			return
 	
@@ -146,16 +169,16 @@ func _handle_rotation(delta: float) -> void:
 	
 	match _rotator_state:
 		RotatorState.ROTATING_BOTTOM:
-			$Object.rotate(Vector3.RIGHT, to_rotate)
+			_object.rotate(Vector3.RIGHT, to_rotate)
 			pass
 		RotatorState.ROTATING_UP:
-			$Object.rotate(Vector3.RIGHT, -to_rotate)
+			_object.rotate(Vector3.RIGHT, -to_rotate)
 			pass
 		RotatorState.ROTATING_LEFT:
-			$Object.rotate(Vector3.UP, -to_rotate)
+			_object.rotate(Vector3.FORWARD, -to_rotate)
 			pass
 		RotatorState.ROTATING_RIGHT:
-			$Object.rotate(Vector3.UP, to_rotate)
+			_object.rotate(Vector3.FORWARD, to_rotate)
 			pass
 
 	if _rotation_remaining <= 0.0:
@@ -176,7 +199,7 @@ func _handle_drag():
 	var distance_to_plane_intersect := -origin.y/direction.y
 	var intersect = origin + direction * distance_to_plane_intersect # interesect on XZ plane (y=0)
 	self.global_position = intersect
-	_place_object_on_xz_plane($Object) # intersect y coord is incorrect, update to correct one
+	_place_object_on_xz_plane(_object) # intersect y coord is incorrect, update to correct one
 	
 	#print("Ray origin: " + str(origin))
 	#print("Direction vector " + str(direction))
@@ -185,7 +208,7 @@ func _handle_drag():
 var _original_mesh: Mesh = null
 
 func _apply_outline():
-	var mesh_instance := $Object.get_child(0) as MeshInstance3D
+	var mesh_instance := _object.get_child(0) as MeshInstance3D
 	if mesh_instance == null:
 		return
 	if outline_material == null:
@@ -214,12 +237,12 @@ func _apply_outline():
 		new_mat.next_pass = outline_material
 		mesh_clone.surface_set_material(i, new_mat)
 
-	$Object.scale = HOVERED_SCALE
+	_object.scale = HOVERED_SCALE
 
 
 func _remove_outline():
 	# Restore original mesh
-	var mesh_instance := $Object.get_child(0) as MeshInstance3D
+	var mesh_instance := _object.get_child(0) as MeshInstance3D
 	if mesh_instance == null: # 'as' keyword casts to null on type mismatch
 		return
 
@@ -229,7 +252,7 @@ func _remove_outline():
 
 	mesh_instance.mesh = _original_mesh
 	_original_mesh = null
-	$Object.scale = Vector3.ONE
+	_object.scale = Vector3.ONE
 
 
 # Add outline to mesh and lift it slightly
