@@ -520,10 +520,10 @@ Mary: Might as well go ahead and use it for the ceremony now.
 	
 ~ branch_next
 if Variables.get_char_var("NPC_3", "relationship") == 5
-
+	pass
 elif Variables.get_char_var("NPC_3", "relationship") == 6
-
+	pass
 elif Variables.get_char_var("NPC_3", "relationship") == 4
-
+	pass
 => END
 
