@@ -26,7 +26,7 @@ func _get_next_free_slot() -> Node3D:
 func add_object(object_scene: PackedScene):
 	var object_rotator: ObjectRotator = _object_rotator_scene.instantiate()
 	object_rotator.set_spawn_data($FocusPosition, $DoneArea, object_scene)
-	object_rotator.global_position = _get_next_free_slot().global_position
-	
 	add_child(object_rotator)
+	
+	object_rotator.global_position = _get_next_free_slot().global_position
 	_used_slots = _used_slots + 1
