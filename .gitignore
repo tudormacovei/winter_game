@@ -4,3 +4,6 @@
 
 # File type ignores
 *.tmp
+
+# VSCode ignores
+.vscode/settings.json
