@@ -1,4 +1,4 @@
-# This is the parent script for all objects with stickers
+# This is the base class for all objects with stickers
 # It will handle random placement of stickers on object surface
 class_name ObjectWithStickers
 extends Area3D

@@ -1,26 +1,26 @@
+# Wrapper for ObjectWithStickers that handles player interaction via a state machine.
+# Objects can be picked up, rotated, dragged around, and completed when dragged to a completion area.
+#
+# Setup: Call set_spawn_data() or set exports before use
 class_name InteractibleObject
 extends Node3D
 
-# TODO: separate the exports into different sections
-
-# THESE EXPORTS BELOW ARE JUST FOR DEBUG PURPOSES!
-@export var focus_position: Node3D # position of the object when it is in focus
-@export var object_completed_area: Area3D # if object overlaps this area, complete the object
-@export var object_scene: PackedScene # the object to load
-
-# The exports below are actually used in all instances
-@export var outline_material: Material # outline of object on mouse hover
-
 signal object_interactible(is_interactible: bool)
 
+# Setup variables, set before node enters scene tree
+var focus_position: Node3D
+var object_completed_area: Area3D
+var object_scene: PackedScene # ObjectWithStickers scene to load
+@export var outline_material: Material
+
 enum State {
-	ON_TABLE, # Resting on the table, cannot be interacted with except by clicking to begin the interaction
-	STATIONARY,
+	ON_TABLE,
+	FOCUSED,
 	ROTATING_LEFT,
 	ROTATING_RIGHT,
 	ROTATING_UP,
 	ROTATING_BOTTOM,
-	DRAGGING, # being dragged around the workspace
+	DRAGGING,
 }
 
 var _object: ObjectWithStickers = null
@@ -30,42 +30,10 @@ var _is_mouse_on_object = false
 var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
 var _is_pending_completion: bool = false
+var _original_mesh: Mesh = null
 
 static var ANIMATION_TIME = 0.1
-static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # scale of object on mouse hover
-
-# Set all data needed for correct functionality
-func set_spawn_data(focus_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
-	self.focus_position = focus_position
-	self.object_completed_area = object_completed_area
-	self.object_scene = object_scene
-
-# TODO: I would really like to move utility functions like this to a different place
-# but I can't find a way to do it rn
-func get_all_children(node) -> Array:
-	var nodes : Array = []
-	
-	for N in node.get_children():
-		if N.get_child_count() > 0:
-			nodes.append(N)
-			nodes.append_array(get_all_children(N))
-		else:
-			nodes.append(N)
-	return nodes
-	
-func _set_state(state: State):
-	_state = state
-	#print("Set state to " + str(state))
-	if state == State.STATIONARY:
-		object_interactible.emit(true)
-	else:
-		object_interactible.emit(false)
-	if state == State.ON_TABLE:
-		_place_object_on_xz_plane(_object)
-
-func _on_sticker_completed():
-	_completed_stickers += 1
-	print("Completed " + str(_completed_stickers) + " stickers!")
+static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -84,15 +52,16 @@ func _ready() -> void:
 	_object.area_entered.connect(_on_object_area_entered)
 	_object.area_exited.connect(_on_object_area_exited)
 	
-	for child in get_all_children(self):
+	for child in Utils.get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
 			
 			child.connect("sticker_completed", _on_sticker_completed)
 			connect("object_interactible", child._on_object_interactible_change)
-			_set_state(State.ON_TABLE)
+	
+	_set_state(State.ON_TABLE)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	_handle_rotation(delta)
 	_handle_drag()
@@ -100,22 +69,22 @@ func _process(delta: float) -> void:
 	if _is_pending_completion and _state == State.ON_TABLE:
 		complete_object()
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
 		if _state == State.ON_TABLE && _is_mouse_on_object:
-			_set_state(State.STATIONARY)
+			_set_state(State.FOCUSED)
 			_object.global_position = focus_position.global_position
 			_remove_outline()
 			get_viewport().set_input_as_handled()
 			return
-		if _state == State.STATIONARY && !_is_mouse_on_object:
+		if _state == State.FOCUSED && !_is_mouse_on_object:
 			_set_state(State.ON_TABLE)
 			_object.position = Vector3.ZERO
 			get_viewport().set_input_as_handled()
 			return
 	
 	if event.is_action_pressed("mouse_click_right"):
-		#print("Right click detected!")
 		if _state == State.ON_TABLE && _is_mouse_on_object:
 			_set_state(State.DRAGGING)
 			
@@ -123,8 +92,8 @@ func _input(event: InputEvent) -> void:
 		if _state == State.DRAGGING:
 			_set_state(State.ON_TABLE)
 
-	# Object can only rotate from stationary beginning
-	if _state != State.STATIONARY:
+	# Object can only rotate from FOCUSED beginning
+	if _state != State.FOCUSED:
 		return
 	
 	if event.is_action_pressed("object_rotate_bottom"):
@@ -140,16 +109,59 @@ func _input(event: InputEvent) -> void:
 		_set_state(State.ROTATING_RIGHT)
 		_rotation_remaining = 1.0
 
-# takes value of a value x between 0.0 and 1.0 and applies a nonlinear
-# transformation that keeps the endpoints at 0.0 and 1.0, respectively
-func ease_function(x: float) -> float:
-	return (x * x + 0.2) / 2
+
+func _on_object_mouse_entered() -> void:
+	#print("INFO:: Mouse entered object")
+	_is_mouse_on_object = true
+	if _state == State.ON_TABLE:
+		_apply_outline()
+
+
+func _on_object_mouse_exited() -> void:
+	#print("INFO:: Mouse exited object")
+	_is_mouse_on_object = false
+	if _state == State.ON_TABLE:
+		_remove_outline()
+
+
+func _on_object_area_entered(area: Area3D) -> void:
+	# wait for player to place the object on the table before completing it
+	if area == object_completed_area:
+		_is_pending_completion = true
+
+
+func _on_object_area_exited(area: Area3D) -> void:
+	if area == object_completed_area:
+		_is_pending_completion = false
+
+
+func _on_sticker_completed():
+	_completed_stickers += 1
+	print("Completed " + str(_completed_stickers) + " stickers!")
+
+
+# Set all data needed for correct functionality
+func set_spawn_data(focus_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
+	self.focus_position = focus_position
+	self.object_completed_area = object_completed_area
+	self.object_scene = object_scene
+
+
+func _set_state(state: State):
+	_state = state
+	#print("Set state to " + str(state))
+	if state == State.FOCUSED:
+		object_interactible.emit(true)
+	else:
+		object_interactible.emit(false)
+	if state == State.ON_TABLE:
+		_place_object_on_xz_plane(_object)
+
 
 # Handles the rotation of the object with an ease-in and ease-out animation
 # TODO:This method of handling the rotation is not good, should be switched
 # to an approach that *sets* the object rotation every tick instead of calling
-# the rotate(...) function. That way it will be much easier to set custom
-# rotation curves to handle the animation 
+# the rotate(...) function.
 func _handle_rotation(delta: float) -> void:
 	if _state not in [State.ROTATING_LEFT, State.ROTATING_RIGHT,
 								State.ROTATING_UP, State.ROTATING_BOTTOM]:
@@ -170,19 +182,16 @@ func _handle_rotation(delta: float) -> void:
 	match _state:
 		State.ROTATING_BOTTOM:
 			_object.rotate(Vector3.RIGHT, to_rotate)
-			pass
 		State.ROTATING_UP:
 			_object.rotate(Vector3.RIGHT, -to_rotate)
-			pass
 		State.ROTATING_LEFT:
 			_object.rotate(Vector3.FORWARD, -to_rotate)
-			pass
 		State.ROTATING_RIGHT:
 			_object.rotate(Vector3.FORWARD, to_rotate)
-			pass
 
 	if _rotation_remaining <= 0.0:
-		_set_state(State.STATIONARY)
+		_set_state(State.FOCUSED)
+
 
 func _handle_drag():
 	if _state != State.DRAGGING:
@@ -205,7 +214,6 @@ func _handle_drag():
 	#print("Direction vector " + str(direction))
 	#print("Distance to plane intersect: " + str(distance_to_plane_intersect))
 
-var _original_mesh: Mesh = null
 
 func _apply_outline():
 	var mesh_instance := _object.get_child(0) as MeshInstance3D
@@ -246,7 +254,7 @@ func _remove_outline():
 	if mesh_instance == null: # 'as' keyword casts to null on type mismatch
 		return
 
-	# if somehow we are in the case where we exit an object we have not entered
+	# failsafe if somehow we are in the case where we exit an object we have not entered
 	if _original_mesh == null:
 		return
 
@@ -255,54 +263,17 @@ func _remove_outline():
 	_object.scale = Vector3.ONE
 
 
-# Add outline to mesh and lift it slightly
-func _on_object_mouse_entered() -> void:
-	#print("INFO:: Mouse entered object")
-	_is_mouse_on_object = true
-	if _state == State.ON_TABLE:
-		_apply_outline()
-
-# Restore original mesh without outline material and original position
-func _on_object_mouse_exited() -> void:
-	#print("INFO:: Mouse exited object")
-	_is_mouse_on_object = false
-	if _state == State.ON_TABLE:
-		_remove_outline()
-
-
-func _on_object_area_entered(area: Area3D) -> void:
-	# wait for player to place the object on the table before completing it
-	if area == object_completed_area:
-		_is_pending_completion = true
-
-func _on_object_area_exited(area: Area3D) -> void:
-	if area == object_completed_area:
-		_is_pending_completion = false
-
 func complete_object():
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
 	queue_free()
 
-# ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
+
+# Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):
-	var bbox: AABB = _calculate_bounding_box(object, false)
+	var bbox: AABB = Utils._calculate_bounding_box(object, false)
 	global_position.y = bbox.size.y / 2
-	#print("Set object y coordinate to: " + str(global_position.y))
 
-# TODO: move _calculate_bounding_box to utils
-func _calculate_bounding_box(parent : Node3D, include_top_level_transform: bool) -> AABB:
-	var bounds: AABB = AABB()
-	if parent is VisualInstance3D:
-		bounds = parent.get_aabb();
-
-	for i in range(parent.get_child_count()):
-		var child : Node3D = parent.get_child(i)
-		if child:
-			var child_bounds : AABB = _calculate_bounding_box(child, true)
-			if bounds.size == Vector3.ZERO && parent:
-				bounds = child_bounds
-			else:
-				bounds = bounds.merge(child_bounds)
-	if include_top_level_transform:
-		bounds = parent.transform * bounds
-	return bounds
+# takes value of a value x between 0.0 and 1.0 and applies a nonlinear
+# transformation that keeps the endpoints at 0.0 and 1.0, respectively
+func ease_function(x: float) -> float:
+	return (x * x + 0.2) / 2
