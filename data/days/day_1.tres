@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=9 format=3 uid="uid://bj13kkf7ghsl4"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=10 format=3 uid="uid://bj13kkf7ghsl4"]
 
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="1_4hvdw"]
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_7tgdb"]
@@ -6,17 +6,18 @@
 [ext_resource type="Resource" uid="uid://dnjv2qqfanwuo" path="res://data/dialogue/NPC_1/NPC_1_1.dialogue" id="3_rlxhn"]
 [ext_resource type="PackedScene" uid="uid://gfjoau0fs0gt" path="res://scenes/object_manipulation/objects/milk_carton_variant_02.tscn" id="4_7mcph"]
 [ext_resource type="Resource" uid="uid://dg7byaup6bjsr" path="res://data/dialogue/NPC_2/NPC_2_1.dialogue" id="5_7mcph"]
+[ext_resource type="PackedScene" uid="uid://d2sa4je13i7jc" path="res://scenes/object_manipulation/objects/milk_carton_variant_01.tscn" id="6_7mcph"]
 
 [sub_resource type="Resource" id="Resource_7tgdb"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("3_rlxhn")
-objects = Array[Resource]([ExtResource("3_p2rig"), ExtResource("4_7mcph")])
+objects = Array[PackedScene]([ExtResource("3_p2rig"), ExtResource("4_7mcph")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_p4oql"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("5_7mcph")
-objects = Array[Resource]([ExtResource("4_7mcph")])
+objects = Array[PackedScene]([ExtResource("6_7mcph")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [resource]

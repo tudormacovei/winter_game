@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://wesuvbb5vbef"
-path="res://.godot/imported/milk_carton.glb-98b4b971b44e07b67c1e6033306f0a55.scn"
+path="res://.godot/imported/milk_carton.glb-fef7c674f0b740797384be5367f702ef.scn"
 
 [deps]
 
-source_file="res://3d_assets/milk_carton.glb"
-dest_files=["res://.godot/imported/milk_carton.glb-98b4b971b44e07b67c1e6033306f0a55.scn"]
+source_file="res://3d_assets/manipulation_objects/milk_carton.glb"
+dest_files=["res://.godot/imported/milk_carton.glb-fef7c674f0b740797384be5367f702ef.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://3d_assets/3d_bottle_collider.res",
+"save_to_file/fallback_path": "res://3d_assets/manipulation_objects/3d_bottle_collider.res",
 "save_to_file/path": "uid://c62ny1un38v7n"
 }
 }

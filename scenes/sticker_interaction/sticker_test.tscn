@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://rqn51eeja1ox"]
 
 [ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="1_3ctbt"]
-[ext_resource type="PackedScene" uid="uid://wesuvbb5vbef" path="res://3d_assets/milk_carton.glb" id="2_vowdq"]
+[ext_resource type="PackedScene" uid="uid://wesuvbb5vbef" path="res://3d_assets/manipulation_objects/milk_carton.glb" id="2_vowdq"]
 [ext_resource type="PackedScene" uid="uid://xns6vbm564vw" path="res://scenes/sticker_interaction/sticker_click/sticker_click.tscn" id="3_dj5ns"]
 
 [sub_resource type="Environment" id="Environment_vowdq"]

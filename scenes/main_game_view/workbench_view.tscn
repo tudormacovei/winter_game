@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bntkja5x3is5f"]
 
-[ext_resource type="Script" uid="uid://fhtjg3on0yx1" path="res://scenes/main_game_view/workbench.gd" id="1_qyrgi"]
+[ext_resource type="Script" uid="uid://fhtjg3on0yx1" path="res://scripts/object_manipulation/workbench.gd" id="1_qyrgi"]
 [ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="2_qyrgi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xcqvh"]

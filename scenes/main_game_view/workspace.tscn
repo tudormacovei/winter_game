@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qq7fn5km1o4b"]
 
-[ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scenes/main_game_view/scripts/camera_control.gd" id="1_jt3v7"]
+[ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/game_manager.gd" id="1_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]

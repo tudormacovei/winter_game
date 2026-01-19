@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://wbmtaxw68vkw"]
 
-[ext_resource type="ArrayMesh" uid="uid://c62ny1un38v7n" path="res://3d_assets/3d_bottle_collider.res" id="1_ewy6c"]
-[ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scenes/object_manipulation/objects/object_with_stickers.gd" id="1_x5fl3"]
+[ext_resource type="ArrayMesh" uid="uid://c62ny1un38v7n" path="res://3d_assets/manipulation_objects/3d_bottle_collider.res" id="1_ewy6c"]
+[ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_x5fl3"]
 [ext_resource type="PackedScene" uid="uid://xns6vbm564vw" path="res://scenes/sticker_interaction/sticker_click/sticker_click.tscn" id="3_bbqcm"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q8fa4"]

@@ -3,8 +3,6 @@
 class_name UIManager
 extends Node
 
-const CameraControlScript = preload("res://scenes/main_game_view/scripts/camera_control.gd")
-	
 @onready var camera: CameraControl = %Camera3D
 
 var balloon_layer: CanvasLayer = null

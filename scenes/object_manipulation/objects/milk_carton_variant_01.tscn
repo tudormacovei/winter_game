@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2sa4je13i7jc"]
 
-[ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scenes/object_manipulation/objects/object_with_stickers.gd" id="1_jwa2p"]
-[ext_resource type="ArrayMesh" uid="uid://c62ny1un38v7n" path="res://3d_assets/3d_bottle_collider.res" id="1_ki133"]
+[ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_jwa2p"]
+[ext_resource type="ArrayMesh" uid="uid://c62ny1un38v7n" path="res://3d_assets/manipulation_objects/3d_bottle_collider.res" id="1_ki133"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ki133"]
 albedo_color = Color(1, 0.20999998, 0.20999998, 1)
