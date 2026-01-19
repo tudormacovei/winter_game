@@ -1,4 +1,4 @@
-class_name ObjectRotator
+class_name InteractibleObject
 extends Node3D
 
 # TODO: separate the exports into different sections
@@ -6,14 +6,14 @@ extends Node3D
 # THESE EXPORTS BELOW ARE JUST FOR DEBUG PURPOSES!
 @export var focus_position: Node3D # position of the object when it is in focus
 @export var object_completed_area: Area3D # if object overlaps this area, complete the object
-@export var object_scene: PackedScene # the object to load into the rotator
+@export var object_scene: PackedScene # the object to load
 
 # The exports below are actually used in all instances
 @export var outline_material: Material # outline of object on mouse hover
 
 signal object_interactible(is_interactible: bool)
 
-enum RotatorState {
+enum State {
 	ON_TABLE, # Resting on the table, cannot be interacted with except by clicking to begin the interaction
 	STATIONARY,
 	ROTATING_LEFT,
@@ -24,7 +24,7 @@ enum RotatorState {
 }
 
 var _object: ObjectWithStickers = null
-var _rotator_state = RotatorState.ON_TABLE
+var _state = State.ON_TABLE
 var _rotation_remaining = 0.0
 var _is_mouse_on_object = false
 var _sticker_total: int = 0 # set at initialization time, then readonly constant
@@ -53,14 +53,14 @@ func get_all_children(node) -> Array:
 			nodes.append(N)
 	return nodes
 	
-func _set_state(state: RotatorState):
-	_rotator_state = state
+func _set_state(state: State):
+	_state = state
 	#print("Set state to " + str(state))
-	if state == RotatorState.STATIONARY:
+	if state == State.STATIONARY:
 		object_interactible.emit(true)
 	else:
 		object_interactible.emit(false)
-	if state == RotatorState.ON_TABLE:
+	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
 
 func _on_sticker_completed():
@@ -70,12 +70,12 @@ func _on_sticker_completed():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if object_scene == null:
-		print("ObjectRotator: Attempted to instantiate null object scene. Aborting...")
+		print("InteractibleObject: Attempted to instantiate null object scene. Aborting...")
 		queue_free() # delete self due to lack of child object
 
 	_object = object_scene.instantiate()
 	if not(_object is ObjectWithStickers):
-		print("ObjectRotator: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
+		print("InteractibleObject: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
 	add_child(_object)
 	_place_object_on_xz_plane(_object)
 	
@@ -90,54 +90,54 @@ func _ready() -> void:
 			
 			child.connect("sticker_completed", _on_sticker_completed)
 			connect("object_interactible", child._on_object_interactible_change)
-			_set_state(RotatorState.ON_TABLE)
+			_set_state(State.ON_TABLE)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_handle_rotation(delta)
 	_handle_drag()
 	# wait for player to place object on table before complete
-	if _is_pending_completion and _rotator_state == RotatorState.ON_TABLE:
+	if _is_pending_completion and _state == State.ON_TABLE:
 		complete_object()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
-		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
-			_set_state(RotatorState.STATIONARY)
+		if _state == State.ON_TABLE && _is_mouse_on_object:
+			_set_state(State.STATIONARY)
 			_object.global_position = focus_position.global_position
 			_remove_outline()
 			get_viewport().set_input_as_handled()
 			return
-		if _rotator_state == RotatorState.STATIONARY && !_is_mouse_on_object:
-			_set_state(RotatorState.ON_TABLE)
+		if _state == State.STATIONARY && !_is_mouse_on_object:
+			_set_state(State.ON_TABLE)
 			_object.position = Vector3.ZERO
 			get_viewport().set_input_as_handled()
 			return
 	
 	if event.is_action_pressed("mouse_click_right"):
 		#print("Right click detected!")
-		if _rotator_state == RotatorState.ON_TABLE && _is_mouse_on_object:
-			_set_state(RotatorState.DRAGGING)
+		if _state == State.ON_TABLE && _is_mouse_on_object:
+			_set_state(State.DRAGGING)
 			
 	if event.is_action_released("mouse_click_right"):
-		if _rotator_state == RotatorState.DRAGGING:
-			_set_state(RotatorState.ON_TABLE)
+		if _state == State.DRAGGING:
+			_set_state(State.ON_TABLE)
 
 	# Object can only rotate from stationary beginning
-	if _rotator_state != RotatorState.STATIONARY:
+	if _state != State.STATIONARY:
 		return
 	
 	if event.is_action_pressed("object_rotate_bottom"):
-		_set_state(RotatorState.ROTATING_BOTTOM)
+		_set_state(State.ROTATING_BOTTOM)
 		_rotation_remaining = 1.0
 	if event.is_action_pressed("object_rotate_top"):
-		_set_state(RotatorState.ROTATING_UP)
+		_set_state(State.ROTATING_UP)
 		_rotation_remaining = 1.0
 	if event.is_action_pressed("object_rotate_left"):
-		_set_state(RotatorState.ROTATING_LEFT)
+		_set_state(State.ROTATING_LEFT)
 		_rotation_remaining = 1.0
 	if event.is_action_pressed("object_rotate_right"):
-		_set_state(RotatorState.ROTATING_RIGHT)
+		_set_state(State.ROTATING_RIGHT)
 		_rotation_remaining = 1.0
 
 # takes value of a value x between 0.0 and 1.0 and applies a nonlinear
@@ -151,8 +151,8 @@ func ease_function(x: float) -> float:
 # the rotate(...) function. That way it will be much easier to set custom
 # rotation curves to handle the animation 
 func _handle_rotation(delta: float) -> void:
-	if _rotator_state not in [RotatorState.ROTATING_LEFT, RotatorState.ROTATING_RIGHT,
-								RotatorState.ROTATING_UP, RotatorState.ROTATING_BOTTOM]:
+	if _state not in [State.ROTATING_LEFT, State.ROTATING_RIGHT,
+								State.ROTATING_UP, State.ROTATING_BOTTOM]:
 		return
 	
 	# to_rotate is from 0.0 to 1.0 here
@@ -167,25 +167,25 @@ func _handle_rotation(delta: float) -> void:
 	# to_rotate is converted to values from 0.0 to PI / 2 here
 	to_rotate *= PI / 2
 	
-	match _rotator_state:
-		RotatorState.ROTATING_BOTTOM:
+	match _state:
+		State.ROTATING_BOTTOM:
 			_object.rotate(Vector3.RIGHT, to_rotate)
 			pass
-		RotatorState.ROTATING_UP:
+		State.ROTATING_UP:
 			_object.rotate(Vector3.RIGHT, -to_rotate)
 			pass
-		RotatorState.ROTATING_LEFT:
+		State.ROTATING_LEFT:
 			_object.rotate(Vector3.FORWARD, -to_rotate)
 			pass
-		RotatorState.ROTATING_RIGHT:
+		State.ROTATING_RIGHT:
 			_object.rotate(Vector3.FORWARD, to_rotate)
 			pass
 
 	if _rotation_remaining <= 0.0:
-		_set_state(RotatorState.STATIONARY)
+		_set_state(State.STATIONARY)
 
 func _handle_drag():
-	if _rotator_state != RotatorState.DRAGGING:
+	if _state != State.DRAGGING:
 		return
 	# Get intersect between raycast from viewport + mouse and XZ plane
 	# Assumption: objects and scene is setup so object ALWAYS sit on the workbench plane
@@ -259,14 +259,14 @@ func _remove_outline():
 func _on_object_mouse_entered() -> void:
 	#print("INFO:: Mouse entered object")
 	_is_mouse_on_object = true
-	if _rotator_state == RotatorState.ON_TABLE:
+	if _state == State.ON_TABLE:
 		_apply_outline()
 
 # Restore original mesh without outline material and original position
 func _on_object_mouse_exited() -> void:
 	#print("INFO:: Mouse exited object")
 	_is_mouse_on_object = false
-	if _rotator_state == RotatorState.ON_TABLE:
+	if _state == State.ON_TABLE:
 		_remove_outline()
 
 

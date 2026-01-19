@@ -5,7 +5,7 @@ extends Node3D
 
 var _used_slots: int = 0
 
-const _object_rotator_scene = preload("res://scenes/object_manipulation/object_rotator.tscn")
+const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,9 +24,9 @@ func _get_next_free_slot() -> Node3D:
 
 # adds a new object to the workbench
 func add_object(object_scene: PackedScene):
-	var object_rotator: ObjectRotator = _object_rotator_scene.instantiate()
-	object_rotator.set_spawn_data($FocusPosition, $DoneArea, object_scene)
-	add_child(object_rotator)
+	var interactible_object: InteractibleObject = _interactible_object_scene.instantiate()
+	interactible_object.set_spawn_data($FocusPosition, $DoneArea, object_scene)
+	add_child(interactible_object)
 	
-	object_rotator.global_position = _get_next_free_slot().global_position
+	interactible_object.global_position = _get_next_free_slot().global_position
 	_used_slots = _used_slots + 1

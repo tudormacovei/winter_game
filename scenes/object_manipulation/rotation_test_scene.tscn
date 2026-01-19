@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bil841httn5by"]
 
-[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/object_rotator.tscn" id="1_d84ec"]
+[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/interactible_object.tscn" id="1_d84ec"]
 
 [node name="Scene_Root" type="Node3D"]
 
@@ -17,7 +17,7 @@ light_energy = 0.5
 transform = Transform3D(1, 0, 0, 0, -0.6053773, 0.7959386, 0, -0.7959386, -0.6053773, 3.6779382, 0, 0)
 light_energy = 0.5
 
-[node name="ObjectRotator" parent="." node_paths=PackedStringArray("focus_position") instance=ExtResource("1_d84ec")]
+[node name="InteractibleObject" parent="." node_paths=PackedStringArray("focus_position") instance=ExtResource("1_d84ec")]
 focus_position = NodePath("../FocusPosition")
 
 [node name="FocusPosition" type="Node3D" parent="."]
