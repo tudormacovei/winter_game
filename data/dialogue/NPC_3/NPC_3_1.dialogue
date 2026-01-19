@@ -767,19 +767,19 @@ Mary: Today, it feels a bit wrong.
 Mary: I was leaping around a dirty, musty lake. Catching flies and crickets with my long, sticky tongue.
 Mary: The crickets were very loud and annoying. And some insufferable birds were up in the trees, singing. 
 Mary: I hated them all for it. I just wanted to hop around and catch my flies in silence.
-Mary: I could do something about the crickets, but the birds were out of my league.
+Mary: I could do something about the crickets, but the birds were out of reach.
 Mary: After a while, I cut my tiny frog ears off using a tiny frog knife.
 Mary: And then I was at peace. Even stopped eating crickets. They didn't taste as good as the flies. 
 Mary: How's that?
 - Must be some deeper meaning to it.
-	Mary: Yeah, it's a bit on the nose. Cutting my ears off in order to stop caring, leading to eternal bliss. My dreams need better writers. 
+	Mary: Yeah, it's a bit on the nose. Cutting my ears off in order to stop caring, leading to eternal bliss. Bad writing if you ask me. 
 	- Was always partial to spelling things out, myself. It's safer that way. 
-		*Her face turns reflective => branch_live
+		=> branch_live
 	- I agree. Always love a bit of subtlety. Used to be very into abstract art back when I was a teen.
-		*Her face turns reflective => branch_live
+		=> branch_live
 - Sounds like a fun dream. 
 	Mary: It wasn't. Not until the very end, anyway.
-	*Her face turns reflective => branch_live
+	=> branch_live
 - What does a frog knife look like?
 	Mary: It's like a butter knife but green and tiny. 
 	- Figures. 
