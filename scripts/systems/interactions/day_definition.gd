@@ -1,7 +1,6 @@
 ## Holds all data about a specific day in the game. A day is made up of multiple interactions ([code]InteractionDefinition[/code]).
 ## 
 ## Meant to be instantiated in standalone files under the folder res://data/days/
-## TODO[ziana]: Implement - Files will then be read at runtime to programatically build the game flow 
 ## Filename convention: "day_<number>.tres"
 @tool
 class_name DayDefintion

@@ -12,7 +12,7 @@ var current_interaction_index: int = -1
 var _day_resources: Array[DayDefinition] = []
 var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
 
-@onready var workbench := %WorkbenchView 
+@onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
 @onready var character_node := get_node("/root/Workspace/DialogueView/DialogueCharacterTexture")
 
@@ -96,7 +96,12 @@ func _play_next_interaction():
 		Utils.debug_error("Dialogue is invalid for day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 		return
 
-	# Start the interaction
+	character_node.texture = null
+
+	# Wait for start delay
+	await get_tree().create_timer(interaction.start_delay_seconds).timeout
+
+	# Start the character interaction
 	var dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
 	ui_manager.balloon_layer = dialogue_balloon
 	
