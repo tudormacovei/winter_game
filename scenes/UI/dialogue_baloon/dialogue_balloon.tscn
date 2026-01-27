@@ -192,6 +192,7 @@ theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("3_kvndo")
 response_template = NodePath("ResponseExample")
+hide_failed_responses = true
 
 [node name="ResponseExample" type="Button" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu"]
 layout_mode = 2
