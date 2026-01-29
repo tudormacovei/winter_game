@@ -647,10 +647,12 @@ Mary: Might as well go ahead and use it for the ceremony now.
 - (LIE) Actually, I can't seem to find it. Must have misplaced it after cleansing it. 
 	Mary: ...
 	Mary: Guess it doesn't matter that much anymore anyway.
-	Mary: If you do find it, please let me know. [do Variables.set_char_var("NPC_3", "watch_state", 4)] [do Variables.set_char_var("NPC_3", "relationship", 5)]
-	- I'll have Micah Bring it over. Goodbye, Mary. 
-		Mary: Farewell.  => END
-	- I'll tell Micah to bring it over. How are you feeling otherwise, Mary?  => branch_next
+	Mary: If you do find it, please let me have it anyway. [do Variables.set_char_var("NPC_3", "watch_state", 4)] [do Variables.set_char_var("NPC_3", "relationship", 4)]
+	- I'll have Micah Bring it over. I'm going to need a replacement for the ceremony, though. 
+		Mary: I brough an old rag of mine. Should suffice. 
+		- Yeah, it will. Goodbye, Mary. 
+			Mary: Farewell.  => END
+		- Yeah, it should be good enough. How are you feeling otherwise, Mary?  => branch_next
 	- I have to give it directly to the Elders once I find it. 
 		Mary: I know the rules, Keeper. I'm asking you to make an exception.
 		- Like I said. Can't do that. 
@@ -689,19 +691,22 @@ Mary: Today, it feels a bit wrong.
 		Mary: Used to dream a lot before that.
 		Mary: I always thought if I were to dream again, I'd dream of him.
 		if Variables.get_char_var("NPC_3", "opened_up") == 2
+			Mary: ...
 			Mary: I dreamt I was a frog. Can you believe that?
-			Mary: I haven't seen a frog in years. I've never had a pet frog. Never played a frog in drama class. I never even liked them. Never hated them either. Just wholly indifferent.
+			Mary: I haven't seen a frog in years. I've never had a pet frog. Never played a frog in drama class. I've never even liked them. Never hated them either. Just wholly indifferent.
 			=> branch_frog
 		else
 			Mary: But I just dreamt of something silly. No Henry. 
 			- What did you dream about?
+				Mary: ...
 				Mary: I dreamt I was a frog. Can you believe that?
-				Mary: I haven't seen a frog in years. I've never had a pet frog. Never played a frog in drama class. I never even liked them. Never hated them either. Just wholly indifferent.
+				Mary: I haven't seen a frog in years. I've never had a pet frog. Never played a frog in drama class. I've never even liked them. Never hated them either. Just wholly indifferent.
 				=> branch_frog
-			- You shouldn't be thinking about Henry today. 
-				Mary: ... => branch_meh
+			- Perhaps it's time to move on, Mary. There's still time to leave your grieving ways behind. I'm sure the elders will be forgiving. => branch_no_henry
+			- Accepting his death is overdue, Mary. That's what the Goddess wants from you. [if Variables.get_char_var("NPC_3", "relationship") == 5]
+				Mary: Goddess this, Goddess that. Hell, can't you people see how brainwashed you are? [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
 	else 
-		Mary: Must be what everyone goes through on the morning of the day of their death. 
+		Mary: Must be what everyone goes through on the morning of the day they know they're going to die. 
 		Mary: Makes sense, if you think about it.
 		- Guess it does. => branch_meh
 		- Must be more than that. 
@@ -711,15 +716,23 @@ Mary: Today, it feels a bit wrong.
 			Mary: Used to dream a lot before that.
 			Mary: I always thought if I were to dream again, I'd dream of him.
 			Mary: But I just dreamt of something silly. No Henry. 
-			- Accepting his death is overdue, Mary. That's what the Goddess wants from you. => branch_bad
+			- Accepting his death is overdue, Mary. That's what the Goddess wants from you.
+				Mary: Goddess this, Goddess that. Fucking hell, can't you people see how brainwashed and soulless you are? => branch_bad
+			- Perhaps it's time to move on, Mary. There's still time to leave your grieving ways behind. I'm sure the elders will be forgiving. => branch_no_henry
 			- What did you dream about?
 				Mary: Just that I was a frog. Like I said, silly, little dream.
 				- Come on, tell me about it. 
-					Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 5)]
-					=> branch_frog
-				- Sounds fun. => branch_meh
-				- Yeah, sounds dumb. => branch_bad
-	- You're in this situation through no one's fault but your own, Mary. => branch_bad
+					Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 5)] => branch_frog
+				- Yeah, sounds dumb. => branch_meh
+		- You're in this situation through no one's fault but your own, Mary.
+			Mary: Not sure why you'd ask me how I'm feeling just to get preachy afterwards, Keeper.
+			Mary: I already know it's my fault.
+			Mary: But not forgetting him is a choice I made consciously.
+			Mary: You have no idea what it's like.
+			- I do, actually. 
+				Mary: Then you should know better. => branch_bad
+			- You're right. I don't.
+				Mary: Then, as a last piece of advice, learn to keep your mouth shut when that's the case. => branch_bad
 - Stage fright is a hell of a thing. 
 	*Her face turns to a quick smile
 	if Variables.get_char_var("NPC_3", "relationship") >= 5
@@ -727,73 +740,216 @@ Mary: Today, it feels a bit wrong.
 		Mary: Stage fright never bothered me. 
 		Mary: I know you're joking, I'm not that boring. 
 		if Variables.get_char_var("NPC_3", "opened_up") == 2
-			Mary: One thing I imagine people would have a hard time believing is that boys used to fall for me on account of my sense of humour, not my looks.
-			Mary: Or at least that's what I had myself thinking.
-			Mary: Never much cared for them, to be completely honest. But I loved making people laugh. 
-			Mary: Loved making him laugh, most of all. 
-			Mary: ... 
-			Mary: He was very self serious, most of the time. 
-			Mary: But if something got to him, he couldn't stop. He'd laugh for 10 minutes. And then, later in the day, he'd think about it again once or twice and laugh s if he'd heard it for the first time.
-			Mary: Gun to my head, that's what I loved about him the most. 
-			- Sarah's like that too. Tough crowd, but once you get her going, there's no stopping. 
-				Mary: She's great, isn't she? I love that kid like I would have loved my own. => branch_live
-			- He'd be happy to know you remember him that way. 
-				Mary: Not sure he would. He'd probably think me stupid and impious. 
-				- If it's against the rules to laugh and reminisce from time to time, not sure I want to be following them. => branch_live
-				- His excessive piousness must have come from somewhere deeper. => branch_live
-			- 
+			Mary: Just feel like reminiscing. => branch_reminisce
 		else
 			Mary: Just hard not to reminisce today. 
-			- I understand. Safe space here, Mary. => branch_live
-			- Thinking about the past might be good in moments like these. => branch_live
-			- Thinking about the past does no good, especially in moments such as these. => branch_meh
-			- Thinking about those times is sinful, Mary. => branch_bad
+			- I understand. Safe space here, Mary. => branch_reminisce
+			- Thinking about the past might be good in moments like these. => branch_reminisce
+			- Thinking about the past does no good. 
+				Mary: Yeah. So I keep getting told. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+			- Thinking back on those times is sinful, Mary. [if Variables.get_var("NPC_3", relationship) == 5] 
+				Mary: Sinful this, sinful that. Hell, can't you people see how brainwashed you are? [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
 	else
-		Mary: I've always loved a good joke. Especially in inappropriate moments. 
+		Mary: I've always loved making jokes in inappropriate moments. 
 		Mary: Not a conclusion you'd jump to, seeing me now. 
 		- I could tell, actually. 
-		- 
+			Mary: Yeah, and how's that? [do Variables.set_char_var("NPC_3", "relationship", 5)]
+			- You just seem like, under all that gloom and doom, you'd actually be a pretty fun person to be around. => branch_reminisce
+			- Never seemed to give a damn about what other people think of you. => branch_good_bad
+			- Inappropriate is all you seem to know, generally. Subjecting all of us to your suffering like it's everyone's problem.
+				Mary: It's genuinely unbelievable how hypocritical and self-important you people can be. => branch_bad
+		- It's good to laugh. Didn't think it was a skill you possesed.
+			Mary: No need to be mean, now. [do Variables.set_char_var("NPC_3", "relationship", 5)]
+			- I'm just messing around. Thought you said you had a sense of humour, didn't you? => branch_reminisce
+			- It's just that I've never seen you laugh, you know? Not properly, anyway.
+				Mary: Oh, so you've been paying attention, have you?
+				- Just like to keep an eye out when it comes to my customers.
+					Mary: How nice of you. And what else have you noticed?
+					- That you don't seem to care what other people think about you. => branch_good_bad
+					- That you don't care about blending in with these people. 
+						Mary: What do you mean?
+						- Perhaps it's time to leave your grieving ways behind. Doesn't have to be genuine. I'm sure the elders will be forgiving and easily fooled. => branch_no_henry
+						- Doesn't matter. It's a bit late for that anyway.
+							Mary: Oh. Alright. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+				- You're reaching. 
+					Mary: Oh well. Guess I'm growing mischievous in my old age. => branch_meh
 - It was never going to be easy on the day of, was it?
 	if Variables.get_char_var("NPC_3", "relationship") >= 5
 		Mary: Actually, I thought it would. Was excited at the thought of reuiniting with Henry.
 		Mary: Never much cared if it was going to be in some sort of heavenly paradise or in a state of eternal oblivion. 
 		if Variables.get_char_var("NPC_3", "opened_up") == 2
-			Mary: 
+			Mary: Or fiery hell, for that matter. 
+			Mary: I just wanted this to end. No matter what. No matter how. 
+			Mary: Don't know what I was thinking. 
+			- It's not too late, Mary. It's time to move on. Leave your grieving ways behind. I'm sure the elders will be forgiving. => branch_no_henry
+			- Do you want to talk about it, Mary?
+				Mary: I was hurting, Keeper. All alone. I had no one else.
+				Mary: I've always loved the children, but they reminded me of him. Of how we were unable to have any of our own. 
+				Mary: And how that was my fault...
+				Mary: He had a daughter from his previous marriage. She died because of the cullings. 
+				Mary: And I always felt guilty about not being able to give him another one, to ease the pain. 
+				Mary: And then he died in such a stupid way. 
+				Mary: Oh, if only things were different. 
+		else
+			Mary: Guess I just have to power through this final stretch, don't I?
+	else
+		Mary: Guess not. 
+		
 			
 			
 ~ branch_frog
+*Her face turns to a quick smile
 Mary: I was leaping around a dirty, musty lake. Catching flies and crickets with my long, sticky tongue.
 Mary: The crickets were very loud and annoying. And some insufferable birds were up in the trees, singing. 
 Mary: I hated them all for it. I just wanted to hop around and catch my flies in silence.
 Mary: I could do something about the crickets, but the birds were out of reach.
-Mary: After a while, I cut my tiny frog ears off using a tiny frog knife.
+Mary: After a while, I cut my tiny frog ears off using a little frog knife.
 Mary: And then I was at peace. Even stopped eating crickets. They didn't taste as good as the flies. 
 Mary: How's that?
 - Must be some deeper meaning to it.
-	Mary: Yeah, it's a bit on the nose. Cutting my ears off in order to stop caring, leading to eternal bliss. Bad writing if you ask me. 
-	- Was always partial to spelling things out, myself. It's safer that way. 
-		=> branch_live
-	- I agree. Always love a bit of subtlety. Used to be very into abstract art back when I was a teen.
-		=> branch_live
+	Mary: Yeah. Cutting my ears off in order to stop caring, leading to eternal bliss. A bit on the nose, if you ask me. 
+	- Was always partial to spelling things out, myself, actually. It's safer that way.
+		Mary: Eh, what's life without a little mystery? => branch_live
+	- I agree. Always prefer a bit of subtlety. Used to be very into abstract art way back when.
+		Mary: You and me both, Keeper. => branch_live
 - Sounds like a fun dream. 
-	Mary: It wasn't. Not until the very end, anyway.
-	=> branch_live
+	Mary: It wasn't... Not until the very end, anyway. 
+	Mary: But it was something. 
+	Mary: I missed having dreams. => branch_live
 - What does a frog knife look like?
 	Mary: It's like a butter knife but green and tiny. 
 	- Figures. 
-		Mary: Yeah, it's a bit on the nose. My dreams need better writers. 
-		- Was always partial to spelling things out, myself. It's safer that way.  => branch_live
-		- I agree. Always love a bit of subtlety. Used to be very into abstract art back when I was a teen. => branch_live
+		Mary: Yeah, it's all a bit on the nose, if you ask me. The knife. Cutting my ears of in order to stop caring, leading to eternal bliss. Please.  
+		- Was always partial to spelling things out, myself, actually. It's safer that way.
+			Mary: Eh, what's life without a little mystery? => branch_live
+		- I agree. Always prefer a bit of subtlety. Used to be very into abstract art way back when. 
+			Mary: You and me both, Keeper. => branch_live
 	- You cut your ears off using a butter knife?
 		Mary: Frog ears. They're very tiny. It only took a second.
-		- Still. Sounds painful. => branch_live
-		- Sounds fun. => branch_live
-~ branch_live
-*Her face turns reflective
+		- Still. Sounds painful.
+			Mary: Eh, I've gone through worse. => branch_live
+		- Sounds fun. 
+			Mary: In its own fucked up way, I guess it was. => branch_live
+ 
+~ branch_reminisce
+Mary: ... 
+Mary: One thing I imagine people would have a hard time believing is that boys used to fall for me on account of my sense of humour, not my looks.
+Mary: Or at least that's what I had myself thinking.
+Mary: Never much cared for them, to be completely honest. But I loved making people laugh. 
+Mary: Loved making him laugh, most of all. 
+Mary: ... 
+Mary: He was very self serious, most of the time. 
+Mary: But if something got to him, he couldn't stop. He'd laugh for 10 minutes. And then, later in the day, he'd think about it again once or twice and laugh as if he'd heard it for the first time.
+Mary: Gun to my head, that's what I loved about him the most. 
+- Sarah's like that too. Tough crowd, but once you get her going, there's no stopping. 
+	Mary: Oh, she's great, isn't she? I love that kid. Like I'd have loved my own daughter. 
+	Mary: It pains me to see her like this. Wish I could have done more for her. 
+	Mary: Alas...
+	Mary: Take good care of her, will you? And keep her away from that Micah boy. He's a mean little rascal.
+	- I'll sure try. => branch_live
+	- He's a good kid, actually. Just a little misguided. Losing his father's been hard on him.
+		Mary: Oh, I know. I was harder on him than I should have been, wasn't I... => branch_live
+- He'd be happy to know you remember him that way. 
+	Mary: Not sure he would. He'd probably think me stupid and impious. 
+	- If it's against the rules to laugh and reminisce from time to time, not sure I want to be following them.
+		Mary: Careful, Keeper. You never know who's listening. Wouldn't want you to follow in my footsteps, would we?
+		- Eh, I'll be fine. They need me, you know. My so called gift and all that.
+			Mary: Lucky you. => branch_live
+		- Perhaps I would.
+			Mary: Yeah, easy to say that when it holds no meaning, you know? => branch_live
+	- His sudden, excessive piousness must have come from somewhere.
+		Mary: The beginning of the cullings were hard on him. He lost his daughter, alongside his previous wife. 
+		Mary: Guess he just didn't know how else to handle the hurt. => branch_live
 
+~ branch_good_bad 
+Mary: And is that a good or a bad thing, you think?
+- Good. 
+	Mary: Not something the elders would agree with, surely. 
+	- They don't know everything. 
+		Mary: Blasphemous words there, Keeper. I'm shocked. 
+		- You'd be surprised. I don't believe in any of that hogwash. I'm just keeping appearances. The way you should be doing.
+			Mary: What do you mean?
+			- Perhaps it's time to leave your grieving ways behind, Mary. Doesn't have to be genuine. I'm sure the elders will be forgiving and easily fooled. => branch_no_henry
+			- Never mind. Doesn't matter anymore.
+				Mary: Oh. Alright. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+		- I'm a servant of the Goddess, not of the elders. 
+			Mary: Oh. Got it. Good for you. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+	- I think you're just misinterpreting their teachings. You should give them another chance. 
+		Mary: Pretty sure I'm not the one to be doing so. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+- Bad.
+	Mary: Ah, seems like we can't be friends after all. A shame. 
+	- Never said I wanted to be friends.
+		Mary: True enough. Oh well. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+	- That's too bad. 
+		Mary: I'm jesting, Keeper. Told you I like bad jokes. 
+		Mary: Bit late to make friends, anyway. [do Variables.set_char_var("NPC_3", "relationship", 3)] 
+		- You're right. => branch_meh
+		- Maybe it's not too late for you, Mary. 
+			Mary: What do you mean? [do Variables.set_char_var("NPC_3", "relationship", 4)] 
+			- Perhaps it's time to leave your grieving ways behind. Doesn't have to be genuine. I'm sure the elders will be forgiving. => branch_no_henry
+			- Never mind. Forget I said anything. 
+				Mary: Oh. Alright. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+			- Depends on the situation. 
+	Mary: Well, we're talking about my situation, obviously. So which is it?
+	- Good. 
+		Mary: Not something the elders would agree with, surely. 
+		- They don't know everything. 
+			Mary: Blasphemous words there, Keeper. I'm shocked. 
+			- You'd be surprised. I don't believe in any of that hogwash. I'm just keeping appearances. The way you should be doing.
+				Mary: What do you mean?
+				- Perhaps it's time to leave your grieving ways behind. Doesn't have to be genuine. I'm sure the elders will be forgiving. => branch_no_henry
+				- Never mind. Doesn't matter anymore.
+					Mary: Oh. Alright. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+			- I'm a servant of the Goddess, not of the elders. 
+				Mary: Oh. Got it. Good for you. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+		- I think you're just misinterpreting their teachings. You should give them another chance. 
+			Mary: Pretty sure I'm not the one to be doing so. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+	- Bad.
+		Mary: Ah, seems like we can't be friends after all. A shame. 
+		- Never said I wanted to be friends.
+			Mary: True enough. Oh well. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+		- That's too bad. 
+			Mary: I'm jesting, Keeper. Told you I like bad jokes. 
+			Mary: Bit late to make friends, anyway. [do Variables.set_char_var("NPC_3", "relationship", 3)] 
+			- You're right. => branch_meh
+			- Maybe it's not too late for you, Mary. 
+				Mary: What do you mean? [do Variables.set_char_var("NPC_3", "relationship", 5)] 
+				- Perhaps it's time to leave your grieving ways behind. Doesn't have to be genuine. I'm sure the elders will be forgiving. => branch_no_henry
+				- Never mind. Forget I said anything. 
+					Mary: Oh. Alright. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
+	- Don't know you well enough to answer. 
+		Mary: Fair enough, then. => branch_meh
+		
 ~ branch_meh
+Mary: ...
+Mary: I'll be going now, Keeper. I want to be by myself. 
+- May the Goddess have mercy on your soul, Mary.
+	Mary: Don't much care whether she does or not. Farewell. => END
+- Goodbye, Mary. => END
 
 ~ branch_bad
+Mary: Just keep the watch, Keeper. I want to be by myself for however long I have left. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 1)] [do Variables.set_char_var("NPC_3", "relationship", 2)]
+- I'm sorry, Mary. May the Goddess have mercy on your soul.
+	*She hears you but doesn't stop. => END
+- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
+	*She hears you and stops for a second. Then she keeps going. [do Variables.set_char_var("NPC_3", "relationship", 1)] => END
+	
+~ branch_no_henry
+if Variables.get_char_var("NPC_3", "relationship") == 6
+	Mary: 
+elif Variables.get_char_var("NPC_3", "relationship") == 5
+	Mary: 
+elif Variables.get_char_var("NPC_3", "relationship") == 4
+	Mary: 
+		
+~ branch_live
+*Her face turns reflective
+Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 6)]
+Mary: I just don't know, Keeper. I have no idea how to deal with all this. No idea what to say. Truth be told, I'm scared. 
+Mary: Terrified, really. 
+- Perhaps it's time to move on, Mary. There's still time to leave your grieving ways behind. Doesn't have to be genuine. I'm sure the elders will be forgiving. => branch_no_henry
+- Truth be told, Mary, I think death is preferable over living here, in this place, in your situation.
+	Mary: You're right. I know that Keeper. Just a little harder to accept than I'd have liked right now. 
 
 => END
 

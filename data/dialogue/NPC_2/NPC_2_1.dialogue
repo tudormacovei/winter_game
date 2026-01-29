@@ -22,15 +22,15 @@ Sarah: Oh, well I'm sorry I stayed up till midnight to help you close shop. [do 
 			Sarah: So stop trying to be. => branch_main
 		- No, but I'm taking care of you and feeding you, so watch that tone. 
 			Sarah: Whatever. => branch_main
-		- Okay, I'm sorry. [do Variables.set_char_var("NPC_2", "relationship", 3)]
-			Sarah: Whatever. => branch_main
+		- Okay, I'm sorry. 
+			Sarah: Whatever. [do Variables.set_char_var("NPC_2", "relationship", 3)] => branch_main
 	- Just forget it. => branch_main
 - You should watch your tone. 
 	Sarah: YOU should remember that you're not my father. 
-	- Thank the Goddess I'm not. [do Variables.set_char_var("NPC_2", "relationship", 2)]
-		Sarah: So stop trying to be. => branch_main
-	- No, but I'm taking care of you and feeding you, so watch that tone. [do Variables.set_char_var("NPC_2", "relationship", 2)]
-		Sarah: Whatever. => branch_main
+	- Thank the Goddess I'm not. 
+		Sarah: So stop trying to be. [do Variables.set_char_var("NPC_2", "relationship", 2)] => branch_main
+	- No, but I'm taking care of you and feeding you, so watch that tone. 
+		Sarah: Whatever. [do Variables.set_char_var("NPC_2", "relationship", 2)] => branch_main
 	- Okay, I'm sorry.
 		Sarah: Whatever. => branch_main
 - And I appreciate it. Come on Sarah, what's wrong? => branch_mary
@@ -132,8 +132,8 @@ else
 				Sarah: I think it should be everyone's problem.
 				- What I mean is, we should rejoice, not shed tears. 
 					Sarah: ...
-					- One less reprobate in our ranks. [do Variables.set_char_var("NPC_2", "ok_with_mary_dying", true)]
-						Sarah: You're right. Forgive me. My mind got clouded for some reason. => branch_main
+					- One less reprobate in our ranks. 
+						Sarah: You're right. Forgive me. My mind got clouded for some reason. [do Variables.set_char_var("NPC_2", "ok_with_mary_dying", true)] => branch_main
 				- What I mean is, there's nothing we can do about it. 
 					Sarah: What if there were? 
 					- What do you mean?
@@ -253,13 +253,12 @@ else
 		- I'll try and talk to her. 
 			Sarah: Thanks! [do Variables.set_char_var("NPC_2", "relationship", 4)]
 			=> branch_main
-- What??? => branch_huh
-#need this to stop showing up if it's already been picked
+- What??? [if Variables.get_var("huh") == false] => branch_huh
 
 
 ~ branch_huh
-Sarah: You okay? You're the one who told me yesterday. 
-- Oh, I forgot I told you. Of course. [do Variables.set_var("huh", true)]
+Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("huh", true)]
+- Oh, I forgot I told you. Of course. 
 => branch_mary
 
 ~ branch_main 

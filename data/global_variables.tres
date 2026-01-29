@@ -43,19 +43,21 @@ metadata/_custom_type_script = "uid://36p5g0q4ta38"
 [sub_resource type="Resource" id="Resource_3cr31"]
 script = ExtResource("1_vywdb")
 name = "opened_up"
+description = "1 - opened up partially (specific case where you don't give/promise to give the watch before asking), 2 - opened up fuly about why she wants the watch to stay as it is"
 default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_fq0ol"]
 script = ExtResource("1_vywdb")
 name = "watch_state"
-description = "0 - stays with you, 1 - refused to give it to her, 2 - gave it to her, 3 - gave it to her and will lie to the elders, 4 - promised to give it to her untouched once you find it"
+description = "0 - stays with you, 1 - refused to give it to her, 2 - gave it to her, 3 - gave it to her and promised to lie to the elders, 4 - promised to give it to her untouched once you find it, 5 - promised to give it to her untouched once you find it and lie to the elders"
 default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_dvws4"]
 script = ExtResource("1_vywdb")
 name = "relationship"
+description = "1 - refused to give watch and was mean to her (causes her to leave), 2 - refused to give watch (causes her to leave), 3 - gave her the watch but caught with a lie or was mean to her (casuses her to leave), 4 - neutral (two options: can't promise anything option OR double lie without being caught (told her you fixed the watch but cant find it, promised to give it later), 5 - was nice to her and gave/promised to give the watch, 6 - was nice to her and gave/promised to give watch and promised to lie to the elders"
 default_value = 4
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
