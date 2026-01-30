@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=17 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=18 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -64,19 +64,27 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 [sub_resource type="Resource" id="Resource_3mlpw"]
 script = ExtResource("1_vywdb")
 name = "thinks_watch_is_fixed"
+description = "lied about it being fixed already"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_sj3hj"]
 script = ExtResource("1_vywdb")
 name = "lied"
+description = "lied about it being misplaced"
 default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_fifn1"]
+script = ExtResource("1_vywdb")
+name = "dead"
+default_value = true
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_qwwlc"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_3"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_3cr31"), SubResource("Resource_fq0ol"), SubResource("Resource_dvws4"), SubResource("Resource_3mlpw"), SubResource("Resource_sj3hj")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_3cr31"), SubResource("Resource_fq0ol"), SubResource("Resource_dvws4"), SubResource("Resource_3mlpw"), SubResource("Resource_sj3hj"), SubResource("Resource_fifn1")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_2wlhm"]
