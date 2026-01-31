@@ -1,0 +1,21 @@
+~ initialize_local_variables
+
+=> start
+
+if Variables.get_char_var("NPC_3", "relationship") == 1
+	*You wake up to the news that the widow has commited suicide. Perhaps there is a still of her, hanged in a barn. 
+elif Variables.get_char_var("NPC_3", "relationship") == 2
+	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. There is a burned watch on a table next to her.
+elif Variables.get_char_var("NPC_3", "relationship") == 3
+	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	if Variables.get_char_var("NPC_3", "watch_state") == 1
+		*There is a burned watch on the table next to her.
+	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+		*There is a burned rag on the table next to her, and she is clinging to a watch at her neck
+
+	
+
+~ start 
+
+=> END
+
