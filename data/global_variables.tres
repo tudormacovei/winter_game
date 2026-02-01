@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=19 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=21 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -87,10 +87,23 @@ name = "maybe_sarah"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_c7yuf"]
+script = ExtResource("1_vywdb")
+name = "next"
+description = "asked the widow how she's feeling"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_c2bg0"]
+script = ExtResource("1_vywdb")
+name = "sarah"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_qwwlc"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_3"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_3cr31"), SubResource("Resource_fq0ol"), SubResource("Resource_dvws4"), SubResource("Resource_3mlpw"), SubResource("Resource_sj3hj"), SubResource("Resource_fifn1"), SubResource("Resource_4u26p")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_3cr31"), SubResource("Resource_fq0ol"), SubResource("Resource_dvws4"), SubResource("Resource_3mlpw"), SubResource("Resource_sj3hj"), SubResource("Resource_fifn1"), SubResource("Resource_4u26p"), SubResource("Resource_c7yuf"), SubResource("Resource_c2bg0")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_2wlhm"]

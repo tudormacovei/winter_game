@@ -3,7 +3,10 @@
 => start
 
 if Variables.get_char_var("NPC_3", "relationship") == 1
-	*You wake up to the news that the widow has commited suicide. Perhaps there is a still of her, hanged in a barn. 
+	if Variables.get_char_var("NPC_3", "watch_state") == 1
+		*You wake up to the news that the ceremony didn't take place. You find out through Micah that she's hanged herself.
+	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+		*You wake up to the news that the ceremony didn't take place. You find out through Micah that she's hanged herself. She was wearing the watch.
 elif Variables.get_char_var("NPC_3", "relationship") == 2
 	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. There is a burned watch on a table next to her.
 elif Variables.get_char_var("NPC_3", "relationship") == 3
@@ -11,10 +14,37 @@ elif Variables.get_char_var("NPC_3", "relationship") == 3
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
-		*There is a burned rag on the table next to her, and she is clinging to a watch at her neck
-
-	
-
+		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+elif Variables.get_char_var("NPC_3", "relationship") == 4
+	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	if Variables.get_char_var("NPC_3", "watch_state") == 1
+		*There is a burned watch on the table next to her.
+	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+elif Variables.get_char_var("NPC_3", "relationship") == 5
+	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	if Variables.get_char_var("NPC_3", "watch_state") == 1
+		*There is a burned watch on the table next to her. You promised her you'd have Micah bring it to her untouched but you chose to cleanse it and give it to the ceremony instead. She kept waiting until the very last moment.
+	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+elif Variables.get_char_var("NPC_3", "relationship") == 6
+	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	if Variables.get_char_var("NPC_3", "watch_state") == 1
+		*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders but you didn't. You cleansed the watch anyway. Mary felt something was wrong and struggled to find peace when thinking about Henry in her last moments.
+	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+		*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders and you did. The watch remained as it was and it helped her rembember Henry as he was before joining the cult. It brought her a little peace in her last moments.
+elif Variables.get_char_var("NPC_3", "relationship") == 7
+	if Variables.get_char_var("NPC_3", "dead") == true
+		*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died peacefully.
+	elif Variables.get_char_var("NPC_3", "dead") == false
+		*Mary comes in, wearing different clothes. She's sad. You talk a little.
+elif Variables.get_char_var("NPC_3", "relationship") == 8
+	if Variables.get_char_var("NPC_3", "dead") == true
+		*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died happy.
+	elif Variables.get_char_var("NPC_3", "dead") == false
+		*Mary comes in, wearing different clothes. She seems quite sad but smiles at the sight of Sarah. You talk a little.
+elif Variables.get_char_var("NPC_3", "relationship") == 9
+	*Mary comes in, wearing different clothes. She's somewhat happy. She smiles at the sight of Sarah. The three of you talk and joke around. 
 ~ start 
 
 => END

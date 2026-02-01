@@ -1,8 +1,42 @@
 ~ initialize_local_variables
 
 => start
-Sarah: Hello
-~ start 
+
+~ start
+if Variables.get_char_var("NPC_3", "watch_state") == 0
+	*You have both the watch and the rug. Mary asked you to cleanse the rug and leave the watch untouched. You told her you'd think about it. 
+elif Variables.get_char_var("NPC_3", "watch_state") == 1
+	*You now have to cleanse the watch for Mary's ceremony.
+elif Variables.get_char_var("NPC_3", "watch_state") == 2
+	*You now have to cleanse the rug for Mary's ceremony.
+elif Variables.get_char_var("NPC_3", "watch_state") == 3
+	*You promised Mary you wouldn't cleanse the watch, but that you would tell the elders it's cleansed anyway. Up to you if you want to keep your promise or not. 
+elif Variables.get_char_var("NPC_3", "watch_state") == 4
+	*You have both the watch and the rug. You promised Mary you'd give her the watch untouched, and cleanse the rug for the ceremony. Up to you if you want to keep your promise or not.
+elif Variables.get_char_var("NPC_3", "watch_state") == 5
+	*You now have to cleanse the watch for Mary to burn in order to prove her lack of attachment to Earthly possessions add get forgiven by the Elders.
+
+if Variables.get_char_var("NPC_3", "relationship") <= 6
+	*Mary is going to die. You talk to Micah/Sarah/both about it. They're sad.
+if Variables.get_char_var("NPC_3", "relationship") >= 7
+	if Variables.get_char_var("NPC_3", "relationship") <=8
+		if Variables.get_char_var("NPC_3", "dead") == true
+			*Mary is going to die. You talk to Micah/Sarah/both about it. They're sad.
+		elif Variables.get_char_var("NPC_3", "dead") == false
+			if Variables.get_char_var("NPC_3", "maybe_sarah") == false
+				*Mary is going to die. You talk to Micah/Sarah/both about it. They're sad.
+			elif Variables.get_char_var("NPC_3", "maybe_sarah") == true
+				*Mary is going to die, but if your relationship with Sarah is good enough you can get her to go after Mary and try to convince her not to give up.
+				if Variables.get_char_var("NPC_3", "relationship") == 7
+					*She fails. Mary dies.
+				elif Variables.get_char_var("NPC_3", "relationship") == 8
+					*She succeeds. Mary lives.
+	elif Variables.get_char_var("NPC_3", "relationship") == 9
+		*You convinced Mary to live. You talk to Micah/Sarah/both about it. They're happy.
+
+
+
+
 
 => END
 
