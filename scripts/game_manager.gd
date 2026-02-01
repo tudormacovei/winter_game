@@ -31,7 +31,7 @@ func _ready():
 func _load_day_resources():
 	_day_resources.clear()
 
-	var dir = DirAccess.open(Utils.DAY_RESOURCES_PATH)
+	var dir = DirAccess.open(Config.DAY_RESOURCES_PATH)
 	if dir:
 		dir.list_dir_begin()
 		var files = []
@@ -42,7 +42,7 @@ func _load_day_resources():
 		# Sort filenames alphabetically
 		files.sort()
 		for f in files:
-			var resource = load(Utils.DAY_RESOURCES_PATH + f)
+			var resource = load(Config.DAY_RESOURCES_PATH + f)
 			if resource and resource is DayDefinition:
 				_day_resources.append(resource)
 				print("GameManager: Loaded day from file '%s'" % f)
@@ -52,7 +52,7 @@ func _load_day_resources():
 func _load_character_resources():
 	_character_dict.clear()
 
-	var dir = DirAccess.open(Utils.CHARACTER_RESOURCES_PATH)
+	var dir = DirAccess.open(Config.CHARACTER_RESOURCES_PATH)
 	if dir:
 		dir.list_dir_begin()
 		var files = []
@@ -61,7 +61,7 @@ func _load_character_resources():
 				files.append(file_name)
 
 		for f in files:
-			var resource = load(Utils.CHARACTER_RESOURCES_PATH + f)
+			var resource = load(Config.CHARACTER_RESOURCES_PATH + f)
 			if resource and resource is CharacterDefinition:
 				if resource.character_id in _character_dict:
 					push_warning("Character resource '%s' has duplicate id '%s' and will be skipped." % [f, resource.character_id])
@@ -82,10 +82,12 @@ func _play_next_interaction():
 		current_day_index += 1
 		current_interaction_index = 0
 
-		# TODO: Handle end of game
 		if current_day_index >= _day_resources.size():
 			print("GameManager: All days completed!")
+			ui_manager.show_game_end_screen()
 			return
+
+		await ui_manager.show_day_end_screen(current_day_index)
 
 	var interaction = _day_resources[current_day_index].interactions[current_interaction_index]
 	if not interaction:
@@ -113,8 +115,6 @@ func _play_next_interaction():
 
 func _on_dialogue_ended(_resource):
 	_play_next_interaction()
-	# TODO[ziana]: Handle timing/transitions in-between interactions
-	# TODO[ziana]: Handle day end and game end by showing a dark screen with text "Day X Complete"
 
 func _on_dialogue_line_started(dialogue_line):
 	# Set character sprite

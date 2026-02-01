@@ -5,13 +5,28 @@ extends Node
 
 @onready var camera: CameraControl = %Camera3D
 
+# UI Elements
+@onready var _day_end_screen := %DayEndScreen
+@onready var _day_end_screen_label: Label = %DayCompleteText
+
 var balloon_layer: CanvasLayer = null
 
 # TODO: Show dialogue state bubble when in workspace view
 
 func _ready() -> void:
 	if camera and camera.has_signal("camera_focus_changed"):
-		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
+		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
+
+func show_day_end_screen(day_number: int) -> void:
+	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
+
+	_day_end_screen.show()
+	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
+	_day_end_screen.hide()
+
+func show_game_end_screen() -> void:
+	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
+	_day_end_screen.show()
 
 #region Signals
 

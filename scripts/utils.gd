@@ -1,9 +1,6 @@
 @tool
 extends Node
 
-const DAY_RESOURCES_PATH: String = "res://data/days/"
-const CHARACTER_RESOURCES_PATH: String = "res://data/characters/"
-
 func debug_error(message: String):
 	push_error(message)
 	if OS.has_feature("debug"):
@@ -18,7 +15,7 @@ func get_timestamp_string() -> String:
 
 # Gets all children and subchildren of a node
 func get_all_children(node: Node) -> Array[Node]:
-	var nodes : Array[Node] = []
+	var nodes: Array[Node] = []
 	
 	for N in node.get_children():
 		if N.get_child_count() > 0:
@@ -29,15 +26,15 @@ func get_all_children(node: Node) -> Array[Node]:
 	return nodes
 
 # Calculates axis-aligned bounding box of a Node3D, including its children
-func _calculate_bounding_box(parent : Node3D, include_top_level_transform: bool) -> AABB:
+func _calculate_bounding_box(parent: Node3D, include_top_level_transform: bool) -> AABB:
 	var bounds: AABB = AABB()
 	if parent is VisualInstance3D:
 		bounds = parent.get_aabb();
 
 	for i in range(parent.get_child_count()):
-		var child : Node3D = parent.get_child(i)
+		var child: Node3D = parent.get_child(i)
 		if child:
-			var child_bounds : AABB = _calculate_bounding_box(child, true)
+			var child_bounds: AABB = _calculate_bounding_box(child, true)
 			if bounds.size == Vector3.ZERO && parent:
 				bounds = child_bounds
 			else:

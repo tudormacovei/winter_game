@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=10 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/game_manager.gd" id="1_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]
+[ext_resource type="Texture2D" uid="uid://c0ghmfixs130i" path="res://2d_assets/UI/day_end_background.webp" id="3_mp6x8"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
@@ -21,6 +22,49 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08,
 [node name="WorkbenchView" parent="." instance=ExtResource("2_ckfyi")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.98480767, -0.17364818, 0, 0.17364818, 0.98480767, 0, 0, 0)
+
+[node name="UI" type="Node" parent="."]
+
+[node name="DayEndScreen" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="UI/DayEndScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1280.0
+offset_right = 720.0
+offset_bottom = 560.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = ExtResource("3_mp6x8")
+stretch_mode = 4
+
+[node name="DayCompleteText" type="Label" parent="UI/DayEndScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Day X complete."
 
 [node name="Managers" type="Node" parent="."]
 
