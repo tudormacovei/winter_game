@@ -39,15 +39,13 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"WatchGlassMaterial": {
+"@MATERIAL:0": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://3d_assets/manipulation_objects/pocket_watch/WatchGlassMaterial.tres",
-"use_external/path": "uid://bcdlm858plgmn"
-},
-"WatchMaterial": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://3d_assets/manipulation_objects/pocket_watch/WatchMaterial.tres",
 "use_external/path": "uid://c446nr8v15a0s"
+},
+"@MATERIAL:1": {
+"use_external/enabled": true,
+"use_external/path": "uid://b5qkcsma2jofn"
 }
 },
 "meshes": {
