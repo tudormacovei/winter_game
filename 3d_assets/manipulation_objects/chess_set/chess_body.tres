@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brc548pcmr3k8"]
+
+[ext_resource type="Texture2D" uid="uid://c6ygyb7tc0mxw" path="res://3d_assets/manipulation_objects/chess_set/ChessTexture.webp" id="1_eaipp"]
+
+[resource]
+albedo_texture = ExtResource("1_eaipp")
