@@ -5,7 +5,7 @@ do Variables.add_local("lovesarah", false)
 do Variables.add_local("frog", false)
 do Variables.add_local("into", false)
 do Variables.add_local("humor", false)
-do Variables.addlocal("counter", 0)
+do Variables.add_local("counter", 0)
 => start
 
 ~ start 
