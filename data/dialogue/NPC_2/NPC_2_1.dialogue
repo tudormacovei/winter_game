@@ -5,7 +5,7 @@ do Variables.add_local("huh", false)
 => start
 
 ~ start 
-*A little girl comes in through the other door. It's Sarah. You can tell that she just woke up.
+Sarah: *A little girl comes in through the other door. It's Sarah. You can tell that she just woke up.
 Sarah: Morning.
 - You sure slept a lot. => branch_fight
 - Morning, Sarah. How are you feeling? => branch_feeling

@@ -5,8 +5,8 @@ do Variables.add_local("asked_about_item", false)
 => start
 
 ~ start 
-*A young boy rushes in, leaving the door open behind him and dropping something on the floor without noticing. He leaves a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
-Micah: Mooornin' Keeper! Got a few thingies here for you to work your magic on. Is Sarah awake yet? 
+Micah: *A young boy rushes in, leaving the door open behind him and dropping something on the floor without noticing. He leaves a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
+Micah: Mornin' Keeper! Got a few thingies here for you to work your magic on. Is Sarah awake yet? 
 - Close the door, you rascal. => branch_door 	
 - You dropped something on the floor there. => branch_item
 - No, Micah, she's still asleep. => branch_sarah 
@@ -15,14 +15,14 @@ Micah: Mooornin' Keeper! Got a few thingies here for you to work your magic on. 
 	
 ~ branch_door
 Micah: Woke up on the wrong side of the bed this morning, huh? 
-*He closes the door. [do Variables.set_var("prog_is_door_open", false)]
+Micah: *He closes the door. [do Variables.set_var("prog_is_door_open", false)]
 Micah: So? She up yet or not?
 - No, Micah, she's still asleep. => branch_sarah
 - What's that on the floor? => branch_item
 
 
 ~ branch_door_2
-*He closes the door. [do Variables.set_var("prog_is_door_open", false)]
+Micah: *He closes the door. [do Variables.set_var("prog_is_door_open", false)]
 - What's that on the floor? => branch_item
 	
 	
@@ -31,14 +31,14 @@ if Variables.get_var("prog_is_door_open") == false
 	Micah: Oh Goddess, I'm all over the place this mornin'. Hope I ain't broke it. 
 else 
 	Micah: Oh. Hope I ain't broke it. 
-*He rushes to check. [do Variables.set_var("is_item_on_the_floor", false)] [do Variables.set_var("asked_about_item", true)]
+Micah: *He rushes to check. [do Variables.set_var("is_item_on_the_floor", false)] [do Variables.set_var("asked_about_item", true)]
 Micah: Phew, all good. 
 - So what is it?
 	Micah: Just an old watch you'll have to fix for widow Mary. It's for the ceremony. Belonged to her shmuck of a husband or sumthin'. No idea why it ain't been thrown' 'way yet.
 	- You shouldn't speak ill of the dead, boy.
 		Micah: My pa used to say he was a filthy sinner, bloke got what was comin' to him! 
 		- Your pa died too, didn't he? 
-			*His face changes instantly. You can see a tear form up in his eyes. 
+			Micah: *His face changes instantly. You can see a tear form up in his eyes. 
 			Micah: My pa was 10 times the man that bitch's husband was, you bonehead. [do Variables.set_char_var("NPC_1", "relationship", 2)]
 			- I'm sorry, Micah, I shouldn't have mentioned it. 
 				if Variables.get_var("asked_about_sarah") == false
@@ -50,7 +50,7 @@ Micah: Phew, all good.
 			- I won't let you speak that way to me in my own house. Now fuck off. 
 				Micah: Fuck you, then. => END
 			- Oh yeah? If I'm the bonehead, why am I not the one 6 feet under the ground now then?
-				*Micah looks at you for a second with an angry face, there's a tear and then he rushes outside. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+				Micah: *Micah looks at you for a second with an angry face, there's a tear and then he rushes outside. [do Variables.set_char_var("NPC_1", "relationship", 1)]
 				=> END
 		- Nevertheless, you shouldn't speak that way about him. It isn't your concern whether he was full of sin or not. That's for the Goddess to decide. 
 			Micah: Guess you're right. I can get a tad hot-headed when it comes to this stuff sometimes. Least that's what my pa used to say. 
@@ -93,13 +93,13 @@ Micah: Phew, all good.
 						Micah: Thought so. Guess I'll be leaving now then. 
 						- Bye, Micah. => END
 				- Cause items aren't people. 
-					*His face turns thoughtful. Seems he's been thinking about this for a while.
+					Micah: *His face turns thoughtful. Seems he's been thinking about this for a while.
 					Micah: Figure since the Goddess treats 'em both the same way, infestin' em with sin and all that, they must be somewhat similar at least.
 					Micah: But then why not let us all see the damn thing? Sure could see it on Sarah's father, I'll tell you that. 
 					Micah: And why are you the only one who can spot it on things that ain't alive? 
 					Micah: Boggles the mind, it does. She works in mysterious ways, our Goddess.
 					- You raise a good point there, Micah. 
-						*He's obviously proud of that, he must've come up with it himself.
+						Micah: *He's obviously proud of that, he must've come up with it himself.
 						if Variables.get_var("asked_about_sarah") == false
 							Micah: So, where's Sarah? [do Variables.set_char_var("NPC_1", "relationship", 4) ]
 							- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
@@ -107,7 +107,7 @@ Micah: Phew, all good.
 							Micah: Well, guess I'll be leaving now. See you later. [do Variables.set_char_var("NPC_1", "relationship", 4) ]
 							- Bye, Micah. => END
 					- Don't you ever question the Goddess again, boy. 
-					*You can see guilt on his face, he's scared and probably won't question his faith again anytime soon.
+					Micah: *You can see guilt on his face, he's scared and probably won't question his faith again anytime soon.
 					if Variables.get_var("asked_about_sarah") == false
 						Micah: Anyway, where's Sarah?
 						- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
