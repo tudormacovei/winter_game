@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=21 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=23 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -25,19 +25,25 @@ metadata/_custom_type_script = "uid://36p5g0q4ta38"
 [sub_resource type="Resource" id="Resource_p42go"]
 script = ExtResource("1_vywdb")
 name = "relationship"
-default_value = 3
+default_value = 2
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
-[sub_resource type="Resource" id="Resource_cr3hu"]
+[sub_resource type="Resource" id="Resource_4xfd3"]
 script = ExtResource("1_vywdb")
-name = "ok_with_mary_dying"
+name = "left_micah"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_mes5c"]
+script = ExtResource("1_vywdb")
+name = "pressure"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_s4nex"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_2"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_p42go"), SubResource("Resource_cr3hu")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_p42go"), SubResource("Resource_4xfd3"), SubResource("Resource_mes5c")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_3cr31"]
@@ -113,8 +119,15 @@ description = "TODO: Needs implementation"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_cr3hu"]
+script = ExtResource("1_vywdb")
+name = "ending_kids"
+description = "1 - both kids hate you, 2 - micah hates you, sarah is fanatical"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_2wlhm")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_2wlhm"), SubResource("Resource_cr3hu")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"
