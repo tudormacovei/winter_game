@@ -5,17 +5,18 @@ do Variables.add_local("huh", false)
 => start
 
 ~ start 
-Sarah: *A little girl comes in through the other door. It's Sarah. You can tell that she just woke up.
+Sarah: *Sarah ENTERS^
 Sarah: Morning.
 - You sure slept a lot. => branch_fight
 - Morning, Sarah. How are you feeling? => branch_feeling
 
-
 ~ branch_fight 
+Sarah: *Her FACE turns ANGRY
 Sarah: Oh, well I'm sorry I stayed up till midnight to help you close shop. [do Variables.set_var("blamed_for_sleeping", true)]
 - I didn't mean it like that. 
 	Sarah: What then? 
 	- I just wanted to make sure everything is okay.
+		Sarah: *Her FACE turns NEUTRAL
 		if Variables.get_var("asked_feeling") == true
 			=> branch_mary
 		else 
@@ -27,7 +28,8 @@ Sarah: Oh, well I'm sorry I stayed up till midnight to help you close shop. [do 
 		- No, but I'm taking care of you and feeding you, so watch that tone. 
 			Sarah: Whatever. => branch_main
 		- Okay, I'm sorry. 
-			Sarah: Whatever. [do Variables.set_char_var("NPC_2", "relationship", 2)] => branch_main
+			Sarah: Whatever. [do Variables.set_char_var("NPC_2", "relationship", 2)]
+			Sarah: *Her FACE turns NEUTRAL => branch_main
 	- Just forget it. => branch_main
 - You should watch your tone. 
 	Sarah: YOU should remember that you're not my father. [do Variables.set_char_var("NPC_2", "relationship", 1)]
@@ -36,8 +38,10 @@ Sarah: Oh, well I'm sorry I stayed up till midnight to help you close shop. [do 
 	- No, but I'm taking care of you and feeding you, so watch that tone. 
 		Sarah: Whatever. => branch_main
 	- Okay, I'm sorry.
-		Sarah: Whatever. [do Variables.set_char_var("NPC_2", "relationship", 2)] => branch_main
+		Sarah: Whatever. [do Variables.set_char_var("NPC_2", "relationship", 2)] 
+		Sarah: *Her FACE turns NEUTRAL => branch_main
 - And I appreciate it. You're a bit grumpy today. 
+	Sarah: *Her FACE turns NEUTRAL
 	if Variables.get_var("asked_feeling") == true
 		=> branch_mary
 	else 
@@ -78,6 +82,7 @@ else
 						Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 						Sarah: Isn't that beautiful? 
 						- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+							Sarah: *Her FACE turns HAPPY
 							Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 						- Don't think that would help. People have already tried.
 							Sarah: Guess so. Try anyway, if you can. For me. 
@@ -95,6 +100,7 @@ else
 				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 				Sarah: Isn't that beautiful? 
 				- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+					Sarah: *Her FACE turns HAPPY
 					Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 				- Don't think that would help. People have already tried. 
 					Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -110,6 +116,7 @@ else
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 			- Don't think that would help. People have already tried. 
 				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -127,6 +134,7 @@ else
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 			- Don't think that would help. People have already tried. 
 				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -160,6 +168,7 @@ else
 							Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 							Sarah: Isn't that beautiful? 
 							- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+								Sarah: *Her FACE turns HAPPY
 								Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 							- Don't think that would help. People have already tried. 
 								Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -177,6 +186,7 @@ else
 					Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 					Sarah: Isn't that beautiful? 
 					- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+						Sarah: *Her FACE turns HAPPY
 						Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 					- Don't think that would help. People have already tried. 
 						Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -192,6 +202,7 @@ else
 				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 				Sarah: Isn't that beautiful? 
 				- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+					Sarah: *Her FACE turns HAPPY
 					Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 				- Don't think that would help. People have already tried. 
 					Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -223,6 +234,7 @@ else
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 			- Don't think that would help. People have already tried. 
 				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -241,6 +253,7 @@ else
 				Sarah: Forget I said anything. Sorry. 
 				=> branch_main
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
+				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 			- Don't think that would help. People have already tried. 
 				Sarah: Guess so. Try anyway, if you can. For me. => branch_main
@@ -264,6 +277,7 @@ else
 		- Take it up with the Goddess, then. I'm sure she'll be happy to hear it. 
 			Sarah: Pfft. => branch_main
 	- That's the devil talking, girl! I should whip you here and now!
+		Sarah: *Her FACE turns ANGRY
 		Sarah: Well, you literally just said it's horrible, remember? Whip me and I'll have everyone know you're a blasphemer too! [do Variables.set_char_var("NPC_2", "relationship", 1)]
 		- Just... don't ever talk that way again. => branch_main
 		- And who's going to believe you? Know your place, girl. => branch_main
@@ -276,6 +290,7 @@ else
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful?  [do Variables.set_char_var("NPC_2", "relationship", 5)]
 			- Okay Sarah, I'll try my best. I promise. 
+				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. => branch_main
 			- I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 				Sarah: Thank you. Really. 
@@ -290,24 +305,28 @@ Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("hu
 - Oh, I forgot I told you. Of course. => branch_mary
 - Don't recall. 
 	Mary: You told me they're publicly killing Widow Mary for grieving her husband.
-	- Right. I'm getting old, you know. I remember now.  => branch_mary
+	- Right. I'm getting old, it seems. I remember now.  => branch_mary
 
 ~ branch_main 
 Sarah: ...
 - Micah asked me to tell you he's looking for you. 
 	if Variables.get_char_var("NPC_2", "relationship") >= 3
+		Sarah: *Her FACE turns HAPPY
 		Sarah: Oh yeah? I'll go look for him then! See you. [do Variables.set_char_var("NPC_2", "left_micah", true)]
-		- Bye, Sarah. => END!
+		- Bye, Sarah. 
+			*She LEAVES^ => END!
 	elif Variables.get_char_var("NPC_2", "relationship") == 1
-		Sarah: Could use some time away from you. I'll be going. [do Variables.set_char_var("NPC_2", "left_micah", true)] => END
+		Sarah: Could use some time away from you. I'll be going. [do Variables.set_char_var("NPC_2", "left_micah", true)] 
+		*She LEAVES^ => END
 	else
 		Sarah: Not really feeling up to it now, think I'll just be in my room. 
-		=> END
+		*She LEAVES^ => END
 - That's it, then. 
 	if Variables.get_char_var("NPC_2", "relationship") == 1
-		Sarah: *Leaves without saying a word. => END
+		*She LEAVES^ => END
 	else
-		Sarah: I'll be in my room. => END
+		Sarah: I'll be in my room. 
+		*She LEAVES^ => END
 
 => END
 

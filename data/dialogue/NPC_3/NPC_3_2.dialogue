@@ -1,51 +1,184 @@
 ~ initialize_local_variables
-
+do Variables.add_local("placeholder", false)
 => start
 
-if Variables.get_char_var("NPC_3", "relationship") == 1
-	if Variables.get_char_var("NPC_3", "watch_state") == 1
-		*You wake up to the news that the ceremony didn't take place. You find out through Micah that she's hanged herself.
-	elif Variables.get_char_var("NPC_3", "watch_state") == 2
-		*You wake up to the news that the ceremony didn't take place. You find out through Micah that she's hanged herself. She was wearing the watch.
-elif Variables.get_char_var("NPC_3", "relationship") == 2
-	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. There is a burned watch on a table next to her.
+~ start
+
+
+if Variables.get_var("placeholder") == false
+	=> branch_placeholder
+else
+	=> branch_start
+
+~ branch_start
+if Variables.get_char_var("NPC_2", "relationship") == 1
+	if Variables.get_char_var("NPC_3", "dead") == true
+		if Variables.get_char_var("NPC_3", "relationship") == 1
+			*Micah ENTERS^ with a bag full of items. 
+			if Variables.get_char_var("NPC_1", "relationship") == 0 
+				Micah: Got your items here. 
+				Micah: ...
+				Micah: Keeper, why didn't you tell Sarah I wanted to see her like you said you would?
+				- I don't like you around her. 
+					Micah: Oh. Okay. 
+					Micah: Guess you're right. 
+					Micah: She's smart and pretty. 
+					Micah: Should spend her time with others. 
+					Micah: ...
+					Micah: Well, see ya.
+					=> branch_sui
+				- I'm sorry, Micah. 
+					Micah: That's alright, I guess. 
+					Micah: You got your hands full an' everythin'.
+					Micah: ...
+					Micah: Well, see ya.
+					=> branch_sui
+			elif Variables.get_char_var("NPC_1", "relationship") <= 2
+				Micah: Got your items here. 
+				Micah: ...
+				Micah: Gotta go. See ya. 
+				=> branch_sui
+			else
+				Micah: Morning, Keeper. Got some items here for you. 
+				- Hello, Micah. Thanks.
+					Micah: No problem. Gotta go.
+					=> branch_sui
+		else 
+			*Sarah ENTERS^ 
+			- Good morning. 
+				Sarah: ...
+				- Sarah, don't go near the window today. [if Variables.get_char_var("NPC_1", "relationship") >= 2]
+					*She WALKS^ there
+					*She starts CRYING^
+					Sarah: ...
+					- I'm sorry, Sarah. 
+						*She LEAVES^ => END
+					- That's what happens to those who go against them. Make sure you don't forget.
+						*She LEAVES^ => END
+					- That's what happens to blasphemers. Make sure you don't forget. 
+						*She LEAVES^ => END
+				- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
+					*She WALKS^ there
+					*She starts CRYING^
+					- That's what happens to those who go against them. Make sure you don't forget.
+						*She LEAVES^ => END
+					- That's what happens to blasphemers. Make sure you don't forget. 
+						*She LEAVES^ => END 
+					
+			
+	else
+		*Mary ENTERS^ wearing NORMAL CLOTHING
+		Mary: Morning, Keeper. Thought I'd come by to check on you. 
+		- Morning. How'd the ceremony go?
+			Mary: Oh, as you'd expect. People gathered around a fire, acting like rabid dogs. 
+			Mary: Recited all my sins. Threw in some new ones in there, gotta give them credit.
+			Mary: Burned my watch. My clothes. Shamed myself in front of everyone.
+			Mary: Then, everyone went home happy. 
+			if Variables.get_char_var("NPC_3", "relationship") == 7
+				Mary: Thoughtless animals, all of us. 
+				Mary: Me, most of all. 
+				Mary: I was supposed to die, yesterday, Keeper. I feel it in my bones. 
+				Mary: Don't know what I'm still doing here. 
+				- You'll figure it out, Mary. In due time. 
+					Mary: Guess we'll see. 
+					Mary: Where's Sarah?
+					- Upstairs. Won't talk to me. 
+						Mary: Oh? Wonder why that could be. 
+						Mary: I'll go see her, if that's alright. 
+						Mary: Be seeing you, Keeper. 
+						*She LEAVES^ => END
+				- Don't know what any of us are still doing here, to be honest. 
+					Mary: Hah. Right. 
+					Mary: Where's Sarah?
+					- Upstairs. Won't talk to me. 
+						Mary: Oh? Wonder why that could be. 
+						Mary: I'll go see her, if that's alright. 
+						Mary: Be seeing you, Keeper. 
+						*She LEAVES^ => END
+			elif Variables.get_char_var("NPC_3", "relationship") == 8
+				Mary: Just another day in crazy town. 
+				Mary: Guess I'll be on the other side of the fence soon enough, whenever some other poor souls find themselves in a similar situation.
+				Mary: Cheering and crying and screaming as they get publicly humiliated. 
+				Mary: So it goes. 
+				Mary: Anyway, where's Sarah?
+				- Upstairs. She won't talk to me.
+					Mary: Oh? Wonder why that could be. 
+					Mary: I'll go see her, if that's alright. 
+					Mary: Be seeing you, Keeper. 
+					*She LEAVES^ => END
+			elif Variables.get_char_var("NPC_3", "relationship") == 9
+				Mary: Bah, who cares. 
+				Mary: Fuck them.
+				Mary: Got other things to think about now. 
+				Mary: Speaking of, where's Sarah?
+				- Upstairs. She won't talk to me.
+					Mary: Oh? Wonder why that could be. 
+					Mary: I'll go see her, if that's alright. 
+					Mary: Be seeing you, Keeper. 
+					*She LEAVES^ => END
+			
+
+~ branch_placeholder
+*For certain endings, the next bit has temporary placeholders marked with * which are going to be replaced with the window mechanic [do Variables.set_var("placeholder", true)]
+if Variables.get_char("NPC_3", "relationship") == 1
+	*You wake up and you look out the window. You see nothing. The ceremonial altar is empty. 
+if Variables.get_char_var("NPC_3", "relationship") == 2
+	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. There is a burned watch on a table next to her.
 elif Variables.get_char_var("NPC_3", "relationship") == 3
-	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
 		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
 elif Variables.get_char_var("NPC_3", "relationship") == 4
-	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
 		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
 elif Variables.get_char_var("NPC_3", "relationship") == 5
-	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her. You promised her you'd have Micah bring it to her untouched but you chose to cleanse it and give it to the ceremony instead. She kept waiting until the very last moment.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
 		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
 elif Variables.get_char_var("NPC_3", "relationship") == 6
-	*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
+	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders but you didn't. You cleansed the watch anyway. Mary felt something was wrong and struggled to find peace when thinking about Henry in her last moments.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
 		*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders and you did. The watch remained as it was and it helped her rembember Henry as he was before joining the cult. It brought her a little peace in her last moments.
 elif Variables.get_char_var("NPC_3", "relationship") == 7
 	if Variables.get_char_var("NPC_3", "dead") == true
-		*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died peacefully.
+		*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died peacefully.
+		Pressure yes/no
 	elif Variables.get_char_var("NPC_3", "dead") == false
-		*Mary comes in, wearing different clothes. She's sad. You talk a little.
+		Mary comes in, wearing different clothes. She's sad. You talk a little.
+		Pressure yes/no
 elif Variables.get_char_var("NPC_3", "relationship") == 8
 	if Variables.get_char_var("NPC_3", "dead") == true
-		*You wake up and look outside the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died happy.
+		*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died happy.
 	elif Variables.get_char_var("NPC_3", "dead") == false
-		*Mary comes in, wearing different clothes. She seems quite sad but smiles at the sight of Sarah. You talk a little.
+		Mary comes in, wearing different clothes. She seems quite sad but smiles at the sight of Sarah. You talk a little.
+		Pressure yes/no
 elif Variables.get_char_var("NPC_3", "relationship") == 9
-	*Mary comes in, wearing different clothes. She's somewhat happy. She smiles at the sight of Sarah. The three of you talk and joke around. 
-~ start 
+	Mary comes in, wearing different clothes. She's somewhat happy. She smiles at the sight of Sarah. The three of you talk and joke around. 
+=> start
 
+~ branch_sui
+- Micah, why is the ceremonial altar empty?
+	Micah: Oh, you don't know? 
+	Micah: Widow Mary hanged herself in her barn last night. 
+	Micah: Right before the ceremony was 'bout to start.
+	if Variables.get_char_var("NPC_3", "watch_state") == 1
+		Micah: I gotta get going. See ya. 
+		*She LEAVES^ => END
+	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+		Micah: They found that stupid watch on the floor. 
+		Micah: Thought it was supposed to be here, Keeper.
+		Micah: I gave it to you yesterday, didn't I? 
+		Micah: Anyway, I gotta get going. See ya. 
+		*She LEAVES^ => END
+		
 => END
 
