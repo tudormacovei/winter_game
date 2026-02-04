@@ -298,7 +298,7 @@ Mary: Morning, Keeper. Thought I'd come by to check on you.
 	elif Variables.get_char_var("NPC_3", "relationship") == 9
 		Mary: Bah, who cares. 
 		Mary: Fuck them.
-		Mary: Got other things to think about now. 
+		Mary: Got other things to reflect on now. 
 		Mary: Speaking of, where's Sarah?
 		- Upstairs. She won't talk to me.
 			Mary: Oh? Wonder why that could be. 
@@ -371,7 +371,7 @@ Mary: Good morning, Keeper.
 	Sarah: And you look so different.
 	Sarah: The clothes. Everything else.
 	Sarah: You're beautiful.
-	Mary: Thanks you, Sarah.
+	Mary: Thank you, Sarah.
 	Mary: I owe it to the Keeper, here. 
 	Mary: And to you, of course. 
 	Mary: I'd be dead without the two of you. 
@@ -400,7 +400,7 @@ Mary: Good morning, Keeper.
 			Mary: ... 
 			Mary: Bah, who cares. 
 			Mary: Fuck them.
-			Mary: Got other things to think about now. 
+			Mary: Got other things to reflect on now. 
 			Mary: See you around, Keeper. 
 			*She LEAVES^ => END
 	elif Variables.get_char_var("NPC_3", "relationship") == 8

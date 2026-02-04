@@ -10,7 +10,7 @@ else
 	=> branch_start
 
 ~ branch_start
-if Variables.set_char_var("NPC_2", "left_micah") == true
+if Variables.get_char_var("NPC_2", "left_micah") == true
 	*Sarah ENTERS^
 	if Variables.get_char_var("NPC_1", "relationship") == 1
 		if Variables.get_char_var("NPC_2", "relationship") == 1
@@ -245,8 +245,8 @@ else
 				*She LEAVES^ => END 
 		
 ~ branch_left_mary
-Sarah: Did you talk to her?
 if Variables.get_char_var("NPC_3", "dead") == true
+	Sarah: Did you talk to her?
 	- I don't want to talk about it. I've had a long day. [if Variables.get_char_var("NPC_3", "relationship") <= 6]
 		if Variables.get_char_var("NPC_2", "relationship") == 3
 			Sarah: Okay, then. I'll be in my room. 
@@ -393,6 +393,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 				Sarah: I hate you. 
 				*She LEAVES^ => END 
 else
+	Sarah: Did you talk to her?
 	- I managed to convince her to do what she must to be forgiven by the elders. 
 		*She turns happy
 		Sarah: You did?! [do Variables.set_char_var("NPC_2", "relationship", 6)] 
@@ -413,8 +414,8 @@ else
 				*She LEAVES^ => END 
 
 ~ branch_left_mary_micah
-Sarah: Did you talk to her?
 if Variables.get_char_var("NPC_3", "dead") == true
+	Sarah: Did you talk to her?
 	- I don't want to talk about it. I've had a long day. [if Variables.get_char_var("NPC_3", "relationship") <= 6]
 		if Variables.get_char_var("NPC_2", "relationship") == 3
 			Sarah: Okay, then. I'll be in my room. Bye, Micah.
@@ -619,6 +620,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 				Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
 				*He LEAVES^ => END 
 else
+	Sarah: Did you talk to her?
 	- I managed to convince her to do what she must to be forgiven by the elders. 
 		*Her FACE turns HAPPY
 		Sarah: You did?! [do Variables.set_char_var("NPC_2", "relationship", 6)] 
