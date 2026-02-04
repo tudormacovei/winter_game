@@ -4,7 +4,10 @@ extends Node3D
 
 @export var object_slots: Array[Node3D]
 
+signal all_objects_completed()
+
 var _used_slots: int = 0
+var _completed_objects_count: int = 0
 
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
 
@@ -12,7 +15,7 @@ func _ready() -> void:
 	pass
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -23,6 +26,11 @@ func _get_next_free_slot() -> Node3D:
 	return object_slots[_used_slots]
 
 
+func reset_workbench() -> void:
+	_used_slots = 0
+	_completed_objects_count = 0
+
+
 # adds a new object to the workbench
 func add_object(object_scene: PackedScene):
 	var interactible_object: InteractibleObject = _interactible_object_scene.instantiate()
@@ -31,3 +39,18 @@ func add_object(object_scene: PackedScene):
 	
 	interactible_object.global_position = _get_next_free_slot().global_position
 	_used_slots = _used_slots + 1
+
+	interactible_object.connect("object_completed", _on_object_completed)
+
+
+#region Signals
+
+func _on_object_completed():
+	_completed_objects_count += 1
+	if _completed_objects_count < _used_slots:
+		return
+
+	print("Workbench: All objects completed")
+	emit_signal("all_objects_completed")
+	
+#endregion

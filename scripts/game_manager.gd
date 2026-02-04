@@ -6,19 +6,22 @@ extends Node
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
 const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
 
-var current_day_index: int = -1
-var current_interaction_index: int = -1
-
-var _day_resources: Array[DayDefinition] = []
-var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
-
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
 @onready var character_node := get_node("/root/Workspace/DialogueView/DialogueCharacterTexture")
 
+var _day_resources: Array[DayDefinition] = []
+var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
+
+var current_day_index: int = -1
+var current_interaction_index: int = -1
+var is_dialogue_running: bool = false
+var are_all_objects_completed: bool = true
+
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
+	workbench.connect("all_objects_completed", _on_all_objects_completed)
 
 	_load_day_resources()
 	_load_character_resources()
@@ -106,15 +109,33 @@ func _play_next_interaction():
 	# Start the character interaction
 	var dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
 	ui_manager.balloon_layer = dialogue_balloon
-	
+	is_dialogue_running = true
+
+	workbench.reset_workbench()
 	for object: PackedScene in interaction.objects:
 		workbench.add_object(object)
+	if interaction.objects.size() != 0:
+		are_all_objects_completed = false
+
 	print("GameManager: Starting day %d interaction %d" % [current_day_index + 1, current_interaction_index])
+
+func _try_play_next_interaction():
+	if is_dialogue_running:
+		return
+	if not are_all_objects_completed:
+		return
+
+	_play_next_interaction()
 
 #region Signals
 
+func _on_all_objects_completed():
+	are_all_objects_completed = true
+	_try_play_next_interaction()
+
 func _on_dialogue_ended(_resource):
-	_play_next_interaction()
+	is_dialogue_running = false
+	_try_play_next_interaction()
 
 func _on_dialogue_line_started(dialogue_line):
 	# Set character sprite

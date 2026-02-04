@@ -6,6 +6,7 @@ class_name InteractibleObject
 extends Node3D
 
 signal object_interactible(is_interactible: bool)
+signal object_completed()
 
 # Setup variables, set before node enters scene tree
 var focus_position: Node3D
@@ -42,7 +43,7 @@ func _ready() -> void:
 		queue_free() # delete self due to lack of child object
 
 	_object = object_scene.instantiate()
-	if not(_object is ObjectWithStickers):
+	if not (_object is ObjectWithStickers):
 		print("InteractibleObject: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
 	add_child(_object)
 	_place_object_on_xz_plane(_object)
@@ -52,7 +53,7 @@ func _ready() -> void:
 	_object.area_entered.connect(_on_object_area_entered)
 	_object.area_exited.connect(_on_object_area_exited)
 	
-	for child in Utils.get_all_children(self):
+	for child in Utils.get_all_children(self ):
 		if child is Sticker:
 			_sticker_total += 1
 			
@@ -205,7 +206,7 @@ func _handle_drag():
 	var origin: Vector3 = camera.project_ray_origin(mouse_pos)
 	var direction: Vector3 = camera.project_ray_normal(mouse_pos)
 	
-	var distance_to_plane_intersect := -origin.y/direction.y
+	var distance_to_plane_intersect := -origin.y / direction.y
 	var intersect = origin + direction * distance_to_plane_intersect # interesect on XZ plane (y=0)
 	self.global_position = intersect
 	_place_object_on_xz_plane(_object) # intersect y coord is incorrect, update to correct one
@@ -266,6 +267,8 @@ func _remove_outline():
 func complete_object():
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
 	queue_free()
+
+	emit_signal("object_completed")
 
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
