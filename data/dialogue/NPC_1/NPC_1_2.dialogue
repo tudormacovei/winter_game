@@ -63,7 +63,12 @@ if Variables.get_char_var("NPC_3", "watch_state") == 6
 			*You GIVE^ the WATCH
 			Micah: Oh. Okay. Got it. I'll be going now. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
 			*He LEAVES^ => END 
-elif Variables.get_char_var("NPC_3", "watch_state") == 2
+elif Variables.get_char_var("NPC_3", "watch_state") == 1 
+	*You GIVE^ the WATCH
+	- Here. Take it. 
+		Micah: Thanks. I'll be going now.
+		*He LEAVES^ => END
+else
 	*You GIVE^ the RAG
 	- Here. Take it. 
 		if Variables.get_char_var("NPC_2", "micah") == false
@@ -73,12 +78,7 @@ elif Variables.get_char_var("NPC_3", "watch_state") == 2
 				*He LEAVES^ => END 
 		else 
 			Micah: Thanks. I'll be going now.
-			*He LEAVES^ => END
-elif Variables.get_char_var("NPC_3", "watch_state") == 1 
-	*You GIVE^ the WATCH
-	- Here. Take it. 
-		Micah: Thanks. I'll be going now.
-		*He LEAVES^ => END
+			*He LEAVES^ => END 
 		
 ~ branch_um
 if Variables.get_char_var("NPC_3", "watch_state") == 7
@@ -86,25 +86,26 @@ if Variables.get_char_var("NPC_3", "watch_state") == 7
 	Micah: Told me to come and tell ya. 
 	Micah: Anyway, I'll be going back to her now. See ya. 
 		*He LEAVES^ => END 
-elif Variables.get_char_var("NPC_3", "watch_state") == 2
-	Micah: Mary asked me to bring you the watch back, to cleanse it. 
-	Micah: She needs it for the other ceremony now, to burn it and be forgiven, she said. 
-	*You TAKE^ the WATCH and CLEANSE it
-	*You GIVE^ the WATCH back
-	Micah: Thanks. I'll go and take it back to her. See ya.
-		*He LEAVES^ => END 
 else
-	Micah: Mary asked me to bring her the watch, cleansed.
-	Micah: She needs it for the other ceremony, to burn it and be forgiven, she said. 
-	- Oh, um, well, I've already cleansed it. [if Variables.get_char_var("NPC_3", "watch_state") == 1]
-		*You GIVE^ the WATCH 
-		Micah: Hmm. Thanks. I'll go and take it to her. See ya.
+	if Variables.get_char_var("NPC_3", "watch_state") == 2
+		Micah: Mary asked me to bring you the watch back, to cleanse it. 
+		Micah: She needs it for the other ceremony now, to burn it and be forgiven, she said. 
+		*You TAKE^ the WATCH and CLEANSE it
+		*You GIVE^ the WATCH back
+		Micah: Thanks. I'll go and take it back to her. See ya.
 			*He LEAVES^ => END 
-	- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
-		*You CLEANSE the WATCH
-		*You GIVE^ him the WATCH
-		- There you go. 
-			Micah: Thanks. I'll go and take it to her. See ya.
+	else
+		Micah: Mary asked me to bring her the watch, cleansed.
+		Micah: She needs it for the other ceremony, to burn it and be forgiven, she said. 
+		- Oh, um, well, I've already cleansed it. [if Variables.get_char_var("NPC_3", "watch_state") == 1]
+			*You GIVE^ the WATCH 
+			Micah: Hmm. Thanks. I'll go and take it to her. See ya.
 				*He LEAVES^ => END 
+		- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
+			*You CLEANSE the WATCH
+			*You GIVE^ him the WATCH
+			- There you go. 
+				Micah: Thanks. I'll go and take it to her. See ya.
+					*He LEAVES^ => END 
 => END
 

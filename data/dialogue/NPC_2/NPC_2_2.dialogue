@@ -296,7 +296,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						- I'm sorry, Sarah. Good night.
 							*She LEAVES^ => END
 						- Night. 
-							*She LEAVES^=> END 
+							*She LEAVES^ => END 
 					- I did. But I couldn't find the right thing to say. 
 						Sarah: ...
 						Sarah: That's okay. I couldn't either.
@@ -589,7 +589,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Sarah: Good night.
 					*She LEAVES^ 
 					Micah: I'll come by later to pick up the ceremonial item, Keeper.
-					*He LEAVES^=> END
+					*He LEAVES^ => END
 				- Night. 
 					*She LEAVES^
 					Micah: I'll come by later to pick up the ceremonial item, Keeper.
@@ -606,7 +606,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Sarah: Good night.
 					*She LEAVES^ 
 					Micah: I'll come by later to pick up the ceremonial item, Keeper. Bye. 
-					*He LEAVES^=> END
+					*He LEAVES^ => END 
 				- Night. 
 					*She LEAVES^
 					Micah: I'll come by later to pick up the ceremonial item, Keeper. Bye.
