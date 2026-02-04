@@ -936,7 +936,7 @@ Mary: Today, it feels a bit wrong.
 			- Thinking about the past might be good in moments like these. => branch_reminisce
 			- Thinking about the past does no good. 
 				Mary: Yeah. So I keep getting told. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
-			- Thinking back on those times is sinful, Mary. [if Variables.get_var("NPC_3", "relationship") == 5] 
+			- Thinking back on those times is sinful, Mary. [if Variables.get_char_var("NPC_3", "relationship") == 5] 
 				Mary: Sinful this, sinful that. Hell, can't you people see how brainwashed you are? [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
 	else
 		Mary: I've always loved making jokes in inappropriate moments. 
