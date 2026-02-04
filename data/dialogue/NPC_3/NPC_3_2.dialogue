@@ -14,113 +14,58 @@ else
 if Variables.get_char_var("NPC_2", "relationship") == 1
 	if Variables.get_char_var("NPC_3", "dead") == true
 		if Variables.get_char_var("NPC_3", "relationship") == 1
-			*Micah ENTERS^ with a bag full of items. 
-			if Variables.get_char_var("NPC_1", "relationship") == 0 
-				Micah: Got your items here. 
-				Micah: ...
-				Micah: Keeper, why didn't you tell Sarah I wanted to see her like you said you would?
-				- I don't like you around her. 
-					Micah: Oh. Okay. 
-					Micah: Guess you're right. 
-					Micah: She's smart and pretty. 
-					Micah: Should spend her time with others. 
-					Micah: ...
-					Micah: Well, see ya.
-					=> branch_sui
-				- I'm sorry, Micah. 
-					Micah: That's alright, I guess. 
-					Micah: You got your hands full an' everythin'.
-					Micah: ...
-					Micah: Well, see ya.
-					=> branch_sui
-			elif Variables.get_char_var("NPC_1", "relationship") <= 2
-				Micah: Got your items here. 
-				Micah: ...
-				Micah: Gotta go. See ya. 
-				=> branch_sui
-			else
-				Micah: Morning, Keeper. Got some items here for you. 
-				- Hello, Micah. Thanks.
-					Micah: No problem. Gotta go.
-					=> branch_sui
+			=> branch_micah
 		else 
-			*Sarah ENTERS^ 
-			- Good morning. 
-				Sarah: ...
-				- Sarah, don't go near the window today. [if Variables.get_char_var("NPC_1", "relationship") >= 2]
-					*She WALKS^ there
-					*She starts CRYING^
-					Sarah: ...
-					- I'm sorry, Sarah. 
-						*She LEAVES^ => END
-					- That's what happens to those who go against them. Make sure you don't forget.
-						*She LEAVES^ => END
-					- That's what happens to blasphemers. Make sure you don't forget. 
-						*She LEAVES^ => END
-				- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
-					*She WALKS^ there
-					*She starts CRYING^
-					- That's what happens to those who go against them. Make sure you don't forget.
-						*She LEAVES^ => END
-					- That's what happens to blasphemers. Make sure you don't forget. 
-						*She LEAVES^ => END 
-					
-			
+			=> branch_sarah_1
 	else
-		*Mary ENTERS^ wearing NORMAL CLOTHING
-		Mary: Morning, Keeper. Thought I'd come by to check on you. 
-		- Morning. How'd the ceremony go?
-			Mary: Oh, as you'd expect. People gathered around a fire, acting like rabid dogs. 
-			Mary: Recited all my sins. Threw in some new ones in there, gotta give them credit.
-			Mary: Burned my watch. My clothes. Shamed myself in front of everyone.
-			Mary: Then, everyone went home happy. 
-			if Variables.get_char_var("NPC_3", "relationship") == 7
-				Mary: Thoughtless animals, all of us. 
-				Mary: Me, most of all. 
-				Mary: I was supposed to die, yesterday, Keeper. I feel it in my bones. 
-				Mary: Don't know what I'm still doing here. 
-				- You'll figure it out, Mary. In due time. 
-					Mary: Guess we'll see. 
-					Mary: Where's Sarah?
-					- Upstairs. Won't talk to me. 
-						Mary: Oh? Wonder why that could be. 
-						Mary: I'll go see her, if that's alright. 
-						Mary: Be seeing you, Keeper. 
-						*She LEAVES^ => END
-				- Don't know what any of us are still doing here, to be honest. 
-					Mary: Hah. Right. 
-					Mary: Where's Sarah?
-					- Upstairs. Won't talk to me. 
-						Mary: Oh? Wonder why that could be. 
-						Mary: I'll go see her, if that's alright. 
-						Mary: Be seeing you, Keeper. 
-						*She LEAVES^ => END
-			elif Variables.get_char_var("NPC_3", "relationship") == 8
-				Mary: Just another day in crazy town. 
-				Mary: Guess I'll be on the other side of the fence soon enough, whenever some other poor souls find themselves in a similar situation.
-				Mary: Cheering and crying and screaming as they get publicly humiliated. 
-				Mary: So it goes. 
-				Mary: Anyway, where's Sarah?
-				- Upstairs. She won't talk to me.
-					Mary: Oh? Wonder why that could be. 
-					Mary: I'll go see her, if that's alright. 
-					Mary: Be seeing you, Keeper. 
-					*She LEAVES^ => END
-			elif Variables.get_char_var("NPC_3", "relationship") == 9
-				Mary: Bah, who cares. 
-				Mary: Fuck them.
-				Mary: Got other things to think about now. 
-				Mary: Speaking of, where's Sarah?
-				- Upstairs. She won't talk to me.
-					Mary: Oh? Wonder why that could be. 
-					Mary: I'll go see her, if that's alright. 
-					Mary: Be seeing you, Keeper. 
-					*She LEAVES^ => END
-			
+		=> branch_mary_solo
+elif Variables.get_char_var("NPC_2", "relationship") == 2
+	if Variables.get_char_var("NPC_3", "relationship") == 1
+		=> branch_micah
+	else 
+		=> branch_sarah_1
+elif Variables.get_char_var("NPC_2", "relationship") == 3
+	if Variables.get_char_var("NPC_3", "relationship") == 1
+		=> branch_micah
+	else 
+		=> branch_sarah_2
+elif Variables.get_char_var("NPC_2", "relationship") == 6
+	if Variables.get_char_var("NPC_2", "pressure") == 0
+		=> branch_mary_sarah
+	else 
+		*Mary ENTERS^
+		Mary: Good morning, Keeper. 
+		- Morning, Mary. 
+			Mary: You're a sly one, aren't you? 
+			if Variables.get_char_var("NPC_2", "pressure") == 1
+				Mary: Sending Sarah last night. 
+				Mary: I guess I showed you my weak spot.
+				Mary: I won't lie to you. I'd been crying when she showed up. Histerically so. 
+				Mary: And then she came to me. She hugged me.
+				=> branch_pressure_success
+			elif Variables.get_char_var("NPC_2", "pressure") == 2
+				Mary: Sending the children last night.
+				Mary: I guess I showed you my weak spot.
+				Mary: I won't lie to you. I'd been crying when they showed up. Histerically so. 
+				Mary: And then they came to me. They hugged me.
+				Mary: Micah, too. Can you believe it?
+				=> branch_pressure_success
+elif Variables.get_char_var("NPC_2", "relationship") == 4
+	=> branch_sarah_3
+else
+	if Variables.get_char_var("NPC_3", "dead") == true
+		if Variables.get_char_var("NPC_2", "pressure") >= 1
+			=> branch_sarah_5
+		else
+			=> branch_sarah_4
+	else 
+		=> branch_mary_sarah
+		
+		
 
 ~ branch_placeholder
 *For certain endings, the next bit has temporary placeholders marked with * which are going to be replaced with the window mechanic [do Variables.set_var("placeholder", true)]
-if Variables.get_char("NPC_3", "relationship") == 1
+if Variables.get_char_var("NPC_3", "relationship") == 1
 	*You wake up and you look out the window. You see nothing. The ceremonial altar is empty. 
 if Variables.get_char_var("NPC_3", "relationship") == 2
 	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. There is a burned watch on a table next to her.
@@ -139,7 +84,7 @@ elif Variables.get_char_var("NPC_3", "relationship") == 4
 elif Variables.get_char_var("NPC_3", "relationship") == 5
 	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
-		*There is a burned watch on the table next to her. You promised her you'd have Micah bring it to her untouched but you chose to cleanse it and give it to the ceremony instead. She kept waiting until the very last moment.
+		*There is a burned watch on the table next to her. You promised her you'd have Micah bring it to her untouched but you chose to cleanse it and give it to the Elders for the ceremony instead. She waited for it at home until the very last moment.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
 		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
 elif Variables.get_char_var("NPC_3", "relationship") == 6
@@ -165,6 +110,37 @@ elif Variables.get_char_var("NPC_3", "relationship") == 9
 	Mary comes in, wearing different clothes. She's somewhat happy. She smiles at the sight of Sarah. The three of you talk and joke around. 
 => start
 
+~ branch_micah
+*Micah ENTERS^ with a bag full of items. 
+if Variables.get_char_var("NPC_1", "relationship") == 0 
+	Micah: Got your items here. 
+	Micah: ...
+	Micah: Keeper, why didn't you tell Sarah I wanted to see her like you said you would?
+	- I don't like you around her. 
+		Micah: Oh. Okay. 
+		Micah: Guess you're right. 
+		Micah: She's smart and pretty. 
+		Micah: Should spend her time with others. 
+		Micah: ...
+		Micah: Well, see ya.
+		=> branch_sui
+	- I'm sorry, Micah. 
+		Micah: That's alright, I guess. 
+		Micah: You got your hands full an' everythin'.
+		Micah: ...
+		Micah: Well, see ya.
+		=> branch_sui
+elif Variables.get_char_var("NPC_1", "relationship") <= 2
+	Micah: Got your items here. 
+	Micah: ...
+	Micah: Gotta go. See ya. 
+	=> branch_sui
+else
+	Micah: Morning, Keeper. Got some items here for you. 
+	- Hello, Micah. Thanks.
+		Micah: No problem. Gotta go.
+		=> branch_sui
+
 ~ branch_sui
 - Micah, why is the ceremonial altar empty?
 	Micah: Oh, you don't know? 
@@ -179,6 +155,285 @@ elif Variables.get_char_var("NPC_3", "relationship") == 9
 		Micah: I gave it to you yesterday, didn't I? 
 		Micah: Anyway, I gotta get going. See ya. 
 		*She LEAVES^ => END
+
+~ branch_sarah_1
+*Sarah ENTERS^ 
+- Good morning. 
+	Sarah: ...
+	- Sarah, don't go near the window today. [if Variables.get_char_var("NPC_3", "relationship") >= 2]
+		*She WALKS^ there
+		*She starts CRYING^
+		Sarah: ...
+		- I'm sorry, Sarah. 
+			*She LEAVES^ => END
+		- That's what happens to those who go against the Goddess. Make sure you don't forget.
+			*She LEAVES^ => END
+		- That's what happens to blasphemers. Make sure you don't forget. 
+			*She LEAVES^ => END
+	- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
+		*She WALKS^ there
+		*She starts CRYING^
+		- That's what happens to those who go against them. Make sure you don't forget.
+			*She LEAVES^ => END
+		- That's what happens to blasphemers. Make sure you don't forget. 
+			*She LEAVES^ => END 
+			
+~ branch_sarah_2
+- Good morning. 
+	Sarah: Morning. 
+	- Sarah, don't go near the window today. [if Variables.get_char_var("NPC_3", "relationship") >= 2]
+		Sarah: Why not?
+		*She WALKS^ there
+		- I'm sorry, Sarah. 
+			Sarah: ...
+			Sarah: It's okay. Like I said. It's her own fault. 
+			*She LEAVES^ => END
+		- That's what happens to those who go against the Goddess. Make sure you don't forget.
+			Sarah: ...
+			Sarah: I won't.
+			*She LEAVES^ => END
+		- That's what happens to blasphemers. Make sure you don't forget.
+			Sarah: ...
+			Sarah: I won't.
+			*She LEAVES^ => END
+	- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
+		Sarah: ...
+		*She WALKS^ there
+		- That's what happens to those who go against them. Make sure you don't forget.
+			Sarah: ...
+			Sarah: I won't.
+			*She LEAVES^ => END
+		- That's what happens to blasphemers. Make sure you don't forget. 
+			Sarah: ...
+			Sarah: I won't.
+			*She LEAVES^ => END 
+			
+~ branch_sarah_3
+*Sarah ENTERS^ 
+- Good morning. 
+	Sarah: Morning.
+	- Sarah, I think it's best don't go near the window today.
+		*She WALKS^ there
+		*She starts CRYING^
+		Sarah: ...
+		- I'm sorry, Sarah. 
+			Sarah: I... I need some time alone.
+			*She LEAVES^ => END
+			
+~ branch_sarah_4
+*Sarah ENTERS^ 
+- Good morning. 
+	Sarah: Morning.
+	- Sarah, I think it's best don't go near the window today.
+		*She WALKS^ there
+		*She starts CRYING^
+		Sarah: ...
+		- I'm sorry, Sarah. 
+			Sarah: I... 
+			Sarah: Will you hold me? Please. 
+			- Of course, child. => END
+			- I... yes.  => END
+			
+~ branch_sarah_5
+*Sarah ENTERS^
+Sarah: ...
+- Good morning.
+	*She WALKS^ to the window
+	Sarah: ...
+	- Sarah, I think it's best if you dont go near the window...
+		*She starts CRYING^
+		Sarah: I... I couldn't save her...
+		Sarah: I went there and she... she just...
+		- It's okay, Sarah. It's alright.
+			Sarah: She just cried. And cried and cried. And then she left. 
+			Sarah: And I went after her. 
+			Sarah: She wasn't speaking.
+			Sarah: And then... and then they killed her. 
+			Sarah: Will you hold me? Please.
+			- Of course, child. => END 
+			- I... yes. => END 
+			
+~ branch_mary_solo
+*Mary ENTERS^ wearing NORMAL CLOTHING
+Mary: Morning, Keeper. Thought I'd come by to check on you. 
+- Morning. How'd the ceremony go?
+	Mary: Oh, as you'd expect. People gathered around a fire, acting like rabid dogs. 
+	Mary: Recited all my sins. Threw in some new ones in there, gotta give them credit.
+	Mary: Burned my watch. My clothes. Shamed myself in front of everyone.
+	Mary: Then, everyone went home happy. 
+	if Variables.get_char_var("NPC_3", "relationship") == 7
+		Mary: Thoughtless animals, all of us. 
+		Mary: Me, most of all. 
+		Mary: I was supposed to die, yesterday, Keeper. I can somehow feel it in my bones. 
+		Mary: Don't know what I'm still doing here. 
+		- You'll figure it out, Mary. In due time. 
+			Mary: Guess we'll see. 
+			Mary: Where's Sarah?
+			- Upstairs. Won't talk to me. 
+				Mary: Oh? Wonder why that could be. 
+				Mary: I'll go see her, if that's alright. 
+				Mary: Be seeing you, Keeper. 
+				*She LEAVES^ => END
+		- Don't know what any of us are still doing here, to be honest. 
+			Mary: Hah. Right. 
+			Mary: Where's Sarah?
+			- Upstairs. Won't talk to me. 
+				Mary: Oh? Wonder why that could be. 
+				Mary: I'll go see her, if that's alright. 
+				Mary: Be seeing you, Keeper. 
+				*She LEAVES^ => END
+	elif Variables.get_char_var("NPC_3", "relationship") == 8
+		Mary: Just another day in crazy town. 
+		Mary: Guess I'll be on the other side of the fence soon enough, whenever some other poor souls find themselves in a similar situation.
+		Mary: Cheering and crying and screaming as they get publicly humiliated. 
+		Mary: So it goes. 
+		Mary: Anyway, where's Sarah?
+		- Upstairs. She won't talk to me.
+			Mary: Oh? Wonder why that could be. 
+			Mary: I'll go see her, if that's alright. 
+			Mary: Be seeing you, Keeper. 
+			*She LEAVES^ => END
+	elif Variables.get_char_var("NPC_3", "relationship") == 9
+		Mary: Bah, who cares. 
+		Mary: Fuck them.
+		Mary: Got other things to think about now. 
+		Mary: Speaking of, where's Sarah?
+		- Upstairs. She won't talk to me.
+			Mary: Oh? Wonder why that could be. 
+			Mary: I'll go see her, if that's alright. 
+			Mary: Be seeing you, Keeper. 
+			*She LEAVES^ => END
+
+~ branch_pressure_success
+Mary: And I felt everything weighing on my soul lift for a second. 
+Mary: I hadn't felt that way in a long, long time. 
+Mary: It was only for a second. The pain came right back like a hurricane after that.
+Mary: But it was enough.
+Mary: I couldn't go through with it. 
+- I'm glad I did, then. 
+	Mary: Time will tell if it was the right choice. 
+	Mary: Anyway, where's Sarah?
+	- Upstairs. Asleep. She came back exhausted last night. 
+		Mary: Well, guess our morning walk will have to wait. 
+		Mary: Tell her to come see me when she wakes up.
+		Mary: See you around, Keeper.
+		*She LEAVES^ => END
+- How was the ceremony? 
+	Mary: Oh, as you'd expect. People gathered around a fire, acting like rabid dogs. 
+	Mary: Recited all my sins. Threw in some new ones in there, gotta give them credit.
+	Mary: Burned my watch. My clothes. Shamed myself in front of everyone.
+	Mary: Then, everyone went home happy. 
+	if Variables.get_char_var("NPC_3", "relationship") == 7
+		Mary: Thoughtless animals, all of us. 
+		Mary: Me, most of all. 
+		Mary: I was supposed to die, yesterday, Keeper. I can somehow feel it in my bones. 
+		Mary: Don't know what I'm still doing here. 
+		- You'll figure it out, Mary. In due time. 
+			Mary: Guess we'll see. 
+			Mary: Anyway, where's Sarah?
+			- Upstairs. Asleep. She came back exhausted last night. 
+				Mary: Well, guess our morning walk will have to wait. 
+				Mary: Tell her to come see me when she wakes up.
+				Mary: See you around, Keeper.
+				*She LEAVES^ => END
+		- Don't know what any of us are still doing here, to be honest. 
+			Mary: Hah. Right. 
+			Mary: Anyway, where's Sarah?
+			- Upstairs. Asleep. She came back exhausted last night. 
+				Mary: Well, guess our morning walk will have to wait. 
+				Mary: Tell her to come see me when she wakes up.
+				Mary: See you around, Keeper.
+				*She LEAVES^ => END
+	elif Variables.get_char_var("NPC_3", "relationship") == 8
+		Mary: Just another day in crazy town. 
+		Mary: Guess I'll be on the other side of the fence soon enough, whenever some other poor souls find themselves in a similar situation.
+		Mary: Cheering and crying and screaming as they get publicly humiliated. 
+		Mary: So it goes. 
+		Mary: Anyway, where's Sarah?
+		- Upstairs. Asleep. She came back exhausted last night. 
+			Mary: Well, guess our morning walk will have to wait. 
+			Mary: Tell her to come see me when she wakes up.
+			Mary: See you around, Keeper.
+			*She LEAVES^ => END
 		
+~ branch_mary_sarah
+*Mary ENTERS^
+Mary: Good morning, Keeper. 
+- Morning, Mary. 
+	*Sarah ENTERS^
+	*Her FACE turns HAPPY
+	*Mary's FACE turns HAPPY
+	Sarah: Mary!
+	Mary: Hello, child. 
+	Sarah: You're alive. I can't believe it. 
+	Sarah: And you look so different.
+	Sarah: The clothes. Everything else.
+	Sarah: You're beautiful.
+	Mary: Thanks you, Sarah.
+	Mary: I owe it to the Keeper, here. 
+	Mary: And to you, of course. 
+	Mary: I'd be dead without the two of you. 
+	Mary: ...
+	Mary: So, what do you say? Still up for our morning walk?
+	Sarah: Sure am! Let me just go wash up a bit.
+	*She LEAVES^
+	if Variables.get_char_var("NPC_3", "relationship") == 9
+		Mary: Thank you again, Keeper. I mean it.
+		- I'm just glad to see you like this. 
+			Mary: Looks like you're not the only one. 
+			Mary: I haven't seen her this happy in forever.
+			Mary: Perhaps I did the right thing.
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+		- Don't mention it. 
+			Mary: Oh, I will.
+			Mary: Over and over.
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+		- How was the ceremony?
+			Mary: Oh, as you'd expect. People gathered around a fire, acting like rabid dogs. 
+			Mary: Recited all my sins. Threw in some new ones in there, gotta give them credit.
+			Mary: Burned my watch. My clothes. Shamed myself in front of everyone.
+			Mary: Then, everyone went home happy.
+			Mary: ... 
+			Mary: Bah, who cares. 
+			Mary: Fuck them.
+			Mary: Got other things to think about now. 
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+	elif Variables.get_char_var("NPC_3", "relationship") == 8
+		Mary: Thank you again, Keeper. 
+		Mary: I woke up sad this morning.
+		Mary: Feeling... empty. Wrong.
+		Mary: But seeing Sarah smile like this...
+		Mary: Sort of makes it worth it.
+		Mary: Hope things will get easier in the long run. 
+		- They will. 
+			Mary: One can only hope. 
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+		- How was the ceremony?
+			Mary: Just another day in crazy town. 
+			Mary: Guess I'll be on the other side of the fence soon enough, whenever some other poor souls find themselves in a similar situation.
+			Mary: Cheering and crying and screaming as they get publicly humiliated. 
+			Mary: So it goes. 
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+	elif Variables.get_char_var("NPC_3", "relationship") == 7
+		Mary: Well, she sure is happy.
+		Mary: Wish I could feel the same way. 
+		Mary: Woke up feeling heavy this morning.
+		Mary: Could feel it in my bones.
+		Mary: Like my body somehow knew it was supposed to be dead.
+		Mary: No idea what I'm still doing here.
+		- You'll figure it out, Mary. In due time. 
+			Mary: Guess we'll see. 
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+		- Don't know what any of us are still doing here, to be honest. 
+			Mary: Hah. Right. 
+			Mary: See you around, Keeper. 
+			*She LEAVES^ => END
+			
 => END
 

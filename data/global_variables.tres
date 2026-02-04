@@ -37,7 +37,7 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 [sub_resource type="Resource" id="Resource_mes5c"]
 script = ExtResource("1_vywdb")
 name = "pressure"
-default_value = false
+default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_s4nex"]

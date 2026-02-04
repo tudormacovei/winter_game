@@ -1145,7 +1145,7 @@ Mary: How's that?
 			Mary: It's been hard for me to realize that most people have experienced loss in some way with how things are nowadays.
 			Mary: Heartbreak everywhere. Yet you don't see everyone giving up, like I did. 
 			Mary: Kind of makes me feel like a fraud, now. Too little too late. 
-			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_live
+			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_know
 	- I mostly have nightmares, myself.
 		Mary: What about?
 		- Oh, just weird, creepy stuff. They kind of feel like the art-house, horror movies of old.
@@ -1158,7 +1158,7 @@ Mary: How's that?
 			Mary: It's been hard for me to realize that most people have experienced loss in some way with how things are nowadays.
 			Mary: Heartbreak everywhere. Yet you don't see everyone giving up, like I did. 
 			Mary: Kind of makes me feel like a fraud, now. Too little too late.  
-			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_live
+			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_know
 - What does a frog knife look like?
 	Mary: It's like a butter knife but green and tiny. 
 	- Figures. 
@@ -1435,6 +1435,7 @@ Mary: Terrified, really.
 	=> branch_know
 	
 ~ branch_know
+Mary: ...
 - Tell me about your childhood. [if Variables.get_var("youth") == false]
 	Mary: I was a theater kid, if you can believe it. [do Variables.set_var("youth", true)] [do Variables.mod_var("counter", 1)]
 	Mary: Aspiring actor, Hollywood dreams.
@@ -1468,8 +1469,8 @@ Mary: Terrified, really.
 		Mary: And then he died in such a stupid way...
 		Mary: Oh, if only things were different.
 		- I'm sorry for asking, Mary. 
-			Mary: Oh, it's alright. Don't worry about it. => branch_live
-- Why is the watch so important to you? [if Variables.get_char_var("NPC_3", opened_up) <= 1]
+			Mary: Oh, it's alright. Don't worry about it. => branch_know
+- Why is the watch so important to you? [if Variables.get_char_var("NPC_3", "opened_up") <= 1]
 	Mary: Henry used to love this watch. It was given to him by his father. [do Variables.set_char_var("NPC_3", "opened_up", 2)] [do Variables.mod_var("counter", 1)] 
 	Mary: But he wasn't the same after we joined the cult. He threw it away. I found it in the trash and kept it. 
 	Mary: In theory, he was free of sin. In practice, however, he was a shell of his former self. 
@@ -1502,7 +1503,7 @@ Mary: Terrified, really.
 	Mary: Haven't had one since Henry died. Not really. 
 	Mary: Used to dream a lot before that.
 	Mary: I always thought if I were to dream again, I'd dream of him. => branch_frog_2
-- Time is running out, Mary. What do you wanna do? [if Variables.get_var("counter") >= 1]
+- Time is running out, Mary. What do you wanna do? [if Variables.get_var("counter") >= 2]
 	if Variables.get_var("counter") >= 3
 		Mary: ...
 		Mary: The thought scares me even more than death, Keeper. [do Variables.set_char_var("NPC_3", "relationship", 9)] [do Variables.set_char_var("NPC_3", "dead", false)]

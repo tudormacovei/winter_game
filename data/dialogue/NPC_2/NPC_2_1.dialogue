@@ -304,7 +304,7 @@ else
 Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("huh", true)]
 - Oh, I forgot I told you. Of course. => branch_mary
 - Don't recall. 
-	Mary: You told me they're publicly killing Widow Mary for grieving her husband.
+	Sarah: You told me they're publicly killing Widow Mary for grieving her husband.
 	- Right. I'm getting old, it seems. I remember now.  => branch_mary
 
 ~ branch_main 

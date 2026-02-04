@@ -94,133 +94,10 @@ if Variables.set_char_var("NPC_2", "left_micah") == true
 				Micah: Evenin', Keeper. I just came to see Sarah home.
 				Sarah: So... I saw Mary enter the shop.
 				Sarah: Did you talk to her? => branch_left_mary_micah
-elif Variables.get_char_var("NPC_2", "relationship") == 2
-	Sarah: I heard Mary's voice from upstairs. Was she here? Did you talk?
-	- She was. We did. 
-		Sarah: So? What's going to happen to her?
-		- She's going to die. [if Variables.get_char_var("NPC_3", "dead") == true]
-			Sarah: ...
-			Sarah: I'm going back to my room. 
-			- Good night. => END 
-				*She LEAVES^
-			- I tried to do something about it, you know. [if Variables.get_char_var("NPC_3", "relationship") >= 7]
-				Sarah: ...
-				Sarah: Good.
-				Sarah: Good night. [do Variables.set_char_var("NPC_2", "relationship", 4)]
-				^She LEAVES^ => END
-		- She's going to live. [if Variables.get_char_var("NPC_3", "dead") == false] 
-			Sarah: You're making fun of me, aren't you?
-			Sarah: ...
-			Sarah: Really? How?
-			- She realized she's not ready to die just yet. 
-				Sarah: Oh. Did you have something to do with it?
-				- Just did what was right. 
-					Sarah: ...
-					Sarah: I'm... surprised to hear you say that.
-					Sarah: That's... great news. 
-					Sarah: Thank you. 
-					Sarah: I'm going to my room, I have to process this. 
-					Sarah: *Her FACE turns HAPPY
-					Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
-					- Good night, Sarah. 
-						*She LEAVES^ => END
-					- I was a bit of an asshole to you earlier. I'm sorry. 
-						Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-						*She LEAVES^ => END
-				- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
-					Sarah: Oh. I don't know what to say.
-					Sarah: I'm going to my room, I have to process this. 
-					Sarah: *Her FACE turns HAPPY
-					Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
-					Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-					- Good night, Sarah. 
-						*She LEAVES^ => END
-			- Helped her realize she's not ready to die just yet. 
-				Sarah: You changed her mind? How?
-				- Just did what was right.
-					Sarah: ...
-					Sarah: I'm... surprised to hear you say that.
-					Sarah: That's... great news. 
-					Sarah: Thank you. 
-					Sarah: I'm going to my room, I have to process this. 
-					Sarah: *Her FACE turns HAPPY
-					Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
-					- Good night, Sarah. 
-						*She LEAVES^ => END
-					- I was a bit of an asshole to you earlier. I'm sorry. 
-						Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-						*She LEAVES^ => END
-				- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
-					Sarah: Oh. I don't know what to say.
-					Sarah: I'm going to my room, I have to process this. 
-					Sarah: *Her FACE turns HAPPY
-					Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
-					Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-					- Good night, Sarah. 
-						*She LEAVES^ => END
-	- That's none of your business. [if Variables.get_char_var("NPC_3", "dead") == true]
-		Sarah: *Her FACE turns ANGRY
-		Sarah: Fuck you! She's my friend. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-		- Well, she's going to die.
-			Sarah: ... 
-			Sarah: I hate you. 
-			*She LEAVES^ => END
-		- I don't care. What we talked is not suitable for a child's ears. 
-			Sarah: I'm not a child!
-			Sarah: And you're not my father!
-			Sarah: Ugh, I hate you!
-			*She LEAVES^ => END 
 else
-	Sarah: *Comes in through the side door
-	Sarah: Why didn't you tell me Micah wanted to see me? [do Variables.set_char_var("NPC_1", "relationship", 0)] 
-	- I don't like you spending so much time with him.
-		if Variables.get_char_var("NPC_2", "relationship") == 1
-			Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak.
-			*She LEAVES^ => END
-		else
-			Sarah: Why?
-			- He's a troubled kid and a bad influence. 
-				Sarah: That's not true. He's just sad. And he's my friend. And I won't stop seeing him. 
-				- As you wish. => branch_left_mary
-				- We'll see about that. 
-					Sarah: Uh, no we won't. 
-					Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)] 
-					*She LEAVES^ => END
-			- I just don't. 
-				Sarah: Well you're just going to have to accept it. 
-				- Seems so. => branch_left_mary
-				- I won't.
-					Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)] 
-					*She LEAVES^ => END
-	- Guess I forgot. [if Variables.get_char_var("NPC_2", "relationship") == 1]
-		Sarah: Guess you don't give a shit. 
-		- Language. 
-			Sarah: Fuck you. 
-			*She LEAVES^ => END 
-		- Guess I don't. 
-			Sarah: Fuck you. 
-			*She LEAVES^ => END 
-	- (LIE) I forgot. I'm sorry. 
-		Sarah: I don't believe you. 
-		Sarah: I came down right after he left. 
-		Sarah: You couldn't have forgotten in such a short time. 
-		Sarah: Stop trying to control me. I'm not your daughter and I'll never be. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-		*She LEAVES^ => END
-	- How'd you know? 
-		Sarah: He threw stones at my window just now and told me. 
-		- Prick. 
-			if Variables.get_char_var("NPC_2", "relationship") == 1
-				Sarah: You're the prick. Stop trying to control me. I'm not your daughter and I'll never be. 
-				*She LEAVES^ => END
-			else
-				Sarah: That's not true. He's my friend. And you're just going to have to accept it. 
-				- Seems so. => branch_left_mary
-				- I won't.
-					Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-					*She LEAVES^ => END
-		- Yeah, I'm sorry. I should have told you. [if Variables.get_char_var("NPC_2", "relationship") >= 3]
-			Sarah: It's fine, I guess. 
-			Sarah: Wasn't feeling like hanging out anyway. => branch_left_mary
+	if Variables.get_char_var("NPC_2", "relationship") != 2
+		Sarah: *Comes in through the side door
+		Sarah: Why didn't you tell me Micah wanted to see me? [do Variables.set_char_var("NPC_1", "relationship", 0)] 
 		- I don't like you spending so much time with him.
 			if Variables.get_char_var("NPC_2", "relationship") == 1
 				Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak.
@@ -232,17 +109,141 @@ else
 					- As you wish. => branch_left_mary
 					- We'll see about that. 
 						Sarah: Uh, no we won't. 
-						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)] 
 						*She LEAVES^ => END
 				- I just don't. 
 					Sarah: Well you're just going to have to accept it. 
-					- Guess I have to. => branch_left_mary
+					- Seems so. => branch_left_mary
+					- I won't.
+						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)] 
+						*She LEAVES^ => END
+		- Guess I forgot. [if Variables.get_char_var("NPC_2", "relationship") == 1]
+			Sarah: Guess you don't give a shit. 
+			- Language. 
+				Sarah: Fuck you. 
+				*She LEAVES^ => END 
+			- Guess I don't. 
+				Sarah: Fuck you. 
+				*She LEAVES^ => END 
+		- (LIE) I forgot. I'm sorry. 
+			Sarah: I don't believe you. 
+			Sarah: I came down right after he left. 
+			Sarah: You couldn't have forgotten in such a short time. 
+			Sarah: Stop trying to control me. I'm not your daughter and I'll never be. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+			*She LEAVES^ => END
+		- How'd you know? 
+			Sarah: He threw stones at my window just now and told me. 
+			- Prick. 
+				if Variables.get_char_var("NPC_2", "relationship") == 1
+					Sarah: You're the prick. Stop trying to control me. I'm not your daughter and I'll never be. 
+					*She LEAVES^ => END
+				else
+					Sarah: That's not true. He's my friend. And you're just going to have to accept it. 
+					- Seems so. => branch_left_mary
 					- I won't.
 						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 						*She LEAVES^ => END
-	- I'm sorry. I should have told you. [if Variables.get_char_var("NPC_2", "relationship") >= 3]
-		Sarah: It's fine, I guess. 
-		Sarah: Wasn't feeling like hanging out anyway. => branch_left_mary
+			- Yeah, I'm sorry. I should have told you. [if Variables.get_char_var("NPC_2", "relationship") >= 3]
+				Sarah: It's fine, I guess. 
+				Sarah: Wasn't feeling like hanging out anyway. => branch_left_mary
+			- I don't like you spending so much time with him.
+				if Variables.get_char_var("NPC_2", "relationship") == 1
+					Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak.
+					*She LEAVES^ => END
+				else
+					Sarah: Why?
+					- He's a troubled kid and a bad influence. 
+						Sarah: That's not true. He's just sad. And he's my friend. And I won't stop seeing him. 
+						- As you wish. => branch_left_mary
+						- We'll see about that. 
+							Sarah: Uh, no we won't. 
+							Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+							*She LEAVES^ => END
+					- I just don't. 
+						Sarah: Well you're just going to have to accept it. 
+						- Guess I have to. => branch_left_mary
+						- I won't.
+							Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+							*She LEAVES^ => END
+		- I'm sorry. I should have told you. [if Variables.get_char_var("NPC_2", "relationship") >= 3]
+			Sarah: It's fine, I guess. 
+			Sarah: Wasn't feeling like hanging out anyway. => branch_left_mary
+	else
+		Sarah: I heard Mary's voice from upstairs. Was she here? Did you talk?
+		- She was. We did. 
+			Sarah: So? What's going to happen to her?
+			- She's going to die. [if Variables.get_char_var("NPC_3", "dead") == true]
+				Sarah: ...
+				Sarah: I'm going back to my room. 
+				- Good night. => END 
+					*She LEAVES^
+				- I tried to do something about it, you know. [if Variables.get_char_var("NPC_3", "relationship") >= 7]
+					Sarah: ...
+					Sarah: Good.
+					Sarah: Good night. [do Variables.set_char_var("NPC_2", "relationship", 4)]
+					^She LEAVES^ => END
+			- She's going to live. [if Variables.get_char_var("NPC_3", "dead") == false] 
+				Sarah: You're making fun of me, aren't you?
+				Sarah: ...
+				Sarah: Really? How?
+				- She realized she's not ready to die just yet. 
+					Sarah: Oh. Did you have something to do with it?
+					- Just did what was right. 
+						Sarah: ...
+						Sarah: I'm... surprised to hear you say that.
+						Sarah: That's... great news. 
+						Sarah: Thank you. 
+						Sarah: I'm going to my room, I have to process this. 
+						Sarah: *Her FACE turns HAPPY
+						Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
+						- Good night, Sarah. 
+							*She LEAVES^ => END
+						- I was a bit of an asshole to you earlier. I'm sorry. 
+							Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
+							*She LEAVES^ => END
+					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
+						Sarah: Oh. I don't know what to say.
+						Sarah: I'm going to my room, I have to process this. 
+						Sarah: *Her FACE turns HAPPY
+						Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
+						Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
+						- Good night, Sarah. 
+							*She LEAVES^ => END
+				- Helped her realize she's not ready to die just yet. 
+					Sarah: You changed her mind? How?
+					- Just did what was right.
+						Sarah: ...
+						Sarah: I'm... surprised to hear you say that.
+						Sarah: That's... great news. 
+						Sarah: Thank you. 
+						Sarah: I'm going to my room, I have to process this. 
+						Sarah: *Her FACE turns HAPPY
+						Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
+						- Good night, Sarah. 
+							*She LEAVES^ => END
+						- I was a bit of an asshole to you earlier. I'm sorry. 
+							Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
+							*She LEAVES^ => END
+					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
+						Sarah: Oh. I don't know what to say.
+						Sarah: I'm going to my room, I have to process this. 
+						Sarah: *Her FACE turns HAPPY
+						Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
+						Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
+						- Good night, Sarah. 
+							*She LEAVES^ => END
+		- That's none of your business. [if Variables.get_char_var("NPC_3", "dead") == true]
+			Sarah: *Her FACE turns ANGRY
+			Sarah: Fuck you! She's my friend. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+			- Well, she's going to die.
+				Sarah: ... 
+				Sarah: I hate you. 
+				*She LEAVES^ => END
+			- I don't care. What we talked is not suitable for a child's ears. 
+				Sarah: I'm not a child!
+				Sarah: And you're not my father!
+				Sarah: Ugh, I hate you!
+				*She LEAVES^ => END 
 		
 ~ branch_left_mary
 if Variables.get_char_var("NPC_3", "dead") == true
@@ -323,7 +324,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Sarah: ...
 					Sarah: I'm going to my room. 
 					*She LEAVES^ => END 
-				- What do you want me to do?
+				- What do you want me to do?  
 					Sarah: ...
 					Sarah: I'm going to my room. 
 					*She LEAVES^ => END 
@@ -352,29 +353,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					- Good night, Sarah. 
 						*She LEAVES^ => END 
 					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
-						Sarah: What is it?
-						- It's a longshot, but it seemed to me like part of her wanted to live. Perhaps if you went and talked to her now... 
-							Sarah: ... 
-							Sarah: I'm scared. What if I say the wrong thing, again?
-							- You won't. Just tell her you love her and don't want to lose her. 
-								if Variables.get_char_var("NPC_3", "relationship") == 7
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", true)] 
-									- Good luck. 
-										*She LEAVES^ => END
-									- Good bye. 
-										*She LEAVES^ => END
-								elif Variables.get_char_var("NPC_3", "relationship") == 8
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", true)] [do Variables.set_char_var("NPC_2", "relationship", 6)] 
-									- Good luck. 
-										*She LEAVES^ => END
-									- Good bye. 
-										*She LEAVES^ => END
-							- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
-								Sarah: It's okay. I understand. I'm sorry too. 
-								Sarah: Bye. 
-								*She LEAVES^ => END 
-						- Nevermind. Good night. 
-							*She LEAVES^ => END		
+						=> branch_pressure	
 				- It is. That's how these people are. 
 					Sarah: ... 
 					Sarah: I'll be in my room. 
@@ -382,29 +361,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					- Good night, Sarah. 
 						*She LEAVES^ => END 
 					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
-						Sarah: What is it?
-						- It's a longshot, but it seemed to me like part of her wanted to live. Perhaps if you went and talked to her now... 
-							Sarah: ... 
-							Sarah: I'm scared. What if I say the wrong thing, again?
-							- You won't. Just tell her you love her and don't want to lose her. 
-								if Variables.get_char_var("NPC_3", "relationship") == 7
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", true)] 
-									- Good luck. 
-										*She LEAVES^ => END
-									- Good bye. 
-										*She LEAVES^ => END
-								elif Variables.get_char_var("NPC_3", "relationship") == 8
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", true)] [do Variables.set_char_var("NPC_2", "relationship", 6)] 
-									- Good luck. 
-										*She LEAVES^ => END
-									- Good bye. 
-										*She LEAVES^ => END
-							- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
-								Sarah: It's okay. I understand. I'm sorry too. 
-								Sarah: Bye. 
-								*She LEAVES^ => END 
-						- Nevermind. Good night. 
-							*She LEAVES^ => END		
+						=> branch_pressure
 			- I did. She didn't want saving. 
 				Sarah: Oh. I know that. I tried myself, many times. 
 				Sarah: Hoped you'd have more luck. Maybe know what to say, since you're older.
@@ -415,6 +372,9 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					*She LEAVES^ => END
 				- Night. 
 					*She LEAVES^ => END 
+				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					Sarah: What is it?
+					=> branch_pressure	
 			- I did. But I couldn't find the right thing to say. 
 				Sarah: ...
 				Sarah: That's okay. I couldn't either.
@@ -425,6 +385,9 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					*She LEAVES^ => END
 				- Night. 
 					*She LEAVES^ => END
+				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					Sarah: What is it?
+					=> branch_pressure	
 			- I didn't. I changed my mind. She had to die. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 				Sarah: How could you? You promised me. You promised. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 				Sarah: I hate you. 
@@ -599,98 +562,17 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Micah: See you around, Keeper.
 						*He LEAVES^ => END 
 					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
-						Sarah: What is it?
-						- It's a longshot, but it seemed to me like part of her wanted to live. Perhaps if you went and talked to her now... 
-							Sarah: ... 
-							Sarah: I'm scared. What if I say the wrong thing, again?
-							- You won't. Just tell her you love her and don't want to lose her. 
-								if Variables.get_char_var("NPC_3", "relationship") == 7
-									if Variables.get_char_var("NPC_2", doubt) == 3
-										Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", true)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
-										Micah: I'll come with. 
-										Micah: Uh, if you want me to. 
-										Sarah: Of course I do. 
-										Sarah: Let's go. 
-										- Good luck. 
-											*They LEAVE^ => END 
-										- Good bye. 
-											*They LEAVE^ => END 
-									else
-										Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", true)]
-										Sarah: Micah, come with me. Please.
-										if Variables.get_char_var("NPC_2", doubt) == 2
-											Micah: Uh, okay. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
-											Sarah: Let's go. 
-											- Good luck. 
-												*They LEAVE^ => END 
-											- Good bye. 
-												*They LEAVE^ => END 
-										elif Variables.get_char_var("NPC_2", doubt) == 1
-											Micah: Uh, I don't know, Sarah.
-											Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
-											Sarah: Suit yourself. 
-											Sarah: I'm going. Bye.
-											*She LEAVES^
-											Micah: Uh, bye, Keeper.
-											*He LEAVES^ => END 
-								elif Variables.get_char_var("NPC_3", "relationship") == 8
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", true)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
-									if Variables.get_char_var("NPC_2", doubt) == 3
-										Micah: I'll come with. 
-										Micah: Uh, if you want me to. 
-										Sarah: Of course I do. 
-										Sarah: Let's go. 
-										- Good luck. 
-											*They LEAVE^ => END 
-										- Good bye. 
-											*They LEAVE^ => END 
-									else
-										Sarah: Come with me, Micah. Please. 
-										if Variables.get_char_var("NPC_2", doubt) == 2
-											Micah: Uh, okay. 
-											Sarah: Let's go. 
-											- Good luck. 
-												*They LEAVE^ => END 
-											- Good bye. 
-												*They LEAVE^ => END 
-										elif Variables.get_char_var("NPC_2", doubt) == 1
-											Micah: Uh, I don't know, Sarah.
-											Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
-											Sarah: Suit yourself. 
-											Sarah: I'm going. Bye.
-											*She LEAVES^
-											Micah: Uh, bye, Keeper.
-											*He LEAVES^ => END 
-							- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
-								Sarah: It's okay. I understand. I'm sorry too. 
-								Sarah: Bye. 
-								*She LEAVES^ 
-								Micah: See you around, Keeper. 
-								*He LEAVES^ => END 
-						- Nevermind. Good night.
-							*She LEAVES^
-							Micah: See you around, Keeper.
-							*He LEAVES^ => END		
+						=> branch_pressure_micah
 				- It is. That's how these people are. 
 					Sarah: ... 
-					Sarah: I'll be in my room. 
-					Sarah: Good night.
-					- Good night, Sarah. => END 
-					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true] 
-						Sarah: What is it?
-						- It's a longshot, but it seemed to me like part of her wanted to live. Perhaps if you went and talked to her now... 
-							Sarah: ... 
-							Sarah: I'm scared. What if I say the wrong thing, again?
-							- You won't. Just tell her you love her and don't want to lose her. 
-								if Variables.get_char_var("NPC_3", "relationship") == 7
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", true)]
-								elif Variables.get_char_var("NPC_3", "relationship") == 8
-									Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", true)]
-							- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
-								Sarah: It's okay. I understand. I'm sorry too. 
-								Sarah: Bye. 
-								*She leaves. => END 
-						- Nevermind. Good night. => END
+					Sarah: I'll be in my room. Bye, Micah.
+					- Good night, Sarah. 
+						Sarah: Good night. 
+						*She LEAVES^
+						Micah: See you around, Keeper.
+						*He LEAVES^ => END 
+					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+						=> branch_pressure_micah
 			- I did. She didn't want saving. 
 				Sarah: Oh. I know that. I tried myself, many times. 
 				Sarah: Hoped you'd have more luck. Maybe know what to say, since you're older.
@@ -704,6 +586,8 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					*She LEAVES^ => END
 				- Night. 
 					*She LEAVES^ => END
+				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					=> branch_pressure_micah
 			- I did. But I couldn't find the right thing to say. 
 				Sarah: ...
 				Sarah: That's okay. I couldn't either.
@@ -717,6 +601,8 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					*She LEAVES^ => END
 				- Night. 
 					*She LEAVES^ => END
+				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					=> branch_pressure_micah
 			- I didn't. I changed my mind. She had to die. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 				Sarah: How could you? You promised me. You promised. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 				Sarah: I hate you. 
@@ -800,7 +686,124 @@ Sarah: I'm going to my room.
 		*She LEAVES^ => END
 - Fine. Go. 
 	*She LEAVES^ => END
-
+	
+~ branch_pressure
+Sarah: What is it?
+- It's a longshot, but it seemed to me like part of her wanted to live. Perhaps if you went and talked to her now... 
+	Sarah: ... 
+	Sarah: I'm scared. What if I say the wrong thing, again?
+	- You won't. Just tell her you love her and don't want to lose her. 
+		if Variables.get_char_var("NPC_3", "relationship") <= 7
+			Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", 1)] 
+			- Good luck. 
+				*She LEAVES^ => END
+			- Good bye. 
+				*She LEAVES^ => END
+		elif Variables.get_char_var("NPC_3", "relationship") == 8
+			Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", 1)] [do Variables.set_char_var("NPC_2", "relationship", 6)] 
+			- Good luck. 
+				*She LEAVES^ => END
+			- Good bye. 
+				*She LEAVES^ => END
+	- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
+		Sarah: It's okay. I understand. I'm sorry too. 
+		Sarah: Bye. 
+		*She LEAVES^ => END 
+- Nevermind. Good night. 
+	*She LEAVES^ => END		
+	
+~ branch_pressure_micah
+Sarah: What is it?
+- It's a longshot, but it seemed to me like part of her wanted to live. Perhaps if you went and talked to her now... 
+	Sarah: ... 
+	Sarah: I'm scared. What if I say the wrong thing, again?
+	- You won't. Just tell her you love her and don't want to lose her. 
+		if Variables.get_char_var("NPC_3", "relationship") <= 7
+			if Variables.get_char_var("NPC_2", doubt) == 3
+				Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", 2)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
+				Micah: I'll come with. 
+				Micah: Uh, if you want me to. 
+				Sarah: Of course I do. 
+				Sarah: Let's go. 
+				- Good luck. 
+					*They LEAVE^ => END 
+				- Good bye. 
+					*They LEAVE^ => END 
+			else
+				Sarah: Okay... I'll try. 
+				Sarah: Micah, come with me. Please.
+				if Variables.get_char_var("NPC_2", doubt) == 2
+					Micah: Uh, okay. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "relationship", 6)] [do Variables.set_char_var("NPC_2", "pressure", 2)]
+					Sarah: Let's go. 
+					- Good luck. 
+						*They LEAVE^ => END 
+					- Good bye. 
+						*They LEAVE^ => END 
+				elif Variables.get_char_var("NPC_2", doubt) == 1
+					Micah: Uh, I don't know, Sarah. [do Variables.set_char_var("NPC_2", "pressure", 1)]
+					Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
+					Sarah: Suit yourself. 
+					Sarah: I'm going. Bye.
+					*She LEAVES^
+					Micah: Uh, bye, Keeper.
+					*He LEAVES^ => END 
+		elif Variables.get_char_var("NPC_3", "relationship") == 8
+			Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
+			if Variables.get_char_var("NPC_2", doubt) == 3
+				Micah: I'll come with. [do Variables.set_char_var("NPC_2", "pressure", 2)]
+				Micah: Uh, if you want me to. 
+				Sarah: Of course I do. 
+				Sarah: Let's go. 
+				- Good luck. 
+					*They LEAVE^ => END 
+				- Good bye. 
+					*They LEAVE^ => END 
+			else
+				Sarah: Come with me, Micah. Please. 
+				if Variables.get_char_var("NPC_2", doubt) == 2
+					Micah: Uh, okay. [do Variables.set_char_var("NPC_2", "pressure", 2)]
+					Sarah: Let's go. 
+					- Good luck. 
+						*They LEAVE^ => END 
+					- Good bye. 
+						*They LEAVE^ => END 
+				elif Variables.get_char_var("NPC_2", doubt) == 1
+					Micah: Uh, I don't know, Sarah. [do Variables.set_char_var("NPC_2", "pressure", 1)]
+					Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
+					Sarah: Suit yourself. 
+					Sarah: I'm going. Bye.
+					*She LEAVES^
+					Micah: Uh, bye, Keeper.
+					*He LEAVES^ => END 
+			else
+				Sarah: Okay... I'll try. 
+				Sarah: Micah, come with me. Please.
+				if Variables.get_char_var("NPC_2", doubt) == 2
+					Micah: Uh, okay. [do Variables.set_char_var("NPC_2", "pressure", 2)]
+					Sarah: Let's go. 
+					- Good luck. 
+						*They LEAVE^ => END 
+					- Good bye. 
+						*They LEAVE^ => END 
+				elif Variables.get_char_var("NPC_2", doubt) == 1
+					Micah: Uh, I don't know, Sarah. [do Variables.set_char_var("NPC_2", "pressure", 1)]
+					Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
+					Sarah: Suit yourself. 
+					Sarah: I'm going. Bye.
+					*She LEAVES^
+					Micah: Uh, bye, Keeper.
+					*He LEAVES^ => END 	
+	- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
+		Sarah: It's okay. I understand. I'm sorry too. 
+		Sarah: Bye. 
+		*She LEAVES^ 
+		Micah: See you around, Keeper. 
+		*He LEAVES^ => END 
+- Nevermind. Good night.
+	*She LEAVES^
+	Micah: See you around, Keeper.
+	*He LEAVES^ => END
+							
 ~ branch_placeholder
 *The next bit is a temporary placeholder for the story objects and the indirect sabotage [do Variables.set_var("placeholder", true)]
 if Variables.get_char_var("NPC_3", "watch_state") == 0
