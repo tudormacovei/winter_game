@@ -1,0 +1,110 @@
+~ initialize_local_variables
+=> start
+
+~ start
+
+*Micah ENTERS^ 
+if Variables.get_char_var("NPC_3", "dead") == false
+	if Variables.get_char_var("NPC_2", "pressure") == 0 
+		Micah: Hello, uh. 
+		Micah: The Elders asked me to bring 'em the ceremonial item.
+		*You GIVE the WATCH
+		- You know, Mary won't be dying tonight. She'll ask for forgiveness and burn the watch herself. 
+			Micah: Oh. That's interesting. Didn't think she'd come to her senses. 
+			Micah: Anyway, I'll be going now. See ya.
+			*He LEAVES^ => END 
+	elif Variables.get_char_var("NPC_2", "pressure") == 1
+		if Variables.get_char_var("NPC_2", "micah") == false
+			Micah: Uh, hello.
+			Micah: I was just at Mary's, Sarah asked me to go with her. 
+			Micah: And, uh, I think Mary's going to live. 
+			- That's great news, Micah. 
+				Micah:Yeah, well, uh.
+				=> branch_um
+			- Good. What do you want?
+				Micah: Well, uh.
+				=> branch_um
+		else 
+			Micah: Uh, hello.
+			Micah: I, uh, went to check on Sarah just now, at Mary's. 
+			Micah: And, uh, they're alright. I think Mary's going to live. 
+			- No thanks to you.
+				Micah: Yeah, well, uh. 
+				=> branch_um
+			- That's great news, Micah. 
+				Micah: Yeah, well, uh. 
+				=> branch_um
+	elif Variables.get_char_var("NPC_2", "pressure") == 2
+		- How did it go with Mary?
+			Micah: Uh, good, I think. She cried. And hugged us. 
+			Micah: I guess she wants to live now. 
+			Micah: Didn't really understand all that happened, to be honest. 
+			- That's... great news. Good job, Micah. 
+				Micah: Um, thanks. 
+				=> branch_um
+else
+	if Variables.get_char_var("NPC_2", "pressure") == 2 
+		- How'd it go with Mary?
+			Micah: Uh, I don't know. Not too good, I think.
+			Micah: She just cried and cried. And then she left.
+			Micah: Sarah went after her but I was summoned by the Elders. 
+			Micah: They asked me to bring 'em the ceremonial item. 
+			=> branch_item
+	else
+		Micah: The Elders asked me to bring the ceremonial item to 'em. 
+		=> branch_item
+
+~ branch_item
+if Variables.get_char_var("NPC_3", "watch_state") == 6
+	*You GIVE^ the RAG
+	- Here. Take it. 
+		Micah: Oh. That's not a watch. 
+		- Yeah. Slight change of plans. I'll need you to take the watch back to Mary, and the rag to the Elders. Be careful not to mix 'em up.
+			*You GIVE^ the WATCH
+			Micah: Oh. Okay. Got it. I'll be going now. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+			*He LEAVES^ => END 
+elif Variables.get_char_var("NPC_3", "watch_state") == 2
+	*You GIVE^ the RAG
+	- Here. Take it. 
+		if Variables.get_char_var("NPC_2", "micah") == false
+			Micah: Oh. That's not a watch. 
+			- Yeah. Slight change of plans. 
+				Micah: Oh. Okay. I'll be going now. 
+				*He LEAVES^ => END 
+		else 
+			Micah: Thanks. I'll be going now.
+			*He LEAVES^ => END
+elif Variables.get_char_var("NPC_3", "watch_state") == 1 
+	*You GIVE^ the WATCH
+	- Here. Take it. 
+		Micah: Thanks. I'll be going now.
+		*He LEAVES^ => END
+		
+~ branch_um
+if Variables.get_char_var("NPC_3", "watch_state") == 7
+	Micah: Sarah stayed with her a lil' longer.
+	Micah: Told me to come and tell ya. 
+	Micah: Anyway, I'll be going back to her now. See ya. 
+		*He LEAVES^ => END 
+elif Variables.get_char_var("NPC_3", "watch_state") == 2
+	Micah: Mary asked me to bring you the watch back, to cleanse it. 
+	Micah: She needs it for the other ceremony now, to burn it and be forgiven, she said. 
+	*You TAKE^ the WATCH and CLEANSE it
+	*You GIVE^ the WATCH back
+	Micah: Thanks. I'll go and take it back to her. See ya.
+		*He LEAVES^ => END 
+else
+	Micah: Mary asked me to bring her the watch, cleansed.
+	Micah: She needs it for the other ceremony, to burn it and be forgiven, she said. 
+	- Oh, um, well, I've already cleansed it. [if Variables.get_char_var("NPC_3", "watch_state") == 1]
+		*You GIVE^ the WATCH 
+		Micah: Hmm. Thanks. I'll go and take it to her. See ya.
+			*He LEAVES^ => END 
+	- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
+		*You CLEANSE the WATCH
+		*You GIVE^ him the WATCH
+		- There you go. 
+			Micah: Thanks. I'll go and take it to her. See ya.
+				*He LEAVES^ => END 
+=> END
+

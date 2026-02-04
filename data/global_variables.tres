@@ -40,10 +40,16 @@ name = "pressure"
 default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_cr3hu"]
+script = ExtResource("1_vywdb")
+name = "micah"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_s4nex"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_2"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_p42go"), SubResource("Resource_4xfd3"), SubResource("Resource_mes5c")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_p42go"), SubResource("Resource_4xfd3"), SubResource("Resource_mes5c"), SubResource("Resource_cr3hu")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_3cr31"]
@@ -63,7 +69,6 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 [sub_resource type="Resource" id="Resource_dvws4"]
 script = ExtResource("1_vywdb")
 name = "relationship"
-description = "1 - refused to give watch and was mean to her (causes her to leave), 2 - refused to give watch (causes her to leave), 3 - gave her the watch but caught with a lie or was mean to her (casuses her to leave), 4 - neutral (two options: can't promise anything option OR double lie without being caught (told her you fixed the watch but cant find it, promised to give it later), 5 - was nice to her and gave/promised to give the watch, 6 - was nice to her and gave/promised to give watch and promised to lie to the elders"
 default_value = 4
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
@@ -119,15 +124,8 @@ description = "TODO: Needs implementation"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
-[sub_resource type="Resource" id="Resource_cr3hu"]
-script = ExtResource("1_vywdb")
-name = "ending_kids"
-description = "1 - both kids hate you, 2 - micah hates you, sarah is fanatical"
-default_value = 0
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_2wlhm"), SubResource("Resource_cr3hu")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_2wlhm")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"

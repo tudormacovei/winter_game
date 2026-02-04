@@ -241,7 +241,7 @@ Micah: Let her know I'm looking for her when she wakes up, will you?
 		Micah: Miserable old prick. [do Variables.set_char_var("NPC_1", "relationship", 2)] 
 		*He LEAVES^ => END
 	- Just playing, Micah. Sure I'll tell her. 
-		Micah: *His FACE turns HAPPY
+		Micah: *His FACE turns HAPPY [do Variables.set_var("asked_about_sarah", true)]
 		Micah: Hah. Could get used to you jokin' around more, Keeper. Suits ya.
 		if Variables.get_var("asked_about_item") == false
 			if Variables.get_var("prog_is_door_open") == true 

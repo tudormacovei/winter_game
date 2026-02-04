@@ -64,7 +64,7 @@ else
 		
 
 ~ branch_placeholder
-*For certain endings, the next bit has temporary placeholders marked with * which are going to be replaced with the window mechanic [do Variables.set_var("placeholder", true)]
+*The next line is a temporary placeholder for the endings in which Mary dies. It's going to be replaced with the window mechanic. [do Variables.set_var("placeholder", true)]
 if Variables.get_char_var("NPC_3", "relationship") == 1
 	*You wake up and you look out the window. You see nothing. The ceremonial altar is empty. 
 if Variables.get_char_var("NPC_3", "relationship") == 2
@@ -91,23 +91,25 @@ elif Variables.get_char_var("NPC_3", "relationship") == 6
 	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders but you didn't. You cleansed the watch anyway. Mary felt something was wrong and struggled to find peace when thinking about Henry in her last moments.
-	elif Variables.get_char_var("NPC_3", "watch_state") == 2
+	elif Variables.get_char_var("NPC_3", "watch_state") == 3
 		*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders and you did. The watch remained as it was and it helped her rembember Henry as he was before joining the cult. It brought her a little peace in her last moments.
 elif Variables.get_char_var("NPC_3", "relationship") == 7
 	if Variables.get_char_var("NPC_3", "dead") == true
 		*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died peacefully.
-		Pressure yes/no
-	elif Variables.get_char_var("NPC_3", "dead") == false
-		Mary comes in, wearing different clothes. She's sad. You talk a little.
-		Pressure yes/no
+		if Variables.get_char_var("NPC_3", "watch_state") == 1
+			*There is a burned watch on the table next to her.
+		elif Variables.get_char_var("NPC_3", "watch_state") == 2
+			*There is a burned rag on the table next to her, and the watch is dangling from her neck.
 elif Variables.get_char_var("NPC_3", "relationship") == 8
 	if Variables.get_char_var("NPC_3", "dead") == true
 		*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. She died happy.
-	elif Variables.get_char_var("NPC_3", "dead") == false
-		Mary comes in, wearing different clothes. She seems quite sad but smiles at the sight of Sarah. You talk a little.
-		Pressure yes/no
-elif Variables.get_char_var("NPC_3", "relationship") == 9
-	Mary comes in, wearing different clothes. She's somewhat happy. She smiles at the sight of Sarah. The three of you talk and joke around. 
+		if Variables.get_char_var("NPC_3", "watch_state") == 1
+			*There is a burned watch on the table next to her.
+		elif Variables.get_char_var("NPC_3", "watch_state") == 2
+			*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+		elif Variables.get_char_var("NPC_3", "watch_state") == 3 
+			*There is a burned watch on the table next to her. You promised Mary you'd lie to the elders and you did. The watch remained as it was and it helped her rembember Henry as he was before joining the cult. It brought her a little peace in her last moments.
+
 => start
 
 ~ branch_micah

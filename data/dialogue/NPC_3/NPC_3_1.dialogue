@@ -170,7 +170,7 @@ Mary: Good day, Keeper. Time is short, so I'll be brief. I want the watch back. 
 	- You know I can't do that.  => branch_no_lie
 	- I can't promise anything.  
 		Mary: Just... think about it, will you? For me. 
-		Mary: I brought this old rug of mine for you to cleanse as a replacement for the ceremony. Just in case. [do Variables.set_char_var("NPC_3", "relationship",4)]
+		Mary: I brought this old rag of mine for you to cleanse as a replacement for the ceremony. Just in case. [do Variables.set_char_var("NPC_3", "relationship", 4)]
 		- I'll see. Goodbye, Mary.
 			Mary: Farewell. And hurry, Keeper. My time is running out. => END
 		- I'll think about it. How are you feeling, Mary? => branch_next
@@ -936,7 +936,7 @@ Mary: Today, it feels a bit wrong.
 			- Thinking about the past might be good in moments like these. => branch_reminisce
 			- Thinking about the past does no good. 
 				Mary: Yeah. So I keep getting told. [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
-			- Thinking back on those times is sinful, Mary. [if Variables.get_var("NPC_3", relationship) == 5] 
+			- Thinking back on those times is sinful, Mary. [if Variables.get_var("NPC_3", "relationship") == 5] 
 				Mary: Sinful this, sinful that. Hell, can't you people see how brainwashed you are? [do Variables.set_char_var("NPC_3", "relationship", 3)] => branch_meh
 	else
 		Mary: I've always loved making jokes in inappropriate moments. 
@@ -993,7 +993,7 @@ Mary: Today, it feels a bit wrong.
 			Mary: Don't know what I was thinking. 
 			- It's not too late, Mary. There's still time to leave your grieving ways behind. Doesn't have to be genuine. It would be just to appease the Elders. => branch_no_henry
 			- Do you want to talk about it, Mary?
-				Mary: It felt like if I gave up this whole grief charade, I'd be giving up on him. 
+				Mary: It felt like if I gave up this whole mourning charade, I'd be giving up on him. 
 				Mary: Forgetting him, in a way.
 				Mary: ...
 				Mary: I was hurting, Keeper. All alone. I had no one else. 
@@ -1013,7 +1013,7 @@ Mary: Today, it feels a bit wrong.
 				Mary: Wouldn't even know what to say. 
 				- You don't have to. I understand. => branch_live
 				- Tell me the first thing that comes to mind. 
-					Mary: It felt like if I gave up this whole grief charade, I'd be giving up on him.
+					Mary: It felt like if I gave up this whole mourning charade, I'd be giving up on him.
 					Mary: Forgetting him, in a way.
 					Mary: ...
 					Mary: I was hurting, Keeper. All alone. I had no one else. 
@@ -1066,7 +1066,7 @@ Mary: How's that?
 	Mary: I missed dreaming.
 	- I dream a lot.
 		Mary: Yeah? What are yours like?
-		- Just dumb, old world stuff. You know, cars, battleships, lasers, that sort of thing. They're kind of like action movies.
+		- Just dumb, old world stuff. You know, cars, battleships, lasers, that sort of thing. They're kind of like the action movies of old.
 			Mary: Oh God. Never was a fan of those. [do Variables.set_var("youth", true)]
 			Mary: Had this very over the top, angsty melancholic episode back when I was a teen. 
 			Mary: My parents had run out of money and were unable to keep me in drama class. 
@@ -1081,7 +1081,8 @@ Mary: How's that?
 			Mary: Heartbreak everywhere. Yet you don't see everyone giving up, like I did. 
 			Mary: Kind of makes me feel like a fraud, now. Too little too late. 
 			- It's not too late, Mary. There's still time to leave your grieving ways behind. Doesn't have to be genuine. It would be just to appease the Elders. => branch_no_henry
-			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_live
+			- Everyone copes differently. Look at everyone here, praying to birds and trees. You chose what felt right, at the time. It's the best any of us can do. 
+				Mary: Thank you. => branch_live
 	- I mostly have nightmares, myself.
 		Mary: What about?
 		- Oh, just weird, creepy stuff. They kind of feel like the art-house, horror movies of old.
@@ -1095,7 +1096,8 @@ Mary: How's that?
 			Mary: Heartbreak everywhere. Yet you don't see everyone giving up, like I did. 
 			Mary: Kind of makes me feel like a fraud, now. Too little too late.  
 			- It's not too late, Mary. There's still time to leave your grieving ways behind. Doesn't have to be genuine. It would be just to appease the Elders. => branch_no_henry
-			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_live
+			- Everyone copes differently. Look at everyone here, praying to birds and trees. You chose what felt right, at the time. It's the best any of us can do. 
+				Mary: Thank you. => branch_live
 - What does a frog knife look like?
 	Mary: It's like a butter knife but green and tiny. 
 	- Figures. 
@@ -1131,7 +1133,7 @@ Mary: How's that?
 	Mary: I missed dreaming.
 	- I dream a lot.
 		Mary: Yeah? What are yours like?
-		- Just dumb, old world stuff. You know, cars, battleships, lasers, that sort of thing. They're kind of like action movies.
+		- Just dumb, old world stuff. You know, cars, battleships, lasers, that sort of thing. They're kind of like the action movies of old.
 			Mary: Oh God. Never was a fan of those. 
 			Mary: Had this very over the top, angsty melancholic episode back when I was a teen. 
 			Mary: When my parents ran out of money and I had to stop going to drama class. 
@@ -1145,7 +1147,8 @@ Mary: How's that?
 			Mary: It's been hard for me to realize that most people have experienced loss in some way with how things are nowadays.
 			Mary: Heartbreak everywhere. Yet you don't see everyone giving up, like I did. 
 			Mary: Kind of makes me feel like a fraud, now. Too little too late. 
-			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_know
+			- Everyone copes differently. Look at everyone here, praying to birds and trees. You chose what felt right, at the time. It's the best any of us can do. 
+				Mary: Thank you. => branch_know
 	- I mostly have nightmares, myself.
 		Mary: What about?
 		- Oh, just weird, creepy stuff. They kind of feel like the art-house, horror movies of old.
@@ -1158,7 +1161,8 @@ Mary: How's that?
 			Mary: It's been hard for me to realize that most people have experienced loss in some way with how things are nowadays.
 			Mary: Heartbreak everywhere. Yet you don't see everyone giving up, like I did. 
 			Mary: Kind of makes me feel like a fraud, now. Too little too late.  
-			- Everyone copes differently. Look at everyone here, praying to trees. You chose what felt right, at the time. It's the best any of us can do. => branch_know
+			- Everyone copes differently. Look at everyone here, praying to birds and trees. You chose what felt right, at the time. It's the best any of us can do.
+				Mary: Thank you. => branch_know
 - What does a frog knife look like?
 	Mary: It's like a butter knife but green and tiny. 
 	- Figures. 
@@ -1299,15 +1303,12 @@ if Variables.get_char_var("NPC_3", "relationship") == 6
 			Mary: I'll burn my clothes. I'll burn the watch. Hell, I'll burn everything. 
 			Mary: But in body and spirit, I'll be in control. 
 			Mary: ...
-			Mary: Haven't acted since drama school. Kind of missed it, to be completely honest. 
-			Mary: A little method acting shouldn't kill me. Hah.
+			Mary: Haven't acted since drama school. But it shouldn't kill me. 
 			Mary: You have shown me kindness today, Keeper. At a time when no one else would. 
 			Mary: I'll be going now. Got much to think about. 
 			Mary: Thank you, once again. 
-			- Anytime, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 4]
-				 Mary: So be it. Farewell. => END
-			- Anytime, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("watch_state") == 2]
-				Mary: So be it. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END 
+			- Anytime, Mary. I'll to cleanse the watch, now. They'll want it burned as part of their little light show. 
+				 Mary: So be it. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END
 		- I understand, Mary. As much as it pains me to say it, that's not a life worth living. 
 			Mary: Even so, you've shown me kindness today, Keeper. At a time no one else would.
 			Mary: You've given me a little hope. Hope that humanity is not altogether doomed. Hope that Sarah will be alright, with someone like you looking out for her.
@@ -1358,13 +1359,13 @@ if Variables.get_char_var("NPC_3", "relationship") == 6
 			Mary: ...
 			Mary: Thank you for opening my eyes, Keeper. I'm just as weak as anyone else in this putrid village. 
 			Mary: Clinging to my life like a thoughtless animal. 
-			...
+			Mary: ...
 			Mary: But at least I'll have the two of you. Might make things a bit easier, not going at it completely alone.
 			Mary: Nice talking to you, Keeper. Farewell. 
-			- Goodbye, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("watch_state") == 4]
-				 Mary: Do as you must. Farewell. => END
-			- Goodbye, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("watch_state") == 2]
-				Mary: Do as you must. Farewell. => END 
+			- Goodbye, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 4]
+				 Mary: Do as you must. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END
+			- Goodbye, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 2]
+				Mary: Do as you must. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END 
 elif Variables.get_char_var("NPC_3", "relationship") == 5
 	Mary: You think I haven't thought about this? I've tried pretending before, to no avail. [do Variables.set_char_var("NPC_3", "relationship", 7)]
 	- Then perhaps, as much as it pains me to say it, death is preferable to living here, in this place, in your situation.
@@ -1390,9 +1391,9 @@ elif Variables.get_char_var("NPC_3", "relationship") == 5
 		Mary: Thank you for opening my eyes, Keeper. I'm just as weak as anyone else in this putrid village. 
 		Mary: Clinging to my life like a thoughtless animal. 
 		Mary: Farewell. 
-		- Goodbye, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("watch_state") == 4]
-			Mary: Do as you must. Farewell. => END
-		- Goodbye, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("watch_state") == 2]
+		- Goodbye, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 4]
+			Mary: Do as you must. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END
+		- Goodbye, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 2]
 			Mary: Do as you must. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END 
 elif Variables.get_char_var("NPC_3", "relationship") == 4  
 	Mary: I appreciate the intent, Keeper. But I don't want to delude myself. 
@@ -1449,7 +1450,7 @@ Mary: ...
 - What were you into, back before the Cullings? [if Variables.get_var("into") == false]
 	Mary: Oh, just everything art. [do Variables.set_var("into", true)] [do Variables.mod_var("counter", 1)]
 	Mary: Movies. Paintings. Books. Music. Anything I could get my hands on. 
-	Mary: Mostly weird stuff. You know, abstract, auteur, experimental fuckery. 
+	Mary: Mostly weird stuff. 
 	Mary: I was a bit annoying about it. My colleagues mostly hated me. 
 	Mary: But I didn't care. Hated most of them right back.
 	- They sound like pricks. => branch_know
@@ -1458,7 +1459,7 @@ Mary: ...
 	- You don't have to. I understand.
 		Mary: Thank you. => branch_know
 	- Tell me the first thing that comes to mind. 
-		Mary: It always felt like if I gave up this whole grief charade, I'd be giving up on him.
+		Mary: It always felt like if I gave up this whole mourning charade, I'd be giving up on him.
 		Mary: Forgetting him, in a way.
 		Mary: ...
 		Mary: I was hurting, Keeper. All alone. I had no one else. 
@@ -1477,7 +1478,7 @@ Mary: ...
 	Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
 	Mary: I know it's just a watch. But I wanted it to stay as it is, no purification, no nothing. 
 	Mary: To remember him as he was before, now, in my final moments. [do Variables.set_char_var("NPC_3", "opened_up", 2)]
-	- I understand. 
+	- I understand. => branch_know
 - Tell me about your relationship with Sarah. [if Variables.get_var("lovesarah") == false]
 	Mary: Oh, she's great, isn't she? I love that kid. Like I'd have loved my own daughter. [do Variables.set_var("lovesarah", true)] [do Variables.mod_var("counter", 1)]
 	Mary: It pains me to see her like this. Wish I could have done more for her. 
@@ -1496,7 +1497,7 @@ Mary: ...
 	Mary: He was very self serious, most of the time. 
 	Mary: But if something got to him, he couldn't stop. He'd laugh for 10 minutes. And then, later in the day, he'd think about it again once or twice and laugh as if he'd heard it for the first time.
 	Mary: Gun to my head, that's what I loved about him the most. 
-	- Thank you for sharing. 
+	- Thank you for sharing. => branch_know
 - Anything else you'd like to share? [if Variables.get_var("frog") == false]
 	Mary: ... [do Variables.set_var("frog", true)] [do Variables.mod_var("counter", 1)]
 	Mary: I dreamt last night. 
@@ -1517,14 +1518,13 @@ Mary: ...
 		Mary: I'll burn my clothes. I'll burn the watch. Hell, I'll burn everything. 
 		Mary: But in body and spirit, I'll be in control. 
 		Mary: ...
-		Mary: Haven't acted since drama school. Kind of missed it, to be completely honest. 
-		Mary: A little method acting shouldn't kill me. Hah.
+		Mary: Haven't acted since drama school. But it shouldn't kill me. 
 		Mary: You have shown me kindness today, Keeper. At a time when no one else would. 
 		Mary: I'll be going now. Got much to think about. 
 		Mary: Thank you, once again. 
-		- Anytime, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 4]
-			 Mary: So be it. Farewell. => END
-		- Anytime, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("watch_state") == 2]
+		- Anytime, Mary. I'll have the watch ready by tonight. They'll want it burned as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") >= 3]
+			 Mary: So be it. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END
+		- Anytime, Mary. I'll need the watch back. They'll want it burned tonight, as part of their little light show. [if Variables.get_char_var("NPC_3", "watch_state") == 2]
 			Mary: So be it. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 5)] => END 
 	else 
 		Mary: The thought scares me even more than death, Keeper. [do Variables.set_char_var("NPC_3", "relationship", 8)] 

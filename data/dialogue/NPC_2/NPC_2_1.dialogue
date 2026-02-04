@@ -2,6 +2,7 @@
 do Variables.add_local("asked_feeling", false)
 do Variables.add_local("blamed_for_sleeping", false)
 do Variables.add_local("huh", false)
+do Variables.add_local("dontcare", false)
 => start
 
 ~ start 
@@ -293,11 +294,17 @@ else
 				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. => branch_main
 			- I'll try. But don't get your hopes up. She's not the easiest person to talk to.
-				Sarah: Thank you. Really. 
+				Sarah: *Her FACE turns HAPPY
+				Sarah: Thank you. Really. => branch_main
 		- I'll try and talk to her. See what I can do. 
 			Sarah: Thanks! [do Variables.set_char_var("NPC_2", "relationship", 4)]
 			=> branch_main
-- What??? [if Variables.get_var("huh") == false] => branch_huh
+- What??? [if Variables.get_var("huh") == false]
+	Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("huh", true)]
+	- Oh, I forgot I told you. Of course. => branch_mary
+	- Don't recall. 
+		Sarah: You told me they're publicly killing Widow Mary for grieving her husband.
+		- Right. I'm getting old, it seems. I remember now.  => branch_mary 
 
 
 ~ branch_huh
@@ -325,8 +332,11 @@ Sarah: ...
 	if Variables.get_char_var("NPC_2", "relationship") == 1
 		*She LEAVES^ => END
 	else
-		Sarah: I'll be in my room. 
-		*She LEAVES^ => END
-
+		if Variables.get_char_var("NPC_2", "relationship") == 2
+			Sarah: I'll be in my room. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+			*She LEAVES^ => END
+		else 
+			Sarah: I'll be in my room.
+			*She LEAVES^ => END
 => END
 
