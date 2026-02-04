@@ -101,8 +101,6 @@ func _play_next_interaction():
 		Utils.debug_error("Dialogue is invalid for day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 		return
 
-	character_node.texture = null
-
 	# Wait for start delay
 	await get_tree().create_timer(interaction.start_delay_seconds).timeout
 
@@ -135,6 +133,7 @@ func _on_all_objects_completed():
 
 func _on_dialogue_ended(_resource):
 	is_dialogue_running = false
+	character_node.texture = null
 	_try_play_next_interaction()
 
 func _on_dialogue_line_started(dialogue_line):
