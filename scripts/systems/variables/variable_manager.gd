@@ -1,7 +1,6 @@
 ## Manages all variables in the game:
 ## - state variables - global and local (only accessed in a single dialogue)
 ## - character-specific global variables
-class_name VariableManager
 extends Node
 
 const globals: GlobalVariablesDefinition = preload("res://data/global_variables.tres")
@@ -78,5 +77,15 @@ func _make_char_var_name(character_id: String, var_name: String) -> String:
 func _on_dialogue_ended(_resource):
 	for key in _local_variables_keys:
 		variables.erase(key)
+
+#endregion
+
+#region Debug
+
+func debug_get_all_variables() -> String:
+	var result := ""
+	for key in variables.keys():
+		result += "%s: %s\n" % [key, str(variables[key])]
+	return result
 
 #endregion
