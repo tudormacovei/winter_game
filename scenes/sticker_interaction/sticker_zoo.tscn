@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://rqn51eeja1ox"]
+
+[ext_resource type="PackedScene" uid="uid://xns6vbm564vw" path="res://scenes/sticker_interaction/sticker_click/sticker_click.tscn" id="1_hos6c"]
+[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="2_pnvr5"]
+
+[sub_resource type="Environment" id="Environment_vowdq"]
+background_energy_multiplier = 0.0
+
+[node name="StickerTest" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 0.77721107, 0.058359385)
+environment = SubResource("Environment_vowdq")
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.1397089, 0.9901926, 0, -0.9901926, 0.1397089, 0, 2.7823217, 4.628906)
+
+[node name="StickerClick" parent="." instance=ExtResource("1_hos6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24547625, 0, -0.10692336)
+debug_enabled = true
+
+[node name="StickerPeel" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17981732, 0, -0.10809153)
+debug_enabled = true
+
+[node name="StickerPeel2" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.18611738, 0, 0.10978322)
+debug_enabled = true
+
+[node name="StickerClick2" parent="." instance=ExtResource("1_hos6c")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.25621593, 0.014867306, 0.10084906)
+debug_enabled = true
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, 0.27125573, 0, 0.27249578)
+text = "Click Stickers"
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.22779533, 0.007941544, 0.26956773)
+text = "Peel Stickers - Omnidirectional"
+
+[node name="Main Title" type="Label3D" parent="."]
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.050511286, 0, 0.35691413)
+text = "This is a sticker zoo scene. It allows for visiblity and simple testing of all sticker types.
+Multiple sizes of sticker are present for testing purposes."
+font_size = 20

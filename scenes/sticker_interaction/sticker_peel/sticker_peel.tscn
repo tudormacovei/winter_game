@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://i5qiolqusxix"]
+[gd_scene load_steps=4 format=3 uid="uid://i5qiolqusxix"]
 
-[ext_resource type="Script" uid="uid://cr5fw7w2xidk8" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_7nm4c"]
-[ext_resource type="PackedScene" uid="uid://bvucemiiehl6l" path="res://3d_assets/stickers/Sticker.glb" id="1_hk4ui"]
+[ext_resource type="Script" uid="uid://drjjrpjcijbet" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_60khh"]
+[ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_60khh"]
 
-[node name="StickerBase" type="Node3D"]
-script = ExtResource("1_7nm4c")
+[sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
+size = Vector3(2, 0.1, 2)
 
-[node name="Sticker" parent="." instance=ExtResource("1_hk4ui")]
+[node name="StickerPeel" type="Area3D"]
+script = ExtResource("1_60khh")
+metadata/_custom_type_script = "uid://drjjrpjcijbet"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
+mesh = ExtResource("2_60khh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
+shape = SubResource("BoxShape3D_yniim")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

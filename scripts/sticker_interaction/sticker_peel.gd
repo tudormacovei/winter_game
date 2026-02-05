@@ -1,17 +1,114 @@
-extends Node3D
+class_name StickerPeel extends Sticker
 
-# temporary variables for debugging
-@export var cylinder_origin: Vector3 = Vector3.ZERO
-@export var cylinder_radius: Vector2 = Vector2(1.0, 0.0)
+var mouse_start: Vector2
+var mouse_current: Vector2
+var is_peeling: bool = false
+var _original_mesh_backup: Mesh = null
+var _original_center: Vector3
+var _original_extent: float
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass 
+# TODO: Change PEEL_RADIUS and MAX_PEEL_DISTANCE to scale with sticker size
+const PEEL_RADIUS: float = 0.03 # Should be roughly half of sticker size
+const MAX_PEEL_DISTANCE: float = 0.15 # world-space distance for a full peel, should be roughly 3x the sticker size
+const COMPLETION_THRESHOLD: float = 0.7 # Percent of max peel distance needed to complete
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _complete_fraction() -> float:
+	# returns the % that a sticker is completed
+	# for this sticker type this is directly equal to deform_amplitude
+	if not is_peeling:
+		return 0.0
+	var start_3d := _screen_to_plane(mouse_start)
+	var current_3d := _screen_to_plane(mouse_current)
+	return clamp(start_3d.distance_to(current_3d) / MAX_PEEL_DISTANCE, 0.0, 1.0)
+
+func _handle_sticker_deform() -> void:
+	if not is_peeling:
+		return
+
+	mouse_current = get_viewport().get_mouse_position()
+
+	# Project screen-space drag into world-space via camera ray onto horizontal plane
+	var start_3d := _screen_to_plane(mouse_start)
+	var current_3d := _screen_to_plane(mouse_current)
+	var world_offset := current_3d - start_3d
+
+	# Optimization go brrr
+	if world_offset.length() < 0.001:
+		return
+
+	var deform_direction := Vector2(world_offset.x, world_offset.z).normalized()
+	var deform_amplitude: float = clamp(world_offset.length() / MAX_PEEL_DISTANCE, 0.0, 1.0)
+
+	# Curl direction is opposite to drag so the peel visually advances with the drag
+	cylinder_radius = -deform_direction * PEEL_RADIUS
+
+	# Position cylinder to control peel progress
+	var mesh_instance = _find_mesh_instance(self)
+	if mesh_instance == null:
+		return
+
+	if _original_mesh_backup == null:
+		_original_mesh_backup = mesh_instance.mesh
+		var aabb := mesh_instance.get_aabb()
+		_original_center = mesh_instance.to_global(aabb.get_center())
+		var world_min := mesh_instance.to_global(aabb.position)
+		var world_max := mesh_instance.to_global(aabb.position + aabb.size)
+		_original_extent = world_min.distance_to(world_max) * 0.5
+
+	var drag_dir := Vector3(deform_direction.x, 0.0, deform_direction.y).normalized()
+
+	# Peel line sweeps from the edge opposite the drag toward the drag edge
+	cylinder_origin = _original_center + drag_dir * lerp(-_original_extent, _original_extent, deform_amplitude)
+	cylinder_origin.y = _original_center.y + PEEL_RADIUS
+
 	_deform_object()
-	pass
+
+func _process(delta: float) -> void:
+	_handle_sticker_deform()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("mouse_click_left") and _get_interactible():
+		get_viewport().set_input_as_handled()
+		is_peeling = true
+		mouse_start = get_viewport().get_mouse_position()
+		mouse_current = mouse_start
+	if event.is_action_released("mouse_click_left") and is_peeling:
+		get_viewport().set_input_as_handled()
+		mouse_current = get_viewport().get_mouse_position()
+		var fraction := _complete_fraction()
+		is_peeling = false
+		if fraction >= COMPLETION_THRESHOLD:
+			_complete_sticker()
+		else:
+			_reset_deform()
+
+# Project a screen position onto a horizontal plane at this sticker's world height
+func _screen_to_plane(screen_pos: Vector2) -> Vector3:
+	var camera := get_viewport().get_camera_3d()
+	var origin := camera.project_ray_origin(screen_pos)
+	var direction := camera.project_ray_normal(screen_pos)
+	if abs(direction.y) < 0.001:
+		return global_position
+	var t := (global_position.y - origin.y) / direction.y
+	return origin + direction * t
+
+func _reset_deform() -> void:
+	var mesh_instance = _find_mesh_instance(self)
+	if mesh_instance and _original_mesh_backup:
+		mesh_instance.mesh = _original_mesh_backup
+	_original_mesh_backup = null
+	_original_center = Vector3.ZERO
+	_original_extent = 0.0
+	original_surfaces.clear()
+
+### Deformation logic
+
+var cylinder_origin: Vector3 = Vector3.ZERO
+# cylinder_radius defines both the ORIENTATION and RADIUS of an UNBOUNDED cylinder
+# 	If cylinder_radius is an X unit vector, the cylinder is axis-aligned with the Z axis
+# 	The direction also determines which side of the start line gets curled:
+# 	vertices ahead of start_of_curl in the forward direction enter the curl, while vertices behind it stay flat
+var cylinder_radius: Vector2 = Vector2(1.0, 0.0)
 
 # Member to cache original per-surface vertices to avoid cumulative deformation
 var original_surfaces: Dictionary = {}
@@ -133,8 +230,9 @@ func _map_to_cylinder(point: Vector3, cylinder_location: Vector3, cylinder_radiu
 	var max_angle: float = PI * 1.2
 	var max_arc_length: float = radius * max_angle
 	
-	# Thickness logic: We add Y to the radius length
-	var current_radius: float = radius + point.y
+	# Thickness logic: height above the surface adds to the curl radius
+	var thickness: float = point.y - start_of_curl.y
+	var current_radius: float = radius + thickness
 
 	var final_pos: Vector3
 	var ratio: float = 0.0
@@ -145,7 +243,7 @@ func _map_to_cylinder(point: Vector3, cylinder_location: Vector3, cylinder_radiu
 		final_pos = start_of_curl + (forward_dir * dist_linear) + (axis_dir * dist_spine)
 		
 		# Apply thickness UP (Opposite to radius_dir)
-		final_pos -= radius_dir * point.y
+		final_pos -= radius_dir * thickness
 		ratio = 0.0
 
 	elif dist_linear <= max_arc_length:

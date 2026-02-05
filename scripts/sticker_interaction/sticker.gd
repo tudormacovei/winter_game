@@ -4,6 +4,8 @@
 # be connected to signal from parent object.
 class_name Sticker extends Area3D
 
+@export var debug_enabled := false
+
 var _is_mouse_on_object := false
 var _is_object_interactible := false
 
@@ -18,9 +20,8 @@ func _complete_sticker():
 	queue_free()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("mouse_click_left") and _get_interactible():
-		get_viewport().set_input_as_handled()
-		_complete_sticker()
+	# Child classes implement specific interactions
+	pass
 
 func _on_object_interactible_change(is_interactible: bool):
 	_is_object_interactible = is_interactible
@@ -36,6 +37,9 @@ func _on_mouse_exited() -> void:
 
 # true if sticker can be interacted with, false otherwise
 func _get_interactible() -> bool:
+	if _is_mouse_on_object and debug_enabled:
+		return true
+
 	if _is_mouse_on_object and _is_object_interactible:
 		return true
 	return false
