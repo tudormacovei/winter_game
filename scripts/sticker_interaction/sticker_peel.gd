@@ -8,9 +8,9 @@ var _original_center: Vector3
 var _original_extent: float
 
 # TODO: Change PEEL_RADIUS and MAX_PEEL_DISTANCE to scale with sticker size
-const PEEL_RADIUS: float = 0.02
-const MAX_PEEL_DISTANCE: float = 0.15 # world-space distance for a full peel
-const COMPLETION_THRESHOLD: float = 0.5
+const PEEL_RADIUS: float = 0.03 # Should be roughly half of sticker size
+const MAX_PEEL_DISTANCE: float = 0.15 # world-space distance for a full peel, should be roughly 3x the sticker size
+const COMPLETION_THRESHOLD: float = 0.7 # Percent of max peel distance needed to complete
 
 func _complete_fraction() -> float:
 	# returns the % that a sticker is completed

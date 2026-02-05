@@ -26,11 +26,11 @@ func _on_object_interactible_change(is_interactible: bool):
 	$CollisionShape3D.disabled = !is_interactible
 
 func _on_mouse_entered() -> void:
-	print("INFO:: Mouse entered sticker")
+	#print("INFO:: Mouse entered sticker")
 	_is_mouse_on_object = true
 
 func _on_mouse_exited() -> void:
-	print("INFO:: Mouse exited sticker")
+	#print("INFO:: Mouse exited sticker")
 	_is_mouse_on_object = false
 
 # true if sticker can be interacted with, false otherwise
