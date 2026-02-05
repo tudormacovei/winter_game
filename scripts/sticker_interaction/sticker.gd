@@ -4,6 +4,8 @@
 # be connected to signal from parent object.
 class_name Sticker extends Area3D
 
+@export var debug_enabled := false
+
 var _is_mouse_on_object := false
 var _is_object_interactible := false
 
@@ -35,6 +37,9 @@ func _on_mouse_exited() -> void:
 
 # true if sticker can be interacted with, false otherwise
 func _get_interactible() -> bool:
+	if _is_mouse_on_object and debug_enabled:
+		return true
+
 	if _is_mouse_on_object and _is_object_interactible:
 		return true
 	return false
