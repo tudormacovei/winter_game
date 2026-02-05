@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bil841httn5by"]
-
-[ext_resource type="PackedScene" uid="uid://bc01kpxj88dy8" path="res://scenes/object_manipulation/interactible_object.tscn" id="1_d84ec"]
+[gd_scene format=3 uid="uid://bgcmy5gdv5jpc"]
 
 [node name="Scene_Root" type="Node3D"]
 
@@ -16,9 +14,6 @@ light_energy = 0.5
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, -0.6053773, 0.7959386, 0, -0.7959386, -0.6053773, 3.6779382, 0, 0)
 light_energy = 0.5
-
-[node name="InteractibleObject" parent="." node_paths=PackedStringArray("focus_position") instance=ExtResource("1_d84ec")]
-focus_position = NodePath("../FocusPosition")
 
 [node name="FocusPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.27812356)

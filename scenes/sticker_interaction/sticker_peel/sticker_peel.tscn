@@ -1,9 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://i5qiolqusxix"]
 
-[ext_resource type="Script" uid="uid://cr5fw7w2xidk8" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_7nm4c"]
-[ext_resource type="PackedScene" uid="uid://bvucemiiehl6l" path="res://3d_assets/stickers/Sticker.glb" id="1_hk4ui"]
+[ext_resource type="Script" uid="uid://drjjrpjcijbet" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_60khh"]
+[ext_resource type="PackedScene" uid="uid://0b7vbosvb14x" path="res://scenes/sticker_interaction/stickers/sticker.tscn" id="2_60khh"]
 
-[node name="StickerBase" type="Node3D"]
-script = ExtResource("1_7nm4c")
+[node name="StickerPeel" type="Node3D"]
 
-[node name="Sticker" parent="." instance=ExtResource("1_hk4ui")]
+[node name="Sticker" parent="." instance=ExtResource("2_60khh")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
+script = ExtResource("1_60khh")
+
+[connection signal="mouse_entered" from="Sticker" to="Sticker" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Sticker" to="Sticker" method="_on_mouse_exited"]
