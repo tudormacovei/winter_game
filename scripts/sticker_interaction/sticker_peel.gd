@@ -24,8 +24,8 @@ func _ready() -> void:
 	dims.sort()
 	# get middle dimension, which is smallest '2D' dimension of the sticker (since thickness is 0, and that's the smallest 3D dimension)
 	var sticker_size: float = dims[1]
-	peel_radius = sticker_size * 0.3
-	max_peel_distance = sticker_size * 1.75
+	peel_radius = sticker_size * 0.25
+	max_peel_distance = sticker_size * 1.5
 
 func _complete_fraction() -> float:
 	# returns the % that a sticker is completed
@@ -52,7 +52,11 @@ func _handle_sticker_deform() -> void:
 		return
 
 	var deform_direction := Vector2(world_offset.x, world_offset.z).normalized()
-	var deform_amplitude: float = clamp(world_offset.length() / max_peel_distance, 0.0, 1.0)
+	
+	# To smooth inputs we need to measure past the max peel distance, so clamp at 3.0 
+	var deform_amplitude: float = clamp(world_offset.length() / max_peel_distance, 0.0, 3.0)
+	# Smooth inputs to not have hard cutoff at max peel distance
+	deform_amplitude = atan((3.0*deform_amplitude))/1.45
 
 	# Curl direction is opposite to drag so the peel visually advances with the drag
 	cylinder_radius = -deform_direction * peel_radius
