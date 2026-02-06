@@ -7,10 +7,25 @@ var _original_mesh_backup: Mesh = null
 var _original_center: Vector3
 var _original_extent: float
 
-# TODO: Change PEEL_RADIUS and MAX_PEEL_DISTANCE to scale with sticker size
-const PEEL_RADIUS: float = 0.03 # Should be roughly half of sticker size
-const MAX_PEEL_DISTANCE: float = 0.15 # world-space distance for a full peel, should be roughly 3x the sticker size
-const COMPLETION_THRESHOLD: float = 0.7 # Percent of max peel distance needed to complete
+var peel_radius: float # larger radius increases peel curvature (worldspace)
+var max_peel_distance: float # how much can the mouse move before stopping the peel animation (worldspace)
+const COMPLETION_THRESHOLD: float = 0.7
+
+func _ready() -> void:
+	var mesh_instance = _find_mesh_instance(self)
+	if mesh_instance == null:
+		push_warning("StickerPeel: No MeshInstance3D found; cannot compute sticker size.")
+		return
+	var aabb := mesh_instance.get_aabb()
+	var mesh_scale: Vector3 = mesh_instance.global_transform.basis.get_scale()
+	var world_size := aabb.size * mesh_scale
+	# Sticker size = 2nd smallest dimension of the world-space bounding box
+	var dims := [world_size.x, world_size.y, world_size.z]
+	dims.sort()
+	# get middle dimension, which is smallest '2D' dimension of the sticker (since thickness is 0, and that's the smallest 3D dimension)
+	var sticker_size: float = dims[1]
+	peel_radius = sticker_size * 0.3
+	max_peel_distance = sticker_size * 1.75
 
 func _complete_fraction() -> float:
 	# returns the % that a sticker is completed
@@ -19,7 +34,7 @@ func _complete_fraction() -> float:
 		return 0.0
 	var start_3d := _screen_to_plane(mouse_start)
 	var current_3d := _screen_to_plane(mouse_current)
-	return clamp(start_3d.distance_to(current_3d) / MAX_PEEL_DISTANCE, 0.0, 1.0)
+	return clamp(start_3d.distance_to(current_3d) / max_peel_distance, 0.0, 1.0)
 
 func _handle_sticker_deform() -> void:
 	if not is_peeling:
@@ -37,10 +52,10 @@ func _handle_sticker_deform() -> void:
 		return
 
 	var deform_direction := Vector2(world_offset.x, world_offset.z).normalized()
-	var deform_amplitude: float = clamp(world_offset.length() / MAX_PEEL_DISTANCE, 0.0, 1.0)
+	var deform_amplitude: float = clamp(world_offset.length() / max_peel_distance, 0.0, 1.0)
 
 	# Curl direction is opposite to drag so the peel visually advances with the drag
-	cylinder_radius = -deform_direction * PEEL_RADIUS
+	cylinder_radius = -deform_direction * peel_radius
 
 	# Position cylinder to control peel progress
 	var mesh_instance = _find_mesh_instance(self)
@@ -59,7 +74,7 @@ func _handle_sticker_deform() -> void:
 
 	# Peel line sweeps from the edge opposite the drag toward the drag edge
 	cylinder_origin = _original_center + drag_dir * lerp(-_original_extent, _original_extent, deform_amplitude)
-	cylinder_origin.y = _original_center.y + PEEL_RADIUS
+	cylinder_origin.y = _original_center.y + peel_radius
 
 	_deform_object()
 
