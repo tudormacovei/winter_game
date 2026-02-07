@@ -11,6 +11,8 @@ var _tabs := [
 
 #NOTE: Needed for persistent search text. Otherwise search text would reset every frame.
 var dialogue_tab_vars_search_text := [""]
+var dialogue_tab_set_var_key := [""]
+var dialogue_tab_set_var_value := [""]
 
 #endregion
 
@@ -25,19 +27,24 @@ func _draw_dialogue_tab():
 	if ImGui.CollapsingHeader("Dialogue Variables"):
 		ImGui.InputText("Search", dialogue_tab_vars_search_text, 64)
 
+		# Show current state of all dialogue variables. Allow searching by variable name
 		ImGui.BeginChild("DialogueVarsChild", Vector2(0, 200), true)
-
 		var all_vars := Variables.debug_get_all_variables()
 		var lines := all_vars.split("\n")
 		for line in lines:
 			if dialogue_tab_vars_search_text[0] == "" or line.to_lower().find(dialogue_tab_vars_search_text[0].to_lower()) != -1:
 				ImGui.Text(line)
-
 		ImGui.EndChild()
-		ImGui.Separator()
 
-		ImGui.TextColored(Color(0.25, 0.6, 1), "TODO: Button to set variables.")
-
+		# Button to set a dialogue variable
+		ImGui.SetNextItemWidth(150)
+		ImGui.InputText("Key", dialogue_tab_set_var_key, 64)
+		ImGui.SameLine()
+		ImGui.SetNextItemWidth(80)
+		ImGui.InputText("Value", dialogue_tab_set_var_value, 64)
+		ImGui.SameLine()
+		if ImGui.Button("Set Variable"):
+			Variables.set_var(dialogue_tab_set_var_key[0], str_to_var(dialogue_tab_set_var_value[0]))
 
 #endregion
 
