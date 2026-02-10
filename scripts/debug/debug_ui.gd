@@ -24,7 +24,9 @@ var dialogue_tab_set_var_value := [""]
 func _draw_general_tab():
 	ImGui.Text("General Information")
 
-	ImGui.TextColored(Color(0.25, 0.6, 1), "TODO: Show general info. Which day, interaction, dialogue etc.")
+	ImGui.Text("Current Day: %d" % game_manager.debug_get_current_day_number())
+	ImGui.Text("Current Interaction: %d" % game_manager.debug_get_current_interaction_number())
+	ImGui.Text("Current Dialogue: %s" % game_manager.debug_get_current_dialogue())
 
 	ImGui.Separator()
 

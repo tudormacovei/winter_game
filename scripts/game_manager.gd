@@ -157,6 +157,23 @@ func _on_dialogue_line_started(dialogue_line):
 
 #region Debug
 
+func debug_get_current_day_number() -> int:
+	return current_day_index + 1
+
+func debug_get_current_interaction_number() -> int:
+	return current_interaction_index
+
+func debug_get_current_dialogue() -> String:
+	if current_day_index >= _day_resources.size() or current_interaction_index >= _day_resources[current_day_index].interactions.size():
+		return "None"
+
+	var interaction = _day_resources[current_day_index].interactions[current_interaction_index]
+	if not interaction:
+		return "None"
+	if not interaction.dialogue:
+		return "None"
+	return interaction.dialogue.resource_path
+
 func debug_play_next_interaction():
 	#NOTE: Dialogue baloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached. 
 	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
