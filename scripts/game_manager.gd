@@ -176,7 +176,7 @@ func debug_get_current_dialogue() -> String:
 
 func debug_play_next_interaction():
 	if current_day_index >= _day_resources.size():
-		Utils.debug_error("Debug: Cannot play next interaction. All days have been completed.")
+		Utils.debug_alert("Debug: Cannot play next interaction. All days have been completed.")
 		return
 
 	#NOTE: Dialogue baloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached. 
@@ -190,7 +190,7 @@ func debug_play_next_interaction():
 
 func debug_start_day(day_number: int):
 	if day_number < 1 or day_number > _day_resources.size():
-		Utils.debug_error("Debug: Invalid day number %d. Must be between 1 and %d" % [day_number, _day_resources.size()])
+		Utils.debug_alert("Debug: Invalid day number %d. Must be between 1 and %d" % [day_number, _day_resources.size()])
 		return
 
 	ui_manager.debug_hide_game_end_screen()
