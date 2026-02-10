@@ -7,9 +7,12 @@ var _tabs := [
 	{"name": "Dialogue", "draw_func": "_draw_dialogue_tab"},
 ]
 
+var game_manager: GameManager = null
+
 #region Debug UI State Variables
 
-#NOTE: Needed for persistent search text. Otherwise search text would reset every frame.
+#NOTE: Needed for persistent text. Otherwise text would reset every frame.
+var general_tab_day_number := ["1"]
 var dialogue_tab_vars_search_text := [""]
 var dialogue_tab_set_var_key := [""]
 var dialogue_tab_set_var_value := [""]
@@ -19,8 +22,25 @@ var dialogue_tab_set_var_value := [""]
 #region Tab Draw Functions
 
 func _draw_general_tab():
+	ImGui.Text("General Information")
+
 	ImGui.TextColored(Color(0.25, 0.6, 1), "TODO: Show general info. Which day, interaction, dialogue etc.")
-	ImGui.TextColored(Color(0.25, 0.6, 1), "TODO: Game Flow options. Skip to next interaction, start specific day...")
+
+	ImGui.Separator()
+
+	ImGui.Text("Game Flow")
+	ImGui.TextColored(Color(1.0, 0.8, 0.25), "Warning: Using these might result in an invalid game state!")
+
+	if ImGui.Button("Start next interaction"):
+		game_manager.debug_play_next_interaction()
+	
+	ImGui.SetNextItemWidth(80)
+	if ImGui.InputInt("Day Number", general_tab_day_number):
+		general_tab_day_number[0] = max(general_tab_day_number[0], 1)
+	ImGui.SameLine()
+	if ImGui.Button("Start day"):
+		game_manager.debug_start_day(general_tab_day_number[0])
+		
 
 # Show all dialogue variables. Allow searching by variable name
 func _draw_dialogue_tab():
@@ -38,15 +58,18 @@ func _draw_dialogue_tab():
 
 		# Button to set a dialogue variable
 		ImGui.SetNextItemWidth(150)
-		ImGui.InputText("Key", dialogue_tab_set_var_key, 64)
+		ImGui.InputTextWithHint("##Key", "Key", dialogue_tab_set_var_key, 64)
 		ImGui.SameLine()
 		ImGui.SetNextItemWidth(80)
-		ImGui.InputText("Value", dialogue_tab_set_var_value, 64)
+		ImGui.InputTextWithHint("##Value", "Value", dialogue_tab_set_var_value, 64)
 		ImGui.SameLine()
 		if ImGui.Button("Set Variable"):
 			Variables.set_var(dialogue_tab_set_var_key[0], str_to_var(dialogue_tab_set_var_value[0]))
 
 #endregion
+
+func register_game_manager(gm: GameManager):
+	game_manager = gm
 
 func _process(_delta):
 	if not enabled:

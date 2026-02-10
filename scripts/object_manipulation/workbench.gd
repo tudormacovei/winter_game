@@ -27,6 +27,11 @@ func _get_next_free_slot() -> Node3D:
 
 
 func reset_workbench() -> void:
+	for i in len(object_slots):
+		for child in object_slots[i].get_children():
+			child.queue_free()
+			push_warning("Workbench: Resetting workbench, removed UNCOMPLETED object from slot number ", i)
+			
 	_used_slots = 0
 	_completed_objects_count = 0
 
@@ -35,9 +40,10 @@ func reset_workbench() -> void:
 func add_object(object_scene: PackedScene):
 	var interactible_object: InteractibleObject = _interactible_object_scene.instantiate()
 	interactible_object.set_spawn_data($FocusPosition, $DoneArea, object_scene)
-	add_child(interactible_object)
 	
-	interactible_object.global_position = _get_next_free_slot().global_position
+	var slot = _get_next_free_slot()
+	slot.add_child(interactible_object)
+	interactible_object.global_position = slot.global_position
 	_used_slots = _used_slots + 1
 
 	interactible_object.connect("object_completed", _on_object_completed)

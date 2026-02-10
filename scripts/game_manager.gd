@@ -17,6 +17,7 @@ var current_day_index: int = -1
 var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
 var are_all_objects_completed: bool = true
+var current_dialogue_baloon = null
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
@@ -28,6 +29,9 @@ func _ready():
 
 	current_day_index = 0
 	_play_next_interaction()
+
+	if OS.is_debug_build():
+		DebugUI.register_game_manager(self )
 
 #region Data Loading Functions
 
@@ -105,8 +109,8 @@ func _play_next_interaction():
 	await get_tree().create_timer(interaction.start_delay_seconds).timeout
 
 	# Start the character interaction
-	var dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
-	ui_manager.balloon_layer = dialogue_balloon
+	current_dialogue_baloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
+	ui_manager.balloon_layer = current_dialogue_baloon
 	is_dialogue_running = true
 
 	workbench.reset_workbench()
@@ -148,5 +152,29 @@ func _on_dialogue_line_started(dialogue_line):
 		return
 		
 	character_node.texture = _character_dict[dialogue_line.character].sprite
+
+#endregion
+
+#region Debug
+
+func debug_play_next_interaction():
+	#NOTE: Dialogue baloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached. 
+	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
+	current_dialogue_baloon.queue_free()
+	DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
+	
+	print("Debug: Skipping to next interaction...")
+	_play_next_interaction()
+
+func debug_start_day(day_number: int):
+	if day_number < 1 or day_number > _day_resources.size():
+		Utils.debug_error("Debug: Invalid day number %d. Must be between 1 and %d" % [day_number, _day_resources.size()])
+		return
+
+	current_day_index = day_number - 1
+	current_interaction_index = -1
+
+	print("Debug: Starting day %d" % day_number)
+	debug_play_next_interaction()
 
 #endregion
