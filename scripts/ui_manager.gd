@@ -44,3 +44,10 @@ func _on_camera_focus_changed(current_focus) -> void:
 		balloon_layer.balloon.show()
 		
 #endregion
+
+#region Debug
+
+func debug_hide_game_end_screen():
+	_day_end_screen.hide()
+
+#endregion
