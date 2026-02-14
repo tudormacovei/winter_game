@@ -95,14 +95,18 @@ func place_stickers() -> void:
 	var temp_mesh_inst: MeshInstance3D = temp_sticker.get_node("MeshInstance3D")
 	var sticker_aabb: AABB = temp_mesh_inst.get_aabb()
 	var sticker_scale: Vector3 = temp_mesh_inst.transform.basis.get_scale()
-	var min_distance: float = max(sticker_aabb.size.x * sticker_scale.x, sticker_aabb.size.z * sticker_scale.z)
+	var extent_x: float = sticker_aabb.size.x * sticker_scale.x
+	var extent_z: float = sticker_aabb.size.z * sticker_scale.z
+	var min_distance: float = sqrt(extent_x * extent_x + extent_z * extent_z)
 	temp_sticker.free()
 
 	var placed_positions: Array[Vector3] = []
+	var placed_shrink_factors: Array[float] = []
 
 	## Place each sticker with validation
 	for _i in range(sticker_count):
 		var placed := false
+		var shrink_factor: float = 1.0
 		for _attempt in range(VALIDATION_MAX_ATTEMPTS):
 			# Pick random triangle (area-weighted)
 			var tri_index: int = _binary_search(cumulative_areas, rng.randf() * total_area)
@@ -119,31 +123,36 @@ func place_stickers() -> void:
 			# Face normal
 			var normal: Vector3 = (b - a).cross(c - a).normalized()
 
-			# Instantiate and orient sticker with random Y rotation
+			# Instantiate and orient sticker with random Y rotation, scaled by shrink factor
 			var sticker_instance: Node3D = sticker_scene.instantiate()
 			var basis := _basis_from_normal(normal)
 			basis = basis * Basis(Vector3.UP, rng.randf() * TAU)
+			basis = basis.scaled(Vector3.ONE * shrink_factor)
 			sticker_instance.transform = Transform3D(basis, point)
 			mesh_instance.add_child(sticker_instance)
 
 			# Validate placement via analytical ray-triangle intersection
 			if _validate_sticker_position(sticker_instance, world_triangles):
-				# Check overlap with already-placed stickers
-				var sticker_center: Vector3 = sticker_instance.global_transform.origin
+				# Check overlap with already-placed stickers (average of both radii)
+				var sticker_center: Vector3 = sticker_instance.transform.origin
 				var too_close := false
-				for pos in placed_positions:
-					if sticker_center.distance_to(pos) < min_distance:
+				for j in range(placed_positions.size()):
+					var threshold: float = min_distance * max(shrink_factor, placed_shrink_factors[j])
+					if sticker_center.distance_to(placed_positions[j]) < threshold:
 						too_close = true
 						break
 				if too_close:
 					sticker_instance.free()
+					shrink_factor *= 0.97
 					continue
 
 				placed_positions.append(sticker_center)
+				placed_shrink_factors.append(shrink_factor)
 				placed = true
 				break
 			else:
 				sticker_instance.free()
+				shrink_factor *= 0.97
 		if not placed:
 			push_warning("ObjectWithStickers: Failed to place sticker %d after %d attempts." % [_i, VALIDATION_MAX_ATTEMPTS])
 
@@ -161,6 +170,19 @@ func _editor_place_stickers() -> void:
 	for child in mesh_instance.get_children():
 		child.queue_free()
 	place_stickers()
+
+	# Add debug visualization of the placement mesh
+	if placement_mesh != null:
+		var debug_mesh_inst := MeshInstance3D.new()
+		debug_mesh_inst.name = "DebugPlacementMesh"
+		debug_mesh_inst.mesh = placement_mesh
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(1, 0, 0, 0.3)
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		debug_mesh_inst.material_override = mat
+		mesh_instance.add_child(debug_mesh_inst)
+		debug_mesh_inst.owner = get_tree().edited_scene_root
 
 
 ### Helpers
