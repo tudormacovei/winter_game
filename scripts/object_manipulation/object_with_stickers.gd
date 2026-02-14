@@ -90,6 +90,16 @@ func place_stickers() -> void:
 			mesh_instance.to_global(tri[2])
 		])
 
+	## Compute minimum distance between sticker centers from the sticker's scaled AABB
+	var temp_sticker: Node3D = sticker_scene.instantiate()
+	var temp_mesh_inst: MeshInstance3D = temp_sticker.get_node("MeshInstance3D")
+	var sticker_aabb: AABB = temp_mesh_inst.get_aabb()
+	var sticker_scale: Vector3 = temp_mesh_inst.transform.basis.get_scale()
+	var min_distance: float = max(sticker_aabb.size.x * sticker_scale.x, sticker_aabb.size.z * sticker_scale.z)
+	temp_sticker.free()
+
+	var placed_positions: Array[Vector3] = []
+
 	## Place each sticker with validation
 	for _i in range(sticker_count):
 		var placed := false
@@ -109,17 +119,31 @@ func place_stickers() -> void:
 			# Face normal
 			var normal: Vector3 = (b - a).cross(c - a).normalized()
 
-			# Instantiate and orient sticker
+			# Instantiate and orient sticker with random Y rotation
 			var sticker_instance: Node3D = sticker_scene.instantiate()
-			sticker_instance.transform = Transform3D(_basis_from_normal(normal), point)
+			var basis := _basis_from_normal(normal)
+			basis = basis * Basis(Vector3.UP, rng.randf() * TAU)
+			sticker_instance.transform = Transform3D(basis, point)
 			mesh_instance.add_child(sticker_instance)
 
 			# Validate placement via analytical ray-triangle intersection
 			if _validate_sticker_position(sticker_instance, world_triangles):
+				# Check overlap with already-placed stickers
+				var sticker_center: Vector3 = sticker_instance.global_transform.origin
+				var too_close := false
+				for pos in placed_positions:
+					if sticker_center.distance_to(pos) < min_distance:
+						too_close = true
+						break
+				if too_close:
+					sticker_instance.free()
+					continue
+
+				placed_positions.append(sticker_center)
 				placed = true
 				break
 			else:
-				sticker_instance.queue_free()
+				sticker_instance.free()
 		if not placed:
 			push_warning("ObjectWithStickers: Failed to place sticker %d after %d attempts." % [_i, VALIDATION_MAX_ATTEMPTS])
 
