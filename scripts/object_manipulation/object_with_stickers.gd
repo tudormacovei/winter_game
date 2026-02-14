@@ -5,10 +5,9 @@ class_name ObjectWithStickers extends Area3D
 
 signal stickers_placed()
 
-const VALIDATION_GRID_RESOLUTION: int = 3
 const VALIDATION_RAY_HEIGHT: float = 0.05
 const VALIDATION_DISTANCE_TOLERANCE: float = 0.01
-const VALIDATION_MAX_ATTEMPTS: int = 5
+const VALIDATION_MAX_ATTEMPTS: int = 50
 
 @export var sticker_count: int = 3
 @export var placement_mesh: Mesh # Triangle mesh to sample random surface points from
@@ -173,8 +172,8 @@ func _basis_from_normal(normal: Vector3) -> Basis:
 
 ### Sticker placement validation
 
-## Validates that a sticker sits on a flat surface by casting rays from a grid of
-## points on the sticker surface against the placement mesh triangles (in world space).
+## Validates that a sticker sits on a convex surface by casting rays from the 4 AABB
+## corners of the sticker mesh against the placement mesh triangles (in world space).
 ## Returns true if all rays hit and the hit distances are within VALIDATION_DISTANCE_TOLERANCE.
 func _validate_sticker_position(sticker_instance: Node3D, world_triangles: Array) -> bool:
 	var sticker_mesh_inst: MeshInstance3D = sticker_instance.get_node("MeshInstance3D")
@@ -182,33 +181,25 @@ func _validate_sticker_position(sticker_instance: Node3D, world_triangles: Array
 		push_warning("_validate_sticker_position: Sticker has no MeshInstance3D or mesh.")
 		return false
 
-	# Build grid points in sticker's local XZ plane, filtered to points inside the mesh shape
+	# Probe the 4 AABB corners on the sticker's local XZ plane
 	var aabb: AABB = sticker_mesh_inst.get_aabb()
-	var triangles_2d: Array = _get_sticker_mesh_triangles_2d(sticker_mesh_inst)
-	var grid_points_local: Array[Vector3] = []
-	var res := VALIDATION_GRID_RESOLUTION
+	var min_x: float = aabb.position.x
+	var max_x: float = aabb.position.x + aabb.size.x
+	var min_z: float = aabb.position.z
+	var max_z: float = aabb.position.z + aabb.size.z
+	var probe_points: Array[Vector3] = [
+		Vector3(min_x, 0.0, min_z),
+		Vector3(max_x, 0.0, min_z),
+		Vector3(min_x, 0.0, max_z),
+		Vector3(max_x, 0.0, max_z),
+	]
 
-	for xi in range(res):
-		for zi in range(res):
-			var t_x: float = (float(xi) + 0.5) / float(res)
-			var t_z: float = (float(zi) + 0.5) / float(res)
-			var local_x: float = aabb.position.x + aabb.size.x * t_x
-			var local_z: float = aabb.position.z + aabb.size.z * t_z
-			var p2d := Vector2(local_x, local_z)
-			for tri in triangles_2d:
-				if _point_in_triangle_2d(p2d, tri[0], tri[1], tri[2]):
-					grid_points_local.append(Vector3(local_x, 0.0, local_z))
-					break
-
-	if grid_points_local.is_empty():
-		return false
-
-	# Cast rays from each grid point into the placement mesh (analytical, no physics needed)
+	# Cast rays from each corner into the placement mesh (analytical, no physics needed)
 	var sticker_normal: Vector3 = sticker_instance.global_transform.basis.y.normalized()
 	var ray_dir: Vector3 = -sticker_normal
 	var hit_distances: Array[float] = []
 
-	for local_point in grid_points_local:
+	for local_point in probe_points:
 		var world_point: Vector3 = sticker_mesh_inst.to_global(local_point)
 		var ray_origin: Vector3 = world_point + sticker_normal * VALIDATION_RAY_HEIGHT
 
@@ -254,44 +245,3 @@ static func _ray_intersects_triangle(origin: Vector3, direction: Vector3, v0: Ve
 	if t > 0.0:
 		return t
 	return -1.0
-
-## Extracts sticker mesh triangles projected onto the local XZ plane (dropping Y)
-## Returns an array of triangles
-func _get_sticker_mesh_triangles_2d(sticker_mesh_inst: MeshInstance3D) -> Array:
-	var mesh: Mesh = sticker_mesh_inst.mesh
-	var arrays := mesh.surface_get_arrays(0)
-	if arrays == null or arrays.is_empty():
-		return []
-
-	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-	var indices = arrays[Mesh.ARRAY_INDEX]
-	var result: Array = []
-
-	if indices != null and indices.size() > 0:
-		for i in range(0, indices.size(), 3):
-			var v0 := vertices[indices[i]]
-			var v1 := vertices[indices[i + 1]]
-			var v2 := vertices[indices[i + 2]]
-			result.append([Vector2(v0.x, v0.z), Vector2(v1.x, v1.z), Vector2(v2.x, v2.z)])
-	else:
-		for i in range(0, vertices.size(), 3):
-			var v0 := vertices[i]
-			var v1 := vertices[i + 1]
-			var v2 := vertices[i + 2]
-			result.append([Vector2(v0.x, v0.z), Vector2(v1.x, v1.z), Vector2(v2.x, v2.z)])
-	return result
-
-## Returns true if point p lies inside triangle (a, b, c) in 2D using barycentric coordinates.
-static func _point_in_triangle_2d(p: Vector2, a: Vector2, b: Vector2, c: Vector2) -> bool:
-	var v0 := c - a
-	var v1 := b - a
-	var v2 := p - a
-	var dot00 := v0.dot(v0)
-	var dot01 := v0.dot(v1)
-	var dot02 := v0.dot(v2)
-	var dot11 := v1.dot(v1)
-	var dot12 := v1.dot(v2)
-	var inv_denom := 1.0 / (dot00 * dot11 - dot01 * dot01)
-	var u := (dot11 * dot02 - dot01 * dot12) * inv_denom
-	var v := (dot00 * dot12 - dot01 * dot02) * inv_denom
-	return u >= 0.0 and v >= 0.0 and (u + v) <= 1.0
