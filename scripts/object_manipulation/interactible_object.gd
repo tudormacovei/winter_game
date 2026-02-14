@@ -52,15 +52,9 @@ func _ready() -> void:
 	_object.mouse_exited.connect(_on_object_mouse_exited)
 	_object.area_entered.connect(_on_object_area_entered)
 	_object.area_exited.connect(_on_object_area_exited)
-	
-	for child in Utils.get_all_children(self ):
-		if child is Sticker:
-			_sticker_total += 1
-			
-			child.connect("sticker_completed", _on_sticker_completed)
-			connect("object_interactible", child._on_object_interactible_change)
-	
-	_set_state(State.ON_TABLE)
+
+	# Stickers are placed asynchronously — wait for the signal before scanning
+	_object.stickers_placed.connect(_on_stickers_placed)
 
 
 func _process(delta: float) -> void:
@@ -134,6 +128,15 @@ func _on_object_area_entered(area: Area3D) -> void:
 func _on_object_area_exited(area: Area3D) -> void:
 	if area == object_completed_area:
 		_is_pending_completion = false
+
+
+func _on_stickers_placed() -> void:
+	for child in Utils.get_all_children(self):
+		if child is Sticker:
+			_sticker_total += 1
+			child.connect("sticker_completed", _on_sticker_completed)
+			connect("object_interactible", child._on_object_interactible_change)
+	_set_state(State.ON_TABLE)
 
 
 func _on_sticker_completed():
