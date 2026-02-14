@@ -1,5 +1,6 @@
 # This is the base class for all objects with stickers
 # Handles random placement of stickers on object surface
+@tool
 class_name ObjectWithStickers extends Area3D
 
 signal stickers_placed()
@@ -14,7 +15,12 @@ const VALIDATION_MAX_ATTEMPTS: int = 5
 @export var rng_seed: int = 1 # Set to 0 to ignore seeed and have run-to-run variation
 @export var sticker_scene: PackedScene
 
+@export_tool_button("Place Stickers")
+var _place_stickers_button := _editor_place_stickers
+
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	# Deferred so InteractibleObject connects to stickers_placed signal before this runs
 	call_deferred("place_stickers")
 
@@ -122,6 +128,18 @@ func place_stickers() -> void:
 
 
 
+## Editor-only: clears existing stickers then places new ones for preview.
+func _editor_place_stickers() -> void:
+	var mesh_instance := _find_mesh_instance()
+	if mesh_instance == null:
+		push_warning("ObjectWithStickers: No MeshInstance3D child found.")
+		return
+	# Remove previously placed stickers and debug meshes
+	for child in mesh_instance.get_children():
+		child.queue_free()
+	place_stickers()
+
+
 ### Helpers
 
 ## Returns the first MeshInstance3D child, or null if none exists.
@@ -202,7 +220,7 @@ func _validate_sticker_position(sticker_instance: Node3D, world_triangles: Array
 				closest_t = t
 
 		if closest_t < 0.0:
-			return false # Ray missed — sticker hangs off the edge
+			return false # Ray miss, early return
 
 		hit_distances.append(closest_t)
 
@@ -212,7 +230,8 @@ func _validate_sticker_position(sticker_instance: Node3D, world_triangles: Array
 	for d in hit_distances:
 		min_dist = min(min_dist, d)
 		max_dist = max(max_dist, d)
-	return (max_dist - min_dist) <= VALIDATION_DISTANCE_TOLERANCE
+	var spread: float = max_dist - min_dist
+	return spread <= VALIDATION_DISTANCE_TOLERANCE
 
 ## Moller-Trumbore ray-triangle intersection. Returns distance t along the ray of the intersect, -1.0 if no hit.
 static func _ray_intersects_triangle(origin: Vector3, direction: Vector3, v0: Vector3, v1: Vector3, v2: Vector3) -> float:
