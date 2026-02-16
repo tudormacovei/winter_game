@@ -75,6 +75,7 @@ data = PackedVector3Array(-0.3319, 0.039699998, -0.021499999, -0.3313, 0.021, -0
 
 [node name="Rag" type="Area3D"]
 script = ExtResource("1_b33lf")
+is_special_object = true
 sticker_count = 5
 placement_mesh = SubResource("ArrayMesh_vjjex")
 rng_seed = 0

@@ -69,7 +69,6 @@ shadow_mesh = SubResource("ArrayMesh_j1qhb")
 
 [node name="ChessSet" type="Area3D"]
 script = ExtResource("1_l5soh")
-is_special_object = true
 sticker_count = 5
 placement_mesh = ExtResource("2_wu2oc")
 rng_seed = 0
