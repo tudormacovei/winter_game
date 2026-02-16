@@ -5,7 +5,6 @@ do Variables.add_local("asked_about_item", false)
 => start
 
 #SOUNDS ARE MARKED WITH "^"
-#"ENTERS", "CLOSES", "LEAVES" ALL SOUND THE SAME (DOOR SOUNDS)
 
 #EXPRESSION CHANGES ARE MARKED WITH UPPERCASE "FACE", WHEN SEARCHING MAKE SURE TO CLICK MATCH CASE
 #MICAH HAS "NEUTRAL", "ANGRY" AND "HAPPY"
@@ -62,7 +61,6 @@ Micah: Phew, all good. Ain't more cracked than it already was.
 			- Oh yeah? If I'm a bonehead, how come I'm not the one buried 6 feet under now then?
 				Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)]
 				Micah: I...
-				*He starts CRYING1^
 				*He STORMS^ out => END
 		- Nevertheless, you shouldn't speak that way about him. It isn't your concern whether he was a sinner or not. That's for the Goddess to decide. 
 			Micah: Guess you're right. I can get a tad hot-headed when it comes to this stuff sometimes. Least that's what my pa used to say. 
