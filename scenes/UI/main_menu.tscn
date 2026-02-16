@@ -1,0 +1,128 @@
+[gd_scene load_steps=5 format=3 uid="uid://1l8gcdx5j14x"]
+
+[ext_resource type="Script" uid="uid://bpfd6anomp51r" path="res://scripts/user_interface/main_menu.gd" id="1_qwnig"]
+[ext_resource type="FontFile" uid="uid://bo4qdxd7tfs3f" path="res://2d_assets/fonts/PirataOne-Regular.ttf" id="1_yonvy"]
+[ext_resource type="PackedScene" uid="uid://qq7fn5km1o4b" path="res://scenes/main_game_view/workspace.tscn" id="3_5jstl"]
+
+[sub_resource type="Theme" id="Theme_qwnig"]
+default_font = ExtResource("1_yonvy")
+default_font_size = 32
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qwnig")
+script = ExtResource("1_qwnig")
+main_scene = ExtResource("3_5jstl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.59265405, 0.25896224, 0.5788266, 1)
+
+[node name="MarginContainerExterior" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainerExterior"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Winter Game Project!"
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Main" type="VBoxContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BlankLabelForWidth2" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
+layout_mode = 2
+text = "                                 "
+
+[node name="StartGameButton" type="Button" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Start Game "
+
+[node name="SettingsButton" type="Button" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Settings"
+
+[node name="ExitGameButton" type="Button" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Exit Game"
+
+[node name="BlankLabelForWidth" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
+layout_mode = 2
+text = "                                 "
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Settings" type="VBoxContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BlankLabelForWidth" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
+layout_mode = 2
+text = "                                          "
+
+[node name="MusicLabel" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
+layout_mode = 2
+text = "Music Volume:"
+
+[node name="MusicSlider" type="HSlider" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 5.0
+value = 80.0
+tick_count = 10
+
+[node name="EffectsLabel" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
+layout_mode = 2
+text = "Effects Volume:"
+
+[node name="EffectsSlider" type="HSlider" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 5.0
+value = 80.0
+tick_count = 10
