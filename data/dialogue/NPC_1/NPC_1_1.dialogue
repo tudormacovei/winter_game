@@ -14,13 +14,11 @@ do Variables.add_local("asked_about_item", false)
 #POSSIBLE OUTCOMES (DOUBT): 1 - MICAH DOESN'T DOUBT HIS FAITH ANYMORE OR HE'S SCARED TO; 2 - STANDARD, MICAH'S UNCERTAIN ABOUT HIS FAITH; 3 - MICAH HAS SOME SERIOUS DOUBTS ABOUT HIS FAITH
 
 ~ start
-Micah: *Micah ENTERS^, leaving the door open behind him and dropping something on the floor without noticing. He leaves a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
-Micah: Mornin' Keeper! Got a few thingies here for you to work your magic on. Is Sarah awake yet? 
+Micah: *Micah ENTERS^, leaving the door open behind him and DROPPING^ something on the floor without noticing. He leaves a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
+Micah: Mornin' Keeper! Got a few things here for you to work your magic on. Is Sarah awake yet? 
 - Close the door, you rascal. => branch_door 	
 - You dropped something on the floor there. => branch_item
 - No, Micah, she's still asleep. => branch_sarah 
-=> END
-	
 	
 ~ branch_door
 Micah: Woke up on the wrong side of the bed this morning, huh? 
@@ -34,13 +32,12 @@ Micah: So? She up yet or not?
 Micah: *He CLOSES^ the door. [do Variables.set_var("prog_is_door_open", false)]
 - What's that on the floor? => branch_item
 	
-	
 ~ branch_item
 if Variables.get_var("prog_is_door_open") == false
 	Micah: Oh Goddess, I'm all over the place this mornin'. Hope I ain't broke it. 
 else 
-	Micah: Oh. Hope I ain't broke it. 
-*He RUSHES^ to check. [do Variables.set_var("is_item_on_the_floor", false)] [do Variables.set_var("asked_about_item", true)]
+	Micah: Oh. Hope I ain't broke it. [do Variables.set_var("is_item_on_the_floor", false)] [do Variables.set_var("asked_about_item", true)]
+*He RUSHES^ to check. 
 Micah: Phew, all good. Ain't more cracked than it already was. 
 - So, what is it?
 	Micah: Just an old watch you'll have to fix for widow Mary. It's for the ceremony. Belonged to her shmuck of a husband or sumthin'. No idea why it ain't been thrown' 'way yet.
@@ -62,7 +59,7 @@ Micah: Phew, all good. Ain't more cracked than it already was.
 			- I won't let you speak that way to me in my own house. Now fuck off. 
 				Micah: Fuck you, then. 
 				*He LEAVES^ => END
-			- Oh yeah? If I'm the bonehead, how come I'm not the one buried 6 feet under now then?
+			- Oh yeah? If I'm a bonehead, how come I'm not the one buried 6 feet under now then?
 				Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)]
 				Micah: I...
 				*He LEAVES^ CRYING^ => END

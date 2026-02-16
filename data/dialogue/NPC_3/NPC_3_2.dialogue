@@ -80,7 +80,10 @@ elif Variables.get_char_var("NPC_3", "relationship") == 4
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
-		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+		if Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == false
+			*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+		else 
+			*There is a burned rag on the table next to her. The watch is nowhere to be seen. 
 elif Variables.get_char_var("NPC_3", "relationship") == 5
 	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
