@@ -11,6 +11,7 @@ data = PackedVector3Array(-0.047799997, -0.0848, 0.0199, -0.0427, -0.0427, 0.019
 
 [node name="PocketWatch" type="Area3D"]
 script = ExtResource("1_q2uq3")
+is_special_object = true
 sticker_count = 0
 rng_seed = 0
 

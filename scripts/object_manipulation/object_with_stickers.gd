@@ -9,6 +9,7 @@ const VALIDATION_RAY_HEIGHT: float = 0.05
 const VALIDATION_DISTANCE_TOLERANCE: float = 0.01
 const VALIDATION_MAX_ATTEMPTS: int = 50
 
+@export var is_special_object: bool = false
 @export var sticker_count: int = 3
 @export var placement_mesh: Mesh # Triangle mesh to sample random surface points from
 @export var rng_seed: int = 1 # Set to 0 to ignore seeed and have run-to-run variation
@@ -26,6 +27,10 @@ func _ready() -> void:
 
 ## Places sticker_count new stickers at random positions on the placement_mesh surface, oriented along face normals.
 func place_stickers() -> void:
+	if is_special_object:
+		stickers_placed.emit() # Still emit signal so InteractibleObject can proceed with setup
+		return
+
 	if placement_mesh == null:
 		push_warning("ObjectWithStickers: placement_mesh is not set.")
 		return
@@ -158,8 +163,6 @@ func place_stickers() -> void:
 
 	stickers_placed.emit()
 
-
-
 ## Editor-only: clears existing stickers then places new ones for preview.
 func _editor_place_stickers() -> void:
 	var mesh_instance := _find_mesh_instance()
@@ -242,7 +245,7 @@ func _validate_sticker_position(sticker_instance: Node3D, world_triangles: Array
 
 	# Cast rays from each corner into the placement mesh (analytical, no physics needed)
 	var sticker_normal: Vector3 = sticker_instance.global_transform.basis.y.normalized()
-	var ray_dir: Vector3 = -sticker_normal
+	var ray_dir: Vector3 = - sticker_normal
 	var hit_distances: Array[float] = []
 
 	for local_point in probe_points:
