@@ -6,7 +6,7 @@ class_name InteractibleObject
 extends Node3D
 
 signal object_interactible(is_interactible: bool)
-signal object_completed()
+signal object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int)
 
 # Setup variables, set before node enters scene tree
 var focus_position: Node3D
@@ -131,7 +131,7 @@ func _on_object_area_exited(area: Area3D) -> void:
 
 
 func _on_stickers_placed() -> void:
-	for child in Utils.get_all_children(self):
+	for child in Utils.get_all_children(self ):
 		if child is Sticker:
 			_sticker_total += 1
 			child.connect("sticker_completed", _on_sticker_completed)
@@ -269,10 +269,9 @@ func _remove_outline():
 
 func complete_object():
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
+
+	emit_signal("object_completed", object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
 	queue_free()
-
-	emit_signal("object_completed")
-
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):

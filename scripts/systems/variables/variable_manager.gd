@@ -68,6 +68,11 @@ func add_local(var_name: String, initial_value):
 	variables[var_name] = initial_value
 	_local_variables_keys.append(var_name)
 
+func add_or_modify_special_object_var(object_name: String, value: int = 0):
+	var var_name = Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name
+	variables[var_name] = value
+	print("VariableManager: Set variable '%s' to value '%s'" % [var_name, value])
+		
 func _make_char_var_name(character_id: String, var_name: String) -> String:
 	# Character specific variable names are stored as: character_id + "_" + var_name
 	return "%s_%s" % [character_id, var_name]

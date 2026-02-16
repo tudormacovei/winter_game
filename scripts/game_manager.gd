@@ -114,8 +114,11 @@ func _play_next_interaction():
 	is_dialogue_running = true
 
 	workbench.reset_workbench()
-	for object: PackedScene in interaction.objects:
-		workbench.add_object(object)
+	for object_scene: PackedScene in interaction.objects:
+		var object = workbench.add_object(object_scene)
+		object.connect("object_completed", _on_object_completed)
+
+
 	if interaction.objects.size() != 0:
 		are_all_objects_completed = false
 
@@ -130,6 +133,20 @@ func _try_play_next_interaction():
 	_play_next_interaction()
 
 #region Signals
+
+func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
+	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)
+	if total_stickers == 0:
+		Utils.debug_error("Object '%s' has NO stickers! Its sticker completion percentage is set to 100." % object_name)
+
+	# Update sabotage variables
+	if is_special_object:
+		Variables.add_or_modify_special_object_var(object_name, sticker_completion_percentage)
+	else:
+		# For simple objects aggregated score, use EMA calculation  
+		var current_score = Variables.get_var(Config.SCORE_SIMPLE_OBJECTS_VAR_KEY)
+		var new_score = current_score * (1 - Config.SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR) + sticker_completion_percentage * Config.SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR
+		Variables.set_var(Config.SCORE_SIMPLE_OBJECTS_VAR_KEY, int(new_score))
 
 func _on_all_objects_completed():
 	are_all_objects_completed = true

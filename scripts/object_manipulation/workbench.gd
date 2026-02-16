@@ -7,7 +7,7 @@ extends Node3D
 signal all_objects_completed()
 
 var _used_slots: int = 0
-var _completed_objects_count: int = 0
+var _completed_objects_count: int = 0 # Completed objects for the current interaction
 
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
 
@@ -47,11 +47,12 @@ func add_object(object_scene: PackedScene):
 	_used_slots = _used_slots + 1
 
 	interactible_object.connect("object_completed", _on_object_completed)
+	return interactible_object
 
 
 #region Signals
 
-func _on_object_completed():
+func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
 	_completed_objects_count += 1
 	if _completed_objects_count < _used_slots:
 		return
