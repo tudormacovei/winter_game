@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://v5y7nscwj2kq"]
+
+[ext_resource type="Texture2D" uid="uid://dh86ydboqth3q" path="res://3d_assets/manipulation_objects/rag/rag_texture.webp" id="1_q5iwa"]
+
+[resource]
+albedo_texture = ExtResource("1_q5iwa")

@@ -80,7 +80,10 @@ elif Variables.get_char_var("NPC_3", "relationship") == 4
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		*There is a burned watch on the table next to her.
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
-		*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+		if Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == false
+			*There is a burned rag on the table next to her, and the watch is dangling from her neck.
+		else 
+			*There is a burned rag on the table next to her. The watch is nowhere to be seen. 
 elif Variables.get_char_var("NPC_3", "relationship") == 5
 	*You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
@@ -150,13 +153,13 @@ else
 	Micah: Right before the ceremony was 'bout to start.
 	if Variables.get_char_var("NPC_3", "watch_state") == 1
 		Micah: I gotta get going. See ya. 
-		*She LEAVES^ => END
+		*He LEAVES^ => END
 	elif Variables.get_char_var("NPC_3", "watch_state") == 2
 		Micah: They found that stupid watch on the floor. 
 		Micah: Thought it was supposed to be here, Keeper.
 		Micah: I gave it to you yesterday, didn't I? 
 		Micah: Anyway, I gotta get going. See ya. 
-		*She LEAVES^ => END
+		*He LEAVES^ => END
 
 ~ branch_sarah_1
 *Sarah ENTERS^ 
@@ -167,18 +170,18 @@ else
 		*She starts CRYING^
 		Sarah: ...
 		- I'm sorry, Sarah. 
-			*She LEAVES^ => END
+			*She STORMS^ out => END
 		- That's what happens to those who go against the Goddess. Make sure you don't forget.
-			*She LEAVES^ => END
+			*She STORMS^ out => END
 		- That's what happens to blasphemers. Make sure you don't forget. 
-			*She LEAVES^ => END
+			*She STORMS^ out => END
 	- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
 		*She WALKS^ there
 		*She starts CRYING^
 		- That's what happens to those who go against them. Make sure you don't forget.
-			*She LEAVES^ => END
+			*She STORMS^ out => END
 		- That's what happens to blasphemers. Make sure you don't forget. 
-			*She LEAVES^ => END 
+			*She STORMS^ out => END 
 			
 ~ branch_sarah_2
 - Good morning. 
@@ -220,7 +223,7 @@ else
 		Sarah: ...
 		- I'm sorry, Sarah. 
 			Sarah: I... I need some time alone.
-			*She LEAVES^ => END
+			*She STORMS^ out => END
 			
 ~ branch_sarah_4
 *Sarah ENTERS^ 
@@ -233,8 +236,10 @@ else
 		- I'm sorry, Sarah. 
 			Sarah: I... 
 			Sarah: Will you hold me? Please. 
-			- Of course, child. => END
-			- I... yes.  => END
+			- Of course, child. 
+				*CRYING^ continues => END
+			- I... yes. 
+				*CRYING^ continues => END
 			
 ~ branch_sarah_5
 *Sarah ENTERS^
@@ -252,8 +257,10 @@ Sarah: ...
 			Sarah: She wasn't speaking.
 			Sarah: And then... and then they killed her. 
 			Sarah: Will you hold me? Please.
-			- Of course, child. => END 
-			- I... yes. => END 
+			- Of course, child. 
+				*CRYING^ continues => END 
+			- I... yes.
+				*CRYING^ continues => END 
 			
 ~ branch_mary_solo
 *Mary ENTERS^ wearing NORMAL CLOTHING

@@ -277,7 +277,7 @@ else
 			Sarah: Guess so. => branch_main
 		- Take it up with the Goddess, then. I'm sure she'll be happy to hear it. 
 			Sarah: Pfft. => branch_main
-	- That's the devil talking, girl! I should whip you here and now!
+	- That's the devil talking, girl! I should have you whipped!
 		Sarah: *Her FACE turns ANGRY
 		Sarah: Well, you literally just said it's horrible, remember? Whip me and I'll have everyone know you're a blasphemer too! [do Variables.set_char_var("NPC_2", "relationship", 1)]
 		- Just... don't ever talk that way again. => branch_main
@@ -316,12 +316,12 @@ Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("hu
 
 ~ branch_main 
 Sarah: ...
-- Micah asked me to tell you he's looking for you. 
+- Micah's been looking for you. 
 	if Variables.get_char_var("NPC_2", "relationship") >= 3
 		Sarah: *Her FACE turns HAPPY
 		Sarah: Oh yeah? I'll go look for him then! See you. [do Variables.set_char_var("NPC_2", "left_micah", true)]
 		- Bye, Sarah. 
-			*She LEAVES^ => END!
+			*She LEAVES^ => END
 	elif Variables.get_char_var("NPC_2", "relationship") == 1
 		Sarah: Could use some time away from you. I'll be going. [do Variables.set_char_var("NPC_2", "left_micah", true)] 
 		*She LEAVES^ => END
