@@ -38,6 +38,18 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/imgui-godot/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://2d_assets/": "pink",
+"res://3d_assets/": "purple",
+"res://3d_assets/materials/": "red",
+"res://addons/": "gray",
+"res://data/": "yellow",
+"res://scenes/": "green",
+"res://scripts/": "blue"
+}
+
 [input]
 
 object_rotate_left={
