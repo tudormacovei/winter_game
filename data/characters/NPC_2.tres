@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterDefintion" load_steps=3 format=3 uid="uid://d0g4y7qnfxc0"]
 
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_q5uqm"]
-[ext_resource type="Texture2D" uid="uid://y1cccyipmcfj" path="res://2d_assets/characters/DialogueView_NPC_2.png" id="2_f0jpx"]
+[ext_resource type="Texture2D" uid="uid://ctfbrqtrfwa1l" path="res://2d_assets/characters/littlegirl_inshop.webp" id="2_q5uqm"]
 
 [resource]
 script = ExtResource("1_q5uqm")
 character_id = "NPC_2"
 display_name = "Sarah"
 description = "This is the second NPC"
-sprite = ExtResource("2_f0jpx")
+sprite = ExtResource("2_q5uqm")
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

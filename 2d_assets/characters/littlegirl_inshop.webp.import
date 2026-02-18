@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1xr6nnrbhgtb"
-path="res://.godot/imported/widow_altclothes.webp-d2c59011bdfb62e912e639ae1e78d232.ctex"
+uid="uid://ctfbrqtrfwa1l"
+path="res://.godot/imported/littlegirl_inshop.webp-5a9d600d2543972c9ca11bb98e2eb52e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/widow_altclothes.webp"
-dest_files=["res://.godot/imported/widow_altclothes.webp-d2c59011bdfb62e912e639ae1e78d232.ctex"]
+source_file="res://2d_assets/characters/littlegirl_inshop.webp"
+dest_files=["res://.godot/imported/littlegirl_inshop.webp-5a9d600d2543972c9ca11bb98e2eb52e.ctex"]
 
 [params]
 
