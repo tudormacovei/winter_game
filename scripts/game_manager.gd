@@ -23,6 +23,7 @@ func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
 	workbench.connect("all_objects_completed", _on_all_objects_completed)
+	tree_exiting.connect(_on_tree_exiting)
 
 	_load_day_resources()
 	_load_character_resources()
@@ -156,6 +157,14 @@ func _on_dialogue_ended(_resource):
 	is_dialogue_running = false
 	character_node.texture = null
 	_try_play_next_interaction()
+
+## Clean up active dialogue when leaving the scene (pause menu -> main menu)
+## Without this, DialogueManager (which is an autoload) retains stale state across scene changes
+func _on_tree_exiting():
+	if current_dialogue_baloon and not current_dialogue_baloon.is_queued_for_deletion():
+		current_dialogue_baloon.queue_free()
+	if is_dialogue_running:
+		DialogueManager.dialogue_ended.emit(null)
 
 func _on_dialogue_line_started(dialogue_line):
 	# Set character sprite

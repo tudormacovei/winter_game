@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=11 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/game_manager.gd" id="1_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]
 [ext_resource type="Texture2D" uid="uid://c0ghmfixs130i" path="res://2d_assets/UI/day_end_background.webp" id="3_mp6x8"]
+[ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
@@ -65,6 +66,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Day X complete."
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("4_x8h8r")]
 
 [node name="Managers" type="Node" parent="."]
 

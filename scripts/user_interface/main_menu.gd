@@ -1,6 +1,6 @@
 extends Node
 
-@export var main_scene: PackedScene
+var main_scene: PackedScene = preload("res://scenes/main_game_view/workspace.tscn")
 
 @onready var settings_panel: VBoxContainer = %Settings
 @onready var settings_button: Button = %SettingsButton
@@ -20,6 +20,7 @@ func _on_settings_pressed() -> void:
 
 func _on_start_pressed() -> void:
 	if main_scene:
+		Variables.reset()
 		get_tree().change_scene_to_packed(main_scene)
 	else:
 		push_warning("MainMenu: main_scene is not set.")

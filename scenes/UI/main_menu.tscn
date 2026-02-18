@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpfd6anomp51r" path="res://scripts/user_interface/main_menu.gd" id="1_qwnig"]
 [ext_resource type="FontFile" uid="uid://bo4qdxd7tfs3f" path="res://2d_assets/fonts/PirataOne-Regular.ttf" id="1_yonvy"]
-[ext_resource type="PackedScene" uid="uid://qq7fn5km1o4b" path="res://scenes/main_game_view/workspace.tscn" id="3_5jstl"]
+[ext_resource type="PackedScene" uid="uid://ddacxnsn8aw4j" path="res://scenes/UI/settings_component.tscn" id="4_tfcbk"]
 
 [sub_resource type="Theme" id="Theme_qwnig"]
 default_font = ExtResource("1_yonvy")
@@ -17,7 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qwnig")
 script = ExtResource("1_qwnig")
-main_scene = ExtResource("3_5jstl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -95,34 +94,6 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Settings" type="VBoxContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+[node name="Settings" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer" instance=ExtResource("4_tfcbk")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BlankLabelForWidth" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
-layout_mode = 2
-text = "                                          "
-
-[node name="MusicLabel" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
-layout_mode = 2
-text = "Music Volume:"
-
-[node name="MusicSlider" type="HSlider" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
-unique_name_in_owner = true
-layout_mode = 2
-step = 5.0
-value = 80.0
-tick_count = 10
-
-[node name="EffectsLabel" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
-layout_mode = 2
-text = "Effects Volume:"
-
-[node name="EffectsSlider" type="HSlider" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/Settings"]
-unique_name_in_owner = true
-layout_mode = 2
-step = 5.0
-value = 80.0
-tick_count = 10

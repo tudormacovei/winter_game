@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://d36qbqmdyx0mw"]
+
+[ext_resource type="FontFile" uid="uid://bo4qdxd7tfs3f" path="res://2d_assets/fonts/PirataOne-Regular.ttf" id="1_qo2fb"]
+[ext_resource type="PackedScene" uid="uid://ddacxnsn8aw4j" path="res://scenes/UI/settings_component.tscn" id="2_bl585"]
+[ext_resource type="Script" uid="uid://dqv8p7k7jlsik" path="res://scripts/user_interface/pause_menu.gd" id="2_mko1u"]
+
+[sub_resource type="Theme" id="Theme_mko1u"]
+default_font = ExtResource("1_qo2fb")
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 255
+script = ExtResource("2_mko1u")
+metadata/_edit_vertical_guides_ = [640.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6901961)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 559.0
+offset_top = 233.0
+offset_right = -305.0
+offset_bottom = -233.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = SubResource("Theme_mko1u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ReturnToGameButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return to Game"
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Settings"
+
+[node name="ExitToMenuButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit to Menu
+(will reset game progress)"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Settings" parent="HBoxContainer/MarginContainer" instance=ExtResource("2_bl585")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

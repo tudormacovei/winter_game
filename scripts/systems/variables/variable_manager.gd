@@ -77,11 +77,18 @@ func _make_char_var_name(character_id: String, var_name: String) -> String:
 	# Character specific variable names are stored as: character_id + "_" + var_name
 	return "%s_%s" % [character_id, var_name]
 
+## Reset all variables to their initial state
+func reset():
+	_local_variables_keys.clear()
+	if globals:
+		variables = globals.get_initial_state()
+
 #region Signals
 
 func _on_dialogue_ended(_resource):
 	for key in _local_variables_keys:
 		variables.erase(key)
+	_local_variables_keys.clear()
 
 #endregion
 
