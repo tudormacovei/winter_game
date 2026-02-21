@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterDefintion" load_steps=3 format=3 uid="uid://c3pfis3nstlxn"]
 
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_454m6"]
-[ext_resource type="Texture2D" uid="uid://boepxj12cgepx" path="res://2d_assets/characters/DialogueView_NPC_1.png" id="2_t1e80"]
+[ext_resource type="Texture2D" uid="uid://cup2ho167u2h0" path="res://2d_assets/characters/Micah_inshop.webp" id="2_454m6"]
 
 [resource]
 script = ExtResource("1_454m6")
 character_id = "NPC_1"
 display_name = "Micah"
 description = "This is the first NPC"
-sprite = ExtResource("2_t1e80")
+sprite = ExtResource("2_454m6")
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
