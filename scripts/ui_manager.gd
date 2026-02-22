@@ -16,6 +16,15 @@ var balloon_layer: CanvasLayer = null
 func _ready() -> void:
 	if camera and camera.has_signal("camera_focus_changed"):
 		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
+	set_cursor(CursorType.DEFAULT)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				set_cursor(CursorType.GRAB)
+			else:
+				set_cursor(CursorType.DEFAULT)
 
 func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
@@ -27,6 +36,37 @@ func show_day_end_screen(day_number: int) -> void:
 func show_game_end_screen() -> void:
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
 	_day_end_screen.show()
+
+#region Mouse Cursor
+
+enum CursorType {
+	DEFAULT,
+	HOVER,
+	GRAB
+}
+
+@export var cursor_default: Texture2D
+@export var cursor_hover: Texture2D
+@export var cursor_grab: Texture2D
+
+const CURSOR_OFFSET: Vector2 = Vector2(7, 7)
+
+func set_cursor(cursor_type: CursorType) -> void:
+	var texture: Texture2D
+	match cursor_type:
+		CursorType.DEFAULT:
+			texture = cursor_default
+		CursorType.HOVER:
+			texture = cursor_hover
+		CursorType.GRAB:
+			texture = cursor_grab
+	
+	if texture:
+		Input.set_custom_mouse_cursor(texture, Input.CURSOR_ARROW, CURSOR_OFFSET)
+	else:
+		push_error("UIManager: No texture assigned for CursorType." + CursorType.keys()[cursor_type])
+
+#endregion
 
 #region Signals
 

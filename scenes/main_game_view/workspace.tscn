@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=13 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c0ghmfixs130i" path="res://2d_assets/UI/day_end_background.webp" id="3_mp6x8"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/ui_manager.gd" id="5_mp6x8"]
+[ext_resource type="Texture2D" uid="uid://bkfd7sonxaobf" path="res://2d_assets/hand cursor/handopen.webp" id="7_x2fib"]
 [ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
+[ext_resource type="Texture2D" uid="uid://b2f0neqk3e11o" path="res://2d_assets/hand cursor/handclosed.webp" id="8_usvo5"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -78,6 +80,9 @@ metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 [node name="UIManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
 script = ExtResource("5_mp6x8")
+cursor_default = ExtResource("7_x2fib")
+cursor_hover = ExtResource("7_x2fib")
+cursor_grab = ExtResource("8_usvo5")
 metadata/_custom_type_script = "uid://dgcq710oaye20"
 
 [node name="Camera3D" type="Camera3D" parent="."]
