@@ -71,9 +71,9 @@ func refresh() -> void:
 	Input.parse_input_event(event)
 
 func _apply_highest() -> void:
-	print("GRAB: " + str(_requests[CursorType.GRAB]))
-	print("HOVER: " + str(_requests[CursorType.HOVER]))
-	print("DEFAULT: " + str(_requests[CursorType.DEFAULT]))
+	#print("GRAB: " + str(_requests[CursorType.GRAB]))
+	#print("HOVER: " + str(_requests[CursorType.HOVER]))
+	#print("DEFAULT: " + str(_requests[CursorType.DEFAULT]))
 	# Iterate from highest to lowest priority
 	for cursor_type in [CursorType.GRAB, CursorType.HOVER, CursorType.DEFAULT]:
 		if _requests[cursor_type] > 0:
