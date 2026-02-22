@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcb6budjwj3x4"
-path="res://.godot/imported/WindowView_Shop.webp-0c9b9474f4ae50a99f7d1278b7501d3a.ctex"
+uid="uid://wapcnta2idj7"
+path="res://.godot/imported/WindowView_Shop_Burned_Watch.webp-8bf0c95cfa808a425aeae4a60a5153d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/backgrounds/WindowView_Shop.webp"
-dest_files=["res://.godot/imported/WindowView_Shop.webp-0c9b9474f4ae50a99f7d1278b7501d3a.ctex"]
+source_file="res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Watch.webp"
+dest_files=["res://.godot/imported/WindowView_Shop_Burned_Watch.webp-8bf0c95cfa808a425aeae4a60a5153d3.ctex"]
 
 [params]
 

@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=6 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Texture2D" uid="uid://ddfhywfx6lq6t" path="res://2d_assets/backgrounds/DialogueView_Background.webp" id="2_kbq0g"]
 [ext_resource type="Texture2D" uid="uid://bar82r5cjhkus" path="res://2d_assets/other/DialogueView_Table.webp" id="3_isxcp"]
+[ext_resource type="Texture2D" uid="uid://dpj45pqi2024o" path="res://2d_assets/backgrounds/demo_day_1/WindowView_Shop.webp" id="4_isxcp"]
 [ext_resource type="Texture2D" uid="uid://c66nv75f08dqa" path="res://2d_assets/other/Workshop_Inbetween.webp" id="4_kbq0g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbq0g"]
+transparency = 1
+albedo_texture = ExtResource("4_isxcp")
+emission_enabled = true
+emission_texture = ExtResource("4_isxcp")
 
 [node name="DialogueView" type="Node3D"]
 
@@ -24,3 +31,10 @@ pixel_size = 0.002
 transform = Transform3D(1.145, 0, 0, 0, 0.9645327, 0.61701035, 0, -0.61701035, 0.9645327, 0, -0.7979435, -0.9693927)
 pixel_size = 0.0005
 texture = ExtResource("4_kbq0g")
+
+[node name="DialogueWindowView" type="Sprite3D" parent="."]
+transform = Transform3D(0.8671614, 0, 0, 0, 0.8671614, 0, 0, 0, 1, 0, 0, -3.9248226)
+material_override = SubResource("StandardMaterial3D_kbq0g")
+pixel_size = 0.002
+texture_filter = 2
+texture = ExtResource("4_isxcp")
