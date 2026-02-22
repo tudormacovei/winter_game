@@ -87,11 +87,13 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_click_left") and _get_interactible():
+		CursorManager.set_cursor(CursorManager.CursorType.GRAB)
 		get_viewport().set_input_as_handled()
 		is_peeling = true
 		mouse_start = get_viewport().get_mouse_position()
 		mouse_current = mouse_start
 	if event.is_action_released("mouse_click_left") and is_peeling:
+		CursorManager.set_cursor(CursorManager.CursorType.DEFAULT)
 		get_viewport().set_input_as_handled()
 		mouse_current = get_viewport().get_mouse_position()
 		var fraction := _complete_fraction()

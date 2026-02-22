@@ -44,6 +44,7 @@ func _ready() -> void:
 
 	_object = object_scene.instantiate()
 	if not (_object is ObjectWithStickers):
+		# TODO: replace prints with warning logs
 		print("InteractibleObject: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
 	add_child(_object)
 	_place_object_on_xz_plane(_object)
@@ -67,6 +68,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
+		CursorManager.set_cursor(CursorManager.CursorType.DEFAULT)
 		if _state == State.ON_TABLE && _is_mouse_on_object:
 			_set_state(State.FOCUSED)
 			_object.global_position = focus_position.global_position
