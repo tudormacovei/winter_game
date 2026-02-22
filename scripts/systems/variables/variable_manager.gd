@@ -3,6 +3,8 @@
 ## - character-specific global variables
 extends Node
 
+signal state_changed(var_name: String) # emitted if any variable was modified or added
+
 const globals: GlobalVariablesDefinition = preload("res://data/global_variables.tres")
 
 var variables: Dictionary = {}
@@ -36,6 +38,7 @@ func set_var(var_name: String, value):
 		return
 	
 	variables[var_name] = value
+	state_changed.emit(var_name)
 	print("VariableManager: Set variable '%s' to value '%s'" % [var_name, value])
 
 func set_char_var(character_id: String, var_name: String, value):
@@ -54,6 +57,7 @@ func mod_var(var_name: String, value):
 		return
 	
 	variables[var_name] += value
+	state_changed.emit(var_name)
 	print("VariableManager: Modified variable '%s' by value '%s'. New value: '%s'" % [var_name, value, variables[var_name]])
 
 func mod_char_var(character_id: String, var_name: String, value):
@@ -66,11 +70,13 @@ func add_local(var_name: String, initial_value):
 		return
 		
 	variables[var_name] = initial_value
+	state_changed.emit(var_name)
 	_local_variables_keys.append(var_name)
 
 func add_or_modify_special_object_var(object_name: String, value: int = 0):
 	var var_name = Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name
 	variables[var_name] = value
+	state_changed.emit(var_name)
 	print("VariableManager: Set variable '%s' to value '%s'" % [var_name, value])
 		
 func _make_char_var_name(character_id: String, var_name: String) -> String:
@@ -82,6 +88,8 @@ func reset():
 	_local_variables_keys.clear()
 	if globals:
 		variables = globals.get_initial_state()
+	
+	state_changed.emit("")
 
 #region Signals
 
@@ -89,6 +97,7 @@ func _on_dialogue_ended(_resource):
 	for key in _local_variables_keys:
 		variables.erase(key)
 	_local_variables_keys.clear()
+	state_changed.emit("")
 
 #endregion
 

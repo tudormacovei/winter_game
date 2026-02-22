@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=22 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=23 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -118,8 +118,15 @@ description = "TODO: Needs implementation"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_c2bg0"]
+script = ExtResource("1_vywdb")
+name = "prog_window_background_path"
+description = "Path to a shop window background. Will instanly change the window background visible in the shop. Must use path to the _Shop_ version of the window view, NOT the _Full_ version."
+default_value = ""
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"
