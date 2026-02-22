@@ -87,7 +87,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_click_left") and _get_interactible():
-		CursorManager.lock_cursor(CursorManager.CursorType.GRAB)
+		CursorManager.request_cursor(CursorManager.CursorType.GRAB)
 		get_viewport().set_input_as_handled()
 		is_peeling = true
 		mouse_start = get_viewport().get_mouse_position()
@@ -101,7 +101,7 @@ func _input(event: InputEvent) -> void:
 			_complete_sticker()
 		else:
 			_reset_deform()
-		CursorManager.unlock_cursor()
+		CursorManager.release_cursor(CursorManager.CursorType.GRAB)
 
 # Project a screen position onto a horizontal plane at this sticker's world height
 func _screen_to_plane(screen_pos: Vector2) -> Vector3:

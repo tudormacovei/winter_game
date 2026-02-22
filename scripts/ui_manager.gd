@@ -31,6 +31,9 @@ func show_game_end_screen() -> void:
 #region Signals
 
 func _on_camera_focus_changed(current_focus) -> void:
+	CursorManager.clear_requests()
+	CursorManager.refresh()
+	
 	if not balloon_layer:
 		return
 

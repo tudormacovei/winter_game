@@ -110,14 +110,14 @@ func _on_object_mouse_entered() -> void:
 	_is_mouse_on_object = true
 	if _state == State.ON_TABLE:
 		_apply_outline()
-		CursorManager.set_cursor(CursorManager.CursorType.HOVER)
+		CursorManager.request_cursor(CursorManager.CursorType.HOVER)
 
 
 func _on_object_mouse_exited() -> void:
 	_is_mouse_on_object = false
 	if _state == State.ON_TABLE:
 		_remove_outline()
-		CursorManager.set_cursor(CursorManager.CursorType.DEFAULT)
+		CursorManager.release_cursor(CursorManager.CursorType.HOVER)
 
 
 func _on_object_area_entered(area: Area3D) -> void:
@@ -153,6 +153,8 @@ func set_spawn_data(focus_position: Node3D, object_completed_area: Area3D, objec
 
 
 func _set_state(state: State):
+	if _state != state:
+		CursorManager.clear_requests()
 	_state = state
 	#print("Set state to " + str(state))
 	if state == State.FOCUSED:

@@ -26,17 +26,17 @@ func _input(event: InputEvent) -> void:
 func _on_object_interactible_change(is_interactible: bool):
 	_is_object_interactible = is_interactible
 	$CollisionShape3D.disabled = !is_interactible
-	if is_interactible:
-		CursorManager.refresh()
+	CursorManager.refresh()
+	CursorManager.clear_requests()
 
 func _on_mouse_entered() -> void:
 	_is_mouse_on_object = true
 	if _is_object_interactible:
-		CursorManager.set_cursor(CursorManager.CursorType.HOVER)
+		CursorManager.request_cursor(CursorManager.CursorType.HOVER)
 
 func _on_mouse_exited() -> void:
 	_is_mouse_on_object = false
-	CursorManager.set_cursor(CursorManager.CursorType.DEFAULT)
+	CursorManager.release_cursor(CursorManager.CursorType.HOVER)
 
 # true if sticker can be interacted with, false otherwise
 func _get_interactible() -> bool:
