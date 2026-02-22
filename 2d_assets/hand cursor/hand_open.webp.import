@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkfd7sonxaobf"
-path="res://.godot/imported/handopen.webp-23900367ee7b8da8844655f721c1d190.ctex"
+path="res://.godot/imported/hand_open.webp-1ded9c6cc03ee182a08bd3b7903dc578.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/hand cursor/handopen.webp"
-dest_files=["res://.godot/imported/handopen.webp-23900367ee7b8da8844655f721c1d190.ctex"]
+source_file="res://2d_assets/hand cursor/hand_open.webp"
+dest_files=["res://.godot/imported/hand_open.webp-1ded9c6cc03ee182a08bd3b7903dc578.ctex"]
 
 [params]
 

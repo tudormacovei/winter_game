@@ -12,6 +12,7 @@ func _ready() -> void:
 	settings_button.pressed.connect(_on_settings_pressed)
 	return_to_game_button.pressed.connect(_toggle_pause)
 	exit_to_menu_button.pressed.connect(_on_exit_to_menu_pressed)
+	CursorManager.register_controls([settings_button, return_to_game_button, exit_to_menu_button])
 
 
 func _input(event: InputEvent) -> void:

@@ -68,7 +68,6 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
-		CursorManager.set_cursor(CursorManager.CursorType.DEFAULT)
 		if _state == State.ON_TABLE && _is_mouse_on_object:
 			_set_state(State.FOCUSED)
 			_object.global_position = focus_position.global_position
@@ -108,17 +107,17 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_object_mouse_entered() -> void:
-	#print("INFO:: Mouse entered object")
 	_is_mouse_on_object = true
 	if _state == State.ON_TABLE:
 		_apply_outline()
+		CursorManager.set_cursor(CursorManager.CursorType.HOVER)
 
 
 func _on_object_mouse_exited() -> void:
-	#print("INFO:: Mouse exited object")
 	_is_mouse_on_object = false
 	if _state == State.ON_TABLE:
 		_remove_outline()
+		CursorManager.set_cursor(CursorManager.CursorType.DEFAULT)
 
 
 func _on_object_area_entered(area: Area3D) -> void:

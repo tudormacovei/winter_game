@@ -12,6 +12,7 @@ func _ready() -> void:
 	settings_button.pressed.connect(_on_settings_pressed)
 	start_button.pressed.connect(_on_start_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
+	CursorManager.register_controls([start_button, settings_button, exit_button])
 
 
 func _on_settings_pressed() -> void:
