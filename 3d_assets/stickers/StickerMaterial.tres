@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b80kpwooaakea"]
 
-[ext_resource type="Texture2D" uid="uid://cowqrrq1iq1tw" path="res://3d_assets/stickers/Sticker_StickerTextureTransparency.png" id="1_dvi3c"]
+[ext_resource type="Texture2D" uid="uid://dxfby5iyoui4u" path="res://3d_assets/stickers/Sticker_StickerTextureTransparency.webp" id="1_dvi3c"]
 
 [resource]
 resource_name = "StickerMaterial"
