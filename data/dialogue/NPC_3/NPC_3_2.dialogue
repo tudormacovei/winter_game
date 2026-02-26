@@ -64,15 +64,6 @@ else
 		
 
 ~ branch_placeholder
-if Variables.get_char_var("NPC_3", "relationship") == 1
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
-elif Variables.get_char_var("NPC_3", "watch_state") == 2 and Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == true
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag.webp")
-elif Variables.get_char_var("NPC_3", "watch_state") == 2
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag_Watch_On_Neck.webp")
-else
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Watch.webp")
-
 *The next line is a temporary placeholder for the endings in which Mary dies. It's going to be replaced with the window mechanic. [do Variables.set_var("placeholder", true)]
 if Variables.get_char_var("NPC_3", "relationship") == 1
 	*You wake up and you look out the window. You see nothing. The ceremonial altar is empty. 

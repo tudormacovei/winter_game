@@ -8,6 +8,7 @@ extends Node
 # UI Elements
 @onready var _day_end_screen := %DayEndScreen
 @onready var _day_end_screen_label: Label = %DayCompleteText
+@onready var _dialogue_view := %DialogueView
 
 var balloon_layer: CanvasLayer = null
 
@@ -21,6 +22,8 @@ func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
 
 	_day_end_screen.show()
+	# Update dialogue view after end screen is shown to hide sprite updates
+	_dialogue_view.update_window_view()
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
 	_day_end_screen.hide()
 
