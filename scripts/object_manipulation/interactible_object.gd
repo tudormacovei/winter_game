@@ -7,6 +7,8 @@ extends Node3D
 
 signal object_interactible(is_interactible: bool)
 signal object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int)
+signal object_state_changed(state: State)
+signal object_pending_completion_changed(is_pending: bool)
 
 # Setup variables, set before node enters scene tree
 var focus_position: Node3D
@@ -124,11 +126,13 @@ func _on_object_area_entered(area: Area3D) -> void:
 	# wait for player to place the object on the table before completing it
 	if area == object_completed_area:
 		_is_pending_completion = true
+		object_pending_completion_changed.emit(true)
 
 
 func _on_object_area_exited(area: Area3D) -> void:
-	if area == object_completed_area:
+	if area == object_completed_area and not is_queued_for_deletion():
 		_is_pending_completion = false
+		object_pending_completion_changed.emit(false)
 
 
 func _on_stickers_placed() -> void:
@@ -163,6 +167,8 @@ func _set_state(state: State):
 		object_interactible.emit(false)
 	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
+	
+	object_state_changed.emit(state)
 
 
 # Handles the rotation of the object with an ease-in and ease-out animation
@@ -272,7 +278,8 @@ func _remove_outline():
 
 func complete_object():
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
-
+	
+	_set_state(State.ON_TABLE)
 	emit_signal("object_completed", object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
 	queue_free()
 

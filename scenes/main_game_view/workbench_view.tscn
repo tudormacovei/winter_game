@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bntkja5x3is5f"]
+[gd_scene load_steps=6 format=3 uid="uid://bntkja5x3is5f"]
 
 [ext_resource type="Script" uid="uid://fhtjg3on0yx1" path="res://scripts/object_manipulation/workbench.gd" id="1_qyrgi"]
 [ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="2_qyrgi"]
+[ext_resource type="Texture2D" uid="uid://d1uet5nwq40sq" path="res://2d_assets/backgrounds/WorkbenchView_Background_DoneArea.webp" id="3_qyrgi"]
+
+[sub_resource type="Curve" id="Curve_qyrgi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xcqvh"]
 size = Vector3(1, 0.225, 1.2)
@@ -9,6 +14,7 @@ size = Vector3(1, 0.225, 1.2)
 [node name="WorkbenchView" type="Node3D" node_paths=PackedStringArray("object_slots")]
 script = ExtResource("1_qyrgi")
 object_slots = [NodePath("ObjectSlot1"), NodePath("ObjectSlot2"), NodePath("ObjectSlot3")]
+transition_curve = SubResource("Curve_qyrgi")
 
 [node name="WorkbenchTexture" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.1920929e-07, 1.0000013, 0, -1.0000013, 1.1920929e-07, 0, -0.01, 0)
@@ -32,3 +38,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84280574, 0.11785263, 0)
 
 [node name="ObjectSlot3" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84280574, 0.11785263, 0.43597627)
+
+[node name="WorkbenchDoneAreaOverlay" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.070225954, 0, 0, 0, -3.0696738e-09, 1, 0, -0.070225954, -4.371139e-08, 0, -0.007363349, 1.9036122e-09)
+texture = ExtResource("3_qyrgi")
