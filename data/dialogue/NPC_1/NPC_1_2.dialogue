@@ -12,7 +12,7 @@ if Variables.get_char_var("NPC_3", "dead") == false
 		- You know, Mary won't be dying tonight. She'll ask for forgiveness and burn the watch herself. 
 			Micah: Oh. That's interesting. Didn't think she'd come to her senses. 
 			Micah: Anyway, I'll be going now. See ya.
-			*He LEAVES^ => END 
+			*He LEAVES^ => end_of_day 
 	elif Variables.get_char_var("NPC_2", "pressure") == 1
 		if Variables.get_char_var("NPC_2", "micah") == false
 			Micah: Uh, hello.
@@ -62,12 +62,12 @@ if Variables.get_char_var("NPC_3", "watch_state") == 6
 		- Yeah. Slight change of plans. I'll need you to take the watch back to Mary, and the rag to the Elders. Be careful not to mix 'em up.
 			*You GIVE^ the WATCH
 			Micah: Oh. Okay. Got it. I'll be going now. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
-			*He LEAVES^ => END 
+			*He LEAVES^ => end_of_day 
 elif Variables.get_char_var("NPC_3", "watch_state") == 1 
 	*You GIVE^ the WATCH
 	- Here. Take it. 
 		Micah: Thanks. I'll be going now.
-		*He LEAVES^ => END
+		*He LEAVES^ => end_of_day
 else
 	*You GIVE^ the RAG
 	- Here. Take it. 
@@ -75,17 +75,17 @@ else
 			Micah: Oh. That's not a watch. 
 			- Yeah. Slight change of plans. 
 				Micah: Oh. Okay. I'll be going now. 
-				*He LEAVES^ => END 
+				*He LEAVES^ => end_of_day 
 		else 
 			Micah: Thanks. I'll be going now.
-			*He LEAVES^ => END 
+			*He LEAVES^ => end_of_day 
 		
 ~ branch_um
 if Variables.get_char_var("NPC_3", "watch_state") == 7
 	Micah: Sarah stayed with her a lil' longer.
 	Micah: Told me to come and tell ya. 
 	Micah: Anyway, I'll be going back to her now. See ya. 
-		*He LEAVES^ => END 
+		*He LEAVES^ => end_of_day 
 else
 	if Variables.get_char_var("NPC_3", "watch_state") == 2
 		Micah: Mary asked me to bring you the watch back, to cleanse it. 
@@ -93,19 +93,30 @@ else
 		*You TAKE^ the WATCH and CLEANSE it
 		*You GIVE^ the WATCH back
 		Micah: Thanks. I'll go and take it back to her. See ya.
-			*He LEAVES^ => END 
+			*He LEAVES^ => end_of_day 
 	else
 		Micah: Mary asked me to bring her the watch, cleansed.
 		Micah: She needs it for the other ceremony, to burn it and be forgiven, she said. 
 		- Oh, um, well, I've already cleansed it. [if Variables.get_char_var("NPC_3", "watch_state") == 1]
 			*You GIVE^ the WATCH 
 			Micah: Hmm. Thanks. I'll go and take it to her. See ya.
-				*He LEAVES^ => END 
+				*He LEAVES^ => end_of_day 
 		- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
 			*You CLEANSE the WATCH
 			*You GIVE^ him the WATCH
 			- There you go. 
 				Micah: Thanks. I'll go and take it to her. See ya.
-					*He LEAVES^ => END 
+					*He LEAVES^ => end_of_day 
+
+~ end_of_day
+if Variables.get_char_var("NPC_3", "dead") == false
+	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
+elif Variables.get_char_var("NPC_3", "watch_state") == 2 and Variables.get_char_var("NPC_3", "relationship") == 4 and Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == true
+	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag.webp")
+elif Variables.get_char_var("NPC_3", "watch_state") == 2
+	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag_Watch_On_Neck.webp")
+else
+	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Watch.webp")
+
 => END
 
