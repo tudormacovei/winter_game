@@ -3,6 +3,7 @@ extends Node
 
 const DAY_RESOURCES_PATH: String = "res://data/days/"
 const CHARACTER_RESOURCES_PATH: String = "res://data/characters/"
+const OBJECTS_SCENES_PATH: String = "res://scenes/object_manipulation/objects"
 
 const SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX: String = "prog_score_special_object_"
 const SCORE_SIMPLE_OBJECTS_VAR_KEY: String = "prog_score_simple_objects" # NOTE: This needs to be synced with the variable name in global_variables.tres

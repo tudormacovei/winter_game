@@ -27,8 +27,8 @@ func _process(_delta: float) -> void:
 
 func _get_next_free_slot() -> Node3D:
 	if _used_slots >= object_slots.size():
-		print("ERROR: Attempting to add object when workbench is full! Skipping object add...")
-		return
+		Utils.debug_error("ERROR: Attempting to add object when workbench is full! Skipping object add...")
+		return null
 	return object_slots[_used_slots]
 
 
@@ -55,6 +55,10 @@ func add_object(object_scene: PackedScene):
 	interactible_object.set_spawn_data($FocusPosition, $DoneArea, object_scene)
 	
 	var slot = _get_next_free_slot()
+	if slot == null:
+		interactible_object.queue_free()
+		return null
+		
 	slot.add_child(interactible_object)
 	interactible_object.global_position = slot.global_position
 	_used_slots = _used_slots + 1

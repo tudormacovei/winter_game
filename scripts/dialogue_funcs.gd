@@ -1,0 +1,17 @@
+# Contains functionality that is available to use in dialogue files
+extends Node
+
+var game_manager: GameManager = null
+func register_game_manager(gm: GameManager):
+	game_manager = gm
+
+#region Dialogue Functions
+
+func add_object_to_workbench(object_name: String):
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot add object to workbench. Inform Prog team of error!")
+		return
+
+	game_manager.dialogue_add_object_to_workbench(object_name)
+
+#endregion

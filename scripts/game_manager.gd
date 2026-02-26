@@ -31,8 +31,16 @@ func _ready():
 	current_day_index = 0
 	_play_next_interaction()
 
+	DialogueFuncs.register_game_manager(self )
 	if OS.is_debug_build():
 		DebugUI.register_game_manager(self )
+
+#region Dialogue Functions
+
+func dialogue_add_object_to_workbench(object_name: String):
+	_add_object_to_workbench(load(Config.OBJECTS_SCENES_PATH + "/" + object_name + ".tscn"))
+
+#endregion
 
 #region Data Loading Functions
 
@@ -116,9 +124,7 @@ func _play_next_interaction():
 
 	workbench.reset_workbench()
 	for object_scene: PackedScene in interaction.objects:
-		var object = workbench.add_object(object_scene)
-		object.connect("object_completed", _on_object_completed)
-
+		_add_object_to_workbench(object_scene)
 
 	if interaction.objects.size() != 0:
 		are_all_objects_completed = false
@@ -132,6 +138,13 @@ func _try_play_next_interaction():
 		return
 
 	_play_next_interaction()
+
+func _add_object_to_workbench(object_scene: PackedScene):
+	var object = workbench.add_object(object_scene)
+	if object == null:
+		return
+		
+	object.connect("object_completed", _on_object_completed)
 
 #region Signals
 
