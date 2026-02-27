@@ -632,7 +632,7 @@ else
 			Sarah: It was also the right thing to do. Morally so!
 			Sarah: I'm going to my room. I want to go to sleep and wake up early tomorrow and go see her. 
 			Sarah: Bye, Micah. See you tomorrow. 
-			Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
+			Micah: Bye, Sarah. I'll come by later to pick up the item for the forgiveness ceremony, Keeper.
 			*He LEAVES^
 			Sarah: Good night. Thank you, again.
 			- You're welcome, Sarah. Good night. 
@@ -642,7 +642,7 @@ else
 			Sarah: Besides me, of course. 
 			Sarah: I'm going to my room. I want to go to sleep and wake up early tomorrow and go see her. 
 			Sarah: Bye, Micah. See you tomorrow. 
-			Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
+			Micah: Bye, Sarah. I'll come by later to pick up the item for the forgiveness ceremony, Keeper.
 			*He LEAVES^
 			Sarah: Good night. Thank you again. 
 			- You're welcome, Sarah. Good night.  
@@ -897,15 +897,15 @@ if Variables.get_char_var("NPC_3", "watch_state") == 0
 	*You have both the watch and the rag. Mary asked you to cleanse the rag and leave the watch untouched. You told her you'd think about it. 
 	Do you cleanse the watch or the rag?
 	- The rag. 
-		*You chose to cleanse the rag. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+		*You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 2)]
 	- The watch. 
-		*You chose to cleanse the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+		*You chose to cleanse the watch. [do DialogueFuncs.add_object_to_workbench("pocket_watch")] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 1
-	*You now have to cleanse the watch for Mary's ceremony.
+	*You now have to cleanse the watch for Mary's ceremony. [do DialogueFuncs.add_object_to_workbench("pocket_watch")]
 elif Variables.get_char_var("NPC_3", "watch_state") == 2
-	*You now have to cleanse the rag for Mary's ceremony.
+	*You now have to cleanse the rag for Mary's ceremony. [do DialogueFuncs.add_object_to_workbench("rag")]
 elif Variables.get_char_var("NPC_3", "watch_state") == 3
-	*You promised Mary you wouldn't cleanse the watch, but that you would tell the elders it's cleansed anyway. Up to you if you want to keep your promise or not. 
+	*You promised Mary you wouldn't cleanse the watch, but that you would tell the elders it's cleansed anyway. Up to you if you want to keep your promise or not. [do DialogueFuncs.add_object_to_workbench("pocket_watch")]
 	Do you cleanse it?
 	- Yes. 
 		*You chose to cleanse the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
@@ -915,11 +915,11 @@ elif Variables.get_char_var("NPC_3", "watch_state") == 4
 	*You have both the watch and the rag. You promised Mary you'd give her the watch untouched, and cleanse the rag for the ceremony. Up to you if you want to keep your promise or not.
 	Do you cleanse the watch or the rag?
 	- The rag. 
-		*You chose to cleanse the rag. [do Variables.set_char_var("NPC_3", "watch_state", 6)]
+		*You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 6)]
 	- The watch. 
-		*You chose to cleanse the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
+		*You chose to cleanse the watch. [do DialogueFuncs.add_object_to_workbench("pocket_watch")] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 5
-	*You now have to cleanse the watch for Mary to burn in order to prove her lack of attachment to Earthly possessions add be forgiven by the Elders.
+	*You now have to cleanse the watch for Mary to burn in order to prove her lack of attachment to Earthly possessions and be forgiven by the Elders. [do DialogueFuncs.add_object_to_workbench("pocket_watch")]
 => start
 
 => END

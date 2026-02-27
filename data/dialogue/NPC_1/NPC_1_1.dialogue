@@ -1,5 +1,4 @@
 ~ initialize_local_variables
-do Variables.add_local("is_item_on_the_floor", true)
 do Variables.add_local("asked_about_sarah", false)
 do Variables.add_local("asked_about_item", false)
 => start
@@ -35,9 +34,9 @@ Micah: *He CLOSES^ the door. [do Variables.set_var("prog_is_door_open", false)]
 if Variables.get_var("prog_is_door_open") == false
 	Micah: Oh Goddess, I'm all over the place this mornin'. Hope I ain't broke it. 
 else 
-	Micah: Oh. Hope I ain't broke it. [do Variables.set_var("is_item_on_the_floor", false)] [do Variables.set_var("asked_about_item", true)]
+	Micah: Oh. Hope I ain't broke it. 
 *He WALKS^ to check. 
-Micah: Phew, all good. Ain't more cracked than it already was. 
+Micah: Phew, all good. Ain't more cracked than it already was. [do Variables.set_var("asked_about_item", true)]
 - So, what is it?
 	Micah: Just an old watch you'll have to fix for widow Mary. It's for the ceremony. Belonged to her shmuck of a husband or sumthin'. No idea why it ain't been thrown' 'way yet.
 	- You shouldn't speak ill of the dead, boy.
@@ -85,7 +84,7 @@ Micah: Phew, all good. Ain't more cracked than it already was.
 					Micah: Maybe so. Anyway, I guess I'll be leaving now.
 					- Bye, Micah. 
 						*He LEAVES^ => END
-	- Somethin' wrong about that woman, I'm telling you.
+	- Somethin' wrong with that woman, I'm telling you.
 		Micah: I'll say! She's in cahoots with the devil or sumthin'.
 		Micah: I once saw her kiss this here thing, like she was worshippin' it or sumthin'. 
 		Micah: Just wish you wouldn't have to fix all these blasphemous items. 

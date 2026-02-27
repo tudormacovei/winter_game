@@ -4,10 +4,12 @@ do Variables.add_local("placeholder", false)
 
 ~ start
 
-
-if Variables.get_var("placeholder") == false
-	=> branch_placeholder
-else
+if Variables.get_char_var("NPC_3", "dead") == true
+	if Variables.get_var("placeholder") == false
+		=> branch_placeholder
+	else
+		=> branch_start
+else 
 	=> branch_start
 
 ~ branch_start

@@ -6,13 +6,22 @@
 *Micah ENTERS^ 
 if Variables.get_char_var("NPC_3", "dead") == false
 	if Variables.get_char_var("NPC_2", "pressure") == 0 
-		Micah: Hello, uh. 
-		Micah: The Elders asked me to bring 'em the ceremonial item.
-		*You GIVE the WATCH
-		- You know, Mary won't be dying tonight. She'll ask for forgiveness and burn the watch herself. 
-			Micah: Oh. That's interesting. Didn't think she'd come to her senses. 
-			Micah: Anyway, I'll be going now. See ya.
-			*He LEAVES^ => end_of_day 
+		if Variables.get_char_var("NPC_2", "micah") == false
+			Micah: Hello, uh. 
+			Micah: The Elders asked me to bring 'em the ceremonial item.
+			*You GIVE the WATCH
+			- You know, Mary won't be dying tonight. She'll ask for forgiveness and burn the watch herself. 
+				Micah: Oh. That's interesting. Didn't think she'd come to her senses. 
+				Micah: Anyway, I'll be going now. See ya.
+				*He LEAVES^ => end_of_day 
+		else 
+			Micah: Hello, uh. 
+			Micah: I came for the item, like I said. 
+			- There you go, Micah.
+				*You GIVE the WATCH
+				Micah: Thanks! 
+				Micah: And, uh, well done, Keeper. I'm glad you managed to talk her out of it. 
+				Micah: Anyway, I'll be going now. See ya!
 	elif Variables.get_char_var("NPC_2", "pressure") == 1
 		if Variables.get_char_var("NPC_2", "micah") == false
 			Micah: Uh, hello.
@@ -51,8 +60,12 @@ else
 			Micah: They asked me to bring 'em the ceremonial item. 
 			=> branch_item
 	else
-		Micah: The Elders asked me to bring the ceremonial item to 'em. 
-		=> branch_item
+		if Variables.get_char_var("NPC_2", "micah") == false
+			Micah: The Elders asked me to bring the ceremonial item to 'em. 
+			=> branch_item
+		else 
+			Micah: I came for the ceremonial item, like I said. 
+			=> branch_item
 
 ~ branch_item
 if Variables.get_char_var("NPC_3", "watch_state") == 6
@@ -67,6 +80,11 @@ elif Variables.get_char_var("NPC_3", "watch_state") == 1
 	*You GIVE^ the WATCH
 	- Here. Take it. 
 		Micah: Thanks. I'll be going now.
+		*He LEAVES^ => end_of_day
+elif Variables.get_char_var("NPC_3", "watch_state") == 3 
+	*You GIVE^ the WATCH
+	- Here. Take it. 
+		Micah: Thanks. Uh, feels heavy. I'll be going now.
 		*He LEAVES^ => end_of_day
 else
 	*You GIVE^ the RAG
@@ -91,6 +109,7 @@ else
 		Micah: Mary asked me to bring you the watch back, to cleanse it. 
 		Micah: She needs it for the other ceremony now, to burn it and be forgiven, she said. 
 		*You TAKE^ the WATCH and CLEANSE it
+		do DialogueFuncs.add_object_to_workbench("pocket_watch")
 		*You GIVE^ the WATCH back
 		Micah: Thanks. I'll go and take it back to her. See ya.
 			*He LEAVES^ => end_of_day 
@@ -103,6 +122,7 @@ else
 				*He LEAVES^ => end_of_day 
 		- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
 			*You CLEANSE the WATCH
+			do DialogueFuncs.add_object_to_workbench("pocket_watch")
 			*You GIVE^ him the WATCH
 			- There you go. 
 				Micah: Thanks. I'll go and take it to her. See ya.
@@ -110,6 +130,8 @@ else
 
 ~ end_of_day
 if Variables.get_char_var("NPC_3", "dead") == false
+	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
+elif Variables.get_char_var("NPC_3", "relationship") == 1
 	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
 elif Variables.get_char_var("NPC_3", "watch_state") == 2 and Variables.get_char_var("NPC_3", "relationship") == 4 and Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == true
 	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag.webp")
