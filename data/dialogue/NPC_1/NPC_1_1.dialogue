@@ -12,7 +12,7 @@ do Variables.add_local("asked_about_item", false)
 #POSSIBLE OUTCOMES (DOUBT): 1 - MICAH DOESN'T DOUBT HIS FAITH ANYMORE OR HE'S SCARED TO; 2 - STANDARD, MICAH'S UNCERTAIN ABOUT HIS FAITH; 3 - MICAH HAS SOME SERIOUS DOUBTS ABOUT HIS FAITH
 
 ~ start
-*Micah ENTERS^, leaving the door open behind him and DROPPING^ something on the floor without noticing. He puts a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
+[do DialogueFuncs.play_sfx("sfx_door_open")] [do DialogueFuncs.play_sfx("sfx_footsteps")] *Micah ENTERS^, leaving the door open behind him and DROPPING^ [do DialogueFuncs.play_sfx("sfx_item_drop")] something on the floor without noticing. He puts a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
 Micah: Mornin' Keeper! Got a few things here for you to work your magic on. Is Sarah awake yet? 
 - Close the door, you rascal. => branch_door 	
 - You dropped something on the floor there. => branch_item
@@ -20,7 +20,7 @@ Micah: Mornin' Keeper! Got a few things here for you to work your magic on. Is S
 	
 ~ branch_door
 Micah: Woke up on the wrong side of the bed this morning, huh? 
-*He CLOSES^ the door. [do Variables.set_var("prog_is_door_open", false)]
+*He CLOSES^ the door. [do Variables.set_var("prog_is_door_open", false)] [do DialogueFuncs.play_sfx("sfx_door_close") ]
 Micah: So? She up yet or not?
 - No, Micah, she's still asleep. => branch_sarah
 - What's that on the floor? => branch_item
