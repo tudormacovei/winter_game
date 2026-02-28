@@ -21,6 +21,7 @@ func _on_settings_pressed() -> void:
 
 func _on_start_pressed() -> void:
 	if main_scene:
+		# TODO: This should be a general function in game manager.
 		Variables.reset()
 		get_tree().change_scene_to_packed(main_scene)
 	else:

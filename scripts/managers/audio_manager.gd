@@ -1,10 +1,7 @@
-#TODO: Set volume from settings.
 # NOTE: This must be loaded in before GameManager!
 # Does not decide when to play audio, just provides an interface for other scripts to do so.
 extends Node
 
-const BUS_AMBIENT := "Ambient"
-const BUS_SFX := "SFX"
 const VALID_AUDIO_EXTENSIONS := ["wav", "ogg", "mp3"]
 
 const SFX_POLYPHONY := 16
@@ -43,6 +40,9 @@ func play_sfx_on_letter_spoke():
 	var random_pitch = randf_range(Config.LETTER_SPOKE_MIN_PITCH_SCALE, Config.LETTER_SPOKE_MAX_PITCH_SCALE)
 	_play_sfx(_sfx_dialogue_letter_player, Config.LETTER_SPOKE_SFX_NAME, Config.LETTER_SPOKE_SFX_VOLUME_DB, random_pitch)
 	
+func set_bus_volume(bus_name: String, volume_db: float):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), volume_db)
+	
 func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
 	if not sfx_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
@@ -76,11 +76,11 @@ func _preload_streams(path: String) -> Dictionary:
 
 func _create_players():
 	_ambient_player = AudioStreamPlayer.new()
-	_ambient_player.bus = BUS_AMBIENT
+	_ambient_player.bus = Config.AUDIO_BUS_AMBIENT
 	add_child(_ambient_player)
 	
-	_sfx_player = _create_polyphonic_stream_player(BUS_SFX, SFX_POLYPHONY)
-	_sfx_dialogue_letter_player = _create_polyphonic_stream_player(BUS_SFX, SFX_DIALOGUE_LETTER_POLYPHONY)
+	_sfx_player = _create_polyphonic_stream_player(Config.AUDIO_BUS_SFX, SFX_POLYPHONY)
+	_sfx_dialogue_letter_player = _create_polyphonic_stream_player(Config.AUDIO_BUS_SFX, SFX_DIALOGUE_LETTER_POLYPHONY)
 
 func _create_polyphonic_stream_player(bus_name: String, polyphony: int) -> AudioStreamPlayer:
 	var player = AudioStreamPlayer.new()
