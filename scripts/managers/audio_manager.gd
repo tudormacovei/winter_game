@@ -1,7 +1,6 @@
 #TODO: Set volume from settings.
 # NOTE: This must be loaded in before GameManager!
 # Does not decide when to play audio, just provides an interface for other scripts to do so.
-class_name AudioManager
 extends Node
 
 const BUS_AMBIENT := "Ambient"
@@ -28,8 +27,6 @@ func _ready():
 	sfx_audio_streams = _preload_streams(Config.SFX_AUDIO_STREAMS_PATH)
 	_create_players()
 
-	DialogueFuncs.register_audio_manager(self )
-	
 
 func play_music(stream_name: String):
 	if not ambient_audio_streams.has(stream_name):
