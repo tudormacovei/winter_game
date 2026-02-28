@@ -24,5 +24,9 @@ func play_sfx(sfx_name: String):
 		return
 		
 	audio_manager.play_sfx(sfx_name)
+
+## Returns false is the object is not special or if the object has not been completed
+func has_completed_special_object(object_name: String) -> bool:
+	return Variables.has(Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name)
 	
 #endregion

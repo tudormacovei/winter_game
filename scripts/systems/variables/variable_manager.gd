@@ -44,6 +44,9 @@ func set_var(var_name: String, value):
 func set_char_var(character_id: String, var_name: String, value):
 	set_var(_make_char_var_name(character_id, var_name), value)
 
+func has(var_name: String) -> bool:
+	return variables.has(var_name)
+
 ## Add a value to a numeric variable
 func mod_var(var_name: String, value):
 	if not variables.has(var_name):
