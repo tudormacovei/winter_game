@@ -14,7 +14,13 @@ const SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR: float = 0.2 # Higher value = score 
 
 #region Game Config
 
+# Audio Config
 const AMBIENT_MUSIC_FILE_NAME: String = "amb_music"
+const LETTER_SPOKE_SFX_NAME: String = "sfx_dialogue_letter"
+const LETTER_SPOKE_SFX_VOLUME_DB: float = -16.0
+const LETTER_SPOKE_MAX_PITCH_SCALE: float = 1.3
+const LETTER_SPOKE_MIN_PITCH_SCALE: float = 0.7
+const LETTER_SPOKE_FREQUENCY: int = 8 # Play a sound every X letters
 
 #endregion
 

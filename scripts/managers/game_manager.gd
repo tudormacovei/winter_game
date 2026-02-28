@@ -18,7 +18,7 @@ var current_day_index: int = -1
 var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
 var are_all_objects_completed: bool = true
-var current_dialogue_baloon = null
+var current_dialogue_balloon = null
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
@@ -121,8 +121,9 @@ func _play_next_interaction():
 	await get_tree().create_timer(interaction.start_delay_seconds).timeout
 
 	# Start the character interaction
-	current_dialogue_baloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
-	ui_manager.balloon_layer = current_dialogue_baloon
+	current_dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
+	ui_manager.balloon_layer = current_dialogue_balloon
+	call_deferred("_deferred_connect_spoke_signal") # NOTE: Nodes inside the dialogue balloon are not created at this point, so we cannot connect signals to them.
 	is_dialogue_running = true
 
 	workbench.reset_workbench()
@@ -142,6 +143,8 @@ func _try_play_next_interaction():
 
 	_play_next_interaction()
 
+#region Helper Functions
+
 func _add_object_to_workbench(object_scene: PackedScene):
 	var object = workbench.add_object(object_scene)
 	if object == null:
@@ -149,7 +152,24 @@ func _add_object_to_workbench(object_scene: PackedScene):
 		
 	object.connect("object_completed", _on_object_completed)
 
+func _deferred_connect_spoke_signal():
+	if current_dialogue_balloon and current_dialogue_balloon.dialogue_label:
+		current_dialogue_balloon.dialogue_label.connect("spoke", _on_dialogue_letter_spoke)
+		return
+		
+	call_deferred("_deferred_connect_spoke_signal") # Try again if dialogue label is not available yet
+
+#endregion
+
 #region Signals
+
+## Clean up active dialogue when leaving the scene (pause menu -> main menu)
+## Without this, DialogueManager (which is an autoload) retains stale state across scene changes
+func _on_tree_exiting():
+	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
+		current_dialogue_balloon.queue_free()
+	if is_dialogue_running:
+		DialogueManager.dialogue_ended.emit(null)
 
 func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
 	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)
@@ -174,14 +194,6 @@ func _on_dialogue_ended(_resource):
 	character_node.texture = null
 	_try_play_next_interaction()
 
-## Clean up active dialogue when leaving the scene (pause menu -> main menu)
-## Without this, DialogueManager (which is an autoload) retains stale state across scene changes
-func _on_tree_exiting():
-	if current_dialogue_baloon and not current_dialogue_baloon.is_queued_for_deletion():
-		current_dialogue_baloon.queue_free()
-	if is_dialogue_running:
-		DialogueManager.dialogue_ended.emit(null)
-
 func _on_dialogue_line_started(dialogue_line):
 	# Set character sprite
 	if dialogue_line.character.is_empty():
@@ -194,6 +206,13 @@ func _on_dialogue_line_started(dialogue_line):
 		return
 		
 	character_node.texture = _character_dict[dialogue_line.character].sprite
+
+var letter_spoke_counter = 0
+func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: float):
+	letter_spoke_counter += 1
+	if letter_spoke_counter % Config.LETTER_SPOKE_FREQUENCY == 0:
+		letter_spoke_counter = 0
+		audio_manager.play_sfx_on_letter_spoke()
 
 #endregion
 
@@ -223,8 +242,8 @@ func debug_play_next_interaction():
 
 	#NOTE: Dialogue baloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached. 
 	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
-	if current_dialogue_baloon and not current_dialogue_baloon.is_queued_for_deletion():
-		current_dialogue_baloon.queue_free()
+	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
+		current_dialogue_balloon.queue_free()
 	DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
 	
 	print("Debug: Skipping to next interaction...")

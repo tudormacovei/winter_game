@@ -8,8 +8,12 @@ const BUS_AMBIENT := "Ambient"
 const BUS_SFX := "SFX"
 const VALID_AUDIO_EXTENSIONS := ["wav", "ogg", "mp3"]
 
+const SFX_POLYPHONY := 16
+const SFX_DIALOGUE_LETTER_POLYPHONY := 32
+
 var _ambient_player: AudioStreamPlayer
 var _sfx_player: AudioStreamPlayer
+var _sfx_dialogue_letter_player: AudioStreamPlayer
 
 #region Preloaded Streams
 
@@ -35,14 +39,21 @@ func play_music(stream_name: String):
 	_ambient_player.stream = ambient_audio_streams[stream_name]
 	_ambient_player.play()
 
-func play_sfx(stream_name: String):
+func play_sfx(stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
+	_play_sfx(_sfx_player, stream_name, volume_db, pitch_scale)
+
+func play_sfx_on_letter_spoke():
+	var random_pitch = randf_range(Config.LETTER_SPOKE_MIN_PITCH_SCALE, Config.LETTER_SPOKE_MAX_PITCH_SCALE)
+	_play_sfx(_sfx_dialogue_letter_player, Config.LETTER_SPOKE_SFX_NAME, Config.LETTER_SPOKE_SFX_VOLUME_DB, random_pitch)
+	
+func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
 	if not sfx_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
 		return
 		
 	var sfx = sfx_audio_streams[stream_name]
-	var playback = _sfx_player.get_stream_playback()
-	playback.play_stream(sfx, 0, 1.0, 1, 0, _sfx_player.bus)
+	var playback = stream_player.get_stream_playback()
+	playback.play_stream(sfx, 0, volume_db, pitch_scale, 0, stream_player.bus)
 
 func _preload_streams(path: String) -> Dictionary:
 	var streams: Dictionary = {}
@@ -71,9 +82,14 @@ func _create_players():
 	_ambient_player.bus = BUS_AMBIENT
 	add_child(_ambient_player)
 	
-	_sfx_player = AudioStreamPlayer.new()
-	_sfx_player.bus = BUS_SFX
-	_sfx_player.stream = AudioStreamPolyphonic.new()
-	_sfx_player.stream.polyphony = 16
-	add_child(_sfx_player)
-	_sfx_player.play() # NOTE: Need to play the polyphonic player to initialize it, otherwise it gives an error on first play :(
+	_sfx_player = _create_polyphonic_stream_player(BUS_SFX, SFX_POLYPHONY)
+	_sfx_dialogue_letter_player = _create_polyphonic_stream_player(BUS_SFX, SFX_DIALOGUE_LETTER_POLYPHONY)
+
+func _create_polyphonic_stream_player(bus_name: String, polyphony: int) -> AudioStreamPlayer:
+	var player = AudioStreamPlayer.new()
+	player.bus = bus_name
+	player.stream = AudioStreamPolyphonic.new()
+	player.stream.polyphony = polyphony
+	add_child(player)
+	player.play() # NOTE: Need to play the polyphonic player to initialize it, otherwise it gives an error on first play :(
+	return player
