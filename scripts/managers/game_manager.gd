@@ -8,6 +8,7 @@ const CharacterDefinition := preload("res://scripts/systems/interactions/charact
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
+@onready var audio_manager := %AudioManager
 @onready var character_node := get_node("/root/Workspace/DialogueView/DialogueCharacterTexture")
 
 var _day_resources: Array[DayDefinition] = []
@@ -30,6 +31,8 @@ func _ready():
 
 	current_day_index = 0
 	_play_next_interaction()
+
+	audio_manager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
 
 	DialogueFuncs.register_game_manager(self )
 	if OS.is_debug_build():

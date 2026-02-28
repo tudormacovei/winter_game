@@ -5,9 +5,18 @@ const DAY_RESOURCES_PATH: String = "res://data/days/"
 const CHARACTER_RESOURCES_PATH: String = "res://data/characters/"
 const OBJECTS_SCENES_PATH: String = "res://scenes/object_manipulation/objects"
 
+const AMBIENT_AUDIO_STREAMS_PATH: String = "res://audio_assets/ambient"
+const SFX_AUDIO_STREAMS_PATH: String = "res://audio_assets/sfx"
+
 const SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX: String = "prog_score_special_object_"
 const SCORE_SIMPLE_OBJECTS_VAR_KEY: String = "prog_score_simple_objects" # NOTE: This needs to be synced with the variable name in global_variables.tres
 const SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR: float = 0.2 # Higher value = score will change quicker based on recent performance. Value should be between 0 and 1.
+
+#region Game Config
+
+const AMBIENT_MUSIC_FILE_NAME: String = "amb_music"
+
+#endregion
 
 #region UI 
 

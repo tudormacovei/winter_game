@@ -15,6 +15,10 @@ run/main_scene="uid://qq7fn5km1o4b"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://d1dogk2c3ulva"
+
 [autoload]
 
 ImGuiRoot="*res://addons/imgui-godot/data/ImGuiRoot.tscn"
@@ -47,6 +51,7 @@ folder_colors={
 "res://3d_assets/": "purple",
 "res://3d_assets/materials/": "red",
 "res://addons/": "gray",
+"res://audio_assets/": "orange",
 "res://data/": "yellow",
 "res://scenes/": "green",
 "res://scripts/": "blue"

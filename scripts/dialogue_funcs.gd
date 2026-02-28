@@ -5,6 +5,10 @@ var game_manager: GameManager = null
 func register_game_manager(gm: GameManager):
 	game_manager = gm
 
+var audio_manager: AudioManager = null
+func register_audio_manager(am: AudioManager):
+	audio_manager = am
+
 #region Dialogue Functions
 
 func add_object_to_workbench(object_name: String):
@@ -14,4 +18,11 @@ func add_object_to_workbench(object_name: String):
 
 	game_manager.dialogue_add_object_to_workbench(object_name)
 
+func play_sfx(sfx_name: String):
+	if audio_manager == null:
+		Utils.debug_error("DialogueFuncs: Audio manager not registered! Cannot play SFX. Inform Prog team of error!")
+		return
+		
+	audio_manager.play_sfx(sfx_name)
+	
 #endregion
