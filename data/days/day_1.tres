@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bxmo5x5kvp8tq" path="res://scenes/object_manipulation/objects/chess_set.tscn" id="4_tafq0"]
 [ext_resource type="Resource" uid="uid://dg7byaup6bjsr" path="res://data/dialogue/NPC_2/NPC_2_1.dialogue" id="5_7mcph"]
 [ext_resource type="PackedScene" uid="uid://bow4um1t67ixx" path="res://scenes/object_manipulation/objects/rag.tscn" id="5_l4lrq"]
-[ext_resource type="PackedScene" uid="uid://d2sa4je13i7jc" path="res://scenes/object_manipulation/objects/milk_carton_variant_01.tscn" id="6_7mcph"]
+[ext_resource type="PackedScene" uid="uid://bl5cie1nbmjtb" path="res://scenes/object_manipulation/objects/book_01.tscn" id="7_l4lrq"]
 [ext_resource type="Resource" uid="uid://dc2tolseshfqd" path="res://data/dialogue/NPC_3/NPC_3_1.dialogue" id="7_tafq0"]
 [ext_resource type="Resource" uid="uid://dqfkyjuyeryi8" path="res://data/dialogue/NPC_2/NPC_2_2.dialogue" id="8_5u7sl"]
 [ext_resource type="Resource" uid="uid://bu00kv7gx3usw" path="res://data/dialogue/NPC_1/NPC_1_2.dialogue" id="9_5u7sl"]
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 [sub_resource type="Resource" id="Resource_p4oql"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("5_7mcph")
-objects = Array[PackedScene]([ExtResource("6_7mcph")])
+objects = Array[PackedScene]([ExtResource("7_l4lrq")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_l4lrq"]

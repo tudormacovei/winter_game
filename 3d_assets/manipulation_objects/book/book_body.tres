@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cdb67kua8xlt5"]
+
+[ext_resource type="Texture2D" uid="uid://bpuhdcjp7p2ok" path="res://3d_assets/manipulation_objects/book/book_texture.webp" id="1_fqbar"]
+
+[resource]
+albedo_texture = ExtResource("1_fqbar")
