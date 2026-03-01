@@ -16,7 +16,6 @@ var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefini
 var current_day_index: int = -1
 var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
-var are_all_objects_completed: bool = true
 var current_dialogue_balloon = null
 
 func _ready():
@@ -129,15 +128,13 @@ func _play_next_interaction():
 	for object_scene: PackedScene in interaction.objects:
 		_add_object_to_workbench(object_scene)
 
-	if interaction.objects.size() != 0:
-		are_all_objects_completed = false
-
 	print("GameManager: Starting day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 
+# Next interaction is played when dialogue ends and there are no more objects on the workbench
 func _try_play_next_interaction():
 	if is_dialogue_running:
 		return
-	if not are_all_objects_completed:
+	if not workbench.is_workbench_empty():
 		return
 
 	_play_next_interaction()
@@ -185,7 +182,6 @@ func _on_object_completed(object_name: String, is_special_object: bool, complete
 		Variables.set_var(Config.SCORE_SIMPLE_OBJECTS_VAR_KEY, int(new_score))
 
 func _on_all_objects_completed():
-	are_all_objects_completed = true
 	_try_play_next_interaction()
 
 func _on_dialogue_ended(_resource):

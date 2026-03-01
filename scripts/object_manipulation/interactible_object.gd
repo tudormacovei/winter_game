@@ -280,8 +280,8 @@ func complete_object():
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
 	
 	_set_state(State.ON_TABLE)
-	emit_signal("object_completed", object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
 	queue_free()
+	emit_signal("object_completed", object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):
