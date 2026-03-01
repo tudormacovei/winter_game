@@ -14,8 +14,8 @@ func add_object_to_workbench(object_name: String):
 
 	game_manager.dialogue_add_object_to_workbench(object_name)
 
-func play_sfx(sfx_name: String):
-	AudioManager.play_sfx(sfx_name)
+func play_sfx(sfx_name: String, volume_db: float = 0.0):
+	AudioManager.play_sfx(sfx_name, volume_db)
 
 ## Returns false is the object is not special or if the object has not been completed
 func has_completed_special_object(object_name: String) -> bool:
