@@ -9,8 +9,7 @@ do Variables.add_local("counter", 0)
 => start
 
 ~ start 
-*Mary ENTERS^
-Mary: Good day, Keeper. Time is short, so I'll be brief. I want the watch back. Untouched. 
+Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Good day, Keeper. Time is short, so I'll be brief. I want the watch back. Untouched. 
 - Hello, Mary. Why is that? => branch_why
 - That's not possible. I haven't cleansed it yet. => branch_no
 - Forget the watch. How are you feeling?
@@ -118,13 +117,13 @@ Mary: Good day, Keeper. Time is short, so I'll be brief. I want the watch back. 
 		- Fine. I'll give it to you. Given the circumstances. I'm going to need a replacement for the ceremony though. 
 			Mary: I brought an old rag of mine. Should suffice. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 3)]
 			- Yeah, it's good enough. Here's your watch. 
-				Mary: Farewell.  
+				Mary: Farewell. 
 				- May I ask why you didn't want it cleansed?
-					Mary: No, asshole. You may not. => END
+					Mary: No, asshole. You may not. [wait=0.25][do DialogueFuncs.play_sfx("sfx_door_close")] => END
 				- May the Goddess have mercy on your soul. 
-					*She LEAVES^ => END 
+					[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 				- Goodbye. 
-					*She LEAVES^ => END 
+					[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- Changed my mind, actually. You can't have the watch. 
 				Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 				- May the Goddess have mercy on your soul. 
@@ -1386,7 +1385,7 @@ Mary: I'll be going now, Keeper. I want to be by myself.
 	Mary: Don't much care whether she does or not. Farewell. 
 	*She LEAVES^ => END
 - Goodbye, Mary. 
-	*She LEAVES^ => END
+	[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 
 ~ branch_bad
 Mary: Just keep the watch, Keeper. I want to be by myself for however long I have left. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 1)] [do Variables.set_char_var("NPC_3", "relationship", 2)]
