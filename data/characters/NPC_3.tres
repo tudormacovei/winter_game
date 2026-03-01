@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=3 format=3 uid="uid://nqu2cn85wnfe"]
+[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=4 format=3 uid="uid://nqu2cn85wnfe"]
 
+[ext_resource type="Texture2D" uid="uid://b1xr6nnrbhgtb" path="res://2d_assets/characters/widow_altclothes.webp" id="1_lwnuu"]
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_w4k2y"]
 [ext_resource type="Texture2D" uid="uid://bjm85glghvyyk" path="res://2d_assets/characters/DialogueView_NPC_3.webp" id="2_w4k2y"]
 
@@ -8,5 +9,8 @@ script = ExtResource("1_w4k2y")
 character_id = "NPC_3"
 display_name = "Mary"
 description = "Widow. Miss Grief."
-sprite = ExtResource("2_w4k2y")
+default_sprite = ExtResource("2_w4k2y")
+alt_sprites = Dictionary[String, Texture2D]({
+"alt_clothes": ExtResource("1_lwnuu")
+})
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

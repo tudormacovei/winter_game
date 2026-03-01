@@ -196,11 +196,16 @@ func _on_dialogue_line_started(dialogue_line):
 		return
 
 	if not _character_dict.has(dialogue_line.character):
-		Utils.debug_error("Dialogue line references unknown character '%s'" % dialogue_line.character)
+		Utils.debug_error("GameManager: Dialogue line references unknown character '%s'" % dialogue_line.character)
 		character_node.texture = null
 		return
 		
-	character_node.texture = _character_dict[dialogue_line.character].sprite
+	var sprite_to_set = _character_dict[dialogue_line.character].default_sprite
+	var sprite_change_tag = dialogue_line.get_tag_value(Config.DIALOGUE_TAGS.SPRITE_CHANGE)
+	if sprite_change_tag:
+		sprite_to_set = _character_dict[dialogue_line.character].alt_sprites[sprite_change_tag]
+
+	character_node.texture = sprite_to_set
 
 var letter_spoke_counter = 0
 func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: float):

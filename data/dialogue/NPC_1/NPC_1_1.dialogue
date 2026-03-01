@@ -11,7 +11,7 @@ do Variables.add_local("asked_about_item", false)
 
 ~ start
 #door being left open and the dropped item on the floor need visual implementation
-Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Mornin' Keeper! Got some[do DialogueFuncs.play_sfx("sfx_item_drop")] things here for you to work your magic on. [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton")][wait=0.65]Is Sarah awake yet? [do Variables.set_var("prog_is_door_open", true)]
+Mary: [#sprite=alt_cldothes] [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Mornin' Keeper! Got some[do DialogueFuncs.play_sfx("sfx_item_drop")] things here for you to work your magic on. [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton")][wait=0.65]Is Sarah awake yet? [do Variables.set_var("prog_is_door_open", true)]
 - Close the door, you rascal. => branch_door 	
 - You dropped something on the floor. => branch_item
 - No, Micah, she's still asleep. => branch_sarah 

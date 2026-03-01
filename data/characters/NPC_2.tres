@@ -8,5 +8,5 @@ script = ExtResource("1_q5uqm")
 character_id = "NPC_2"
 display_name = "Sarah"
 description = "This is the second NPC"
-sprite = ExtResource("2_q5uqm")
+default_sprite = ExtResource("2_q5uqm")
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
