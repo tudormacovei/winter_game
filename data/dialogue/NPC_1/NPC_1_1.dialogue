@@ -3,8 +3,6 @@ do Variables.add_local("asked_about_sarah", false)
 do Variables.add_local("asked_about_item", false)
 => start
 
-#SOUNDS ARE MARKED WITH "^"
-
 #EXPRESSION CHANGES ARE MARKED WITH UPPERCASE "FACE", WHEN SEARCHING MAKE SURE TO CLICK MATCH CASE
 #MICAH HAS "NEUTRAL", "ANGRY" AND "HAPPY"
 
@@ -12,48 +10,45 @@ do Variables.add_local("asked_about_item", false)
 #POSSIBLE OUTCOMES (DOUBT): 1 - MICAH DOESN'T DOUBT HIS FAITH ANYMORE OR HE'S SCARED TO; 2 - STANDARD, MICAH'S UNCERTAIN ABOUT HIS FAITH; 3 - MICAH HAS SOME SERIOUS DOUBTS ABOUT HIS FAITH
 
 ~ start
-[do DialogueFuncs.play_sfx("sfx_door_open")] [do DialogueFuncs.play_sfx("sfx_footsteps")] *Micah ENTERS^, leaving the door open behind him and DROPPING^ [do DialogueFuncs.play_sfx("sfx_item_drop")] something on the floor without noticing. He puts a bag on the table. [do Variables.set_var("prog_is_door_open", true)]
-Micah: Mornin' Keeper! Got a few things here for you to work your magic on. Is Sarah awake yet? 
+#door being left open and the dropped item on the floor need visual implementation
+Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Mornin' Keeper! Got some[do DialogueFuncs.play_sfx("sfx_item_drop")] things here for you to work your magic on. [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton")][wait=0.65]Is Sarah awake yet? [do Variables.set_var("prog_is_door_open", true)]
 - Close the door, you rascal. => branch_door 	
-- You dropped something on the floor there. => branch_item
+- You dropped something on the floor. => branch_item
 - No, Micah, she's still asleep. => branch_sarah 
 	
 ~ branch_door
-Micah: Woke up on the wrong side of the bed this morning, huh? 
-*He CLOSES^ the door. [do Variables.set_var("prog_is_door_open", false)] [do DialogueFuncs.play_sfx("sfx_door_close") ]
-Micah: So? She up yet or not?
+Micah: [do DialogueFuncs.play_sfx("sfx_footsteps")]Woke up on the wrong side of the bed this morning, huh?[wait=0.5][do Variables.set_var("prog_is_door_open", false)] [do DialogueFuncs.play_sfx("sfx_door_close")]
+Micah: So?[wait=0.35] She up yet or not?
 - No, Micah, she's still asleep. => branch_sarah
 - What's that on the floor? => branch_item
 
-
 ~ branch_door_2
-Micah: *He CLOSES^ the door. [do Variables.set_var("prog_is_door_open", false)]
+Micah: Oh. [do DialogueFuncs.play_sfx("sfx_footsteps")]My bad. [wait=0.5][do DialogueFuncs.play_sfx("sfx_door_close")] [do Variables.set_var("prog_is_door_open", false)] 
 - What's that on the floor? => branch_item
 	
 ~ branch_item
 if Variables.get_var("prog_is_door_open") == false
-	Micah: Oh Goddess, I'm all over the place this mornin'. Hope I ain't broke it. 
+	Micah: Oh Goddess, I'm all over the place this mornin'.[do DialogueFuncs.play_sfx("sfx_footsteps")] Hope I ain't broke it.
 else 
-	Micah: Oh. Hope I ain't broke it. 
-*He WALKS^ to check. 
-Micah: Phew, all good. Ain't more cracked than it already was. [do Variables.set_var("asked_about_item", true)]
+	Micah: Oh.[do DialogueFuncs.play_sfx("sfx_footsteps")] Hope I ain't broke it.
+Micah: Phew, all good. Ain't more cracked than it already was. [do Variables.set_var("asked_about_item", true)] 
 - So, what is it?
-	Micah: Just an old watch you'll have to fix for widow Mary. It's for the ceremony. Belonged to her shmuck of a husband or sumthin'. No idea why it ain't been thrown' 'way yet.
+	Micah: Just an old watch you'll have to fix for widow Mary. It's for the ceremony. Belonged to her shmuck of a husband or somethin'. No idea why she ain't thrown' it away yet.
 	- You shouldn't speak ill of the dead, boy.
-		Micah: My pa used to say he was a filthy sinner, he got what was comin' to him! 
+		Micah: My pa used to say he was a filthy sinner. He got what was comin' to him! 
 		- Your pa died too, didn't he? 
 			Micah: *His FACE changes instantly. He's ANGRY and a tear bursts from his eyes. 
 			Micah: My pa was 10 times the man that bitch's husband was, you bonehead. [do Variables.set_char_var("NPC_1", "doubt", 3)] [do Variables.set_char_var("NPC_1", "relationship", 2)]
 			- I'm sorry, Micah, I shouldn't have mentioned it. 
 				if Variables.get_var("asked_about_sarah") == false
-					Micah: *His FACE changes instantly. He's NEUTRAL again. 
+					Micah: *His FACE changes. He's NEUTRAL again. 
 					Micah: S'all good, I guess. So, where's Sarah? [do Variables.set_char_var("NPC_1", "relationship", 3)]
 					- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
 				else 
-					Micah: *His FACE changes instantly. He's NEUTRAL again. 
-					Micah: S'all good, I guess. I'll be leaving now. [do Variables.set_char_var("NPC_1", "relationship", 3)]
+					Micah: *His FACE changes. He's NEUTRAL again. 
+					Micah: S'all good, I guess. I'll be leaving now. [do DialogueFuncs.play_sfx("sfx_footsteps")][wait=0.35][do DialogueFuncs.play_sfx("sfx_door_close")][do Variables.set_char_var("NPC_1", "relationship", 3)]
 					- Bye, Micah. 
-						*He LEAVES^ => END
+						 => END
 			- I won't let you speak that way to me in my own house. Now fuck off. 
 				Micah: Fuck you, then. 
 				*He STORMS^ out => END
