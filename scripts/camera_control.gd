@@ -16,6 +16,7 @@ enum CameraFocus {
 }
 
 signal camera_focus_changed(current_focus)
+signal camera_rotation_completed(current_focus)
 
 var _camera_state = CameraState.STATIONARY
 var _camera_focus = CameraFocus.DIALOGUE_AREA
@@ -52,6 +53,7 @@ func handle_rotation(delta: float):
 	if _rotation_tracker >= 1.0:
 		_camera_state = CameraState.STATIONARY
 		_rotation_tracker = 0.0
+		emit_signal("camera_rotation_completed", _camera_focus)
 
 # sets variables to toggle the camera view between dialogue view to the work area view
 func toggle_view():

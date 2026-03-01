@@ -17,6 +17,8 @@ var balloon_layer: CanvasLayer = null
 func _ready() -> void:
 	if camera and camera.has_signal("camera_focus_changed"):
 		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
+	if camera and camera.has_signal("camera_rotation_completed"):
+		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
 
 func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
@@ -37,16 +39,13 @@ func _on_camera_focus_changed(current_focus) -> void:
 	CursorManager.clear_requests()
 	CursorManager.refresh()
 	
-	if not balloon_layer:
-		return
-
-	# NOTE: It's important that we specifically show / hide the balloon_layer.balloon variable instead of 
-	# the entire balloon_layer, so that the input events are propagated correctly based on logic in dialogue balloon script
-	if current_focus == CameraControl.CameraFocus.WORK_AREA:
+	if balloon_layer and current_focus == CameraControl.CameraFocus.WORK_AREA:
+		# NOTE: It's important that we specifically show / hide the balloon_layer.balloon variable instead of 
+		# the entire balloon_layer, so that the input events are propagated correctly based on logic in dialogue balloon script
 		balloon_layer.balloon.hide()
-	elif current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		# Delay showing the ballon until the camera rotation is complete
-		await get_tree().create_timer(camera.ANIMATION_TIME).timeout
+
+func _on_camera_rotation_completed(current_focus) -> void:
+	if balloon_layer and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		balloon_layer.balloon.show()
 		
 #endregion
