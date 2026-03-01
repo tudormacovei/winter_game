@@ -6,8 +6,7 @@ do Variables.add_local("dontcare", false)
 => start
 
 ~ start 
-Sarah: *Sarah ENTERS^
-Sarah: Morning.
+Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Morning.
 - You sure slept a lot. => branch_fight
 - Morning, Sarah. How are you feeling? => branch_feeling
 
@@ -288,7 +287,7 @@ else
 		Sarah: I barely slept last night, thinking about whether I should.
 		- You can always talk to me, Sarah. So what do you think we should do, then?
 			Sarah: Maybe you could try to convince her that her husband's death was good. Something she should be happy about.
-			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
+			Sarah: He wasn't marked for his sins. He had the most natural death one could ask for.
 			Sarah: Isn't that beautiful?  [do Variables.set_char_var("NPC_2", "relationship", 5)]
 			- Okay Sarah, I'll try my best. I promise. 
 				Sarah: *Her FACE turns HAPPY
@@ -303,7 +302,7 @@ else
 	Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("huh", true)]
 	- Oh, I forgot I told you. Of course. => branch_mary
 	- Don't recall. 
-		Sarah: You told me they're publicly killing Widow Mary for grieving her husband.
+		Sarah: You told me they're killing Widow Mary in the square tonight for refusing to stop grieving her husband.
 		- Right. I'm getting old, it seems. I remember now.  => branch_mary 
 
 
@@ -321,22 +320,23 @@ Sarah: ...
 		Sarah: *Her FACE turns HAPPY
 		Sarah: Oh yeah? I'll go look for him then! See you. [do Variables.set_char_var("NPC_2", "left_micah", true)]
 		- Bye, Sarah. 
-			*She LEAVES^ => END
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	elif Variables.get_char_var("NPC_2", "relationship") == 1
 		Sarah: Could use some time away from you. I'll be going. [do Variables.set_char_var("NPC_2", "left_micah", true)] 
-		*She LEAVES^ => END
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	else
 		Sarah: Not really feeling up to it now, think I'll just be in my room. 
-		*She LEAVES^ => END
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 - That's it, then. 
 	if Variables.get_char_var("NPC_2", "relationship") == 1
-		*She LEAVES^ => END
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	else
 		if Variables.get_char_var("NPC_2", "relationship") == 2
 			Sarah: I'll be in my room. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-			*She LEAVES^ => END
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else 
-			Sarah: I'll be in my room.
-			*She LEAVES^ => END
+			Sarah: I'll be in my room. 
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+			
 => END
 

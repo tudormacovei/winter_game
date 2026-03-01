@@ -131,9 +131,9 @@ if Variables.get_char_var("NPC_1", "relationship") == 0
 		Micah: ...
 		Micah: Well, see ya.
 		=> branch_sui
-	- I'm sorry, Micah. 
+	- I'm sorry, Micah. I forgot.
 		Micah: That's alright, I guess. 
-		Micah: You got your hands full an' everythin'.
+		Micah: You got your hands full and everythin'.
 		Micah: ...
 		Micah: Well, see ya.
 		=> branch_sui
