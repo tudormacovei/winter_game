@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 [sub_resource type="Resource" id="Resource_p4oql"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("5_7mcph")
-objects = Array[PackedScene]([null])
+objects = Array[PackedScene]([ExtResource("7_5u7sl")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_l4lrq"]
