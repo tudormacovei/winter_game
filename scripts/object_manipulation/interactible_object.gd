@@ -41,8 +41,9 @@ static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if object_scene == null:
-		print("InteractibleObject: Attempted to instantiate null object scene. Aborting...")
+		Utils.debug_error("InteractibleObject: Attempted to instantiate null object scene. Check that the day resource does not contain empty objects!")
 		queue_free() # delete self due to lack of child object
+		return
 
 	_object = object_scene.instantiate()
 	if not (_object is ObjectWithStickers):
