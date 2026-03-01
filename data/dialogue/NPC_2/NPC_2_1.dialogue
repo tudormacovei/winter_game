@@ -264,7 +264,7 @@ else
 		Sarah: ...
 		- ... => branch_main
 - I know. It's horrible. 
-	Sarah: Right?? It's not like she can control her feelings or anything. Let her grieve, I say. 
+	Sarah: Right? It's not like she can control her feelings or anything. Let her grieve, I say. 
 	Sarah: I was a bit sad too, when Daddy died. But that was different.
 	Sarah: He got marked for death by the Goddess, and died as part of the Cullings.
 	Sarah: Took me a while to realize that he was filth and had to go.
@@ -298,7 +298,7 @@ else
 		- I'll try and talk to her. See what I can do. 
 			Sarah: Thanks! [do Variables.set_char_var("NPC_2", "relationship", 4)]
 			=> branch_main
-- What??? [if Variables.get_var("huh") == false]
+- What? [if Variables.get_var("huh") == false]
 	Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("huh", true)]
 	- Oh, I forgot I told you. Of course. => branch_mary
 	- Don't recall. 

@@ -50,13 +50,13 @@ Micah: [wait=1.5]Phew, all good. Ain't more cracked than it already was. [do Var
 					- Bye, Micah. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- I won't let you speak that way to me in my own house. Now fuck off. 
-				Micah: Fuck you, then.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam")] 
+				Micah: Fuck you, then.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam", -40.0)] 
 				...
 				- Slam my door like that again and see what happens! => END
 				- Damn kid. => END 
 			- Oh yeah? If I'm the bonehead, then why am I not the one buried six feet under?
 				Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)]
-				Micah: I hope you die.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam")]
+				Micah: I hope you die.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam", -40.0)]
 				...   
 				- Slam my door like that again and I'll put you in the ground right next to him! => END
 				- Damn kid. => END 
@@ -143,8 +143,19 @@ Micah: [wait=1.5]Phew, all good. Ain't more cracked than it already was. [do Var
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- Fixing 'em is how I make a living, Micah. We all gotta play our part here.
 			Micah: Guess you're right. Wish I wouldn't have to touch them bastards neither but I don't have much of a choice. 
-			- We need these to survive, Micah. 
+			- We need these to survive.
 				Micah: Do we, really? [do Variables.set_char_var("NPC_1", "doubt", 3)]
+				if Variables.get_var("asked_about_sarah") == false
+					Micah: Anyway, where's Sarah?
+					- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
+				else
+					Micah: Anyway, guess I better go now. 
+					- Bye, Micah. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+			- You're doing great, Micah. Couldn't do this without you. 
+				Micah: *His FACE turns HAPPY
+				Micah: ...
+				Micah: Thanks, Keeper. [do Variables.set_char_var("NPC_1", "doubt", 3)] [do Variables.set_char_var("NPC_1", "relationship", 4)]
 				if Variables.get_var("asked_about_sarah") == false
 					Micah: Anyway, where's Sarah?
 					- She's still in bed, she stayed up late last night to help me clean up around here. => branch_sarah
@@ -228,14 +239,14 @@ Micah: Let her know I'm looking for her when she wakes up, will you?
 	- She's got better things to do than hang out with the likes of you. [if Variables.get_char_var("NPC_1", "relationship") <= 2]
 		Micah: *His FACE turns ANGRY
 		Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)]
-		Micah: I hope you die.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam")]
+		Micah: I hope you die.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam", -40.0)]
 		...   
 		- Slam my door like that again and I'll put you in the ground right next to your father! => END
 		- Damn kid. => END 
 	- You two can sort it out yourselves. 
 		Micah: *His FACE turns ANGRY
 		Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 2)]
-		Micah: Miserable old prick.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam")]
+		Micah: Miserable old prick.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam", -12)]
 		...   
 		- Slam my door like that again and see what happens! => END
 		- Damn kid. => END 
