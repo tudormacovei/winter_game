@@ -41,13 +41,13 @@ elif Variables.get_char_var("NPC_2", "relationship") == 6
 			if Variables.get_char_var("NPC_2", "pressure") == 1
 				Mary: [#sprite=alt_clothes]Sending Sarah last night. 
 				Mary: [#sprite=alt_clothes]I guess I showed you my weak spot.
-				Mary: [#sprite=alt_clothes]I won't lie to you. I'd been crying when she showed up. Histerically so. 
+				Mary: [#sprite=alt_clothes]I won't lie to you. I'd been crying when she showed up. Like I haven't in a long time.
 				Mary: [#sprite=alt_clothes]And then she came to me. She hugged me.
 				=> branch_pressure_success
 			elif Variables.get_char_var("NPC_2", "pressure") == 2
 				Mary: [#sprite=alt_clothes]Sending the children last night.
 				Mary: [#sprite=alt_clothes]I guess I showed you my weak spot.
-				Mary: [#sprite=alt_clothes]I won't lie to you. I'd been crying when they showed up. Histerically so. 
+				Mary: [#sprite=alt_clothes]I won't lie to you. I'd been crying when they showed up. Like I haven't in a long time.
 				Mary: [#sprite=alt_clothes]And then they came to me. They hugged me.
 				Mary: [#sprite=alt_clothes]Micah, too. Can you believe it?
 				=> branch_pressure_success
@@ -118,7 +118,7 @@ elif Variables.get_char_var("NPC_3", "relationship") == 8
 
 ~ branch_micah
 if Variables.get_char_var("NPC_1", "relationship") == 0 
-	Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Got your items here. 
+	Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Got your items here. [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
 	Micah: ...
 	Micah: Keeper, why didn't you tell Sarah I wanted to see her like you said you would?
 	- I don't like you around her. 
@@ -168,17 +168,15 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 	- Sarah, don't go near the window today. [if Variables.get_char_var("NPC_3", "relationship") >= 2]
 		Sarah: [do DialogueFuncs.play_sfx("sfx_footsteps")]...[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]
 		- I'm sorry, Sarah. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => END
-		- That's what happens to those who go against the Goddess. Make sure you don't forget.
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => END
-		- That's what happens to blasphemers. Make sure you don't forget. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+		- That's what happens to heretics. Make sure you don't forget. 
+			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 	- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
 		Sarah: [do DialogueFuncs.play_sfx("sfx_footsteps")]...[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]
 		- That's what happens to those who go against them. Make sure you don't forget.
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => END
-		- That's what happens to blasphemers. Make sure you don't forget. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => END 
+			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+		- That's what happens to heretics. Make sure you don't forget. 
+			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 			
 ~ branch_sarah_2
 - Good morning. 
@@ -190,11 +188,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			Sarah: ...
 			Sarah: It's okay. Like I said. It's her own fault. 
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-		- That's what happens to those who go against the Goddess. Make sure you don't forget.
-			Sarah: ...
-			Sarah: I won't.
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-		- That's what happens to blasphemers. Make sure you don't forget.
+		- That's what happens to heretics. Make sure you don't forget.
 			Sarah: ...
 			Sarah: I won't.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
@@ -204,7 +198,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			Sarah: ...
 			Sarah: I won't.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-		- That's what happens to blasphemers. Make sure you don't forget. 
+		- That's what happens to heretics. Make sure you don't forget. 
 			Sarah: ...
 			Sarah: I won't.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
@@ -217,7 +211,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 		Sarah: [do DialogueFuncs.play_sfx("sfx_footsteps")]...[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]
 		- I'm sorry, Sarah. 
 			Sarah: I... I need some time alone.
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			
 ~ branch_sarah_4
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]...

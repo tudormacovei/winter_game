@@ -17,32 +17,32 @@ if Variables.get_char_var("NPC_2", "left_micah") == true
 			Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]How could you say those things to Micah, you asshole? 
 			- Fuck off to your room. 
 				Sarah: I hate you.
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			- Save it, Sarah. 
 				Sarah: ...
 				Sarah: I hate you.
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			- Forget Micah. I managed to convince Mary to do what she must to be forgiven by the elders. [if Variables.get_char_var("NPC_3", "dead") == false]
 				Sarah: ...
 				Sarah: Fuck you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 		else 
 			Sarah: *Her FACE is ANGRY
 			Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Why'd you say those things to Micah?
 			- Save it, Sarah. 
 				Sarah: ...
 				Sarah: Fuck you. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 			- Forget Micah. I managed to convince Mary to do what she must to be forgiven by the elders. [if Variables.get_char_var("NPC_3", "dead") == false]
 				Sarah: ... 
 				if Variables.get_char_var("NPC_2", "relationship") == 3
 					Sarah: Okay. But you were an asshole to my friend. 
 					Sarah: Fuck you. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 				else
 					Sarah: That's good. But you were an asshole to my friend. 
 					Sarah: Fuck you. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 			- I guess he got on my nerves. 
 				Sarah: That doesn't make it okay. You should apologize to him.
 				- You're right. I will. 
@@ -58,7 +58,7 @@ if Variables.get_char_var("NPC_2", "left_micah") == true
 					- He's a brat. I'm not going to apologize to a child. 
 						Sarah: ...
 						Sarah: Fuck you. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 	elif Variables.get_char_var("NPC_1", "relationship") == 2
 		if Variables.get_char_var("NPC_2", "relationship") == 1
 			=> branch_left_1
@@ -74,7 +74,7 @@ if Variables.get_char_var("NPC_2", "left_micah") == true
 			=> branch_left_1
 		else
 			Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Hello. [do Variables.set_char_var("NPC_2", "micah", true)]
-			Micah: [do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]...
+			Micah: [do DialogueFuncs.play_sfx("sfx_footsteps")][wait=0.7]...
 			- Hi, Sarah. Hi, Micah.
 				Micah: Evenin', Keeper. I just came to see Sarah home.
 				Sarah: So... I saw Mary enter the shop. => branch_left_mary_micah
@@ -90,7 +90,7 @@ else
 		- I don't like you spending so much time with him.
 			if Variables.get_char_var("NPC_2", "relationship") == 1
 				Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak.
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			else
 				Sarah: Why?
 				- He's a troubled kid and a bad influence. 
@@ -100,41 +100,41 @@ else
 					- We'll see about that. 
 						Sarah: Uh, no we won't. 
 						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)] 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 				- I just don't. 
 					Sarah: Well you're just going to have to accept it. 
 					- Seems so. 
 						Sarah: I heard Mary's voice. => branch_left_mary
 					- I won't.
 						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)] 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 		- Guess I forgot. [if Variables.get_char_var("NPC_2", "relationship") == 1]
 			Sarah: Guess you don't give a shit. 
 			- Language. 
 				Sarah: Fuck you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 			- Guess I don't. 
 				Sarah: Fuck you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 		- (LIE) I forgot. I'm sorry. 
 			Sarah: I don't believe you. 
 			Sarah: I came down right after he left. 
 			Sarah: You couldn't have forgotten in such a short time. 
 			Sarah: Stop trying to control me. I'm not your daughter and I'll never be. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 		- How'd you know? 
 			Sarah: He threw stones at my window just now and told me. 
 			- Prick. 
 				if Variables.get_char_var("NPC_2", "relationship") == 1
 					Sarah: You're the prick. Stop trying to control me. I'm not your daughter and I'll never be. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 				else
 					Sarah: That's not true. He's my friend. And you're just going to have to accept it. 
 					- Seems so. 
 						Sarah: I heard Mary's voice. => branch_left_mary
 					- I won't.
 						Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			- Yeah, I'm sorry. I should have told you. [if Variables.get_char_var("NPC_2", "relationship") >= 3]
 				Sarah: It's fine, I guess. 
 				Sarah: Wasn't feeling like hanging out anyway. 
@@ -142,7 +142,7 @@ else
 			- I don't like you spending so much time with him.
 				if Variables.get_char_var("NPC_2", "relationship") == 1
 					Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak.
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 				else
 					Sarah: Why?
 					- He's a troubled kid and a bad influence. 
@@ -152,14 +152,14 @@ else
 						- We'll see about that. 
 							Sarah: Uh, no we won't. 
 							Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-							[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 					- I just don't. 
 						Sarah: Well you're just going to have to accept it. 
 						- Guess I have to. 
 							Sarah: I heard Mary's voice. => branch_left_mary
 						- I won't.
 							Sarah: I'm not your daughter and I'll never be. Stop trying to control me. Freak. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-							[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 		- I'm sorry. I should have told you. [if Variables.get_char_var("NPC_2", "relationship") >= 3]
 			Sarah: It's fine, I guess. 
 			Sarah: Wasn't feeling like hanging out anyway. 
@@ -172,12 +172,12 @@ else
 				Sarah: ...
 				Sarah: I'm going back to my room. 
 				- Good night. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- I tried to do something about it, you know. [if Variables.get_char_var("NPC_3", "relationship") >= 7]
 					Sarah: ...
 					Sarah: Good.
 					Sarah: Good night. [do Variables.set_char_var("NPC_2", "relationship", 4)]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- She's going to live. [if Variables.get_char_var("NPC_3", "dead") == false] 
 				Sarah: You're making fun of me, aren't you?
 				Sarah: ...
@@ -193,10 +193,10 @@ else
 						Sarah: *Her FACE turns HAPPY
 						Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 						- Good night, Sarah. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- I was a bit of an asshole to you earlier. I'm sorry. 
 							Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
 						Sarah: Oh. I don't know what to say.
 						Sarah: I'm going to my room, I have to process this. 
@@ -204,7 +204,7 @@ else
 						Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
 						Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 						- Good night, Sarah. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- Helped her realize she's not ready to die just yet. 
 					Sarah: You changed her mind? How?
 					- Just did what was right.
@@ -216,10 +216,10 @@ else
 						Sarah: *Her FACE turns HAPPY
 						Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 						- Good night, Sarah. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- I was a bit of an asshole to you earlier. I'm sorry. 
 							Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
 						Sarah: Oh. I don't know what to say.
 						Sarah: I'm going to my room, I have to process this. 
@@ -227,19 +227,19 @@ else
 						Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
 						Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 						- Good night, Sarah. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- That's none of your business. [if Variables.get_char_var("NPC_3", "dead") == true]
 			Sarah: *Her FACE turns ANGRY
 			Sarah: Fuck you! She's my friend. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 			- Well, she's going to die.
 				Sarah: ... 
 				Sarah: I hate you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			- I don't care. What we talked is not suitable for a child's ears. 
 				Sarah: I'm not a child!
 				Sarah: And you're not my father!
 				Sarah: Ugh, I hate you!
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 		
 ~ branch_left_mary
 if Variables.get_char_var("NPC_3", "dead") == true
@@ -249,12 +249,12 @@ if Variables.get_char_var("NPC_3", "dead") == true
 			Sarah: Okay, then. I'll be in my room. 
 			- Night. 
 				Sarah: Night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- She's going to die. 
 				Sarah: Oh. 
 				Sarah: ...
 				Sarah: Thanks for letting me know. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else
 			Sarah: Please. Just tell me.
 			- The ceremony is going ahead as planned. Justice will be done. [if Variables.get_char_var("NPC_3", "relationship") == 1]
@@ -265,23 +265,23 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					- No, they aren't. She got judged and sentenced. 
 						Sarah: ...
 						Sarah: I'm going to my room. 
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 					- What do you want me to do?
 						Sarah: ...
 						Sarah: I'm going to my room. 
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 				- I changed my mind. She had to die. 
 					Sarah: You promised you would. You promised. I hate you. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			- The ceremony is going ahead as planned. [if Variables.get_char_var("NPC_3", "relationship") >=2]
 				if Variables.get_char_var("NPC_2", "relationship") == 3
 					Sarah: Oh. 
 					- I'm sorry. 
 						Sarah: It is what it is. She's to blame. Good night.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 					- It had to happen. 
 						Sarah: I know. Good night. 
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				else
 					Sarah: What do you mean? Didn't you talk to her?
 					- I did. She didn't want saving. 
@@ -291,9 +291,9 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Sarah: ...Still, it's unfair.
 						Sarah: I'm going to my room. Good night. 
 						- I'm sorry, Sarah. Good night.
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- Night. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 					- I did. But I couldn't find the right thing to say. 
 						Sarah: ...
 						Sarah: That's okay. I couldn't either.
@@ -301,17 +301,17 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Sarah: ...Still, it's unfair.
 						Sarah: I'm going to my room. Good night. 
 						- I'm sorry, Sarah. Good night. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- Night. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I didn't. I changed my mind. She had to die. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 						Sarah: How could you? You promised me. You promised. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 						Sarah: I hate you. 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 	- The ceremony is going ahead as planned. Justice will be done. [if Variables.get_char_var("NPC_3", "relationship") == 1]
 		if Variables.get_char_var("NPC_2", "relationship") == 3
 			Sarah: Oh. It is what it is. She's to blame. Good night. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else 
 			Sarah: What do you mean "justice will be done"?
 			Sarah: You promised you'd talk to her, try to get her out of it. [do Variables.set_char_var("NPC_2", "relationship", 1)]
@@ -320,23 +320,23 @@ if Variables.get_char_var("NPC_3", "dead") == true
 				- No, they aren't. She got judged and sentenced. 
 					Sarah: ...
 					Sarah: I'm going to my room. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 				- What do you want me to do?  
 					Sarah: ...
 					Sarah: I'm going to my room. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- I changed my mind. She had to die. 
 				Sarah: You promised you would. You promised. I hate you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 	- The ceremony is going ahead as planned. [if Variables.get_char_var("NPC_3", "relationship") >=2]
 		if Variables.get_char_var("NPC_2", "relationship") == 3
 			Sarah: Oh. 
 			- I'm sorry. 
 				Sarah: It is what it is. She's to blame. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- It had to happen. 
 				Sarah: I know. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else
 			Sarah: What do you mean? Didn't you talk to her?
 			- I tried. Believe me, I did. [if Variables.get_char_var("NPC_3", "relationship") >=7]
@@ -348,16 +348,16 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Sarah: I'll be in my room. 
 					Sarah: Good night.
 					- Good night, Sarah. 
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 						=> branch_pressure
 				- It is. That's how these people are. 
 					Sarah: ... 
 					Sarah: I'll be in my room. 
 					Sarah: Good night.
 					- Good night, Sarah. 
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 						=> branch_pressure
 			- I did. She didn't want saving. 
 				Sarah: Oh. I know that. I tried myself, many times. 
@@ -366,10 +366,10 @@ if Variables.get_char_var("NPC_3", "dead") == true
 				Sarah: ...Still, it's unfair.
 				Sarah: I'm going to my room. Good night. 
 				- I'm sorry, Sarah. Good night. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- Night. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 					Sarah: What is it?
 					=> branch_pressure	
 			- I did. But I couldn't find the right thing to say. 
@@ -379,16 +379,16 @@ if Variables.get_char_var("NPC_3", "dead") == true
 				Sarah: ...Still, it's unfair.
 				Sarah: I'm going to my room. Good night. 
 				- I'm sorry, Sarah. Good night. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- Night. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
-				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+				- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 					Sarah: What is it?
 					=> branch_pressure	
 			- I didn't. I changed my mind. She had to die. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 				Sarah: How could you? You promised me. You promised. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 				Sarah: I hate you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
 else
 	Sarah: Did you talk to her?
 	- I managed to convince her to do what she must to be forgiven by the elders. 
@@ -401,14 +401,14 @@ else
 			Sarah: I'm going to my room. I want to go to sleep and wake up early tomorrow and go see her. 
 			Sarah: Good night. Thank you, again.
 			- You're welcome, Sarah. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 		- She didn't deserve to die. I only did what was right. 
 			Sarah: Exactly. But you're the only one to have done so. 
 			Sarah: Besides me, of course. 
 			Sarah: I'm going to my room. I want to go to sleep and wake up early tomorrow and go see her. 
 			Sarah: Good night. Thank you again. 
 			- You're welcome, Sarah. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 
 ~ branch_left_mary_micah
 if Variables.get_char_var("NPC_3", "dead") == true
@@ -420,12 +420,12 @@ if Variables.get_char_var("NPC_3", "dead") == true
 			[do DialogueFuncs.play_sfx("sfx_door_close")]...
 			- Night. 
 				Sarah: Night.
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- She's going to die. 
 				Sarah: Oh. 
 				Sarah: ...
 				Sarah: Thanks for letting me know. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else
 			Sarah: Please. Just tell me.
 			- The ceremony is going ahead as planned. Justice will be done. [if Variables.get_char_var("NPC_3", "relationship") == 1]
@@ -439,19 +439,19 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Micah: Bye, Sarah. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Micah: I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 					- What do you want me to do?
 						Sarah: ...
 						Sarah: I'm going to my room. Bye, Micah.
 						Micah: Bye, Sarah. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Micah: I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 				- I changed my mind. She had to die. 
 					Sarah: You promised you would. You promised. I hate you. 
 					[do DialogueFuncs.play_sfx("sfx_door_close")]...
 					Micah: Uh, I'll come by later to pick up the ceremonial item. Bye. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- The ceremony is going ahead as planned. [if Variables.get_char_var("NPC_3", "relationship") >=2]
 				if Variables.get_char_var("NPC_2", "relationship") == 3
 					Sarah: Oh. 
@@ -460,14 +460,14 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Sarah: Good night.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 					- It had to happen. 
 						Sarah: I know. 
 						Sarah: Bye, Micah.
 						Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Sarah: Good night. 
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				else
 					Sarah: What do you mean? Didn't you talk to her?
 					- I did. She didn't want saving. 
@@ -480,9 +480,9 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Sarah: Good night. 
 						- I'm sorry, Sarah. Good night.
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- Night.
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I did. But I couldn't find the right thing to say. 
 						Sarah: ...
 						Sarah: That's okay. I couldn't either.
@@ -493,15 +493,15 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Sarah: Good night. 
 						- I'm sorry, Sarah. Good night.
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- Night. 
-							[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I didn't. I changed my mind. She had to die. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 						Sarah: How could you? You promised me. You promised. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 						Sarah: I hate you. 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]...
+						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]...
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 	- The ceremony is going ahead as planned. Justice will be done. [if Variables.get_char_var("NPC_3", "relationship") == 1]
 		if Variables.get_char_var("NPC_2", "relationship") == 3
 			Sarah: Oh. It is what it is. She's to blame. 
@@ -509,7 +509,7 @@ if Variables.get_char_var("NPC_3", "dead") == true
 			Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]...
 			Sarah: Good night. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else 
 			Sarah: What do you mean "justice will be done"?
 			Sarah: You promised you'd talk to her, try to get her out of it. [do Variables.set_char_var("NPC_2", "relationship", 1)]
@@ -521,19 +521,19 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Micah: Bye, Sarah. 
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 					Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 				- What do you want me to do?
 					Sarah: ...
 					Sarah: I'm going to my room. Bye, Micah.
 					Micah: Bye, Sarah. 
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 					Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- I changed my mind. She had to die. 
 				Sarah: You promised you would. You promised. I hate you. 
 				[do DialogueFuncs.play_sfx("sfx_door_close")]...
 				Micah: Uh, I'll come by later to pick up the ceremonial item. Bye. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	- The ceremony is going ahead as planned. [if Variables.get_char_var("NPC_3", "relationship") >=2]
 		if Variables.get_char_var("NPC_2", "relationship") == 3
 			Sarah: Oh. 
@@ -542,14 +542,14 @@ if Variables.get_char_var("NPC_3", "dead") == true
 				Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
 				[do DialogueFuncs.play_sfx("sfx_door_close")]...
 				Sarah: Good night.
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			- It had to happen. 
 				Sarah: I know. 
 				Sarah: Bye, Micah.
 				Micah: Bye, Sarah. I'll come by later to pick up the ceremonial item, Keeper.
 				[do DialogueFuncs.play_sfx("sfx_door_close")]...
 				Sarah: Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else
 			Sarah: What do you mean? Didn't you talk to her?
 			- I tried. Believe me, I did. [if Variables.get_char_var("NPC_3", "relationship") >=7]
@@ -563,8 +563,8 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Sarah: Good night. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Micah: I'll come by later to pick up the ceremonial item, Keeper.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 						=> branch_pressure_micah
 				- It is. That's how these people are. 
 					Sarah: ... 
@@ -573,8 +573,8 @@ if Variables.get_char_var("NPC_3", "dead") == true
 						Sarah: Good night. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]...
 						Micah: I'll come by later to pick up the ceremonial item, Keeper.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 						=> branch_pressure_micah
 			- I did. She didn't want saving. 
 				Sarah: Oh. I know that. I tried myself, many times. 
@@ -586,12 +586,12 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Sarah: Good night.
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 					Micah: I'll come by later to pick up the ceremonial item, Keeper.
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- Night. 
 					[do DialogueFuncs.play_sfx("sfx_door_close")]...
 					Micah: I'll come by later to pick up the ceremonial item, Keeper.
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
-				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+				- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 					=> branch_pressure_micah
 			- I did. But I couldn't find the right thing to say. 
 				Sarah: ...
@@ -603,19 +603,19 @@ if Variables.get_char_var("NPC_3", "dead") == true
 					Sarah: Good night.
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 					Micah: I'll come by later to pick up the ceremonial item, Keeper. Bye. 
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 				- Night. 
 					[do DialogueFuncs.play_sfx("sfx_door_close")]...
 					Micah: I'll come by later to pick up the ceremonial item, Keeper. Bye.
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
-				- Sarah, wait. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+				- Sarah, wait. Something came to mind. [if Variables.get_char_var("NPC_3", "maybe_sarah") == true]
 					=> branch_pressure_micah
 			- I didn't. I changed my mind. She had to die. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 				Sarah: How could you? You promised me. You promised. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 				Sarah: I hate you. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]...
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]...
 				Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 else
 	Sarah: Did you talk to her?
 	- I managed to convince her to do what she must to be forgiven by the elders. 
@@ -633,7 +633,7 @@ else
 			[do DialogueFuncs.play_sfx("sfx_door_close")]...
 			Sarah: Good night. Thank you, again.
 			- You're welcome, Sarah. Good night. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- She didn't deserve to die. I only did what was right. 
 			Sarah: Exactly. But you're the only one to have done so. 
 			Sarah: Besides me, of course. 
@@ -643,13 +643,13 @@ else
 			[do DialogueFuncs.play_sfx("sfx_door_close")]...
 			Sarah: Good night. Thank you again. 
 			- You're welcome, Sarah. Good night.  
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 
 ~ branch_left_1
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]I'm going to my room. 
 - Hello to you too. 
 	Sarah: Yeah, whatever. 
-	[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+	[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 - I talked to Mary. Don't you want to know how it went? 
 	Sarah: Did you convince her to listen to the Elders?
 	- I did, actually. She's going to live. [if Variables.get_char_var("NPC_3", "dead") == false]
@@ -662,7 +662,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
 			Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 			- Good night, Sarah. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- It was the right thing to do. 
 			Sarah: ...
 			Sarah: I'm... surprised you've realized that.
@@ -672,10 +672,10 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			Sarah: *Her FACE turns HAPPY
 			Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 			- Good night, Sarah. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- I was an asshole to you earlier. I'm sorry. 
 				Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- None of your business. 
 			Sarah: *Her FACE turns ANGRY
 			Sarah: Fuck you! She's my friend.
@@ -683,17 +683,17 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 				Sarah: ...
 				Sarah: Why'd you have to sour this moment by being so mean?
 				Sarah: I don't get you. You're a sad old prick. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 			- So go and be happy for her by yourself.
 				Sarah: ...
 				Sarah: I'll do just that. 
 				Sarah: I don't get you. You're a sad old prick. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 	- I didn't. [if Variables.get_char_var("NPC_3", "dead") == true]
 		Sarah: Then no, I don't.
-		[do DialogueFuncs.play_sfx("sfx_door_slam", -12)]... => end_watch
+		[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 - Fine. Go. 
-	[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+	[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	
 ~ branch_pressure
 Sarah: What is it?
@@ -703,28 +703,22 @@ Sarah: What is it?
 	- You won't. Just tell her you love her and don't want to lose her. 
 		if Variables.get_char_var("NPC_3", "relationship") <= 7
 			Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", 1)] 
-			- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-				Sarah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-			- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
-			- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+			- Good luck. 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+			- Good bye. 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		elif Variables.get_char_var("NPC_3", "relationship") == 8
 			Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", 1)] [do Variables.set_char_var("NPC_2", "relationship", 6)] 
-			- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-				Sarah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 7)]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-			- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
-			- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+			- Good luck. 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+			- Good bye. 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 	- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
 		Sarah: It's okay. I understand. I'm sorry too. 
 		Sarah: Bye. 
-		[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 - Nevermind. Good night. 
-	[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch		
+	[do DialogueFuncs.play_sfx("sfx_door_close")]... => END		
 	
 ~ branch_pressure_micah
 Sarah: What is it?
@@ -733,156 +727,124 @@ Sarah: What is it?
 	Sarah: I'm scared. What if I say the wrong thing, again?
 	- You won't. Just tell her you love her and don't want to lose her. 
 		if Variables.get_char_var("NPC_3", "relationship") == 7
-			if Variables.get_char_var("NPC_2", doubt) == 3
+			if Variables.get_char_var("NPC_1", "doubt") == 3
 				Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "pressure", 2)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
 				Micah: I'll come with. 
 				Micah: Uh, if you want me to. 
 				Sarah: Of course I do. 
 				Sarah: Let's go. 
-				- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-					Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 7)]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				- Good luck. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				- Good bye. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			else
 				Sarah: Okay... I'll try. 
 				Sarah: Micah, come with me. Please.
-				if Variables.get_char_var("NPC_2", doubt) == 2
+				if Variables.get_char_var("NPC_1", "doubt") == 2
 					Micah: Uh, okay. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "relationship", 6)] [do Variables.set_char_var("NPC_2", "pressure", 2)]
 					Sarah: Let's go. 
-					- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-						Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 7)]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				elif Variables.get_char_var("NPC_2", doubt) == 1
+					- Good luck. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Good bye. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				elif Variables.get_char_var("NPC_1", "doubt") == 1
 					Micah: Uh, I don't know, Sarah. [do Variables.set_char_var("NPC_2", "pressure", 1)]
 					Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
 					Sarah: Suit yourself. 
 					Sarah: I'm going. Bye.
-					- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-						Sarah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+					- Good luck. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Good bye. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
-						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 		elif Variables.get_char_var("NPC_3", "relationship") == 8
 			Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_3", "dead", false)] [do Variables.set_char_var("NPC_2", "relationship", 6)]
-			if Variables.get_char_var("NPC_2", doubt) == 3
+			if Variables.get_char_var("NPC_1", "doubt") == 3
 				Micah: I'll come with. [do Variables.set_char_var("NPC_2", "pressure", 2)]
 				Micah: Uh, if you want me to. 
 				Sarah: Of course I do. 
 				Sarah: Let's go. 
-				- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-					Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 7)]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+				- Good luck. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				- Good bye. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			else
 				Sarah: Come with me, Micah. Please. 
-				if Variables.get_char_var("NPC_2", doubt) == 2
+				if Variables.get_char_var("NPC_1", "doubt") == 2
 					Micah: Uh, okay. [do Variables.set_char_var("NPC_2", "pressure", 2)]
 					Sarah: Let's go. 
-					- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-						Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 7)]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				elif Variables.get_char_var("NPC_2", doubt) == 1
+					- Good luck. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Good bye. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				elif Variables.get_char_var("NPC_1", "doubt") == 1
 					Micah: Uh, I don't know, Sarah. [do Variables.set_char_var("NPC_2", "pressure", 1)]
 					Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
 					Sarah: Suit yourself. 
 					Sarah: I'm going. Bye.
-					- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-						Sarah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 7)]
+					- Good luck. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Good bye. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
-						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch  
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END  
 		else
-			if Variables.get_char_var("NPC_2", doubt) == 3
+			if Variables.get_char_var("NPC_1", "doubt") == 3
 				Sarah: Okay... I'll try. [do Variables.set_char_var("NPC_2", "pressure", 2)] 
 				Micah: I'll come with. 
 				Micah: Uh, if you want me to. 
 				Sarah: Of course I do. 
 				Sarah: Let's go. 
-				- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-					Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-					[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				- Good luck. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				- Good bye. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 			else
 				Sarah: Okay... I'll try. 
 				Sarah: Micah, come with me. Please.
-				if Variables.get_char_var("NPC_2", doubt) == 2
+				if Variables.get_char_var("NPC_1", "doubt") == 2
 					Micah: Uh, okay. [do Variables.set_char_var("NPC_2", "pressure", 2)]  
 					Sarah: Let's go. 
-					- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-						Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-				elif Variables.get_char_var("NPC_2", doubt) == 1
+					- Good luck. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Good bye. 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				elif Variables.get_char_var("NPC_1", "doubt") == 1
 					Micah: Uh, I don't know, Sarah. [do Variables.set_char_var("NPC_2", "pressure", 1)]
 					Micah: Sounds like the Goddess and the Elders wouldn't like that very much.
 					Sarah: Suit yourself. 
-					Sarah: I'm going. Bye.
-					- Wait. Take the watch. Give it to her. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
-						Sarah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Okay. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+					Sarah: I'm going. Bye. 
+					- Good luck. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good luck. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+					- Good bye. 
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
-					- Good bye. [if Variables.get_char_var("NPC_3", "watch_state") != 6]
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... 
-						Micah: Uh, I'll come by later to pick up the ceremonial item. Bye.
-						[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 	- You're right. It's too much pressure to put on your shoulders. Forget I said anything. I'm sorry. 
 		Sarah: It's okay. I understand. I'm sorry too. 
 		Sarah: Bye. 
 		[do DialogueFuncs.play_sfx("sfx_door_close")]... 
 		Micah: I'll come by later to pick up the ceremonial item, Keeper. 
-		[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch 
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 - Nevermind. Good night.
 	[do DialogueFuncs.play_sfx("sfx_door_close")]...
 	Micah: I'll come by later to pick up the ceremonial item, Keeper.
-	[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_watch
+	[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 							
 ~ branch_placeholder
 if Variables.get_char_var("NPC_3", "watch_state") == 0
 	You have both the watch and the rag. Mary asked you to cleanse the rag and leave the watch untouched. You told her you'd think about it. [do Variables.set_var("placeholder", true)]
-	Do you cleanse the watch or the rag?
+	Will you cleanse the watch or the rag?
 	- The rag. 
-		You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+		You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 6)]
 	- The watch. 
 		You chose to cleanse the watch. [do DialogueFuncs.add_object_to_workbench("pocket_watch")] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 1
@@ -893,7 +855,7 @@ elif Variables.get_char_var("NPC_3", "watch_state") == 3
 	You promised Mary you wouldn't cleanse the watch, but that you would tell the elders it's cleansed anyway. Up to you if you want to keep your promise or not. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 4
 	You have both the watch and the rag. You promised Mary you'd give her the watch untouched, and cleanse the rag for the ceremony. Up to you if you want to keep your promise or not. [do Variables.set_var("placeholder", true)]
-	Do you cleanse the watch or the rag?
+	Will you cleanse the watch or the rag?
 	- The rag. 
 		You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 6)]
 	- The watch. 
@@ -902,15 +864,6 @@ elif Variables.get_char_var("NPC_3", "watch_state") == 5
 	You now have to cleanse the watch for Mary to burn in order to prove her lack of attachment to earthly possessions and be forgiven by the Elders. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
 => start
 
-~ end_watch
-if Variables.get_char_var("NPC_3", "watch_state") == 3
-	Did you cleanse the watch?
-	- Yes. 
-		You chose to cleanse the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
-	- No. 
-		You chose not to cleanse the watch. [do Variables.set_char_var("NPC_3", "watch_state", 3)]
-else
-	=> END
 		
 => END
 

@@ -2,32 +2,50 @@
 => start
 
 ~ start
-
+if Variables.get_char_var("NPC_3", "watch_state") == 3
+	if Variables.get_var("prog_score_special_object_pocket_watch") == 0
+		You kept your promise and chose not to cleanse the watch. => next
+	else
+		You didn't keep your promise and chose to cleanse the watch. [do Variables.set_char_var("NPC_3", "watch_state", 1)] => next
+else
+	=> next
+	
+~ next
 if Variables.get_char_var("NPC_3", "dead") == false
 	if Variables.get_char_var("NPC_2", "pressure") == 0 
 		if Variables.get_char_var("NPC_2", "micah") == false
 			Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Hello, uh. 
 			Micah: The Elders asked me to bring 'em the ceremonial item.
-			*You GIVE the WATCH
-			- You know, Mary won't be dying tonight. She'll ask for forgiveness and burn the watch herself. 
-				Micah: Oh. That's interesting. Didn't think she'd come to her senses. 
-				Micah: Anyway, I'll be going now. See ya. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
+			- You know, Mary won't be dying tonight. She'll ask for forgiveness and burn the watch herself. There you go. 
+				Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Oh. That's interesting. Didn't think she'd come to her senses. 
+				if Variables.get_var("prog_score_special_object_pocket_watch") == 100
+					Micah: The watch does feel lighter.
+					Micah: Anyway, I'll be going now. See ya. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				else 
+					Micah: Hmm. The watch still feels heavy. 
+					Micah: Anyway, I'll be going now. See ya. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 		else 
 			Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Hello, uh. 
-			Micah: I came for the item, like I said. 
+			Micah: I came back for the item. Gotta take it to the Elders.
 			- There you go, Micah.
-				*You GIVE the WATCH
-				Micah: Thanks! 
+				Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks! 
 				Micah: And, uh, well done, Keeper. I'm glad you managed to talk her out of it. 
-				Micah: Anyway, I'll be going now. See ya!
+				if Variables.get_var("prog_score_special_object_pocket_watch") == 100
+					Micah: Huh. The watch feels lighter. 
+					Micah: Anyway, I'll be going now. See ya. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+				else 
+					Micah: Anyway, I'll be going now. See ya. 
+					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 	elif Variables.get_char_var("NPC_2", "pressure") == 1
 		if Variables.get_char_var("NPC_2", "micah") == false
 			Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Uh, hello.
 			Micah: I was just at Mary's, Sarah asked me to go with her. 
 			Micah: And, uh, I think Mary's going to live. 
 			- That's great news, Micah. 
-				Micah:Yeah, well, uh.
+				Micah: Yeah, well, uh.
 				=> branch_um
 			- Good. What do you want?
 				Micah: Well, uh.
@@ -65,81 +83,66 @@ else
 			Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]The Elders asked me to bring the ceremonial item to 'em. 
 			=> branch_item
 		else 
-			Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]I'm here for the ceremonial item, like I said. 
+			Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]I'm back for the ceremonial item. Gotta take it to the Elders.
 			=> branch_item
 
 ~ branch_item
 if Variables.get_char_var("NPC_3", "watch_state") == 6
-	*You GIVE the RAG
+	Micah: ...
 	- Here. Take it. 
-		Micah: Oh. That's not a watch. 
+		Micah: [do DialogueFuncs.play_sfx("sfx_rag")]Oh. That's not a watch. 
 		- Yeah. Slight change of plans. I'll need you to take the watch back to Mary, and the rag to the Elders. Be careful not to mix 'em up.
-			*You GIVE the WATCH
-			Micah: Oh. Okay. Got it. I'll be going now. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
+			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Oh. Okay. Got it. I'll be going now. [do Variables.set_char_var("NPC_3", "watch_state", 2)]
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 elif Variables.get_char_var("NPC_3", "watch_state") == 1 
-	*You GIVE the WATCH
+	Micah: ...
 	- Here. Take it. 
-		Micah: Thanks. I'll be going now. 
-		[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day
+		if Variables.get_var("prog_score_special_object_pocket_watch") == 100
+			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks. Feels lighter. I'll be going now. 
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+		else 
+			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks. Uh, still feels heavy. I'll be going now. 
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 elif Variables.get_char_var("NPC_3", "watch_state") == 3 
-	*You GIVE the WATCH
+	Micah: ...
 	- Here. Take it. 
-		Micah: Thanks. Uh, feels heavy. I'll be going now. 
-		[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day
+		Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks. Uh, still feels heavy. I'll be going now. 
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 else
-	*You GIVE the RAG
+	Micah: ...
 	- Here. Take it. 
 		if Variables.get_char_var("NPC_2", "micah") == false
-			Micah: Oh. That's not a watch. 
+			Micah: [do DialogueFuncs.play_sfx("sfx_rag")]Oh. That's not a watch. 
 			- Yeah. Slight change of plans. 
 				Micah: Oh. Okay. I'll be going now. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
+				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 		else 
 			Micah: Thanks. I'll be going now. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
 		
 ~ branch_um
-if Variables.get_char_var("NPC_3", "watch_state") == 7
-	Micah: Sarah stayed with her a lil' longer.
-	Micah: Told me to come and tell ya. 
-	Micah: Anyway, I'll be going back to her now. See ya. 
-	[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
+if Variables.get_char_var("NPC_3", "watch_state") == 2
+	Micah: Mary asked me to bring you the watch back, to cleanse it. 
+	Micah: She needs it for the other ceremony now, to burn it and be forgiven, she said. [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.add_object_to_workbench("pocket_watch")]
+	- I'll have it ready in a bit. 
+		Micah: I'll wait outside. Watchin' you do this stuff makes me uneasy. [do Variables.set_char_var("NPC_1", "wait", true)] 
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 else
-	if Variables.get_char_var("NPC_3", "watch_state") == 2
-		Micah: Mary asked me to bring you the watch back, to cleanse it. 
-		Micah: She needs it for the other ceremony now, to burn it and be forgiven, she said. 
-		*You TAKE the WATCH and CLEANSE it
-		do DialogueFuncs.add_object_to_workbench("pocket_watch")
-		*You GIVE the WATCH back
-		Micah: Thanks. I'll go and take it back to her. See ya. 
-		[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
-	else
-		Micah: Mary asked me to bring her the watch, cleansed.
-		Micah: She needs it for the other ceremony, to burn it and be forgiven, she said. 
-		- Oh, um, well, I've already cleansed it. [if Variables.get_char_var("NPC_3", "watch_state") == 1]
-			*You GIVE the WATCH 
-			Micah: Hmm. Thanks. I'll go and take it to her. See ya. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
-		- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
-			*You CLEANSE the WATCH
-			do DialogueFuncs.add_object_to_workbench("pocket_watch")
-			*You GIVE him the WATCH
-			- There you go. 
-				Micah: Thanks. I'll go and take it to her. See ya. 
-				[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day 
-
-~ end_of_day
-if Variables.get_char_var("NPC_3", "dead") == false
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
-elif Variables.get_char_var("NPC_3", "relationship") == 1
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
-elif Variables.get_char_var("NPC_3", "watch_state") == 2 and Variables.get_char_var("NPC_3", "relationship") == 4 and Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == true
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag.webp")
-elif Variables.get_char_var("NPC_3", "watch_state") == 2
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag_Watch_On_Neck.webp")
-else
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Watch.webp")
+	Micah: Mary asked me to tell you to cleanse the watch, after all. 
+	Micah: She needs it for the other ceremony, to burn it and be forgiven, she said. 
+	- Oh, um, well, I've already cleansed it. [if Variables.get_char_var("NPC_3", "watch_state") == 1]
+		if Variables.get_var("prog_score_special_object_pocket_watch") == 100
+			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Hmm. Feels lighter, indeed. I'll go and take it to her. See ya.
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+		else
+			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Hmm. Feels heavy, still. I'll go and take it to her. See ya. 
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END 
+	- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 3]
+		Micah: [do DialogueFuncs.add_object_to_workbench("pocket_watch")]I'll wait outside. Watchin' you do this stuff makes me uneasy.[do Variables.set_char_var("NPC_1", "wait", true)] 
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
+	- Just give me a second. I'll have it ready in no time. [if Variables.get_char_var("NPC_3", "watch_state") == 6]
+		Micah: [do DialogueFuncs.add_object_to_workbench("pocket_watch")]I'll wait outside. Watchin' you do this stuff makes me uneasy.[do Variables.set_char_var("NPC_1", "wait", true)] 
+		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 
 => END
 
