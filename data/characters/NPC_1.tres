@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterDefintion" load_steps=3 format=3 uid="uid://c3pfis3nstlxn"]
 
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_454m6"]
-[ext_resource type="Texture2D" uid="uid://cup2ho167u2h0" path="res://2d_assets/characters/Micah_inshop.webp" id="2_454m6"]
+[ext_resource type="Texture2D" uid="uid://b0srt73xp82h7" path="res://2d_assets/characters/Micah_inshop.webp" id="2_454m6"]
 
 [resource]
 script = ExtResource("1_454m6")

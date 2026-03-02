@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bntkja5x3is5f"]
 
 [ext_resource type="Script" uid="uid://fhtjg3on0yx1" path="res://scripts/object_manipulation/workbench.gd" id="1_qyrgi"]
-[ext_resource type="Texture2D" uid="uid://bikc7dwrnk0x8" path="res://2d_assets/backgrounds/WorkbenchView_Background.webp" id="2_qyrgi"]
+[ext_resource type="Texture2D" uid="uid://dp5o857sg1vx" path="res://2d_assets/backgrounds/Workbench_simple.webp" id="2_qyrgi"]
 [ext_resource type="Texture2D" uid="uid://d1uet5nwq40sq" path="res://2d_assets/backgrounds/WorkbenchView_Background_DoneArea.webp" id="3_qyrgi"]
 
 [sub_resource type="Curve" id="Curve_qyrgi"]
@@ -41,5 +41,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84280574, 0.11785263, 0.43
 
 [node name="WorkbenchDoneAreaOverlay" type="Sprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.070225954, 0, 0, 0, -3.0696738e-09, 1, 0, -0.070225954, -4.371139e-08, 0, -0.007363349, 1.9036122e-09)
+transform = Transform3D(0.070225954, 0, 0, 0, -3.0696738e-09, 1, 0, -0.070225954, -4.371139e-08, 0.0052860975, -0.00736323, -0.002887724)
 texture = ExtResource("3_qyrgi")
