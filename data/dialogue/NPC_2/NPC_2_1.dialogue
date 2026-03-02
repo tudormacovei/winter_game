@@ -72,7 +72,8 @@ else
 			- What I mean is, there's nothing we can do about it. 
 				Sarah: What if there were? 
 				- What do you mean?
-					Sarah: Maybe you could talk to her before the ceremony? Get her to see the light?
+					Sarah: Maybe you could talk to her before the ceremony? Get her to see the light? 
+					Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 					- I could try.
 						Sarah: Please do. Maybe she can be saved yet. [do Variables.set_char_var("NPC_2", "relationship", 4)] => branch_main
 					- Not my problem. 
@@ -99,6 +100,7 @@ else
 				Sarah: Well, just make her see her husband's death as something good. Something she should be happy about.
 				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 				Sarah: Isn't that beautiful? 
+				Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 				- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 					Sarah: *Her FACE turns HAPPY
 					Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
@@ -115,6 +117,7 @@ else
 			Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
+			Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
@@ -133,6 +136,7 @@ else
 			Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
+			Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
@@ -159,6 +163,7 @@ else
 					Sarah: What if there were? 
 					- What do you mean?
 						Sarah: Maybe you could talk to her before the ceremony? Get her to see the light?
+						Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 						- I could try.
 							Sarah: Please do. Maybe she can be saved yet. [do Variables.set_char_var("NPC_2", "relationship", 4)] => branch_main
 						- Not my problem. 
@@ -185,6 +190,7 @@ else
 					Sarah: Well, just make her see her husband's death as something good. Something she should be happy about.
 					Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 					Sarah: Isn't that beautiful? 
+					Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 					- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 						Sarah: *Her FACE turns HAPPY
 						Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
@@ -201,6 +207,7 @@ else
 				Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
 				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 				Sarah: Isn't that beautiful? 
+				Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 				- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 					Sarah: *Her FACE turns HAPPY
 					Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
@@ -219,6 +226,7 @@ else
 				Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
 				Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 				Sarah: Isn't that beautiful? 
+				Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 				- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 					Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
 				- Don't think that would help. People have already tried. 
@@ -233,6 +241,7 @@ else
 			Sarah: Well, just convince her to see her husband's death as something good. Something she should be happy about.
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
+			Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 			- Okay Sarah, I'll try. But don't get your hopes up. She's not the easiest person to talk to.
 				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. [do Variables.set_char_var("NPC_2", "relationship", 5)] => branch_main
@@ -249,6 +258,7 @@ else
 			Sarah: Maybe you could try to convince her that her husband's death was good. Something she should be happy about.
 			Sarah: He wasn't marked for his sins. He died picking apples. The most natural death one could ask for.
 			Sarah: Isn't that beautiful? 
+			Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. 
 			- I said there's nothing we can do, Sarah. It'd be blasphemy. 
 				Sarah: Forget I said anything. Sorry. 
 				=> branch_main
@@ -288,7 +298,8 @@ else
 		- You can always talk to me, Sarah. So what do you think we should do, then?
 			Sarah: Maybe you could try to convince her that her husband's death was good. Something she should be happy about.
 			Sarah: He wasn't marked for his sins. He had the most natural death one could ask for.
-			Sarah: Isn't that beautiful?  [do Variables.set_char_var("NPC_2", "relationship", 5)]
+			Sarah: Isn't that beautiful?  
+			Sarah: I'm sure the Elders would forgive her if she gave up her grieving ways. [do Variables.set_char_var("NPC_2", "relationship", 5)]
 			- Okay Sarah, I'll try my best. I promise. 
 				Sarah: *Her FACE turns HAPPY
 				Sarah: Thank you. Really. => branch_main
@@ -299,8 +310,8 @@ else
 			Sarah: Thanks! [do Variables.set_char_var("NPC_2", "relationship", 4)]
 			=> branch_main
 - What? [if Variables.get_var("huh") == false]
-	Sarah: You okay? You're the one who told me yesterday. [do Variables.set_var("huh", true)]
-	- Oh, I forgot I told you. Of course. => branch_mary
+	Sarah: You okay? You're the one who told me yesterday, remember? [do Variables.set_var("huh", true)]
+	- Oh, I just forgot I told you. Of course. => branch_mary
 	- Don't recall. 
 		Sarah: You told me they're killing Widow Mary in the square tonight for refusing to stop grieving her husband.
 		- Right. I'm getting old, it seems. I remember now.  => branch_mary 
