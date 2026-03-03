@@ -76,7 +76,7 @@ data = PackedVector3Array(-0.3319, 0.039699998, -0.021499999, -0.3313, 0.021, -0
 [node name="Rag" type="Area3D"]
 script = ExtResource("1_b33lf")
 is_special_object = true
-sticker_count = 5
+sticker_count = 0
 placement_mesh = SubResource("ArrayMesh_vjjex")
 rng_seed = 0
 sticker_scene = ExtResource("3_bog5l")
@@ -87,6 +87,12 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 material_override = ExtResource("3_lsmaj")
 mesh = SubResource("ArrayMesh_lsmaj")
 skeleton = NodePath("")
+
+[node name="StickerPeel" parent="MeshInstance3D" instance=ExtResource("3_bog5l")]
+transform = Transform3D(0.75, 0, 0, 0, -0.75, -1.13246855e-07, 0, 1.13246855e-07, -0.75, 0.19868055, -0.09034863, 0)
+
+[node name="StickerPeel2" parent="MeshInstance3D" instance=ExtResource("3_bog5l")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 1.4305115e-07, 0, -1.4305115e-07, 0.6, -0.14338788, 0.09640704, -2.7422269e-08)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
