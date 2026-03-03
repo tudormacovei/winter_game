@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=19 format=3 uid="uid://bj13kkf7ghsl4"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=20 format=3 uid="uid://bj13kkf7ghsl4"]
 
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="1_4hvdw"]
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_7tgdb"]
 [ext_resource type="Resource" uid="uid://dnjv2qqfanwuo" path="res://data/dialogue/NPC_1/NPC_1_1.dialogue" id="3_rlxhn"]
 [ext_resource type="PackedScene" uid="uid://bxmo5x5kvp8tq" path="res://scenes/object_manipulation/objects/chess_set.tscn" id="4_tafq0"]
 [ext_resource type="Resource" uid="uid://dg7byaup6bjsr" path="res://data/dialogue/NPC_2/NPC_2_1.dialogue" id="5_7mcph"]
-[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="7_5u7sl"]
 [ext_resource type="PackedScene" uid="uid://bl5cie1nbmjtb" path="res://scenes/object_manipulation/objects/book_01.tscn" id="7_l4lrq"]
 [ext_resource type="Resource" uid="uid://dc2tolseshfqd" path="res://data/dialogue/NPC_3/NPC_3_1.dialogue" id="7_tafq0"]
 [ext_resource type="Resource" uid="uid://dqfkyjuyeryi8" path="res://data/dialogue/NPC_2/NPC_2_2.dialogue" id="8_5u7sl"]
 [ext_resource type="PackedScene" uid="uid://d2sa4je13i7jc" path="res://scenes/object_manipulation/objects/milk_carton_variant_01.tscn" id="8_o05bc"]
 [ext_resource type="Resource" uid="uid://bu00kv7gx3usw" path="res://data/dialogue/NPC_1/NPC_1_2.dialogue" id="9_5u7sl"]
+[ext_resource type="PackedScene" uid="uid://gfjoau0fs0gt" path="res://scenes/object_manipulation/objects/milk_carton_variant_02.tscn" id="11_f0opt"]
+[ext_resource type="PackedScene" uid="uid://bov6fm3d5y6xm" path="res://scenes/object_manipulation/objects/flask.tscn" id="11_o05bc"]
 [ext_resource type="Resource" uid="uid://bnvprtkx16co" path="res://data/dialogue/NPC_1/NPC_1_3.dialogue" id="11_q24my"]
 
 [sub_resource type="Resource" id="Resource_7tgdb"]
@@ -21,7 +22,7 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 [sub_resource type="Resource" id="Resource_p4oql"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("5_7mcph")
-objects = Array[PackedScene]([ExtResource("7_5u7sl")])
+objects = Array[PackedScene]([ExtResource("11_o05bc")])
 start_delay_seconds = 3.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
@@ -41,7 +42,7 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 [sub_resource type="Resource" id="Resource_o05bc"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("9_5u7sl")
-objects = Array[PackedScene]([ExtResource("7_5u7sl")])
+objects = Array[PackedScene]([ExtResource("11_f0opt")])
 start_delay_seconds = 4.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 

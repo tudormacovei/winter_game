@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bs7cfim84lxe3"]
+
+[ext_resource type="Texture2D" uid="uid://bqkcq8ewbbkdn" path="res://3d_assets/manipulation_objects/flask/flask_texture.webp" id="1_wj1xw"]
+
+[resource]
+albedo_texture = ExtResource("1_wj1xw")
