@@ -189,9 +189,9 @@ else
 						Sarah: I'm... surprised to hear you say that.
 						Sarah: That's... great news. 
 						Sarah: Thank you. 
-						Sarah: I'm going to my room, I have to process this. 
+						Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 						Sarah: *Her FACE turns HAPPY
-						Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
+						Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 						- Good night, Sarah. 
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- I was a bit of an asshole to you earlier. I'm sorry. 
@@ -199,9 +199,9 @@ else
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
 						Sarah: Oh. I don't know what to say.
-						Sarah: I'm going to my room, I have to process this. 
+						Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 						Sarah: *Her FACE turns HAPPY
-						Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
+						Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow!
 						Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 						- Good night, Sarah. 
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
@@ -212,9 +212,9 @@ else
 						Sarah: I'm... surprised to hear you say that.
 						Sarah: That's... great news. 
 						Sarah: Thank you. 
-						Sarah: I'm going to my room, I have to process this. 
+						Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 						Sarah: *Her FACE turns HAPPY
-						Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
+						Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 						- Good night, Sarah. 
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- I was a bit of an asshole to you earlier. I'm sorry. 
@@ -222,9 +222,9 @@ else
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
 						Sarah: Oh. I don't know what to say.
-						Sarah: I'm going to my room, I have to process this. 
+						Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 						Sarah: *Her FACE turns HAPPY
-						Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
+						Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow!
 						Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 						- Good night, Sarah. 
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
@@ -657,9 +657,9 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 		Sarah: How come?
 		- I realized I was an asshole to you earlier. I wanted to try to make up for it. I know how much she means to you.
 			Sarah: Oh. I don't know what to say.
-			Sarah: I'm going to my room, I have to process this. 
+			Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 			Sarah: *Her FACE turns HAPPY
-			Sarah: And go to sleep so that I wake up as early as possible so I can go see her!
+			Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow!
 			Sarah: You've made me happy. Thank you. I forgive you. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 			- Good night, Sarah. 
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
@@ -668,9 +668,9 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			Sarah: I'm... surprised you've realized that.
 			Sarah: That's... great news. 
 			Sarah: Thank you. 
-			Sarah: I'm going to my room, I have to process this. 
+			Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 			Sarah: *Her FACE turns HAPPY
-			Sarah: And go to sleep so that I wake up as early as possible so I can go see her! [do Variables.set_char_var("NPC_2", "relationship", 5)]
+			Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 			- Good night, Sarah. 
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- I was an asshole to you earlier. I'm sorry. 

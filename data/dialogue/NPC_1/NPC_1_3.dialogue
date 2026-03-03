@@ -7,27 +7,27 @@ if Variables.get_char_var("NPC_1", "wait") == true
 	- Yes. Here it is.
 		if Variables.get_var("prog_score_special_object_pocket_watch") == 0
 			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Hmm. Feels heavy, still. I'll take it to her. See ya. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		elif Variables.get_var("prog_score_special_object_pocket_watch") == 100
 			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks. Feels much lighter. I'll take it to her. See ya. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		else
 			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks. Feels a bit lighter. I'll take it to her. See ya. 
-			[do DialogueFuncs.play_sfx("sfx_door_close")]... => end_of_day
+			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 else 
-	=> end_of_day
+	=> END
 
-~ end_of_day
-if Variables.get_char_var("NPC_3", "dead") == false
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
-elif Variables.get_char_var("NPC_3", "relationship") == 1
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
-elif Variables.get_char_var("NPC_3", "watch_state") == 2 and Variables.get_char_var("NPC_3", "relationship") == 4 and Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == true
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag.webp")
-elif Variables.get_char_var("NPC_3", "watch_state") == 2
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag_Watch_On_Neck.webp")
-else
-	do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Watch.webp")
+#~ end_of_day
+#if Variables.get_char_var("NPC_3", "dead") == false
+	#do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
+#elif Variables.get_char_var("NPC_3", "relationship") == 1
+	#do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
+#elif Variables.get_char_var("NPC_3", "watch_state") == 2 and Variables.get_char_var("NPC_3", "relationship") == 4 and Variables.get_char_var("NPC_3", "thinks_watch_is_fixed") == true
+	#do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag.webp")
+#elif Variables.get_char_var("NPC_3", "watch_state") == 2
+	#do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Rag_Watch_On_Neck.webp")
+#else
+	#do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Burned_Watch.webp")
 
 => END
 

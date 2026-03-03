@@ -22,28 +22,33 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("5_7mcph")
 objects = Array[PackedScene]([ExtResource("7_5u7sl")])
+start_delay_seconds = 3.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_l4lrq"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("7_tafq0")
 objects = Array[PackedScene]([ExtResource("4_tafq0"), ExtResource("7_l4lrq"), ExtResource("8_o05bc")])
+start_delay_seconds = 4.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_q24my"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("8_5u7sl")
+start_delay_seconds = 4.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_o05bc"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("9_5u7sl")
 objects = Array[PackedScene]([ExtResource("7_5u7sl")])
+start_delay_seconds = 4.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_f0opt"]
 script = ExtResource("1_7tgdb")
 dialogue = ExtResource("11_q24my")
+start_delay_seconds = 3.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [resource]
