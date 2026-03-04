@@ -194,7 +194,7 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 	- You know I can't do that.  => branch_no_lie
 	- I can't promise anything.  
 		Mary: Just... think about it, will you? For me. 
-		Mary: I brought this old rag of mine for you to cleanse as a replacement for the ceremony. Just in case. [do Variables.set_char_var("NPC_3", "relationship", 4)]
+		Mary: I brought this old rag of mine. You can use it for the ceremony instead. Just in case. [do Variables.set_char_var("NPC_3", "relationship", 4)]
 		- I'll see. Goodbye, Mary.
 			Mary: Farewell. And hurry, Keeper. My time is running out. 
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END

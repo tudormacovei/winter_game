@@ -65,7 +65,7 @@ else
 		
 
 ~ branch_placeholder
-The next line is a temporary placeholder for the endings in which Mary dies. It's going to be replaced with the window mechanic. [do Variables.set_var("placeholder", true)]
+#The next line is a temporary placeholder for the endings in which Mary dies. It's going to be replaced with the window mechanic. [do Variables.set_var("placeholder", true)]
 if Variables.get_char_var("NPC_3", "relationship") == 1
 	You wake up and you look out the window. You see nothing. The ceremonial altar is empty. 
 if Variables.get_char_var("NPC_3", "relationship") == 2
@@ -171,7 +171,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 		- That's what happens to heretics. Make sure you don't forget. 
 			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
-	- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 3]
+	- Go, Sarah. Look out the window. [if Variables.get_char_var("NPC_3", "relationship") <= 4]
 		Sarah: [do DialogueFuncs.play_sfx("sfx_footsteps")]...[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]
 		- That's what happens to those who go against them. Make sure you don't forget.
 			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END

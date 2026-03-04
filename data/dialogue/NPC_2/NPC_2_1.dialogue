@@ -32,7 +32,7 @@ Sarah: Oh, well I'm sorry I stayed up till midnight to help you close shop. [do 
 			Sarah: *Her FACE turns NEUTRAL => branch_main
 	- Just forget it. => branch_main
 - You should watch your tone. 
-	Sarah: YOU should remember that you're not my father. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+	Sarah: You should remember that you're not my father. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 	- Thank the Goddess I'm not. 
 		Sarah: So stop trying to be.  => branch_main
 	- No, but I'm taking care of you and feeding you, so watch that tone. 
