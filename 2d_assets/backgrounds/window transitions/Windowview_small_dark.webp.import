@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddaf67iv4x4t2"
-path="res://.godot/imported/Micah_inshop.webp-4a1738b8ef86b34ebe529b5229c86787.ctex"
+uid="uid://rjc1vxueuj28"
+path="res://.godot/imported/Windowview_small_dark.webp-3ead44f4626d18f6254ea807893ba776.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/Micah_inshop.webp"
-dest_files=["res://.godot/imported/Micah_inshop.webp-4a1738b8ef86b34ebe529b5229c86787.ctex"]
+source_file="res://2d_assets/backgrounds/window transitions/Windowview_small_dark.webp"
+dest_files=["res://.godot/imported/Windowview_small_dark.webp-3ead44f4626d18f6254ea807893ba776.ctex"]
 
 [params]
 
