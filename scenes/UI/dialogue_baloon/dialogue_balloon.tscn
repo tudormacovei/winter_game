@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bktr4eceqgheb"]
+[gd_scene load_steps=16 format=3 uid="uid://bktr4eceqgheb"]
 
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_5sgtx"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_j8juc"]
 [ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_kvndo"]
+[ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="3_fm55w"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_kvndo"]
+[ext_resource type="FontFile" uid="uid://b4wicr355a63g" path="res://2d_assets/fonts/avara/Avara-Bold.otf" id="4_v1ja5"]
+[ext_resource type="FontFile" uid="uid://do1cr3dldia4n" path="res://2d_assets/fonts/avara/Avara-BoldItalic.otf" id="5_dq3cj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -121,6 +124,7 @@ offset_right = 1255.0
 offset_bottom = 252.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/margin_bottom = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainerDialogue"]
 clip_children = 2
@@ -146,6 +150,10 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_fm55w")
+theme_override_fonts/bold_font = ExtResource("4_v1ja5")
+theme_override_fonts/bold_italics_font = ExtResource("5_dq3cj")
+theme_override_fonts/italics_font = ExtResource("5_dq3cj")
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -155,6 +163,10 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_fm55w")
+theme_override_fonts/bold_font = ExtResource("4_v1ja5")
+theme_override_fonts/bold_italics_font = ExtResource("5_dq3cj")
+theme_override_fonts/italics_font = ExtResource("5_dq3cj")
 text = "Dialogue..."
 
 [node name="Control" type="Control" parent="Balloon/MarginContainerDialogue/PanelContainer/MarginContainer/HBoxContainer"]
@@ -197,6 +209,7 @@ hide_failed_responses = true
 [node name="ResponseExample" type="Button" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu"]
 layout_mode = 2
 theme = ExtResource("2_kvndo")
+theme_override_constants/h_separation = 4
 text = "Response example"
 alignment = 0
 autowrap_mode = 2
