@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://1l8gcdx5j14x"]
+[gd_scene load_steps=6 format=3 uid="uid://1l8gcdx5j14x"]
 
 [ext_resource type="Script" uid="uid://bpfd6anomp51r" path="res://scripts/user_interface/main_menu.gd" id="1_qwnig"]
 [ext_resource type="FontFile" uid="uid://bo4qdxd7tfs3f" path="res://2d_assets/fonts/PirataOne-Regular.ttf" id="1_yonvy"]
+[ext_resource type="Texture2D" uid="uid://6jf7i3vmincq" path="res://2d_assets/backgrounds/demo_day_1/WindowView_Full.webp" id="3_tfcbk"]
 [ext_resource type="PackedScene" uid="uid://ddacxnsn8aw4j" path="res://scenes/UI/settings_component.tscn" id="4_tfcbk"]
 
 [sub_resource type="Theme" id="Theme_qwnig"]
@@ -25,7 +26,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.59265405, 0.25896224, 0.5788266, 1)
+color = Color(0.5921569, 0.25882354, 0.5803922, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("3_tfcbk")
+stretch_mode = 6
 
 [node name="MarginContainerExterior" type="MarginContainer" parent="ColorRect"]
 layout_mode = 1
@@ -34,7 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 64
+theme_override_constants/margin_left = 26
 theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
@@ -50,7 +59,7 @@ text = "Winter Game Project!"
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 64
+theme_override_constants/margin_top = -26
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer"]
 layout_mode = 2
