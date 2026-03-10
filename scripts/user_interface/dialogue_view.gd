@@ -2,13 +2,12 @@ class_name DialogueView extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Disabled, useful for instantaneous change of window background
-	#Variables.state_changed.connect(update_window_view)
-	pass
+	# Connected for instantaneous change of window background
+	Variables.state_changed.connect(update_window_view)
 
 ## Updates the sprites for the window view
 ## TODO: Update the sprite for the window view that can be seen when you click
-func update_window_view() -> void:
+func update_window_view(_var_name: String) -> void:
 	var path = Variables.get_var("prog_window_background_path")
 	var texture := load(path) as Texture2D
 	if texture == null:
