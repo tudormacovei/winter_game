@@ -68,7 +68,7 @@ else
 #The next line is a temporary placeholder for the endings in which Mary dies. It's going to be replaced with the window mechanic. [do Variables.set_var("placeholder", true)]
 if Variables.get_char_var("NPC_3", "relationship") == 1
 	You wake up and you look out the window. You see nothing. The ceremonial altar is empty. 
-if Variables.get_char_var("NPC_3", "relationship") == 2
+elif Variables.get_char_var("NPC_3", "relationship") == 2
 	You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. There is a burned watch on a table next to her.
 elif Variables.get_char_var("NPC_3", "relationship") == 3
 	You wake up and look out the window. You can see the widow's lifeless body after the sacrificial ceremony, exposed in the town square for everyone to see. 

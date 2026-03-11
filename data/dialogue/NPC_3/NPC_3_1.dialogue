@@ -9,7 +9,7 @@ do Variables.add_local("counter", 0)
 => start
 
 ~ start 
-Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Good day, Keeper. Time is short, so I'll be brief. I want the watch back. Untouched. 
+Mary: [do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_light.webp")][do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Good day, Keeper. Time is short, so I'll be brief. I want the watch back. Untouched. 
 - Hello, Mary. Why is that? => branch_why
 - That's not possible. I haven't cleansed it yet. => branch_no
 - Forget the watch. How are you feeling?

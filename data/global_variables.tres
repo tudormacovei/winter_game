@@ -128,7 +128,7 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 script = ExtResource("1_vywdb")
 name = "prog_window_background_path"
 description = "Path to a shop window background. Will instanly change the window background visible in the shop. Must use path to the _Shop_ version of the window view, NOT the _Full_ version."
-default_value = ""
+default_value = "res://2d_assets/backgrounds/window_transitions/Windowview_small_morelight.webp"
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [resource]

@@ -841,27 +841,27 @@ Sarah: What is it?
 							
 ~ branch_placeholder
 if Variables.get_char_var("NPC_3", "watch_state") == 0
-	You have both the watch and the rag. Mary asked you to cleanse the rag and leave the watch untouched. You told her you'd think about it. [do Variables.set_var("placeholder", true)]
+	[do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_lessdark.webp")]You have both the watch and the rag. Mary asked you to cleanse the rag and leave the watch untouched. You told her you'd think about it. [do Variables.set_var("placeholder", true)]
 	Will you cleanse the watch or the rag?
 	- The rag. 
 		You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 6)]
 	- The watch. 
 		You chose to cleanse the watch. [do DialogueFuncs.add_object_to_workbench("pocket_watch")] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 1
-	You now have to cleanse the watch for Mary's ceremony. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
+	[do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_lessdark.webp")]You now have to cleanse the watch for Mary's ceremony. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 2
-	You now have to cleanse the rag for Mary's ceremony. [do DialogueFuncs.add_object_to_workbench("rag")][do Variables.set_var("placeholder", true)]
+	[do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_lessdark.webp")]You now have to cleanse the rag for Mary's ceremony. [do DialogueFuncs.add_object_to_workbench("rag")][do Variables.set_var("placeholder", true)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 3
-	You promised Mary you wouldn't cleanse the watch, but that you would tell the elders it's cleansed anyway. Up to you if you want to keep your promise or not. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
+	[do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_lessdark.webp")]You promised Mary you wouldn't cleanse the watch, but that you would tell the elders it's cleansed anyway. Up to you if you want to keep your promise or not. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 4
-	You have both the watch and the rag. You promised Mary you'd give her the watch untouched, and cleanse the rag for the ceremony. Up to you if you want to keep your promise or not. [do Variables.set_var("placeholder", true)]
+	[do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_lessdark.webp")]You have both the watch and the rag. You promised Mary you'd give her the watch untouched, and cleanse the rag for the ceremony. Up to you if you want to keep your promise or not. [do Variables.set_var("placeholder", true)]
 	Will you cleanse the watch or the rag?
 	- The rag. 
 		You chose to cleanse the rag. [do DialogueFuncs.add_object_to_workbench("rag")] [do Variables.set_char_var("NPC_3", "watch_state", 6)]
 	- The watch. 
 		You chose to cleanse the watch. [do DialogueFuncs.add_object_to_workbench("pocket_watch")] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 elif Variables.get_char_var("NPC_3", "watch_state") == 5
-	You now have to cleanse the watch for Mary to burn in order to prove her lack of attachment to earthly possessions and be forgiven by the Elders. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
+	[do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/window_transitions/Windowview_small_lessdark.webp")]You now have to cleanse the watch for Mary to burn in order to prove her lack of attachment to earthly possessions and be forgiven by the Elders. [do DialogueFuncs.add_object_to_workbench("pocket_watch")][do Variables.set_var("placeholder", true)]
 => start
 
 		
