@@ -98,6 +98,7 @@ func _play_next_interaction():
 	if current_interaction_index >= _day_resources[current_day_index].interactions.size():
 		current_day_index += 1
 		current_interaction_index = 0
+		Variables.set_var(Config.WINDOW_VAR_KEY, Config.START_DAY_WINDOW_SPRITE_PATH)
 
 		if current_day_index >= _day_resources.size():
 			print("GameManager: All days completed!")

@@ -14,11 +14,16 @@ const SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX: String = "prog_score_special_object_"
 const SCORE_SIMPLE_OBJECTS_VAR_KEY: String = "prog_score_simple_objects" # NOTE: This needs to be synced with the variable name in global_variables.tres
 const SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR: float = 0.2 # Higher value = score will change quicker based on recent performance. Value should be between 0 and 1.
 
+const WINDOW_VAR_KEY: String = "prog_window_background_path"
+
 const DIALOGUE_TAGS: Dictionary = {
     SPRITE_CHANGE = "sprite",
 }
 
 #region Game Config
+
+# TODO: Determine this at runtime for the default window that is loaded in the scene
+const START_DAY_WINDOW_SPRITE_PATH: String = "res://2d_assets/backgrounds/window_transitions/Windowview_small_morelight.webp"
 
 #region Audio Config
 
