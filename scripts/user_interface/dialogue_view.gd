@@ -7,7 +7,7 @@ func _ready() -> void:
 
 ## Updates the sprites for the window view
 ## TODO: Update the sprite for the window view that can be seen when you click
-func update_window_view(_var_name: String) -> void:
+func update_window_view(_var_name: String = "") -> void:
 	var path = Variables.get_var("prog_window_background_path")
 	var texture := load(path) as Texture2D
 	if texture == null:
