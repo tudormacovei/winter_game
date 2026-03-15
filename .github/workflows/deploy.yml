@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to itch.io
-        uses: Ayowel/butler-to-itch@v1.0.0
+        uses: Ayowel/butler-to-itch@v1.2.0
         with:
           butler_key: ${{ secrets.BUTLER_CREDENTIALS }}
           itch_user: tudormacovei
