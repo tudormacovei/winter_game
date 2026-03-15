@@ -28,7 +28,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Day X complete."
 
-[node name="DayEndBgFullscreen" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640.5, 360.5)
 scale = Vector2(0.33359376, 0.3337963)
 texture = ExtResource("1_dbw7d")

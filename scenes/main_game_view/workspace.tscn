@@ -32,6 +32,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("4_x8h8r")]
+visible = false
 
 [node name="Managers" type="Node" parent="."]
 
@@ -69,3 +70,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_kvbp6")
 metadata/_edit_use_anchors_ = true
+
+[editable path="UI/DayEndScreen"]
