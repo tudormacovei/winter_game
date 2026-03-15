@@ -10,3 +10,4 @@ addons/imgui-godot/bin/
 
 # VSCode ignores
 .vscode/settings.json
+/exports

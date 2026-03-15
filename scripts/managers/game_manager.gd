@@ -48,17 +48,11 @@ func dialogue_add_object_to_workbench(object_name: String):
 func _load_day_resources():
 	_day_resources.clear()
 
-	var dir = DirAccess.open(Config.DAY_RESOURCES_PATH)
-	if dir:
-		dir.list_dir_begin()
-		var files = []
-		for file_name in dir.get_files():
-			if file_name.ends_with(".tres"):
-				files.append(file_name)
+	var files = Array(ResourceLoader.list_directory(Config.DAY_RESOURCES_PATH))
 
-		# Sort filenames alphabetically
-		files.sort()
-		for f in files:
+	# Sort filenames alphabetically
+	files.sort()
+	for f in files:
 			var resource = load(Config.DAY_RESOURCES_PATH + f)
 			if resource and resource is DayDefinition:
 				_day_resources.append(resource)
@@ -69,15 +63,8 @@ func _load_day_resources():
 func _load_character_resources():
 	_character_dict.clear()
 
-	var dir = DirAccess.open(Config.CHARACTER_RESOURCES_PATH)
-	if dir:
-		dir.list_dir_begin()
-		var files = []
-		for file_name in dir.get_files():
-			if file_name.ends_with(".tres"):
-				files.append(file_name)
-
-		for f in files:
+	var files = Array(ResourceLoader.list_directory(Config.CHARACTER_RESOURCES_PATH))
+	for f in files:
 			var resource = load(Config.CHARACTER_RESOURCES_PATH + f)
 			if resource and resource is CharacterDefinition:
 				if resource.character_id in _character_dict:

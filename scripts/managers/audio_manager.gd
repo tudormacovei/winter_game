@@ -2,8 +2,6 @@
 # Does not decide when to play audio, just provides an interface for other scripts to do so.
 extends Node
 
-const VALID_AUDIO_EXTENSIONS := ["wav", "ogg", "mp3"]
-
 const SFX_POLYPHONY := 16
 const SFX_DIALOGUE_LETTER_POLYPHONY := 32
 
@@ -54,23 +52,13 @@ func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db:
 
 func _preload_streams(path: String) -> Dictionary:
 	var streams: Dictionary = {}
-	var dir = DirAccess.open(path)
-	if not dir:
-		Utils.debug_error("AudioManager: Could not open path '%s'" % path)
-		return streams
 
-	for file_name in dir.get_files():
-		var ext = file_name.get_extension().to_lower()
-		if not ext in VALID_AUDIO_EXTENSIONS:
-			continue
-
-		var key = file_name.get_basename()
+	for file_name in ResourceLoader.list_directory(path):
 		var full_path = path.path_join(file_name)
 		var stream = ResourceLoader.load(full_path)
-		if not stream:
-			Utils.debug_error("AudioManager: Failed to load audio stream at '%s'" % full_path)
+		if not stream is AudioStream:
 			continue
-		streams[key] = stream
+		streams[file_name.get_basename()] = stream
 
 	return streams
 

@@ -7,7 +7,7 @@ extends Node
 
 # UI Elements
 @onready var _day_end_screen := %DayEndScreen
-@onready var _day_end_screen_label: Label = %DayCompleteText
+@onready var _day_end_screen_label: Label = %DayEndScreen.get_node("%DayCompleteText")
 @onready var _dialogue_view := %DialogueView
 
 var balloon_layer: CanvasLayer = null
