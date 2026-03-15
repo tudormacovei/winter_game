@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=10 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bfegigj2pr0lh" path="res://scenes/UI/day_end_screen.tscn" id="3_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
-[ext_resource type="Script" uid="uid://gij5rtfvopi4" path="res://addons/accumulation_motion_blur/accumulation_motion_blur.gd" id="8_kvbp6"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -62,13 +61,3 @@ light_energy = 0.5
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.42365292, -0.7597822, 0.49320307, -0.75856656, 3.9338993e-08, 0.6515956, -0.49507076, -0.6501777, -0.5763453, -3.8702822, 1.3785387, 0)
 light_energy = 0.3
-
-[node name="MotionBlurLayer" type="CanvasLayer" parent="."]
-
-[node name="MotionBlurTextureRect" type="TextureRect" parent="MotionBlurLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("8_kvbp6")
-metadata/_edit_use_anchors_ = true
-
-[editable path="UI/DayEndScreen"]
