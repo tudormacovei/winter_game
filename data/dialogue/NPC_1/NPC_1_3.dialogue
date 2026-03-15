@@ -15,7 +15,7 @@ if Variables.get_char_var("NPC_1", "wait") == true
 			Micah: [do DialogueFuncs.play_sfx("sfx_watch_tick")][do DialogueFuncs.play_sfx("sfx_watch_tick")]Thanks. Feels a bit lighter. I'll take it to her. See ya. 
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 else 
-	=> END
+	One last item and then I can go to sleep... => END
 
 #~ end_of_day
 #if Variables.get_char_var("NPC_3", "dead") == false
