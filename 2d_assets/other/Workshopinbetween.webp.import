@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c66nv75f08dqa"
-path.s3tc="res://.godot/imported/Workshop_Inbetween.webp-32e68f7bc176e8028cfa256d2765dbe5.s3tc.ctex"
+uid="uid://crxinxv1ugvo6"
+path.s3tc="res://.godot/imported/Workshopinbetween.webp-76feff7f680e0c4c507916283ad2fb07.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://2d_assets/other/Workshop_Inbetween.webp"
-dest_files=["res://.godot/imported/Workshop_Inbetween.webp-32e68f7bc176e8028cfa256d2765dbe5.s3tc.ctex"]
+source_file="res://2d_assets/other/Workshopinbetween.webp"
+dest_files=["res://.godot/imported/Workshopinbetween.webp-76feff7f680e0c4c507916283ad2fb07.s3tc.ctex"]
 
 [params]
 
