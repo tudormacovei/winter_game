@@ -30,6 +30,7 @@ func _ready():
 	current_day_index = 0
 	_play_next_interaction()
 
+	Variables.set_var(Config.WINDOW_VAR_KEY, Config.START_DAY_WINDOW_SPRITE_PATH)
 	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
 
 	DialogueFuncs.register_game_manager(self )
