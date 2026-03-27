@@ -207,7 +207,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]...
 - Good morning. 
 	Sarah: Morning.
-	- Sarah, I think it's best don't go near the window today.
+	- Sarah, I think it's best if you don't go near the window today.
 		Sarah: [do DialogueFuncs.play_sfx("sfx_footsteps")]...[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]
 		- I'm sorry, Sarah. 
 			Sarah: I... I need some time alone.
@@ -217,7 +217,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]...
 - Good morning. 
 	Sarah: Morning.
-	- Sarah, I think it's best don't go near the window today.
+	- Sarah, I think it's best if you don't go near the window today.
 		Sarah: [do DialogueFuncs.play_sfx("sfx_footsteps")]...[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]
 		- I'm sorry, Sarah. 
 			Sarah: I... 
