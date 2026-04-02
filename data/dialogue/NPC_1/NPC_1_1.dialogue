@@ -262,15 +262,15 @@ Micah: Let her know I'm looking for her when she wakes up, will you?
 - Don't think I will.
 	Micah: And why's that?
 	- She's got better things to do than hang out with the likes of you. [if Variables.get_char_var("NPC_1", "relationship") <= 2]
-		Micah: *His FACE turns ANGRY
-		Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)]
+		Micah: *His FACE turns ANGRY 
+		Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)][do Variables.set_char_var("NPC_1", "tell", false)]
 		Micah: I hope you die.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam", -6.0)]
 		...   
 		- Slam my door like that again and I'll put you in the ground right next to your father! => END
 		- Damn kid. => END 
 	- You two can sort it out yourselves. 
-		Micah: *His FACE turns ANGRY
-		Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 2)]
+		Micah: *His FACE turns ANGRY 
+		Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 2)][do Variables.set_char_var("NPC_1", "tell", false)]
 		Micah: Miserable old prick.[wait=0.75][do DialogueFuncs.play_sfx("sfx_door_slam", -6)]
 		...   
 		- Slam my door like that again and see what happens! => END

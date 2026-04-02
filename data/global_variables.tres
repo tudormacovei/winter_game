@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=24 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=25 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -22,10 +22,16 @@ name = "wait"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_lfeg1"]
+script = ExtResource("1_vywdb")
+name = "tell"
+default_value = true
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_h5qkm"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_1"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_t7f3i"), SubResource("Resource_lwloc"), SubResource("Resource_dsvxs")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_t7f3i"), SubResource("Resource_lwloc"), SubResource("Resource_dsvxs"), SubResource("Resource_lfeg1")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_p42go"]

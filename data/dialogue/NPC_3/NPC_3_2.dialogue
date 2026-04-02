@@ -118,22 +118,28 @@ elif Variables.get_char_var("NPC_3", "relationship") == 8
 
 ~ branch_micah
 if Variables.get_char_var("NPC_1", "relationship") == 0 
-	Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Got your items here. [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
-	Micah: ...
-	Micah: Keeper, why didn't you tell Sarah I wanted to see her like you said you would?
-	- I don't like you around her. 
-		Micah: Oh. Okay. 
-		Micah: Guess you're right. 
-		Micah: She's smart and pretty. 
-		Micah: Should spend her time with others. 
+	if Variables.get_char_var("NPC_1", "tell") == true
+		Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Got your items here. [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
 		Micah: ...
-		Micah: Well, see ya.
-		=> branch_sui
-	- I'm sorry, Micah. I forgot.
-		Micah: That's alright, I guess. 
-		Micah: You got your hands full and everythin'.
+		Micah: Keeper, why didn't you tell Sarah I wanted to see her like you said you would?
+		- I don't like you around her. 
+			Micah: Oh. Okay. 
+			Micah: Guess you're right. 
+			Micah: She's smart and pretty. 
+			Micah: Should spend her time with others. 
+			Micah: ...
+			Micah: Well, see ya.
+			=> branch_sui
+		- I'm sorry, Micah. I forgot.
+			Micah: That's alright, I guess. 
+			Micah: You got your hands full and everythin'.
+			Micah: ...
+			Micah: Well, see ya.
+			=> branch_sui
+	else 
+		Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Got your items here. 
 		Micah: ...
-		Micah: Well, see ya.
+		Micah: Gotta go. See ya. 
 		=> branch_sui
 elif Variables.get_char_var("NPC_1", "relationship") <= 2
 	Micah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sfx_footsteps")][wait=2.1]Got your items here. 
@@ -242,7 +248,7 @@ Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("s
 			Sarah: Will you hold me? Please.
 			- Of course, child. 
 				... => END 
-			- I... yes.
+			- I... okay.
 				... => END 
 			
 ~ branch_mary_solo
