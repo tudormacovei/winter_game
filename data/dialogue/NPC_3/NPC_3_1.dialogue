@@ -112,7 +112,7 @@ Mary: [do Variables.set_var("prog_window_background_path", "res://2d_assets/back
 					Mary: ...
 					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
 		- Why do you want it? => branch_why
-	- Sheesh, I'm definitely not going to miss you. 
+	- Jeez, I'm definitely not going to miss you. 
 		Mary: Can't say I much care about that anymore. Give me the watch. 
 		- Fine. I'll give it to you. Given the circumstances. I'm going to need a replacement for the ceremony though. 
 			Mary: I brought an old rag of mine. Should suffice. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 3)]

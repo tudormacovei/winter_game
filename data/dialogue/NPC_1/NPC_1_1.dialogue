@@ -34,7 +34,7 @@ else
 Micah: [wait=1.5]Phew, all good. Ain't more cracked than it already was. [do Variables.set_var("asked_about_item", true)] 
 - So, what is it?
 	Micah: Just an old watch you'll have to fix for widow Mary. It's for the ceremony. Belonged to her shmuck of a husband or somethin'. No idea why she ain't thrown' it away yet.
-	- You shouldn't speak ill of the dead, boy.
+	- You shouldn't speak ill of the dead.
 		Micah: My pa used to say he was a filthy sinner. He got what was comin' to him! 
 		- Your pa died too, didn't he? 
 			Micah: *His FACE changes instantly. He's ANGRY and a tear bursts from his eyes. 

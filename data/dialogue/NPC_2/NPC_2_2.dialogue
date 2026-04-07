@@ -194,10 +194,10 @@ else
 						Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 						- Good night, Sarah. 
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-						- I was a bit of an asshole to you earlier. I'm sorry. 
-							Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
+						- I could have been kinder to you earlier. I'm sorry. 
+							Sarah: It's okay. We all could. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
+					- I talked her out of it. I could have been more considerate of your feelings, earlier, today. Wanted to make up for it.
 						Sarah: Oh. I don't know what to say.
 						Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 						Sarah: *Her FACE turns HAPPY
@@ -217,10 +217,10 @@ else
 						Sarah: Maybe go to sleep early so I can wake up and go see her as soon as possible tomorrow! [do Variables.set_char_var("NPC_2", "relationship", 5)]
 						- Good night, Sarah. 
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-						- I was a bit of an asshole to you earlier. I'm sorry. 
-							Sarah: It's okay. We're all assholes. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
+						- I could have been kinder to you earlier. I'm sorry.
+							Sarah: It's okay. We all could. Good night. [do Variables.set_char_var("NPC_2", "relationship", 6)]
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
-					- I talked her out of it. I was a bit of an asshole to you earlier. Wanted to make up for it.
+					- I talked her out of it. I could have been more considerate of your feelings, earlier, today. Wanted to make up for it.
 						Sarah: Oh. I don't know what to say.
 						Sarah: I'm going to my room, I'm tired and I want to be alone for a bit.  
 						Sarah: *Her FACE turns HAPPY
