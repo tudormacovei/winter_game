@@ -37,6 +37,11 @@ var _original_mesh: Mesh = null
 
 static var ANIMATION_TIME = 0.1
 static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02)
+static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width before a press becomes a drag
+
+var _drag_threshold_px: float = 0.0
+var _drag_start_pos: Vector2 = Vector2.ZERO
+var _mouse_down: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,6 +65,8 @@ func _ready() -> void:
 	# Stickers are placed asynchronously — wait for the signal before scanning
 	_object.stickers_placed.connect(_on_stickers_placed)
 
+	_drag_threshold_px = get_viewport().get_visible_rect().size.x * DRAG_THRESHOLD_FRACTION
+
 
 func _process(delta: float) -> void:
 	_handle_rotation(delta)
@@ -70,31 +77,42 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# Begin tracking mouse position on press: used to determines click vs drag
+	if event.is_action_pressed("mouse_click_left"):
+		if _state == State.ON_TABLE and _is_mouse_on_object:
+			_mouse_down = true
+			_drag_start_pos = get_viewport().get_mouse_position()
+
+	# Crossed drag threshold while holding: start dragging
+	if event is InputEventMouseMotion and _mouse_down and _state == State.ON_TABLE:
+		if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
+			_mouse_down = false
+			_set_state(State.DRAGGING)
+
 	if event.is_action_released("mouse_click_left"):
-		if _state == State.ON_TABLE && _is_mouse_on_object:
+		if _state == State.DRAGGING:
+			_mouse_down = false
+			_set_state(State.ON_TABLE)
+			get_viewport().set_input_as_handled()
+			return
+		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
+			_mouse_down = false
 			_set_state(State.FOCUSED)
 			_object.global_position = focus_position.global_position
 			_remove_outline()
 			get_viewport().set_input_as_handled()
 			return
-		if _state == State.FOCUSED && !_is_mouse_on_object:
+		if _state == State.FOCUSED and not _is_mouse_on_object:
 			_set_state(State.ON_TABLE)
 			_object.position = Vector3.ZERO
 			get_viewport().set_input_as_handled()
 			return
-	
-	if event.is_action_pressed("mouse_click_right"):
-		if _state == State.ON_TABLE && _is_mouse_on_object:
-			_set_state(State.DRAGGING)
-			
-	if event.is_action_released("mouse_click_right"):
-		if _state == State.DRAGGING:
-			_set_state(State.ON_TABLE)
+		_mouse_down = false
 
-	# Object can only rotate from FOCUSED beginning
+	# Object can only rotate from FOCUSED
 	if _state != State.FOCUSED:
 		return
-	
+
 	if event.is_action_pressed("object_rotate_bottom"):
 		_set_state(State.ROTATING_BOTTOM)
 		_rotation_remaining = 1.0
