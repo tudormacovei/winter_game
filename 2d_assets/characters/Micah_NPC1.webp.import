@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctfbrqtrfwa1l"
-path="res://.godot/imported/littlegirl_inshop.webp-5a9d600d2543972c9ca11bb98e2eb52e.ctex"
+uid="uid://ddaf67iv4x4t2"
+path="res://.godot/imported/Micah_NPC1.webp-78f87c801251f441d3272baa07cd6e2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/littlegirl_inshop.webp"
-dest_files=["res://.godot/imported/littlegirl_inshop.webp-5a9d600d2543972c9ca11bb98e2eb52e.ctex"]
+source_file="res://2d_assets/characters/Micah_NPC1.webp"
+dest_files=["res://.godot/imported/Micah_NPC1.webp-78f87c801251f441d3272baa07cd6e2b.ctex"]
 
 [params]
 

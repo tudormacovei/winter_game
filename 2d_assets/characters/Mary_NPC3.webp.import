@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjm85glghvyyk"
-path="res://.godot/imported/DialogueView_NPC_3.webp-82e44e5c457fc627ca8eddf405bfa1d4.ctex"
+uid="uid://fefpsguo8q1g"
+path="res://.godot/imported/Mary_NPC3.webp-f100fb19f84e68b806341febeaabf8bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/DialogueView_NPC_3.webp"
-dest_files=["res://.godot/imported/DialogueView_NPC_3.webp-82e44e5c457fc627ca8eddf405bfa1d4.ctex"]
+source_file="res://2d_assets/characters/Mary_NPC3.webp"
+dest_files=["res://.godot/imported/Mary_NPC3.webp-f100fb19f84e68b806341febeaabf8bd.ctex"]
 
 [params]
 
