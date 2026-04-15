@@ -15,6 +15,8 @@ var focus_position: Node3D
 var object_completed_area: Area3D
 var object_scene: PackedScene # ObjectWithStickers scene to load
 @export var outline_material: Material
+@export var focus_curve: Curve
+@export var unfocus_curve: Curve
 
 enum State {
 	ON_TABLE,
@@ -36,6 +38,7 @@ static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width b
 # Full revolutions when dragging across the viewport width
 static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.0
 static var ROTATION_SNAP_DURATION: float = 0.15
+static var FOCUS_DURATION: float = 0.1
 
 var _drag_threshold_px: float = 0.0
 var _drag_start_pos: Vector2 = Vector2.ZERO
@@ -45,6 +48,8 @@ var _rotation_sensitivity: float = 0.0  # radians per pixel, set in _ready
 var _stickers_hovered: int = 0
 var _hovered_stickers: Array[Sticker] = []
 var _snap_tween: Tween
+var _focus_position_tween: Tween
+var _focus_rotation_tween: Tween
 static var _snap_orientations: Array[Basis] = []
 
 # Called when the node enters the scene tree for the first time.
@@ -115,7 +120,7 @@ func _input(event: InputEvent) -> void:
 			return
 		if _state == State.FOCUSED and not _is_mouse_on_object:
 			_set_state(State.ON_TABLE)
-			_object.position = Vector3.ZERO
+			_start_focus_tween(Vector3.ZERO, unfocus_curve)
 			get_viewport().set_input_as_handled()
 			return
 		if _state == State.FOCUSED:
@@ -140,7 +145,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
 			_mouse_down = false
 			_set_state(State.FOCUSED)
-			_object.global_position = focus_position.global_position
+			_start_focus_tween(self.to_local(focus_position.global_position), focus_curve)
 			_remove_outline()
 			get_viewport().set_input_as_handled()
 			return
@@ -207,6 +212,9 @@ func _set_state(state: State):
 		object_interactible.emit(true)
 	else:
 		object_interactible.emit(false)
+	if state == State.ROTATING:
+		if _focus_rotation_tween and _focus_rotation_tween.is_valid():
+			_focus_rotation_tween.kill()
 	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
 	
@@ -230,6 +238,32 @@ func _start_snap_tween() -> void:
 	_snap_tween.tween_method(
 		func(t: float): _object.basis = Basis(Quaternion(start_basis).slerp(Quaternion(target_basis), t)),
 		0.0, 1.0, ROTATION_SNAP_DURATION
+	)
+
+
+func _start_focus_tween(target_local_pos: Vector3, curve: Curve) -> void:
+	var sample := func(t: float) -> float: return curve.sample(t) if curve else t
+	var start_pos := _object.position
+	var start_basis := _object.basis.orthonormalized()
+
+	if _focus_position_tween and _focus_position_tween.is_valid():
+		_focus_position_tween.kill()
+	if _focus_rotation_tween and _focus_rotation_tween.is_valid():
+		_focus_rotation_tween.kill()
+	if _snap_tween and _snap_tween.is_valid():
+		_snap_tween.kill()
+
+	_focus_position_tween = create_tween()
+	_focus_position_tween.tween_method(
+		func(t: float): _object.position = start_pos.lerp(target_local_pos, sample.call(t)),
+		0.0, 1.0, FOCUS_DURATION
+	)
+	_focus_position_tween.tween_callback(func(): _place_object_on_xz_plane(_object))
+
+	_focus_rotation_tween = create_tween()
+	_focus_rotation_tween.tween_method(
+		func(t: float): _object.basis = Basis(Quaternion(start_basis).slerp(Quaternion.IDENTITY, sample.call(t))),
+		0.0, 1.0, FOCUS_DURATION
 	)
 
 
