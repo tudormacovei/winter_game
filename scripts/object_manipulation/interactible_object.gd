@@ -83,23 +83,16 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# Branch for click vs drag (ON_TABLE) or rotation start (FOCUSED)
 	if event.is_action_pressed("mouse_click_left"):
-		if _state == State.ON_TABLE and _is_mouse_on_object:
+		if _state == State.FOCUSED and _is_mouse_on_object and _stickers_hovered == 0:
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
-		elif _state == State.FOCUSED and _is_mouse_on_object and _stickers_hovered == 0:
-			_mouse_down = true
-			_drag_start_pos = get_viewport().get_mouse_position()
+		elif _state == State.FOCUSED and not _is_mouse_on_object:
+			get_viewport().set_input_as_handled()
 
 	if event is InputEventMouseMotion:
-		# ON_TABLE drag: if crossed threshold: start moving object
-		if _mouse_down and _state == State.ON_TABLE:
-			if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
-				_mouse_down = false
-				_set_state(State.DRAGGING)
 		# FOCUSED drag: if crossed threshold: start rotating
-		elif _mouse_down and _state == State.FOCUSED:
+		if _mouse_down and _state == State.FOCUSED:
 			if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
 				_mouse_down = false
 				_set_state(State.ROTATING)
@@ -120,16 +113,35 @@ func _input(event: InputEvent) -> void:
 			_start_snap_tween()
 			get_viewport().set_input_as_handled()
 			return
+		if _state == State.FOCUSED and not _is_mouse_on_object:
+			_set_state(State.ON_TABLE)
+			_object.position = Vector3.ZERO
+			get_viewport().set_input_as_handled()
+			return
+		if _state == State.FOCUSED:
+			_mouse_down = false # click on focused object without crossing rotation threshold
+
+# Handle interactions for object on the table in unhandled input
+# this is done to first give the focused object the chance to consume the input event
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("mouse_click_left"):
+		if _state == State.ON_TABLE and _is_mouse_on_object:
+			_mouse_down = true
+			_drag_start_pos = get_viewport().get_mouse_position()
+
+	if event is InputEventMouseMotion:
+		# ON_TABLE drag: if crossed threshold: start moving object
+		if _mouse_down and _state == State.ON_TABLE:
+			if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
+				_mouse_down = false
+				_set_state(State.DRAGGING)
+
+	if event.is_action_released("mouse_click_left"):
 		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
 			_mouse_down = false
 			_set_state(State.FOCUSED)
 			_object.global_position = focus_position.global_position
 			_remove_outline()
-			get_viewport().set_input_as_handled()
-			return
-		if _state == State.FOCUSED and not _is_mouse_on_object:
-			_set_state(State.ON_TABLE)
-			_object.position = Vector3.ZERO
 			get_viewport().set_input_as_handled()
 			return
 		_mouse_down = false
