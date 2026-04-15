@@ -19,29 +19,33 @@ var object_scene: PackedScene # ObjectWithStickers scene to load
 enum State {
 	ON_TABLE,
 	FOCUSED,
-	ROTATING_LEFT,
-	ROTATING_RIGHT,
-	ROTATING_UP,
-	ROTATING_BOTTOM,
+	ROTATING,
 	DRAGGING,
 }
 
 var _object: ObjectWithStickers = null
-var _state = State.ON_TABLE
-var _rotation_remaining = 0.0
-var _is_mouse_on_object = false
+var _state := State.ON_TABLE
+var _is_mouse_on_object := false
 var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
-var _is_pending_completion: bool = false
+var _is_pending_completion := false
 var _original_mesh: Mesh = null
 
-static var ANIMATION_TIME = 0.1
-static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02)
+static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # object scale on mouse hover
 static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width before a press becomes a drag
+# Full revolutions when dragging across the viewport width
+static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.0
+static var ROTATION_SNAP_DURATION: float = 0.15
 
 var _drag_threshold_px: float = 0.0
 var _drag_start_pos: Vector2 = Vector2.ZERO
 var _mouse_down: bool = false
+
+var _rotation_sensitivity: float = 0.0  # radians per pixel, set in _ready
+var _stickers_hovered: int = 0
+var _hovered_stickers: Array[Sticker] = []
+var _snap_tween: Tween
+static var _snap_orientations: Array[Basis] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,7 +57,9 @@ func _ready() -> void:
 	_object = object_scene.instantiate()
 	if not (_object is ObjectWithStickers):
 		# TODO: replace prints with warning logs
-		print("InteractibleObject: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
+		Utils.debug_error("InteractibleObject: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
+		queue_free()
+		return
 	add_child(_object)
 	_place_object_on_xz_plane(_object)
 	
@@ -66,10 +72,10 @@ func _ready() -> void:
 	_object.stickers_placed.connect(_on_stickers_placed)
 
 	_drag_threshold_px = get_viewport().get_visible_rect().size.x * DRAG_THRESHOLD_FRACTION
+	_rotation_sensitivity = TAU * ROTATION_REVOLUTIONS_PER_WIDTH / get_viewport().get_visible_rect().size.x
 
 
-func _process(delta: float) -> void:
-	_handle_rotation(delta)
+func _process(_delta: float) -> void:
 	_handle_drag()
 	# wait for player to place object on table before complete
 	if _is_pending_completion and _state == State.ON_TABLE:
@@ -77,22 +83,41 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# Begin tracking mouse position on press: used to determines click vs drag
+	# Branch for click vs drag (ON_TABLE) or rotation start (FOCUSED)
 	if event.is_action_pressed("mouse_click_left"):
 		if _state == State.ON_TABLE and _is_mouse_on_object:
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
+		elif _state == State.FOCUSED and _is_mouse_on_object and _stickers_hovered == 0:
+			_mouse_down = true
+			_drag_start_pos = get_viewport().get_mouse_position()
 
-	# Crossed drag threshold while holding: start dragging
-	if event is InputEventMouseMotion and _mouse_down and _state == State.ON_TABLE:
-		if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
-			_mouse_down = false
-			_set_state(State.DRAGGING)
+	if event is InputEventMouseMotion:
+		# ON_TABLE drag: if crossed threshold: start moving object
+		if _mouse_down and _state == State.ON_TABLE:
+			if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
+				_mouse_down = false
+				_set_state(State.DRAGGING)
+		# FOCUSED drag: if crossed threshold: start rotating
+		elif _mouse_down and _state == State.FOCUSED:
+			if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
+				_mouse_down = false
+				_set_state(State.ROTATING)
+				_apply_rotation_delta(event.relative)
+		# ROTATING: apply rotation every frame
+		elif _state == State.ROTATING:
+			_apply_rotation_delta(event.relative)
 
 	if event.is_action_released("mouse_click_left"):
 		if _state == State.DRAGGING:
 			_mouse_down = false
 			_set_state(State.ON_TABLE)
+			get_viewport().set_input_as_handled()
+			return
+		if _state == State.ROTATING:
+			_mouse_down = false
+			_set_state(State.FOCUSED)
+			_start_snap_tween()
 			get_viewport().set_input_as_handled()
 			return
 		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
@@ -108,23 +133,6 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		_mouse_down = false
-
-	# Object can only rotate from FOCUSED
-	if _state != State.FOCUSED:
-		return
-
-	if event.is_action_pressed("object_rotate_bottom"):
-		_set_state(State.ROTATING_BOTTOM)
-		_rotation_remaining = 1.0
-	if event.is_action_pressed("object_rotate_top"):
-		_set_state(State.ROTATING_UP)
-		_rotation_remaining = 1.0
-	if event.is_action_pressed("object_rotate_left"):
-		_set_state(State.ROTATING_LEFT)
-		_rotation_remaining = 1.0
-	if event.is_action_pressed("object_rotate_right"):
-		_set_state(State.ROTATING_RIGHT)
-		_rotation_remaining = 1.0
 
 
 func _on_object_mouse_entered() -> void:
@@ -155,11 +163,14 @@ func _on_object_area_exited(area: Area3D) -> void:
 
 
 func _on_stickers_placed() -> void:
-	for child in Utils.get_all_children(self ):
+	for child in Utils.get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
-			child.connect("sticker_completed", _on_sticker_completed)
-			connect("object_interactible", child._on_object_interactible_change)
+			child.sticker_completed.connect(_on_sticker_completed)
+			object_interactible.connect(child._on_object_interactible_change)
+			child.sticker_mouse_entered.connect(_on_sticker_mouse_entered)
+			child.sticker_mouse_exited.connect(_on_sticker_mouse_exited)
+			child.tree_exiting.connect(_on_sticker_tree_exiting.bind(child))
 	_set_state(State.ON_TABLE)
 
 
@@ -180,7 +191,7 @@ func _set_state(state: State):
 		CursorManager.clear_requests()
 	_state = state
 	#print("Set state to " + str(state))
-	if state == State.FOCUSED:
+	if state == State.FOCUSED or state == State.ROTATING:
 		object_interactible.emit(true)
 	else:
 		object_interactible.emit(false)
@@ -190,58 +201,86 @@ func _set_state(state: State):
 	object_state_changed.emit(state)
 
 
-# Handles the rotation of the object with an ease-in and ease-out animation
-# TODO:This method of handling the rotation is not good, should be switched
-# to an approach that *sets* the object rotation every tick instead of calling
-# the rotate(...) function.
-func _handle_rotation(delta: float) -> void:
-	if _state not in [State.ROTATING_LEFT, State.ROTATING_RIGHT,
-								State.ROTATING_UP, State.ROTATING_BOTTOM]:
-		return
-	
-	# to_rotate is from 0.0 to 1.0 here
-	var to_rotate = delta / ANIMATION_TIME * ease_function(_rotation_remaining)
-	
-	if to_rotate > _rotation_remaining:
-		to_rotate = _rotation_remaining
-		_rotation_remaining = 0.0
-	else:
-		_rotation_remaining -= to_rotate
-	
-	# to_rotate is converted to values from 0.0 to PI / 2 here
-	to_rotate *= PI / 2
-	
-	match _state:
-		State.ROTATING_BOTTOM:
-			_object.rotate(Vector3.RIGHT, to_rotate)
-		State.ROTATING_UP:
-			_object.rotate(Vector3.RIGHT, -to_rotate)
-		State.ROTATING_LEFT:
-			_object.rotate(Vector3.FORWARD, -to_rotate)
-		State.ROTATING_RIGHT:
-			_object.rotate(Vector3.FORWARD, to_rotate)
+func _apply_rotation_delta(delta: Vector2) -> void:
+	var camera := get_viewport().get_camera_3d()
+	_object.rotate(camera.global_basis.y, delta.x * _rotation_sensitivity)
+	_object.rotate(camera.global_basis.x, delta.y * _rotation_sensitivity)
 
-	if _rotation_remaining <= 0.0:
-		_set_state(State.FOCUSED)
+
+func _start_snap_tween() -> void:
+	# orthonormalize first: repeated rotate() calls accumulate float drift
+	_object.basis = _object.basis.orthonormalized()
+	var start_basis := _object.basis
+	var target_basis := _nearest_snap_orientation(start_basis)
+	if _snap_tween and _snap_tween.is_valid():
+		_snap_tween.kill()
+	_snap_tween = create_tween()
+	_snap_tween.tween_method(
+		func(t: float): _object.basis = Basis(Quaternion(start_basis).slerp(Quaternion(target_basis), t)),
+		0.0, 1.0, ROTATION_SNAP_DURATION
+	)
+
+
+func _nearest_snap_orientation(current: Basis) -> Basis:
+	if _snap_orientations.is_empty():
+		_snap_orientations = _build_snap_orientations()
+	var current_quat := Quaternion(current).normalized()
+	var best := _snap_orientations[0]
+	var best_dot := -1.0
+	for candidate in _snap_orientations:
+		var d: float = abs(current_quat.dot(Quaternion(candidate).normalized()))
+		if d > best_dot:
+			best_dot = d
+			best = candidate
+	return best
+
+
+static func _build_snap_orientations() -> Array[Basis]:
+	var cardinals: Array[Vector3] = [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN, Vector3.FORWARD, Vector3.BACK]
+	var results: Array[Basis] = []
+	for y_axis in cardinals:
+		for z_axis in cardinals:
+			if abs(y_axis.dot(z_axis)) > 0.001:
+				continue
+			var x_axis := y_axis.cross(z_axis).normalized()
+			results.append(Basis(x_axis, y_axis, z_axis))
+	return results
+
+
+func _on_sticker_mouse_entered(sticker: Sticker) -> void:
+	if _hovered_stickers.has(sticker):
+		return
+	_hovered_stickers.append(sticker)
+	_stickers_hovered += 1
+
+
+func _on_sticker_mouse_exited(sticker: Sticker) -> void:
+	if not _hovered_stickers.has(sticker):
+		return
+	_hovered_stickers.erase(sticker)
+	_stickers_hovered = max(0, _stickers_hovered - 1)
+
+
+func _on_sticker_tree_exiting(sticker: Sticker) -> void:
+	_on_sticker_mouse_exited(sticker)
 
 
 func _handle_drag():
 	if _state != State.DRAGGING:
 		return
 	# Get intersect between raycast from viewport + mouse and XZ plane
-	# Assumption: objects and scene is setup so object ALWAYS sit on the workbench plane
-	# if they are at position y=0! So their origin has to be offset
-	
+	# Assumption: scene is setup so workbench plane is at y = 0
+
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var origin: Vector3 = camera.project_ray_origin(mouse_pos)
 	var direction: Vector3 = camera.project_ray_normal(mouse_pos)
-	
+
 	var distance_to_plane_intersect := -origin.y / direction.y
 	var intersect = origin + direction * distance_to_plane_intersect # interesect on XZ plane (y=0)
 	self.global_position = intersect
 	_place_object_on_xz_plane(_object) # intersect y coord is incorrect, update to correct one
-	
+
 	#print("Ray origin: " + str(origin))
 	#print("Direction vector " + str(direction))
 	#print("Distance to plane intersect: " + str(distance_to_plane_intersect))
@@ -305,9 +344,6 @@ func complete_object():
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):
 	var bbox: AABB = Utils._calculate_bounding_box(object, false)
+	# TODO: get the world space transform matrix of the object and multiply it with the object BBOX
+	# bug is most likely caused by object bbox being in local coords
 	global_position.y = bbox.size.y / 2
-
-# takes value of a value x between 0.0 and 1.0 and applies a nonlinear
-# transformation that keeps the endpoints at 0.0 and 1.0, respectively
-func ease_function(x: float) -> float:
-	return (x * x + 0.2) / 2

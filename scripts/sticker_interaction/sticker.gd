@@ -10,6 +10,8 @@ var _is_mouse_on_object := false
 var _is_object_interactible := false
 
 signal sticker_completed()
+signal sticker_mouse_entered(sticker: Sticker)
+signal sticker_mouse_exited(sticker: Sticker)
 
 func _ready() -> void:
 	pass
@@ -31,11 +33,13 @@ func _on_object_interactible_change(is_interactible: bool):
 
 func _on_mouse_entered() -> void:
 	_is_mouse_on_object = true
+	sticker_mouse_entered.emit(self)
 	if _is_object_interactible:
 		CursorManager.request_cursor(CursorManager.CursorType.HOVER)
 
 func _on_mouse_exited() -> void:
 	_is_mouse_on_object = false
+	sticker_mouse_exited.emit(self)
 	CursorManager.release_cursor(CursorManager.CursorType.HOVER)
 
 # true if sticker can be interacted with, false otherwise
