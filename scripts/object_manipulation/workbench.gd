@@ -12,11 +12,10 @@ var _drag_color := Color(0.5, 0.5, 0.5, 0.25)
 var _pending_completion_color := Color("white")
 var _current_color: Color = _drag_color
 var _tween: Tween
+var _dim_tween: Tween
+const FOCUS_DIM_ALPHA: float = 0.7
+const FOCUS_DIM_DURATION: float = 0.6
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
-
-func _ready() -> void:
-	pass
-
 
 func _process(_delta: float) -> void:
 	pass
@@ -60,6 +59,14 @@ func _get_next_free_slot() -> Node3D:
 	Utils.debug_error("Workbench: Attempting to add object when workbench is full! Skipping object add...")
 	return null
 
+func _set_background_dim(dimmed: bool) -> void:
+	var target: float = FOCUS_DIM_ALPHA if dimmed else 0.0
+	if _dim_tween and _dim_tween.is_valid():
+		_dim_tween.kill()
+	_dim_tween = create_tween()
+	_dim_tween.tween_property(%WorkbenchBackground, "modulate:a", target, FOCUS_DIM_DURATION)
+
+
 func _set_overlay_color(target: Color) -> void:
 	if _tween: _tween.kill()
 	var start = %WorkbenchDoneAreaOverlay.modulate
@@ -81,6 +88,9 @@ func _on_object_state_changed(state: InteractibleObject.State) -> void:
 		_set_overlay_color(_current_color)
 	else:
 		_set_overlay_color(Color(0.0, 0.0, 0.0, 0.0))
+
+	var focused := state == InteractibleObject.State.FOCUSED or state == InteractibleObject.State.ROTATING
+	_set_background_dim(focused)
 
 func _on_object_pending_completion_changed(is_pending_completion: bool) -> void:
 	if is_pending_completion:

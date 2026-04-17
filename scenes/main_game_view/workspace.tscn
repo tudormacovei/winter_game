@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=11 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/managers/game_manager.gd" id="1_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]
+[ext_resource type="Texture2D" uid="uid://bm1bm3b7ximrr" path="res://2d_assets/backgrounds/focus_background.webp" id="3_7nw64"]
 [ext_resource type="PackedScene" uid="uid://bfegigj2pr0lh" path="res://scenes/UI/day_end_screen.tscn" id="3_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
@@ -22,7 +23,13 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08,
 
 [node name="WorkbenchView" parent="." instance=ExtResource("2_ckfyi")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.98480767, -0.17364818, 0, 0.17364818, 0.98480767, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9848076, -0.17364818, 0, 0.17364818, 0.9848076, 0, 0, 0)
+
+[node name="WorkbenchBackground" type="Sprite3D" parent="WorkbenchView"]
+unique_name_in_owner = true
+transform = Transform3D(0.075, 0, 0, 0, -3.278354e-09, -0.075, 0, 0.075, -3.2783543e-09, 0, 0.69604945, -2.0743899e-08)
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("3_7nw64")
 
 [node name="UI" type="Node" parent="."]
 
