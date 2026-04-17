@@ -1,8 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc01kpxj88dy8"]
+[gd_scene load_steps=5 format=3 uid="uid://bobl0x3ybe78b"]
 
 [ext_resource type="Script" uid="uid://bhh4wa5b2nnlg" path="res://scripts/object_manipulation/interactible_object.gd" id="1_uybdy"]
 [ext_resource type="Material" uid="uid://lh5rtw0dljba" path="res://3d_assets/materials/white_outline.tres" id="2_1acb4"]
 
+[sub_resource type="Curve" id="Curve_3gwqq"]
+_data = [Vector2(0, 0), 0.0, 2.7709656, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_nrq7e"]
+_data = [Vector2(0, 0), 0.0, 3.2021499, 0, 0, Vector2(1, 1), 0.5664645, 0.0, 0, 0]
+point_count = 2
+
 [node name="InteractibleObject" type="Node3D"]
 script = ExtResource("1_uybdy")
 outline_material = ExtResource("2_1acb4")
+focus_position_curve = SubResource("Curve_3gwqq")
+focus_rotation_curve = SubResource("Curve_nrq7e")
