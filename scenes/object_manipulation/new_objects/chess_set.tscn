@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://otk2f11i354r"]
-
-[ext_resource type="PackedScene" uid="uid://bobl0x3ybe78b" path="res://scenes/object_manipulation/interactible_object.tscn" id="1_gfjy0"]
-
-[node name="InteractibleObject" instance=ExtResource("1_gfjy0")]

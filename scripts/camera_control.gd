@@ -5,6 +5,10 @@ var DIALOGUE_ROTATION = 0.0
 var WORK_AREA_ROTATION = -80.0
 var ANIMATION_TIME = 0.4
 
+@export var focused_fov: float = 40.0
+@export var focus_fov_curve: Curve
+@export var dolly_zoom_sensitivity: float = 0.02 # godot units camer moves per 1 degree FOV change
+
 enum CameraState {
 	STATIONARY,
 	ROTATING
@@ -21,10 +25,13 @@ signal camera_rotation_completed(current_focus)
 var _camera_state = CameraState.STATIONARY
 var _camera_focus = CameraFocus.DIALOGUE_AREA
 var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rotation animation
+var _default_fov: float = 0.0
+var _fov_tween: Tween
+var _dolly_tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_default_fov = fov
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -70,3 +77,25 @@ func toggle_view():
 		_camera_focus = CameraFocus.DIALOGUE_AREA
 
 	emit_signal("camera_focus_changed", _camera_focus)
+
+
+func tween_fov(target_fov: float, duration: float) -> void:
+	if _fov_tween and _fov_tween.is_valid():
+		_fov_tween.kill()
+	if _dolly_tween and _dolly_tween.is_valid():
+		_dolly_tween.kill()
+	var start_fov := fov
+	var start_pos := position
+	var fov_delta := target_fov - start_fov
+	var target_pos := start_pos + (-basis.z * fov_delta * dolly_zoom_sensitivity)
+	var curve_sample := func(t: float) -> float: return focus_fov_curve.sample(t) if focus_fov_curve else t
+	_fov_tween = create_tween()
+	_fov_tween.tween_method(
+		func(t: float) -> void: fov = lerpf(start_fov, target_fov, curve_sample.call(t)),
+		0.0, 1.0, duration
+	)
+	_dolly_tween = create_tween()
+	_dolly_tween.tween_method(
+		func(t: float) -> void: position = start_pos.lerp(target_pos, curve_sample.call(t)),
+		0.0, 1.0, duration
+	)

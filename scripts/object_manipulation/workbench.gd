@@ -14,7 +14,7 @@ var _current_color: Color = _drag_color
 var _tween: Tween
 var _dim_tween: Tween
 const FOCUS_DIM_ALPHA: float = 0.6
-const FOCUS_DIM_DURATION: float = 0.3
+const FOCUS_DIM_DURATION: float = 0.25
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
 
 func _process(_delta: float) -> void:

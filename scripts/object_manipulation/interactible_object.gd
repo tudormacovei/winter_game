@@ -37,8 +37,8 @@ static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # object scale on mouse hov
 static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width before a press becomes a drag
 static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.0 # full revolutions when dragging across the viewport width
 static var ROTATION_SNAP_DURATION: float = 0.2
-static var FOCUS_DURATION: float = 0.3
-static var FOCUS_SCALE: float = 0.3
+static var FOCUS_DURATION: float = 0.25
+static var FOCUS_OBJECT_SCALE: float = 0.3
 
 var _drag_threshold_px: float = 0.0
 var _drag_start_pos: Vector2 = Vector2.ZERO
@@ -121,7 +121,7 @@ func _input(event: InputEvent) -> void:
 			return
 		if _state == State.FOCUSED and not _is_mouse_on_object:
 			_set_state(State.ON_TABLE)
-			_start_focus_tween(Vector3.ZERO, focus_position_curve, focus_rotation_curve, Vector3.ONE)
+			_start_focus_tween(Vector3.ZERO, focus_position_curve, focus_rotation_curve, Vector3.ONE, false)
 			get_viewport().set_input_as_handled()
 			return
 		if _state == State.FOCUSED:
@@ -147,7 +147,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_mouse_down = false
 			_set_state(State.FOCUSED)
 			_remove_outline()
-			_start_focus_tween(self.to_local(focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_SCALE)
+			_start_focus_tween(self.to_local(focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
 			get_viewport().set_input_as_handled()
 			return
 		_mouse_down = false
@@ -245,7 +245,7 @@ func _start_snap_tween() -> void:
 	_snap_tween.tween_method(snap_fn, 0.0, 1.0, ROTATION_SNAP_DURATION)
 
 
-func _start_focus_tween(target_local_pos: Vector3, position_curve: Curve, rotation_curve: Curve, target_scale: Vector3) -> void:
+func _start_focus_tween(target_local_pos: Vector3, position_curve: Curve, rotation_curve: Curve, target_scale: Vector3, is_focusing: bool) -> void:
 	var position_sample := func(t: float) -> float: return position_curve.sample(t) if position_curve else t
 	var rotation_sample := func(t: float) -> float: return rotation_curve.sample(t) if rotation_curve else t
 	var start_pos := _object.position
@@ -260,6 +260,11 @@ func _start_focus_tween(target_local_pos: Vector3, position_curve: Curve, rotati
 		_focus_scale_tween.kill()
 	if _snap_tween and _snap_tween.is_valid():
 		_snap_tween.kill()
+
+	var camera := get_viewport().get_camera_3d() as CameraControl
+	if camera:
+		var target_fov := camera.focused_fov if is_focusing else camera._default_fov
+		camera.tween_fov(target_fov, FOCUS_DURATION)
 
 	_focus_position_tween = create_tween()
 	_focus_position_tween.tween_method(

@@ -8,7 +8,7 @@ const CharacterDefinition := preload("res://scripts/systems/interactions/charact
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
-@onready var character_node := get_node("/root/Workspace/DialogueView/DialogueCharacterTexture")
+@onready var character_node := get_node("/root/Workspace/CameraSpace/DialogueView/DialogueCharacterTexture")
 
 var _day_resources: Array[DayDefinition] = []
 var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition

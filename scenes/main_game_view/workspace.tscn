@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=13 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -8,28 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://bfegigj2pr0lh" path="res://scenes/UI/day_end_screen.tscn" id="3_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
+[ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
 
+[sub_resource type="Curve" id="Curve_x8h8r"]
+_data = [Vector2(0, 0), 0.0, 3.032672, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Workspace" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364816, 0.9848077, 0, 0, 0)
-
-[node name="DialogueView" parent="." instance=ExtResource("1_w2y3b")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.3369119, 0.23607965)
-
-[node name="WorkbenchView" parent="." instance=ExtResource("2_ckfyi")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.9848076, -0.17364818, 0, 0.17364818, 0.9848076, 0, 0, 0)
-
-[node name="WorkbenchBackground" type="Sprite3D" parent="WorkbenchView"]
-unique_name_in_owner = true
-transform = Transform3D(0.075, 0, 0, 0, -3.278354e-09, -0.075, 0, 0.075, -3.2783543e-09, 0, 0.69604945, -2.0743899e-08)
-modulate = Color(1, 1, 1, 0)
-texture = ExtResource("3_7nw64")
 
 [node name="UI" type="Node" parent="."]
 
@@ -51,12 +42,6 @@ metadata/_custom_type_script = "uid://dgcq710oaye20"
 script = ExtResource("1_x8h8r")
 metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 
-[node name="Camera3D" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 4.4703484e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.3369119, 0.23607965)
-fov = 50.0
-script = ExtResource("1_jt3v7")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8pwe6")
 camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
@@ -68,3 +53,32 @@ light_energy = 0.5
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.42365292, -0.7597822, 0.49320307, -0.75856656, 3.9338993e-08, 0.6515956, -0.49507076, -0.6501777, -0.5763453, -3.8702822, 1.3785387, 0)
 light_energy = 0.3
+
+[node name="DialogueInbetweenTexture" type="Sprite3D" parent="."]
+transform = Transform3D(1.145, 0, 0, 0, 0.9645329, 0.61701035, 0, -0.6170107, 0.9645327, 0, 1.1459852, -0.3619644)
+pixel_size = 0.0005
+texture = ExtResource("9_7nw64")
+
+[node name="CameraSpace" type="Node3D" parent="."]
+
+[node name="DialogueView" parent="CameraSpace" instance=ExtResource("1_w2y3b")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.6842041, -0.81009686)
+
+[node name="WorkbenchView" parent="CameraSpace" instance=ExtResource("2_ckfyi")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.9848076, -0.17364818, 0, 0.17364816, 0.9848076, 0, 0, 0)
+
+[node name="WorkbenchBackground" type="Sprite3D" parent="CameraSpace/WorkbenchView"]
+unique_name_in_owner = true
+transform = Transform3D(0.075, 0, 0, 0, -3.278354e-09, -0.075, 0, 0.075, -3.2783543e-09, 0, 0.69604945, -2.0743899e-08)
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("3_7nw64")
+
+[node name="Camera3D" type="Camera3D" parent="CameraSpace"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.6960672, 0.2994084)
+fov = 40.0
+script = ExtResource("1_jt3v7")
+focused_fov = 55.0
+focus_fov_curve = SubResource("Curve_x8h8r")
