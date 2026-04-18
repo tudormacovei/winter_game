@@ -59,7 +59,7 @@ func _handle_sticker_deform() -> void:
 	deform_amplitude = atan((3.0*deform_amplitude))/1.45
 
 	# Curl direction is opposite to drag so the peel visually advances with the drag
-	cylinder_radius = -deform_direction * peel_radius
+	_cylinder_radius = -deform_direction * peel_radius
 
 	# Position cylinder to control peel progress
 	var mesh_instance = _find_mesh_instance(self)
@@ -82,7 +82,7 @@ func _handle_sticker_deform() -> void:
 
 	_deform_object()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_handle_sticker_deform()
 
 func _input(event: InputEvent) -> void:
@@ -129,7 +129,7 @@ var cylinder_origin: Vector3 = Vector3.ZERO
 # 	If cylinder_radius is an X unit vector, the cylinder is axis-aligned with the Z axis
 # 	The direction also determines which side of the start line gets curled:
 # 	vertices ahead of start_of_curl in the forward direction enter the curl, while vertices behind it stay flat
-var cylinder_radius: Vector2 = Vector2(1.0, 0.0)
+var _cylinder_radius: Vector2 = Vector2(1.0, 0.0)
 
 # Member to cache original per-surface vertices to avoid cumulative deformation
 var original_surfaces: Dictionary = {}
@@ -188,7 +188,7 @@ func _deform_object() -> void:
 			var world_v: Vector3 = mesh_instance.to_global(local_v)
 			
 			# [CHANGED] Call modified map function that returns Dict
-			var result: Dictionary = _map_to_cylinder(world_v, cylinder_origin, cylinder_radius)
+			var result: Dictionary = _map_to_cylinder(world_v, cylinder_origin, _cylinder_radius)
 			var mapped_world: Vector3 = result["position"]
 			var ratio: float = result["ratio"] # 0.0 to 1.0
 

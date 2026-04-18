@@ -11,9 +11,9 @@ signal object_state_changed(state: State)
 signal object_pending_completion_changed(is_pending: bool)
 
 # Setup variables, set before node enters scene tree
-var focus_position: Node3D
-var object_completed_area: Area3D
-var object_scene: PackedScene # ObjectWithStickers scene to load
+var _focus_position: Node3D
+var _object_completed_area: Area3D
+var _object_scene: PackedScene # ObjectWithStickers scene to load
 @export var outline_material: Material
 @export var focus_position_curve: Curve
 @export var focus_rotation_curve: Curve
@@ -55,12 +55,13 @@ static var _snap_orientations: Array[Basis] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if object_scene == null:
+	assert(_focus_position != null and _object_completed_area != null and _object_scene != null, "set_spawn_data() must be called before InteractibleObject enters the scene tree")
+	if _object_scene == null:
 		Utils.debug_error("InteractibleObject: Attempted to instantiate null object scene. Check that the day resource does not contain empty objects!")
 		queue_free() # delete self due to lack of child object
 		return
 
-	_object = object_scene.instantiate()
+	_object = _object_scene.instantiate()
 	if not (_object is ObjectWithStickers):
 		# TODO: replace prints with warning logs
 		Utils.debug_error("InteractibleObject: Object scene is not of type ObjectWithStickers. Type: " + str(_object.get_class()))
@@ -147,7 +148,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_mouse_down = false
 			_set_state(State.FOCUSED)
 			_remove_outline()
-			_start_focus_tween(self.to_local(focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
+			_start_focus_tween(self.to_local(_focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
 			get_viewport().set_input_as_handled()
 			return
 		_mouse_down = false
@@ -169,13 +170,13 @@ func _on_object_mouse_exited() -> void:
 
 func _on_object_area_entered(area: Area3D) -> void:
 	# wait for player to place the object on the table before completing it
-	if area == object_completed_area:
+	if area == _object_completed_area:
 		_is_pending_completion = true
 		object_pending_completion_changed.emit(true)
 
 
 func _on_object_area_exited(area: Area3D) -> void:
-	if area == object_completed_area and not is_queued_for_deletion():
+	if area == _object_completed_area and not is_queued_for_deletion():
 		_is_pending_completion = false
 		object_pending_completion_changed.emit(false)
 
@@ -199,9 +200,9 @@ func _on_sticker_completed():
 
 # Set all data needed for correct functionality
 func set_spawn_data(focus_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
-	self.focus_position = focus_position
-	self.object_completed_area = object_completed_area
-	self.object_scene = object_scene
+	_focus_position = focus_position
+	_object_completed_area = object_completed_area
+	_object_scene = object_scene
 
 
 func _set_state(state: State):
@@ -404,7 +405,7 @@ func complete_object():
 	
 	_set_state(State.ON_TABLE)
 	queue_free()
-	emit_signal("object_completed", object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
+	emit_signal("object_completed", _object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):

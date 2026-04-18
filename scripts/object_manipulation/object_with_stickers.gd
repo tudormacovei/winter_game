@@ -15,6 +15,7 @@ const VALIDATION_MAX_ATTEMPTS: int = 50
 @export var rng_seed: int = 1 # Set to 0 to ignore seeed and have run-to-run variation
 @export var sticker_scene: PackedScene
 
+@warning_ignore("unused_private_class_variable")
 @export_tool_button("Place Stickers")
 var _place_stickers_button := _editor_place_stickers
 
@@ -130,10 +131,10 @@ func place_stickers() -> void:
 
 			# Instantiate and orient sticker with random Y rotation, scaled by shrink factor
 			var sticker_instance: Node3D = sticker_scene.instantiate()
-			var basis := _basis_from_normal(normal)
-			basis = basis * Basis(Vector3.UP, rng.randf() * TAU)
-			basis = basis.scaled(Vector3.ONE * shrink_factor)
-			sticker_instance.transform = Transform3D(basis, point)
+			var sticker_basis := _basis_from_normal(normal)
+			sticker_basis = sticker_basis * Basis(Vector3.UP, rng.randf() * TAU)
+			sticker_basis = sticker_basis.scaled(Vector3.ONE * shrink_factor)
+			sticker_instance.transform = Transform3D(sticker_basis, point)
 			mesh_instance.add_child(sticker_instance)
 
 			# Validate placement via analytical ray-triangle intersection

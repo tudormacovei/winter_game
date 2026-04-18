@@ -21,7 +21,7 @@ func _complete_sticker():
 	sticker_completed.emit()
 	queue_free()
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# Child classes implement specific interactions
 	pass
 

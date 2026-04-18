@@ -7,7 +7,7 @@ var ANIMATION_TIME = 0.4
 
 @export var focused_fov: float = 40.0
 @export var focus_fov_curve: Curve
-@export var dolly_zoom_sensitivity: float = 0.02 # godot units camer moves per 1 degree FOV change
+@export var dolly_zoom_sensitivity: float = 0.02 # godot units camera moves per 1 degree FOV change
 
 enum CameraState {
 	STATIONARY,
@@ -65,8 +65,7 @@ func handle_rotation(delta: float):
 # sets variables to toggle the camera view between dialogue view to the work area view
 func toggle_view():
 	# If we are rotation then we are interrupting a rotation with a toggle
-	# To go the other direction we need the complement - if we have a little left to the original destination, 
-	# then we have a long way back
+	# To go the other direction we need the complement
 	if _camera_state == CameraState.ROTATING:
 		_rotation_tracker = 1.0 - _rotation_tracker
 	_camera_state = CameraState.ROTATING
