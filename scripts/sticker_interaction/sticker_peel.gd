@@ -14,6 +14,8 @@ const COMPLETION_THRESHOLD: float = 0.8
 @export var complete_final_amplitude: float # deform_amplitude the completion tween drives toward
 @export var rollback_duration: float
 @export var complete_duration: float
+@export var complete_deform_curve: Curve
+@export var complete_scale_curve: Curve
 
 var is_completing: bool = false
 var _deform_amplitude: float = 0.0
@@ -132,10 +134,20 @@ func _start_completion() -> void:
 	is_completing = true
 	if _complete_tween:
 		_complete_tween.kill()
+	var deform_sample := func(t: float) -> float: return complete_deform_curve.sample(t) if complete_deform_curve else t
+	var scale_sample := func(t: float) -> float: return complete_scale_curve.sample(t) if complete_scale_curve else t
+	var start_amp := _deform_amplitude
+	var start_scale := scale
 	_complete_tween = create_tween()
 	_complete_tween.set_parallel(true)
-	_complete_tween.tween_method(_apply_deform_at_amplitude, _deform_amplitude, complete_final_amplitude, complete_duration)
-	_complete_tween.tween_property(self, "scale", Vector3.ONE * 1e-6, complete_duration) # using VECTOR3.ONE * 1e-6 to prevent setting scale to 0.0 (which naturally causes issues)
+	_complete_tween.tween_method(
+		func(t: float): _apply_deform_at_amplitude(lerpf(start_amp, complete_final_amplitude, deform_sample.call(t))),
+		0.0, 1.0, complete_duration
+	)
+	_complete_tween.tween_method(
+		func(t: float): scale = start_scale.lerp(Vector3.ONE * 1e-6, scale_sample.call(t)), # using 1e-6 to prevent scale 0.0
+		0.0, 1.0, complete_duration
+	)
 	_complete_tween.finished.connect(_complete_sticker)
 
 # Project a screen position onto a horizontal plane at this sticker's world height

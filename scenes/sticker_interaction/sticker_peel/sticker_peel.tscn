@@ -1,16 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://i5qiolqusxix"]
+[gd_scene load_steps=6 format=3 uid="uid://i5qiolqusxix"]
 
 [ext_resource type="Script" uid="uid://drjjrpjcijbet" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_60khh"]
 [ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_60khh"]
+
+[sub_resource type="Curve" id="Curve_60khh"]
+_data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_yniim"]
+_data = [Vector2(0, 0), 0.0, -0.03255444, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
 size = Vector3(2, 0.1, 2)
 
 [node name="StickerPeel" type="Area3D"]
 script = ExtResource("1_60khh")
-complete_final_amplitude = 3.0
-rollback_duration = 0.8
-complete_duration = 0.4
+complete_final_amplitude = 3.5
+rollback_duration = 0.7
+complete_duration = 0.6
+complete_deform_curve = SubResource("Curve_60khh")
+complete_scale_curve = SubResource("Curve_yniim")
 metadata/_custom_type_script = "uid://drjjrpjcijbet"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
