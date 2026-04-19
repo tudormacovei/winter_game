@@ -9,7 +9,17 @@ var _original_extent: float
 
 var peel_radius: float # larger radius increases peel curvature (worldspace)
 var max_peel_distance: float # how much can the mouse move before stopping the peel animation (worldspace)
-const COMPLETION_THRESHOLD: float = 0.7
+const COMPLETION_THRESHOLD: float = 0.8
+
+@export var complete_final_amplitude: float # deform_amplitude the completion tween drives toward
+@export var rollback_duration: float
+@export var complete_duration: float
+
+var is_completing: bool = false
+var _deform_amplitude: float = 0.0
+var _drag_dir: Vector3 = Vector3.ZERO
+var _rollback_tween: Tween
+var _complete_tween: Tween
 
 func _ready() -> void:
 	var mesh_instance = _find_mesh_instance(self)
@@ -24,7 +34,7 @@ func _ready() -> void:
 	dims.sort()
 	# get middle dimension, which is smallest '2D' dimension of the sticker (since thickness is 0, and that's the smallest 3D dimension)
 	var sticker_size: float = dims[1]
-	peel_radius = sticker_size * 0.25
+	peel_radius = sticker_size * 0.1 # radius of the cylinder used for peeling: smaller values have a tighter peel
 	max_peel_distance = sticker_size * 1.5
 
 func _complete_fraction() -> float:
@@ -52,16 +62,16 @@ func _handle_sticker_deform() -> void:
 		return
 
 	var deform_direction := Vector2(world_offset.x, world_offset.z).normalized()
-	
-	# To smooth inputs we need to measure past the max peel distance, so clamp at 3.0 
-	var deform_amplitude: float = clamp(world_offset.length() / max_peel_distance, 0.0, 3.0)
+
+	# To smooth inputs we need to measure past the max peel distance, so clamp at 3.0
+	var amplitude: float = clamp(world_offset.length() / max_peel_distance, 0.0, 3.0)
 	# Smooth inputs to not have hard cutoff at max peel distance
-	deform_amplitude = atan((3.0*deform_amplitude))/1.45
+	amplitude = atan((3.0*amplitude))/1.45
 
 	# Curl direction is opposite to drag so the peel visually advances with the drag
 	_cylinder_radius = -deform_direction * peel_radius
+	_drag_dir = Vector3(deform_direction.x, 0.0, deform_direction.y).normalized()
 
-	# Position cylinder to control peel progress
 	var mesh_instance = _find_mesh_instance(self)
 	if mesh_instance == null:
 		return
@@ -74,19 +84,25 @@ func _handle_sticker_deform() -> void:
 		var world_max := mesh_instance.to_global(aabb.position + aabb.size)
 		_original_extent = world_min.distance_to(world_max) * 0.5
 
-	var drag_dir := Vector3(deform_direction.x, 0.0, deform_direction.y).normalized()
+	_apply_deform_at_amplitude(amplitude)
 
+
+func _apply_deform_at_amplitude(amplitude: float) -> void:
+	_deform_amplitude = amplitude
 	# Peel line sweeps from the edge opposite the drag toward the drag edge
-	cylinder_origin = _original_center + drag_dir * lerp(-_original_extent, _original_extent, deform_amplitude)
+	cylinder_origin = _original_center + _drag_dir * lerp(-_original_extent, _original_extent, amplitude)
 	cylinder_origin.y = _original_center.y + peel_radius
-
 	_deform_object()
 
 func _process(_delta: float) -> void:
 	_handle_sticker_deform()
 
 func _input(event: InputEvent) -> void:
+	if is_completing:
+		return
 	if event.is_action_pressed("mouse_click_left") and _get_interactible():
+		if _rollback_tween and _rollback_tween.is_running():
+			_rollback_tween.kill()
 		CursorManager.request_cursor(CursorManager.CursorType.GRAB)
 		get_viewport().set_input_as_handled()
 		is_peeling = true
@@ -98,10 +114,29 @@ func _input(event: InputEvent) -> void:
 		var fraction := _complete_fraction()
 		is_peeling = false
 		if fraction >= COMPLETION_THRESHOLD:
-			_complete_sticker()
+			_start_completion()
 		else:
-			_reset_deform()
+			_start_rollback()
 		CursorManager.release_cursor(CursorManager.CursorType.GRAB)
+
+func _start_rollback() -> void:
+	if _original_mesh_backup == null:
+		return
+	if _rollback_tween:
+		_rollback_tween.kill()
+	_rollback_tween = create_tween()
+	_rollback_tween.tween_method(_apply_deform_at_amplitude, _deform_amplitude, 0.0, rollback_duration)
+	_rollback_tween.finished.connect(_reset_deform)
+
+func _start_completion() -> void:
+	is_completing = true
+	if _complete_tween:
+		_complete_tween.kill()
+	_complete_tween = create_tween()
+	_complete_tween.set_parallel(true)
+	_complete_tween.tween_method(_apply_deform_at_amplitude, _deform_amplitude, complete_final_amplitude, complete_duration)
+	_complete_tween.tween_property(self, "scale", Vector3.ONE * 1e-6, complete_duration) # using VECTOR3.ONE * 1e-6 to prevent setting scale to 0.0 (which naturally causes issues)
+	_complete_tween.finished.connect(_complete_sticker)
 
 # Project a screen position onto a horizontal plane at this sticker's world height
 func _screen_to_plane(screen_pos: Vector2) -> Vector3:
@@ -146,7 +181,11 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 
 # Deform attached object for sticker peel effect
 func _deform_object() -> void:
-	# Find the MeshInstance3D (self may be a MeshInstance3D or a parent Node)
+	# Skip when self has near-zero scale (end of completion tween):
+	# to_local/to_global would log a Basis::invert error
+	if scale.length_squared() < 1e-6:
+		return
+	
 	var mesh_instance = _find_mesh_instance(self)
 	if mesh_instance == null:
 		push_warning("No MeshInstance3D found in node subtree; cannot deform.")
@@ -177,7 +216,7 @@ func _deform_object() -> void:
 		var arrays := array_mesh.surface_get_arrays(s)
 		var orig_verts: PackedVector3Array = original_surfaces.get(s, PackedVector3Array()).duplicate()
 
-		# [NEW] Prepare array for custom data (Curl Ratio)
+		# Prepare array for custom data (Curl Ratio)
 		# 4 bytes per vertex (R, G, B, A). We use Red for the ratio.
 		var custom_data := PackedByteArray() 
 		custom_data.resize(orig_verts.size() * 4) 
@@ -186,8 +225,7 @@ func _deform_object() -> void:
 		for i in range(orig_verts.size()):
 			var local_v: Vector3 = orig_verts[i]
 			var world_v: Vector3 = mesh_instance.to_global(local_v)
-			
-			# [CHANGED] Call modified map function that returns Dict
+
 			var result: Dictionary = _map_to_cylinder(world_v, cylinder_origin, _cylinder_radius)
 			var mapped_world: Vector3 = result["position"]
 			var ratio: float = result["ratio"] # 0.0 to 1.0

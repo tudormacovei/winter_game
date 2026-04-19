@@ -8,6 +8,9 @@ size = Vector3(2, 0.1, 2)
 
 [node name="StickerPeel" type="Area3D"]
 script = ExtResource("1_60khh")
+complete_final_amplitude = 3.0
+rollback_duration = 0.8
+complete_duration = 0.4
 metadata/_custom_type_script = "uid://drjjrpjcijbet"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
