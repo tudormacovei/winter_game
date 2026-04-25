@@ -19,10 +19,13 @@ var is_dialogue_running: bool = false
 var current_dialogue_balloon = null
 
 var health: float = 100.0
+var max_health: float = 100.0
 @export var health_drain_per_second: float = 1.5
 @export var health_restore_per_second: float = 0.75
+@export var hp_penalty_per_missed_sticker: float = 5.0
+@export var hp_penalty_cap_per_object: float = 15.0
 
-static var _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0]
+static var _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0, 0.0]
 var _triggered_thresholds: Array[float] = []
 var _has_focused_object: bool = false
 
@@ -32,7 +35,7 @@ func _process(delta: float) -> void:
 		health -= health_drain_per_second * delta
 	else:
 		health += health_restore_per_second * delta
-	health = clampf(health, 0.0, 100.0)
+	health = clampf(health, 0.0, max_health)
 	_check_health_thresholds(prev_health)
 
 
@@ -41,6 +44,9 @@ func _check_health_thresholds(prev_health: float) -> void:
 		if prev_health > threshold and health <= threshold:
 			_triggered_thresholds.append(threshold)
 			print("GameManager: Health dropped below " + str(int(threshold)) + " (" + str(snappedf(health, 0.1)) + " pts)")
+			if threshold == 0.0:
+				# TODO: show game end screen
+				Utils.debug_error("GameManager: Player current HP reached 0")
 		elif prev_health <= threshold and health > threshold:
 			_triggered_thresholds.erase(threshold)
 			print("GameManager: Health recovered above " + str(int(threshold)) + " (" + str(snappedf(health, 0.1)) + " pts)")
@@ -193,6 +199,18 @@ func _on_object_completed(object_name: String, is_special_object: bool, complete
 	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)
 	if total_stickers == 0:
 		Utils.debug_error("Object '%s' has NO stickers! Its sticker completion percentage is set to 100." % object_name)
+
+	var missed_stickers := total_stickers - completed_stickers
+	if missed_stickers > 0:
+		var penalty := minf(missed_stickers * hp_penalty_per_missed_sticker, hp_penalty_cap_per_object)
+		var prev_health := health
+		max_health = maxf(0.0, max_health - penalty)
+		health = minf(health, max_health)
+		print("GameManager: Max health set to: " + str(snappedf(health, 0.1)))
+		if max_health == 0.0:
+			# TODO: Show game end screen
+			Utils.debug_error("GameManager: Player max HP reached 0")
+		_check_health_thresholds(prev_health)
 
 	# Update sabotage variables
 	if is_special_object:
