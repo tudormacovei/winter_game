@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=14 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
+[ext_resource type="Texture2D" uid="uid://138vl4dbfsi4" path="res://2d_assets/other/health overlay.webp" id="10_x2fib"]
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -31,6 +32,13 @@ visible = false
 [node name="PauseMenu" parent="UI" instance=ExtResource("4_x8h8r")]
 visible = false
 
+[node name="HealthOverlay" type="Sprite2D" parent="UI"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+position = Vector2(641, 360.00003)
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("10_x2fib")
+
 [node name="Managers" type="Node" parent="."]
 
 [node name="UIManager" type="Node" parent="Managers"]
@@ -40,6 +48,8 @@ metadata/_custom_type_script = "uid://dgcq710oaye20"
 
 [node name="GameManager" type="Node" parent="Managers"]
 script = ExtResource("1_x8h8r")
+health_drain_per_second = 3.0
+health_restore_per_second = 2.0
 metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

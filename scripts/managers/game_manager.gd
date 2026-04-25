@@ -8,6 +8,7 @@ const CharacterDefinition := preload("res://scripts/systems/interactions/charact
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
+@onready var health_overlay: Sprite2D = %HealthOverlay
 @onready var character_node := get_node("/root/Workspace/CameraSpace/DialogueView/DialogueCharacterTexture")
 
 var _day_resources: Array[DayDefinition] = []
@@ -18,7 +19,7 @@ var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
 var current_dialogue_balloon = null
 
-var health: float = 100.0
+var _health: float = 100.0
 var max_health: float = 100.0
 @export var health_drain_per_second: float = 1.5
 @export var health_restore_per_second: float = 0.75
@@ -30,26 +31,30 @@ var _triggered_thresholds: Array[float] = []
 var _has_focused_object: bool = false
 
 func _process(delta: float) -> void:
-	var prev_health := health
 	if _has_focused_object:
-		health -= health_drain_per_second * delta
+		set_health(_health - health_drain_per_second * delta)
 	else:
-		health += health_restore_per_second * delta
-	health = clampf(health, 0.0, max_health)
+		set_health(_health + health_restore_per_second * delta)
+
+
+func set_health(value: float) -> void:
+	var prev_health := _health
+	_health = clampf(value, 0.0, max_health)
 	_check_health_thresholds(prev_health)
+	health_overlay.modulate = Color(1.0, 1.0, 1.0, 1.0 - _health / 100.0)
 
 
 func _check_health_thresholds(prev_health: float) -> void:
 	for threshold in _HEALTH_THRESHOLDS:
-		if prev_health > threshold and health <= threshold:
+		if prev_health > threshold and _health <= threshold:
 			_triggered_thresholds.append(threshold)
-			print("GameManager: Health dropped below " + str(int(threshold)) + " (" + str(snappedf(health, 0.1)) + " pts)")
+			print("GameManager: Health dropped below " + str(int(threshold)) + " (" + str(snappedf(_health, 0.1)) + " pts)")
 			if threshold == 0.0:
 				# TODO: show game end screen
 				Utils.debug_error("GameManager: Player current HP reached 0")
-		elif prev_health <= threshold and health > threshold:
+		elif prev_health <= threshold and _health > threshold:
 			_triggered_thresholds.erase(threshold)
-			print("GameManager: Health recovered above " + str(int(threshold)) + " (" + str(snappedf(health, 0.1)) + " pts)")
+			print("GameManager: Health recovered above " + str(int(threshold)) + " (" + str(snappedf(_health, 0.1)) + " pts)")
 
 
 func _ready():
@@ -203,14 +208,12 @@ func _on_object_completed(object_name: String, is_special_object: bool, complete
 	var missed_stickers := total_stickers - completed_stickers
 	if missed_stickers > 0:
 		var penalty := minf(missed_stickers * hp_penalty_per_missed_sticker, hp_penalty_cap_per_object)
-		var prev_health := health
 		max_health = maxf(0.0, max_health - penalty)
-		health = minf(health, max_health)
-		print("GameManager: Max health set to: " + str(snappedf(health, 0.1)))
+		set_health(_health)
+		print("GameManager: Max health set to: " + str(snappedf(_health, 0.1)))
 		if max_health == 0.0:
 			# TODO: Show game end screen
 			Utils.debug_error("GameManager: Player max HP reached 0")
-		_check_health_thresholds(prev_health)
 
 	# Update sabotage variables
 	if is_special_object:
