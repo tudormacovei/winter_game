@@ -18,6 +18,34 @@ var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
 var current_dialogue_balloon = null
 
+var health: float = 100.0
+@export var health_drain_per_second: float = 1.5
+@export var health_restore_per_second: float = 0.75
+
+static var _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0]
+var _triggered_thresholds: Array[float] = []
+var _has_focused_object: bool = false
+
+func _process(delta: float) -> void:
+	var prev_health := health
+	if _has_focused_object:
+		health -= health_drain_per_second * delta
+	else:
+		health += health_restore_per_second * delta
+	health = clampf(health, 0.0, 100.0)
+	_check_health_thresholds(prev_health)
+
+
+func _check_health_thresholds(prev_health: float) -> void:
+	for threshold in _HEALTH_THRESHOLDS:
+		if prev_health > threshold and health <= threshold:
+			_triggered_thresholds.append(threshold)
+			print("GameManager: Health dropped below " + str(int(threshold)) + " (" + str(snappedf(health, 0.1)) + " pts)")
+		elif prev_health <= threshold and health > threshold:
+			_triggered_thresholds.erase(threshold)
+			print("GameManager: Health recovered above " + str(int(threshold)) + " (" + str(snappedf(health, 0.1)) + " pts)")
+
+
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
@@ -136,6 +164,7 @@ func _add_object_to_workbench(object_scene: PackedScene):
 		return
 		
 	object.connect("object_completed", _on_object_completed)
+	object.object_interactible.connect(_on_object_interactible)
 
 func _deferred_connect_spoke_signal():
 	if current_dialogue_balloon and current_dialogue_balloon.dialogue_label:
@@ -155,6 +184,10 @@ func _on_tree_exiting():
 		current_dialogue_balloon.queue_free()
 	if is_dialogue_running:
 		DialogueManager.dialogue_ended.emit(null)
+
+func _on_object_interactible(is_interactible: bool) -> void:
+	_has_focused_object = is_interactible
+
 
 func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
 	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)
