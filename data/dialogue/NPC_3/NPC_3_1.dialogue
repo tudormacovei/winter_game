@@ -23,7 +23,7 @@ Mary: [do Variables.set_var("prog_window_background_path", "res://2d_assets/back
 			- May I ask why you don't want the watch cleansed?
 				Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 				Mary: *Her FACE turns REFLECTIVE
-				Mary: Henry was my man. I loved him. I still do.
+				Mary: Henry was everything to me. I loved him dearly. I still do.
 				Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 				Mary: In practice, however, he was a shell of his former self. 
 				Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -72,7 +72,7 @@ Mary: [do Variables.set_var("prog_window_background_path", "res://2d_assets/back
 				- May I ask why you don't want the watch cleansed?
 					Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 					Mary: *Her FACE turns REFLECTIVE
-					Mary: Henry was my man. I loved him. I still do.
+					Mary: Henry was everything to me. I loved him dearly. I still do.
 					Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 					Mary: In practice, however, he was a shell of his former self. 
 					Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -155,7 +155,7 @@ Mary: [do Variables.set_var("prog_window_background_path", "res://2d_assets/back
 		- It's good enough. So, why don't you want the watch cleansed?
 			Mary: I despise the practice. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -210,7 +210,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 	- Yeah, that should work. May I ask why you don't want the watch cleansed? 
 		Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 		Mary: *Her FACE turns REFLECTIVE
-		Mary: Henry was my man. I loved him. I still do.
+		Mary: Henry was everything to me. I loved him dearly. I still do.
 		Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 		Mary: In practice, however, he was a shell of his former self. 
 		Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -255,7 +255,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 		- You're welcome. May I ask why you didn't want the watch cleansed?
 			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -282,7 +282,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 		- Yeah, that should work. May I ask why you don't want the watch cleansed?
 			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -316,7 +316,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 		Mary: Brought an old rag of mine. Should suffice. [do Variables.set_char_var("NPC_3", "relationship", 5)] 
 		- It's good enough. So, why don't you want the watch cleansed?
 			Mary: I despise the practice. It dawned on me just now, as my time on this Earth nears its end. 
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -369,7 +369,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 	- Yeah, that should work. May I ask why you don't want the watch cleansed?
 		Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 		Mary: *Her FACE turns REFLECTIVE
-		Mary: Henry was my man. I loved him. I still do.
+		Mary: Henry was everything to me. I loved him dearly. I still do.
 		Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 		Mary: In practice, however, he was a shell of his former self. 
 		Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -414,7 +414,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 		- You're welcome. May I ask why you didn't want the watch cleansed?
 			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -441,7 +441,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 		- Yeah, that should work. Can I ask why you don't want the watch cleansed?
 			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -483,7 +483,7 @@ Mary: Consider it my final wish.
 		- May I ask why you don't want the watch cleansed?
 			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -527,7 +527,7 @@ Mary: Consider it my final wish.
 - Why does it matter so much to not have it cleansed?
 	Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 	Mary: *Her FACE turns REFLECTIVE
-	Mary: Henry was my man. I loved him. I still do. 
+	Mary: Henry was everything to me. I loved him dearly. I still do. 
 	Mary: ...
 	Mary: Please, Keeper. Just give it back. [do Variables.set_char_var("NPC_3", "opened_up", 1)]
 	- You're holding back. Tell me. 
@@ -638,7 +638,7 @@ Mary: Consider it my final wish.
 		- May I ask why you don't want the watch cleansed?
 			Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 			Mary: *Her FACE turns REFLECTIVE
-			Mary: Henry was my man. I loved him. I still do.
+			Mary: Henry was everything to me. I loved him dearly. I still do.
 			Mary: But he wasn't the same after we joined the cult. In theory, he was free of sin.  
 			Mary: In practice, however, he was a shell of his former self. 
 			Mary: To this day I'm not sure if what I'm grieving is his death or his cleansing. 
@@ -689,7 +689,7 @@ Mary: Consider it my final wish.
 - Why does it matter so much to not have it cleansed?
 	Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 	Mary: *Her FACE turns REFLECTIVE 
-	Mary: Henry was my man. I loved him. I still do. 
+	Mary: Henry was everything to me. I loved him dearly. I still do. 
 	Mary: ...
 	Mary: Please, Keeper. Just give it back. [do Variables.set_char_var("NPC_3", "opened_up", 1)]
 	- You're holding back. Tell me. 
