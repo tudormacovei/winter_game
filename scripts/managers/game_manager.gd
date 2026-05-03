@@ -5,6 +5,7 @@ extends Node
 
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
 const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
+const ShaderWarmup: GDScript = preload("res://scripts/user_interface/shader_warmup.gd")
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
@@ -51,13 +52,16 @@ func _check_health_thresholds(prev_health: float) -> void:
 			print("GameManager: Health dropped below " + str(int(threshold)) + " (" + str(snappedf(_health, 0.1)) + " pts)")
 			if threshold == 0.0:
 				# TODO: show game end screen
-				Utils.debug_error("GameManager: Player current HP reached 0")
+				push_warning("GameManager: Player current HP reached 0")
 		elif prev_health <= threshold and _health > threshold:
 			_triggered_thresholds.erase(threshold)
 			print("GameManager: Health recovered above " + str(int(threshold)) + " (" + str(snappedf(_health, 0.1)) + " pts)")
 
 
 func _ready():
+	var warmup: Node = ShaderWarmup.new()
+	add_child(warmup)
+
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
 	workbench.connect("all_objects_completed", _on_all_objects_completed)
@@ -213,7 +217,7 @@ func _on_object_completed(object_name: String, is_special_object: bool, complete
 		print("GameManager: Max health set to: " + str(snappedf(_health, 0.1)))
 		if max_health == 0.0:
 			# TODO: Show game end screen
-			Utils.debug_error("GameManager: Player max HP reached 0")
+			push_warning("GameManager: Player max HP reached 0")
 
 	# Update sabotage variables
 	if is_special_object:
