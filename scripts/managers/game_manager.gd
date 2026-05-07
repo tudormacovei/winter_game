@@ -20,6 +20,12 @@ var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
 var current_dialogue_balloon = null
 
+# Interaction cancelling variables
+# Starting a new interaction invalidates previous interaction tokens. This is used to cancel pending interactions and only start the most recent one.
+# NOTE: GDScript is single threaded by default. Cancelling logic could look like a race condition, but it doesn't seem to be in practice. 
+var _interaction_start_pending: bool = false
+var _interaction_start_token: int = 0
+
 var _health: float = 100.0
 var max_health: float = 100.0
 @export var health_drain_per_second: float = 1.5
@@ -124,6 +130,10 @@ func _load_character_resources():
 #endregion
 
 func _play_next_interaction():
+	_interaction_start_token += 1
+	var current_start_token = _interaction_start_token
+	_interaction_start_pending = true
+
 	# Traverse day and interaction arrays
 	current_interaction_index += 1
 	if current_interaction_index >= _day_resources[current_day_index].interactions.size():
@@ -137,6 +147,8 @@ func _play_next_interaction():
 			return
 
 		await ui_manager.show_day_end_screen(current_day_index)
+		if current_start_token != _interaction_start_token:
+			return
 
 	var interaction = _day_resources[current_day_index].interactions[current_interaction_index]
 	if not interaction:
@@ -149,6 +161,8 @@ func _play_next_interaction():
 
 	# Wait for start delay
 	await get_tree().create_timer(interaction.start_delay_seconds).timeout
+	if current_start_token != _interaction_start_token:
+		return
 
 	# Start the character interaction
 	current_dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
@@ -160,6 +174,7 @@ func _play_next_interaction():
 	for object_scene: PackedScene in interaction.objects:
 		_add_object_to_workbench(object_scene)
 
+	_interaction_start_pending = false
 	print("GameManager: Starting day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 
 # Next interaction is played when dialogue ends and there are no more objects on the workbench
@@ -286,14 +301,24 @@ func debug_play_next_interaction():
 	if current_day_index >= _day_resources.size():
 		Utils.debug_alert("Debug: Cannot play next interaction. All days have been completed.")
 		return
+	
+	if _interaction_start_pending:
+		_interaction_start_token += 1
+		print("Debug: Cancelling pending interaction...")
 
-	#NOTE: Dialogue baloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached. 
+	if not workbench.is_workbench_empty():
+		workbench.reset_workbench()
+
+	#NOTE: Dialogue balloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached.
 	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
 	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
+		print("Debug: Skipping to next interaction...")
+		
 		current_dialogue_balloon.queue_free()
-	DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
-	
-	print("Debug: Skipping to next interaction...")
+		DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
+		return # NOTE: Early out since emitting signal above will skip to the next interaction by default
+
+	print("Debug: Starting next interaction...")
 	_play_next_interaction()
 
 func debug_start_day(day_number: int):
