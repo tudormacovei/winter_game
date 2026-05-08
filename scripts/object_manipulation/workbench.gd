@@ -56,7 +56,7 @@ func _get_next_free_slot() -> Node3D:
 		if slot.get_child_count() == 0:
 			return slot
 			
-	Utils.debug_error("Workbench: Attempting to add object when workbench is full! Skipping object add...")
+	push_warning("Workbench: Attempting to add object when workbench is full! Skipping object add...")
 	return null
 
 func _set_background_dim(dimmed: bool) -> void:

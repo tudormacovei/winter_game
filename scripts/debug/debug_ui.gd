@@ -11,8 +11,9 @@ var game_manager: GameManager = null
 
 #region Debug UI State Variables
 
-#NOTE: Needed for persistent text. Otherwise text would reset every frame.
+#NOTE: Needed for persistent values. Otherwise they would reset every frame.
 var general_tab_day_number := ["1"]
+var general_tab_disable_interaction_delay := [false]
 var dialogue_tab_vars_search_text := [""]
 var dialogue_tab_set_var_key := [""]
 var dialogue_tab_set_var_value := [""]
@@ -32,6 +33,8 @@ func _draw_general_tab():
 
 	ImGui.Text("Game Flow")
 	ImGui.TextColored(Color(1.0, 0.8, 0.25), "Warning: Using these might result in an invalid game state!")
+
+	ImGui.Checkbox("Disable interaction start delay", general_tab_disable_interaction_delay)
 
 	if ImGui.Button("Start next interaction"):
 		game_manager.debug_play_next_interaction()
@@ -85,6 +88,10 @@ func _process(_delta):
 		ImGui.EndTabBar()
 
 	ImGui.End()
+
+	# Sync debug options to Game Manager
+	if game_manager:
+		game_manager.debug_disable_interaction_delay = general_tab_disable_interaction_delay[0]
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug_ui"):

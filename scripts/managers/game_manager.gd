@@ -160,9 +160,10 @@ func _play_next_interaction():
 		return
 
 	# Wait for start delay
-	await get_tree().create_timer(interaction.start_delay_seconds).timeout
-	if current_start_token != _interaction_start_token:
-		return
+	if not (OS.is_debug_build() and debug_disable_interaction_delay):
+		await get_tree().create_timer(interaction.start_delay_seconds).timeout
+		if current_start_token != _interaction_start_token:
+			return
 
 	# Start the character interaction
 	current_dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables")
@@ -279,6 +280,8 @@ func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: floa
 #endregion
 
 #region Debug
+
+var debug_disable_interaction_delay: bool = false
 
 func debug_get_current_day_number() -> int:
 	return current_day_index + 1
