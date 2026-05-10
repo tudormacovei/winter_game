@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d0blehxjqxmbe"]
+
+[ext_resource type="Shader" uid="uid://bi1ex3a0m2kqr" path="res://3d_assets/shaders/health_overlay.gdshader" id="1_r4p4h"]
+
+[resource]
+shader = ExtResource("1_r4p4h")
+shader_parameter/alpha = 0.0

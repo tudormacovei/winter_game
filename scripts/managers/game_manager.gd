@@ -48,7 +48,7 @@ func set_health(value: float) -> void:
 	var prev_health := _health
 	_health = clampf(value, 0.0, max_health)
 	_check_health_thresholds(prev_health)
-	health_overlay.modulate = Color(1.0, 1.0, 1.0, 1.0 - _health / 100.0)
+	health_overlay.material.set_shader_parameter(&"alpha", 1.0 - _health / 100.0)
 
 
 func _check_health_thresholds(prev_health: float) -> void:
