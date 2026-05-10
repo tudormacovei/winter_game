@@ -25,6 +25,16 @@ uniform float radial_speed : hint_range(0.0, 10.0) = 1.0;
 uniform float radial_magnitude : hint_range(0.0, 0.05) = 0.01;     // in UV units
 uniform float radial_frequency : hint_range(1.0, 32.0, 1.0) = 8.0; // whole number for seamless wrap
 
+// blend: tints the opaque parts of the overlay with a gradient between two colors.
+// blend_color_inner sits right next to the distorted circle edge.
+// blend_color_outer sits at the far edge of the screen (the corner).
+// Detection samples the texture at half the radial distortion, so the tinted region
+// is less wobbly than the visible texture but still moves with the effect.
+uniform vec4 blend_color_inner : source_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 blend_color_outer : source_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform float blend_alpha_threshold : hint_range(0.0, 1.0) = 0.5;
+uniform float blend_gradient_distance : hint_range(0.01, 1.0) = 0.5; // in normalized height units, same scale as the feather
+
 void fragment() {
 
 	// coordinate setup
@@ -71,7 +81,25 @@ void fragment() {
 	vec2 sample_UV = UV + radial_dir * radial_wave * falloff * radial_magnitude;
 
 
+	// BLEND COLOR DETECTION
+	// Sample the texture again at half the radial distortion offset. If that less-distorted
+	// sample reads as opaque, the pixel is "inside" the overlay artwork and we tint it.
+	//
+	// The tint itself is a gradient driven by how far the pixel is from the circle edge.
+	// Like the feather, the gradient distance is a fixed normalized-height length and
+	// does NOT depend on the circle size, so the band of colors stays consistent as
+	// health changes.
+	vec2 detect_UV = UV + radial_dir * radial_wave * falloff * radial_magnitude * 0.5;
+	float detect_alpha = texture(TEXTURE, detect_UV).a;
+
+	float gradient_t = clamp(d / blend_gradient_distance, 0.0, 1.0);
+	vec4 blend_color = mix(blend_color_inner, blend_color_outer, gradient_t);
+
+
 	// output
 	vec4 tex = texture(TEXTURE, sample_UV);
+	if (detect_alpha > blend_alpha_threshold) {
+		tex.rgb = mix(tex.rgb, blend_color.rgb, blend_color.a);
+	}
 	COLOR = vec4(tex.rgb, tex.a * mask);
 }
