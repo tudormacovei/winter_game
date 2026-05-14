@@ -13,7 +13,7 @@ size = Vector3(1, 0.225, 1.2)
 
 [node name="WorkbenchView" type="Node3D" node_paths=PackedStringArray("object_slots")]
 script = ExtResource("1_qyrgi")
-object_slots = [NodePath("ObjectSlot1"), NodePath("ObjectSlot2"), NodePath("ObjectSlot3")]
+object_slots = [NodePath("QuarantineZone/ObjectSlot1"), NodePath("QuarantineZone/ObjectSlot2"), NodePath("QuarantineZone/ObjectSlot3")]
 transition_curve = SubResource("Curve_qyrgi")
 
 [node name="WorkbenchTexture" type="Sprite3D" parent="."]
@@ -30,16 +30,48 @@ shape = SubResource("BoxShape3D_xcqvh")
 [node name="FocusPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1470308, 0)
 
-[node name="ObjectSlot1" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84280574, 0.11785263, -0.35793114)
-
-[node name="ObjectSlot2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84280574, 0.11785263, 0)
-
-[node name="ObjectSlot3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.84280574, 0.11785263, 0.43597627)
-
 [node name="WorkbenchDoneAreaOverlay" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.070225954, 0, 0, 0, -3.0696738e-09, 1, 0, -0.070225954, -4.371139e-08, 0.0052860975, -0.00736323, -0.002887724)
 texture = ExtResource("3_qyrgi")
+
+[node name="QuarantineZone" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.443455, 0.0018835664, 0)
+
+[node name="QuarantineBG" type="Sprite3D" parent="QuarantineZone"]
+transform = Transform3D(0.42926157, 0, 0, 0, 1.1920929e-07, 1.0000013, 0, -1.0000013, 1.1920929e-07, -0.48960263, -0.035868533, -3.0837657e-09)
+modulate = Color(1, 0.88, 0.88, 1)
+pixel_size = 0.0007
+texture = ExtResource("2_qyrgi")
+
+[node name="QuarantineDoor01" type="Sprite3D" parent="QuarantineZone"]
+unique_name_in_owner = true
+transform = Transform3D(-1.2239187e-08, -0.7414801, 0, 3.3378555e-08, 0, 1.0000013, -0.27999997, 3.2411126e-08, 1.1920928e-07, -0.4774809, -0.017822165, 0.36554292)
+modulate = Color(0.5636256, 0.5636255, 0.5636255, 1)
+pixel_size = 0.0007
+texture = ExtResource("2_qyrgi")
+
+[node name="QuarantineDoor02" type="Sprite3D" parent="QuarantineZone"]
+unique_name_in_owner = true
+transform = Transform3D(-1.2239187e-08, -0.7414801, 0, 3.3378555e-08, 0, 1.0000013, -0.27999997, 3.2411126e-08, 1.1920928e-07, -0.47748095, -0.017822076, -0.39071628)
+modulate = Color(0.5636256, 0.5636255, 0.5636255, 1)
+pixel_size = 0.0007
+texture = ExtResource("2_qyrgi")
+
+[node name="ObjectSlot1" type="Node3D" parent="QuarantineZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2656498, 0.11596906, -0.42398053)
+
+[node name="ObjectSlot2" type="Node3D" parent="QuarantineZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26835048, 0.11596906, -0.07801308)
+
+[node name="ObjectSlot3" type="Node3D" parent="QuarantineZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2187295, 0.11596906, 0.41969946)
+
+[node name="ObjectSlot4" type="Node3D" parent="QuarantineZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6260226, 0.11596906, -0.40941924)
+
+[node name="ObjectSlot5" type="Node3D" parent="QuarantineZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60754275, 0.11596918, 0.1294339)
+
+[node name="ObjectSlot6" type="Node3D" parent="QuarantineZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6985388, 0.11596918, 0.53810406)

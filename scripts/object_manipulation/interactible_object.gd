@@ -135,6 +135,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _state == State.ON_TABLE and _is_mouse_on_object:
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
+			var camera := get_viewport().get_camera_3d() as CameraControl
+			if camera:
+				camera.view_toggle_locked = true
 
 	if event is InputEventMouseMotion:
 		# ON_TABLE drag: if crossed threshold: start moving object
@@ -152,6 +155,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		_mouse_down = false
+		var camera := get_viewport().get_camera_3d() as CameraControl
+		if camera:
+			camera.view_toggle_locked = false
 
 
 func _on_object_mouse_entered() -> void:
@@ -219,7 +225,11 @@ func _set_state(state: State):
 			_focus_rotation_tween.kill()
 	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
-	
+
+	var camera := get_viewport().get_camera_3d() as CameraControl
+	if camera:
+		camera.view_toggle_locked = state == State.FOCUSED or state == State.ROTATING
+
 	object_state_changed.emit(state)
 
 

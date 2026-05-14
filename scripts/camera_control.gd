@@ -9,6 +9,16 @@ var ANIMATION_TIME = 0.4
 @export var focus_fov_curve: Curve
 @export var dolly_zoom_sensitivity: float = 0.02 # godot units camera moves per 1 degree FOV change
 
+@export_group("Quarantine View")
+# exit zone is wider than entry zone: prevents the view flicking back and forth when the mouse sits near the boundary
+@export var quarantine_entry_zone_fraction: float = 0.15
+@export var quarantine_exit_zone_fraction: float = 0.25
+@export var quarantine_x_offset: float = -0.5
+@export var quarantine_dwell_time: float = 0.5
+@export var quarantine_exit_grace: float = 0.15
+@export var quarantine_transition_time: float = 0.4
+@export var quarantine_transition_curve: Curve
+
 enum CameraState {
 	STATIONARY,
 	ROTATING
@@ -16,7 +26,8 @@ enum CameraState {
 
 enum CameraFocus {
 	DIALOGUE_AREA,
-	WORK_AREA
+	WORK_AREA,
+	QUARANTINE_VIEW,
 }
 
 signal camera_focus_changed(current_focus)
@@ -28,14 +39,21 @@ var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rot
 var _default_fov: float = 0.0
 var _fov_tween: Tween
 var _dolly_tween: Tween
+var view_toggle_locked: bool = false
+var _base_x: float = 0.0
+var _quarantine_dwell_acc: float = 0.0
+var _quarantine_exit_acc: float = 0.0
+var _quarantine_tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_default_fov = fov
+	_base_x = position.x
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	handle_rotation(delta)
+	_handle_quarantine_proximity(delta)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_view"):
@@ -64,6 +82,8 @@ func handle_rotation(delta: float):
 
 # sets variables to toggle the camera view between dialogue view to the work area view
 func toggle_view():
+	if view_toggle_locked or _camera_focus == CameraFocus.QUARANTINE_VIEW:
+		return
 	# If we are rotation then we are interrupting a rotation with a toggle
 	# To go the other direction we need the complement
 	if _camera_state == CameraState.ROTATING:
@@ -76,6 +96,66 @@ func toggle_view():
 		_camera_focus = CameraFocus.DIALOGUE_AREA
 
 	emit_signal("camera_focus_changed", _camera_focus)
+
+
+func _handle_quarantine_proximity(delta: float) -> void:
+	if view_toggle_locked or _camera_state == CameraState.ROTATING:
+		_quarantine_dwell_acc = 0.0
+		_quarantine_exit_acc = 0.0
+		return
+
+	var mouse_fraction := get_viewport().get_mouse_position().x / get_viewport().get_visible_rect().size.x
+
+	if _camera_focus == CameraFocus.WORK_AREA:
+		if mouse_fraction < quarantine_entry_zone_fraction:
+			_quarantine_exit_acc = 0.0
+			_quarantine_dwell_acc += delta
+			if _quarantine_dwell_acc >= quarantine_dwell_time:
+				_quarantine_dwell_acc = 0.0
+				_enter_quarantine()
+		else:
+			_quarantine_dwell_acc = 0.0
+	elif _camera_focus == CameraFocus.QUARANTINE_VIEW:
+		if mouse_fraction >= quarantine_exit_zone_fraction:
+			_quarantine_dwell_acc = 0.0
+			_quarantine_exit_acc += delta
+			if _quarantine_exit_acc >= quarantine_exit_grace:
+				_quarantine_exit_acc = 0.0
+				_exit_quarantine()
+		else:
+			_quarantine_exit_acc = 0.0
+
+
+func _enter_quarantine() -> void:
+	var start_x := position.x
+	var target_x := _base_x + quarantine_x_offset
+	if _quarantine_tween and _quarantine_tween.is_valid():
+		_quarantine_tween.kill()
+	_camera_focus = CameraFocus.QUARANTINE_VIEW
+	camera_focus_changed.emit(_camera_focus)
+	var sample := func(t: float) -> float: return quarantine_transition_curve.sample(t) if quarantine_transition_curve else t
+	_quarantine_tween = create_tween()
+	_quarantine_tween.tween_method(
+		func(t: float) -> void: position.x = lerpf(start_x, target_x, sample.call(t)),
+		0.0, 1.0, quarantine_transition_time
+	)
+	_quarantine_tween.tween_callback(func(): camera_rotation_completed.emit(_camera_focus))
+
+
+func _exit_quarantine() -> void:
+	var start_x := position.x
+	var target_x := _base_x
+	if _quarantine_tween and _quarantine_tween.is_valid():
+		_quarantine_tween.kill()
+	_camera_focus = CameraFocus.WORK_AREA
+	camera_focus_changed.emit(_camera_focus)
+	var sample := func(t: float) -> float: return quarantine_transition_curve.sample(t) if quarantine_transition_curve else t
+	_quarantine_tween = create_tween()
+	_quarantine_tween.tween_method(
+		func(t: float) -> void: position.x = lerpf(start_x, target_x, sample.call(t)),
+		0.0, 1.0, quarantine_transition_time
+	)
+	_quarantine_tween.tween_callback(func(): camera_rotation_completed.emit(_camera_focus))
 
 
 func tween_fov(target_fov: float, duration: float) -> void:
