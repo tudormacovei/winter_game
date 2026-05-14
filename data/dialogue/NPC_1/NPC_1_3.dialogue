@@ -17,6 +17,7 @@ if Variables.get_char_var("NPC_1", "wait") == true
 else 
 	One last item and then I can go to sleep... => END
 
+# !!! NOTE FROM PROG: Updating time of day from dialogue is deprecated !!!
 #~ end_of_day
 #if Variables.get_char_var("NPC_3", "dead") == false
 	#do Variables.set_var("prog_window_background_path", "res://2d_assets/backgrounds/demo_day_2/WindowView_Shop_Widow_Alive.webp")
