@@ -5,7 +5,6 @@ extends Node
 
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
 const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
-const ShaderWarmup: GDScript = preload("res://scripts/user_interface/shader_warmup.gd")
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
@@ -68,9 +67,6 @@ func _check_health_thresholds(prev_health: float) -> void:
 
 
 func _ready():
-	var warmup: Node = ShaderWarmup.new()
-	add_child(warmup)
-
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
 	workbench.connect("all_objects_completed", _on_all_objects_completed)

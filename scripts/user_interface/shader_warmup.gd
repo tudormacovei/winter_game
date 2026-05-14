@@ -5,6 +5,7 @@ signal warmup_completed
 const WARMUP_FRAME_COUNT: int = 30
 const WORKBENCH_VIEW_SCENE: PackedScene = preload("res://scenes/main_game_view/workbench_view.tscn")
 const STICKER_PEEL_SCENE: PackedScene = preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn")
+const DIALOGUE_VIEW_SCENE: PackedScene = preload("res://scenes/main_game_view/dialogue_view.tscn")
 
 var _frame_counter: int = 0
 
@@ -20,7 +21,7 @@ func _process(_delta: float) -> void:
 
 func _create_viewport() -> SubViewport:
 	var viewport := SubViewport.new()
-	viewport.size = Vector2i(1280, 720) # Matches res of the project 
+	viewport.size = Vector2i(1280, 720) # Matches res of the project
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS # ensures render occurs even if it is not visible
 	add_child(viewport)
 
@@ -55,4 +56,5 @@ func _populate_scenes(viewport: SubViewport) -> void:
 		container.add_child(scene.instantiate())
 
 	container.add_child(WORKBENCH_VIEW_SCENE.instantiate())
+	container.add_child(DIALOGUE_VIEW_SCENE.instantiate())
 	container.add_child(STICKER_PEEL_SCENE.instantiate())

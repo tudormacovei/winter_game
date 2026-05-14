@@ -1,5 +1,7 @@
 extends Node
 
+const ShaderWarmup: GDScript = preload("res://scripts/user_interface/shader_warmup.gd")
+
 var main_scene: PackedScene = preload("res://scenes/main_game_view/workspace.tscn")
 
 @onready var settings_panel: VBoxContainer = %Settings
@@ -8,6 +10,10 @@ var main_scene: PackedScene = preload("res://scenes/main_game_view/workspace.tsc
 @onready var exit_button: Button = %ExitGameButton
 
 func _ready() -> void:
+    # NOTE: This prevents hitches in the main scene. In case we need warmup to run for the main menu, we need to think of another solution (for example, a loading screen or a transition)
+	var warmup: Node = ShaderWarmup.new()
+	add_child(warmup)
+
 	settings_panel.visible = false
 	settings_button.pressed.connect(_on_settings_pressed)
 	start_button.pressed.connect(_on_start_pressed)
