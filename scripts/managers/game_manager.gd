@@ -32,6 +32,7 @@ var max_health: float = 100.0
 @export var health_restore_per_second: float = 0.75
 @export var hp_penalty_per_missed_sticker: float = 5.0
 @export var hp_penalty_cap_per_object: float = 15.0
+@export var health_to_radius_curve: Curve
 
 static var _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0, 0.0]
 var _triggered_thresholds: Array[float] = []
@@ -48,7 +49,9 @@ func set_health(value: float) -> void:
 	var prev_health := _health
 	_health = clampf(value, 0.0, max_health)
 	_check_health_thresholds(prev_health)
-	health_overlay.material.set_shader_parameter(&"health_normalized", _health / 100.0)
+	var health_fraction := _health / 100.0
+	var radius_fraction := health_to_radius_curve.sample(health_fraction) if health_to_radius_curve else health_fraction
+	health_overlay.material.set_shader_parameter(&"health_normalized", radius_fraction)
 
 
 func _check_health_thresholds(prev_health: float) -> void:

@@ -46,13 +46,13 @@ void fragment() {
 
 
 	// CIRCLE MASK
-	// base_radius is half the screen width in the normalized coordinate space, which equals 0.5 * aspect.
+	// base_radius reaches the screen corners at full health, so the overlay is fully hidden when health is 100%.
 	// wave2 nudges the angle by a small radian amount before wave1 reads it. Because the nudge
 	// itself varies sinusoidally around the circle, wave1 ends up sampling an uneven input and
 	// produces a less symmetric shape without adding a visually distinct second wave.
 	float distorted_angle = angle + wave2_magnitude * sin(wave2_frequency * angle + TIME * wave2_speed);
 
-	float base_radius = health_normalized * 0.5 * (resolution.x / resolution.y);
+	float base_radius = health_normalized * 0.5 * length(vec2(resolution.x / resolution.y, 1.0));
 	float radius = base_radius + wave_magnitude * sin(wave_frequency * distorted_angle + TIME * wave_speed);
 
 	// smoothstep over a 5px band gives a soft edge.
