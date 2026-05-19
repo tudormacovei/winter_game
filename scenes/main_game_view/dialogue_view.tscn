@@ -1,14 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=6 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_isxcp"]
 [ext_resource type="Texture2D" uid="uid://dgwb08atbapnq" path="res://2d_assets/backgrounds/DialogueView_Background.webp" id="2_kbq0g"]
+[ext_resource type="Shader" uid="uid://r5hwe4eih73w" path="res://3d_assets/shaders/window.gdshader" id="3_08sga"]
 [ext_resource type="Texture2D" uid="uid://dpj45pqi2024o" path="res://2d_assets/backgrounds/demo_day_1/WindowView_Shop.webp" id="4_isxcp"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbq0g"]
-transparency = 1
-albedo_texture = ExtResource("4_isxcp")
-emission_enabled = true
-emission_texture = ExtResource("4_isxcp")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbq0g"]
+render_priority = 0
+shader = ExtResource("3_08sga")
+shader_parameter/texture = ExtResource("4_isxcp")
+shader_parameter/time_of_day = 0.50000002375
+shader_parameter/color_noon = Color(1, 0.98, 0.92, 1)
+shader_parameter/color_sunset = Color(0.63426405, 0.36607158, 0.26324913, 1)
+shader_parameter/color_night = Color(0.19215687, 0.21960784, 0.38039216, 1)
+shader_parameter/night_brightness = 1.0
 
 [node name="DialogueView" type="Node3D"]
 script = ExtResource("1_isxcp")
@@ -26,9 +31,9 @@ pixel_size = 0.002
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.92)
 pixel_size = 0.002
 
-[node name="DialogueWindowView" type="Sprite3D" parent="."]
+[node name="DialogueWindowView" type="Sprite3D" parent="." groups=["time_of_day"]]
 transform = Transform3D(0.8671614, 0, 0, 0, 0.8671614, 0, 0, 0, 1, 0, 0, -3.9330757)
-material_override = SubResource("StandardMaterial3D_kbq0g")
+material_override = SubResource("ShaderMaterial_kbq0g")
 pixel_size = 0.002
 texture_filter = 2
 texture = ExtResource("4_isxcp")

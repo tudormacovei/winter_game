@@ -82,7 +82,7 @@ func _ready():
 
 	DialogueFuncs.register_game_manager(self )
 	if OS.is_debug_build():
-		DebugUI.register_game_manager(self )
+		DebugUI.register_debug_target(self )
 
 #region Dialogue Functions
 
@@ -127,6 +127,7 @@ func _load_character_resources():
 
 #endregion
 
+# TODO[ziana]: Integrate time of day changes after an interaction ends
 func _play_next_interaction():
 	_interaction_start_token += 1
 	var current_start_token = _interaction_start_token

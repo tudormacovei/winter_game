@@ -5,9 +5,13 @@ var enabled := false
 var _tabs := [
 	{"name": "General", "draw_func": "_draw_general_tab"},
 	{"name": "Dialogue", "draw_func": "_draw_dialogue_tab"},
+	{"name": "Visual", "draw_func": "_draw_visual_tab"},
 ]
 
+var WarningColor: Color = Color(1.0, 0.8, 0.25)
+
 var game_manager: GameManager = null
+var time_manager: TimeManager = null
 
 #region Debug UI State Variables
 
@@ -17,6 +21,7 @@ var general_tab_disable_interaction_delay := [false]
 var dialogue_tab_vars_search_text := [""]
 var dialogue_tab_set_var_key := [""]
 var dialogue_tab_set_var_value := [""]
+var visual_tab_time_of_day := [0.0]
 
 #endregion
 
@@ -32,7 +37,7 @@ func _draw_general_tab():
 	ImGui.Separator()
 
 	ImGui.Text("Game Flow")
-	ImGui.TextColored(Color(1.0, 0.8, 0.25), "Warning: Using these might result in an invalid game state!")
+	ImGui.TextColored(WarningColor, "Warning: Using these might result in an invalid game state!")
 
 	ImGui.Checkbox("Disable interaction start delay", general_tab_disable_interaction_delay)
 
@@ -71,10 +76,26 @@ func _draw_dialogue_tab():
 		if ImGui.Button("Set Variable"):
 			Variables.set_var(dialogue_tab_set_var_key[0], str_to_var(dialogue_tab_set_var_value[0]))
 
+
+func _draw_visual_tab():
+	if time_manager == null:
+		ImGui.TextColored(WarningColor, "Time Manager not found. Cannot display visual debug options.")
+		return
+
+	var current_time_of_day: float = time_manager.debug_get_current_time_of_day()
+	ImGui.Text("Current Time of Day: %.2f" % current_time_of_day)
+
+	if ImGui.SliderFloat("Override Time of Day", visual_tab_time_of_day, 0.0, 1.0) and time_manager:
+		time_manager.debug_set_time_of_day(visual_tab_time_of_day[0])
 #endregion
 
-func register_game_manager(gm: GameManager):
-	game_manager = gm
+func register_debug_target(target):
+	if target is GameManager:
+		game_manager = target
+	elif target is TimeManager:
+		time_manager = target
+	else:
+		push_warning("DebugUI: Tried to register unsupported debug target of type: " + str(target.get_class()))
 
 func _process(_delta):
 	if not enabled:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=18 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bfegigj2pr0lh" path="res://scenes/UI/day_end_screen.tscn" id="3_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
+[ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
 [ext_resource type="Texture2D" uid="uid://138vl4dbfsi4" path="res://2d_assets/other/health overlay.webp" id="10_x2fib"]
 
@@ -61,6 +62,9 @@ health_drain_per_second = 3.5
 health_restore_per_second = 2.5
 health_to_radius_curve = SubResource("Curve_vfkcj")
 metadata/_custom_type_script = "uid://dyhn8xx75acn4"
+
+[node name="TimeManager" type="Node" parent="Managers"]
+script = ExtResource("7_vfkcj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8pwe6")

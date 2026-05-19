@@ -7,6 +7,9 @@ func _ready() -> void:
 
 ## Updates the sprites for the window view
 func update_window_view(_var_name: String = "") -> void:
+	# TODO[ziana]: Refactor this to allow narrative to change the window background sprite.
+	return
+
 	var path = Variables.get_var("prog_window_background_path")
 	var texture := load(path) as Texture2D
 	if texture == null:
