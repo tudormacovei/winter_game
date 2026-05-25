@@ -3,6 +3,69 @@
 => start
 
 ~ start
+#background: wooden gate, nearly pitch black
+After a long and tiresome trek in the dark, you finally arrive at the village gates. You can barely make someone's features out through what you can only assume is a sliding peephole. They speak.
+???: Who goes there?
+- I heard this village is a safe haven, untouched by hardship and the Cullings. I want to setlle here.
+	???: The Goddess is all welcoming. So far, we've let everyone in, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. But you, you got here just in time. 
+	- I had a strange dream a few weeks ago. The one you call Goddess showed herself to me and told me to come here. 
+		???: The Elders told us She would soon send a chosen one bearing Her Gift. Safe to assume you're the one they've been talking about.
+		- She did mention She'd bestow a certain gift upon me. No idea what she meant by it, though. 
+			???: Don't worry about it just now. All will be revealed, in due time. 
+			???: She provides and cares for us. And she will provide and care for you, too. 
+			???: But for now, let's get you settled. I'm guessing you're hungry, tired, and in need of a bath. 
+			???: First things first, though. To your left, there's a charred hole. 
+			???: I'll need you to drop all your possessions in it, save your clothes.
+			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
+			- So be it. => go
+			- That's absurd.
+				???: A small price to pay for salvation.
+				- Fine. I did come all this way. => go 
+				- Salvation does sound good. => go 
+		- Whatever you say. 
+			???: Don't worry about it just now. All will be revealed, in due time. 
+			???: She provides and cares for us. And she will provide and care for you, too. 
+			???: But for now, let's get you settled. I'm guessing you're hungry, tired, and in need of a bath. 
+			???: First things first, though. To your left, there's a charred hole. 
+			???: I'll need you to drop all your possessions in it, save your clothes.
+			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
+			- So be it. => go
+			- That's absurd.
+				???: A small price to pay for salvation.
+				- Fine. I did come all this way. => go 
+				- This better be worth it. => go 
+- I heard this is the birthing place of the Church of the one true Goddess. I want to join. 
+	???: More and more people flocking to join each day. The Goddess welcomes you all with open arms. As do we. 
+	- She showed Herself to me one night. Told me to come here. 
+		???: The Elders told us She would soon send a chosen one bearing Her Gift. Safe to assume you're the one they've been talking about.
+		- She did mention She'd bestow a certain gift upon me. No idea what she meant by it, though. 
+			???: Don't worry about it just now. All will be revealed, in due time. 
+			???: She provides and cares for us. And she will provide and care for you, too.
+			???: But for now, let's get you settled. I'm guessing you're hungry, tired, and in need of a bath. 
+			???: First things first, though. To your left, there's a charred hole. 
+			???: I'll need you to drop all your possessions in it, save your clothes.
+			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
+			- So be it. => go
+			- That's absurd.
+				???: A small price to pay for salvation.
+				- Fine. I did come all this way. => go 
+				- Salvation does sound good. => go 
+		- Yes. I am her chosen one. I'm eager to serve.
+			???: Always a pleasure to meet a fellow believer.
+			???: Anyway, I'm guessing you're hungry, tired, and in need of a bath. 
+			???: First things first, though. To your left, there's a charred hole. 
+			???: I'll need you to drop all your possessions in it, save your clothes.
+			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
+			- So be it. => go 
+			- Happy to oblige. => go
+
+
+~ go
 
 => END
 
