@@ -54,7 +54,7 @@ After a long and tiresome trek in the dark, you finally arrive at the village ga
 				???: A small price to pay for salvation.
 				- Fine. I did come all this way. => go 
 				- Salvation does sound good. => go 
-		- Yes. I am her chosen one. I'm eager to serve.
+		- Yes. I am Her chosen one. I'm eager to serve.
 			???: Always a pleasure to meet a fellow believer.
 			???: Anyway, I'm guessing you're hungry, tired, and in need of a bath. 
 			???: First things first, though. To your left, there's a charred hole. 
@@ -66,6 +66,23 @@ After a long and tiresome trek in the dark, you finally arrive at the village ga
 
 
 ~ go
+???: [wait=3.0]Now that that's over with, let's get you to your new home. 
+???: You'll be staying at the Shopkeeper's house, on account of your Gift. He's Gifted himself, and I'm sure he's better suited to explain how it works than I am.
+???: He's been in need of an apprentice since forever, anyway. 
+???: That's his house. Just knock and tell him you're the Gifted newcomer the Elders mentioned, and that Joan sent you. He'll know what to do.
+Joan: Farewell. May the Goddess guide your every step. 
+- Goodbye, Joan. 
+	You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. 
+	Shopkeeper: Hello there. I know who you are and why you're here. No need to get into it right now. We've got time.
+	Shopkeeper: That there's your room. I've readied a change of clothes and a warm bath for you. Throw your own clothes in the fireplace once you're done.
+	Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done.
+	Shopkeeper: I'm guessing you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
+	Shopkeeper: But right now, my daughter, Sarah, is fast asleep. She's been helping me out all day and I'd hate for us to wake her up. 
+	Shopkeeper: Good night. I'll see you in the morning.
+	- Alright then. => END
+	- Thank you. Good night. => END
+
+
 
 => END
 
