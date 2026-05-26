@@ -1,7 +1,106 @@
 ~ initialize_local_variables
-
+do Variables.add_local("know", false)
+do Variables.add_local("why", false)
+do Variables.add_local("cult", false)
 => start
 
 ~ start
+Shopkeeper: Morning, there. Sleep well?
+- Morning. Slept just fine. 
+	Shopkeeper: Glad to hear that. Wouldn't want you tired on your first day. Especially after such a long journey.
+	- How do you know so much about me already?
+		Shopkeeper: Your arrival was heralded by the Elders.
+		Shopkeeper: To be completely honest, though, you never know with them.
+		Shopkeeper: Their predictions have been wrong just as often as they've been right.
+		Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.[do Variables.set_var("know", true)]
+		- I see. 
+			Shopkeeper: So, got any other questions for me before we get to work?
+			- None. 
+				Shopkeeper: Okay then. Let's get started. => tutorial 
+			- Still have a few, actually.
+				Shopkeeper: Shoot. => questions 
+		- She talked to me too. In a dream. Told me to come here. 
+			Shopkeeper: I'm well aware.
+			- Any idea why?
+				Shopkeeper: No idea. She's not exactly straightforward, our Goddess. Few Gods are.
+				Shopkeeper: All I know is you're important to her, and she wants me to train you.
+				Shopkeeper: And that's all I need to know for now.[do Variables.set_var("why", true)]
+				- Alright then. Let's get to it.
+					Shopkeeper: Let's. => tutorial 
+			- Anyway. Let's get to work. 
+				Shopkeeper: Let's. => tutorial
+	- Guess not. Got a bunch of questions before we get started, though. 
+		Shopkeeper: Shoot. => questions
+	- Yeah, just eager to start working, to be honest. 
+		Shopkeeper: A man after my own heart. So, no questions then?
+		- None. 
+			Shopkeeper: Okay then. Let's get started. => tutorial
+		- Actually, I got a few. 
+			Shopkeeper: Shoot. => questions
+- Not really. Got a lot on my mind.
+	Shopkeeper: Care to share?
+	- Not right now.
+		Shopkeeper: No worries. Just know I'm here if you wanna talk. And I'm mostly an open book, if you've got questions. 
+		Shopkeeper: Gotta stick together, us so favoured by the Goddess, eh? People can get as jealous here as anywhere else.
+		- Noted.
+			Shopkeeper: If you've no other questions to ask me, let us get started.
+			- Let's. => tutorial
+			- Actually, I wanted to ask you about something. 
+				Shopkeeper: Shoot. => questions
+		- Let's just get to work. 
+			Shopkeeper: Alright then. Let's get started. => tutorial 
+	- Yeah. Kind of feels like I'm joining a cult.
+		Shopkeeper: Eh, people here are just like everywhere else. 
+		Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
+		Shopkeeper: Way I see it, at least they've got a purpose.
+		Shopkeeper: Goes a long way, what with the state of the world right now and everything. [do Variables.set_var("cult", true)]
+		- Guess I can respect that. 
+			Shopkeeper: Just keep an open mind, yeah? That's how I generally go about my life. Worked pretty well for me so far.
+			Shopkeeper: Anyway, got any questions or shall we get started?
+			- Yeah, got a few things I wanted to ask about. 
+				Shopkeeper: Shoot. => questions
+			- Nope, let's just get to it. => tutorial
+		- "They"? Doesn't it apply to you, too?
+			Shopkeeper: Sure it does. Guess I've just been kind of by myself lately, focusing on Sarah and the shop. 
+			Shopkeeper: Easy to start feeling estranged, adopt an "us and them" mentality in such circumstances. 
+			Shopkeeper: No 
+		- Still feels weird. 
+			Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.
+			- Yeah, thanks. Wanted to ask you about something else. 
+				Shopkeeper: Shoot. => questions
+			- Let's just get to it. Working might help me ease into it better.
+				Shopkeeper: Let's. => tutorial
+	- The way you greeted me last night creeped me out. Like you were already expecting me. 
+		Shopkeeper: Oh, I didn't mean to be weird. I'm a bit anxious myself, to be completely honest. 
+		Shopkeeper: Been working alone ever since I came here. Hasn't been ideal, but I got used to it. Forgot how to behave around people, seems like. 
+		Shopkeeper: And you seem nice enough. But there's a lot riding on this, according to the Goddess and the elders. 
+		Shopkeeper: Wouldn't wanna be the one to fuck it up, haha. 
+		Shopkeeper: I'll try to be less spooky from now on, though. Promise. 
+		- Okay, I guess. 
+			Shopkeeper: Shall we get started, then? 
+			- Got a few questions I wanted to ask, first. 
+				Shopkeeper: Shoot. => questions 
+			- Let's. => tutorial
+		- No harm, no foul. 
+			Shopkeeper: Appreciate it. Shall we get started, then?
+			- Got a few questions I wanted to ask, first. 
+				Shopkeeper: Shoot. => questions 
+			- Let's. => tutorial
+	- Just eager to start serving the Goddess. 
+		Shopkeeper: Oh, no point mucking about, then. Unless you want to ask me something before we get started?
+		- Nope. Let's get to it. => tutorial
+		- Actually, I do. 
+			Shopkeeper: Shoot. => questions 
+	
+	
+~ questions
+Shopkeeper: ...
+- 
+-
+-
+-
+~ tutorial
+
+
 => END
 
