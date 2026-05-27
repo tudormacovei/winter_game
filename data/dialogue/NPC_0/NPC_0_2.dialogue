@@ -1,46 +1,63 @@
 ~ initialize_local_variables
 do Variables.add_local("know", false)
-do Variables.add_local("why", false)
 do Variables.add_local("cult", false)
+do Variables.add_local("questions", 0)
+do Variables.add_local("wait", false)
+do Variables.add_local("unaffected", false)
+do Variables.add_local("gift", false)
+do Variables.add_local("elders", false)
+do Variables.add_local("sacrifice", false)
 => start
 
 ~ start
-Shopkeeper: Morning, there. Sleep well?
+You wake up feeling dizzy. You get out of bed and make your way to the main room. Once there, you take your place behind the work station. You look around for a bit before you start hearing heavy footsteps coming down the stairs.
+Shopkeeper: Morning, there. I see you're itching to get started. Sleep well?
 - Morning. Slept just fine. 
-	Shopkeeper: Glad to hear that. Wouldn't want you tired on your first day. Especially after such a long journey.
+	Shopkeeper: Good. Wouldn't want you tired on your first day. Especially after such a long journey.[do Variables.set_var("know", true)]
 	- How do you know so much about me already?
 		Shopkeeper: Your arrival was heralded by the Elders.
-		Shopkeeper: To be completely honest, though, you never know with them.
-		Shopkeeper: Their predictions have been wrong just as often as they've been right.
-		Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.[do Variables.set_var("know", true)]
+		Shopkeeper: They told of someone bearing the Gift who would soon come help me around with the shop. Goddess knows I could use it. 
+		Shopkeeper: To be completely honest, though, you never know with them. Their predictions have been wrong just as often as they've been right. 
+		Shopkeeper: ...Make sure not to tell anyone I said that. 
+		Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.
 		- I see. 
 			Shopkeeper: So, got any other questions for me before we get to work?
 			- None. 
 				Shopkeeper: Okay then. Let's get started. => tutorial 
 			- Still have a few, actually.
 				Shopkeeper: Shoot. => questions 
-		- She talked to me too. In a dream. Told me to come here. 
-			Shopkeeper: I'm well aware.
-			- Any idea why?
-				Shopkeeper: No idea. She's not exactly straightforward, our Goddess. Few Gods are.
-				Shopkeeper: All I know is you're important to her, and she wants me to train you.
-				Shopkeeper: And that's all I need to know for now.[do Variables.set_var("why", true)]
+		- She talked to me, too. In my sleep, in what felt like a dream. Told me to come here. 
+			Shopkeeper: I'm well aware. She rarely does that, you know. 
+			- Any idea why She chose me?
+				Shopkeeper: None. She's not exactly straightforward, our Goddess. Few Gods ever are.
+				Shopkeeper: All I know is you're important to her, and she wants me to train you. And for you to help me.
+				Shopkeeper: And that's all I need to know for now.
 				- Alright then. Let's get to it.
 					Shopkeeper: Let's. => tutorial 
+				- Well, I'd like to know a bit more before we get started.
+					Shopkeeper: Shoot. => questions
+			- Got some other questions I wanted to ask. 
+				Shopkeeper: Shoot. => questions
 			- Anyway. Let's get to work. 
 				Shopkeeper: Let's. => tutorial
 	- Guess not. Got a bunch of questions before we get started, though. 
 		Shopkeeper: Shoot. => questions
-	- Yeah, just eager to start working, to be honest. 
+	- Yeah, just eager to start working, to be honest. [if Variables.get_var("religious_fervour") == 5]
 		Shopkeeper: A man after my own heart. So, no questions then?
 		- None. 
 			Shopkeeper: Okay then. Let's get started. => tutorial
 		- Actually, I got a few. 
 			Shopkeeper: Shoot. => questions
+	- Yeah, just eager to start serving the Goddess, to be honest. [if Variables.get_var("religious_fervour") == 6]
+		Shopkeeper: I see. So, no questions, then?
+		- None. 
+			Shopkeeper: Okay then. Let's get started. => tutorial
+		- Actually, I got a few. 
+			Shopkeeper: Shoot. => questions
 - Not really. Got a lot on my mind.
-	Shopkeeper: Care to share?
-	- Not right now.
-		Shopkeeper: No worries. Just know I'm here if you wanna talk. And I'm mostly an open book, if you've got questions. 
+	Shopkeeper: Care to share? [do Variables.set_var("cult", true)]
+	- Not right now, to be honest.
+		Shopkeeper: No worries. Just know I'm here if you wanna talk. And I'm mostly an open book, if you've got any questions. 
 		Shopkeeper: Gotta stick together, us so favoured by the Goddess, eh? People can get as jealous here as anywhere else.
 		- Noted.
 			Shopkeeper: If you've no other questions to ask me, let us get started.
@@ -48,32 +65,52 @@ Shopkeeper: Morning, there. Sleep well?
 			- Actually, I wanted to ask you about something. 
 				Shopkeeper: Shoot. => questions
 		- Let's just get to work. 
-			Shopkeeper: Alright then. Let's get started. => tutorial 
-	- Yeah. Kind of feels like I'm joining a cult.
+			Shopkeeper: Alright then. Let's get started. [do Variables.set_char_var("NPC_0", "relationship", 2)] => tutorial 
+	- Yeah. Kind of feels like I'm joining a cult. [if Variables.get_var("religious_fervour") == 5]
 		Shopkeeper: Eh, people here are just like everywhere else. 
 		Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
+		Shopkeeper: There are some practices and beliefs which might seem... odd, especially to an outsider.
 		Shopkeeper: Way I see it, at least they've got a purpose.
-		Shopkeeper: Goes a long way, what with the state of the world right now and everything. [do Variables.set_var("cult", true)]
+		Shopkeeper: Goes a long way, what with the state of the world right now and everything.
 		- Guess I can respect that. 
-			Shopkeeper: Just keep an open mind, yeah? That's how I generally go about my life. Worked pretty well for me so far.
+			Shopkeeper: Just keep an open mind, yeah? 
 			Shopkeeper: Anyway, got any questions or shall we get started?
 			- Yeah, got a few things I wanted to ask about. 
 				Shopkeeper: Shoot. => questions
 			- Nope, let's just get to it. => tutorial
-		- "They"? Doesn't it apply to you, too?
-			Shopkeeper: Sure it does. Guess I've just been kind of by myself lately, focusing on Sarah and the shop. 
+		- "They"? Can't relate?
+			Shopkeeper: Sure can. Guess I've just been kind of by myself lately, focusing on Sarah and the shop. 
 			Shopkeeper: Easy to start feeling estranged, adopt an "us and them" mentality in such circumstances. 
-			Shopkeeper: No 
+			- I get it.
+				Shopkeeper: Yeah. Hopefully you staying here will help prevent my becoming a secluded hermit. Hah. 
+				- Got a few questions I wanted to ask you.
+					Shopkeeper: Shoot. => questions 
+				- Let's get to work. 
+					Shopkeeper: Let's. => tutorial
+			- Would the Goddess approve?
+				Shopkeeper: It was a slip of the tongue. The Goddess is forgiving. 
+				Shopkeeper: The Elders, not so much. I'd appreciate it if this and any further such mistakes on my part stayed between us.
+				Shopkeeper: You scratch my back, I'll scratch yours, eh?
+				- Sure thing. 
+					Shopkeeper: Appreciate it. Shall we get to work? [do Variables.set_char_var("NPC_0", "relationship", 4)]
+					- Got a few questions I wanted to ask, first. 
+						Shopkeeper: Shoot. => questions 
+					- Let's. => tutorial 
+				- We'll see. 
+					Shopkeeper: Understandable. Guess I'll have to prove my worth first. Shall we get to work then? [do Variables.set_char_var("NPC_0", "relationship", 2)]
+					- Got a few questions I wanted to ask, first. 
+						Shopkeeper: Shoot. => questions 
+					- Let's. => tutorial 
 		- Still feels weird. 
-			Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.
-			- Yeah, thanks. Wanted to ask you about something else. 
+			Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in. [do Variables.mod_var("religious_fervour", -1)]
+			- Speaking of, I wanted to ask you a few questions.
 				Shopkeeper: Shoot. => questions
 			- Let's just get to it. Working might help me ease into it better.
 				Shopkeeper: Let's. => tutorial
 	- The way you greeted me last night creeped me out. Like you were already expecting me. 
-		Shopkeeper: Oh, I didn't mean to be weird. I'm a bit anxious myself, to be completely honest. 
+		Shopkeeper: Oh, I didn't mean to be weird. I'm a bit nervous myself, to be completely honest. [do Variables.set_var("wait", true)]
 		Shopkeeper: Been working alone ever since I came here. Hasn't been ideal, but I got used to it. Forgot how to behave around people, seems like. 
-		Shopkeeper: And you seem nice enough. But there's a lot riding on this, according to the Goddess and the elders. 
+		Shopkeeper: And you seem nice enough. But there's a lot riding on this, according to the Goddess and the Elders. 
 		Shopkeeper: Wouldn't wanna be the one to fuck it up, haha. 
 		Shopkeeper: I'll try to be less spooky from now on, though. Promise. 
 		- Okay, I guess. 
@@ -86,21 +123,152 @@ Shopkeeper: Morning, there. Sleep well?
 			- Got a few questions I wanted to ask, first. 
 				Shopkeeper: Shoot. => questions 
 			- Let's. => tutorial
-	- Just eager to start serving the Goddess. 
-		Shopkeeper: Oh, no point mucking about, then. Unless you want to ask me something before we get started?
+	- Just eager to start serving the Goddess. [if Variables.get_var("religious_fervour") == 6]
+		Shopkeeper: Oh, no point mucking about, then. Unless you want to ask me anything before we get started?
 		- Nope. Let's get to it. => tutorial
 		- Actually, I do. 
 			Shopkeeper: Shoot. => questions 
+	- I'm just slightly confused about everything. Got a bunch of questions.
+		Shopkeeper: Shoot. => questions
 	
 	
 ~ questions
-Shopkeeper: ...
-- 
--
--
--
+Shopkeeper: ... 
+- Were you waiting for me last night? Didn't even get to properly knock before you opened the door. [if Variables.get_var("wait") == false]
+	Shopkeeper: Oh, well, uh, kind of. I'm sorry if that was weird. [do Variables.mod_var("questions", 1)][do Variables.set_var("wait", true)]
+	Shopkeeper: It's just that I've known for a while someone bearing the Gift would come, and yesterday I felt this urge to look out the window right before you came into view.
+	Shopkeeper: And there you were. As soon as I saw you, I somehow knew it was you. Can't explain it more than that, though I wish I could.
+	Shopkeeper: Plus, I didn't want your knocking to wake Sarah up, truth be told. She's a light sleeper. 
+	- To be honest, I, myself, kind of knew this was your house even before Joan pointed it to me.
+		Shopkeeper: There you have it. => questions 
+	- Err, not sure how I feel about that. 
+		Shopkeeper: I know I'm being odd again. But it's the truth. => questions
+- How do you know so much about me already? [if Variables.get_var("know") == false]
+	Shopkeeper: Your arrival was heralded by the Elders. [do Variables.mod_var("questions", 1)][do Variables.set_var("know", true)]
+	Shopkeeper: They told me someone bearing the Gift would soon come to help me around with the shop. Goddess knows I could use it.
+	Shopkeeper: To be completely honest, though, you never know with them. Their predictions have been wrong just as often as they've been right.
+	Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.
+	- She talked to me, too. In my sleep, in what felt like a dream. Told me to come here. 
+		Shopkeeper: I'm well aware. She rarely does that, you know. 
+		- Any idea why She chose me?
+			Shopkeeper: None. She's not exactly straightforward, our Goddess. Few Gods ever are.
+			Shopkeeper: All I know is you're important to her, and she wants me to train you. And for you to help me.
+			Shopkeeper: And that's all I need to know for now. => questions
+		- Interesting. => questions
+	- I see. => questions
+- Is this village really unaffected by the Cullings? [if Variables.get_var("unaffected") == false]
+	Shopkeeper: Sure is. Not a single death, ever since they started occurring all those years ago. [do Variables.mod_var("questions", 1)][do Variables.set_var("unaffected", true)]
+	Shopkeeper: The sky does turn red in the morning, heralding a Culling day, and we've had people die just outside our walls. 
+	Shopkeeper: Gruesome, horrific way to go. Glad I've only witnessed it this one time.
+	Shopkeeper: But inside, nothing. Not once. The Goddess cares for and protects us.
+	- How is this possible?
+		Shopkeeper: You'll have to see it to believe it. Perhaps, if you're a doubter now, those doubts will vanish then. 
+		Shopkeeper: The Cullings are our Goddess's work. 
+		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
+		Shopkeeper: Sounds brutal, I know. But we, as a species, have been ruthless ourselves to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: Something had to be done. 
+		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
+			Shopkeeper: Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way. => questions
+		- We had it coming. Hopefully some good comes out of it. 
+			Shopkeeper: Time will tell. Either way, it's how things are now and we have to adjust to it. => questions
+	- Could it be that She's the one causing them, then?
+		Shopkeeper: She sure is. It's a well known fact around here. 
+		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
+		Shopkeeper: Sounds brutal, I know. But we ourselves, as a species, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: Something had to be done. 
+		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
+			Shopkeeper: Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way. => questions
+		- We had it coming. Hopefully some good comes out of it. 
+			Shopkeeper: Time will tell. Either way, it's how things are now and we have to adjust to it. => questions
+- So, what's the deal with our so called Gift? [if Variables.get_var("gift") == false]
+	Shopkeeper: I'll explain it once we start working. It will be easier for you to understand. [do Variables.mod_var("questions", 1)][do Variables.set_var("gift", true)]
+	Shopkeeper: The gist of it is, we get visions from the Goddess from time to time, and we can see more than other people can. 
+	Shopkeeper: You'll see. => questions
+- Who are the "Elders"? [if Variables.get_var("elders") == false]
+	Shopkeeper: They're the founders and leaders of our wonderful village and church. [do Variables.mod_var("questions", 1)][do Variables.set_var("elders", true)]
+	Shopkeeper: There's 5 of them, and they're the only ones who can communicate directly with the Goddess, besides me, of course. 
+	Shopkeeper: They're very old, hence the name. They rarely come out of their home. They have underlings and messengers in their service, and that's how they usually communicate the Goddess's will and teachings to us.
+	Shopkeeper: There's a chance you won't ever see them yourself, but it's safer to assume they're aware of your every move. 
+	Shopkeeper: They don't take kindly to meddling newcomers. And they're not known for being forgiving to heretics and blasphemers. 
+	Shopkeeper: Since you're not technically part of our church yet, the most severe form of punishment you could undergo is exile. 
+	Shopkeeper: But once you take the oath and become a fully fledged member, the punishment for sinning is either flogging, or death, depending on the severity of your actions. 
+	Shopkeeper: Sounds worse than it is. All you have to do is not speak against or openly defy our Goddess. 
+	- Sounds simple enough. => questions
+	- That's... fucked up. 
+		Shopkeeper: Salvation comes at a cost. => questions
+- Kind of feels like I'm joining a cult. [if Variables.get_var("cult") == false]
+	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.set_var("cult", true)]
+	Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
+	Shopkeeper: There are some practices and beliefs which might seem... odd, especially to an outsider.
+	Shopkeeper: Way I see it, at least they've got a purpose.
+	Shopkeeper: Goes a long way, what with the state of the world right now and everything.
+	- Guess I can respect that. 
+		Shopkeeper: Just keep an open mind, yeah? => questions
+	- "They"? Can't relate?
+		Shopkeeper: Sure can. Guess I've just been kind of by myself lately, focusing on Sarah and the shop. 
+		Shopkeeper: Easy to start feeling estranged, adopt an "us and them" mentality in such circumstances. 
+		- I get it.
+			Shopkeeper: Yeah. Hopefully you staying here will help prevent my becoming a secluded hermit. Hah. => questions
+		- Would the Goddess approve?
+			Shopkeeper: It was a slip of the tongue. The Goddess is forgiving. 
+			Shopkeeper: The Elders, not so much. I'd appreciate it if this and any further such mistakes on my part stayed between us.
+			Shopkeeper: You scratch my back, I'll scratch yours, eh?
+			- Sure thing. 
+				Shopkeeper: Appreciate it.[do Variables.set_char_var("NPC_0", "relationship", 4)] => questions
+			- We'll see. 
+				Shopkeeper: Understandable. Guess I'll have to prove my worth first.[do Variables.set_char_var("NPC_0", "relationship", 2)] => questions
+	- Still feels weird. 
+		Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.[do Variables.mod_var("religious_fervour", -1)] => questions
+- So, do you people sacrifice humans and stuff? [if Variables.get_var("sacrifice") == false and Variables.get_var("questions") >= 3] 
+	Shopkeeper: Uh, no, course not. [do Variables.set_var("sacrifice", true)]
+	- Okay. => questions
+	- You sure?
+		Shopkeeper: Sure I'm sure. No sacrifices here. Nope. 
+		Shopkeeper: None. 
+		- Okay then. => questions
+		- Kind of sounds like you're lying to me.
+			Shopkeeper: Look, there are some things you'll only get to know once you become a full member of the church.  
+			Shopkeeper: But trust me, we don't sacrifice anyone in the traditional sense, and never involuntarily. 
+			Shopkeeper: That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
+			- Okay, I trust you. => questions
+			- Okay, I'll drop it for now. => questions
+- That's it, for now. [if Variables.get_var("questions") >= 1]
+	Shopkeeper: Alright then. Let's get to it. => tutorial
+
 ~ tutorial
-
-
+Shopkeeper: First things first. I'll neeed to explain how the Cullings really work. 
+Shopkeeper: Besides infecting people with spots of corruption that quite literally suck the life out of them, the Cullings also yield a residual substance that attaches itself to worldly, man-made items. 
+Shopkeeper: While the manner in which said corruption targets and attaches itself to people or items is seemingly random, there's surely a logic and a purpose to it, known only to the Goddess Herself.
+Shopkeeper: Whenever the sky turns red in the morning - a harbinger of the Cullings, as you well know - some people die, and some items become corrupted. 
+Shopkeeper: While the goodwill of our Goddess has fortunately kept us safe from the former, we have sadly not been unaffected by the latter. 
+Shopkeeper: Interesting thing is, the residual substance that attaches itself to objects is invisible to the human eye. 
+Shopkeeper: Anyone can see the spots of corruption that cause people to die gruesome deaths. But only a few of us, who have had the good fortune of being blessed by the Goddess with Her Gift of sight, can see the spots of corruption that infect our everyday objects. 
+Shopkeeper: Though most people can't see said spots, their side effects can be felt by anyone. Using, interacting with or looking at an infected object can cause madness, ilness, and the appearance of violent urges.
+Shopkeeper: Sometimes, people can even hear the object talking to them, inciting them to violence. No wonder they go mad. 
+Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
+Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our little hands and fingers. 
+Shopkeeper: There. Look down and to your left. There's an infected object on the table.
+Shopkeeper: Pick it up and put it down in front of you, for now. 
+#tutorial: look down, move objects, quarantine zone
+Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds.
+#tutorial: rotate, focus mode
+Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
+Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
+Shopkeeper: You'll feel fine again soon enough. And then you're back to peeling. 
+Shopkeeper: Speaking of, let's try peeling the evil off this one. Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. 
+Shopkeeper: Remember, take breaks if you feel the need. 
+#tutorial: peeling, managing your health
+Shopkeeper: Well done. Put it in the basket, to your right. / No worries, no one gets it right the first time. Try again. / Almost. You've got it this time. 
+#tutorial: done zone
+Shopkeeper: Now let's try another one. 
+Shopkeeper: This one has been infected longer. Its evil is more frenetic. Some of its spots will move around erratically, while some others will move inward when observed for too long, infecting it forever.
+Shopkeeper: Make sure to target those first. And remember, put it down from time to time. Better it stay that way than you become infected yourself. Items can be burned, but you can't come back if the evil gets its hooks in you. 
+Shopkeeper: Give it a go. 
+#tutorial: different stickers
+Shopkeeper: Great job. You're a natural, eh? / Yep, this one's trickier. Give it another go. / Still better than I was at first. No harm done. Again. / There we go. In the basket it goes. 
+Shopkeeper: That's it. Our day consists of doing this over and over again, taking short breaks whenever we feel the need, and longer ones once every two or three objects. Safer that way. Easy to get lost in this kind of work. 
+Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around, talk to me or to Micah or to whoever finds themselves in this sorry place, peer out the window, anything. Balance is key. 
+Shopkeeper: You can keep practicing, if you so wish. These items are from old batches, anyway. Their owners are long dead, mostly.
+Shopkeeper: When you're ready, I'll introduce you to my daughter, Sarah, and to our beloved delivery boy, Micah. He's one of the Elders' messengers, collecting infected items from around the village and bringing 'em to us. 
 => END
 

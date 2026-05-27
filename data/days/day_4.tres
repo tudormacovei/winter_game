@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_mbtji"]
 script = ExtResource("1_nr3kf")
 dialogue = ExtResource("3_8lvv7")
+start_delay_seconds = 5.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [resource]

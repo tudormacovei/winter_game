@@ -34,7 +34,7 @@ After a long and tiring trek in the dark, you finally arrive at the village gate
 	- Gift? What Gift?
 		???: Don't worry about it right now. All will be revealed in due time. => but
 - I heard this is the birthing place of the Church of the one true Goddess. I'd like to join. 
-	???: Your reasons are pure. Many come here out of desperation and fear. 
+	???: Your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
 	???: But I've still got to ask Her for guidance.
 	???: Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
 	???: Does he speak truth? Will he serve and praise You? Or will he sow discord and doubt among our ranks?
