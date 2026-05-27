@@ -4,96 +4,113 @@
 
 ~ start
 #background: wooden gate, nearly pitch black
-In a world ravaged by seemingly random occurrences known as the Cullings, you make your way to a village you found out about in a dream, when a self-proclaimed Goddess showed herself to you in your sleep.
-After a long and tiresome trek in the dark, you finally arrive at the village gates. You can barely make someone's features out through what you can only assume is a sliding peephole. They speak.
-???: Who goes there?
-- I heard this village is a safe haven, untouched by hardship and the Cullings. Things are worse than ever out there. I want to setlle here.
-	???: The Goddess is all welcoming. So far, we've let everyone in, provided they're willing to leave their earthly possessions and sinful ways behind.
-	???: Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. But you, you got here just in time. 
-	- I had a strange dream a few weeks ago. The one you call Goddess showed herself to me and told me to come here. 
-		???: The Elders told us She would soon send a chosen one bearing Her Gift. Safe to assume you're the one they've been talking about.
-		- She did mention She'd bestow a certain gift upon me. No idea what she meant by it, though. 
-			???: Don't worry about it just now. All will be revealed, in due time. 
-			???: She provides and cares for us. And she will provide and care for you, too. 
-			???: But for now, let's get you settled. I'm guessing you're hungry, tired, and in need of a bath. 
-			???: First things first, though. To your left, there's a charred hole. 
-			???: I'll need you to drop all your possessions in it, save your clothes.
-			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
-			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
-			- So be it. => go
-			- That's absurd.
-				???: A small price to pay for salvation.
-				- Fine. I did come all this way. => go 
-				- Salvation does sound good. => go 
-		- Whatever you say. 
-			???: Don't worry about it just now. All will be revealed, in due time. 
-			???: She provides and cares for us. And she will provide and care for you, too. 
-			???: But for now, let's get you settled. I'm guessing you're hungry, tired, and in need of a bath. 
-			???: First things first, though. To your left, there's a charred hole. 
-			???: I'll need you to drop all your possessions in it, save your clothes.
-			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
-			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
-			- So be it. => go
-			- That's absurd.
-				???: A small price to pay for salvation.
-				- Fine. I did come all this way. => go 
-				- This better be worth it. => go 
-- I heard this is the birthing place of the Church of the one true Goddess. I want to join. 
-	???: More and more people flocking to join each day. The Goddess welcomes you all with open arms. As do we. 
-	- She showed Herself to me one night. Told me to come here. 
-		???: The Elders told us She would soon send a chosen one bearing Her Gift. Safe to assume you're the one they've been talking about.
-		- She did mention She'd bestow a certain gift upon me. No idea what she meant by it, though. 
-			???: Don't worry about it just now. All will be revealed, in due time. 
-			???: She provides and cares for us. And she will provide and care for you, too.
-			???: But for now, let's get you settled. I'm guessing you're hungry, tired, and in need of a bath. 
-			???: First things first, though. To your left, there's a charred hole. 
-			???: I'll need you to drop all your possessions in it, save your clothes.
-			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
-			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
-			- So be it. => go
-			- That's absurd.
-				???: A small price to pay for salvation.
-				- Fine. I did come all this way. => go 
-				- Salvation does sound good. => go 
-		- Yes. I am Her chosen one. I'm eager to serve.
-			???: Always a pleasure to meet a fellow believer.
-			???: Anyway, I'm guessing you're hungry, tired, and in need of a bath. 
-			???: First things first, though. To your left, there's a charred hole. 
-			???: I'll need you to drop all your possessions in it, save your clothes.
-			???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
-			???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
-			- So be it. => go 
-			- Happy to oblige. => go
+In a world ravaged by seemingly random occurrences known as the Cullings, leading to countless deaths, you make your way to a village you found out about in a dream. A self-proclaimed Goddess showed Herself to you in your sleep and told you to come here.
+After a long and tiring trek in the dark, you finally arrive at the village gates. You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch you as you walk towards them. After what seems like minutes, they speak.
+???: [wait=0.5]Who's there?
+- I heard this village is a safe haven, untouched by hardship and the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.
+	???: Not the first to ask. Sure won't be the last. Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
+	???: Will he serve and praise, or will he sow discord and doubt among our ranks?
+	???: [wait=0.5]...
+	???: [wait=1]...Fortune smiles upon you!
+	???: The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
+	???: But you, you got here just in time. 
+	???: And you're bearing Her Gift, are you? What a blessed day. 
+	- That's... great!
+		???: So it is. 
+		???: She provides and cares for us. And she will provide and care for you, too. => but
+	- Praise be!
+		???: Praise be indeed!
+		???: She provides and cares for us. And she will provide and care for you, too. => but
+	- Your Goddess showed Herself to me in my sleep and told me to come here. Of course she'd let me in.
+		???: The Goddess very rarely speaks to us mortals. You've been blessed. 
+		???: Doubly so, since She's also bestowed Her Gift upon you. 
+		???: But don't let that turn your reverence and appreciation into vanity and pride.
+		???: For if there's one thing Our Blessed Goddess hates, it's arrogance. => but
+	- Whatever you say. 
+		???: She speaks through me. I'm a mere vessel. 
+		???: She provides and cares for us. And she will provide and care for you, too. 
+		???: ...In spite of your ignorant attitude. => but
+	- Gift? What Gift?
+		???: Don't worry about it right now. All will be revealed in due time. => but
+- I heard this is the birthing place of the Church of the one true Goddess. I'd like to join. 
+	???: Your reasons are pure. Many come here out of desperation and fear. 
+	???: But I've still got to ask Her for guidance.
+	???: Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
+	???: Does he speak truth? Will he serve and praise You? Or will he sow discord and doubt among our ranks?
+	???: [wait=0.5]...
+	???: [wait=1]...Fortune smiles upon you!
+	???: The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
+	???: But you, you got here just in time. 
+	???: And you're bearing Her Gift, are you? What a blessed day. 
+	- That's... great!
+		???: So it is. 
+		???: She provides and cares for us. And she will provide and care for you, too. => but1
+	- Praise be!
+		???: Praise be indeed!
+		???: She provides and cares for us. And she will provide and care for you, too. => but1
+	- Gift? What Gift?
+		???: Don't worry about it right now. All will be revealed in due time. => but1
+	- Yes. She showed Herself to me in my sleep. Told me to come here. I am Her chosen one. 
+		#add global variable, add new dialogue option in tutorial section
+		???: The Goddess very rarely speaks to us mortals. You've been blessed. 
+		???: Doubly so, since She's also bestowed Her Gift upon you. 
+		???: But don't let that turn your reverence and appreciation into vanity and pride.
+		???: For if there's one thing Our Blessed Goddess hates, it's arrogance. => but1
 
-
+~ but
+???: Anyway, I'm guessing you're hungry, tired, and in desperate need of a bath. 
+???: First things first, though. To your left, there's a charred hole. 
+???: I'll need you to drop all your possessions in it. Your clothes, too. 
+???: No outside items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+???: Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
+- So be it. => go
+- That's absurd.
+	???: A small price to pay for salvation.
+	- Fine. I did come all this way. => go 
+	- Just... turn around. 
+		???: Whatever helps you feel more comfortable. => go 
+	- Salvation does sound good. => go
+	- This place better be everything you make it out to be.
+		???: Oh, it sure is. And so much more. => go
+		
+~ but1
+???: Anyway, I'm guessing you're hungry, tired, and in need of a bath. 
+???: First things first, though. To your left, there's a charred hole. 
+???: I'll need you to drop all your possessions in it, save your clothes.
+???: No man-made items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+???: Once you're in, we'll give you a new change clothes, and your present attire will be burned too. 
+- So be it. => go 
+- Happy to oblige. => go
+- That's absurd.
+	???: A small price to pay for salvation.
+	- Fine. I did come all this way. => go 
+	- Just... turn around. 
+		???: Whatever helps you feel more comfortable. => go 
+	- Salvation does sound good. => go
+		
 ~ go
-???: [wait=3.0]Now that that's over with, let's get you to your new home. 
+???: [wait=2.0]Now that that's over with, let's get you to your new home. 
 ???: You'll be staying at the Shopkeeper's house, on account of your Gift. He's Gifted himself, and I'm sure he's better suited to explain how it works than any of us are.
 ???: He's been in need of an apprentice since forever, anyway. 
-???: That's his house. Just knock and tell him you're the Gifted newcomer the Elders mentioned, and that Joan sent you. He'll know what to do.
+???: That's his house. Just knock and tell him you're Gifted, and that Joan let you in, with the Goddess's blessing. 
 Joan: Farewell. May the Goddess guide your every step. 
 - Goodbye, Joan. 
-	You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. 
-	Shopkeeper: Hello there. I know who you are and why you're here. No need to get into it right now. We've got time.
-	Shopkeeper: That there's your room. I've readied a change of clothes and a warm bath for you. Throw your own clothes in the fireplace once you're done.
-	Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done.
-	Shopkeeper: I'm guessing you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
-	Shopkeeper: But now, my daughter, Sarah, is fast asleep. She's been helping me out all day and I'd hate for us to wake her up. 
-	Shopkeeper: Good night. I'll see you in the morning.
-	- Alright then. => END
-	- Thank you. Good night. => END
+	[wait=1.5]You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
 - ...
-	You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. 
-	Shopkeeper: Hello there. I know who you are and why you're here. No need to get into it right now. We've got time.
-	Shopkeeper: That there's your room. I've readied a change of clothes and a warm bath for you. Throw your own clothes in the fireplace once you're done.
-	Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done.
-	Shopkeeper: I'm guessing you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
-	Shopkeeper: But now, my daughter, Sarah, is fast asleep. She's been helping me out all day and I'd hate for us to wake her up. 
-	Shopkeeper: Good night. I'll see you in the morning.
-	- Alright then. => END
-	- Thank you. Good night. => END
-
-
+	[wait=1.5]You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
+	
+~ shop
+Shopkeeper: Come in. I know who you are and why you're here. No need to get into it right now. You're probably exhausted. We've got time. 
+Shopkeeper: That there's your room. I've readied a change of clothes and a warm bath for you. 
+Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done, and I'm guessing a lot of talking, too. 
+Shopkeeper: I'm sure you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
+Shopkeeper: But not now. My daughter, Sarah, is fast asleep. She's been helping me out all day and I'd hate for us to wake her up with our chatter. 
+Shopkeeper: I'll see you in the morning. Good night. 
+- Alright then. => END
+- Thank you. Good night. => END
+- ... => END
 
 => END
 
