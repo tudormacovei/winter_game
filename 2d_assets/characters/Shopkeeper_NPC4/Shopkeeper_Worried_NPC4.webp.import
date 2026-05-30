@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbl1oeutas260"
-path="res://.godot/imported/ShopkeeperWorried_NPC4.webp-61a3605de9ca511375616f75f7ce2310.ctex"
+path="res://.godot/imported/Shopkeeper_Worried_NPC4.webp-065258de00f2648b0d19494a051c2379.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/Shopkeeper_NPC4/ShopkeeperWorried_NPC4.webp"
-dest_files=["res://.godot/imported/ShopkeeperWorried_NPC4.webp-61a3605de9ca511375616f75f7ce2310.ctex"]
+source_file="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_Worried_NPC4.webp"
+dest_files=["res://.godot/imported/Shopkeeper_Worried_NPC4.webp-065258de00f2648b0d19494a051c2379.ctex"]
 
 [params]
 
