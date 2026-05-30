@@ -10,7 +10,7 @@ var main_scene: PackedScene = preload("res://scenes/main_game_view/workspace.tsc
 @onready var exit_button: Button = %ExitGameButton
 
 func _ready() -> void:
-    # NOTE: This prevents hitches in the main scene. In case we need warmup to run for the main menu, we need to think of another solution (for example, a loading screen or a transition)
+	# NOTE: This prevents hitches in the main scene. In case we need warmup to run for the main menu, we need to think of another solution (for example, a loading screen or a transition)
 	var warmup: Node = ShaderWarmup.new()
 	add_child(warmup)
 

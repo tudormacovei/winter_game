@@ -110,3 +110,6 @@ quarantine_entry_zone_fraction = 0.1
 quarantine_exit_zone_fraction = 0.45
 quarantine_x_offset = -1.2
 quarantine_transition_curve = SubResource("Curve_usvo5")
+vertical_zone_fraction = 0.15
+vertical_dwell_time = 0.2
+vertical_transition_time = 0.5
