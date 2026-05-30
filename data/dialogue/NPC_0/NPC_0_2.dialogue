@@ -247,8 +247,7 @@ Shopkeeper: Though most people can't see said spots, their side effects can be f
 Shopkeeper: Sometimes, people can even hear the object talking to them, inciting them to violence. No wonder they go mad. 
 Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
 Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our little hands and fingers. 
-Shopkeeper: There. Look down and to your left. There's an infected object on the table.
-Shopkeeper: Pick it up and put it down in front of you, for now. 
+Shopkeeper: There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. 
 #tutorial: look down, move objects, quarantine zone
 Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds.
 #tutorial: rotate, focus mode
@@ -259,11 +258,14 @@ Shopkeeper: Speaking of, let's try peeling the evil off this one. Pick it back u
 Shopkeeper: Remember, take breaks if you feel the need. 
 #tutorial: peeling, managing your health
 Shopkeeper: Well done. Put it in the basket, to your right. / No worries, no one gets it right the first time. Try again. / Almost. You've got it this time. 
+#var: Variable for doneness of object
+#tutorial: Repeating object based on player performance 
 #tutorial: done zone
 Shopkeeper: Now let's try another one. 
 Shopkeeper: This one has been infected longer. Its evil is more frenetic. Some of its spots will move around erratically, while some others will move inward when observed for too long, infecting it forever.
 Shopkeeper: Make sure to target those first. And remember, put it down from time to time. Better it stay that way than you become infected yourself. Items can be burned, but you can't come back if the evil gets its hooks in you. 
 Shopkeeper: Give it a go. 
+#var: Variable for doneness of object
 #tutorial: different stickers
 Shopkeeper: Great job. You're a natural, eh? / Yep, this one's trickier. Give it another go. / Still better than I was at first. No harm done. Again. / There we go. In the basket it goes. 
 Shopkeeper: That's it. Our day consists of doing this over and over again, taking short breaks whenever we feel the need, and longer ones once every two or three objects. Safer that way. Easy to get lost in this kind of work. 
