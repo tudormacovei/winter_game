@@ -85,7 +85,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
-		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
+		progress.visible = not dialogue_label.is_typing and not dialogue_label._is_awaiting_mutation and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 
 ## Consume input when balloon is visible, otherwise propagate it
 func _unhandled_input(_event: InputEvent) -> void:
@@ -104,7 +104,7 @@ func _notification(what: int) -> void:
 
 ## Start some dialogue
 func start(with_dialogue_resource: DialogueResource = null, title: String = "", extra_game_states: Array = []) -> void:
-	temporary_game_states = [self] + extra_game_states
+	temporary_game_states = [ self ] + extra_game_states
 	is_waiting_for_input = false
 	if is_instance_valid(with_dialogue_resource):
 		dialogue_resource = with_dialogue_resource
@@ -192,6 +192,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 			dialogue_label.skip_typing()
 			return
 
+	if dialogue_label._is_awaiting_mutation: return
 	if not is_waiting_for_input: return
 	if dialogue_line.responses.size() > 0: return
 

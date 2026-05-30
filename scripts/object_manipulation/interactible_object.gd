@@ -40,11 +40,16 @@ static var ROTATION_SNAP_DURATION: float = 0.2
 static var FOCUS_DURATION: float = 0.25
 static var FOCUS_OBJECT_SCALE: float = 0.3
 
+#region Game State Variables
+var _has_player_dragged_object: bool = false
+var _has_player_rotated_object: bool = false
+#endregion
+
 var _drag_threshold_px: float = 0.0
 var _drag_start_pos: Vector2 = Vector2.ZERO
 var _mouse_down: bool = false
 
-var _rotation_sensitivity: float = 0.0  # radians per pixel, set in _ready
+var _rotation_sensitivity: float = 0.0 # radians per pixel, set in _ready
 var _stickers_hovered: int = 0
 var _hovered_stickers: Array[Sticker] = []
 var _snap_tween: Tween
@@ -191,7 +196,7 @@ func _on_object_area_exited(area: Area3D) -> void:
 
 
 func _on_stickers_placed() -> void:
-	for child in Utils.get_all_children(self):
+	for child in Utils.get_all_children(self ):
 		if child is Sticker:
 			_sticker_total += 1
 			child.sticker_completed.connect(_on_sticker_completed)
@@ -224,8 +229,15 @@ func _set_state(state: State):
 	else:
 		object_interactible.emit(false)
 	if state == State.ROTATING:
+		if not _has_player_rotated_object:
+			_has_player_rotated_object = true
+			GameState.first_object_rotated.emit()
 		if _focus_rotation_tween and _focus_rotation_tween.is_valid():
 			_focus_rotation_tween.kill()
+	if state == State.DRAGGING:
+		if not _has_player_dragged_object:
+			_has_player_dragged_object = true
+			GameState.first_object_dragged.emit()
 	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
 
