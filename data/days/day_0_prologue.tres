@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=5 format=3 uid="uid://bc10gafysuvix"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=5 format=3 uid="uid://crjbbp07kdxig"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_qajja"]
 [ext_resource type="Resource" uid="uid://gqbuiwqdbhkc" path="res://data/dialogue/NPC_0/NPC_0_1.dialogue" id="2_jqotn"]

@@ -133,11 +133,12 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_click_left"):
 		if _state == State.ON_TABLE and _is_mouse_on_object:
+			var camera := get_viewport().get_camera_3d() as CameraControl
+			if camera == null or not camera.is_at_rest_at_table():
+				return
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
-			var camera := get_viewport().get_camera_3d() as CameraControl
-			if camera:
-				camera.view_toggle_locked = true
+			camera.rotation_locked = true
 
 	if event is InputEventMouseMotion:
 		# ON_TABLE drag: if crossed threshold: start moving object
@@ -147,17 +148,19 @@ func _unhandled_input(event: InputEvent) -> void:
 				_set_state(State.DRAGGING)
 
 	if event.is_action_released("mouse_click_left"):
-		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
-			_mouse_down = false
-			_set_state(State.FOCUSED)
-			_remove_outline()
-			_start_focus_tween(self.to_local(_focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
-			get_viewport().set_input_as_handled()
-			return
-		_mouse_down = false
 		var camera := get_viewport().get_camera_3d() as CameraControl
+		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
+			# object focus can only happen while in workbench view, NOT quarantine view
+			if camera and camera.is_at_rest_in_workbench_view():
+				_mouse_down = false
+				_set_state(State.FOCUSED)
+				_remove_outline()
+				_start_focus_tween(self.to_local(_focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
+				get_viewport().set_input_as_handled()
+				return
+		_mouse_down = false
 		if camera:
-			camera.view_toggle_locked = false
+			camera.rotation_locked = false
 
 
 func _on_object_mouse_entered() -> void:
@@ -228,7 +231,7 @@ func _set_state(state: State):
 
 	var camera := get_viewport().get_camera_3d() as CameraControl
 	if camera:
-		camera.view_toggle_locked = state == State.FOCUSED or state == State.ROTATING
+		camera.rotation_locked = state != State.ON_TABLE
 
 	object_state_changed.emit(state)
 
@@ -415,7 +418,7 @@ func complete_object():
 	
 	_set_state(State.ON_TABLE)
 	queue_free()
-	emit_signal("object_completed", _object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
+	object_completed.emit(_object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):

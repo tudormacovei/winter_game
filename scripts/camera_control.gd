@@ -44,7 +44,7 @@ var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rot
 var _default_fov: float = 0.0
 var _fov_tween: Tween
 var _dolly_tween: Tween
-var view_toggle_locked: bool = false
+var rotation_locked: bool = false
 var _base_x: float = 0.0
 var _quarantine_dwell_elapsed: float = 0.0 # in seconds
 var _quarantine_exit_elapsed: float = 0.0 # in seconds
@@ -82,26 +82,34 @@ func handle_rotation(delta: float):
 	if _rotation_tracker >= 1.0:
 		_camera_state = CameraState.STATIONARY
 		_rotation_tracker = 0.0
-		emit_signal("camera_rotation_completed", _camera_focus)
+		camera_rotation_completed.emit(_camera_focus)
 
 # begins a rotation from the current camera_focus to target_focus (WORK_AREA or DIALOGUE_AREA)
 func _start_rotation_to(target_focus: CameraFocus) -> void:
-	if view_toggle_locked:
+	if rotation_locked:
 		return
 	# interrupting an in-progress rotation toward the opposite target: reverse by complementing the tracker
 	if _camera_state == CameraState.ROTATING:
 		_rotation_tracker = 1.0 - _rotation_tracker
 	_camera_state = CameraState.ROTATING
 	_camera_focus = target_focus
-	emit_signal("camera_focus_changed", _camera_focus)
+	camera_focus_changed.emit(_camera_focus)
 
 
 func _is_camera_animating() -> bool:
 	return _camera_state != CameraState.STATIONARY
 
 
+func is_at_rest_in_workbench_view() -> bool:
+	return _camera_state == CameraState.STATIONARY and _camera_focus == CameraFocus.WORK_AREA
+
+
+func is_at_rest_at_table() -> bool:
+	return _camera_state == CameraState.STATIONARY and (_camera_focus == CameraFocus.WORK_AREA or _camera_focus == CameraFocus.QUARANTINE_VIEW)
+
+
 func _handle_quarantine_proximity(delta: float) -> void:
-	if view_toggle_locked or _is_camera_animating():
+	if _is_camera_animating():
 		_quarantine_dwell_elapsed = 0.0
 		_quarantine_exit_elapsed = 0.0
 		return
@@ -132,7 +140,7 @@ func _handle_quarantine_proximity(delta: float) -> void:
 
 
 func _handle_vertical_proximity(delta: float) -> void:
-	if view_toggle_locked or _is_camera_animating():
+	if rotation_locked or _is_camera_animating():
 		_vertical_dwell_elapsed = 0.0
 		return
 
