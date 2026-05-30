@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cjqb1kabifwjc"]
+
+[ext_resource type="Shader" uid="uid://sc0cfqbuuoa4" path="res://3d_assets/shaders/sticker_peel_directional.gdshader" id="1_g4av5"]
+[ext_resource type="Texture2D" uid="uid://dxfby5iyoui4u" path="res://3d_assets/stickers/Sticker_StickerTextureTransparency.webp" id="1_qctey"]
+
+[resource]
+resource_name = "StickerMaterial"
+render_priority = 0
+shader = ExtResource("1_g4av5")
+shader_parameter/albedo_texture = ExtResource("1_qctey")
+shader_parameter/roughness = 0.5
+shader_parameter/wave_direction = Vector2(0, 1)
+shader_parameter/wave_frequency = 7.465000351327619
+shader_parameter/wave_speed = 2.7410001301975
+shader_parameter/wave_decay = 1.7660000838849998
+shader_parameter/bend_freq_large = 1.5
+shader_parameter/bend_amp_large = 0.7010000332975
+shader_parameter/bend_freq_small = 6.0
+shader_parameter/bend_amp_small = 0.22000001045
+shader_parameter/wave_max_threshold = 0.8000000855
+shader_parameter/wave_min_threshold = -0.48799997568
+shader_parameter/wave_min_multiplier = 0.0
+shader_parameter/texture_pull = -0.03999999538023

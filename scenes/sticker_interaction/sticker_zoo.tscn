@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://rqn51eeja1ox"]
+[gd_scene load_steps=5 format=3 uid="uid://rqn51eeja1ox"]
 
 [ext_resource type="PackedScene" uid="uid://xns6vbm564vw" path="res://scenes/sticker_interaction/sticker_click/sticker_click.tscn" id="1_hos6c"]
 [ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="2_pnvr5"]
+[ext_resource type="PackedScene" uid="uid://cfle3ykdjwjad" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel_directional.tscn" id="3_pnvr5"]
 
 [sub_resource type="Environment" id="Environment_vowdq"]
 background_energy_multiplier = 0.0
@@ -17,31 +18,47 @@ fov = 50.0
 transform = Transform3D(1, 0, 0, 0, 0.1397089, 0.9901926, 0, -0.9901926, 0.1397089, 0, 2.7823217, 4.628906)
 
 [node name="StickerClick" parent="." instance=ExtResource("1_hos6c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24547625, 0, -0.10692336)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3746801, 0, 0.14362808)
 debug_enabled = true
 
 [node name="StickerPeel" parent="." instance=ExtResource("2_pnvr5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17981732, 0, -0.10809153)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11313133, 0, 0.12889123)
 debug_enabled = true
 
-[node name="StickerPeel2" parent="." instance=ExtResource("2_pnvr5")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.18611738, 0, 0.10978322)
-debug_enabled = true
-
-[node name="StickerClick2" parent="." instance=ExtResource("1_hos6c")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.25621593, 0.014867306, 0.10084906)
+[node name="StickerPeel5" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(1.7352715, 0, 0.47836447, 0, 1.8, 0, -0.47836447, 0, 1.7352715, -0.34960803, 0, 0.14124155)
 debug_enabled = true
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, 0.27125573, 0, 0.27249578)
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, 0.35704678, 0, 0.27249578)
 text = "Click Stickers"
 
 [node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.22779533, 0.007941544, 0.26956773)
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.14200428, 0.007941544, 0.26956773)
 text = "Peel Stickers - Omnidirectional"
+
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.14199236, 0.0076012015, -0.01223994)
+text = "Peel Stickers - Directional"
 
 [node name="Main Title" type="Label3D" parent="."]
 transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.050511286, 0, 0.35691413)
 text = "This is a sticker zoo scene. It allows for visiblity and simple testing of all sticker types.
 Multiple sizes of sticker are present for testing purposes."
 font_size = 20
+
+[node name="StickerPeel2" parent="." instance=ExtResource("3_pnvr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23663831, -0.0033427477, -0.14538485)
+debug_enabled = true
+
+[node name="StickerPeel4" parent="." instance=ExtResource("3_pnvr5")]
+transform = Transform3D(-0.23187225, 0, 0.4429845, 0, 0.5, 0, -0.4429845, 0, -0.23187225, -0.41471845, -0.0033426285, -0.098181285)
+debug_enabled = true
+
+[node name="StickerPeel6" parent="." instance=ExtResource("3_pnvr5")]
+transform = Transform3D(-0.4386485, 0, 0.23997398, 0, 0.5, 0, -0.23997398, 0, -0.4386485, -0.11189297, -0.0033425987, -0.11128476)
+debug_enabled = true
+
+[node name="StickerPeel3" parent="." instance=ExtResource("3_pnvr5")]
+transform = Transform3D(1.0855962, 0, 0.51135206, 0, 1.2, 0, -0.51135206, 0, 1.0855962, 0.024952024, -0.0033426285, -0.14645699)
+debug_enabled = true

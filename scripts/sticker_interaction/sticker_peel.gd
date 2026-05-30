@@ -115,11 +115,16 @@ func _input(event: InputEvent) -> void:
 		mouse_current = get_viewport().get_mouse_position()
 		var fraction := _complete_fraction()
 		is_peeling = false
-		if fraction >= COMPLETION_THRESHOLD:
+		if _passes_completion_check(fraction):
 			_start_completion()
 		else:
 			_start_rollback()
 		CursorManager.release_cursor(CursorManager.CursorType.GRAB)
+
+## Override in subclasses to add additional completion criteria (e.g. drag direction).
+func _passes_completion_check(fraction: float) -> bool:
+	return fraction >= COMPLETION_THRESHOLD
+
 
 func _start_rollback() -> void:
 	if _original_mesh_backup == null:
