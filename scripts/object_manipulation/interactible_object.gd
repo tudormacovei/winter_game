@@ -43,6 +43,7 @@ static var FOCUS_OBJECT_SCALE: float = 0.3
 #region Game State Variables
 var _has_player_dragged_object: bool = false
 var _has_player_rotated_object: bool = false
+var _has_player_cleansed_sticker: bool = false
 #endregion
 
 var _drag_threshold_px: float = 0.0
@@ -208,6 +209,10 @@ func _on_stickers_placed() -> void:
 
 
 func _on_sticker_completed():
+	if not _has_player_cleansed_sticker:
+		_has_player_cleansed_sticker = true
+		GameState.first_sticker_cleansed_on_object.emit()
+
 	_completed_stickers += 1
 	print("Completed " + str(_completed_stickers) + " stickers!")
 
@@ -231,13 +236,13 @@ func _set_state(state: State):
 	if state == State.ROTATING:
 		if not _has_player_rotated_object:
 			_has_player_rotated_object = true
-			GameState.first_object_rotated.emit()
+			GameState.first_rotate_on_object.emit()
 		if _focus_rotation_tween and _focus_rotation_tween.is_valid():
 			_focus_rotation_tween.kill()
 	if state == State.DRAGGING:
 		if not _has_player_dragged_object:
 			_has_player_dragged_object = true
-			GameState.first_object_dragged.emit()
+			GameState.first_drag_on_object.emit()
 	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
 
@@ -427,6 +432,7 @@ func _remove_outline():
 
 func complete_object():
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
+	GameState.object_completed.emit()
 	
 	_set_state(State.ON_TABLE)
 	queue_free()

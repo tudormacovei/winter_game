@@ -247,26 +247,38 @@ Shopkeeper: Though most people can't see said spots, their side effects can be f
 Shopkeeper: Sometimes, people can even hear the object talking to them, inciting them to violence. No wonder they go mad. 
 Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
 Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our little hands and fingers. 
-Shopkeeper: There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. 
+Shopkeeper: [do DialogueFuncs.add_object_to_workbench("rag")] There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do wait_for("first_drag_on_object")]   
 #tutorial: look down, move objects, quarantine zone
-Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds.
-#tutorial: rotate, focus mode
+Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do wait_for("first_rotate_on_object")] 
+#tutorial: focus mode, rotate 
 Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
 Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
 Shopkeeper: You'll feel fine again soon enough. And then you're back to peeling. 
-Shopkeeper: Speaking of, let's try peeling the evil off this one. Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. 
-Shopkeeper: Remember, take breaks if you feel the need. 
-#tutorial: peeling, managing your health
-Shopkeeper: Well done. Put it in the basket, to your right. / No worries, no one gets it right the first time. Try again. / Almost. You've got it this time. 
-#var: Variable for doneness of object
-#tutorial: Repeating object based on player performance 
+Shopkeeper: Speaking of, let's try peeling the evil off this one. 
+Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do wait_for("first_sticker_cleansed_on_object")] 
+#tutorial: managing your health, peeling 
+Shopkeeper: Well done. Now get rid of all corruption spots and when you're done put it in the basket, to your right. [do wait_for("object_completed")] => normal_stickers_complete_check
 #tutorial: done zone
+
+#tutorial: Repeating normal stickers object based on player performance 
+~ normal_stickers_complete_check
+if Variables.get_var("prog_score_special_object_rag") < 100
+	% Shopkeeper: [do DialogueFuncs.add_object_to_workbench("rag")] No worries, no one gets it right the first time. Try again.
+	% Shopkeeper: [do DialogueFuncs.add_object_to_workbench("rag")] Almost. You've got it this time. Give it another try. 
+	
+	% Shopkeeper: You have to get rid of all corruption spots and when you're done put it in the basket, to your right. [do wait_for("object_completed")] => normal_stickers_complete_check
+	% Shopkeeper: Fully cleanse the object and and then put it in the basket, to your right. [do wait_for("object_completed")] => normal_stickers_complete_check
+else 
+	Shopkeeper: The object is clean, well done! => special_stickers
+	
+# TODO
+#tutorial: different stickers
+~ special_stickers
 Shopkeeper: Now let's try another one. 
 Shopkeeper: This one has been infected longer. Its evil is more frenetic. Some of its spots will move around erratically, while some others will move inward when observed for too long, infecting it forever.
 Shopkeeper: Make sure to target those first. And remember, put it down from time to time. Better it stay that way than you become infected yourself. Items can be burned, but you can't come back if the evil gets its hooks in you. 
 Shopkeeper: Give it a go. 
 #var: Variable for doneness of object
-#tutorial: different stickers
 Shopkeeper: Great job. You're a natural, eh? / Yep, this one's trickier. Give it another go. / Still better than I was at first. No harm done. Again. / There we go. In the basket it goes. 
 Shopkeeper: That's it. Our day consists of doing this over and over again, taking short breaks whenever we feel the need, and longer ones once every two or three objects. Safer that way. Easy to get lost in this kind of work. 
 Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around, talk to me or to whoever finds themselves in this sorry place, peer out the window, anything. Balance is key. 

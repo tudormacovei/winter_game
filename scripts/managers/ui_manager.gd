@@ -8,7 +8,8 @@ extends Node
 # UI Elements
 @onready var _day_end_screen := %DayEndScreen
 @onready var _day_end_screen_label: Label = %DayEndScreen.get_node("%DayCompleteText")
-@onready var _dialogue_view := %DialogueView
+# @onready var _dialogue_view := %DialogueView NOTE: This is not used anymore
+@onready var _dialogue_state_balloon: CanvasLayer = %DialogueStateBalloon
 
 var balloon_layer: CanvasLayer = null
 
@@ -19,6 +20,9 @@ func _ready() -> void:
 		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
+
+	if GameState and GameState.has_signal("dialogue_mutation_completed"):
+		GameState.connect("dialogue_mutation_completed", Callable(self , "_on_dialogue_mutation_completed"))
 
 func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
@@ -41,11 +45,18 @@ func _on_camera_focus_changed(current_focus) -> void:
 		# NOTE: It's important that we specifically show / hide the balloon_layer.balloon variable instead of 
 		# the entire balloon_layer, so that the input events are propagated correctly based on logic in dialogue balloon script
 		balloon_layer.balloon.hide()
+	
+	if _dialogue_state_balloon and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+		_dialogue_state_balloon.hide()
 
 func _on_camera_rotation_completed(current_focus) -> void:
 	if balloon_layer and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		balloon_layer.balloon.show()
-		
+
+# Emitted when a dialogue mutation finishes its awaiting
+func _on_dialogue_mutation_completed() -> void:
+	if _dialogue_state_balloon and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
+		_dialogue_state_balloon.show()
 #endregion
 
 #region Debug
