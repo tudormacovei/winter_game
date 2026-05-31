@@ -38,7 +38,7 @@ static func get_sticker_spawn_config(difficulty: int) -> Dictionary:
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
-@onready var health_overlay: Sprite2D = %HealthOverlay
+@onready var health_manager: HealthManager = %HealthManager
 @onready var character_node := get_node("/root/Workspace/CameraSpace/DialogueView/DialogueCharacterTexture")
 
 var _day_resources: Array[DayDefinition] = []
@@ -54,47 +54,6 @@ var current_dialogue_balloon = null
 # NOTE: GDScript is single threaded by default. Cancelling logic could look like a race condition, but it doesn't seem to be in practice. 
 var _interaction_start_pending: bool = false
 var _interaction_start_token: int = 0
-
-var _health: float = 100.0
-var max_health: float = 100.0
-@export var health_drain_per_second: float = 1.5
-@export var health_restore_per_second: float = 0.75
-@export var hp_penalty_per_missed_sticker: float = 5.0
-@export var hp_penalty_cap_per_object: float = 15.0
-@export var health_to_radius_curve: Curve
-
-static var _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0, 0.0]
-var _triggered_thresholds: Array[float] = []
-var _has_focused_object: bool = false
-
-func _process(delta: float) -> void:
-	if _has_focused_object:
-		set_health(_health - health_drain_per_second * delta)
-	else:
-		set_health(_health + health_restore_per_second * delta)
-
-
-func set_health(value: float) -> void:
-	var prev_health := _health
-	_health = clampf(value, 0.0, max_health)
-	_check_health_thresholds(prev_health)
-	var health_fraction := _health / 100.0
-	var radius_fraction := health_to_radius_curve.sample(health_fraction) if health_to_radius_curve else health_fraction
-	health_overlay.material.set_shader_parameter(&"health_normalized", radius_fraction)
-
-
-func _check_health_thresholds(prev_health: float) -> void:
-	for threshold in _HEALTH_THRESHOLDS:
-		if prev_health > threshold and _health <= threshold:
-			_triggered_thresholds.append(threshold)
-			print("GameManager: Health dropped below " + str(int(threshold)) + " (" + str(snappedf(_health, 0.1)) + " pts)")
-			if threshold == 0.0:
-				# TODO: show game end screen
-				push_warning("GameManager: Player current HP reached 0")
-		elif prev_health <= threshold and _health > threshold:
-			_triggered_thresholds.erase(threshold)
-			print("GameManager: Health recovered above " + str(int(threshold)) + " (" + str(snappedf(_health, 0.1)) + " pts)")
-
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
@@ -223,7 +182,7 @@ func _add_object_to_workbench(object_scene: PackedScene):
 		return
 		
 	object.connect("object_completed", _on_object_completed)
-	object.object_interactible.connect(_on_object_interactible)
+	health_manager.register_object(object)
 
 func _deferred_connect_spoke_signal():
 	if current_dialogue_balloon and current_dialogue_balloon.dialogue_label:
@@ -244,24 +203,10 @@ func _on_tree_exiting():
 	if is_dialogue_running:
 		DialogueManager.dialogue_ended.emit(null)
 
-func _on_object_interactible(is_interactible: bool) -> void:
-	_has_focused_object = is_interactible
-
-
 func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
 	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)
 	if total_stickers == 0:
 		Utils.debug_error("Object '%s' has NO stickers! Its sticker completion percentage is set to 100." % object_name)
-
-	var missed_stickers := total_stickers - completed_stickers
-	if missed_stickers > 0:
-		var penalty := minf(missed_stickers * hp_penalty_per_missed_sticker, hp_penalty_cap_per_object)
-		max_health = maxf(0.0, max_health - penalty)
-		set_health(_health)
-		print("GameManager: Max health set to: " + str(snappedf(_health, 0.1)))
-		if max_health == 0.0:
-			# TODO: Show game end screen
-			push_warning("GameManager: Player max HP reached 0")
 
 	# Update sabotage variables
 	if is_special_object:

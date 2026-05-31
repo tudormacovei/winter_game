@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=20 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://w6fvfg6nqa87" path="res://scenes/UI/dialogue_state_balloon/dialogue_state_balloon.tscn" id="5_jwblm"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
+[ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
 [ext_resource type="Texture2D" uid="uid://138vl4dbfsi4" path="res://2d_assets/other/health overlay.webp" id="10_x2fib"]
 
@@ -64,10 +65,14 @@ metadata/_custom_type_script = "uid://dgcq710oaye20"
 [node name="GameManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
 script = ExtResource("1_x8h8r")
+metadata/_custom_type_script = "uid://dyhn8xx75acn4"
+
+[node name="HealthManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
+script = ExtResource("8_sllmx")
 health_drain_per_second = 3.5
 health_restore_per_second = 2.5
 health_to_radius_curve = SubResource("Curve_vfkcj")
-metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 
 [node name="TimeManager" type="Node" parent="Managers"]
 script = ExtResource("7_vfkcj")
