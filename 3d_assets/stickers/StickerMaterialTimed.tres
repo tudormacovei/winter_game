@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dyr1yme6xx7a"]
+
+[ext_resource type="Shader" uid="uid://cqh27ksr3ao4o" path="res://3d_assets/shaders/sticker_peel_timed.gdshader" id="1_s1cwb"]
+[ext_resource type="Texture2D" uid="uid://dxfby5iyoui4u" path="res://3d_assets/stickers/Sticker_StickerTextureTransparency.webp" id="2_olray"]
+
+[sub_resource type="Gradient" id="Gradient_s1cwb"]
+offsets = PackedFloat32Array(0, 0.006060606, 0.9530303, 0.99545455)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_olray"]
+gradient = SubResource("Gradient_s1cwb")
+
+[resource]
+resource_name = "StickerMaterial"
+render_priority = 0
+shader = ExtResource("1_s1cwb")
+shader_parameter/albedo_texture = ExtResource("2_olray")
+shader_parameter/roughness = 0.5
+shader_parameter/progress = 0.0
+shader_parameter/sweep_gradient = SubResource("GradientTexture1D_olray")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxkmqhm2g76la"]
+
+[ext_resource type="Script" uid="uid://cw175c4ao10g" path="res://scripts/sticker_interaction/sticker_peel_timed.gd" id="1_uyiqc"]
+[ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_ppkbr"]
+[ext_resource type="Material" uid="uid://dyr1yme6xx7a" path="res://3d_assets/stickers/StickerMaterialTimed.tres" id="3_ppkbr"]
+
+[sub_resource type="Curve" id="Curve_60khh"]
+_data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_yniim"]
+_data = [Vector2(0, 0), 0.0, -0.03255444, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
+size = Vector3(2, 0.1, 2)
+
+[node name="StickerPeelTimed" type="Area3D"]
+script = ExtResource("1_uyiqc")
+time_limit = 15.0
+complete_final_amplitude = 3.5
+rollback_duration = 0.7
+complete_duration = 0.6
+complete_deform_curve = SubResource("Curve_60khh")
+complete_scale_curve = SubResource("Curve_yniim")
+metadata/_custom_type_script = "uid://drjjrpjcijbet"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
+shape = SubResource("BoxShape3D_yniim")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
+mesh = ExtResource("2_ppkbr")
+surface_material_override/0 = ExtResource("3_ppkbr")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

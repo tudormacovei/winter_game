@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://rqn51eeja1ox"]
+[gd_scene load_steps=6 format=3 uid="uid://rqn51eeja1ox"]
 
 [ext_resource type="PackedScene" uid="uid://xns6vbm564vw" path="res://scenes/sticker_interaction/sticker_click/sticker_click.tscn" id="1_hos6c"]
 [ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="2_pnvr5"]
 [ext_resource type="PackedScene" uid="uid://cfle3ykdjwjad" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel_directional.tscn" id="3_pnvr5"]
+[ext_resource type="PackedScene" uid="uid://bxkmqhm2g76la" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel_timed.tscn" id="4_5muat"]
 
 [sub_resource type="Environment" id="Environment_vowdq"]
 background_energy_multiplier = 0.0
@@ -41,6 +42,10 @@ text = "Peel Stickers - Omnidirectional"
 transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.14199236, 0.0076012015, -0.01223994)
 text = "Peel Stickers - Directional"
 
+[node name="Label3D4" type="Label3D" parent="."]
+transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, 0.29490748, 0.0076012015, -0.012239979)
+text = "Peel Stickers - Timed"
+
 [node name="Main Title" type="Label3D" parent="."]
 transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.050511286, 0, 0.35691413)
 text = "This is a sticker zoo scene. It allows for visiblity and simple testing of all sticker types.
@@ -61,4 +66,12 @@ debug_enabled = true
 
 [node name="StickerPeel3" parent="." instance=ExtResource("3_pnvr5")]
 transform = Transform3D(1.0855962, 0, 0.51135206, 0, 1.2, 0, -0.51135206, 0, 1.0855962, 0.024952024, -0.0033426285, -0.14645699)
+debug_enabled = true
+
+[node name="StickerPeelTimed" parent="." instance=ExtResource("4_5muat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45342547, 0, -0.14163893)
+debug_enabled = true
+
+[node name="StickerPeelTimed2" parent="." instance=ExtResource("4_5muat")]
+transform = Transform3D(0.6345722, 0, 0.48715314, 0, 0.8, 0, -0.48715314, 0, 0.6345722, 0.28907958, 0, -0.13707764)
 debug_enabled = true

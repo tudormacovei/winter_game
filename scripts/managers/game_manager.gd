@@ -11,15 +11,16 @@ const CharacterDefinition := preload("res://scripts/systems/interactions/charact
 const STICKER_TYPES: Array[PackedScene] = [
 	preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn"),
 	preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel_directional.tscn"),
+	preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel_timed.tscn"),
 ]
 
 const DIFFICULTY_TABLE: Array[Dictionary] = [
-	{ "types": [0],    "fraction": 0.30 },  # 0
-	{ "types": [0],    "fraction": 0.45 },  # 1
-	{ "types": [0],    "fraction": 0.60 },  # 2
-	{ "types": [0, 1], "fraction": 0.75 },  # 3
-	{ "types": [0, 1], "fraction": 0.90 },  # 4
-	{ "types": [0, 1], "fraction": 1.00 },  # 5
+	{ "types": [0],       "fraction": 0.50 },  # 0: peel only
+	{ "types": [0, 1],    "fraction": 0.60 },  # 1: + directional
+	{ "types": [0, 1, 2], "fraction": 0.70 },  # 2: + timed
+	{ "types": [0, 1, 2], "fraction": 0.80 },  # 3
+	{ "types": [0, 1, 2], "fraction": 0.90 },  # 4
+	{ "types": [0, 1, 2], "fraction": 1.00 },  # 5
 ]
 
 const MAX_DIFFICULTY: int = 5

@@ -4,8 +4,11 @@
 # be connected to signal from parent object.
 class_name Sticker extends Area3D
 
+enum State { ACTIVE, FAILED }
+
 @export var debug_enabled := false
 
+var state: State = State.ACTIVE
 var _is_mouse_on_object := false
 var _is_object_interactible := false
 
@@ -27,7 +30,7 @@ func _input(_event: InputEvent) -> void:
 
 func _on_object_interactible_change(is_interactible: bool):
 	_is_object_interactible = is_interactible
-	$CollisionShape3D.disabled = !is_interactible
+	$CollisionShape3D.disabled = !is_interactible or state != State.ACTIVE
 	CursorManager.refresh()
 	CursorManager.clear_requests()
 
@@ -44,6 +47,8 @@ func _on_mouse_exited() -> void:
 
 # true if sticker can be interacted with, false otherwise
 func _get_interactible() -> bool:
+	if state != State.ACTIVE:
+		return false
 	if _is_mouse_on_object and debug_enabled:
 		return true
 
