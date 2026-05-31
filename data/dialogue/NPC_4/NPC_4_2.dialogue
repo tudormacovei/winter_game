@@ -1,0 +1,34 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+Sarah: Daaad, where are you?
+Sarah: [wait=2]Oh. Hello. Know where my father is?
+Sarah: I heard him come in late last night for a few minutes. Then he left again. 
+- Haven't seen him since yesterday, myself. 
+	Sarah: Hmm. Wonder what he's up to. => drink
+- Know where he went?
+	Sarah: Uh, not really. => drink
+
+~ drink
+Sarah: He used to drink. But he hasn't in a while.
+Sarah: Don't remember him being gone for a whole night since he stopped. 
+Sarah: I'm starting to get worried. 
+- I'm sure he's fine. => micah
+- I can help you look for him, if you want. => micah
+- The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=6] => micah
+
+~ micah
+Micah: [wait=2]Hey Sarah. Fresh delivery for you, Keeper. I see you're settling in nicely. 
+Sarah: Micah! Have you seen my father? He didn't come home last night.
+Micah: Yeah. He's with the Elders. No idea why, though. He was with 'em till late into the night. 
+Micah: He just up and left at one point. Then came back in the morning. He's still there, now. 
+Micah: That's all I know, though. 
+Sarah: Oh thank the Goddess. I was starting to get worried. 
+Sarah: Thought he started drinking again. Got himself into trouble or something. 
+
+
+
+=> END
+

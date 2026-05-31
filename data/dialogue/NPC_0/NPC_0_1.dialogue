@@ -108,9 +108,44 @@ Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done, and
 Shopkeeper: I'm sure you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
 Shopkeeper: But not now. My daughter, Sarah, is fast asleep. She's been helping me out all day and I'd hate for us to wake her up with our chatter. 
 Shopkeeper: I'll see you in the morning. Good night. 
-- Alright then. => END
-- Thank you. Good night. => END
-- ... => END
-
+- Alright then. 
+	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
+	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
+	Sarah: I had that bad dream again. They came back. 
+	Shopkeeper: Go back to bad. I'm right behind you. 
+	Shopkeeper: [wait=1.5]Have to go. See you tomorrow. 
+	- Sorry I woke her up.
+		Shopkeeper: No harm done. It wasn't you. 
+		Shopkeeper: Good night. => END 
+	- All good?
+		Shopkeeper: Yeah, don't worry about it. Good night. => END
+	- Night. => END
+- Thank you. Good night. 
+	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
+	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
+	Sarah: I had that bad dream again. They came back. 
+	Shopkeeper: Go back to bad. I'm right behind you. 
+	Shopkeeper: [wait=1.5]Have to go. See you tomorrow. 
+	- Sorry I woke her up.
+		Shopkeeper: No harm done. It wasn't you. 
+		Shopkeeper: Good night. => END 
+	- All good?
+		Shopkeeper: Yeah, don't worry about it. Good night. => END
+	- Night. => END
+- Weird welcoming party. 
+	Shopkeeper: Hah. I know. You'll have to forgive me. 
+	Shopkeeper: Hospitality is usually my strong suit. I'll make it up to you. 
+	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
+	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
+	Sarah: I had that bad dream again. They came back. 
+	Shopkeeper: Go back to bad. I'm right behind you. 
+	Shopkeeper: [wait=1.5]Have to go. See you tomorrow. 
+	- Sorry I woke her up.
+		Shopkeeper: No harm done. It wasn't you. 
+		Shopkeeper: Good night. => END 
+	- All good?
+		Shopkeeper: Yeah, don't worry about it. Good night. => END
+	- Night. => END 
+		
 => END
 
