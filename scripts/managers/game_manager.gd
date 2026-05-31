@@ -165,7 +165,7 @@ func _play_next_interaction():
 
 	# Start the character interaction
 	current_dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables", [GameState])
-	ui_manager.balloon_layer = current_dialogue_balloon
+	ui_manager.set_balloon_layer(current_dialogue_balloon)
 	call_deferred("_deferred_connect_spoke_signal") # NOTE: Nodes inside the dialogue balloon are not created at this point, so we cannot connect signals to them.
 	is_dialogue_running = true
 

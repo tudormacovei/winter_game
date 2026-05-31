@@ -24,6 +24,14 @@ func _ready() -> void:
 	if GameState and GameState.has_signal("dialogue_mutation_completed"):
 		GameState.connect("dialogue_mutation_completed", Callable(self , "_on_dialogue_mutation_completed"))
 
+func set_balloon_layer(new_balloon_layer: CanvasLayer):
+	self.balloon_layer = new_balloon_layer
+
+	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
+		call_deferred("hide_balloon_layer")
+		if _dialogue_state_balloon:
+			_dialogue_state_balloon.show_state_balloon()
+
 func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
 
@@ -35,16 +43,22 @@ func show_game_end_screen() -> void:
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
 	_day_end_screen.show()
 
+func hide_balloon_layer() -> void:
+	if balloon_layer and balloon_layer.balloon:
+		# NOTE: It's important that we specifically show / hide the balloon_layer.balloon variable instead of 
+		# the entire balloon_layer, so that the input events are propagated correctly based on logic in dialogue balloon script
+		balloon_layer.balloon.hide()
+	else:
+		push_warning("UI Manager: Trying to hide invalid balloon layer or balloon.")
+
 #region Signals
 
 func _on_camera_focus_changed(current_focus) -> void:
 	CursorManager.clear_requests()
 	CursorManager.refresh()
 	
-	if balloon_layer and current_focus == CameraControl.CameraFocus.WORK_AREA:
-		# NOTE: It's important that we specifically show / hide the balloon_layer.balloon variable instead of 
-		# the entire balloon_layer, so that the input events are propagated correctly based on logic in dialogue balloon script
-		balloon_layer.balloon.hide()
+	if current_focus == CameraControl.CameraFocus.WORK_AREA:
+		hide_balloon_layer()
 	
 	if _dialogue_state_balloon and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		_dialogue_state_balloon.hide()
@@ -56,7 +70,7 @@ func _on_camera_rotation_completed(current_focus) -> void:
 # Emitted when a dialogue mutation finishes its awaiting
 func _on_dialogue_mutation_completed() -> void:
 	if _dialogue_state_balloon and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
-		_dialogue_state_balloon.show()
+		_dialogue_state_balloon.show_state_balloon()
 #endregion
 
 #region Debug
