@@ -68,7 +68,7 @@ data = PackedVector3Array(0.0848, -0.2156, 0.0962, 0.0848, 0.1611, -0.0735, 0.08
 
 [node name="MilkCartonArea3D" type="Area3D"]
 script = ExtResource("1_erdju")
-sticker_count = 4
+max_sticker_count = 4
 placement_mesh = SubResource("ArrayMesh_rly6t")
 sticker_scene = ExtResource("3_rly6t")
 

@@ -62,6 +62,7 @@ script = ExtResource("5_mp6x8")
 metadata/_custom_type_script = "uid://dgcq710oaye20"
 
 [node name="GameManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
 script = ExtResource("1_x8h8r")
 health_drain_per_second = 3.5
 health_restore_per_second = 2.5

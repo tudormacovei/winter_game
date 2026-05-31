@@ -6,6 +6,35 @@ extends Node
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
 const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
 
+# Sticker spawning configuration.
+# STICKER_TYPES is the global asset registry; DIFFICULTY_TABLE maps difficulty to indices into STICKER_TYPES
+const STICKER_TYPES: Array[PackedScene] = [
+	preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn"),
+	preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel_directional.tscn"),
+]
+
+const DIFFICULTY_TABLE: Array[Dictionary] = [
+	{ "types": [0],    "fraction": 0.30 },  # 0
+	{ "types": [0],    "fraction": 0.45 },  # 1
+	{ "types": [0],    "fraction": 0.60 },  # 2
+	{ "types": [0, 1], "fraction": 0.75 },  # 3
+	{ "types": [0, 1], "fraction": 0.90 },  # 4
+	{ "types": [0, 1], "fraction": 1.00 },  # 5
+]
+
+const MAX_DIFFICULTY: int = 5
+var current_difficulty: int = 5  # hardcoded for now; will be driven by game progression later
+
+
+## Returns the eligible sticker scenes and count fraction for the given difficulty.
+static func get_sticker_spawn_config(difficulty: int) -> Dictionary:
+	var clamped: int = clampi(difficulty, 0, MAX_DIFFICULTY)
+	var row: Dictionary = DIFFICULTY_TABLE[clamped]
+	var types: Array[PackedScene] = []
+	for idx in row["types"]:
+		types.append(STICKER_TYPES[idx])
+	return { "types": types, "fraction": row["fraction"] as float }
+
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
 @onready var health_overlay: Sprite2D = %HealthOverlay
