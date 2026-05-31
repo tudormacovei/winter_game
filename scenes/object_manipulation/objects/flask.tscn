@@ -123,7 +123,7 @@ data = PackedVector3Array(-0.104399994, 0.2625, -0.0145, -0.1039, 0.26369998, -0
 
 [node name="Flask" type="Area3D"]
 script = ExtResource("1_yaw7h")
-sticker_count = 6
+max_sticker_count = 6
 placement_mesh = SubResource("ArrayMesh_1qj3i")
 rng_seed = 0
 sticker_scene = ExtResource("5_70irm")

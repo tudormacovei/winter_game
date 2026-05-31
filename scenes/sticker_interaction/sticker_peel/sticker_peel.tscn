@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://i5qiolqusxix"]
+[gd_scene load_steps=7 format=3 uid="uid://i5qiolqusxix"]
 
 [ext_resource type="Script" uid="uid://drjjrpjcijbet" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_60khh"]
 [ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_60khh"]
+[ext_resource type="Material" uid="uid://b80kpwooaakea" path="res://3d_assets/stickers/StickerMaterial.tres" id="3_yniim"]
 
 [sub_resource type="Curve" id="Curve_60khh"]
 _data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
@@ -26,6 +27,7 @@ metadata/_custom_type_script = "uid://drjjrpjcijbet"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_60khh")
+surface_material_override/0 = ExtResource("3_yniim")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)

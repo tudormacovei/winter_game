@@ -74,6 +74,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	add_child(_object)
+	_object.owner = get_tree().current_scene
 	_place_object_on_xz_plane(_object)
 	
 	_object.mouse_entered.connect(_on_object_mouse_entered)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=4 uid="uid://bl5cie1nbmjtb"]
+[gd_scene load_steps=11 format=4 uid="uid://bl5cie1nbmjtb"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_7qiyl"]
-[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="3_3eqo3"]
 [ext_resource type="Material" uid="uid://cdb67kua8xlt5" path="res://3d_assets/manipulation_objects/book/book_body.tres" id="4_wlemi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3uy5h"]
@@ -97,10 +96,9 @@ data = PackedVector3Array(-0.2258, 0.35549998, 0.0885, -0.2272, 0.3551, 0.0897, 
 
 [node name="Book01" type="Area3D"]
 script = ExtResource("1_7qiyl")
-sticker_count = 5
+max_sticker_count = 5
 placement_mesh = SubResource("ArrayMesh_hu2tc")
 rng_seed = 0
-sticker_scene = ExtResource("3_3eqo3")
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

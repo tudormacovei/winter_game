@@ -53,7 +53,12 @@ func _populate_scenes(viewport: SubViewport) -> void:
 		var scene := load(Config.OBJECTS_SCENES_PATH + "/" + f) as PackedScene
 		if scene == null:
 			continue
-		container.add_child(scene.instantiate())
+		var instance := scene.instantiate()
+
+		# Mark as non-gameplay so ObjectWithStickers skips its runtime placement logic
+		if instance is ObjectWithStickers:
+			(instance as ObjectWithStickers).skip_runtime_init = true
+		container.add_child(instance)
 
 	container.add_child(WORKBENCH_VIEW_SCENE.instantiate())
 	container.add_child(DIALOGUE_VIEW_SCENE.instantiate())
