@@ -8,10 +8,9 @@ const _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0, 0.0]
 @export var health_restore_per_second: float = 0.75
 @export var hp_penalty_per_missed_sticker: float = 5.0
 @export var hp_penalty_cap_per_object: float = 15.0
-@export var health_to_radius_curve: Curve
 
 @onready var camera: CameraControl = %Camera3D
-@onready var health_overlay: Sprite2D = %HealthOverlay
+@onready var health_overlay: HealthOverlay = %HealthOverlay
 
 var _health: float = 100.0
 var _visual_health: float = 100.0
@@ -31,7 +30,7 @@ func _process(delta: float) -> void:
 		_set_health(_health + health_restore_per_second * delta)
 
 	_visual_health = lerp(_visual_health, _health, 1.0 - exp(-VISUAL_HEALTH_SMOOTHING_RATE * delta))
-	_update_health_shader()
+	_update_health_overlay()
 
 
 func register_object(obj: InteractibleObject) -> void:
@@ -45,10 +44,8 @@ func _set_health(value: float) -> void:
 	_check_health_thresholds(prev_health)
 
 
-func _update_health_shader() -> void:
-	var health_fraction := _visual_health / 100.0
-	var radius_fraction := health_to_radius_curve.sample(health_fraction) if health_to_radius_curve else health_fraction
-	health_overlay.material.set_shader_parameter(&"health_normalized", radius_fraction)
+func _update_health_overlay() -> void:
+	health_overlay.set_health_normalized(_visual_health / 100.0)
 
 ## Used to check if HP is below 0
 func _check_health_thresholds(prev_health: float) -> void:

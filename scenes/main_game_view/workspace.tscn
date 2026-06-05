@@ -1,23 +1,19 @@
-[gd_scene load_steps=20 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=19 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
 [ext_resource type="Script" uid="uid://dyhn8xx75acn4" path="res://scripts/managers/game_manager.gd" id="1_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]
 [ext_resource type="Texture2D" uid="uid://bm1bm3b7ximrr" path="res://2d_assets/backgrounds/focus_background.webp" id="3_7nw64"]
-[ext_resource type="Material" uid="uid://d0blehxjqxmbe" path="res://3d_assets/materials/shader_material_health_overlay.tres" id="3_usvo5"]
 [ext_resource type="PackedScene" uid="uid://bfegigj2pr0lh" path="res://scenes/UI/day_end_screen.tscn" id="3_x8h8r"]
+[ext_resource type="Script" uid="uid://3eha20jds2g7" path="res://scripts/user_interface/health_overlay.gd" id="4_sllmx"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
+[ext_resource type="PackedScene" uid="uid://dhtlwlem7pnm2" path="res://scenes/UI/branch_ring.tscn" id="5_8dlmc"]
 [ext_resource type="PackedScene" uid="uid://w6fvfg6nqa87" path="res://scenes/UI/dialogue_state_balloon/dialogue_state_balloon.tscn" id="5_jwblm"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
-[ext_resource type="Texture2D" uid="uid://138vl4dbfsi4" path="res://2d_assets/other/health overlay.webp" id="10_x2fib"]
-
-[sub_resource type="Curve" id="Curve_vfkcj"]
-_data = [Vector2(0, 0), 0.0, 0.21444397, 0, 0, Vector2(0.37179488, 0.5622029), 1.344737, 1.344737, 0, 0, Vector2(1, 1), 0.3622276, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -44,16 +40,38 @@ visible = false
 [node name="PauseMenu" parent="UI" instance=ExtResource("4_x8h8r")]
 visible = false
 
-[node name="HealthOverlay" type="Sprite2D" parent="UI"]
-unique_name_in_owner = true
-material = ExtResource("3_usvo5")
-position = Vector2(641, 360.00003)
-scale = Vector2(0.334, 0.334)
-texture = ExtResource("10_x2fib")
-
 [node name="DialogueStateBalloon" parent="UI" instance=ExtResource("5_jwblm")]
 unique_name_in_owner = true
 visible = false
+
+[node name="HealthOverlay" type="Node2D" parent="UI"]
+unique_name_in_owner = true
+position = Vector2(1, 1)
+script = ExtResource("4_sllmx")
+
+[node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
+end_radius = 80.0
+branch_count = 20
+branch_scale = 0.3
+parallax_strength = 0.02
+
+[node name="BranchRing2" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
+modulate = Color(0.80616105, 0.8061606, 0.8061606, 1)
+z_index = 1
+start_radius = 500.0
+end_radius = 100.0
+branch_count = 14
+branch_scale = 0.4
+parallax_strength = 0.05
+
+[node name="BranchRing3" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
+modulate = Color(0.6337567, 0.6337568, 0.6337567, 1)
+z_index = 2
+start_radius = 600.0
+end_radius = 150.0
+branch_count = 10
+branch_scale = 0.5
+parallax_strength = 0.07
 
 [node name="Managers" type="Node" parent="."]
 
@@ -72,7 +90,6 @@ unique_name_in_owner = true
 script = ExtResource("8_sllmx")
 health_drain_per_second = 3.5
 health_restore_per_second = 2.5
-health_to_radius_curve = SubResource("Curve_vfkcj")
 
 [node name="TimeManager" type="Node" parent="Managers"]
 script = ExtResource("7_vfkcj")

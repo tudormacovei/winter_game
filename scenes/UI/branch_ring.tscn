@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhtlwlem7pnm2"]
+
+[ext_resource type="Script" uid="uid://bfypv2dnp7gxl" path="res://scripts/user_interface/branch_ring.gd" id="1_3ox6l"]
+[ext_resource type="Texture2D" uid="uid://da1dt4m01b175" path="res://2d_assets/other/health_overlay_branch.png" id="2_m8x7e"]
+
+[node name="BranchRing" type="Node2D"]
+script = ExtResource("1_3ox6l")
+branch_texture = ExtResource("2_m8x7e")
