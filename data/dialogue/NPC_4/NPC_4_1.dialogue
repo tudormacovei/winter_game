@@ -263,20 +263,22 @@ Shopkeeper: Though most people can't see said spots, their side effects can be f
 Shopkeeper: Sometimes, people can even hear the object talking to them, inciting them to violence. No wonder they go mad. 
 Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
 Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our little hands and fingers. 
-Shopkeeper: [do DialogueFuncs.add_object_to_workbench("rag")] There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do wait_for("first_drag_on_object")]   
+#tutorial start
+Shopkeeper: [do DialogueFuncs.add_object_to_workbench("rag")] [do lock_player_action("complete_object", true)] [do lock_player_action("complete_sticker", true)] [do lock_player_action("focus_object", true)] There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do wait_for("first_drag_on_object")]   
 #tutorial: look down, move objects, quarantine zone
-Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do wait_for("first_rotate_on_object")] 
+Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
 #tutorial: focus mode, rotate 
 Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
 Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
 Shopkeeper: You'll feel fine again soon enough. And then you're back to peeling. 
 Shopkeeper: Speaking of, let's try peeling the evil off this one. 
-Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do wait_for("first_sticker_cleansed_on_object")] 
+Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do lock_player_action("complete_sticker", false)] [do wait_for("first_sticker_cleansed_on_object")] 
 #tutorial: managing your health, peeling 
-Shopkeeper: Well done. Now get rid of all corruption spots and when you're done put it in the basket, to your right. [do wait_for("object_completed")] => normal_stickers_complete_check
+Shopkeeper: Well done. Now get rid of all corruption spots and when you're done put it in the basket, to your right. [do lock_player_action("complete_object", false)] [do wait_for("object_completed")] => normal_stickers_complete_check
 #tutorial: done zone
+#tutorial TODO: Repeating normal stickers object based on player performance 
+#tutorial end
 
-#tutorial: Repeating normal stickers object based on player performance 
 ~ normal_stickers_complete_check
 if Variables.get_var("prog_score_special_object_rag") < 100
 	% Shopkeeper: [do DialogueFuncs.add_object_to_workbench("rag")] No worries, no one gets it right the first time. Try again.

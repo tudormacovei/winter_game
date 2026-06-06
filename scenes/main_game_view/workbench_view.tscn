@@ -30,6 +30,9 @@ shape = SubResource("BoxShape3D_xcqvh")
 [node name="FocusPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1470308, 0)
 
+[node name="OnTableNeutralPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116, 0)
+
 [node name="WorkbenchDoneAreaOverlay" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.070225954, 0, 0, 0, -3.0696738e-09, 1, 0, -0.070225954, -4.371139e-08, 0.0052860975, -0.00736323, -0.002887724)

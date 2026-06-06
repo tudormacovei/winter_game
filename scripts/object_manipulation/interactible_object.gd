@@ -5,6 +5,10 @@
 class_name InteractibleObject
 extends Node3D
 
+# TODO ZIANA: Handle edge-cases that soft-lock player.
+	# For the first instruction, first drag can be missed. Going down can be blocked in the beginning of the convo. 
+	# You can complete an object before the wait for object is triggered. Do a pass on when this action should be locked/unlocked.
+
 signal object_interactible(is_interactible: bool)
 signal object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int)
 signal object_state_changed(state: State)
@@ -12,6 +16,7 @@ signal object_pending_completion_changed(is_pending: bool)
 
 # Setup variables, set before node enters scene tree
 var _focus_position: Node3D
+var _on_table_neutral_position: Node3D
 var _object_completed_area: Area3D
 var _object_scene: PackedScene # ObjectWithStickers scene to load
 @export var outline_material: Material
@@ -40,10 +45,30 @@ static var ROTATION_SNAP_DURATION: float = 0.2
 static var FOCUS_DURATION: float = 0.25
 static var FOCUS_OBJECT_SCALE: float = 0.3
 
-#region Game State Variables
+#region Game State 
+
+enum ActionName {
+	FOCUS_OBJECT,
+	COMPLETE_STICKER,
+	COMPLETE_OBJECT,
+}
+
+static var STRING_TO_ACTION_NAME_MAP = {
+	"focus_object": ActionName.FOCUS_OBJECT,
+	"complete_sticker": ActionName.COMPLETE_STICKER,
+	"complete_object": ActionName.COMPLETE_OBJECT,
+}
+
+var _is_action_locked: Dictionary = {
+	ActionName.FOCUS_OBJECT: false,
+	ActionName.COMPLETE_STICKER: false,
+	ActionName.COMPLETE_OBJECT: false,
+}
+
 var _has_player_dragged_object: bool = false
 var _has_player_rotated_object: bool = false
 var _has_player_cleansed_sticker: bool = false
+
 #endregion
 
 var _drag_threshold_px: float = 0.0
@@ -159,6 +184,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
 			# object focus can only happen while in workbench view, NOT quarantine view
 			if camera and camera.is_at_rest_in_workbench_view():
+				if _is_action_locked[ActionName.FOCUS_OBJECT]:
+					_mouse_down = false
+					if camera:
+						camera.rotation_locked = false
+					get_viewport().set_input_as_handled()
+					return
+
 				_mouse_down = false
 				_set_state(State.FOCUSED)
 				_remove_outline()
@@ -219,10 +251,22 @@ func _on_sticker_completed():
 
 
 # Set all data needed for correct functionality
-func set_spawn_data(focus_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
+func set_spawn_data(focus_position: Node3D, on_table_neutral_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
 	_focus_position = focus_position
+	_on_table_neutral_position = on_table_neutral_position
 	_object_completed_area = object_completed_area
 	_object_scene = object_scene
+
+
+func lock_player_action(action_name: String, locked: bool) -> void:
+	var action_id = STRING_TO_ACTION_NAME_MAP.get(action_name, null)
+	if action_id == null:
+		Utils.debug_error("InteractibleObject: Unknown action_name: " + action_name)
+		return
+	
+	_is_action_locked[action_id] = locked
+	if action_id == ActionName.COMPLETE_STICKER:
+		_set_object_interactible(locked)
 
 
 func _set_state(state: State):
@@ -231,9 +275,9 @@ func _set_state(state: State):
 	_state = state
 	#print("Set state to " + str(state))
 	if state == State.FOCUSED or state == State.ROTATING:
-		object_interactible.emit(true)
+		_set_object_interactible(true)
 	else:
-		object_interactible.emit(false)
+		_set_object_interactible(false)
 	if state == State.ROTATING:
 		if not _has_player_rotated_object:
 			_has_player_rotated_object = true
@@ -253,6 +297,14 @@ func _set_state(state: State):
 
 	object_state_changed.emit(state)
 
+func _set_object_interactible(is_interactible: bool) -> void:
+	if _is_action_locked[ActionName.COMPLETE_STICKER]:
+		is_interactible = false
+
+	if is_interactible and (_state != State.FOCUSED and _state != State.ROTATING):
+		return # Object can only be interactible in certain states
+
+	object_interactible.emit(is_interactible)
 
 func _apply_rotation_delta(delta: Vector2) -> void:
 	var camera := get_viewport().get_camera_3d()
@@ -432,6 +484,12 @@ func _remove_outline():
 
 
 func complete_object():
+	if _is_action_locked[ActionName.COMPLETE_OBJECT]:
+		# Snap object back to neutral table position 
+		var target: Vector3 = _on_table_neutral_position.global_position
+		create_tween().tween_property(self , "global_position", target, 0.15)
+		return
+
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
 	GameState.object_completed.emit()
 	
