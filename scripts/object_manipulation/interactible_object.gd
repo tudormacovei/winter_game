@@ -18,7 +18,9 @@ signal object_pending_completion_changed(is_pending: bool)
 var _focus_position: Node3D
 var _on_table_neutral_position: Node3D
 var _object_completed_area: Area3D
+var _out_of_bounds_area: Area3D
 var _object_scene: PackedScene # ObjectWithStickers scene to load
+const RETURN_TWEEN_DURATION: float = 0.2
 @export var outline_material: Material
 @export var focus_position_curve: Curve
 @export var focus_rotation_curve: Curve
@@ -28,6 +30,7 @@ enum State {
 	FOCUSED,
 	ROTATING,
 	DRAGGING,
+	RETURNING,
 }
 
 var _object: ObjectWithStickers = null
@@ -68,6 +71,14 @@ var _is_action_locked: Dictionary = {
 var _has_player_dragged_object: bool = false
 var _has_player_rotated_object: bool = false
 var _has_player_cleansed_sticker: bool = false
+
+#endregion
+
+#region Workspace Object Bounds
+
+const OUT_OF_BOUNDS_MARGIN: float = 0.1
+const _RETURN_IN_BOUNDS_ITERATION_CAP: int = 12
+const _RETURN_IN_BOUNDS_ITERATION_STEP: float = 0.1
 
 #endregion
 
@@ -116,9 +127,41 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_handle_drag()
+	# If the object detected out of bounds, place it back in-bounds in the same tick.
+	if _state != State.RETURNING and _out_of_bounds_area and _is_point_out_of_bounds(self.global_position, OUT_OF_BOUNDS_MARGIN):
+		_return_object_in_bounds()
+		return
 	# wait for player to place object on table before complete
 	if _is_pending_completion and _state == State.ON_TABLE:
 		complete_object()
+
+
+func _return_object_in_bounds() -> void:
+	if _is_pending_completion:
+		_is_pending_completion = false
+		object_pending_completion_changed.emit(false)
+	# Step the candidate toward neutral until it's clear of every out-of-bounds box by at least `margin`.
+	var candidate := self.global_position
+	var neutral := _on_table_neutral_position.global_position
+	for _i in _RETURN_IN_BOUNDS_ITERATION_CAP:
+		if not _is_point_out_of_bounds(candidate, OUT_OF_BOUNDS_MARGIN):
+			break
+		candidate = candidate.lerp(neutral, _RETURN_IN_BOUNDS_ITERATION_STEP)
+	_return_to(candidate)
+
+
+# Returns `true` if `point` is inside the out-of-bounds area, OR within `margin` of one's surface.
+func _is_point_out_of_bounds(point: Vector3, margin: float) -> bool:
+	for child in _out_of_bounds_area.get_children():
+		if child is CollisionShape3D and child.shape is BoxShape3D:
+			var local: Vector3 = child.global_transform.affine_inverse() * point
+			var half: Vector3 = (child.shape as BoxShape3D).size * 0.5
+			var dx: float = max(abs(local.x) - half.x, 0.0)
+			var dy: float = max(abs(local.y) - half.y, 0.0)
+			var dz: float = max(abs(local.z) - half.z, 0.0)
+			if sqrt(dx * dx + dy * dy + dz * dz) < margin: # spherical margin check
+				return true
+	return false
 
 
 func _input(event: InputEvent) -> void:
@@ -251,10 +294,11 @@ func _on_sticker_completed():
 
 
 # Set all data needed for correct functionality
-func set_spawn_data(focus_position: Node3D, on_table_neutral_position: Node3D, object_completed_area: Area3D, object_scene: PackedScene):
+func set_spawn_data(focus_position: Node3D, on_table_neutral_position: Node3D, object_completed_area: Area3D, out_of_bounds_area: Area3D, object_scene: PackedScene):
 	_focus_position = focus_position
 	_on_table_neutral_position = on_table_neutral_position
 	_object_completed_area = object_completed_area
+	_out_of_bounds_area = out_of_bounds_area
 	_object_scene = object_scene
 
 
@@ -485,17 +529,28 @@ func _remove_outline():
 
 func complete_object():
 	if _is_action_locked[ActionName.COMPLETE_OBJECT]:
-		# Snap object back to neutral table position 
-		var target: Vector3 = _on_table_neutral_position.global_position
-		create_tween().tween_property(self , "global_position", target, 0.15)
+		_return_to(_on_table_neutral_position.global_position)
 		return
 
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
 	GameState.object_completed.emit()
-	
+
 	_set_state(State.ON_TABLE)
 	queue_free()
 	object_completed.emit(_object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
+
+
+# Snap-back to a target world position. Locks player input on this object during the return animation via the RETURNING state
+func _return_to(target_global_position: Vector3) -> void:
+	_set_state(State.RETURNING)
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", target_global_position, RETURN_TWEEN_DURATION)
+	tween.finished.connect(_on_return_finished)
+
+
+func _on_return_finished() -> void:
+	_set_state(State.ON_TABLE)
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
 func _place_object_on_xz_plane(object: Node3D):

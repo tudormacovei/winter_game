@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 # adds a new object to the workbench
 func add_object(object_scene: PackedScene):
 	var interactible_object: InteractibleObject = _interactible_object_scene.instantiate()
-	interactible_object.set_spawn_data($FocusPosition, $OnTableNeutralPosition, $DoneArea, object_scene)
+	interactible_object.set_spawn_data($FocusPosition, $OnTableNeutralPosition, $DoneArea, %ObjectOutOfBoundsArea, object_scene)
 	
 	var slot = _get_next_free_slot()
 	if slot == null:

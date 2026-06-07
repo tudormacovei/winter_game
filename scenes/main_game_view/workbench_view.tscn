@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bntkja5x3is5f"]
+[gd_scene load_steps=8 format=3 uid="uid://bntkja5x3is5f"]
 
 [ext_resource type="Script" uid="uid://fhtjg3on0yx1" path="res://scripts/object_manipulation/workbench.gd" id="1_qyrgi"]
 [ext_resource type="Texture2D" uid="uid://dp5o857sg1vx" path="res://2d_assets/backgrounds/Workbench_simple.webp" id="2_qyrgi"]
@@ -10,6 +10,12 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xcqvh"]
 size = Vector3(1, 0.225, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qyrgi"]
+size = Vector3(4.289322, 1, 3.8250732)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y3085"]
+size = Vector3(3.73938, 1, 8.894104)
 
 [node name="WorkbenchView" type="Node3D" node_paths=PackedStringArray("object_slots")]
 script = ExtResource("1_qyrgi")
@@ -24,7 +30,7 @@ texture = ExtResource("2_qyrgi")
 [node name="DoneArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoneArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.135, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.063883975, 0)
 shape = SubResource("BoxShape3D_xcqvh")
 
 [node name="FocusPosition" type="Node3D" parent="."]
@@ -78,3 +84,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60754275, 0.11596918, 0.12
 
 [node name="ObjectSlot6" type="Node3D" parent="QuarantineZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6985388, 0.11596918, 0.53810406)
+
+[node name="ObjectOutOfBoundsArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectOutOfBoundsArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5224991, 0, 2.566506)
+shape = SubResource("BoxShape3D_qyrgi")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ObjectOutOfBoundsArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5224991, 0, -2.5269618)
+shape = SubResource("BoxShape3D_qyrgi")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ObjectOutOfBoundsArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.191938, 0, -0.03865695)
+shape = SubResource("BoxShape3D_y3085")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ObjectOutOfBoundsArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0857685, 0, 0.08356601)
+shape = SubResource("BoxShape3D_y3085")
