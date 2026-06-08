@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=2 format=3 uid="uid://bcdfo8eqlt006"]
+
+[ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="2_oa8bg"]
+
+[resource]
+script = ExtResource("2_oa8bg")
+character_id = "NPC_0"
+display_name = "???"
+description = "Guy in prologue"
+metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
