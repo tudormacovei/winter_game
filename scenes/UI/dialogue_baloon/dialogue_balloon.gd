@@ -150,6 +150,10 @@ func apply_dialogue_line() -> void:
 	elif dialogue_line.responses.size() > 0:
 		balloon.focus_mode = Control.FOCUS_NONE
 		responses_menu.show()
+		for item in responses_menu.get_menu_items():
+			item.scale = Vector2(1.0, 1.0)
+			item.mouse_entered.connect(_on_response_hover.bind(item, true))
+			item.mouse_entered.connect(_on_response_hover.bind(item, true))
 		CursorManager.register_controls(Array(responses_menu.get_menu_items()))
 	elif dialogue_line.time != "":
 		var time = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
@@ -207,5 +211,12 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
+	
+func _on_response_hover(item: Control, is_hovering: bool) -> void:
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUAD)
+	var target = Vector2(1.05, 1.05) if is_hovering else Vector2(1.0, 1.0)
+	tween.tween_property(item, "scale", target, 0.15)
 
 #endregion

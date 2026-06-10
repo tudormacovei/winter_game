@@ -22,6 +22,26 @@ expand_margin_top = 1.0
 expand_margin_right = 5.0
 expand_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8wpu"]
+content_margin_left = 6.0
+content_margin_top = 7.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.631847, 0.42715314, 0.27901027, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4280338, 0.33820975, 0.280604, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urtv6"]
 content_margin_left = 6.0
 content_margin_top = 7.0
@@ -42,32 +62,12 @@ expand_margin_top = 1.0
 expand_margin_right = 5.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8wpu"]
-content_margin_left = 6.0
-content_margin_top = 7.0
-content_margin_right = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0.6045195, 0.42219973, 0.32778183, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.4280338, 0.33820975, 0.280604, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 5.0
-expand_margin_top = 1.0
-expand_margin_right = 5.0
-expand_margin_bottom = 1.0
-
 [resource]
 Button/font_sizes/font_size = 20
 Button/fonts/font = ExtResource("1_c8wpu")
 Button/styles/disabled = SubResource("StyleBoxFlat_riy72")
-Button/styles/focus = SubResource("StyleBoxFlat_urtv6")
-Button/styles/hover = SubResource("StyleBoxFlat_urtv6")
-Button/styles/normal = SubResource("StyleBoxFlat_c8wpu")
+Button/styles/focus = SubResource("StyleBoxFlat_c8wpu")
+Button/styles/hover = SubResource("StyleBoxFlat_c8wpu")
+Button/styles/normal = SubResource("StyleBoxFlat_urtv6")
 Label/fonts/font = ExtResource("1_c8wpu")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_urtv6")
