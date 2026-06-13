@@ -320,7 +320,9 @@ Shopkeeper: That's it. Our day consists of doing this over and over again, takin
 Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around, talk to me or to whoever finds themselves in this sorry place, peer out the window, anything. Balance is key. 
 Shopkeeper: You can keep practicing, if you so wish. These items are from old batches, anyway. Their owners are long dead. Mostly.
 -  I want to practise a little more, for now. 
-	Shopkeeper: Sure thing. I'll go check up on Sarah. Shout when you're ready. => micah
+# TODO DANI: This section needs a narrative pass
+	Shopkeeper: Sure thing, I'll grab a couple of objects for you. Make sure to finish them up before you end your day. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
+	Shopkeeper: I'll go check up on Sarah while you work. Be right back. => micah
 - Think I got it. Let's move on.
 	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back. => micah
 
