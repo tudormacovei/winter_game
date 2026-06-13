@@ -14,6 +14,9 @@ func _ready() -> void:
 	var warmup: Node = ShaderWarmup.new()
 	add_child(warmup)
 
+	#Let's see if we can play something in main menu
+	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
+
 	settings_panel.visible = false
 	settings_button.pressed.connect(_on_settings_pressed)
 	start_button.pressed.connect(_on_start_pressed)
