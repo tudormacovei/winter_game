@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=21 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -11,9 +11,19 @@
 [ext_resource type="PackedScene" uid="uid://dhtlwlem7pnm2" path="res://scenes/UI/branch_ring.tscn" id="5_8dlmc"]
 [ext_resource type="PackedScene" uid="uid://w6fvfg6nqa87" path="res://scenes/UI/dialogue_state_balloon/dialogue_state_balloon.tscn" id="5_jwblm"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
+[ext_resource type="Shader" uid="uid://dyg7t2rqjvy1s" path="res://3d_assets/shaders/screen_edge_highlight.gdshader" id="6_8dlmc"]
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdvrf"]
+shader = ExtResource("6_8dlmc")
+shader_parameter/edges_enabled_mask = 4
+shader_parameter/glow_color = Color(1, 0.22745098, 0.23529412, 1)
+shader_parameter/glow_height = 0.10000000475
+shader_parameter/glow_multiplier = 0.50000002375
+shader_parameter/pulse_speed = 1.50000007125
+shader_parameter/_fade_progress = 0.0
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -72,6 +82,21 @@ end_radius = 150.0
 branch_count = 10
 branch_scale = 0.5
 parallax_strength = 0.07
+
+[node name="ScreenHighlightCanvas" type="CanvasLayer" parent="UI"]
+unique_name_in_owner = true
+layer = 100
+visible = false
+
+[node name="ScreenHighlightColorRect" type="ColorRect" parent="UI/ScreenHighlightCanvas"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_rdvrf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Managers" type="Node" parent="."]
 
