@@ -1,14 +1,14 @@
 shader_type canvas_item;
 
 group_uniforms EdgeBehaviour;
-/** Bitmask configuring which edges have glow. Top = bit 0, Bottom= bit 1, Left = bit 2, Right = bit 3 */
+/** Bitmask configuring which edges have glow. Top = bit 0, Bottom = bit 1, Left = bit 2, Right = bit 3 */
 uniform int edges_enabled_mask = 0;
 
 group_uniforms Glow;
 uniform vec4 glow_color : source_color = vec4(1.0, 0.0, 0.0, 1.0);
-uniform float glow_height : hint_range(0.0, 1.0) = 0.3; // Screen percentage
-uniform float glow_multiplier : hint_range(0.0, 1.5) = 0.8;
-const float glow_softness = 2.5;
+uniform float glow_height : hint_range(0.0, 1.0) = 0.1; // Screen percentage
+uniform float glow_multiplier : hint_range(0.0, 1.5) = 0.5;
+uniform float glow_softness : hint_range(0.0, 5.0) = 2.0;
 
 uniform float pulse_speed : hint_range(0.0, 5.0) = 1.5; // 0.0 - Disabled
 const float pulse_intensity = 0.5;

@@ -18,12 +18,13 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdvrf"]
 shader = ExtResource("6_8dlmc")
-shader_parameter/edges_enabled_mask = 4
-shader_parameter/glow_color = Color(1, 0.22745098, 0.23529412, 1)
+shader_parameter/edges_enabled_mask = 2
+shader_parameter/glow_color = Color(0.43137255, 0.19607843, 0.16862746, 1)
 shader_parameter/glow_height = 0.10000000475
 shader_parameter/glow_multiplier = 0.50000002375
+shader_parameter/glow_softness = 2.0
 shader_parameter/pulse_speed = 1.50000007125
-shader_parameter/_fade_progress = 0.0
+shader_parameter/_fade_progress = 1.0
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -56,7 +57,7 @@ visible = false
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(1, 1)
+position = Vector2(556.5, 302.5)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
