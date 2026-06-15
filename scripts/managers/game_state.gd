@@ -13,8 +13,11 @@ signal first_sticker_cleansed_on_object
 @warning_ignore("unused_signal")
 signal object_completed
 
+# Emitted when:
+# - dialogue starts typing after a pause
+# - dialogue progress indicator becomes visible
 @warning_ignore("unused_signal")
-signal dialogue_mutation_completed
+signal dialogue_changed
 
 func wait_for(signal_name: String) -> void:
 	if not has_signal(signal_name):

@@ -22,12 +22,13 @@ func _ready() -> void:
 		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
 
 	GameState.ui_manager = self
-	if GameState.has_signal("dialogue_mutation_completed"):
-		GameState.connect("dialogue_mutation_completed", Callable(self , "_on_dialogue_mutation_completed"))
+	if GameState.has_signal("dialogue_changed"):
+		GameState.connect("dialogue_changed", Callable(self , "_on_dialogue_changed"))
 
 func set_balloon_layer(new_balloon_layer: CanvasLayer):
 	self.balloon_layer = new_balloon_layer
 
+	# Don't show Dialogue UI in workbench, instead show Dialogue State UI
 	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
 		call_deferred("hide_balloon_layer")
 		if _dialogue_state_balloon:
@@ -130,8 +131,7 @@ func _on_camera_rotation_completed(current_focus) -> void:
 	if balloon_layer and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		balloon_layer.balloon.show()
 
-# Emitted when a dialogue mutation finishes its awaiting
-func _on_dialogue_mutation_completed() -> void:
+func _on_dialogue_changed() -> void:
 	if _dialogue_state_balloon and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
 		_dialogue_state_balloon.show_state_balloon()
 

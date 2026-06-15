@@ -57,6 +57,9 @@ var dialogue_line:
 ## Whether the label is currently typing itself out.
 var is_typing: bool = false:
 	set(value):
+		if value and is_typing != value:
+			GameState.dialogue_changed.emit()
+
 		var is_finished: bool = _is_typing != value and value == false and visible_characters == get_total_character_count()
 		_is_typing = value
 		if is_finished:
@@ -180,7 +183,6 @@ func _mutate_inline_mutations(index: int) -> void:
 			_is_awaiting_mutation = true
 			# The DialogueManager can't be referenced directly here so we need to get it by its path
 			await Engine.get_singleton("DialogueManager")._mutate(inline_mutation[1], dialogue_line.extra_game_states, true)
-			GameState.dialogue_mutation_completed.emit()
 			_is_awaiting_mutation = false
 
 	_already_mutated_indices.append(index)
