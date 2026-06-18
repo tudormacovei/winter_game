@@ -192,7 +192,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
-			camera.rotation_locked = true
+			camera.can_enter_dialogue_view = false
 
 	if event is InputEventMouseMotion:
 		# ON_TABLE drag: if crossed threshold: start moving object
@@ -209,7 +209,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				if GameState.is_action_locked[GameState.ActionName.FOCUS_OBJECT]:
 					_mouse_down = false
 					if camera:
-						camera.rotation_locked = false
+						camera.can_enter_dialogue_view = true
 					get_viewport().set_input_as_handled()
 					return
 
@@ -221,7 +221,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 		_mouse_down = false
 		if camera:
-			camera.rotation_locked = false
+			camera.can_enter_dialogue_view = true
 
 
 func _on_object_mouse_entered() -> void:
@@ -305,7 +305,8 @@ func _set_state(state: State):
 
 	var camera := get_viewport().get_camera_3d() as CameraControl
 	if camera:
-		camera.rotation_locked = state != State.ON_TABLE
+		camera.can_enter_dialogue_view = state == State.ON_TABLE
+		camera.can_enter_quarantine_view = state != State.FOCUSED and state != State.ROTATING
 
 	object_state_changed.emit(state)
 
