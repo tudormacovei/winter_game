@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://i5qiolqusxix"]
+[gd_scene load_steps=10 format=3 uid="uid://i5qiolqusxix"]
 
 [ext_resource type="Script" uid="uid://drjjrpjcijbet" path="res://scripts/sticker_interaction/sticker_peel.gd" id="1_60khh"]
 [ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_60khh"]
-[ext_resource type="Material" uid="uid://b80kpwooaakea" path="res://3d_assets/stickers/StickerMaterial.tres" id="3_yniim"]
+[ext_resource type="Texture2D" uid="uid://b6e4cfra2okfl" path="res://2d_assets/spots/Spot1.webp" id="2_62jyo"]
+[ext_resource type="Texture2D" uid="uid://db5tk7oq8hmu1" path="res://2d_assets/spots/Spot2.webp" id="3_oxt4s"]
+[ext_resource type="Texture2D" uid="uid://b4pski8bbfv0d" path="res://2d_assets/spots/Spot3.webp" id="4_f5str"]
 
 [sub_resource type="Curve" id="Curve_60khh"]
 _data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
@@ -11,6 +13,15 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_yniim"]
 _data = [Vector2(0, 0), 0.0, -0.03255444, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6jnk"]
+resource_name = "StickerMaterial"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("2_62jyo")
+roughness = 0.5
+emission_enabled = true
+emission_texture = ExtResource("2_62jyo")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
 size = Vector3(2, 0.1, 2)
@@ -22,12 +33,13 @@ rollback_duration = 0.7
 complete_duration = 0.6
 complete_deform_curve = SubResource("Curve_60khh")
 complete_scale_curve = SubResource("Curve_yniim")
+spot_textures = Array[Texture2D]([ExtResource("2_62jyo"), ExtResource("3_oxt4s"), ExtResource("4_f5str")])
 metadata/_custom_type_script = "uid://drjjrpjcijbet"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_60khh")
-surface_material_override/0 = ExtResource("3_yniim")
+surface_material_override/0 = SubResource("StandardMaterial3D_p6jnk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)

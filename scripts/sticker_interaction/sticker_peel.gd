@@ -1,3 +1,4 @@
+@tool
 class_name StickerPeel extends Sticker
 
 var mouse_start: Vector2
@@ -24,7 +25,8 @@ var _rollback_tween: Tween
 var _complete_tween: Tween
 
 func _ready() -> void:
-	var mesh_instance = _find_mesh_instance(self)
+	super._ready()
+	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
 	if mesh_instance == null:
 		push_warning("StickerPeel: No MeshInstance3D found; cannot compute sticker size.")
 		return
@@ -74,7 +76,7 @@ func _handle_sticker_deform() -> void:
 	_cylinder_radius = -deform_direction * peel_radius
 	_drag_dir = Vector3(deform_direction.x, 0.0, deform_direction.y).normalized()
 
-	var mesh_instance = _find_mesh_instance(self)
+	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
 	if mesh_instance == null:
 		return
 
@@ -166,7 +168,7 @@ func _screen_to_plane(screen_pos: Vector2) -> Vector3:
 	return origin + direction * t
 
 func _reset_deform() -> void:
-	var mesh_instance = _find_mesh_instance(self)
+	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
 	if mesh_instance and _original_mesh_backup:
 		mesh_instance.mesh = _original_mesh_backup
 	_original_mesh_backup = null
@@ -186,16 +188,6 @@ var _cylinder_radius: Vector2 = Vector2(1.0, 0.0)
 # Member to cache original per-surface vertices to avoid cumulative deformation
 var original_surfaces: Dictionary = {}
 
-# Helper: find first MeshInstance3D in this node's subtree
-func _find_mesh_instance(node: Node) -> MeshInstance3D:
-	for child in node.get_children():
-		if child is MeshInstance3D:
-			return child
-		var found := _find_mesh_instance(child)
-		if found:
-			return found
-	return null
-
 # Deform attached object for sticker peel effect
 func _deform_object() -> void:
 	# Skip when self has near-zero scale (end of completion tween):
@@ -203,7 +195,7 @@ func _deform_object() -> void:
 	if scale.length_squared() < 1e-6:
 		return
 	
-	var mesh_instance = _find_mesh_instance(self)
+	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
 	if mesh_instance == null:
 		push_warning("No MeshInstance3D found in node subtree; cannot deform.")
 		return

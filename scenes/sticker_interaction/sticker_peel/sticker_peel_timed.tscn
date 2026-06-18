@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxkmqhm2g76la"]
+[gd_scene load_steps=11 format=3 uid="uid://bxkmqhm2g76la"]
 
 [ext_resource type="Script" uid="uid://cw175c4ao10g" path="res://scripts/sticker_interaction/sticker_peel_timed.gd" id="1_uyiqc"]
 [ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_ppkbr"]
-[ext_resource type="Material" uid="uid://dyr1yme6xx7a" path="res://3d_assets/stickers/StickerMaterialTimed.tres" id="3_ppkbr"]
+[ext_resource type="Texture2D" uid="uid://ce3xncx1s8kb0" path="res://2d_assets/spots/Spot4.webp" id="2_wntlq"]
+[ext_resource type="Shader" uid="uid://cqh27ksr3ao4o" path="res://3d_assets/shaders/sticker_peel_timed.gdshader" id="4_e2fqs"]
 
 [sub_resource type="Curve" id="Curve_60khh"]
 _data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
@@ -15,6 +16,22 @@ point_count = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
 size = Vector3(2, 0.1, 2)
 
+[sub_resource type="Gradient" id="Gradient_s1cwb"]
+offsets = PackedFloat32Array(0, 0.006060606, 0.9530303, 0.99545455)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_olray"]
+gradient = SubResource("Gradient_s1cwb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cdd3r"]
+resource_name = "StickerMaterial"
+render_priority = 0
+shader = ExtResource("4_e2fqs")
+shader_parameter/albedo_texture = ExtResource("2_wntlq")
+shader_parameter/roughness = 0.5
+shader_parameter/progress = 0.0
+shader_parameter/sweep_gradient = SubResource("GradientTexture1D_olray")
+
 [node name="StickerPeelTimed" type="Area3D"]
 script = ExtResource("1_uyiqc")
 time_limit = 15.0
@@ -23,6 +40,7 @@ rollback_duration = 0.7
 complete_duration = 0.6
 complete_deform_curve = SubResource("Curve_60khh")
 complete_scale_curve = SubResource("Curve_yniim")
+spot_textures = Array[Texture2D]([ExtResource("2_wntlq")])
 metadata/_custom_type_script = "uid://drjjrpjcijbet"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -32,7 +50,7 @@ shape = SubResource("BoxShape3D_yniim")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_ppkbr")
-surface_material_override/0 = ExtResource("3_ppkbr")
+surface_material_override/0 = SubResource("ShaderMaterial_cdd3r")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

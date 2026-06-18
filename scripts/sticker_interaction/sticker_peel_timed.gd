@@ -1,5 +1,6 @@
 ## Timed sticker: keeps track of how long the object has been in focus
 ## Once the object has been in focus more than time_limit seconds, the sticker is permanently failed, and no longer interactible
+@tool
 class_name StickerPeelTimed extends StickerPeel
 
 @export var time_limit: float = 10.0
@@ -43,16 +44,12 @@ func _fail() -> void:
 	_write_shader_uniforms()
 
 
-# Same as StickerPeelDirectional: duplicate template so per-instance uniform writes don't bleed across stickers.
+# setup the per-instance ShaderMaterial & store a reference to it
 func _setup_shader_material() -> void:
-	var mesh_instance := _find_mesh_instance(self)
-	if mesh_instance == null:
+	var mat := _get_or_duplicate_surface_material()
+	if not (mat is ShaderMaterial):
 		return
-	var template := mesh_instance.get_surface_override_material(0)
-	if not (template is ShaderMaterial):
-		return
-	_material = template.duplicate() as ShaderMaterial
-	mesh_instance.set_surface_override_material(0, _material)
+	_material = mat as ShaderMaterial
 
 
 func _write_shader_uniforms() -> void:
