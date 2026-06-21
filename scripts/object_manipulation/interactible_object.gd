@@ -10,6 +10,11 @@ signal object_completed(object_name: String, is_special_object: bool, completed_
 signal object_state_changed(state: State)
 signal object_pending_completion_changed(is_pending: bool)
 
+# Fires after:
+# - initial sticker placement finishes
+# - stickers get peeled of the object (sticker completion)
+signal has_stickers_remaining_changed(has_remaining: bool)
+
 # Setup variables, set before node enters scene tree
 var _focus_position: Node3D
 var _on_table_neutral_position: Node3D
@@ -260,6 +265,7 @@ func _on_stickers_placed() -> void:
 			child.sticker_mouse_entered.connect(_on_sticker_mouse_entered)
 			child.sticker_mouse_exited.connect(_on_sticker_mouse_exited)
 			child.tree_exiting.connect(_on_sticker_tree_exiting.bind(child))
+	has_stickers_remaining_changed.emit(_sticker_total > 0)
 	_set_state(State.ON_TABLE)
 
 
@@ -270,6 +276,8 @@ func _on_sticker_completed():
 
 	_completed_stickers += 1
 	print("Completed " + str(_completed_stickers) + " stickers!")
+	if _completed_stickers >= _sticker_total:
+		has_stickers_remaining_changed.emit(false)
 
 
 # Set all data needed for correct functionality
