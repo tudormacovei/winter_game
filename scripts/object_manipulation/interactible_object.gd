@@ -504,6 +504,7 @@ func complete_object():
 		return
 
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
+	AudioManager.play_sfx(Config.OBJECT_COMPLETED_SFX_NAME)
 	GameState.object_completed.emit()
 
 	_set_state(State.ON_TABLE)

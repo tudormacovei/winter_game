@@ -34,8 +34,8 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 
 func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
-
 	_day_end_screen.show()
+	AudioManager.play_sfx(Config.END_DAY_SFX_NAME, Config.END_DAY_SFX_VOLUME_DB)
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
 	_day_end_screen.hide()
 
