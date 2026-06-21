@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfle3ykdjwjad"]
+[gd_scene load_steps=11 format=3 uid="uid://cfle3ykdjwjad"]
 
 [ext_resource type="Script" uid="uid://0jg6w2v5on0e" path="res://scripts/sticker_interaction/sticker_peel_directional.gd" id="1_3rjha"]
 [ext_resource type="ArrayMesh" uid="uid://dfyox3r8mn33m" path="res://3d_assets/stickers/Sticker_Plane.res" id="2_7yb5f"]
-[ext_resource type="Material" uid="uid://cjqb1kabifwjc" path="res://3d_assets/stickers/StickerMaterialDirectional.tres" id="3_7yb5f"]
+[ext_resource type="Texture2D" uid="uid://b6e4cfra2okfl" path="res://2d_assets/spots/Spot1.webp" id="2_ab3cd"]
+[ext_resource type="Texture2D" uid="uid://db5tk7oq8hmu1" path="res://2d_assets/spots/Spot2.webp" id="3_0s47l"]
+[ext_resource type="Shader" uid="uid://sc0cfqbuuoa4" path="res://3d_assets/shaders/sticker_peel_directional.gdshader" id="3_3rjha"]
+[ext_resource type="Texture2D" uid="uid://b4pski8bbfv0d" path="res://2d_assets/spots/Spot3.webp" id="4_hwr76"]
 
 [sub_resource type="Curve" id="Curve_60khh"]
 _data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
@@ -15,6 +18,25 @@ point_count = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
 size = Vector3(2, 0.1, 2)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3cd"]
+resource_name = "StickerMaterial"
+render_priority = 0
+shader = ExtResource("3_3rjha")
+shader_parameter/albedo_texture = ExtResource("2_ab3cd")
+shader_parameter/roughness = 0.5
+shader_parameter/wave_direction = Vector2(-1, 0)
+shader_parameter/wave_frequency = 7.465000351327619
+shader_parameter/wave_speed = 2.7410001301975
+shader_parameter/wave_decay = 1.7660000838849998
+shader_parameter/bend_freq_large = 1.5
+shader_parameter/bend_amp_large = 0.7010000332975
+shader_parameter/bend_freq_small = 6.0
+shader_parameter/bend_amp_small = 0.22000001045
+shader_parameter/wave_max_threshold = 0.8000000855
+shader_parameter/wave_min_threshold = -0.48799997568
+shader_parameter/wave_min_multiplier = 0.0
+shader_parameter/texture_pull = -0.03999999538023
+
 [node name="StickerPeelDirectional" type="Area3D"]
 script = ExtResource("1_3rjha")
 angle_width_degrees = 40.0
@@ -24,6 +46,7 @@ rollback_duration = 0.7
 complete_duration = 0.6
 complete_deform_curve = SubResource("Curve_60khh")
 complete_scale_curve = SubResource("Curve_yniim")
+spot_textures = Array[Texture2D]([ExtResource("2_ab3cd"), ExtResource("3_0s47l"), ExtResource("4_hwr76")])
 metadata/_custom_type_script = "uid://drjjrpjcijbet"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -33,7 +56,7 @@ shape = SubResource("BoxShape3D_yniim")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_7yb5f")
-surface_material_override/0 = ExtResource("3_7yb5f")
+surface_material_override/0 = SubResource("ShaderMaterial_ab3cd")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

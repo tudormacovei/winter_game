@@ -2,6 +2,7 @@
 #
 # Not interactible by default, _on_object_interactible_change must
 # be connected to signal from parent object.
+@tool
 class_name StickerClick extends Sticker
 
 func _ready() -> void:

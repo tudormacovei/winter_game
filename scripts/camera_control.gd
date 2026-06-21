@@ -44,7 +44,8 @@ var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rot
 var _default_fov: float = 0.0
 var _fov_tween: Tween
 var _dolly_tween: Tween
-var rotation_locked: bool = false
+var can_enter_dialogue_view: bool = true
+var can_enter_quarantine_view: bool = true
 var _base_x: float = 0.0
 var _quarantine_dwell_elapsed: float = 0.0 # in seconds
 var _quarantine_exit_elapsed: float = 0.0 # in seconds
@@ -86,7 +87,7 @@ func handle_rotation(delta: float):
 
 # begins a rotation from the current camera_focus to target_focus (WORK_AREA or DIALOGUE_AREA)
 func _start_rotation_to(target_focus: CameraFocus) -> void:
-	if rotation_locked:
+	if not can_enter_dialogue_view and target_focus == CameraFocus.DIALOGUE_AREA:
 		return
 	# interrupting an in-progress rotation toward the opposite target: reverse by complementing the tracker
 	if _camera_state == CameraState.ROTATING:
@@ -110,7 +111,7 @@ func is_at_rest_at_table() -> bool:
 
 
 func _handle_quarantine_proximity(delta: float) -> void:
-	if _is_camera_animating():
+	if not can_enter_quarantine_view or _is_camera_animating():
 		_quarantine_dwell_elapsed = 0.0
 		_quarantine_exit_elapsed = 0.0
 		return
@@ -141,7 +142,7 @@ func _handle_quarantine_proximity(delta: float) -> void:
 
 
 func _handle_vertical_proximity(delta: float) -> void:
-	if rotation_locked or _is_camera_animating():
+	if not can_enter_dialogue_view or _is_camera_animating():
 		_vertical_dwell_elapsed = 0.0
 		return
 

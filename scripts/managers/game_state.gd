@@ -1,7 +1,8 @@
 extends Node
 
-# Signals are emitted in relevant places in the codebase according to player actions so they are not used in this file
+@onready var ui_manager: UIManager = null
 
+# Signals are emitted in relevant places in the codebase according to player actions so they are not used in this file
 # Dialogue signals (used in dialogue files)
 @warning_ignore("unused_signal")
 signal first_drag_on_object
@@ -12,14 +13,39 @@ signal first_sticker_cleansed_on_object
 @warning_ignore("unused_signal")
 signal object_completed
 
+# Emitted when:
+# - dialogue starts typing after a pause
+# - dialogue progress indicator becomes visible
 @warning_ignore("unused_signal")
-signal dialogue_mutation_completed
+signal dialogue_changed
 
 func wait_for(signal_name: String) -> void:
 	if not has_signal(signal_name):
 		Utils.debug_error("GameState: No valid signal with name: " + signal_name)
 		return
 	await self [signal_name]
+
+func do_scripted_event(event_name: String) -> void:
+	self.call(event_name)
+
+#region Scripted Events 
+
+# NOTE: If more scripted events are needed, a better system should be implemented to handle them
+var is_tutorial_find_quarantine_enabled: bool = false
+
+func start_find_quarantine_tutorial() -> void:
+	if not ui_manager:
+		Utils.debug_error("GameState:start_find_quarantine_tutorial UIManager is not set!")
+		return
+
+	is_tutorial_find_quarantine_enabled = true
+	ui_manager.show_screen_highlight()
+
+func stop_find_quarantine_tutorial() -> void:
+	is_tutorial_find_quarantine_enabled = false
+	ui_manager.hide_screen_highlight()
+
+#endregion
 
 #region Lock Player Actions
 
