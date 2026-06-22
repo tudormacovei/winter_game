@@ -153,7 +153,7 @@ func apply_dialogue_line() -> void:
 		for item in responses_menu.get_menu_items():
 			item.scale = Vector2(1.0, 1.0)
 			item.mouse_entered.connect(_on_response_hover.bind(item, true))
-			item.mouse_entered.connect(_on_response_hover.bind(item, true))
+			item.mouse_exited.connect(_on_response_hover.bind(item, false))
 		CursorManager.register_controls(Array(responses_menu.get_menu_items()))
 	elif dialogue_line.time != "":
 		var time = dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
@@ -216,7 +216,7 @@ func _on_response_hover(item: Control, is_hovering: bool) -> void:
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	var target = Vector2(1.05, 1.05) if is_hovering else Vector2(1.0, 1.0)
+	var target = Vector2(1.02, 1.02) if is_hovering else Vector2(1.0, 1.0)
 	tween.tween_property(item, "scale", target, 0.15)
 
 #endregion
