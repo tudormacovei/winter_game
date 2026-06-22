@@ -3,6 +3,9 @@
 class_name GameManager
 extends Node
 
+signal day_started(day_index: int)
+signal day_ended(day_index: int)
+
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
 const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
 
@@ -61,10 +64,14 @@ func _ready():
 	workbench.connect("all_objects_completed", _on_all_objects_completed)
 	tree_exiting.connect(_on_tree_exiting)
 
+	day_started.connect(health_manager.reset_max_health.unbind(1)) # reset HP needed on day start so debug skips also reset HP
+	day_ended.connect(health_manager.reset_max_health.unbind(1)) # reset HP on day end to remove low-HP effects
+
 	_load_day_resources()
 	_load_character_resources()
 
 	current_day_index = 0
+	day_started.emit(0)
 	_play_next_interaction()
 
 	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
@@ -125,6 +132,9 @@ func _play_next_interaction():
 	# Traverse day and interaction arrays
 	current_interaction_index += 1
 	if current_interaction_index >= _day_resources[current_day_index].interactions.size():
+		# Fire day_ended before showing end-of-day UI, to have a clean screen
+		day_ended.emit(current_day_index)
+
 		current_day_index += 1
 		current_interaction_index = 0
 
@@ -136,6 +146,8 @@ func _play_next_interaction():
 		await ui_manager.show_day_end_screen(current_day_index)
 		if current_start_token != _interaction_start_token:
 			return
+
+		day_started.emit(current_day_index)
 
 	var interaction = _day_resources[current_day_index].interactions[current_interaction_index]
 	if not interaction:
@@ -304,6 +316,7 @@ func debug_start_day(day_number: int):
 
 	ui_manager.debug_hide_game_end_screen()
 	current_day_index = day_number - 1
+	day_started.emit(current_day_index)
 	current_interaction_index = -1
 
 	print("Debug: Starting day %d" % day_number)

@@ -5,14 +5,15 @@
 class_name InteractibleObject
 extends Node3D
 
-# TODO ZIANA: Handle edge-cases that soft-lock player.
-	# For the first instruction, first drag can be missed. Going down can be blocked in the beginning of the convo. 
-	# You can complete an object before the wait for object is triggered. Do a pass on when this action should be locked/unlocked.
-
 signal object_interactible(is_interactible: bool)
 signal object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int)
 signal object_state_changed(state: State)
 signal object_pending_completion_changed(is_pending: bool)
+
+# Fires after:
+# - initial sticker placement finishes
+# - stickers get peeled of the object (sticker completion)
+signal has_stickers_remaining_changed(has_remaining: bool)
 
 # Setup variables, set before node enters scene tree
 var _focus_position: Node3D
@@ -49,24 +50,6 @@ static var FOCUS_DURATION: float = 0.25
 static var FOCUS_OBJECT_SCALE: float = 0.3
 
 #region Game State 
-
-enum ActionName {
-	FOCUS_OBJECT,
-	COMPLETE_STICKER,
-	COMPLETE_OBJECT,
-}
-
-static var STRING_TO_ACTION_NAME_MAP = {
-	"focus_object": ActionName.FOCUS_OBJECT,
-	"complete_sticker": ActionName.COMPLETE_STICKER,
-	"complete_object": ActionName.COMPLETE_OBJECT,
-}
-
-var _is_action_locked: Dictionary = {
-	ActionName.FOCUS_OBJECT: false,
-	ActionName.COMPLETE_STICKER: false,
-	ActionName.COMPLETE_OBJECT: false,
-}
 
 var _has_player_dragged_object: bool = false
 var _has_player_rotated_object: bool = false
@@ -203,6 +186,7 @@ func _input(event: InputEvent) -> void:
 		if _state == State.FOCUSED:
 			_mouse_down = false # click on focused object without crossing rotation threshold
 
+
 # Handle interactions for object on the table in unhandled input
 # this is done to first give the focused object the chance to consume the input event
 func _unhandled_input(event: InputEvent) -> void:
@@ -213,7 +197,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
-			camera.rotation_locked = true
+			camera.can_enter_dialogue_view = false
 
 	if event is InputEventMouseMotion:
 		# ON_TABLE drag: if crossed threshold: start moving object
@@ -227,10 +211,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
 			# object focus can only happen while in workbench view, NOT quarantine view
 			if camera and camera.is_at_rest_in_workbench_view():
-				if _is_action_locked[ActionName.FOCUS_OBJECT]:
+				if GameState.is_action_locked[GameState.ActionName.FOCUS_OBJECT]:
 					_mouse_down = false
 					if camera:
-						camera.rotation_locked = false
+						camera.can_enter_dialogue_view = true
 					get_viewport().set_input_as_handled()
 					return
 
@@ -242,7 +226,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 		_mouse_down = false
 		if camera:
-			camera.rotation_locked = false
+			camera.can_enter_dialogue_view = true
 
 
 func _on_object_mouse_entered() -> void:
@@ -281,6 +265,7 @@ func _on_stickers_placed() -> void:
 			child.sticker_mouse_entered.connect(_on_sticker_mouse_entered)
 			child.sticker_mouse_exited.connect(_on_sticker_mouse_exited)
 			child.tree_exiting.connect(_on_sticker_tree_exiting.bind(child))
+	has_stickers_remaining_changed.emit(_sticker_total > 0)
 	_set_state(State.ON_TABLE)
 
 
@@ -291,6 +276,8 @@ func _on_sticker_completed():
 
 	_completed_stickers += 1
 	print("Completed " + str(_completed_stickers) + " stickers!")
+	if _completed_stickers >= _sticker_total:
+		has_stickers_remaining_changed.emit(false)
 
 
 # Set all data needed for correct functionality
@@ -300,17 +287,6 @@ func set_spawn_data(focus_position: Node3D, on_table_neutral_position: Node3D, o
 	_object_completed_area = object_completed_area
 	_out_of_bounds_area = out_of_bounds_area
 	_object_scene = object_scene
-
-
-func lock_player_action(action_name: String, locked: bool) -> void:
-	var action_id = STRING_TO_ACTION_NAME_MAP.get(action_name, null)
-	if action_id == null:
-		Utils.debug_error("InteractibleObject: Unknown action_name: " + action_name)
-		return
-	
-	_is_action_locked[action_id] = locked
-	if action_id == ActionName.COMPLETE_STICKER:
-		_set_object_interactible(locked)
 
 
 func _set_state(state: State):
@@ -337,18 +313,22 @@ func _set_state(state: State):
 
 	var camera := get_viewport().get_camera_3d() as CameraControl
 	if camera:
-		camera.rotation_locked = state != State.ON_TABLE
+		camera.can_enter_dialogue_view = state == State.ON_TABLE
+		camera.can_enter_quarantine_view = state != State.FOCUSED and state != State.ROTATING
 
 	object_state_changed.emit(state)
 
+
 func _set_object_interactible(is_interactible: bool) -> void:
-	if _is_action_locked[ActionName.COMPLETE_STICKER]:
+	# NOTE: COMPLETE_STICKER locked action works as intended because the object starts as not interactible and is only set to interactable in focus mode
+	if GameState.is_action_locked[GameState.ActionName.COMPLETE_STICKER]:
 		is_interactible = false
 
 	if is_interactible and (_state != State.FOCUSED and _state != State.ROTATING):
 		return # Object can only be interactible in certain states
 
 	object_interactible.emit(is_interactible)
+
 
 func _apply_rotation_delta(delta: Vector2) -> void:
 	var camera := get_viewport().get_camera_3d()
@@ -528,7 +508,7 @@ func _remove_outline():
 
 
 func complete_object():
-	if _is_action_locked[ActionName.COMPLETE_OBJECT]:
+	if GameState.is_action_locked[GameState.ActionName.COMPLETE_OBJECT]:
 		_return_to(_on_table_neutral_position.global_position)
 		return
 
@@ -545,7 +525,7 @@ func _return_to(target_global_position: Vector3) -> void:
 	_set_state(State.RETURNING)
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "global_position", target_global_position, RETURN_TWEEN_DURATION)
+	tween.tween_property(self , "global_position", target_global_position, RETURN_TWEEN_DURATION)
 	tween.finished.connect(_on_return_finished)
 
 

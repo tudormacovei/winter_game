@@ -85,7 +85,10 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
+		var last_is_progress_visible: bool = progress.visible
 		progress.visible = not dialogue_label.is_typing and not dialogue_label._is_awaiting_mutation and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
+		if progress.visible and last_is_progress_visible != progress.visible:
+			GameState.dialogue_changed.emit()
 
 ## Consume input when balloon is visible, otherwise propagate it
 func _unhandled_input(_event: InputEvent) -> void:

@@ -21,12 +21,14 @@ func _ready() -> void:
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
 
-	if GameState and GameState.has_signal("dialogue_mutation_completed"):
-		GameState.connect("dialogue_mutation_completed", Callable(self , "_on_dialogue_mutation_completed"))
+	GameState.ui_manager = self
+	if GameState.has_signal("dialogue_changed"):
+		GameState.connect("dialogue_changed", Callable(self , "_on_dialogue_changed"))
 
 func set_balloon_layer(new_balloon_layer: CanvasLayer):
 	self.balloon_layer = new_balloon_layer
 
+	# Don't show Dialogue UI in workbench, instead show Dialogue State UI
 	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
 		call_deferred("hide_balloon_layer")
 		if _dialogue_state_balloon:
@@ -51,6 +53,66 @@ func hide_balloon_layer() -> void:
 	else:
 		push_warning("UI Manager: Trying to hide invalid balloon layer or balloon.")
 
+#region Screen Highlight
+
+const _SCREEN_HIGHLIGHT_FADE_DURATION = 2.0
+var _screen_highlight_tween: Tween = null
+
+# NOTE: These values must match the values in the shader
+enum ScreenHighlightEdge {
+	NONE = 0,
+	TOP = 1,
+	BOTTOM = 2,
+	LEFT = 4,
+	RIGHT = 8,
+}
+
+func show_screen_highlight() -> void:
+	var screen_highlight_canvas: CanvasLayer = %ScreenHighlightCanvas
+	var screen_highlight_rect: ColorRect = %ScreenHighlightColorRect
+	if not screen_highlight_canvas or not screen_highlight_rect:
+		Utils.debug_error("UIManager:show_screen_highlight Screen highlight UI elements are null!")
+		return
+
+	var mat = screen_highlight_rect.material as ShaderMaterial
+	mat.set_shader_parameter("edges_enabled_mask", get_current_screen_highlight_mask())
+	
+	# Fade in the screen highlight, so that it doesn't look too jarring
+	if _screen_highlight_tween:
+		_screen_highlight_tween.kill()
+	_screen_highlight_tween = create_tween()
+	_screen_highlight_tween.tween_method(
+		func(t: float) -> void: %ScreenHighlightColorRect.material.set_shader_parameter("_fade_progress", t),
+		0.0, 1.0, _SCREEN_HIGHLIGHT_FADE_DURATION
+	)
+
+	screen_highlight_canvas.show()
+
+func hide_screen_highlight() -> void:
+	var screen_highlight_canvas: CanvasLayer = %ScreenHighlightCanvas
+	if not screen_highlight_canvas:
+		Utils.debug_error("UIManager:hide_screen_highlight Screen highlight canvas is null!")
+		return
+
+	screen_highlight_canvas.hide()
+
+func get_current_screen_highlight_mask() -> int:
+	# For now, edge highlighting is only enabled for finding the quarantine during tutorial
+	# This can be expanded in the future for other use cases 
+	if not GameState.is_tutorial_find_quarantine_enabled:
+		return ScreenHighlightEdge.NONE
+	
+	if camera._camera_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+		return ScreenHighlightEdge.BOTTOM
+	
+	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
+		return ScreenHighlightEdge.LEFT
+		
+	return ScreenHighlightEdge.NONE
+
+#endregion
+
+
 #region Signals
 
 func _on_camera_focus_changed(current_focus) -> void:
@@ -63,14 +125,16 @@ func _on_camera_focus_changed(current_focus) -> void:
 	if _dialogue_state_balloon and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		_dialogue_state_balloon.hide()
 
+	show_screen_highlight()
+
 func _on_camera_rotation_completed(current_focus) -> void:
 	if balloon_layer and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		balloon_layer.balloon.show()
 
-# Emitted when a dialogue mutation finishes its awaiting
-func _on_dialogue_mutation_completed() -> void:
+func _on_dialogue_changed() -> void:
 	if _dialogue_state_balloon and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
 		_dialogue_state_balloon.show_state_balloon()
+
 #endregion
 
 #region Debug

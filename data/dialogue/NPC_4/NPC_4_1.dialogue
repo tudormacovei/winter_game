@@ -264,7 +264,7 @@ Shopkeeper: Sometimes, people can even hear the object talking to them, inciting
 Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
 Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our little hands and fingers. 
 #tutorial start
-Shopkeeper: [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do lock_player_action("complete_object", true)] [do lock_player_action("complete_sticker", true)] [do lock_player_action("focus_object", true)] There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do wait_for("first_drag_on_object")]   
+Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down and to your left. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_quarantine_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_quarantine_tutorial")]
 #tutorial: look down, move objects, quarantine zone
 Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
 #tutorial: focus mode, rotate 
@@ -320,7 +320,9 @@ Shopkeeper: That's it. Our day consists of doing this over and over again, takin
 Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around, talk to me or to whoever finds themselves in this sorry place, peer out the window, anything. Balance is key. 
 Shopkeeper: You can keep practicing, if you so wish. These items are from old batches, anyway. Their owners are long dead. Mostly.
 -  I want to practise a little more, for now. 
-	Shopkeeper: Sure thing. I'll go check up on Sarah. Shout when you're ready. => micah
+# TODO DANI: This section needs a narrative pass
+	Shopkeeper: Sure thing, I'll grab a couple of objects for you. Make sure to finish them up before you end your day. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
+	Shopkeeper: I'll go check up on Sarah while you work. Be right back. => micah
 - Think I got it. Let's move on.
 	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back. => micah
 

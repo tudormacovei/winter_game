@@ -4,19 +4,18 @@ class_name StickerPeelDirectional extends StickerPeel
 # Direction in sticker-local space the player must drag toward.
 # 0° = sticker-local forward (+Z), positive rotates around local +Y (CCW from above).
 @export var correct_angle_degrees: float = 0.0 : set = _set_correct_angle_degrees
-# Angular wedge (centered on correct_angle_degrees) inside which a drag counts as correct.
+# Angular wedge centered on correct_angle_degrees, inside which a drag counts as correct.
 @export var angle_width_degrees: float = 45.0
 @export var randomize_direction: bool = true
-# Quantization step for randomized direction. 90 => uniform pick of N/E/S/W.
-@export var randomization_increment_degrees: float = 90.0
+@export var randomization_increment_degrees: float = 90.0  # 90 => uniform pick of N/E/S/W.
 
 func _ready() -> void:
-	# In editor: skip runtime setup, just push the current angle to the shader so the inspector preview works.
+	super._ready() # base picks + applies the texture (works in both editor and runtime)
+
 	if Engine.is_editor_hint():
+		# Editor preview: skip peel-runtime setup, just push the current angle to the shader.
 		_apply_wave_direction_to_existing_material()
 		return
-
-	super._ready()
 
 	if randomize_direction:
 		var increment: float = max(randomization_increment_degrees, 0.001)
@@ -58,32 +57,18 @@ func _passes_completion_check(fraction: float) -> bool:
 	return angle_between <= deg_to_rad(angle_width_degrees) * 0.5
 
 
-# Material params must be edited per-instance with the peel direciton
+# Writes wave_direction to the per-instance ShaderMaterial. Cooperates with the base's
+# texture-apply path via _get_or_duplicate_surface_material — only one duplication per instance.
 func _setup_shader_material() -> void:
-	var mesh_instance := _find_mesh_instance(self)
-	if mesh_instance == null:
-		return
-	
-	# The Surface 0 override is the template ShaderMaterial set in the inspector.
-	# We duplicate so each per-instance wave_direction edit does not bleed across stickers sharing the resource.
-	var template := mesh_instance.get_surface_override_material(0)
-	if not (template is ShaderMaterial):
-		return
-	var mat: ShaderMaterial = template.duplicate() as ShaderMaterial
-	mesh_instance.set_surface_override_material(0, mat)
-	mat.set_shader_parameter(&"wave_direction", _wave_direction_uv())
-
-
-# Writes wave_direction onto whatever ShaderMaterial currently sits on Surface 0, without duplicating.
-# Used at edit time so the inspector preview reflects correct_angle_degrees live.
-func _apply_wave_direction_to_existing_material() -> void:
-	var mesh_instance := _find_mesh_instance(self)
-	if mesh_instance == null:
-		return
-	var mat := mesh_instance.get_surface_override_material(0)
+	var mat := _get_or_duplicate_surface_material()
 	if not (mat is ShaderMaterial):
 		return
 	(mat as ShaderMaterial).set_shader_parameter(&"wave_direction", _wave_direction_uv())
+
+
+# Used at edit time so the inspector preview reflects correct_angle_degrees live.
+func _apply_wave_direction_to_existing_material() -> void:
+	_setup_shader_material()
 
 
 # Wave direction in UV space.
