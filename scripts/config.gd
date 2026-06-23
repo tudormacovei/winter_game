@@ -35,6 +35,17 @@ const LETTER_SPOKE_MAX_PITCH_SCALE: float = 1.3
 const LETTER_SPOKE_MIN_PITCH_SCALE: float = 0.7
 const LETTER_SPOKE_FREQUENCY: int = 8 # Play a sound every X letters
 
+const CAMERA_SWOOSH_SFX_NAME: String = "sfx_camera_swoosh"
+const CAMERA_SWOOSH_VOLUME_DB: float = -20.0
+
+const OBJECT_COMPLETED_SFX_NAME: String = "sfx_object_completed"
+
+const END_DAY_SFX_NAME: String = "sfx_clock_ticking"
+const END_DAY_SFX_VOLUME_DB: float = -15.0
+
+const STICKER_BEGIN_PEEL_SFX_NAME: String = "sfx_begin_peel"
+const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
+
 #endregion
 
 # UI Config

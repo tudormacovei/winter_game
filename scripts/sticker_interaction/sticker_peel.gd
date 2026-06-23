@@ -110,6 +110,7 @@ func _input(event: InputEvent) -> void:
 		CursorManager.request_cursor(CursorManager.CursorType.GRAB)
 		get_viewport().set_input_as_handled()
 		is_peeling = true
+		AudioManager.play_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)
 		mouse_start = get_viewport().get_mouse_position()
 		mouse_current = mouse_start
 	if event.is_action_released("mouse_click_left") and is_peeling:
@@ -118,6 +119,7 @@ func _input(event: InputEvent) -> void:
 		var fraction := _complete_fraction()
 		is_peeling = false
 		if _passes_completion_check(fraction):
+			AudioManager.play_sfx(Config.STICKER_END_PEEL_SFX_NAME)
 			_start_completion()
 		else:
 			_start_rollback()

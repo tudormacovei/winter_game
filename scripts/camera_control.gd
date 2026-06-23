@@ -93,6 +93,7 @@ func _start_rotation_to(target_focus: CameraFocus) -> void:
 	if _camera_state == CameraState.ROTATING:
 		_rotation_tracker = 1.0 - _rotation_tracker
 	_camera_state = CameraState.ROTATING
+	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
 	_camera_focus = target_focus
 	camera_focus_changed.emit(_camera_focus)
 
@@ -190,6 +191,7 @@ func _enter_quarantine() -> void:
 		_quarantine_tween.kill()
 	_camera_state = CameraState.MOVING
 	_camera_focus = CameraFocus.QUARANTINE_VIEW
+	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
 	camera_focus_changed.emit(_camera_focus)
 	var sample := func(t: float) -> float: return quarantine_transition_curve.sample(t) if quarantine_transition_curve else t
 	_quarantine_tween = create_tween()
@@ -212,6 +214,7 @@ func _exit_quarantine() -> void:
 		_quarantine_tween.kill()
 	_camera_state = CameraState.MOVING
 	_camera_focus = CameraFocus.WORK_AREA
+	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
 	camera_focus_changed.emit(_camera_focus)
 	var sample := func(t: float) -> float: return quarantine_transition_curve.sample(t) if quarantine_transition_curve else t
 	_quarantine_tween = create_tween()
