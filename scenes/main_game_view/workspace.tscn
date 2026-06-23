@@ -57,7 +57,7 @@ visible = false
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(556.5, 302.5)
+position = Vector2(1, 1)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
@@ -118,6 +118,7 @@ health_drain_per_second = 3.5
 health_restore_per_second = 2.5
 
 [node name="TimeManager" type="Node" parent="Managers"]
+unique_name_in_owner = true
 script = ExtResource("7_vfkcj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

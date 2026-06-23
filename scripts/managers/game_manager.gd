@@ -18,16 +18,16 @@ const STICKER_TYPES: Array[PackedScene] = [
 ]
 
 const DIFFICULTY_TABLE: Array[Dictionary] = [
-	{ "types": [0],       "fraction": 0.50 },  # 0: peel only
-	{ "types": [0, 1],    "fraction": 0.60 },  # 1: + directional
-	{ "types": [0, 1, 2], "fraction": 0.70 },  # 2: + timed
-	{ "types": [0, 1, 2], "fraction": 0.80 },  # 3
-	{ "types": [0, 1, 2], "fraction": 0.90 },  # 4
-	{ "types": [0, 1, 2], "fraction": 1.00 },  # 5
+	{"types": [0], "fraction": 0.50}, # 0: peel only
+	{"types": [0, 1], "fraction": 0.60}, # 1: + directional
+	{"types": [0, 1, 2], "fraction": 0.70}, # 2: + timed
+	{"types": [0, 1, 2], "fraction": 0.80}, # 3
+	{"types": [0, 1, 2], "fraction": 0.90}, # 4
+	{"types": [0, 1, 2], "fraction": 1.00}, # 5
 ]
 
 const MAX_DIFFICULTY: int = 5
-var current_difficulty: int = 5  # hardcoded for now; will be driven by game progression later
+var current_difficulty: int = 5 # hardcoded for now; will be driven by game progression later
 
 
 ## Returns the eligible sticker scenes and count fraction for the given difficulty.
@@ -37,12 +37,13 @@ static func get_sticker_spawn_config(difficulty: int) -> Dictionary:
 	var types: Array[PackedScene] = []
 	for idx in row["types"]:
 		types.append(STICKER_TYPES[idx])
-	return { "types": types, "fraction": row["fraction"] as float }
+	return {"types": types, "fraction": row["fraction"] as float}
 
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
 @onready var health_manager: HealthManager = %HealthManager
 @onready var character_node := get_node("/root/Workspace/CameraSpace/DialogueView/DialogueCharacterTexture")
+@onready var time_manager := %TimeManager
 
 var _day_resources: Array[DayDefinition] = []
 var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
@@ -76,9 +77,9 @@ func _ready():
 
 	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
 
-	DialogueFuncs.register_game_manager(self )
+	DialogueFuncs.register_game_manager(self)
 	if OS.is_debug_build():
-		DebugUI.register_debug_target(self )
+		DebugUI.register_debug_target(self)
 
 #region Dialogue Functions
 
@@ -158,6 +159,8 @@ func _play_next_interaction():
 		Utils.debug_error("Dialogue is invalid for day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 		return
 
+	_update_time_of_day()
+
 	# Wait for start delay
 	if not (OS.is_debug_build() and debug_disable_interaction_delay):
 		await get_tree().create_timer(interaction.start_delay_seconds).timeout
@@ -187,6 +190,15 @@ func _try_play_next_interaction():
 	_play_next_interaction()
 
 #region Helper Functions
+
+func _update_time_of_day():
+	if not time_manager:
+		return
+
+	var total_interactions: int = _day_resources[current_day_index].interactions.size()
+	var day_progress: float = float(current_interaction_index) / max(1, total_interactions - 1)
+	var do_lerp: bool = current_interaction_index > 0 # Don't lerp on the first interaction
+	time_manager.set_target_time_of_day(day_progress, do_lerp)
 
 func _add_object_to_workbench(object_scene: PackedScene):
 	var object = workbench.add_object(object_scene)
