@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bthdoam3ce0u7"
+path="res://.godot/imported/NPC_4_3.dialogue-2f6b601631444a57cd79cbb056547423.tres"
+
+[deps]
+
+source_file="res://data/dialogue/NPC_4/NPC_4_3.dialogue"
+dest_files=["res://.godot/imported/NPC_4_3.dialogue-2f6b601631444a57cd79cbb056547423.tres"]
+
+[params]
+
+defaults=true

@@ -1,62 +1,17 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=21 format=3 uid="uid://bj13kkf7ghsl4"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=5 format=3 uid="uid://ww2tat7utudi"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
+[ext_resource type="Resource" uid="uid://bthdoam3ce0u7" path="res://data/dialogue/NPC_4/NPC_4_3.dialogue" id="2_7circ"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="2_jitoe"]
-[ext_resource type="Resource" uid="uid://dnjv2qqfanwuo" path="res://data/dialogue/NPC_1/NPC_1_1.dialogue" id="2_n33hj"]
-[ext_resource type="PackedScene" uid="uid://d2sa4je13i7jc" path="res://scenes/object_manipulation/objects/milk_carton_variant_01.tscn" id="3_7circ"]
-[ext_resource type="Resource" uid="uid://dg7byaup6bjsr" path="res://data/dialogue/NPC_2/NPC_2_1.dialogue" id="3_djq11"]
-[ext_resource type="PackedScene" uid="uid://bov6fm3d5y6xm" path="res://scenes/object_manipulation/objects/flask.tscn" id="4_uquws"]
-[ext_resource type="Resource" uid="uid://dc2tolseshfqd" path="res://data/dialogue/NPC_3/NPC_3_1.dialogue" id="5_5xrv2"]
-[ext_resource type="PackedScene" uid="uid://bxmo5x5kvp8tq" path="res://scenes/object_manipulation/objects/chess_set.tscn" id="6_e2atf"]
-[ext_resource type="PackedScene" uid="uid://bl5cie1nbmjtb" path="res://scenes/object_manipulation/objects/book_01.tscn" id="7_6kbr0"]
-[ext_resource type="Resource" uid="uid://dqfkyjuyeryi8" path="res://data/dialogue/NPC_2/NPC_2_2.dialogue" id="9_cgcyd"]
-[ext_resource type="PackedScene" uid="uid://gfjoau0fs0gt" path="res://scenes/object_manipulation/objects/milk_carton_variant_02.tscn" id="10_n0ua4"]
-[ext_resource type="Resource" uid="uid://bu00kv7gx3usw" path="res://data/dialogue/NPC_1/NPC_1_2.dialogue" id="11_jgx3k"]
-[ext_resource type="Resource" uid="uid://bnvprtkx16co" path="res://data/dialogue/NPC_1/NPC_1_3.dialogue" id="12_6u08n"]
-[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="13_l6xi3"]
 
-[sub_resource type="Resource" id="Resource_7tgdb"]
+[sub_resource type="Resource" id="Resource_uxq47"]
 script = ExtResource("1_5ihi8")
-dialogue = ExtResource("2_n33hj")
-metadata/_custom_type_script = "uid://dnsly0bq77weo"
-
-[sub_resource type="Resource" id="Resource_p4oql"]
-script = ExtResource("1_5ihi8")
-dialogue = ExtResource("3_djq11")
-objects = Array[PackedScene]([ExtResource("4_uquws")])
-start_delay_seconds = 3.0
-metadata/_custom_type_script = "uid://dnsly0bq77weo"
-
-[sub_resource type="Resource" id="Resource_l4lrq"]
-script = ExtResource("1_5ihi8")
-dialogue = ExtResource("5_5xrv2")
-objects = Array[PackedScene]([ExtResource("6_e2atf"), ExtResource("7_6kbr0"), ExtResource("3_7circ")])
-start_delay_seconds = 4.0
-metadata/_custom_type_script = "uid://dnsly0bq77weo"
-
-[sub_resource type="Resource" id="Resource_q24my"]
-script = ExtResource("1_5ihi8")
-dialogue = ExtResource("9_cgcyd")
-objects = Array[PackedScene]([ExtResource("10_n0ua4")])
-start_delay_seconds = 3.0
-metadata/_custom_type_script = "uid://dnsly0bq77weo"
-
-[sub_resource type="Resource" id="Resource_o05bc"]
-script = ExtResource("1_5ihi8")
-dialogue = ExtResource("11_jgx3k")
-objects = Array[PackedScene]([ExtResource("4_uquws")])
-start_delay_seconds = 4.0
-metadata/_custom_type_script = "uid://dnsly0bq77weo"
-
-[sub_resource type="Resource" id="Resource_f0opt"]
-script = ExtResource("1_5ihi8")
-dialogue = ExtResource("12_6u08n")
-objects = Array[PackedScene]([ExtResource("13_l6xi3")])
-start_delay_seconds = 3.0
+dialogue = ExtResource("2_7circ")
+start_delay_seconds = 5.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [resource]
 script = ExtResource("2_jitoe")
 day_id = 2
-interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_7tgdb"), SubResource("Resource_p4oql"), SubResource("Resource_l4lrq"), SubResource("Resource_q24my"), SubResource("Resource_o05bc"), SubResource("Resource_f0opt")])
+interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_uxq47")])
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

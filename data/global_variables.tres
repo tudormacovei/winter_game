@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=28 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=37 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -10,10 +10,64 @@ name = "relationship"
 default_value = 3
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_6j24c"]
+script = ExtResource("1_vywdb")
+name = "know"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_l3k17"]
+script = ExtResource("1_vywdb")
+name = "cult"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_dxgj2"]
+script = ExtResource("1_vywdb")
+name = "questions"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_eft0y"]
+script = ExtResource("1_vywdb")
+name = "wait"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_6s65m"]
+script = ExtResource("1_vywdb")
+name = "unaffected"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_xpc13"]
+script = ExtResource("1_vywdb")
+name = "gift"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_tsadp"]
+script = ExtResource("1_vywdb")
+name = "elders"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_dgxfi"]
+script = ExtResource("1_vywdb")
+name = "sacrifice"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_jtdi1"]
+script = ExtResource("1_vywdb")
+name = "dream"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_yreg5"]
 script = ExtResource("1_cr3hu")
-character_id = "NPC_0"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_fv61s")])
+character_id = "NPC_4"
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_fv61s"), SubResource("Resource_6j24c"), SubResource("Resource_l3k17"), SubResource("Resource_dxgj2"), SubResource("Resource_eft0y"), SubResource("Resource_6s65m"), SubResource("Resource_xpc13"), SubResource("Resource_tsadp"), SubResource("Resource_dgxfi"), SubResource("Resource_jtdi1")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_t7f3i"]
@@ -158,6 +212,6 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi"), null])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_yreg5"), SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"
