@@ -4,7 +4,7 @@
 
 ~ start
 Sarah: Dad, where are you?
-Sarah: [wait=2]Oh. Hello. Know where my father is?
+Sarah: [wait=1]...Oh. Hello. Know where my father is?
 Sarah: I heard him come in late last night for a few minutes. Then he left again. 
 - Haven't seen him since yesterday, myself. 
 	Sarah: Hmm. Wonder what he's up to. => drink

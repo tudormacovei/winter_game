@@ -212,6 +212,6 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi"), null])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_yreg5"), SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"

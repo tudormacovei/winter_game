@@ -4,7 +4,8 @@
 
 ~ start
 *You can barely see part of Micah through the window for a second, and then you can hear the door open but you can't see anyone; after a few seconds, you can see his head pop up from under the table; he sneaked up on you.
-Micah: Boo!
+#sound effect needed
+Micah: Boo! 
 - You scared the shit out of me. 
 	Micah: Hahaha! Got you. 
 	- Don't ever do that again.
@@ -202,8 +203,8 @@ Micah: Anyway, here's today's bag of items. Where's the shopkeeper? The real one
 Sarah: Micah!
 Micah: Oh, hi, Sarah!
 Micah: Ready to go?
-Sarah: You know it. 
-Sarah: [wait=1.0]Hello, random, creepy stranger. 
+Sarah: You know I am. 
+Sarah: [wait=0.3]...Hello, random, creepy stranger. 
 - Hello, random, creepy girl. => stop
 - Nice to meet you too, Sarah.  => stop
 	
@@ -216,7 +217,7 @@ Shopkeeper: Just keep out of trouble this time. Please.
 Sarah: Course we will. When haven't we?
 Sarah: Anyway, see you later. Bye!
 Micah: Bye, Shopkeeper! Bye, other 'keeper!
-Shopkeeper: [wait=2.0] Devils, the two of them. 
+Shopkeeper: [wait=1.0]...Devils, the two of them. 
 Shopkeeper: I see you've met Micah. He's a good kid, eh?
 - He's definitely something. => eh
 - Gets on my nerves, to be honest. => eh
@@ -356,6 +357,7 @@ Shopkeeper: ...
 	Shopkeeper: Your arrival was heralded by the Elders. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "know", true)]
 	Shopkeeper: They told me someone bearing the Gift would soon come to help me around with the shop. Goddess knows I could use it.
 	Shopkeeper: To be completely honest, though, you never know with them. Their predictions have been wrong just as often as they've been right.
+	Shopkeeper: ...Make sure not to tell anyone I said that, please. 
 	Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.
 	- She talked to me, too. In my sleep, in what felt like a dream. Told me to come here. 
 		Shopkeeper: I'm well aware. She rarely does that, you know. 

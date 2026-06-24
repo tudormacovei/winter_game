@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_l22pw"]
 script = ExtResource("1_cy22h")
 dialogue = ExtResource("2_fw5tm")
-start_delay_seconds = 5.0
+start_delay_seconds = 3.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_fw5tm"]

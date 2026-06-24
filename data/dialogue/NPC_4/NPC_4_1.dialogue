@@ -140,6 +140,7 @@ Shopkeeper: ...
 	Shopkeeper: Your arrival was heralded by the Elders. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "know", true)]
 	Shopkeeper: They told me someone bearing the Gift would soon come to help me around with the shop. Goddess knows I could use it.
 	Shopkeeper: To be completely honest, though, you never know with them. Their predictions have been wrong just as often as they've been right.
+	Shopkeeper: ...Make sure not to tell anyone I said that, please. 
 	Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.
 	- She talked to me, too. In my sleep, in what felt like a dream. Told me to come here. 
 		Shopkeeper: I'm well aware. She rarely does that, you know. 
@@ -287,8 +288,8 @@ else
 #tutorial: Repeating timed spots object based on player performance
 ~ timed_spots_complete_check
 if Variables.get_var("prog_score_special_object_tutorial_timed_milk_carton") < 100
-	% Shopkeeper: Yep, this one's trickier. Give it another go.
-	% Shopkeeper: Still better than I was at first. No harm done. Again.
+	% Shopkeeper: Yep, this one's trickier. You didn't peel it in time. Give it another go.
+	% Shopkeeper: And it's gone forever. No harm done. You're still better than I was at first. Again.
 	
 	% Shopkeeper: You have to get rid it of all corruption spots and then place it in the basket, to your right. [do DialogueFuncs.add_object_to_workbench("tutorial_timed_milk_carton")] [do wait_for("object_completed")]  => timed_spots_complete_check
 	% Shopkeeper: Fully cleanse the object and and then put it in the basket, to your right. [do DialogueFuncs.add_object_to_workbench("tutorial_timed_milk_carton")] [do wait_for("object_completed")]  => timed_spots_complete_check

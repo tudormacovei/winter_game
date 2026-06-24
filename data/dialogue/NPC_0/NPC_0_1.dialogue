@@ -4,10 +4,13 @@
 
 ~ start
 #background: wooden gate, nearly pitch black
-In a world ravaged by seemingly random occurrences known as the Cullings, leading to countless gruesome deaths, you make your way to a village you found out about in a dream. A self-proclaimed Goddess showed Herself to you in your sleep and told you to come here.
-After a long and tiring trek in the dark, you finally arrive at the village gates. You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch you as you walk towards them. After what feels like minutes, they speak.
-???: [wait=0.5]Who's there?
-- I heard this village is a safe haven, untouched by hardship and the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.
+You're... someone. You live in a world ravaged by seemingly random occurrences known as the Cullings, events that have lead to countless gruesome deaths over the past decade. 
+You're currently on your way to a village you found out about in a dream. A self-proclaimed Goddess showed Herself to you in your sleep, assuming the appearance of a crow, and told you to make your way there with haste.
+You abided. Who knows why. Your reasons are your own. 
+After a long and tiring trek in the dark, you finally arrive at the village gates. You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch you as you walk towards them. 
+[wait=0.5]...After what feels like too long, they speak.
+???: [wait=1.5]Who's there?
+- I heard this village is a safe haven, untouched by hardship or the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.
 	???: Not the first to ask. Sure won't be the last. Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
 	???: Will he serve and praise, or will he sow discord and doubt among our ranks?
 	???: [wait=1]...
@@ -35,9 +38,8 @@ After a long and tiring trek in the dark, you finally arrive at the village gate
 		???: Don't worry about it right now. All will be revealed in due time. => but
 - I heard this is the birthing place of the Church of the one true Goddess. I'd like to join. 
 	???: Your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
-	???: But I've still got to ask Her for guidance.
 	???: Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
-	???: Does he speak truth? Will he serve and praise You? Or will he sow discord and doubt among our ranks?
+	???: Does he speak truly? Will he serve and praise You? Or will he sow discord and doubt among our ranks?
 	???: [wait=0.5]...
 	???: [wait=1]...Fortune smiles upon you!
 	???: The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
@@ -62,8 +64,8 @@ After a long and tiring trek in the dark, you finally arrive at the village gate
 ~ but
 ???: Anyway, I'm guessing you're hungry, tired, and in desperate need of a bath. 
 ???: First things first, though. To your left, there's a charred hole. 
-???: I'll need you to drop all your possessions in it. Your clothes, too. 
-???: No outside items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+???: I'll need you to drop all your possessions in there. Your clothes, too. 
+???: No outside items, especially technological in nature, are allowed in the village, for they are sinful, and wrong.
 ???: Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
 - So be it. => go
 - That's absurd.
@@ -78,8 +80,8 @@ After a long and tiring trek in the dark, you finally arrive at the village gate
 ~ but1
 ???: Anyway, I'm guessing you're hungry, tired, and in desperate need of a bath. 
 ???: First things first, though. To your left, there's a charred hole. 
-???: I'll need you to drop all your possessions in it. Your clothes, too. 
-???: No outside items, especially technological in nature, are allowed in the village, for they are wrong, and sinful.
+???: I'll need you to drop all your possessions in there. Your clothes, too. 
+???: No outside items, especially technological in nature, are allowed in the village, for they are sinful, and wrong.
 ???: Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
 - So be it. => go 
 - Happy to oblige. => go
@@ -92,15 +94,15 @@ After a long and tiring trek in the dark, you finally arrive at the village gate
 		
 ~ go
 #maybe screen with hole
-???: [wait=2.0]Now that that's over with, let's get you to your new home. 
+???: [wait=1.0]...Now that that's over with, let's get you to your new home. 
 ???: You'll be staying at the Shopkeeper's house, on account of your Gift. He's Gifted himself, and I'm sure he's better suited to explain how it works than any of us are.
 ???: He's been in need of an apprentice since forever, anyway. 
 ???: That's his house. Just knock and tell him you're Gifted, and that Joan let you in, with the Goddess's blessing. 
 Joan: Farewell. May the Goddess guide your every step. 
 - Goodbye, Joan. 
-	[wait=1.5]You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
+	[wait=1.0]...You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
 - ...
-	[wait=1.5]You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
+	[wait=1.0]...You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
 	
 ~ shop
 Shopkeeper: Come in. I know who you are and why you're here. No need to get into it right now. You're probably exhausted. We've got time. 
@@ -136,11 +138,11 @@ Shopkeeper: I'll see you in the morning. Good night.
 - Weird welcoming party. 
 	Shopkeeper: Hah. I know. You'll have to forgive me. 
 	Shopkeeper: Hospitality is usually my strong suit. I'll make it up to you. 
-	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
+	Sarah: [wait=1.0]...Dad? What's going on? Who is that?
 	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
 	Sarah: I had that bad dream again. They came back. 
 	Shopkeeper: Go back to bed. I'm right behind you. 
-	Shopkeeper: [wait=1.5]Have to go. See you tomorrow. 
+	Shopkeeper: [wait=0.5]...Have to go. See you tomorrow. 
 	- Sorry I woke her up.
 		Shopkeeper: No harm done. It wasn't you. 
 		Shopkeeper: Good night. => END 
