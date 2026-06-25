@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb2u7raocbkmp"
-path.s3tc="res://.godot/imported/Windowview_small.webp-f8308d9a9d43f842fe46a8b611d788aa.s3tc.ctex"
+uid="uid://7xd3rl8sjvrd"
+path.s3tc="res://.godot/imported/WorkshopWindow.webp-0a685f3ffd781890f6c4dedb36ae5710.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://2d_assets/backgrounds/window_transitions/Windowview_small.webp"
-dest_files=["res://.godot/imported/Windowview_small.webp-f8308d9a9d43f842fe46a8b611d788aa.s3tc.ctex"]
+source_file="res://2d_assets/backgrounds/window/WorkshopWindow.webp"
+dest_files=["res://.godot/imported/WorkshopWindow.webp-0a685f3ffd781890f6c4dedb36ae5710.s3tc.ctex"]
 
 [params]
 
