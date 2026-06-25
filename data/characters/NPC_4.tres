@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=4 format=3 uid="uid://bjj82tmucy6m0"]
+[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=5 format=3 uid="uid://bjj82tmucy6m0"]
 
 [ext_resource type="Texture2D" uid="uid://bbl1oeutas260" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_Worried_NPC4.webp" id="1_vrbln"]
+[ext_resource type="Texture2D" uid="uid://34h1lhi0hmjm" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_Laughing_NPC4.webp" id="2_ul8vy"]
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="2_vrbln"]
 [ext_resource type="Texture2D" uid="uid://25cybc5jvpvx" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_NPC4.webp" id="2_wv6c1"]
 
@@ -10,6 +11,7 @@ character_id = "NPC_4"
 display_name = "Shopkeeper"
 default_sprite = ExtResource("2_wv6c1")
 alt_sprites = Dictionary[String, Texture2D]({
+"laugh": ExtResource("2_ul8vy"),
 "worried": ExtResource("1_vrbln")
 })
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
