@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=5 format=3 uid="uid://ww2tat7utudi"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=7 format=3 uid="uid://ww2tat7utudi"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
 [ext_resource type="Resource" uid="uid://bthdoam3ce0u7" path="res://data/dialogue/NPC_4/NPC_4_3.dialogue" id="2_7circ"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="2_jitoe"]
+[ext_resource type="Resource" uid="uid://b6fuy4pkk2ykv" path="res://data/dialogue/NPC_4/NPC_4_4.dialogue" id="3_7circ"]
 
 [sub_resource type="Resource" id="Resource_uxq47"]
 script = ExtResource("1_5ihi8")
@@ -10,8 +11,14 @@ dialogue = ExtResource("2_7circ")
 start_delay_seconds = 5.0
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
+[sub_resource type="Resource" id="Resource_ylnnp"]
+script = ExtResource("1_5ihi8")
+dialogue = ExtResource("3_7circ")
+start_delay_seconds = 5.0
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
 [resource]
 script = ExtResource("2_jitoe")
 day_id = 2
-interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_uxq47")])
+interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_uxq47"), SubResource("Resource_ylnnp")])
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

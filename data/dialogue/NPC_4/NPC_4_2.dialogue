@@ -200,6 +200,7 @@ Micah: That's how things work around here. Not too complicated, but think it mig
 
 ~ sarah
 Micah: Anyway, here's today's bag of items. Where's the shopkeeper? The real one, I mean?
+#add items
 Sarah: Micah!
 Micah: Oh, hi, Sarah!
 Micah: Ready to go?
@@ -216,7 +217,7 @@ Sarah: It's a secret. You'll see.
 Shopkeeper: Just keep out of trouble this time. Please. 
 Sarah: Course we will. When haven't we?
 Sarah: Anyway, see you later. Bye!
-Micah: Bye, Shopkeeper! Bye, other 'keeper!
+Micah: Bye, Shopkeeper! Bye, fake 'keeper!
 Shopkeeper: [wait=1.0]...Devils, the two of them. 
 Shopkeeper: I see you've met Micah. He's a good kid, eh?
 - He's definitely something. => eh
@@ -441,8 +442,8 @@ Shopkeeper: ...
 		Shopkeeper: Yeah. Appreciate it. => questions2
 	- What does she dream about?
 		Shopkeeper: It's... difficult to explain. 
-		Shopkeeper: She used to draw everything she remembered in the morning, then hang it up on the walls around the house.
-		Shopkeeper: Don't freak out if a bunch of weird drawings show up around the room in the future. 
+		Shopkeeper: She used to draw everything she remembered in the morning, then hang it up on the walls around the house. A few of them are still up, see?
+		Shopkeeper: Don't freak out if more weird drawings show up around the room in the future. 
 		- Noted. => questions2
 		- I'll... try. => questions2
 - So, do you people sacrifice humans and stuff? [if Variables.get_char_var("NPC_4", "sacrifice") == false and Variables.get_char_var("NPC_4", "questions") >= 3] 

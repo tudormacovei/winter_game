@@ -3,12 +3,15 @@
 => start
 
 ~ start
-Sarah: Dad, where are you?
-Sarah: [wait=1]...Oh. Hello. Know where my father is?
-Sarah: I heard him come in late last night for a few minutes. Then he left again. 
+...Dad, where are you?
+...
+Sarah: [wait=1]...Oh. Hello. 
+Sarah: Know where my father is?
+Sarah: I heard him come in late last night. I'm a light sleeper. I could even hear you snore.
+Sarah: But then he left again... and didn't come back.
 - Haven't seen him since yesterday, myself. 
 	Sarah: Hmm. Wonder what he's up to. => drink
-- Know where he went?
+- Know where he went yesterday?
 	Sarah: Uh, not really. => drink
 
 ~ drink
@@ -20,14 +23,54 @@ Sarah: I'm starting to get worried.
 - The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=6] => micah
 
 ~ micah
-Micah: [wait=2]Hey Sarah. Fresh delivery for you, Keeper. I see you're settling in nicely. 
+Micah: [wait=1.5]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place.
+#add items
 Sarah: Micah! Have you seen my father? He didn't come home last night.
-Micah: Yeah. He's with the Elders. No idea why, though. He was with 'em till late into the night. 
-Micah: He just up and left at one point. Then came back in the morning. He's still there, now. 
-Micah: That's all I know, though. 
+Micah: Sure have. He's with the Elders. No idea why, though. He was with 'em late into the night. 
+Micah: I tried to listen in but couldn't hear shit. 
+Micah: ...Uh, sorry.
+Micah: He just up and left at one point. He seemed angry.
+Micah: He came back this morning. He's still there, now. I think.
 Sarah: Oh thank the Goddess. I was starting to get worried. 
-Sarah: Thought he started drinking again. Got himself into trouble or something. 
-
+Sarah: Thought he started drinking again. I'll have a word with him tonight. 
+Sarah: Anyway, I'm ready. Shall we?
+Micah: Uh, sure. 
+- Where are you two going?
+	Micah: Uh, we can't tell you. [do Variables.set_var("knows_of_gift", "true")]
+	Sarah: Sure we can. You can keep a secret, can't you?
+	Sarah: My dad's birthday is coming up in a few days. Micah's helping me get him a surprise gift. 
+	Sarah: It's gonna be really cool. But I can't tell you what it is yet. I don't trust you quite enough.
+	Sarah: But since you're Gifted and all, you might help cleanse it right before we give it to him. Have the Goddess bless it through you!
+	Sarah: What do you say?
+	- Sure thing. 
+		Sarah: Awesome. Thanks! [do Variables.set_char_var("NPC_2", "relationship", 4)]
+		Sarah: Anyway, see you later. 
+		Sarah: If dad shows up tell him I'm with Micah, and that I'll be back before nightfall. And make him go sleep! 
+		Sarah: And if you mention the surprise, you're dead!
+		Micah: See you later, fake 'Keeper!
+		- See you. => END
+		- Take care, children. => END
+	- Uh, I've got enough on my plate.
+		Sarah: Doesn't look like it.
+		Sarah: Whatever. He'll just cleanse it himself after we give it to him. [do Variables.set_char_var("NPC_2", "relationship", 2)]
+		Sarah: Let's go, Micah.
+		Micah: ...
+		- Bye, then. => END
+		- ... => END
+		- Take care. => END
+- Take care. 
+	Sarah: If dad shows up tell him I'm with Micah, and I'll be back before nightfall. And tell him to get some sleep!
+	Sarah: Byeee!
+	Micah: See you later, fake 'Keeper. 
+	- See you. => END
+	- Will do. => END
+- ...
+	Sarah: Hey, if dad shows up tell him I'm with Micah, and I'll be back before nightfall. And tell him to get some sleep!
+	Sarah: Byeee!
+	Micah: See you later, fake 'Keeper. 
+	- See you. => END
+	- Will do. => END
+	- ... => END
 
 
 => END

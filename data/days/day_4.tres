@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [resource]
 script = ExtResource("4_b6olo")
-day_id = 3
+day_id = 4
 interactions = Array[ExtResource("1_ucw6y")]([SubResource("Resource_uxq47")])
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

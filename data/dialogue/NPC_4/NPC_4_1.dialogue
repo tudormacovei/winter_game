@@ -237,8 +237,8 @@ Shopkeeper: ...
 		Shopkeeper: Yeah. Appreciate it. => questions
 	- What does she dream about?
 		Shopkeeper: It's... difficult to explain. 
-		Shopkeeper: She used to draw everything she remembered in the morning, then hang it up on the walls around the house.
-		Shopkeeper: Don't freak out if a bunch of weird drawings show up around the room in the future. 
+		Shopkeeper: She used to draw everything she remembered in the morning, then hang it up on the walls around the house. A few of them are still up, see?
+		Shopkeeper: Don't freak out if more weird drawings show up around the room in the future. 
 		- Noted. => questions
 		- I'll... try. => questions
 - That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
@@ -313,8 +313,7 @@ else
 Shopkeeper: That's it. Our day consists of doing this over and over again, taking short breaks whenever we feel the need, and longer ones once every two or three objects. Safer that way. Easy to get lost in this kind of work. 
 Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around, talk to me or to whoever finds themselves in this sorry place, peer out the window, anything. Balance is key. 
 Shopkeeper: You can keep practicing, if you so wish. These items are from old batches, anyway. Their owners are long dead. Mostly.
--  I want to practise a little more, for now. 
-# TODO DANI: This section needs a narrative pass
+-  I want to practise a little more. 
 	Shopkeeper: You're enjoying this, eh? Good. 
 	Shopkeeper: I've got a few more items around the place. Here, you can have them. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
 	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here.

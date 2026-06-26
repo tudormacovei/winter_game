@@ -1,0 +1,183 @@
+~ initialize_local_variables
+do Variables.add_local("nosy", false)
+
+=> start
+
+~ start
+Mary: [wait=1]Good day to you. 
+- Good day. 
+	Mary: Is Duncan here? => duncan
+- Who are you?
+	Mary: Name's Mary. I'm in a bit of a hurry. Is Duncan here? => duncan
+
+~ duncan
+- Who?
+	Mary: The shopkeeper. I assume you're his new minion. 
+	- I only serve the Goddess. [if Variables.get_var("religious_fervour") >= 6]
+		Mary: They got to you quickly, didn't they?
+		Mary: How fun. You'll fit in nicely. 
+		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him.
+		Mary: And tell him it's urgent. Please. => important
+	- I'm nobody's servant. [if Variables.get_var("religious_fervour") <= 6] 
+		Mary: That would make you quite unique in this here village. 
+		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him. 
+		Mary: And tell him it's urgent. Please. => important
+	- Guess you could say that. 
+		Mary: Of course I could. 
+		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him.
+		Mary: And tell him it's urgent. Please. => important
+- Uh, no.
+	Mary: Let him know I need to talk to him. 
+	Mary: And tell him it's urgent. Please. => important 
+	
+~ important
+- Will do.
+	Mary: Appreciate it. 
+	Mary: Tell Sarah to stay in her room today, will you? => sarah
+- You can just tell me. I'll pass on the message. 
+	Mary: Appreciate the offer. But no. 
+	- Come on, I can keep a secret.
+		Mary: It doesn't concern you. Don't be nosy.
+		Mary: It's off-putting. [do Variables.set_var("nosy", true)]
+		Mary: Anyway, tell Sarah to stay in her room today, will you? => sarah
+	- Alright then. 
+		Mary: Tell Sarah to stay in her room today, will you? => sarah
+- Did something happen?
+	Mary: Perhaps. I'm not sure. 
+	- Can't you just tell me?
+		Mary: It doesn't concern you. Don't be nosy.
+		Mary: It's off-putting. [do Variables.set_var("nosy", true)]
+		Mary: Anyway, tell Sarah to stay in her room today, will you? => sarah
+	- Uh, okay. 
+		Mary: Just... tell Sarah to stay in her room today, will you? => sarah
+	
+~ sarah
+- Uh, sure. 
+	Mary: Appreciate it. Farewell. 
+	- See you around. => END 
+	- Goodbye. => END 
+- She's already left with Micah.
+	Mary: Oh. 
+	Mary: I don't like that kid. At least she's not alone.
+	Mary: Where did they go?
+	- No idea. 
+		Mary: Well, it could be nothing. At least I hope so.
+		Mary: Tell her anyway, when she comes back, will you?
+		- Will do. 
+			Mary: Appreciate it. Farewell. 
+			- See you around. => END 
+			- Goodybe. => END 
+		- Don't wanna scare her for no reason. 
+			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+			Mary: Farewell. 
+			- See you around. => END 
+			- Goodbye. => END 
+	- Not sure, but they're definitely up to something. [if Variables.get_var("knows_of_gift") == false]
+		Mary: Good lord. 
+		Mary: Well, it could be nothing. At least I hope so. 
+		Mary: Tell her anyway, when she comes back, will you?
+		- Will do. 
+			Mary: Appreciate it. Farewell. 
+			- See you around. => END 
+			- Goodybe. => END 
+		- Don't wanna scare her for no reason. 
+			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+			Mary: Farewell. 
+			- See you around. => END 
+			- Goodbye. => END 
+	- They're getting a gift for Duncan. [if Variables.get_var("knows_of_gift") == true]
+		Mary: What a sweet, sweet child she is. 
+		Mary: Well, it could be nothing. At least I hope so. 
+		Mary: Tell her anyway, when she comes back, will you?
+		- Will do. 
+			Mary: Appreciate it. Farewell. 
+			- See you around. => END 
+			- Goodybe. => END 
+		- Don't wanna scare her for no reason. 
+			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+			Mary: Farewell. 
+			- See you around. => END 
+			- Goodbye. => END 
+	- They just said they'd be back before nighftfall. 
+		Mary: That's a ways off. 
+		Mary: Well, it could be nothing. At least I hope so. 
+		Mary: Tell her anyway, when she comes back, will you?
+		- Will do. 
+			Mary: Appreciate it. Farewell. 
+			- See you around. => END 
+			- Goodybe. => END 
+		- Don't wanna scare her for no reason. 
+			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+			Mary: Farewell. 
+			- See you around. => END 
+			- Goodbye. => END 
+- Thought this doesn't concern me. [if Variables.get_var("nosy") == true] 
+	Mary: ...
+	Mary: Pleasure talking to you. Farewell. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+	- See you. => END 
+	- Pleasure was all mine. => END 
+	- I'm just messing. I'll tell her. 
+		Mary: ...Appreciate it. Goodbye. [do Variables.mod_char_var("NPC_3", "relationship", 1)]
+		- See you around. => END
+		- Goodbye. => END  
+	- (WHISPER) Bitch. 
+		Mary: I'm sorry, I didn't quite catch that. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+		- I didn't say anything. Goodbye. => END 
+		- I said you're a bitch. 
+			Mary: Lovely. => END 
+	- (OUT LOUD) Bitch. 
+		Mary: You don't know the half of it. [do Variables.mod_char_var("NPC_3", "relationship", -1)] => END 
+- Why?
+	if Variables.get_var("nosy" == true)
+		Mary: You sure ask a lot of questions. 
+		Mary: It's to keep her safe. Just in case. 
+		- Safe from what?
+			Mary: From your endless barrage of fucking questions. Good lord. 
+			Mary: You've been here a day. Are you trying to break the village record? 
+			Mary: Just tell her to stay here. Farewell.
+			- Goodbye. => END
+			- I'm simply curious by nature. 
+				Mary: It killed the cat. It will obliterate you around here.
+				- Don't you worry about me. 
+					Mary: I won't. => END 
+				- What are you talking about? 
+					Mary: ... [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+					Mary: That's quite enough. I'm leaving. Goodbye. => END 
+		- Okay then. 
+			Mary: Appreciate it. Farewell. 
+			- See you around. => END 
+			- Goodbye. => END 
+		- Too bad this doesn't concern me. 
+			Mary: ...
+			Mary: Pleasure talking to you. Farewell. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+			- See you. => END 
+			- Pleasure was all mine. => END 
+			- I'm just messing. I'll tell her. 
+				Mary: ...Appreciate it. Goodbye. [do Variables.mod_char_var("NPC_3", "relationship", 1)] => END 
+			- (WHISPER) Bitch. 
+				Mary: I'm sorry, I didn't quite catch that. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+				- I didn't say anything. Goodbye. => END 
+				- I said you're a bitch. 
+					Mary: Lovely. => END 
+			- (OUT LOUD) Bitch. 
+				Mary: You don't know the half of it. [do Variables.mod_char_var("NPC_3", "relationship", -1)] => END 
+	else
+		Mary: To keep her safe. Just in case. 
+		- Safe from what?
+			Mary: I don't know myself, really. Could be nothing. 
+			Mary: That's all I'll say. Just do it, please. 
+			- Okay. I will. 
+				Mary: Appreciate it. Farewell. 
+				- See you around. => END 
+				- Goodbye. => END 
+			- Don't wanna scare her for no reason. 
+				Mary: ...Very well. I'll try and find her father, then.
+				Mary: Farewell. 
+				- See you around. => END 
+				- Goodbye. => END 
+		- Alright. Will do. 
+			Mary: Appreciate it. Farewell.
+			- See you around. => END 
+			- Goodbye. => END 
+=> END
+

@@ -98,7 +98,7 @@ After a long and tiring trek in the dark, you finally arrive at the village gate
 ???: You'll be staying at the Shopkeeper's house, on account of your Gift. He's Gifted himself, and I'm sure he's better suited to explain how it works than any of us are.
 ???: He's been in need of an apprentice since forever, anyway. 
 ???: That's his house. Just knock and tell him you're Gifted, and that Joan let you in, with the Goddess's blessing. 
-Joan: Farewell. May the Goddess guide your every step. 
+???: Farewell. May the Goddess guide your every step. 
 - Goodbye, Joan. 
 	[wait=1.0]...You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
 - ...
@@ -107,15 +107,15 @@ Joan: Farewell. May the Goddess guide your every step.
 ~ shop
 Shopkeeper: Come in. I know who you are and why you're here. No need to get into it right now. You're probably exhausted. We've got time. 
 Shopkeeper: That there's your room. I've readied a change of clothes and a warm bath for you. 
-Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done, and I'm guessing a lot of talking, too. 
+Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done.
 Shopkeeper: I'm sure you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
 Shopkeeper: But not now. My daughter, Sarah, is fast asleep. She's been helping me out all day and I'd hate for us to wake her up with our chatter. 
-Shopkeeper: I'll see you in the morning. Good night. 
+Shopkeeper: I'll see you in the morning. 
 - Alright then. 
 	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
-	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
-	Sarah: I had that bad dream again. They came back. 
-	Shopkeeper: Go back to bed. I'm right behind you. 
+	Shopkeeper: Go back to sleep, sweetie. Everything's fine. 
+	Sarah: I dreamt again. They came back. 
+	Shopkeeper: Back to bed. I'm right behind you. 
 	Shopkeeper: [wait=1.5]Have to go. See you tomorrow. 
 	- Sorry I woke her up.
 		Shopkeeper: No harm done. It wasn't you. 
@@ -125,9 +125,9 @@ Shopkeeper: I'll see you in the morning. Good night.
 	- Night. => END
 - Thank you. Good night. 
 	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
-	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
-	Sarah: I had that bad dream again. They came back. 
-	Shopkeeper: Go back to bed. I'm right behind you. 
+	Shopkeeper: Go back to sleep, sweetie. Everything's fine. 
+	Sarah: I dreamt again. They came back. 
+	Shopkeeper: Back to bed. I'm right behind you. 
 	Shopkeeper: [wait=1.5]Have to go. See you tomorrow. 
 	- Sorry I woke her up.
 		Shopkeeper: No harm done. It wasn't you. 
@@ -139,15 +139,15 @@ Shopkeeper: I'll see you in the morning. Good night.
 	Shopkeeper: Hah. I know. You'll have to forgive me. 
 	Shopkeeper: Hospitality is usually my strong suit. I'll make it up to you. 
 	Sarah: [wait=1.0]...Dad? What's going on? Who is that?
-	Shopkeeper: Go back to bed, sweetie. Everything's fine. 
-	Sarah: I had that bad dream again. They came back. 
-	Shopkeeper: Go back to bed. I'm right behind you. 
+	Shopkeeper: Go back to sleep, sweetie. Everything's fine. 
+	Sarah: I dreamt again. They came back. 
+	Shopkeeper: Back to bed. I'm right behind you. 
 	Shopkeeper: [wait=0.5]...Have to go. See you tomorrow. 
 	- Sorry I woke her up.
 		Shopkeeper: No harm done. It wasn't you. 
 		Shopkeeper: Good night. => END 
 	- All good?
-		Shopkeeper: Yeah, don't worry about it. Good night. => END
+		Shopkeeper: Don't worry about it. Good night. => END
 	- Night. => END 
 		
 => END
