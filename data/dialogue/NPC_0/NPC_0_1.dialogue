@@ -6,99 +6,101 @@
 #background: wooden gate, nearly pitch black
 You're... someone. You live in a world ravaged by seemingly random occurrences known as the Cullings, events that have lead to countless gruesome deaths over the past decade. 
 You're currently on your way to a village you found out about in a dream. A self-proclaimed Goddess showed Herself to you in your sleep, assuming the appearance of a crow, and told you to make your way there with haste.
-You abided. Who knows why. Your reasons are your own. 
-After a long and tiring trek in the dark, you finally arrive at the village gates. You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch you as you walk towards them. 
-[wait=0.5]...After what feels like too long, they speak.
-???: [wait=1.5]Who's there?
+You abided. Who knows why? Your reasons are your own. 
+After a long and tiring trek in the dark, you finally arrive at the village gates. 
+You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch you as you walk towards them. 
+After what feels like too long, they speak.
+???: [wait=1][speed=0.2][shake rate=10.0 level=2]...
+???: [speed=0.2][shake rate=10.0 level=2]...Who's there?
 - I heard this village is a safe haven, untouched by hardship or the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.
-	???: Not the first to ask. Sure won't be the last. Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
-	???: Will he serve and praise, or will he sow discord and doubt among our ranks?
-	???: [wait=1]...
-	???: [wait=1.5]...Fortune smiles upon you!
-	???: The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
-	???: Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
-	???: But you, you got here just in time. 
-	???: And you're bearing Her Gift, are you? What a blessed day. 
+	???: [speed=0.8][shake rate=10.0 level=2]Not the first to ask. Sure won't be the last. Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
+	???: [speed=0.8][shake rate=10.0 level=2]Will he serve and praise, or will he sow discord and doubt amongst our ranks?
+	???: [wait=1][speed=0.8][shake rate=10.0 level=2]...
+	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you!
+	???: [speed=0.8][shake rate=10.0 level=2]The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: [speed=0.8][shake rate=10.0 level=2]Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
+	???: [speed=0.8][shake rate=10.0 level=2]But you, you got here [speed=0.1]just in time. 
+	???: [speed=0.8][shake rate=10.0 level=2]And you're bearing Her Gift, are you? What a blessed day. 
 	- That's... great!
-		???: So it is. 
-		???: She provides and cares for us. And she will provide and care for you, too. => but
+		???: [speed=0.8][shake rate=10.0 level=2]So it is. 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but
 	- Praise be!
-		???: Praise be indeed!
-		???: She provides and cares for us. And she will provide and care for you, too. => but
+		???: [speed=0.8][shake rate=10.0 level=2]Praise be indeed!
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but
 	- Your Goddess showed Herself to me in my sleep and told me to come here. Of course she'd let me in.
-		???: The Goddess very rarely speaks to us mortals. You've been blessed. 
-		???: Doubly so, since She's also bestowed Her Gift upon you. 
-		???: But don't let that turn your reverence and appreciation into vanity and pride.
-		???: For if there's one thing Our Blessed Goddess hates, it's arrogance. => but
+		???: [speed=0.8][shake rate=10.0 level=2]The Goddess very rarely speaks to us mortals. You've been blessed. 
+		???: [speed=0.8][shake rate=10.0 level=2]Doubly so, since She's also bestowed Her Gift upon you. 
+		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride.
+		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess hates, it's arrogance. => but
 	- Whatever you say. 
-		???: She speaks through me. I'm a mere vessel. 
-		???: She provides and cares for us. And she will provide and care for you, too. 
-		???: ...In spite of your ignorant attitude. => but
+		???: [speed=0.8][shake rate=10.0 level=2]She speaks through me. I'm a mere vessel. 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. 
+		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your ignorant attitude. => but
 	- Gift? What Gift?
-		???: Don't worry about it right now. All will be revealed in due time. => but
+		???: [speed=0.8][shake rate=10.0 level=2]Don't worry about it right now. All will be revealed in due time. => but
 - I heard this is the birthing place of the Church of the one true Goddess. I'd like to join. 
-	???: Your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
-	???: Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
-	???: Does he speak truly? Will he serve and praise You? Or will he sow discord and doubt among our ranks?
-	???: [wait=0.5]...
-	???: [wait=1]...Fortune smiles upon you!
-	???: The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
-	???: Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
-	???: But you, you got here just in time. 
-	???: And you're bearing Her Gift, are you? What a blessed day. 
+	???: [speed=0.8][shake rate=10.0 level=2]Your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
+	???: [speed=0.8][shake rate=10.0 level=2]Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
+	???: [speed=0.8][shake rate=10.0 level=2]Does he speak truly? Will he serve and praise You? Or will he sow discord and doubt amongst our ranks?
+	???: [wait=0.5][speed=0.8][shake rate=10.0 level=2]...
+	???: [wait=1][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you!
+	???: [speed=0.8][shake rate=10.0 level=2]The Goddess is all welcoming. She's let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: [speed=0.8][shake rate=10.0 level=2]Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
+	???: [speed=0.8][shake rate=10.0 level=2]But you, you got here just in time. 
+	???: [speed=0.8][shake rate=10.0 level=2]And you're bearing Her Gift, are you? What a blessed day. 
 	- That's... great!
-		???: So it is. 
-		???: She provides and cares for us. And she will provide and care for you, too. => but1
+		???: [speed=0.8][shake rate=10.0 level=2]So it is. 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but1
 	- Praise be!
-		???: Praise be indeed!
-		???: She provides and cares for us. And she will provide and care for you, too. => but1
+		???: [speed=0.8][shake rate=10.0 level=2]Praise be indeed!
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but1
 	- Gift? What Gift?
-		???: Don't worry about it right now. All will be revealed in due time. => but1
+		???: [speed=0.8][shake rate=10.0 level=2]Don't worry about it right now. All will be revealed in due time. => but1
 	- Yes. She showed Herself to me in my sleep. Told me to come here. I am Her chosen one. 
 		#add global variable, add new dialogue option in tutorial section
-		???: The Goddess very rarely speaks to us mortals. You've been blessed. 
-		???: Doubly so, since She's also bestowed Her Gift upon you. 
-		???: But don't let that turn your reverence and appreciation into vanity and pride.
-		???: For if there's one thing Our Blessed Goddess hates, it's arrogance. => but1
+		???: [speed=0.8][shake rate=10.0 level=2]The Goddess very rarely speaks to us mortals. You've been blessed. 
+		???: [speed=0.8][shake rate=10.0 level=2]Doubly so, since She's also bestowed Her Gift upon you. 
+		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride.
+		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess hates, it's arrogance. => but1
 
 ~ but
-???: Anyway, I'm guessing you're hungry, tired, and in desperate need of a bath. 
-???: First things first, though. To your left, there's a charred hole. 
-???: I'll need you to drop all your possessions in there. Your clothes, too. 
-???: No outside items, especially technological in nature, are allowed in the village, for they are sinful, and wrong.
-???: Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
+???: [speed=0.8][shake rate=10.0 level=2]Anyway, you're hungry, tired, and in desperate need of a bath. 
+???: [speed=0.8][shake rate=10.0 level=2]First things first. To your left, there's a charred hole. 
+???: [speed=0.8][shake rate=10.0 level=2]I'll need you to drop all your possessions in there. Your clothes, too. 
+???: [speed=0.8][shake rate=10.0 level=2]No outside items, especially technological in nature, are allowed in the village, for they are sinful, and wrong.
+???: [speed=0.8][shake rate=10.0 level=2]Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
 - So be it. => go
 - That's absurd.
-	???: A small price to pay for salvation.
+	???: [speed=0.8][shake rate=10.0 level=2]A small price to pay for salvation.
 	- Fine. I did come all this way. => go 
 	- Just... turn around. 
-		???: Whatever helps you feel more comfortable. => go 
+		???: [speed=0.8][shake rate=10.0 level=2]Whatever helps you feel more comfortable. => go 
 	- Salvation does sound good. => go
 	- This place better be everything you make it out to be.
-		???: Oh, it sure is. And so much more. => go
+		???: [speed=0.8][shake rate=10.0 level=2]Oh, it sure is. And so much more. => go
 		
 ~ but1
-???: Anyway, I'm guessing you're hungry, tired, and in desperate need of a bath. 
-???: First things first, though. To your left, there's a charred hole. 
-???: I'll need you to drop all your possessions in there. Your clothes, too. 
-???: No outside items, especially technological in nature, are allowed in the village, for they are sinful, and wrong.
-???: Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
+???: [speed=0.8][shake rate=10.0 level=2]Anyway, I'm guessing you're hungry, tired, and in desperate need of a bath. 
+???: [speed=0.8][shake rate=10.0 level=2]First things first, though. To your left, there's a charred hole. 
+???: [speed=0.8][shake rate=10.0 level=2]I'll need you to drop all your possessions in there. Your clothes, too. 
+???: [speed=0.8][shake rate=10.0 level=2]No outside items, especially technological in nature, are allowed in the village, for they are sinful, and wrong.
+???: [speed=0.8][shake rate=10.0 level=2]Here's a robe to cover yourself. Once you're in, we'll give you a new change of clothes.
 - So be it. => go 
 - Happy to oblige. => go
 - That's absurd.
-	???: A small price to pay for salvation.
+	???: [speed=0.8][shake rate=10.0 level=2]A small price to pay for salvation.
 	- Fine. I did come all this way. => go 
 	- Just... turn around. 
-		???: Whatever helps you feel more comfortable. => go 
+		???: [speed=0.8][shake rate=10.0 level=2]Whatever helps you feel more comfortable. => go 
 	- Salvation does sound good. => go
 		
 ~ go
 #maybe screen with hole
-???: [wait=1.0]...Now that that's over with, let's get you to your new home. 
-???: You'll be staying at the Shopkeeper's house, on account of your Gift. He's Gifted himself, and I'm sure he's better suited to explain how it works than any of us are.
-???: He's been in need of an apprentice since forever, anyway. 
-???: That's his house. Just knock and tell him you're Gifted, and that Joan let you in, with the Goddess's blessing. 
-???: Farewell. May the Goddess guide your every step. 
+???: [wait=1.0][speed=0.8][shake rate=10.0 level=2]...Now that that's over with, let's get you to your new home. 
+???: [speed=0.8][shake rate=10.0 level=2]You'll be staying at the Shopkeeper's house, on account of your Gift. He's Gifted himself, and I'm sure he's better suited to explain how it works than any of us are.
+???: [speed=0.8][shake rate=10.0 level=2]He's been in need of an apprentice since forever, anyway. 
+???: [speed=0.8][shake rate=10.0 level=2]That's his house. Just knock and tell him you're Gifted, and that Joan let you in, with the Goddess's blessing. 
+???: [speed=0.8][shake rate=10.0 level=2]Farewell. May the Goddess guide your every step. 
 - Goodbye, Joan. 
 	[wait=1.0]...You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood the door opens. He's been expecting you. => shop
 - ...

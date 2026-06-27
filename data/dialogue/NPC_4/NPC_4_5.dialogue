@@ -1,0 +1,17 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+Shopkeeper: [wait=2]Terribly sorry for leaving you alone all day. It doesn't excuse it, but it was outside of my control. 
+Shopkeeper: Won't happen again. 
+- What happened?
+- No worries. I managed just fine. 
+	Shopkeeper: I can see that. Nearly done with today's batch, already. 
+	Shopkeeper: Perhaps I ought to just hand over the reins to you. 
+
+
+
+
+=> END
+

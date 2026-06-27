@@ -124,7 +124,6 @@ Shopkeeper: Morning, there. I see you're itching to get started. Sleep well?
 	- I'm just slightly confused about everything. Got a bunch of questions.
 		Shopkeeper: Shoot. => questions
 	
-	
 ~ questions
 Shopkeeper: ... 
 - Were you waiting for me last night? Didn't even get to properly knock before you opened the door. [if Variables.get_char_var("NPC_4", "wait") == false]

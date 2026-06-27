@@ -4,7 +4,8 @@ do Variables.add_local("nosy", false)
 => start
 
 ~ start
-Mary: [wait=1]Good day to you. 
+Mary: [wait=1]Oh. Good day to you. 
+Mary: Wasn't expecting to see a new face here. 
 - Good day. 
 	Mary: Is Duncan here? => duncan
 - Who are you?
@@ -27,8 +28,20 @@ Mary: [wait=1]Good day to you.
 		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him.
 		Mary: And tell him it's urgent. Please. => important
 - Uh, no.
-	Mary: Let him know I need to talk to him. 
-	Mary: And tell him it's urgent. Please. => important 
+	Mary: I assume you're his new minion.
+	- I only serve the Goddess. [if Variables.get_var("religious_fervour") >= 6]
+		Mary: They got to you quickly, didn't they?
+		Mary: How fun. You'll fit in nicely. 
+		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him.
+		Mary: And tell him it's urgent. Please. => important
+	- I'm nobody's servant. [if Variables.get_var("religious_fervour") <= 6] 
+		Mary: That would make you quite unique in this here village. 
+		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him. 
+		Mary: And tell him it's urgent. Please. => important
+	- Guess you could say that. 
+		Mary: Of course I could. 
+		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him.
+		Mary: And tell him it's urgent. Please. => important
 	
 ~ important
 - Will do.
