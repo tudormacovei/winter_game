@@ -52,7 +52,7 @@ const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
 #endregion
 
 # UI Config
-const DAY_END_SCREEN_SHOW_TIME_SECONDS: float = 3.0
+const DAY_END_SCREEN_SHOW_TIME_SECONDS: float = 4.0
 
 #endregion
 
