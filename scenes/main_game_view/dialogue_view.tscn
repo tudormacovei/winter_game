@@ -1,19 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=8 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_isxcp"]
 [ext_resource type="Texture2D" uid="uid://brhi0kh5r17wq" path="res://2d_assets/backgrounds/DialogueView_BG.webp" id="2_kbq0g"]
 [ext_resource type="Shader" uid="uid://r5hwe4eih73w" path="res://3d_assets/shaders/window.gdshader" id="3_08sga"]
 [ext_resource type="Texture2D" uid="uid://7xd3rl8sjvrd" path="res://2d_assets/backgrounds/window/WorkshopWindow.webp" id="4_kbq0g"]
+[ext_resource type="Shader" uid="uid://s2h2vbotkkvf" path="res://3d_assets/shaders/window_sky.gdshader" id="5_isxcp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kbq0g"]
 render_priority = 0
 shader = ExtResource("3_08sga")
 shader_parameter/texture = ExtResource("4_kbq0g")
-shader_parameter/time_of_day = 0.50000002375
+shader_parameter/time_of_day = 0.250000011875
 shader_parameter/color_noon = Color(1, 0.98, 0.92, 1)
 shader_parameter/color_sunset = Color(0.63426405, 0.36607158, 0.26324913, 1)
 shader_parameter/color_night = Color(0.19215687, 0.21960784, 0.38039216, 1)
 shader_parameter/night_brightness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_isxcp"]
+render_priority = -1
+shader = ExtResource("5_isxcp")
+shader_parameter/time_of_day = 0.250000011875
+shader_parameter/color_noon = Color(0.6092569, 0.80285454, 0.98288745, 1)
+shader_parameter/color_sunset = Color(0.9843137, 0.6117647, 0.4, 1)
+shader_parameter/color_night = Color(0.101960786, 0.1254902, 0.28627452, 1)
 
 [node name="DialogueView" type="Node3D"]
 script = ExtResource("1_isxcp")
@@ -36,4 +45,9 @@ transform = Transform3D(0.8671614, 0, 0, 0, 0.8671614, 0, 0, 0, 1, 0, 0, -3.9330
 material_override = SubResource("ShaderMaterial_kbq0g")
 pixel_size = 0.002
 texture_filter = 2
+texture = ExtResource("4_kbq0g")
+
+[node name="DialogueWindowSky" type="Sprite3D" parent="DialogueWindowView" groups=["time_of_day"]]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3714396, 0.7873398, 0)
+material_override = SubResource("ShaderMaterial_isxcp")
 texture = ExtResource("4_kbq0g")

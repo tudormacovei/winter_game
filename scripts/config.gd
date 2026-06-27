@@ -25,7 +25,7 @@ const DIALOGUE_TAGS: Dictionary = {
 # Window Time of Day Config
 # TODO: Determine this at runtime for the default window that is loaded in the scene
 const START_DAY_WINDOW_SPRITE_PATH: String = "res://2d_assets/backgrounds/window_transitions/Windowview_small_morelight.webp"
-const TIME_OF_DAY_START: float = 0.25 # Default start time of day for the first interaction of a day. Ranges from 0 to 1.
+const TIME_OF_DAY_START: float = 0.15 # Default start time of day for the first interaction of a day. Ranges from 0 to 1.
 const TIME_OF_DAY_BASE_LERP_SECONDS: float = 6.0 # Baseline duration to transition from one time of day to another
 
 #region Audio Config
