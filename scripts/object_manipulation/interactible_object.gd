@@ -166,9 +166,9 @@ func _smallest_push_to_safe(point: Vector3) -> Vector3:
 			local_push = dir * (OUT_OF_BOUNDS_MARGIN - surface_distance + EPSILON)
 		else:
 			# Inside the box: exit through the nearest face + add the margin
-			var depth_x : float = half.x - abs(local.x)
-			var depth_y : float = half.y - abs(local.y)
-			var depth_z : float = half.z - abs(local.z)
+			var depth_x: float = half.x - abs(local.x)
+			var depth_y: float = half.y - abs(local.y)
+			var depth_z: float = half.z - abs(local.z)
 			var axis: int = 0
 			var min_depth := depth_x
 			if depth_y < min_depth:
@@ -319,7 +319,7 @@ func _on_object_area_exited(area: Area3D) -> void:
 
 
 func _on_stickers_placed() -> void:
-	for child in Utils.get_all_children(self ):
+	for child in Utils.get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
 			child.sticker_completed.connect(_on_sticker_completed)
@@ -586,6 +586,7 @@ func complete_object():
 	AudioManager.play_sfx(Config.OBJECT_COMPLETED_SFX_NAME)
 	GameState.object_completed.emit()
 
+	_is_mouse_on_object = false # Prevents timing issues where the mouse is registered as hovering while the object is being freed
 	_set_state(State.ON_TABLE)
 	queue_free()
 	object_completed.emit(_object_scene.resource_path.get_file().get_basename(), _object.is_special_object, _completed_stickers, _sticker_total)
@@ -596,7 +597,7 @@ func _return_to(target_global_position: Vector3) -> void:
 	_set_state(State.RETURNING)
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self , "global_position", target_global_position, RETURN_TWEEN_DURATION)
+	tween.tween_property(self, "global_position", target_global_position, RETURN_TWEEN_DURATION)
 	tween.finished.connect(_on_return_finished)
 
 
