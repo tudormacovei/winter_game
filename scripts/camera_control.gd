@@ -169,7 +169,10 @@ func _handle_vertical_proximity(delta: float) -> void:
 			else:
 				_vertical_dwell_elapsed = 0.0
 		CameraFocus.QUARANTINE_VIEW:
-			if in_top:
+			# Only start chain to dialogue if mouse is also outside the quarantine X-zone
+			var mouse_x_frac := get_viewport().get_mouse_position().x / viewport_size.x
+			var past_quarantine_exit_zone := mouse_x_frac >= quarantine_exit_zone_fraction
+			if in_top and past_quarantine_exit_zone:
 				_vertical_dwell_elapsed += delta
 				if _vertical_dwell_elapsed >= vertical_dwell_time:
 					_vertical_dwell_elapsed = 0.0
