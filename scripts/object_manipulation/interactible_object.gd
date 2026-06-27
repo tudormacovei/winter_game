@@ -59,9 +59,8 @@ var _has_player_cleansed_sticker: bool = false
 
 #region Workspace Object Bounds
 
-const OUT_OF_BOUNDS_MARGIN: float = 0.1
+const OUT_OF_BOUNDS_MARGIN: float = 0.2
 const _RETURN_IN_BOUNDS_ITERATION_CAP: int = 12
-const _RETURN_IN_BOUNDS_ITERATION_STEP: float = 0.1
 
 #endregion
 
@@ -119,14 +118,80 @@ func _return_object_in_bounds() -> void:
 	if _is_pending_completion:
 		_is_pending_completion = false
 		object_pending_completion_changed.emit(false)
-	# Step the candidate toward neutral until it's clear of every out-of-bounds box by at least `margin`.
+
+	# Each iteration shoves the candidate out of whichever offending box requires the smallest displacement.
+	# One iteration is enough in the common case, the loop only matters when out of bounds boxes overlap (bound corners)
 	var candidate := self.global_position
-	var neutral := _on_table_neutral_position.global_position
+	var converged := false
 	for _i in _RETURN_IN_BOUNDS_ITERATION_CAP:
-		if not _is_point_out_of_bounds(candidate, OUT_OF_BOUNDS_MARGIN):
+		var push := _smallest_push_to_safe(candidate)
+		if push == Vector3.ZERO:
+			converged = true
 			break
-		candidate = candidate.lerp(neutral, _RETURN_IN_BOUNDS_ITERATION_STEP)
+		candidate += push
+
+	if not converged:
+		# Geometric search could not find a safe point, fall back to the neutral position
+		push_warning("InteractibleObject: bounds recovery did not converge; returning to neutral position")
+		candidate = _on_table_neutral_position.global_position
+
 	_return_to(candidate)
+
+
+# Among all out-of-bounds boxes the point violates, returns the smalles world-space displacement vector
+# that exits one box by `OUT_OF_BOUNDS_MARGIN`.
+# Returns `Vector3.ZERO` when the point is already safe.
+func _smallest_push_to_safe(point: Vector3) -> Vector3:
+	const EPSILON: float = 0.0001
+	var best_push := Vector3.ZERO
+	var best_magnitude_sq := INF
+	for child in _out_of_bounds_area.get_children():
+		if not (child is CollisionShape3D and (child as CollisionShape3D).shape is BoxShape3D):
+			continue
+		var collision_shape := child as CollisionShape3D
+		var box := collision_shape.shape as BoxShape3D
+		var local: Vector3 = collision_shape.global_transform.affine_inverse() * point
+		var half: Vector3 = box.size * 0.5
+		var dx: float = max(abs(local.x) - half.x, 0.0)
+		var dy: float = max(abs(local.y) - half.y, 0.0)
+		var dz: float = max(abs(local.z) - half.z, 0.0)
+		var surface_distance := sqrt(dx * dx + dy * dy + dz * dz)
+		if surface_distance >= OUT_OF_BOUNDS_MARGIN:
+			continue
+
+		var local_push: Vector3
+		if surface_distance > 0.0:
+			# Outside the box but have not cleared the margin
+			var dir := Vector3(dx * signf(local.x), dy * signf(local.y), dz * signf(local.z)) / surface_distance
+			local_push = dir * (OUT_OF_BOUNDS_MARGIN - surface_distance + EPSILON)
+		else:
+			# Inside the box: exit through the nearest face + add the margin
+			var depth_x : float = half.x - abs(local.x)
+			var depth_y : float = half.y - abs(local.y)
+			var depth_z : float = half.z - abs(local.z)
+			var axis: int = 0
+			var min_depth := depth_x
+			if depth_y < min_depth:
+				axis = 1
+				min_depth = depth_y
+			if depth_z < min_depth:
+				axis = 2
+				min_depth = depth_z
+
+			# point exactly on the box's center axis: pick an arbitrary side
+			var coord_sign := signf(local[axis])
+			if coord_sign == 0.0:
+				coord_sign = 1.0
+			local_push = Vector3.ZERO
+			local_push[axis] = coord_sign * (min_depth + OUT_OF_BOUNDS_MARGIN + EPSILON)
+
+		var world_push: Vector3 = collision_shape.global_transform.basis * local_push
+		var magnitude_sq := world_push.length_squared()
+		if magnitude_sq < best_magnitude_sq:
+			best_magnitude_sq = magnitude_sq
+			best_push = world_push
+
+	return best_push
 
 
 # Returns `true` if `point` is inside the out-of-bounds area, OR within `margin` of one's surface.

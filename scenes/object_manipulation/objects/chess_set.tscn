@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://bxmo5x5kvp8tq"]
+[gd_scene load_steps=10 format=4 uid="uid://bxmo5x5kvp8tq"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_l5soh"]
 [ext_resource type="Material" uid="uid://dmf227mafd453" path="res://3d_assets/manipulation_objects/chess_set/chess_brass.tres" id="2_24vgu"]
 [ext_resource type="ArrayMesh" uid="uid://cjib4o0v3r5gf" path="res://3d_assets/manipulation_objects/chess_set/sticker_mesh_chess.tres" id="2_wu2oc"]
-[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="3_n8pv6"]
 [ext_resource type="Material" uid="uid://brc548pcmr3k8" path="res://3d_assets/manipulation_objects/chess_set/chess_body.tres" id="3_wu2oc"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_yjwoc"]
@@ -72,7 +71,6 @@ script = ExtResource("1_l5soh")
 max_sticker_count = 5
 placement_mesh = ExtResource("2_wu2oc")
 rng_seed = 0
-sticker_scene = ExtResource("3_n8pv6")
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
