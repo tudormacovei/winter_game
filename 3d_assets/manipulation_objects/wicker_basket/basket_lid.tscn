@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://clxvtwnmtynw1"]
+
+[ext_resource type="PackedScene" uid="uid://ee1vi7gm8nr2" path="res://3d_assets/manipulation_objects/wicker_basket/basket_lid.glb" id="1_6es1x"]
+[ext_resource type="Material" uid="uid://bb0lo0uquc6co" path="res://3d_assets/manipulation_objects/wicker_basket/wicker_basket_material.tres" id="2_h5h5o"]
+
+[node name="BasketLid" instance=ExtResource("1_6es1x")]
+
+[node name="basket_lid" parent="." index="0"]
+material_override = ExtResource("2_h5h5o")

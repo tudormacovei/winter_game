@@ -8,14 +8,15 @@ extends Node3D
 @export var transition_duration: float = 0.3
 signal all_objects_completed()
 
-var _drag_color := Color(0.5, 0.5, 0.5, 0.25)
-var _pending_completion_color := Color("white")
-var _current_color: Color = _drag_color
 var _tween: Tween
 var _dim_tween: Tween
 const FOCUS_DIM_ALPHA: float = 0.6
 const FOCUS_DIM_DURATION: float = 0.25
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
+
+@onready var _basket_lid: Node3D = %BasketLid
+@onready var _basket_lid_open_marker: Node3D = %BasketLidOpenTransform
+@onready var _basket_lid_closed_transform: Transform3D = _basket_lid.transform
 
 func _process(_delta: float) -> void:
 	pass
@@ -67,38 +68,31 @@ func _set_background_dim(dimmed: bool) -> void:
 	_dim_tween.tween_property(%WorkbenchBackground, "modulate:a", target, FOCUS_DIM_DURATION)
 
 
-func _set_overlay_color(target: Color) -> void:
+func _set_basket_open(open: bool) -> void:
 	if _tween: _tween.kill()
-	var start = %WorkbenchDoneAreaOverlay.modulate
+	var from := _basket_lid.transform
+	var to := _basket_lid_open_marker.transform if open else _basket_lid_closed_transform
 	_tween = create_tween()
-	_tween.tween_method(func(t: float): %WorkbenchDoneAreaOverlay.modulate = start.lerp(target, transition_curve.sample(t)), 0.0, 1.0, transition_duration)
+	_tween.tween_method(
+		func(t: float): _basket_lid.transform = from.interpolate_with(to, transition_curve.sample(t)),
+		0.0, 1.0, transition_duration
+	)
 
 #region Signals
 
 func _on_object_completed(_object_name: String, _is_special_object: bool, _completed_stickers: int, _total_stickers: int):
-	_current_color = _drag_color
-	_set_overlay_color(Color(0.0, 0.0, 0.0, 0.0))
-	
+	_set_basket_open(false)
+
 	if is_workbench_empty():
 		print("Workbench: All objects completed")
 		emit_signal("all_objects_completed")
 
 func _on_object_state_changed(state: InteractibleObject.State) -> void:
-	if state == InteractibleObject.State.DRAGGING:
-		_set_overlay_color(_current_color)
-	else:
-		_set_overlay_color(Color(0.0, 0.0, 0.0, 0.0))
-
 	var focused := state == InteractibleObject.State.FOCUSED or state == InteractibleObject.State.ROTATING
 	_set_background_dim(focused)
 
 func _on_object_pending_completion_changed(is_pending_completion: bool) -> void:
-	if is_pending_completion:
-		_current_color = _pending_completion_color
-		_set_overlay_color(_current_color)
-	else:
-		_current_color = _drag_color
-		_set_overlay_color(_current_color)
+	_set_basket_open(is_pending_completion)
 
 
 #endregion
