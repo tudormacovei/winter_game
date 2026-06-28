@@ -1,0 +1,121 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+Shopkeeper: [wait=1]...Is Sarah here? 
+- Where have you been? 
+	Shopkeeper: Tell me where she is. Now. 
+	- She left. Said she's going on a walk. => next
+	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next 
+	- I'm really trying not to get involved. [if Variables.get_char_var("NPC_2", "relationship") == 0]
+		Shopkeeper: Fucking useless. [do Variables.set_var("ending_zero", true)] => END 
+		#door close
+- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
+- Relax for a bit. Tell me what's going on. 
+	Shopkeeper: Tell me where she is. Now. 
+	- She left. Said she's going on a walk. => next
+	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
+	- I'm really trying not to get involved. [if Variables.get_char_var("NPC_2", "relationship") == 0]
+		Shopkeeper: Fucking useless. [do Variables.set_var("ending_zero", true)] => END 
+		#door close
+~ next 
+Shopkeeper: Look. I need your help. Desperately. 
+if Variables.get_char_var("NPC_4", "express_doubt") == 1
+	Shopkeeper: You seem like you're already quite devoted to the Goddess and to our church. 
+	Shopkeeper: But you have to believe me, things are not what they seem. => sacrifices
+elif Variables.get_char_var("NPC_4", "express_doubt") == 2
+	Shopkeeper: I've no idea how you feel about the Goddess, or about our church. => sacrifices
+	Shopkeeper: But you have to believe me, things are now what they seem. 
+elif Variables.get_char_var("NPC_4", "express_doubt") == 3
+	Shopkeeper: You've expressed doubts about the Goddess and our church before. 
+	Shopkeeper: You were right. Things are not what they seem. => sacrifices
+
+~ sacrifices
+if Variables.get_char_var("NPC_4", "sacrifice") == true
+	Shopkeeper: Like I said before, on your first day. The Goddess requires sacrifices to keep our village safe from the Cullings. Human sacrifices. 
+	Shopkeeper: But I didn't lie to you. It's always been voluntary. => goddess
+else 
+	Shopkeeper: This might be hard to believe, but the Goddes requires sacrifices to keep our village safe from the Cullings. Human sacrifices.
+	Shopkeeper: I know this sounds fucked up. But it's always been voluntary. => goddess
+	
+~ goddess 
+Shopkeeper: Once every three months, a member of our church is burned at the rug. 
+Shopkeeper: There's always been many, many volunteers. People are happy to offer. It's for the good of the community. For the good of their loved ones. The only rule is that in order to volunteer, you have to be older than twenty-five. 
+Shopkeeper: ... At least, that's how it's worked so far. 
+Shopkeeper: Two days ago, the Elders called me for a private meeting. This never happens. I knew something was up. 
+Shopkeeper: They told me things are changing. We've grown sinful. Our sacrifices won't do anymore. The Goddess demands purer, more drastic sacrifices. 
+Shopkeeper: She demands children. 
+Shopkeeper: She demands my Sarah...
+Shopkeeper: I didn't take them seriously. I thought it was just another one of their misinterpretations of the Goddess's instructions. She would never ask that of me. 
+if Variables.get_var("fourfive") == 2
+	Shopkeeper: Yesterday, I went to see Mary. She had a dream. She saw Sarah, burned alive. Her visions come true, most of the time. 
+	Shopkeeper: After, when I found Sarah, she had a look in her eyes. A fiery look, like she knew what was coming. What was supposed to happen. 
+	Shopkeeper: She wasn't scared, though. She seemed... determined.
+	Shopkeeper: Maybe I was seeing things. I tried contacting the Goddess desperately, by way of the Elder Tree in the village square and the Elder Tree here. => cant
+else 
+	Shopkeeper: Yesterday, when I found Sarah, she had a look in her eyes. A fiery look, like she knew what was coming. What was supposed to happen. 
+	Shopkeeper: She wasn't scared, though. She seemed... determined. 
+	Shopkeeper: Maybe I was seeing things. I tried contacting the Goddess desperately, by way of the Elder Tree in the village square and the Elder Tree here. => cant
+~ cant
+Shopkeeper: She wouldn't answer. I tried for hours. 
+Shopkeeper: This morning, She finally said something. "Do not hold onto what is rightly mine".
+Shopkeeper: I've always been devoted to Her. Ever since She gave Sarah to me, I swore I'd serve and worship Her until the end of my days. 
+Shopkeeper: But this is too much. I can't. I won't. 
+Shopkeeper: I've contacted everyone I could, the few friends I can still trust. Asked them to help me get Sarah out of here and run far away, never to return. 
+Shopkeeper: I've been drinking. My mind is clouded. Perhaps I'm making a mistake, perhaps I'm misjudging you. But I'm desperate. I need all the help I can get. It's not easy to get out of here if they want you to stay. 
+Shopkeeper: I'm not asking for much. I just need you to lie to them if they come here. Tell them we've gone for a walk in the forest. Anything. Buy us as much time as you can. 
+Shopkeeper: We're leaving tomorrow night, once everything's ready. 
+Shopkeeper: Will you help?
+- This is... a lot. 
+	Shopkeeper: I know. I'm sorry. Take your time. Think about it. 
+	Shopkeeper: But I beg you. Help us. 
+	- Okay. You can count on me. 
+		Shopkeeper: I can't even begin to tell you how much I appreciate it. => more
+	- I'll sleep on it. 
+		Shopkeeper: Thank you. I know it's a lot to ask. => more
+- Of course I will. [if Variables.get_var("religious_fervour") <= 5]
+	Shopkeeper: I can't even begin to tell you how much I appreciate it. => more
+- I... can't get involved. I'm sorry. 
+	Shopkeeper: Please. Sleep on it. I know it's a lot to ask. => more
+- You're lucky if I don't turn you in myself tonight. [if Variables.get_var("religious_fervour") >= 5]
+	Shopkeeper: Your first instinct is to look out for yourself. I get it. I do. 
+	Shopkeeper: Just sleep on it. Try to find it in your heart to help. => more1
+- May the Goddess strike you both down where you stand, you heretics. [if Variables.get_var("religious_fervour") >= 6]
+	Shopkeeper: You can't have grown this devoted in such a short time. It's all a sham, and you know it. 
+	Shopkeeper: You're scared. I get it. 
+	Shopkeeper: Just sleep on it. Try to find it in your heart to help. => more1
+- There must be a reason why she demands this sacrifice. You are being selfish. 
+	Shopkeeper: Fuck her reasons. There's no possible reason that's good enough. 
+	Shopkeeper: I'd raze this whole village to the ground for Sarah. 
+	Shopkeeper: And you would, too, in my place. => more1
+
+~ more 
+Shopkeeper: I need to go find her now. 
+Shopkeeper: Just act like everything is normal. That's all I ask. 
+Shopkeeper: And if, somehow, we're successful in our escape, please take care of Micah. He has no one. He's alone. He needs you. 
+- I will. 
+	Shopkeeper: Thank you. Farewell. => END 
+- Take care. 
+	Shopkeeper: Farewell. => END 
+- ...
+	Shopkeeper: ...
+	Shopkeeper: Farewell. => END 
+- I don't know about that. 
+	Shopkeeper: Please. He's a good kid. 
+	Shopkeeper: Farewell. => END 
+
+~ more1
+Shopkeeper: I need to go find her now. 
+Shopkeeper: Just act like everything is normal. That's all I ask. 
+Shopkeeper: And if, somehow, we're successful in our escape, please take care of Micah. He has no one. He's alone. He needs you. 
+- ...
+	Shopkeeper: ...
+	Shopkeeper: Farewell. => END 
+- You'll burn in hell. 
+	Shopkeeper: ... => END 
+- You're making a big mistake. 
+	Shopkeeper: You may be right. 
+	Shopkeeper: Farewell. => END 
+=> END
+

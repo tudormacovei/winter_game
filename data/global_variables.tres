@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=39 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=43 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -64,10 +64,16 @@ name = "dream"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_7iiqd"]
+script = ExtResource("1_vywdb")
+name = "express_doubt"
+default_value = 2
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_yreg5"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_4"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_fv61s"), SubResource("Resource_6j24c"), SubResource("Resource_l3k17"), SubResource("Resource_dxgj2"), SubResource("Resource_eft0y"), SubResource("Resource_6s65m"), SubResource("Resource_xpc13"), SubResource("Resource_tsadp"), SubResource("Resource_dgxfi"), SubResource("Resource_jtdi1")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_fv61s"), SubResource("Resource_6j24c"), SubResource("Resource_l3k17"), SubResource("Resource_dxgj2"), SubResource("Resource_eft0y"), SubResource("Resource_6s65m"), SubResource("Resource_xpc13"), SubResource("Resource_tsadp"), SubResource("Resource_dgxfi"), SubResource("Resource_jtdi1"), SubResource("Resource_7iiqd")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_t7f3i"]
@@ -222,8 +228,26 @@ name = "knows_of_gift"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_ulfmv"]
+script = ExtResource("1_vywdb")
+name = "fourfive"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_p0qt7"]
+script = ExtResource("1_vywdb")
+name = "told_of_gift"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_3as7m"]
+script = ExtResource("1_vywdb")
+name = "ending_zero"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi"), SubResource("Resource_twn5d")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi"), SubResource("Resource_twn5d"), SubResource("Resource_ulfmv"), SubResource("Resource_p0qt7"), SubResource("Resource_3as7m")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_yreg5"), SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"

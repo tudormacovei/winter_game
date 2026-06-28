@@ -1,0 +1,125 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+if Variables.get_char_var("NPC_2", "relationship") == 0
+	Sarah: [wait=1]...
+	- Wanted to say I was sorry for yesterday. 
+		Sarah: You truly sorry or just scared you'll get thrown out? 
+		Sarah: You shouldn't apologise for not caring about my story. Some people care, others don't. It's not something you can control. 
+		Sarah: And I don't mind all that much. Not even sure why I told Micah. 
+		Sarah: Don't worry. He wouldn't hurt a fly. And he's overestimating his relationship with the Elders. 
+		Sarah: They won't just kick you out cause he tells them to. That'd be stupid. 
+		- I do care. Don't know what came over me yesterday. 
+			Sarah: I get it. It's fine. You're probably overwhelmed.[do Variables.set_char_var("NPC_2", "relationship", 2)] 
+			Sarah: Anyway... => next
+		- Phew. Alright then. 
+			Sarah: ...[do Variables.set_char_var("NPC_2", "relationship", 1)] => next
+	- You told Micah I was mean to you. 
+		Sarah: I didn't tell him you were mean. I told him you were cold and indifferent. 
+		Sarah: I guess to him, they're the same thing. 
+		Sarah: I don't mind all that much. Some people care, others don't. It's not something you can control. Not sure why I even told him. 
+		Sarah: Don't worry. He wouldn't hurt a fly. And he's overestimating his relationship with the Elders. 
+		Sarah: They won't just kick you out cause he tells them to. That'd be stupid. 
+		- Uh, okay then. 
+			Sarah: ...[do Variables.set_char_var("NPC_2", "relationship", 1)] => next
+		- You're a bit of a rat, aren't you? 
+			Sarah: ...
+			Sarah: That's a bit much. 
+			Sarah: I'm going for a walk. 
+			Sarah: Leave me alone or I'll scream so hard the whole village will be here in seconds.
+			- Brat. => END 
+			- ... => END 
+elif Variables.get_char_var("told_of gift") == true
+	Sarah: [wait=1]...
+	Sarah: You told dad about the gift. 
+	Sarah: He tried to hide it but he's the worst liar in the world. 
+	Sarah: Why would you do that?
+	- I was trying to help. He was worried about you, and wanted to know where you were. 
+		Sarah: ...
+		Sarah: Urgh. You could have just invented something. 
+		Sarah: But at least your intentions were good.
+		- Micah said to tell you he figured out how to get the last piece.  
+			Sarah: Oh. That's good. 
+			Sarah: But I've got other stuff on my mind right now. 
+			Sarah: ... => next 
+		- Sorry. 
+			Sarah: Doesn't matter now. Got more important things to worry about. 
+			Sarah: ... => next 
+	- Come on, it's not that big of a deal. 
+		Sarah: Not that big of a deal? 
+		Sarah: Who are you to say? 
+		Sarah: Unbelievable. Thought you were cool. 
+		- He'll still appreciate it, you know. 
+			Sarah: Doesn't matter now. Got more important things to worry about.
+			Sarah: ... => next 
+		- Sorry. 
+			Sarah: Doesn't matter now. Got more important things to worry about. 
+			Sarah: ... => next 
+		- Micah said to tell you he figured out how to get the last piece. 
+			Sarah: Oh. That's good. 
+			Sarah: But I've got other stuff on my mind right now.
+			Sarah: ... => next 
+elif Variables.get_char_var("told_of gift") == false
+	Sarah: [wait=1]... => next
+	- Morning. 
+		Sarah: Uh, morning. 
+		Sarah: ...
+	- Micah was just looking for you. He said to tell you he figured out how to get the last piece. 
+		Sarah: Oh. That's good. 
+		Sarah: But I've got other stuff on my mind right now.
+		Sarah: ... => next 
+		
+~ next
+Sarah: Any idea what's going on with my dad? 
+Sarah: He forbid me to get out of the house today. He seemed very worried last night. 
+Sarah: He always worries, but this time it's different. He's scaring me. 
+Sarah: If you know anything, please tell me. 
+- He went to see Mary last night. She wanted to tell him something about you. [if Variables.get_var("fourfive") == 2]
+	Sarah: Tell him what? 
+	- I've no idea. 
+		Sarah: What the hell is going on with everybody? 
+		Sarah: Why's no one telling me anything?
+		Sarah: I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
+	- She seemed worried herself. Told me to tell you to stay in your room. 
+		Sarah: What the hell is going on with everybody? 
+		Sarah: Why is everyone worried about me?
+		Sarah: I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
+- Probably has something to do with the Elders. 
+	Sarah: Yeah, I asked him about it. 
+	Sarah: He wouldn't tell me anything. Just told me to stay in my room, as a precaution. 
+	Sarah: I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
+- Mary was also worried about you. [if Variables.get_var("fourfive") <= 2]
+	Sarah: Why? 
+	- I've no idea. 
+		Sarah: What the hell is going on with everybody? 
+		Sarah: Why's no one telling me anything?
+		Sarah: I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
+	- I don't know, exactly. Told me to tell you to stay in your room. 
+		Sarah: What the hell is going on with everybody? 
+		Sarah: Why is everyone worried about me?
+		Sarah: I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
+- Beats me. He's acting very strange. 
+	Sarah: I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
+
+~ straight 
+Sarah: I need to think about this. I'm going for a walk. 
+- Would probably do you some good. 
+	Sarah: That's what I'm thinking. 
+	Sarah: If he were here, things would be different. But he's off again, Goddess knows where. 
+	Sarah: I can't just stay here. 
+	Sarah: If he comes back, tell him not to worry, and to look for me at Mary's. 
+	Sarah: Maybe at least one adult can be rational about all this, Goddess willing. 
+	- Will do. => END 
+	- Be careful. => END 
+- You shouldn't...
+	Sarah: Yeah, you're not stopping me. 
+	Sarah: And he isn't, either, seeing as how he's missing yet again. 
+	Sarah: If he comes back, tell him not to worry, and to look for me at Mary's. 
+	Sarah: Maybe at least one adult can be rational about all this, Goddess willing. 
+	- Will do. => END 
+	- Be careful. => END 
+	
+=> END
+

@@ -5,7 +5,7 @@
 ~ start
 #you can barely see part of Micah through the window for a second, and then you can hear the door open but you can't see anyone; after a few seconds, you can see his head pop up from under the table; he sneaked up on you.
 #sound effect needed
-Micah: Boo! 
+Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare", -12.0)]Raagh!
 - You scared the shit out of me. 
 	Micah: Hahaha! Got you. 
 	- Don't ever do that again.
@@ -13,10 +13,10 @@ Micah: Boo!
 	- Sure did. Prepare for retaliation!
 		Micah: Not sure that's even a word. Sarah's been teaching me, and now I've got a big vo-ca-bu-lary now. 
 		Micah: But I've never heard of this one. So you might wanna double check that. 
-		Micah: Either way, I'm always prepared for everything. => whothehell
+		Micah: Either way, I'm always prepared for everything! => whothehell
 - Who the hell are you?
 	Micah: Who the hell are YOU?
-	- I'm the shopkeeper's new apprentice. 
+	- I'm the Shopkeeper's new apprentice. 
 		Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
 		Micah: I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
 		- You Gifted yourself?
@@ -25,7 +25,7 @@ Micah: Boo!
 		- I'd like to see you try.
 			Micah: Oh, don't worry. You will. 
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-	- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the shopkeeper. [if Variables.get_var("religious_fervour") == 6]
+	- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 		Micah: Uh huh. If you say so. 
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 	- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
@@ -48,7 +48,7 @@ Micah: Boo!
 		- You've no idea what that means. 
 			Micah: Sure do. Sarah's been teaching me a lot of words. I've got a big vo-ca-bu-lary now.
 			Micah: Anyway. Who the hell are you? 
-			- I'm the shopkeeper's new apprentice. Who are you?
+			- I'm the Shopkeeper's new apprentice. Who are you?
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
 				Micah: I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
 				- You Gifted yourself?
@@ -57,7 +57,7 @@ Micah: Boo!
 				- I'd like to see you try.
 					Micah: Oh, don't worry. You will. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the shopkeeper. [if Variables.get_var("religious_fervour") == 6]
+			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: Uh huh. If you say so. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
@@ -68,7 +68,7 @@ Micah: Boo!
 			Micah: Hmm. You're weird. 
 			Micah: In a funny way. 
 			Micah: Who the hell are you, anyway?
-			- I'm the shopkeeper's new apprentice. Who are you?
+			- I'm the Shopkeeper's new apprentice. Who are you?
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
 				Micah: I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
 				- You Gifted yourself?
@@ -77,7 +77,7 @@ Micah: Boo!
 				- I'd like to see you try.
 					Micah: Oh, don't worry. You will. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the shopkeeper. [if Variables.get_var("religious_fervour") == 6]
+			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: Uh huh. If you say so. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
@@ -88,7 +88,7 @@ Micah: Boo!
 		Micah: I was taught to always speak the truth. It is what it is. 
 		- Whatever. Who the hell are you, anyway?
 			Micah: Who the hell are YOU?
-			- I'm the shopkeeper's new apprentice. 
+			- I'm the Shopkeeper's new apprentice. 
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
 				Micah: I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
 				- You Gifted yourself?
@@ -97,7 +97,7 @@ Micah: Boo!
 				- I'd like to see you try.
 					Micah: Oh, don't worry. You will. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the shopkeeper. [if Variables.get_var("religious_fervour") == 6]
+			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: Uh huh. If you say so. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
@@ -115,7 +115,7 @@ Micah: Boo!
 		- Sometimes it's better to shut up. Take it from me. 
 			Micah: Eh, agree then disagree, or whatever they say. 
 			Micah: Anyway, who the hell are you? 
-			- I'm the shopkeeper's new apprentice. Who are you?
+			- I'm the Shopkeeper's new apprentice. Who are you?
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
 				Micah: I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
 				- You Gifted yourself?
@@ -124,7 +124,7 @@ Micah: Boo!
 				- I'd like to see you try.
 					Micah: Oh, don't worry. You will. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the shopkeeper. [if Variables.get_var("religious_fervour") == 6]
+			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: Uh huh. If you say so. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
@@ -134,7 +134,7 @@ Micah: Boo!
 
 ~ whothehell
 Micah: Anyway, who the hell are you?
-- I'm the shopkeeper's new apprentice. Who are you?
+- I'm the Shopkeeper's new apprentice. Who are you?
 	Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
 	Micah: I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
 	- You Gifted yourself?
@@ -143,7 +143,7 @@ Micah: Anyway, who the hell are you?
 	- I'd like to see you try.
 		Micah: Oh, don't worry. You will. 
 		Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the shopkeeper. [if Variables.get_var("religious_fervour") == 6]
+- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 	Micah: Uh huh. If you say so. 
 	Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 - Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
@@ -169,7 +169,7 @@ Micah: That's how things work around here. Not too complicated, but think it mig
 			- What an honour. 
 				Micah: Hahah. Damn right. => sarah
 	- Whatever, kid. 
-		Micah: I'm not a kid. I'm 11. You stop being a kid when you're 10. [do Variables.set_char_var("NPC_1", "relationship", 2)]
+		Micah: I'm not a kid. I'm eleven. You stop being a kid when you're ten. [do Variables.set_char_var("NPC_1", "relationship", 2)]
 		Micah: Anyway, I'm just messing around. Don't take me too seriously. => sarah
 	- You think I'm stupid?
 		Micah: Hahah, yeah. 
@@ -192,14 +192,21 @@ Micah: That's how things work around here. Not too complicated, but think it mig
 				Micah: Sure do. You'll get used to it.
 				Micah: Or not. => sarah
 		- Eh, guess I am.
-			Micah: Nah, you're alright. I was just playing around. => sarah
+			Micah: Nah, you're alright. I was just playing around.[do Variables.set_char_var("NPC_1", "relationship", 4)] => sarah
 - You're a mischievous one, aren't you?
 	Micah: Not sure what that means, but people call me many things, so yeah, probably. 
 	Micah: I'm just messing around though. 
-	Micah: Mostly. => sarah
+	Micah: Mostly. 
+	- You're funny. I like you. 
+		Micah: Haha. Awesome. [do Variables.set_char_var("NPC_1", "relationship", 4)]
+		Micah: Adults usually think I'm annoying. => sarah
+	- Careful not to mess with the wrong person sometime. 
+		Micah: Eh, I'll be fine. => sarah 
+	- You should tone it down a bit. 
+		Micah: Uh, not sure I wanna do that.[do Variables.set_char_var("NPC_1", "relationship", 2)] => sarah
 
 ~ sarah
-Micah: Anyway, here's today's bag of items. Where's the shopkeeper? The real one, I mean?
+Micah: Anyway, here's today's bag of items. Where's the Shopkeeper? The real one, I mean? [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton")][do DialogueFuncs.add_object_to_workbench("chess_set")]
 #add items
 Sarah: Micah!
 Micah: Oh, hi, Sarah!
@@ -214,7 +221,7 @@ Shopkeeper: Told you to stop running down the stairs, Sarah.
 Sarah: Sorry, dad. Micah and I are in a bit of a hurry.
 Shopkeeper: What are the two of you up to now?
 Sarah: It's a secret. You'll see.
-Shopkeeper: Just keep out of trouble this time. Please. 
+Shopkeeper: [#sprite=worried]Just keep out of trouble this time. Please. 
 Sarah: Course we will. When haven't we?
 Sarah: Anyway, see you later. Bye!
 Micah: Bye, Shopkeeper! Bye, fake 'keeper!
@@ -225,7 +232,7 @@ Shopkeeper: I see you've met Micah. He's a good kid, eh?
 
 ~ eh
 Shopkeeper: Eh, you'll get used to him. 
-Shopkeeper: He's had a rough time. His mother died while giving birth, and his dad died himself, recently. 
+Shopkeeper: [#sprite=worried]He's had a rough time. His mother died while giving birth, and his dad died himself, recently. 
 Shopkeeper: The Elders took him in. He's one of their messengers, now. 
 Shopkeeper: But he mostly delivers items to us and back to their owners.
 Shopkeeper: Comes here every morning, so you'll be seeing a lot of him. 
@@ -248,11 +255,11 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 		- If you say so. => next
 		- Sounds more like it's what's needed, rather than what's right.
 			Shopkeeper: It's both. [do Variables.mod_var("religious_fervour", -1)]
-			Shopkeeper: ...
+			Shopkeeper: [#sprite=worried]...
 			Shopkeeper: You're new here. You seem smart. 
 			Shopkeeper: So be careful with what you say and who you say it to. 
 			Shopkeeper: Not everyone is as understanding and open minded as I am.
-			Shopkeeper: And don't take it as a threat, but as soon as I feel like your words or doubts might put Sarah in danger, I'll stop being understanding and open minded, too. 
+			Shopkeeper: [#sprite=worried]And don't take it as a threat, but as soon as I feel like your words or doubts might put Sarah in danger, I'll stop being understanding and open minded, too. 
 			Shopkeeper: I hope you can understand. 
 			- I do. I'll be careful. 
 				Shopkeeper: Good. => next
@@ -260,8 +267,8 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 				Shopkeeper: Which I answered truthfully. 
 				Shopkeeper: And those two can very often be the same thing, at the end of the day. => next
 			- Just want to make sure you're not brainwashing the child. 
-				Shopkeeper: I can only hope your attitude will change, once you feel the Goddess's warmth. [do Variables.mod_var("religious_fervour", -1)]
-				Shopkeeper: If not, may She have mercy and help you find the light, for I won't. I can't. [do Variables.set_char_var("NPC_4", "relationship", 1)] => next
+				Shopkeeper: [#sprite=worried]I can only hope your attitude will change, once you feel the Goddess's warmth. [do Variables.mod_var("religious_fervour", -1)]
+				Shopkeeper: [#sprite=worried]If not, may She have mercy and help you find the light, for I won't. I can't. [do Variables.set_char_var("NPC_4", "relationship", 1)] => next
 - She a true believer? [if Variables.get_var("religious_fervour") >= 6]
 	Shopkeeper: Course she is. 
 	Shopkeeper: I've been teaching her the ways of our Goddess ever since she was born. 
@@ -269,15 +276,15 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 	- Good. => next 
 	- Is that what she wants?
 		Shopkeeper: It's what's right. 
-		Shopkeeper: And what's needed. 
+		Shopkeeper: [#sprite=worried]And what's needed. 
 		- It sure is. => next
 		- Don't you think she should only do it if she wants to?
 			Shopkeeper: That's... not exactly how things work around here. [do Variables.mod_var("religious_fervour", -1)]
-			Shopkeeper: ...
+			Shopkeeper: [#sprite=worried]...
 			Shopkeeper: You're new here. You seem smart. 
 			Shopkeeper: So be careful with what you say and who you say it to. 
 			Shopkeeper: Not everyone is as understanding and open minded as I am.
-			Shopkeeper: And don't take it as a threat, but as soon as I feel like your words or doubts might put Sarah in danger, I'll stop being understanding and open minded, too. 
+			Shopkeeper: [#sprite=worried]And don't take it as a threat, but as soon as I feel like your words or doubts might put Sarah in danger, I'll stop being understanding and open minded, too. 
 			Shopkeeper: I hope you can understand. 
 			- I do. I'll be careful. 
 				Shopkeeper: Good. => next
@@ -287,37 +294,37 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 			- Just want to make sure her faith is genuine. 
 				Shopkeeper: It is.[do Variables.mod_var("religious_fervour", 1)][do Variables.set_char_var("NPC_4", "relationship", 1)] 
 				Shopkeeper: Not that it's any of your business. 
-				Shopkeeper: Tread carefully. I'd do literally anything to protect her.
-				Shopkeeper: I mean it. => next
+				Shopkeeper: [#sprite=worried]Tread carefully. I'd do literally anything to protect her.
+				Shopkeeper: [#sprite=worried]I mean it. => next
 - You two don't look that much alike. 
-	Shopkeeper: ...Yeah. She gets her looks from her mother. 
-	Shopkeeper: Thankfully. 
+	Shopkeeper: [#sprite=worried]...Yeah. She gets her looks from her mother. 
+	Shopkeeper: [#sprite=laugh]Thankfully. 
 	- Don't sell yourself short. 
-		Shopkeeper: Hahaha. Flattery does work on me, can't lie.[do Variables.set_char_var("NPC_4", "relationship", 4)] => next
+		Shopkeeper: [#sprite=laugh]Hahaha. Flattery does work on me, can't lie.[do Variables.set_char_var("NPC_4", "relationship", 4)] => next
 	- What happened to her?
-		Shopkeeper: Don't really wanna talk about it, if you don't mind. 
+		Shopkeeper: [#sprite=worried]Don't really wanna talk about it, if you don't mind. 
 		- Of course. I understand.
 			Shopkeeper: Appreciate it.[do Variables.set_char_var("NPC_4", "relationship", 4)] => next
 		- Why not?
-			Shopkeeper: I think that's my business and mine only. 
-			Shopkeeper: And I'd appreciate it if you didn't pry further. [do Variables.set_char_var("NPC_4", "relationship", 1)] 
+			Shopkeeper: [#sprite=worried]I think that's my business and mine only. 
+			Shopkeeper: [#sprite=worried]And I'd appreciate it if you didn't pry further. [do Variables.set_char_var("NPC_4", "relationship", 1)] 
 			- Okay. Sorry. 
 				Shopkeeper: Don't worry about it. [do Variables.set_char_var("NPC_4", "relationship", 2)] => next
 			- Fine. => next
 - She's lucky to have you. 
-	Shopkeeper: Nowhere near as lucky as I am to have her.
+	Shopkeeper: [#sprite=laugh]Hah, nowhere near as lucky as I am to have her.
 	Shopkeeper: But thank you. I often wonder if I'm doing right by her. 
 	Shopkeeper: Goddess knows I've tried my best, and then some. 
-	Shopkeeper: But it's... hard. A child shouldn't have to grow up in a world like this. 
-	Shopkeeper: I'm not doubting the Goddess's work, of course. Just wish things could have been different.
-	Shopkeeper: For Sarah's sake. 
+	Shopkeeper: [#sprite=worried]But it's... hard. A child shouldn't have to grow up in a world like this. 
+	Shopkeeper: [#sprite=worried]I'm not doubting the Goddess's work, of course. Just wish things could have been different.
+	Shopkeeper: [#sprite=worried]For Sarah's sake. 
 	- I understand. 
-		Shopkeeper: Means a lot. [do Variables.set_char_var("NPC_4", "relationship", 4)] => next
+		Shopkeeper: [#sprite=worried]Means a lot. [do Variables.set_char_var("NPC_4", "relationship", 4)] => next
 	- I'm sure she appreciates it. 
-		Shopkeeper: She's too pure not to. [do Variables.set_char_var("NPC_4", "relationship", 4)] => next
+		Shopkeeper: [#sprite=worried]She's too pure not to. [do Variables.set_char_var("NPC_4", "relationship", 4)] => next
 	- That comes dangerously close to blasphemy. [if Variables.get_var("religious_fervour") >= 5]
-		Shopkeeper: ... [do Variables.set_char_var("NPC_4", "relationship", 2)]
-		Shopkeeper: You're right. Forgive me. => next
+		Shopkeeper: [#sprite=worried]... [do Variables.set_char_var("NPC_4", "relationship", 2)]
+		Shopkeeper: [#sprite=worried]You're right. Forgive me. => next
 	
 
 ~ next
@@ -326,19 +333,17 @@ Shopkeeper: Pretty small batch today, and it's the best way to learn, if you ask
 Shopkeeper: I've got some errands to run, so I'll leave you to it. 
 Shopkeeper: Think you're up to it?
 - Sure am. 
-	Shopkeeper: That's the spirit. 
+	Shopkeeper: [#sprite=laugh]That's the spirit. 
 	Shopkeeper: Might be late by the time I get back, so feel free to go to bed once you're done. 
-	Shopkeeper: See you you tomorrow morning. 
+	Shopkeeper: See you you tomorrow morning. Good luck. 
 	- See you then. => END 
-	- Good luck with whatever it is you're doing. 
-		Shopkeeper: Uh, thanks. => END
+	- Thanks. => END
 - Guess we'll see. 
 	Shopkeeper: Confidence is key, you know. 
 	Shopkeeper: Might be late by the time I get back, so feel free to go to bed once you're done. 
-	Shopkeeper: See you tomorrow morning. 
+	Shopkeeper: See you tomorrow morning. Good luck. 
 	- See you then. => END
-	- Good luck with whatever it is you're doing. 
-		Shopkeeper: Uh, thanks. => END 
+	- Thanks. => END 
 - Think I wanna ask some questions, now, after all. [if Variables.get_char_var("NPC_4", "questions") == 0]
 	Shopkeeper: Oh, good. Shoot. => questions2 
 
@@ -346,7 +351,7 @@ Shopkeeper: Think you're up to it?
 ~ questions2
 Shopkeeper: ... 
 - Were you waiting for me last night? Didn't even get to properly knock before you opened the door. [if Variables.get_char_var("NPC_4", "wait") == false]
-	Shopkeeper: Oh, well, uh, kind of. I'm sorry if that was weird. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "wait", true)]
+	Shopkeeper: [#sprite=worried]Oh, well, uh, kind of. I'm sorry if that was weird. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "wait", true)]
 	Shopkeeper: It's just that I've known for a while someone bearing the Gift would come, and yesterday I felt this urge to look out the window right before you came into view.
 	Shopkeeper: And there you were. As soon as I saw you, I somehow knew it was you. Can't explain it more than that, though I wish I could.
 	Shopkeeper: Plus, I didn't want your knocking to wake Sarah up, truth be told. She's a light sleeper. 
@@ -358,7 +363,7 @@ Shopkeeper: ...
 	Shopkeeper: Your arrival was heralded by the Elders. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "know", true)]
 	Shopkeeper: They told me someone bearing the Gift would soon come to help me around with the shop. Goddess knows I could use it.
 	Shopkeeper: To be completely honest, though, you never know with them. Their predictions have been wrong just as often as they've been right.
-	Shopkeeper: ...Make sure not to tell anyone I said that, please. 
+	Shopkeeper: [#sprite=worried]...Make sure not to tell anyone I said that, please. 
 	Shopkeeper: I've got my own connection with the Goddess, though. She told me what I needed to know Herself.
 	- She talked to me, too. In my sleep, in what felt like a dream. Told me to come here. 
 		Shopkeeper: I'm well aware. She rarely does that, you know. 
@@ -386,28 +391,28 @@ Shopkeeper: ...
 	- Could it be that She's the one causing them, then?
 		Shopkeeper: She sure is. It's a well known fact around here. 
 		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: Sounds brutal, I know. But we ourselves, as a species, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we ourselves, as a species, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
 		Shopkeeper: Something had to be done. 
 		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
-			Shopkeeper: Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way. => questions2
+			Shopkeeper:[#sprite=worried] Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way. => questions2
 		- We had it coming. Hopefully some good comes out of it. 
-			Shopkeeper: Time will tell. Either way, it's how things are now and we have to adjust to it. => questions2
+			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it. => questions2
 - So, what's the deal with our so called Gift? [if Variables.get_char_var("NPC_4", "gift") == false]
 	Shopkeeper: I'll explain it once we start working. It will be easier for you to understand. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "gift", true)]
 	Shopkeeper: The gist of it is, we get visions from the Goddess from time to time, and we can see more than other people can. 
 	Shopkeeper: You'll see. => questions2
 - Who are the "Elders"? [if Variables.get_char_var("NPC_4", "elders") == false]
 	Shopkeeper: They're the founders and leaders of our wonderful village and church. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "elders", true)]
-	Shopkeeper: There's 5 of them, and they're the only ones who can communicate directly with the Goddess, besides me, of course. 
+	Shopkeeper: There's five of them, and they're the only ones who can communicate directly with the Goddess, besides me, of course. 
 	Shopkeeper: They're very old, hence the name. They rarely come out of their home. They have underlings and messengers in their service, and that's how they usually communicate the Goddess's will and teachings to us.
 	Shopkeeper: There's a chance you won't ever see them yourself, but it's safer to assume they're aware of your every move. 
 	Shopkeeper: They don't take kindly to meddling newcomers. And they're not known for being forgiving to heretics and blasphemers. 
 	Shopkeeper: Since you're not technically part of our church yet, the most severe form of punishment you could undergo is exile. 
-	Shopkeeper: But once you take the oath and become a fully fledged member, the punishment for sinning is either flogging, or death, depending on the severity of your actions. 
+	Shopkeeper: [#sprite=worried]But once you take the oath and become a fully fledged member, the punishment for sinning is either flogging, or death, depending on the severity of your actions. 
 	Shopkeeper: Sounds worse than it is. All you have to do is not speak against or openly defy our Goddess. 
 	- Sounds simple enough. => questions2
 	- That's... fucked up. 
-		Shopkeeper: Salvation comes at a cost. => questions2
+		Shopkeeper: [#sprite=worried]Salvation comes at a cost. => questions2
 - Kind of feels like I'm joining a cult. [if Variables.get_char_var("NPC_4", "cult") == false]
 	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "cult", true)]
 	Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
@@ -418,50 +423,50 @@ Shopkeeper: ...
 		Shopkeeper: Just keep an open mind, yeah? => questions2
 	- "They"? Can't relate?
 		Shopkeeper: Sure can. Guess I've just been kind of by myself lately, focusing on Sarah and the shop. 
-		Shopkeeper: Easy to start feeling estranged, adopt an "us and them" mentality in such circumstances. 
+		Shopkeeper: [#sprite=worried]Easy to start feeling estranged, adopt an "us and them" mentality in such circumstances. 
 		- I get it.
-			Shopkeeper: Yeah. Hopefully you staying here will help prevent my becoming a secluded hermit. Hah. => questions2
+			Shopkeeper: [#sprite=laugh]Yeah. Hopefully you staying here will help prevent my becoming a secluded hermit. Hah. => questions2
 		- Would the Goddess approve?
 			Shopkeeper: It was a slip of the tongue. The Goddess is forgiving. 
-			Shopkeeper: The Elders, not so much. I'd appreciate it if this and any further such mistakes on my part stayed between us.
+			Shopkeeper: [#sprite=worried]The Elders, not so much. I'd appreciate it if this and any further such mistakes on my part stayed between us.
 			Shopkeeper: You scratch my back, I'll scratch yours, eh?
 			- Sure thing. 
 				Shopkeeper: Appreciate it.[do Variables.set_char_var("NPC_4", "relationship", 4)] => questions2
 			- We'll see. 
-				Shopkeeper: Understandable. Guess I'll have to prove my worth first.[do Variables.set_char_var("NPC_4", "relationship", 2)] => questions2
+				Shopkeeper: [#sprite=worried]Understandable. Guess I'll have to prove my worth first.[do Variables.set_char_var("NPC_4", "relationship", 2)] => questions2
 	- Still feels weird. 
 		Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.[do Variables.mod_var("religious_fervour", -1)] => questions2
 - What was your daughter talking about last night, with the dreams and everything? [if Variables.get_char_var("NPC_4", "dream") == false]
-	Shopkeeper: That's... complicated. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "dream", true)]
-	Shopkeeper: She used to have nightmares every night a while back. It was a hard time for her. For us. 
-	Shopkeeper: Then they just... stopped.
-	Shopkeeper: Looks like they're a thing again. 
-	Shopkeeper: Her abundant imagination should be a source of joy, especially at her age. 
-	Shopkeeper: It's been anything but. 
+	Shopkeeper: [#sprite=worried]That's... complicated. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "dream", true)]
+	Shopkeeper: [#sprite=worried]She used to have nightmares every night a while back. It was a hard time for her. For us. 
+	Shopkeeper: [#sprite=worried]Then they just... stopped.
+	Shopkeeper: [#sprite=worried]Looks like they're a thing again. 
+	Shopkeeper: [#sprite=worried]Her abundant imagination should be a source of joy, especially at her age. 
+	Shopkeeper: [#sprite=worried]It's been anything but. 
 	- I'm sorry to hear that. 
-		Shopkeeper: Yeah. Appreciate it. => questions2
+		Shopkeeper: [#sprite=worried]Yeah. Appreciate it. => questions2
 	- What does she dream about?
-		Shopkeeper: It's... difficult to explain. 
-		Shopkeeper: She used to draw everything she remembered in the morning, then hang it up on the walls around the house. A few of them are still up, see?
-		Shopkeeper: Don't freak out if more weird drawings show up around the room in the future. 
+		Shopkeeper: [#sprite=worried]It's... difficult to explain. 
+		Shopkeeper: [#sprite=worried]She used to draw everything she remembered in the morning, then hang it up on the walls around the house. A few of them are still up, see?
+		Shopkeeper: [#sprite=worried]Don't freak out if more weird drawings show up around the room in the future. 
 		- Noted. => questions2
 		- I'll... try. => questions2
 - So, do you people sacrifice humans and stuff? [if Variables.get_char_var("NPC_4", "sacrifice") == false and Variables.get_char_var("NPC_4", "questions") >= 3] 
-	Shopkeeper: Uh, no, course not. [do Variables.set_char_var("NPC_4", "sacrifice", true)]
+	Shopkeeper: [#sprite=worried]Uh, no, course not. [do Variables.set_char_var("NPC_4", "sacrifice", true)]
 	- Okay. => questions2
 	- You sure?
-		Shopkeeper: Sure I'm sure. No sacrifices here. Nope. 
-		Shopkeeper: None. 
+		Shopkeeper: [#sprite=worried]Sure I'm sure. No sacrifices here. Nope. 
+		Shopkeeper: [#sprite=worried]None. 
 		- Okay then. => questions2
 		- Kind of sounds like you're lying to me.
-			Shopkeeper: Look, there are some things you'll only get to know once you become a full member of the church.  
-			Shopkeeper: But trust me, we don't sacrifice anyone in the traditional sense, and never involuntarily. 
-			Shopkeeper: That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
+			Shopkeeper: [#sprite=worried]Look, there are some things you'll only get to know once you become a full member of the church.  
+			Shopkeeper: [#sprite=worried]But trust me, we don't sacrifice anyone in the traditional sense, and never involuntarily. 
+			Shopkeeper: [#sprite=worried]That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
 			- Okay, I trust you. => questions2
 			- Fine, I'll drop it for now. => questions2
 - That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
 	Shopkeeper: Alright then. I'm heading out. Good luck. 
-	- Thanks. You too, whatever it is you're doing. => END 
+	- Thanks. => END 
 	- See you tomorrow. => END 
 	
 => END

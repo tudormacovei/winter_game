@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://do1jglohotqhs"
+path="res://.godot/imported/NPC_4_9.dialogue-8734dde6c2bb115ac8c74b24b51868c0.tres"
+
+[deps]
+
+source_file="res://data/dialogue/NPC_4/NPC_4_9.dialogue"
+dest_files=["res://.godot/imported/NPC_4_9.dialogue-8734dde6c2bb115ac8c74b24b51868c0.tres"]
+
+[params]
+
+defaults=true

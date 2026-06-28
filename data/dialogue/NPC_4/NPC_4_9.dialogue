@@ -1,0 +1,90 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+if Variables.get_var("ending_zero") == true
+	It's the day of the Cullings. The Shopkeeper and Sarah are missing. Micah asked the Elders to banish you from the village, on account of you constantly badmouthing the Goddess ever since you got here. 
+	Given the situation, they accept. They don't need another inconvenience. 
+	You find yourself outside the village walls as the sky turns red. After a few minutes, you start to feel blisters on your skin. They hurt more than anything you've ever imagined, and you can feel them suck the life out of you. 
+	In mere seconds, you're dead. => END 
+else 
+	Micah: [wait=1]...Morning, Keeper. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton")] 
+	Micah: Everything alright? Have you seen Sarah, or the Shopkeeper? 
+	- They said they're going for a walk in the forest. 
+		Micah: Oh. Okay. => next
+	- Nope. No idea where they might be. 
+		Micah: Oh. Okay. => next 
+	- Micah, the Shopkeeper's gone mad. He's trying to smuggle Sarah out of the village. You need to tell the Elders. 
+		Micah: What do you mean, smuggle? 
+		- I mean he's running away with her. If you don't tell the Elders, you might never see her again. 
+			Micah: Uh, I find that hard to believe. 
+			- Just trust me. And trust the Elders. They'll know what to do. => micah
+			- It's for her own good, Micah. Pray to the Goddess and see what She says. => micah
+		- I mean he's running away with her, even though the Goddess told them to stay. 
+			Micah: Uh, I find that hard to believe. 
+			- Just trust me. And trust the Elders. They'll know what to do. => micah
+			- It's for her own good, Micah. Pray to the Goddess and see what She says. => micah
+	- The Shopkeeper is a heretic. He's disobeying the Goddess's will. You need to tell the Elders. [if Variables.get_var("religious_fervour") >= 5]
+		Micah: Uh, I find that hard to believe. 
+		- Just trust me. And trust the Elders. They'll know what to do. => micah
+		- It's for the good of the village, Micah. Pray to the Goddess and see what She says. => micah
+		
+~ next
+Micah: I'll just leave this here then. Give it to Sarah when she comes back.
+- What is it? 
+	Micah: Just some clay. She's trying to draw her mother, as a birthday gift for her dad. 
+	Micah: She had a very specific hair-colour. She described it as fiery chestnut. 
+	Micah: We couldn't find a coloured pencil to match it. So I got her this. Hope it's good enough. 
+	Micah: I'll be going now. Looks like it might be a Culling day. They're always busy. 
+	Micah: Get ready for a huge delivery tomorrow morning, haha. 
+	Micah: See ya. => final1 
+- Will do. 
+	Micah: Thanks. I'll be going now. Looks like it might be a Culling day. 
+	Micah: Get ready for a huge delivery tomorrow morning, haha. 
+	Micah: See ya. => final1
+	
+	
+~ micah
+Micah: Uhh, okay. I'll go tell them then. 
+Micah: ...
+Micah: You sure?
+- Yeah. I'm sure. 
+	Micah: Okay. I'm going. 
+	Micah: Uh, see ya. => final2 
+- Actually, nevermind.
+	Micah: ...I'm confused. 
+	- I was just messing with you. 
+		Micah: Uh, okay. 
+		Micah: You're very weird. 
+		Micah: Anyway, gotta go now. 
+		Micah: See ya. => final1
+	- Yeah. Me too. Just go about your day, okay? 
+		Micah: Uh, okay. 
+		Micah: You're very weird. 
+		Micah: Anyway, gotta go now. 
+		Micah: See ya. => final1
+
+
+~ final1
+[wait=3]The sky turns red. The Culling has oficially begun. 
+Late in the evening, as you cleanse your final item of the day, you hear screams coming from outside. 
+You watch through the window. You see people gathered around a body, near the gate. 
+Through a small gap, you're able to see Duncan's body, laying on the ground, deformed and dry, as the Culling sucks the final breath of life out of his body.
+They almost made it. But the Goddess got to him first. 
+It's the first time ever that the Cullings have taken someone's life inside of the village. 
+Sarah's crying. Her fate is still in question. => END 
+
+~ final2
+[wait=3]The sky turns red. The Culling has oficially begun. 
+The Elders' lackeys found Duncan and Sarah. They sentenced Duncan to death for heresy. 
+Late in the evening, as you cleanse your final item of the day, you hear screams coming from outside. 
+You watch through the window. You see people gathered around a body, near the sacrificial altar. 
+Through a small gap, you're able to see Duncan's body, laying on the ground, deformed and dry, as the Culling sucks the final breath of life out of his body. 
+He didn't make it to his execution. The Goddess got to him first. 
+It's the first time ever that the Cullings have taken someone's life inside of the village. 
+Sarah's crying. Her fate is still in question. => END 
+
+
+=> END
+

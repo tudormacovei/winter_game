@@ -1,17 +1,108 @@
 ~ initialize_local_variables
-
+do Variables.add_local("mary", false)
 => start
 
 ~ start
-Shopkeeper: [wait=2]Terribly sorry for leaving you alone all day. It doesn't excuse it, but it was outside of my control. 
-Shopkeeper: Won't happen again. 
+Shopkeeper: [#sprite=worried][wait=1]Terribly sorry for leaving you alone all day. It doesn't excuse it, but it was outside of my control. 
+Shopkeeper: [#sprite=worried]Won't happen again. 
+- Welcome back, Duncan. 
+	Shopkeeper: [#sprite=worried]Dammit, completely forgot to tell you my name. [do Variables.set_var("mary", true)]
+	Shopkeeper: [#sprite=worried]Goes to show how much of a hermit I've been these past few years. 
+	Shopkeeper: Few people call me that nowadays anyway. Everyone just calls me Shopkeeper. 
+	Shopkeeper: [#sprite=laugh]I think even Sarah might have forgotten it. 
+	Shopkeeper: Who told you? 
+	- (LIE) Sarah. 
+		Shopkeeper: Interesting. She never calls me that.
+		Shopkeeper: Anyway, where is she? => next
+	- (LIE) Micah. 
+		Shopkeeper: [#sprite=laugh]Made a dirty joke, did he? The rascal. 
+		Shopkeeper: Anyway, where's Sarah? => next
+	- Mary. 
+		Shopkeeper: [#sprite=worried]Oh? So she was here? 
+		Shopkeeper: [#sprite=worried]What did she want?
+		- Said she needed to see you. That it's important. 
+			Shopkeeper: [#sprite=worried]Did she say what it was about?
+			- Not really. 
+				Shopkeeper: [#sprite=worried]Hells. I should probably go look for her. She's not one to leave her house unless it's important. I'm sorry to be leaving you again so soon. 
+				Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
+				Shopkeeper: [#sprite=worried]Be seeing you. [do Variables.set_var("fourfive", 2)]
+				- See y... => END 
+				- Goodb... => END 
+			- She just said it's about Sarah.
+				Shopkeeper: [#sprite=worried]Oh, hells. Must be important then. I need to go look for her. I'm sorry to be leaving you again so soon. 
+				Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
+				Shopkeeper: [#sprite=worried]Be seeing you. [do Variables.set_var("fourfive", 2)]
+				- See y... => END 
+				- Goodb... => END 
+		- No idea. 
+			Shopkeeper: [#sprite=worried]Hells. I should probably go and look for her. She's not one to leave her house unless it's important.  I'm sorry to be leaving you again so soon. 
+			Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
+			Shopkeeper: [#sprite=worried]Be seeing you. [do Variables.set_var("fourfive", 2)]
+			- See y... => END 
+			- Goodb... => END 
 - What happened?
+	Shopkeeper: [#sprite=worried]Oh, nothing, nothing... Don't worry about it. 
+	Shopkeeper: The Elders wanted to talk to me about something. They're blabbering again. Went on for way longer than it should've. 
+	Shopkeeper: I've got it under control. 
+	Shopkeeper: Anyway, where's Sarah? => next
 - No worries. I managed just fine. 
 	Shopkeeper: I can see that. Nearly done with today's batch, already. 
-	Shopkeeper: Perhaps I ought to just hand over the reins to you. 
-
-
-
+	Shopkeeper: [#sprite=laugh]Perhaps I ought to just hand over the reins to you. 
+	Shopkeeper: Anyway, where's Sarah? => next 
+- Have you been drinking?
+	Shopkeeper: [#sprite=worried]What? No. I quit. 
+	Shopkeeper: [#sprite=worried]What business is it of yours?
+	- You're right. It doesn't concern me. Sorry. 
+		Shopkeeper: [#sprite=worried]No, you're alright. It's me who should apologize. 
+		Shopkeeper: [#sprite=worried]I've had a rough day. And it's a sensitive subject. 
+		Shopkeeper: [#sprite=worried]We can talk about it sometime. Just not now. 
+		Shopkeeper: I'm guessing Sarah's the one who told you. Any idea where she is? => next
+	- Sarah told me about it. She was worried you were out drinking again. 
+		Shopkeeper: [#sprite=worried]Oh, poor child. 
+		Shopkeeper: [#sprite=worried]I'm sorry. I came on too strong. I've had a rought day, and it's a sensitive subject. 
+		Shopkeeper: [#sprite=worried]We can talk about it sometime. Just not now. 
+		Shopkeeper: Any idea where she is? => next
+	
+~ next
+- She left with Micah earlier. Said she'd be back before nightfall. 
+	Shopkeeper: [#sprite=worried]Oh Goddess. They could be anywhere. [do Variables.set_var("fourfive", 1)]
+	Shopkeeper: [#sprite=worried]I need to go look for her. => why
+- Micah's helping her find a surprise gift for your birthday. [if Variables.get_var("knows_of_gift") == true]
+	Shopkeeper: [#sprite=worried]Uh, I'm guessing she asked you to keep it a secret. [do Variables.set_char_var("told_of_gift", true)]
+	Shopkeeper: [#sprite=worried]Doesn't matter. Think I know where they went. 
+	Shopkeeper: [#sprite=worried]I need to go look for her. => why
+- (LIE) No idea. Sorry. 
+	Shopkeeper: [#sprite=worried]Oh Goddess. She could be anywhere. 
+	Shopkeeper: [#sprite=worried]I need to go look for her. => why 
+	
+~ why
+- Why? Is she in any danger?
+	Shopkeeper: [#sprite=worried]Oh, I wouldn't take it that far. I just want her home as soon as possible tonight. Just in case.
+	Shopkeeper: [#sprite=worried]A father worries, you know?
+	Shopkeeper: [#sprite=worried]I'm sorry to be leaving you again so soon. 
+	Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
+	Shopkeeper: [#sprite=worried]Be seeing you. 
+	- See y... => END 
+	- Goodb... => END 
+- Actually, Mary told me she wanted to see you. Said it was important. 
+	Shopkeeper: [#sprite=worried]Oh. Did she say what it was about?
+	- Not really. 
+		Shopkeeper: [#sprite=worried]Hells. I should probably go look for her. She's not one to leave her house unless it's important. I'm sorry to be leaving you again so soon. 
+		Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
+		Shopkeeper: [#sprite=worried]Be seeing you. [do Variables.set_var("fourfive", 2)]
+		- See y... => END 
+		- Goodb... => END 
+	- She just said it's about Sarah.
+		Shopkeeper: [#sprite=worried]Oh, hells. Must be important then. I need to go look for her. I'm sorry to be leaving you again so soon. 
+		Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
+		Shopkeeper: [#sprite=worried]Be seeing you. [do Variables.set_var("fourfive", 2)]
+		- See y... => END 
+		- Goodb... => END 
+- Okay. I'll just finish up these items then. 
+	Shopkeeper: [#sprite=worried]Appreciate it. I'll make it up to you. 
+	Shopkeeper: [#sprite=worried]Be seeing you. 
+	- See y... => END 
+	- Goodb... => END 
 
 => END
 

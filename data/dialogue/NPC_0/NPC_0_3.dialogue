@@ -1,0 +1,51 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+Shopkeeper: Be quiet. My daughter's asleep. She's been helping me out all day and I'd hate for us to wake her up with our chatter. 
+Shopkeeper: I know who you are and why you're here. No need to get into it right now. You're probably exhausted. We've got time. 
+Shopkeeper: That there's your room. I've readied a change of clothes and a warm bath for you. 
+Shopkeeper: Get some sleep. Tomorrow we wake early. Lots of work to be done.
+Shopkeeper: I'm sure you've got loads of questions for me. Don't worry, I'll answer each and every one of them, as best I can. 
+Shopkeeper: I'll see you in the morning. 
+- Alright then. 
+	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
+	Shopkeeper: Go back to sleep, sweetie. Everything's fine. 
+	Sarah: I had one of those dreams again. They're back. 
+	Shopkeeper: [#sprite=worried]Back to bed. I'm right behind you. 
+	Shopkeeper: [#sprite=worried][wait=0.6]...Have to go. See you tomorrow. 
+	- Sorry I woke her up.
+		Shopkeeper: [#sprite=worried]No harm done. It wasn't you. 
+		Shopkeeper: [#sprite=worried]Good night. => END 
+	- All good?
+		Shopkeeper: [#sprite=worried]Yeah, don't worry about it. Good night. => END
+	- Night. => END
+- Thank you. 
+	Sarah: [wait=1.5]...Dad? What's going on? Who is that?
+	Shopkeeper: Go back to sleep, sweetie. Everything's fine. 
+	Sarah: I had one of those dreams again. They're back. 
+	Shopkeeper: [#sprite=worried]Back to bed. I'm right behind you. 
+	Shopkeeper: [#sprite=worried][wait=0.6]...Have to go. See you tomorrow. 
+	- Sorry I woke her up.
+		Shopkeeper: [#sprite=worried]No harm done. It wasn't you. 
+		Shopkeeper: [#sprite=worried]Good night. => END 
+	- All good?
+		Shopkeeper: [#sprite=worried]Yeah, don't worry about it. Good night. => END
+	- Night. => END
+- Weird welcoming party. 
+	Shopkeeper: Hah. I know. You'll have to forgive me. 
+	Shopkeeper: Hospitality is usually my strong suit. I'll make it up to you. 
+	Sarah: [wait=1]...Dad? What's going on? Who is that?
+	Shopkeeper: Go back to sleep, sweetie. Everything's fine. 
+	Sarah: I had one of those dreams again. They're back. 
+	Shopkeeper: [#sprite=worried]Back to bed. I'm right behind you. 
+	Shopkeeper: [#sprite=worried][wait=0.6]...Have to go. See you tomorrow. 
+	- Sorry I woke her up.
+		Shopkeeper: [#sprite=worried]No harm done. It wasn't you. 
+		Shopkeeper: [#sprite=worried]Good night. => END 
+	- All good?
+		Shopkeeper: [#sprite=worried]Don't worry about it. Good night. => END
+	- Night. => END 
+=> END
+

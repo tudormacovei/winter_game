@@ -40,104 +40,22 @@ Sarah: You don't know the first thing about us.
 ~ help
 Sarah: Appreciate it, but how would you help, exactly?
 Sarah: There isn't a nook or cranny in this village I'm not familiar with. 
-Sarah: You may think I'm a worthless little girl, but it's me who takes care of him most of the time, not the other way around. 
+Sarah: You may think I'm some worthless little girl, but I'm not. 
 - I don't think you're worthless. I'm just trying to help. 
-	Sarah: Well, you can't. Plus, I'm managing just fine. 
-	- I'm sure you are. 
-		Sarah: It's all in the past, anyway. He's been clean three months now. Not a single sip. 
-		Sarah: I've been watching him. 
-		- You keep doing that. 
-			Sarah: Course I will. 
-			Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-		- He's lucky to have you. 
-			Sarah: Course he is. And there's more than this one reason for it. 
-			Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
-		- Lay off him a bit, eh? 
-			Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-	- You shouldn't have to, at this age.  
-		Sarah: It's fine. I don't mind. 
-		Sarah: I just make sure he doesn't drink anymore. 
-		Sarah: It's all in the past, anyway. He's been clean three months now. Not a single sip. 
-		Sarah: I've been watching him. 
-		- You keep doing that. 
-			Sarah: Course I will. 
-			Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-		- He's lucky to have you. 
-			Sarah: Course he is. And there's more than this one reason for it. 
-			Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
-		- Lay off him a bit, eh? 
-			Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
+	Sarah: Well, you can't. Plus, I'm managing just fine. => hope
 - Confident, are we? 
 	Sarah: Laugh all you want. 
-	Sarah: You don't know what it was like. 
-	Sarah: He'd get so drunk sometimes he couldn't find his way home at night. Used to find him in some ditch in the morning, passed out. 
-	Sarah: ...Thought he was dead this one time. 
-	Sarah: ... 
-	- I'm sorry. 
-		Sarah: It's fine. It's all in the past, anyway. 
-		Sarah: He's been clean three months now. Not a single sip. 
-		Sarah: I've been watching him. 
-		- You keep doing that. 
-			Sarah: Course I will. 
-			Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-		- He's lucky to have you. 
-			Sarah: Course he is. And there's more than this one reason for it. 
-			Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
-		- Lay off him a bit, eh? 
-			Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-	- That's fucked. 
-		Sarah: Language. 
-		Sarah: It's fine. It's all in the past, anyway. 
-		Sarah: He's been clean three months now. Not a single sip. 
-		Sarah: I've been watching him. 
-		- You keep doing that. 
-			Sarah: Course I will. 
-			Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-		- He's lucky to have you. 
-			Sarah: Course he is. And there's more than this one reason for it. 
-			Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
-		- Lay off him a bit, eh? 
-			Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful 
-	- Uhh... I'm really not sure what to say to that. 
-		Sarah: Don't worry. You don't have to say anything. 
-		Sarah: Adults rarely know what to say.
-		Sarah: It's all in the past, anyway. 
-		Sarah: He's been clean three months now. Not a single sip. 
-		Sarah: I've been watching him. 
-		- You keep doing that. 
-			Sarah: Course I will. 
-			Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-		- He's lucky to have you. 
-			Sarah: Course he is. And there's more than this one reason for it. 
-			Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
-		- Lay off him a bit, eh? 
-			Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful 
+	Sarah: You don't know what it was like. => anyway3
 - How so?
 	Sarah: I make sure he doesn't drink anymore. 
-	Sarah: He's had some serious problems with it in the past. 
-	Sarah: He'd get so drunk sometimes he couldn't find his way home at night. Used to find him in some ditch in the morning, passed out. 
-	Sarah: ...Thought he was dead this one time. 
-	Sarah: ... 
-	Sarah: Anyway, he's been clean three months now. Not a single sip. 
-	Sarah: I've been watching him. 
-	- You keep doing that. 
-		Sarah: Course I will. 
-		Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-	- He's lucky to have you. 
-		Sarah: Course he is. And there's more than this one reason for it. 
-		Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
-	- Lay off him a bit, eh? 
-		Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
-
+	Sarah: He's had some serious problems with it in the past. => anyway1
+	
 ~ hope
 Sarah: ...
 Sarah: Oh, I really hope he didn't go drinking. 
 - He doesn't beat you, does he? => beat
 - Why's he not supposed to drink?
-	Sarah: He's had some serious problems with it in the past. 
-	Sarah: He'd get so drunk sometimes he couldn't find his way home at night. Used to find him in some ditch in the morning, passed out. 
-	Sarah: ...Thought he was dead this one time. 
-	Sarah: ... => anyway
+	Sarah: He's had some serious problems with it in the past. => anyway1
 
 ~ beat
 Sarah: What? No! Of course not!
@@ -161,22 +79,72 @@ Sarah: He'd never lay a hand on me.
 Sarah: She says children are pure and holy. We're the future, the ones who will inhabit Her new world, once She's done cleansing it of sinners and evil-doers. 
 Sarah: Parents who beat their children are punished. Maybe even killed.
 Sarah: But that's never happened here, cause no ever does it. 
-- Good to know. => anyway
+- Good to know. => anyway2
 - Built yourselves a proper little utopia here, have you?
 	Sarah: Not sure what you mean by utopia. But we didn't build anything. It's all the work of the Goddess. 
-	Sarah: She loves us and She takes care of us. We're all indebted to Her for life. => anyway
+	Sarah: She loves us and She takes care of us. We're all indebted to Her for life. => anyway2
 	
-~ anyway
-Sarah: Anyway, he's been clean three months now. Not a single sip. 
+~ anyway1
+Sarah: He'd get so drunk sometimes he couldn't find his way home at night. Used to find him in some ditch in the morning, passed out. 
+Sarah: ...Thought he was dead this one time. 
+Sarah: ...
+Sarah: He's been clean three months now. Not a single sip. 
+Sarah: I've been watching him. 
+- I'm sorry. 
+	Sarah: It's fine. It's all in the past. 
+	Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
+- He's lucky to have you. 
+	Sarah: Course he is. And there's more than this one reason for it. 
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful 
+- That's fucked. 
+	Sarah: Language. 
+	Sarah: It's fine. It's all in the past, anyway. 
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
+- Uhh... I'm really not sure what to say to that. 
+	Sarah: Don't worry. You don't have to say anything. 
+	Sarah: Adults rarely know what to say.
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
+- I don't need to know all that. 
+	Sarah: You're the one who asked. 
+	Sarah: Quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micah2
+
+~ anyway2
+Sarah: Anyway, he's been clean three months now. Not a single sip.
 Sarah: I've been watching him. 
 - You keep doing that. 
 	Sarah: Course I will. He needs me even more than I need him. 
 	Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
 - He's lucky to have you. 
-	Sarah: Course he is. And there's more than this one reason for it. He needs me even more than I need him. 
+	Sarah: Course he is. And there's more than this one reason for it. 
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
+- You shouldn't have to do that at your age. 
+	Sarah: It's fine. I don't mind. 
+	Sarah: He takes care of me, I take care of him. 
+	Sarah: Plus, I'm almost an adult. 
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - Lay off him a bit, eh? 
 	Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
+	
+~ anyway3
+Sarah: He'd get so drunk sometimes he couldn't find his way home at night. Used to find him in some ditch in the morning, passed out. 
+Sarah: ...Thought he was dead this one time. 
+Sarah: ...
+- I'm sorry. 
+	Sarah: It's fine. It's all in the past. 
+	Sarah: It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
+- He's lucky to have you. 
+	Sarah: Course he is. And there's more than this one reason for it. 
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful 
+- That's fucked. 
+	Sarah: Language. 
+	Sarah: It's fine. It's all in the past, anyway. 
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
+- Uhh... I'm really not sure what to say to that. 
+	Sarah: Don't worry. You don't have to say anything. 
+	Sarah: Adults rarely know what to say.
+	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
+- I don't need to know all that. 
+	Sarah: You're quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micah2
 	
 ~ vengeful 
 - The Goddess is vengeful, isn't She?
@@ -185,7 +153,7 @@ Sarah: I've been watching him.
 	Sarah: It's not for us to question Her. 
 	- If you say so. 
 		Sarah: It's not so because I say so. It is so because She says so. => micah
-	- You speak the truth. [if Variables.get_var("religious_fervour") >= 6]
+	- You're wise for your age. [if Variables.get_var("religious_fervour") >= 6]
 		Sarah: Course I am. [do Variables.mod_var("religious_fervour", 1)] => micah
 	- Guess you're right. 
 		Sarah: Course I am. => micah
@@ -201,12 +169,12 @@ Sarah: I've been watching him.
 	Sarah: I love him and I'm sure he loves the Goddess, but he has his moments of weakness from time to time. 
 	- I see. => micah
 	- Weakness? 
-		Sarah: I've seen him nearly cry over the most unimportant things sometimes. Things outside his control. I don't get it. 
+		Sarah: I sometimes fear he's not as devoted to the Goddess as he should be. 
+		Sarah: I've seen him nearly cry over the most unimportant things sometimes. Things outside of his control. Things the Goddess told us don't matter. I don't get it. 
 		Sarah: Anyway, that's our business. => micah
 
 ~ micah
-Micah: [wait=1.5]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place.
-#add items
+Micah: [wait=1.5]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
 Sarah: Micah! Have you seen my father? He didn't come home last night.
 Micah: Sure have. He's with the Elders. No idea why, though. He was with 'em late into the night. 
 Micah: I tried to listen in but couldn't hear shit. 
@@ -218,14 +186,14 @@ Sarah: Thought he started drinking again. I'll have a word with him tonight.
 Sarah: Anyway, I'm ready. Shall we?
 Micah: Uh, sure. 
 - Where are you two going?
-	Micah: Uh, we can't tell you. [do Variables.set_var("knows_of_gift", "true")]
+	Micah: Uh, we can't tell you. [do Variables.set_var("knows_of_gift", true)]
 	Sarah: Sure we can. You can keep a secret, can't you?
 	Sarah: My dad's birthday is coming up in a few days. Micah's helping me get him a surprise gift. 
 	Sarah: It's gonna be really cool. But I can't tell you what it is yet. I don't trust you quite enough.
 	Sarah: But since you're Gifted and all, you might help cleanse it right before we give it to him. Have the Goddess bless it through you!
 	Sarah: What do you say?
 	- Sure thing. 
-		Sarah: Awesome. Thanks! [do Variables.set_char_var("NPC_2", "relationship", 4)]
+		Sarah: Awesome. Thanks! [do Variables.set_char_var("NPC_2", "relationship", 3)]
 		Sarah: Anyway, see you later. 
 		Sarah: If dad shows up tell him I'm with Micah, and that I'll be back before nightfall. And make him go sleep! 
 		Sarah: And if you mention the surprise, you're dead!
@@ -234,7 +202,7 @@ Micah: Uh, sure.
 		- Take care, children. => END
 	- Uh, I've got enough on my plate.
 		Sarah: Doesn't look like it.
-		Sarah: Whatever. He'll just cleanse it himself after we give it to him. [do Variables.set_char_var("NPC_2", "relationship", 2)]
+		Sarah: Whatever. He'll just cleanse it himself after we give it to him. [do Variables.set_char_var("NPC_2", "relationship", 1)]
 		Sarah: Let's go, Micah.
 		Micah: ...
 		- Bye, then. => END
@@ -254,5 +222,38 @@ Micah: Uh, sure.
 	- Will do. => END
 	- ... => END
 
+~ micah2
+Micah: [wait=1.5]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
+Sarah: Micah! Have you seen my father? He didn't come home last night.
+Micah: Sure have. He's with the Elders. No idea why, though. He was with 'em late into the night. 
+Micah: I tried to listen in but couldn't hear shit. 
+Micah: ...Uh, sorry.
+Micah: He just up and left at one point. He seemed angry.
+Micah: He came back this morning. He's still there, now. I think.
+Sarah: Oh thank the Goddess. I was starting to get worried. 
+Sarah: Thought he started drinking again. I'll have a word with him tonight. 
+Sarah: Anyway, I'm ready. Shall we?
+Micah: Uh, sure. 
+- Where are you two going?
+	Micah: Uh, we can't tell you.
+	Sarah: Yeah, wouldn't you like to know, prick. 
+	Sarah: If dad shows up tell him I'm with Micah, and I'll be back before nightfall. 
+	- See you. => END
+	- Will do. => END 
+	- Brats. => END 
+- Take care. 
+	Sarah: Hey prick, if dad shows up, tell him I'm with Micah, and I'll be back before nightfall. 
+	Micah: See you later, fake 'Keeper. 
+	- See you. => END
+	- Will do. => END 
+	- Brats. => END 
+- ...
+	Sarah: Hey prick, if dad shows up, tell him I'm with Micah, and I'll be back before nightfall. 
+	Micah: See you later, fake 'Keeper. 
+	- See you. => END
+	- Will do. => END
+	- Brats. => END 
+	- ... => END
+	
 => END
 
