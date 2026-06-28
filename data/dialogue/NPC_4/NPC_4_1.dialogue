@@ -243,8 +243,8 @@ Shopkeeper: ...
 		Shopkeeper: [#sprite=worried]Yeah. Appreciate it. => questions
 	- What does she dream about?
 		Shopkeeper: [#sprite=worried]It's... difficult to explain. 
-		Shopkeeper: [#sprite=worried]She used to draw everything she remembered in the morning, then hang it up on the walls around the house. A few of them are still up, see?
-		Shopkeeper: [#sprite=worried]Don't freak out if more such drawings show up around the room in the future. 
+		Shopkeeper: [#sprite=worried]She likes to draw what she remembers in the morning.
+		Shopkeeper: [#sprite=worried]Don't freak out if you see such drawings around the house.
 		- Noted. => questions
 		- I'll... try. => questions
 - So, do you people sacrifice humans and stuff? [if Variables.get_char_var("NPC_4", "sacrifice") == false and Variables.get_char_var("NPC_4", "questions") >= 3] 
@@ -255,7 +255,7 @@ Shopkeeper: ...
 		Shopkeeper: [#sprite=worried]None. 
 		- Okay then. => questions
 		- Kind of sounds like you're lying to me.
-			Shopkeeper: [#sprite=worried]ook, there are some things you'll only get to know once you become a full member of the church.  
+			Shopkeeper: [#sprite=worried]Look, there are some things you'll only get to know once you become a full member of the church.  
 			Shopkeeper: [#sprite=worried]But trust me, we don't sacrifice anyone in the traditional sense, and never involuntarily. 
 			Shopkeeper: [#sprite=worried]That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
 			- Okay, I trust you. => questions
@@ -264,7 +264,7 @@ Shopkeeper: ...
 	Shopkeeper: Alright then. Let's get to it. => tutorial
 
 ~ tutorial
-Shopkeeper: First things first. I'll neeed to explain how the Cullings really work. 
+Shopkeeper: First things first. I'll need to explain how the Cullings really work. 
 Shopkeeper: Want the long version or the short one?
 - Long version. 
 	Shopkeeper: [#sprite=laugh]I'm starting to like you!
