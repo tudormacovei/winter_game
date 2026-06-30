@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctfbrqtrfwa1l"
-path="res://.godot/imported/Sarah_NPC2.webp-6b1018f3ca981b09fd47b8ddab90ddd7.ctex"
+uid="uid://dyny0iv3r07qp"
+path="res://.godot/imported/Sarah_Happy_NPC2.webp-65804499167aedca566212b734a1381f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/Sarah_NPC2.webp"
-dest_files=["res://.godot/imported/Sarah_NPC2.webp-6b1018f3ca981b09fd47b8ddab90ddd7.ctex"]
+source_file="res://2d_assets/characters/Sarah_NPC2/Sarah_Happy_NPC2.webp"
+dest_files=["res://.godot/imported/Sarah_Happy_NPC2.webp-65804499167aedca566212b734a1381f.ctex"]
 
 [params]
 
