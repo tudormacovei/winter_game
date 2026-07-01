@@ -60,5 +60,6 @@ const DAY_END_SCREEN_SHOW_TIME_SECONDS: float = 4.0
 
 const DAY_END_SCREEN_MESSAGE: String = "You have completed day %d."
 const GAME_END_SCREEN_MESSAGE: String = "You have completed all days."
+const DEATH_SCREEN_MESSAGE: String = "YOU DIED"
 
 #endregion

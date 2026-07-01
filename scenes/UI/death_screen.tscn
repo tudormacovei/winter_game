@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ows3vg8n3gk"]
+
+[ext_resource type="Texture2D" uid="uid://dqqog4lfb3012" path="res://2d_assets/backgrounds/death/death_screen.webp" id="1_jcrgr"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640.5, 360.5)
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("1_jcrgr")
+
+[node name="DeathText" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 519.0
+offset_top = 130.0
+offset_right = 755.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 50
+text = "YOU DIED"
+horizontal_alignment = 1
