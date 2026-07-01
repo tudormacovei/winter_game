@@ -23,8 +23,8 @@ func _ready() -> void:
 		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
-	if health_manager and health_manager.has_signal("player_died"):
-		health_manager.connect("player_died", show_death_screen)
+	if GameState.has_signal("player_died"):
+		GameState.connect("player_died", Callable(self , "show_death_screen"))
 
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
