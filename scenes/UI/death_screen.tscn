@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0ows3vg8n3gk"]
+[gd_scene load_steps=3 format=3 uid="uid://c0ows3vg8n3gk"]
 
 [ext_resource type="Texture2D" uid="uid://dqqog4lfb3012" path="res://2d_assets/backgrounds/death/death_screen.webp" id="1_jcrgr"]
+[ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="2_2n4oe"]
 
 [node name="DeathScreen" type="Control"]
 z_index = 4
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +24,7 @@ offset_left = 519.0
 offset_top = 130.0
 offset_right = 755.0
 offset_bottom = 199.0
+theme_override_fonts/font = ExtResource("2_2n4oe")
 theme_override_font_sizes/font_size = 50
 text = "YOU DIED"
 horizontal_alignment = 1
