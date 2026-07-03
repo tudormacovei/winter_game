@@ -52,6 +52,7 @@ visible = false
 [node name="DeathScreen" parent="UI" instance=ExtResource("4_rdvrf")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 3
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("4_x8h8r")]
 visible = false

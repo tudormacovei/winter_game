@@ -29,6 +29,9 @@ func _ready() -> void:
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
 		GameState.connect("dialogue_changed", Callable(self , "_on_dialogue_changed"))
+	
+	if OS.is_debug_build():
+		DebugUI.register_debug_target(self)
 
 func set_balloon_layer(new_balloon_layer: CanvasLayer):
 	self.balloon_layer = new_balloon_layer
@@ -47,10 +50,10 @@ func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen.hide()
 
 func show_death_screen() -> void:
-	_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
-	_death_screen.show()
-	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
-	_death_screen.hide()
+	if not debug_disable_death_screen:
+		_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
+		_death_screen.show()
+		get_tree().paused = true
 
 func show_game_end_screen() -> void:
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
@@ -149,8 +152,18 @@ func _on_dialogue_changed() -> void:
 #endregion
 
 #region Debug
+var debug_disable_death_screen: bool = false
 
 func debug_hide_game_end_screen():
 	_day_end_screen.hide()
+
+# func debug_toggle_death_screen(_death_screen_shown: bool) -> void:
+# 	if _death_screen_shown && GameState.player_died.is_connected(Callable(self , "show_death_screen")):
+# 		GameState.disconnect("player_died", Callable(self , "show_death_screen"))
+# 		if (_death_screen.visible):
+# 			_death_screen.hide()
+# 	else:
+# 		GameState.connect("player_died", Callable(self , "show_death_screen"))
+
 
 #endregion
