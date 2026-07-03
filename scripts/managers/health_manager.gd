@@ -13,6 +13,7 @@ const _HEALTH_THRESHOLDS: Array[float] = [80.0, 50.0, 20.0, 10.0, 0.0]
 @onready var camera: CameraControl = %Camera3D
 @onready var health_overlay: HealthOverlay = %HealthOverlay
 
+
 var _health: float = STARTING_MAX_HEALTH
 var _visual_health: float = STARTING_MAX_HEALTH
 var max_health: float = STARTING_MAX_HEALTH
@@ -64,6 +65,7 @@ func _check_health_thresholds(prev_health: float) -> void:
 			print("HealthManager: Health dropped below %d (%s pts)" % [int(threshold), str(snappedf(_health, 0.1))])
 			if threshold == 0.0:
 				push_warning("HealthManager: Player current HP reached 0")
+				GameState.player_died.emit()
 		elif prev_health <= threshold and _health > threshold:
 			_triggered_thresholds.erase(threshold)
 			print("HealthManager: Health recovered above %d (%s pts)" % [int(threshold), str(snappedf(_health, 0.1))])
@@ -98,3 +100,4 @@ func _on_object_completed(_object_name: String, _is_special: bool, completed_sti
 	print("HealthManager: Max health set to %s" % str(snappedf(max_health, 0.1)))
 	if max_health == 0.0:
 		push_warning("HealthManager: Player max HP reached 0")
+		GameState.player_died.emit()

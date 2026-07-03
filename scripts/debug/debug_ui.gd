@@ -12,12 +12,14 @@ var WarningColor: Color = Color(1.0, 0.8, 0.25)
 
 var game_manager: GameManager = null
 var time_manager: TimeManager = null
+var ui_manager: UIManager = null
 
 #region Debug UI State Variables
 
 #NOTE: Needed for persistent values. Otherwise they would reset every frame.
 var general_tab_day_number := ["1"]
 var general_tab_disable_interaction_delay := [false]
+var general_tab_disable_death_state := [false]
 var dialogue_tab_vars_search_text := [""]
 var dialogue_tab_set_var_key := [""]
 var dialogue_tab_set_var_value := [""]
@@ -40,6 +42,7 @@ func _draw_general_tab():
 	ImGui.TextColored(WarningColor, "Warning: Using these might result in an invalid game state!")
 
 	ImGui.Checkbox("Disable interaction start delay", general_tab_disable_interaction_delay)
+	ImGui.Checkbox("Disable death state", general_tab_disable_death_state)
 
 	if ImGui.Button("Start next interaction"):
 		game_manager.debug_play_next_interaction()
@@ -94,6 +97,8 @@ func register_debug_target(target):
 		game_manager = target
 	elif target is TimeManager:
 		time_manager = target
+	elif target is UIManager:
+		ui_manager = target
 	else:
 		push_warning("DebugUI: Tried to register unsupported debug target of type: " + str(target.get_class()))
 
@@ -113,6 +118,11 @@ func _process(_delta):
 	# Sync debug options to Game Manager
 	if game_manager:
 		game_manager.debug_disable_interaction_delay = general_tab_disable_interaction_delay[0]
+	
+	if ui_manager:
+		ui_manager.debug_disable_death_screen = general_tab_disable_death_state[0]
+
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug_ui"):

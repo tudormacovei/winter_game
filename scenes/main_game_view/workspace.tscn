@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=22 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -6,12 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bntkja5x3is5f" path="res://scenes/main_game_view/workbench_view.tscn" id="2_ckfyi"]
 [ext_resource type="Texture2D" uid="uid://bm1bm3b7ximrr" path="res://2d_assets/backgrounds/focus_background.webp" id="3_7nw64"]
 [ext_resource type="PackedScene" uid="uid://bfegigj2pr0lh" path="res://scenes/UI/day_end_screen.tscn" id="3_x8h8r"]
+[ext_resource type="PackedScene" uid="uid://c0ows3vg8n3gk" path="res://scenes/UI/death_screen.tscn" id="4_rdvrf"]
 [ext_resource type="Script" uid="uid://3eha20jds2g7" path="res://scripts/user_interface/health_overlay.gd" id="4_sllmx"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://dhtlwlem7pnm2" path="res://scenes/UI/branch_ring.tscn" id="5_8dlmc"]
 [ext_resource type="PackedScene" uid="uid://w6fvfg6nqa87" path="res://scenes/UI/dialogue_state_balloon/dialogue_state_balloon.tscn" id="5_jwblm"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
-[ext_resource type="Shader" uid="uid://dyg7t2rqjvy1s" path="res://3d_assets/shaders/screen_edge_highlight.gdshader" id="6_8dlmc"]
+[ext_resource type="Shader" path="res://3d_assets/shaders/screen_edge_highlight.gdshader" id="6_8dlmc"]
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
@@ -48,6 +49,11 @@ transform = Transform3D(1, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364816, 0.98
 unique_name_in_owner = true
 visible = false
 
+[node name="DeathScreen" parent="UI" instance=ExtResource("4_rdvrf")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+
 [node name="PauseMenu" parent="UI" instance=ExtResource("4_x8h8r")]
 visible = false
 
@@ -57,7 +63,7 @@ visible = false
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(1, 1)
+position = Vector2(636, 288.5)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]

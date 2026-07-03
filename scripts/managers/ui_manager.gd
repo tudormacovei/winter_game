@@ -4,10 +4,13 @@ class_name UIManager
 extends Node
 
 @onready var camera: CameraControl = %Camera3D
+@onready var health_manager: HealthManager = %HealthManager
 
 # UI Elements
 @onready var _day_end_screen := %DayEndScreen
+@onready var _death_screen := %DeathScreen
 @onready var _day_end_screen_label: Label = %DayEndScreen.get_node("%DayCompleteText")
+@onready var _death_screen_label: Label = %DeathScreen.get_node("%DeathText")
 # @onready var _dialogue_view := %DialogueView NOTE: This is not used anymore
 @onready var _dialogue_state_balloon: CanvasLayer = %DialogueStateBalloon
 
@@ -20,10 +23,15 @@ func _ready() -> void:
 		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
+	if GameState.has_signal("player_died"):
+		GameState.connect("player_died", Callable(self , "show_death_screen"))
 
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
 		GameState.connect("dialogue_changed", Callable(self , "_on_dialogue_changed"))
+	
+	if OS.is_debug_build():
+		DebugUI.register_debug_target(self)
 
 func set_balloon_layer(new_balloon_layer: CanvasLayer):
 	self.balloon_layer = new_balloon_layer
@@ -40,6 +48,12 @@ func show_day_end_screen(day_number: int) -> void:
 	AudioManager.play_sfx(Config.END_DAY_SFX_NAME, Config.END_DAY_SFX_VOLUME_DB)
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
 	_day_end_screen.hide()
+
+func show_death_screen() -> void:
+	if not debug_disable_death_screen:
+		_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
+		_death_screen.show()
+		get_tree().paused = true
 
 func show_game_end_screen() -> void:
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
@@ -138,6 +152,7 @@ func _on_dialogue_changed() -> void:
 #endregion
 
 #region Debug
+var debug_disable_death_screen: bool = false
 
 func debug_hide_game_end_screen():
 	_day_end_screen.hide()
