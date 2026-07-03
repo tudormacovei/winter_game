@@ -1,10 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=10 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_isxcp"]
 [ext_resource type="Texture2D" uid="uid://brhi0kh5r17wq" path="res://2d_assets/Workshop/WorkshopBG_Color.webp" id="2_kbq0g"]
 [ext_resource type="Shader" uid="uid://r5hwe4eih73w" path="res://3d_assets/shaders/window.gdshader" id="3_08sga"]
 [ext_resource type="Texture2D" uid="uid://7xd3rl8sjvrd" path="res://2d_assets/backgrounds/window/WorkshopWindow.webp" id="4_kbq0g"]
 [ext_resource type="Shader" uid="uid://s2h2vbotkkvf" path="res://3d_assets/shaders/window_sky.gdshader" id="5_isxcp"]
+
+[sub_resource type="Gradient" id="Gradient_isxcp"]
+offsets = PackedFloat32Array(0.52364475)
+colors = PackedColorArray(0.24, 0.1464, 0.115200005, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_08sga"]
+gradient = SubResource("Gradient_isxcp")
+width = 4400
+height = 3000
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kbq0g"]
 render_priority = 0
@@ -32,6 +41,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
 pixel_size = 0.002
 texture = ExtResource("2_kbq0g")
 
+[node name="DialogueMargins" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.197665)
+sorting_offset = -2.0
+pixel_size = 0.002
+render_priority = -1
+texture = SubResource("GradientTexture2D_08sga")
+
 [node name="DialogueForeground" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9)
 pixel_size = 0.002
@@ -41,13 +57,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.92)
 pixel_size = 0.002
 
 [node name="DialogueWindowView" type="Sprite3D" parent="." groups=["time_of_day"]]
-transform = Transform3D(0.8671614, 0, 0, 0, 0.8671614, 0, 0, 0, 1, 0, 0, -3.9330757)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9330757)
 material_override = SubResource("ShaderMaterial_kbq0g")
 pixel_size = 0.002
 texture_filter = 2
 texture = ExtResource("4_kbq0g")
 
 [node name="DialogueWindowSky" type="Sprite3D" parent="DialogueWindowView" groups=["time_of_day"]]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3714396, 0.7873398, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.6097144, 0.79534423, 0)
 material_override = SubResource("ShaderMaterial_isxcp")
 texture = ExtResource("4_kbq0g")
