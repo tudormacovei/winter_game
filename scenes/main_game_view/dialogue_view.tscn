@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=11 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_isxcp"]
 [ext_resource type="Texture2D" uid="uid://brhi0kh5r17wq" path="res://2d_assets/Workshop/WorkshopBG_Color.webp" id="2_kbq0g"]
 [ext_resource type="Shader" uid="uid://r5hwe4eih73w" path="res://3d_assets/shaders/window.gdshader" id="3_08sga"]
+[ext_resource type="Texture2D" uid="uid://baj4heain7ghg" path="res://2d_assets/Workshop/WorkshopFG_Color.webp" id="3_mlet6"]
 [ext_resource type="Texture2D" uid="uid://7xd3rl8sjvrd" path="res://2d_assets/backgrounds/window/WorkshopWindow.webp" id="4_kbq0g"]
 [ext_resource type="Shader" uid="uid://s2h2vbotkkvf" path="res://3d_assets/shaders/window_sky.gdshader" id="5_isxcp"]
 
@@ -49,8 +50,9 @@ render_priority = -1
 texture = SubResource("GradientTexture2D_08sga")
 
 [node name="DialogueForeground" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8750484)
 pixel_size = 0.002
+texture = ExtResource("3_mlet6")
 
 [node name="DialogueCharacterTexture" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.92)
