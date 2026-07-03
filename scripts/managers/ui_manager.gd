@@ -157,13 +157,4 @@ var debug_disable_death_screen: bool = false
 func debug_hide_game_end_screen():
 	_day_end_screen.hide()
 
-# func debug_toggle_death_screen(_death_screen_shown: bool) -> void:
-# 	if _death_screen_shown && GameState.player_died.is_connected(Callable(self , "show_death_screen")):
-# 		GameState.disconnect("player_died", Callable(self , "show_death_screen"))
-# 		if (_death_screen.visible):
-# 			_death_screen.hide()
-# 	else:
-# 		GameState.connect("player_died", Callable(self , "show_death_screen"))
-
-
 #endregion
