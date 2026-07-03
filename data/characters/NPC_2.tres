@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=3 format=3 uid="uid://d0g4y7qnfxc0"]
+[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=5 format=3 uid="uid://d0g4y7qnfxc0"]
 
-[ext_resource type="Texture2D" uid="uid://bntoteeteh7k1" path="res://2d_assets/characters/Sarah-final_NPC2.webp" id="1_f0jpx"]
+[ext_resource type="Texture2D" uid="uid://bntoteeteh7k1" path="res://2d_assets/characters/Sarah_NPC2/Sarah_NPC2.webp" id="1_f0jpx"]
+[ext_resource type="Texture2D" uid="uid://dyny0iv3r07qp" path="res://2d_assets/characters/Sarah_NPC2/Sarah_Happy_NPC2.webp" id="1_l0yv7"]
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_q5uqm"]
+[ext_resource type="Texture2D" uid="uid://cy3j21kinln2" path="res://2d_assets/characters/Sarah_NPC2/Sarah_Upset_NPC2.webp" id="2_8tcyf"]
 
 [resource]
 script = ExtResource("1_q5uqm")
@@ -9,4 +11,8 @@ character_id = "NPC_2"
 display_name = "Sarah"
 description = "This is the second NPC"
 default_sprite = ExtResource("1_f0jpx")
+alt_sprites = Dictionary[String, Texture2D]({
+"happy": ExtResource("1_l0yv7"),
+"upset": ExtResource("2_8tcyf")
+})
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

@@ -219,13 +219,18 @@ func _deferred_connect_spoke_signal():
 
 #region Signals
 
-## Clean up active dialogue when leaving the scene (pause menu -> main menu)
-## Without this, DialogueManager (which is an autoload) retains stale state across scene changes
+## Clean up active dialogue when leaving the scene (pause menu -> main menu).
+## Without this DialogueManager (which is an autoload) retains stale dialogue state accross scene changes
 func _on_tree_exiting():
+	# Disconnect local functions from the dialogueManager to ensure the emit() below does not trigger
+	# these functions while we are exiting the tree (this is spaghetti asf)
+	DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
+	DialogueManager.got_dialogue.disconnect(_on_dialogue_line_started)
+
 	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
 		current_dialogue_balloon.queue_free()
 	if is_dialogue_running:
-		DialogueManager.dialogue_ended.emit(null)
+		DialogueManager.dialogue_ended.emit(null) # TODO: would be nice to cleanup calls like this and not call the emit of other objects
 
 func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
 	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)

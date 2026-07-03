@@ -148,11 +148,11 @@ texture = ExtResource("9_7nw64")
 
 [node name="DialogueView" parent="CameraSpace" instance=ExtResource("1_w2y3b")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 1.6842041, -0.81009686)
+transform = Transform3D(1, 0, 0, 0, 1, 2.9802319e-08, 0, -2.9802319e-08, 1, 0, 1.6842041, -1.6700333)
 
 [node name="WorkbenchView" parent="CameraSpace" instance=ExtResource("2_ckfyi")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.9848076, -0.17364818, 0, 0.17364816, 0.9848076, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9848076, -0.17364818, 0, 0.17364815, 0.9848076, -0.00051021576, 0.0045061004, -0.0022528435)
 
 [node name="WorkbenchBackground" type="Sprite3D" parent="CameraSpace/WorkbenchView"]
 unique_name_in_owner = true
