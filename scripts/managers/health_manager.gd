@@ -24,9 +24,6 @@ var _focused_object: InteractibleObject = null
 # This flag is not cleared! — recovery from player death should be done via scene reload
 var _is_dead: bool = false
 
-# debug: accumulates delta for the once-per-second health printout
-var _debug_print_elapsed: float = 0.0
-
 
 func reset_max_health() -> void:
 	max_health = STARTING_MAX_HEALTH
@@ -41,6 +38,8 @@ func register_object(obj: InteractibleObject) -> void:
 
 func _ready() -> void:
 	camera.camera_focus_changed.connect(_on_camera_focus_changed)
+	if OS.is_debug_build():
+		DebugUI.register_debug_target(self)
 
 
 func _process(delta: float) -> void:
@@ -53,19 +52,10 @@ func _process(delta: float) -> void:
 	_visual_health = lerp(_visual_health, _health, 1.0 - exp(-VISUAL_HEALTH_SMOOTHING_RATE * delta))
 	health_overlay.set_health_normalized(_visual_health / STARTING_MAX_HEALTH)
 
-	# TODO: remove debug prints
-	# _debug_print_elapsed += delta
-	# if _debug_print_elapsed >= 1.0:
-	# 	_debug_print_elapsed = 0.0
-	# 	var focused := is_instance_valid(_focused_object)
-	# 	print("HealthManager: HP %s/%s | focused=%s has_stickers=%s -> %s" % [
-	# 		str(snappedf(_health, 0.1)), str(snappedf(max_health, 0.1)),
-	# 		str(focused), str(focused and _focused_object.has_stickers_remaining()),
-	# 		"DRAINING" if _should_drain() else "restoring",
-	# 	])
-
 
 func _should_drain() -> bool:
+	if debug_disable_drain:
+		return false
 	return is_instance_valid(_focused_object) and _focused_object.has_stickers_remaining()
 
 
@@ -77,7 +67,7 @@ func _set_health(value: float) -> void:
 
 func _die() -> void:
 	_is_dead = true
-	set_process(false) # stops drain, regen, debug updates
+	set_process(false) # stops drain, regen
 	push_warning("Player HP reached 0")
 	GameState.player_died.emit()
 
@@ -102,3 +92,13 @@ func _on_object_completed(_object_name: String, _is_special: bool, completed_sti
 	max_health = maxf(0.0, max_health - penalty)
 	_set_health(_health) # re-clamp to the new ceiling: a zero ceiling will trigger death
 	print("HealthManager: Max health set to %s" % str(snappedf(max_health, 0.1)))
+
+
+#region Debug
+
+var debug_disable_drain: bool = false
+
+func debug_get_current_health() -> float:
+	return _health
+
+#endregion

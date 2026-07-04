@@ -13,6 +13,7 @@ var WarningColor: Color = Color(1.0, 0.8, 0.25)
 var game_manager: GameManager = null
 var time_manager: TimeManager = null
 var ui_manager: UIManager = null
+var health_manager: HealthManager = null
 
 #region Debug UI State Variables
 
@@ -20,6 +21,7 @@ var ui_manager: UIManager = null
 var general_tab_day_number := ["1"]
 var general_tab_disable_interaction_delay := [false]
 var general_tab_disable_death_state := [false]
+var general_tab_disable_health_drain := [false]
 var dialogue_tab_vars_search_text := [""]
 var dialogue_tab_set_var_key := [""]
 var dialogue_tab_set_var_value := [""]
@@ -30,6 +32,10 @@ var visual_tab_time_of_day := [0.0]
 #region Tab Draw Functions
 
 func _draw_general_tab():
+	if game_manager == null:
+		ImGui.TextColored(WarningColor, "Game Manager not found. General debug options are only available in-game.")
+		return
+
 	ImGui.Text("General Information")
 
 	ImGui.Text("Current Day: %d" % game_manager.debug_get_current_day_number())
@@ -53,7 +59,17 @@ func _draw_general_tab():
 	ImGui.SameLine()
 	if ImGui.Button("Start day"):
 		game_manager.debug_start_day(general_tab_day_number[0])
-		
+
+	ImGui.Separator()
+	ImGui.Text("Health")
+	if health_manager == null:
+		ImGui.TextColored(WarningColor, "Health Manager not found. Cannot display health debug options.")
+	else:
+		var current_hp: float = health_manager.debug_get_current_health()
+		ImGui.ProgressBar(current_hp / HealthManager.STARTING_MAX_HEALTH)
+		ImGui.Text("Current HP: %.2f" % current_hp)
+		ImGui.Checkbox("Disable health drain", general_tab_disable_health_drain)
+
 
 # Show all dialogue variables. Allow searching by variable name
 func _draw_dialogue_tab():
@@ -99,6 +115,8 @@ func register_debug_target(target):
 		time_manager = target
 	elif target is UIManager:
 		ui_manager = target
+	elif target is HealthManager:
+		health_manager = target
 	else:
 		push_warning("DebugUI: Tried to register unsupported debug target of type: " + str(target.get_class()))
 
@@ -106,6 +124,14 @@ func _process(_delta):
 	if not enabled:
 		return
 
+	if not is_instance_valid(game_manager):
+		game_manager = null
+	if not is_instance_valid(time_manager):
+		time_manager = null
+	if not is_instance_valid(ui_manager):
+		ui_manager = null
+	if not is_instance_valid(health_manager):
+		health_manager = null
 	ImGui.Begin("Debug UI")
 
 	if ImGui.BeginTabBar("Debug Tabs"):
@@ -122,6 +148,8 @@ func _process(_delta):
 	if ui_manager:
 		ui_manager.debug_disable_death_screen = general_tab_disable_death_state[0]
 
+	if health_manager:
+		health_manager.debug_disable_drain = general_tab_disable_health_drain[0]
 
 
 func _input(event: InputEvent) -> void:
