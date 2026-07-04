@@ -331,6 +331,13 @@ func _on_stickers_placed() -> void:
 	_set_state(State.ON_TABLE)
 
 
+## Returns true if the object still has stickers left to peel.
+## Works correctly for both special objects & objects with automated sticker placement. [br]
+## Note: If called BEFORE sticker placement finishes, returns FALSE
+func has_stickers_remaining() -> bool:
+	return _completed_stickers < _sticker_total
+
+
 func _on_sticker_completed():
 	if not _has_player_cleansed_sticker:
 		_has_player_cleansed_sticker = true
