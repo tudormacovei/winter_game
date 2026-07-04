@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=20 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_isxcp"]
 [ext_resource type="Texture2D" uid="uid://brhi0kh5r17wq" path="res://2d_assets/Workshop/WorkshopBG_Color.webp" id="2_kbq0g"]
@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://baj4heain7ghg" path="res://2d_assets/Workshop/WorkshopFG_Color.webp" id="3_mlet6"]
 [ext_resource type="Texture2D" uid="uid://7xd3rl8sjvrd" path="res://2d_assets/backgrounds/window/WorkshopWindow.webp" id="4_kbq0g"]
 [ext_resource type="Shader" uid="uid://s2h2vbotkkvf" path="res://3d_assets/shaders/window_sky.gdshader" id="5_isxcp"]
+[ext_resource type="Texture2D" uid="uid://nhkypmivow5x" path="res://2d_assets/UI/WorkshopBG_Shadow1.webp" id="7_c1r7f"]
+[ext_resource type="Shader" uid="uid://c6ahooeib8ybd" path="res://3d_assets/shaders/workshop_shadow.gdshader" id="7_nlanv"]
+[ext_resource type="Texture2D" uid="uid://kg0w6tx0alfw" path="res://2d_assets/UI/WorkshopBG_Shadow2.webp" id="8_nlanv"]
+[ext_resource type="Texture2D" uid="uid://dqe31dt3lkjs6" path="res://2d_assets/UI/WorkshopFG_Shadow1.webp" id="9_lxqo2"]
+[ext_resource type="Texture2D" uid="uid://oe3gymfrbkxu" path="res://2d_assets/UI/WorkshopFG_Shadow2.webp" id="10_wcy1s"]
 
 [sub_resource type="Gradient" id="Gradient_isxcp"]
 offsets = PackedFloat32Array(0.52364475)
@@ -20,7 +25,6 @@ height = 3000
 render_priority = 0
 shader = ExtResource("3_08sga")
 shader_parameter/texture = ExtResource("4_kbq0g")
-shader_parameter/time_of_day = 0.250000011875
 shader_parameter/color_noon = Color(1, 0.98, 0.92, 1)
 shader_parameter/color_sunset = Color(0.63426405, 0.36607158, 0.26324913, 1)
 shader_parameter/color_night = Color(0.19215687, 0.21960784, 0.38039216, 1)
@@ -29,10 +33,33 @@ shader_parameter/night_brightness = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_isxcp"]
 render_priority = -1
 shader = ExtResource("5_isxcp")
-shader_parameter/time_of_day = 0.250000011875
 shader_parameter/color_noon = Color(0.6092569, 0.80285454, 0.98288745, 1)
 shader_parameter/color_sunset = Color(0.9843137, 0.6117647, 0.4, 1)
 shader_parameter/color_night = Color(0.101960786, 0.1254902, 0.28627452, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxqo2"]
+render_priority = 1
+shader = ExtResource("7_nlanv")
+shader_parameter/texture_sampler = ExtResource("7_c1r7f")
+shader_parameter/shadow_type = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlanv"]
+render_priority = 2
+shader = ExtResource("7_nlanv")
+shader_parameter/texture_sampler = ExtResource("8_nlanv")
+shader_parameter/shadow_type = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcy1s"]
+render_priority = 5
+shader = ExtResource("7_nlanv")
+shader_parameter/texture_sampler = ExtResource("9_lxqo2")
+shader_parameter/shadow_type = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcbg"]
+render_priority = 6
+shader = ExtResource("7_nlanv")
+shader_parameter/texture_sampler = ExtResource("10_wcy1s")
+shader_parameter/shadow_type = 1
 
 [node name="DialogueView" type="Node3D"]
 script = ExtResource("1_isxcp")
@@ -50,22 +77,52 @@ render_priority = -1
 texture = SubResource("GradientTexture2D_08sga")
 
 [node name="DialogueForeground" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8750484)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.93)
 pixel_size = 0.002
+render_priority = 4
 texture = ExtResource("3_mlet6")
 
 [node name="DialogueCharacterTexture" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.92)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.93)
 pixel_size = 0.002
+render_priority = 3
 
-[node name="DialogueWindowView" type="Sprite3D" parent="." groups=["time_of_day"]]
+[node name="DialogueWindowView" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9330757)
 material_override = SubResource("ShaderMaterial_kbq0g")
 pixel_size = 0.002
 texture_filter = 2
 texture = ExtResource("4_kbq0g")
 
-[node name="DialogueWindowSky" type="Sprite3D" parent="DialogueWindowView" groups=["time_of_day"]]
+[node name="DialogueWindowSky" type="Sprite3D" parent="DialogueWindowView"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.6097144, 0.79534423, 0)
 material_override = SubResource("ShaderMaterial_isxcp")
 texture = ExtResource("4_kbq0g")
+
+[node name="BGShadowGlobal" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
+material_override = SubResource("ShaderMaterial_lxqo2")
+pixel_size = 0.002
+render_priority = 1
+texture = ExtResource("7_c1r7f")
+
+[node name="BGShadowHighlight" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
+material_override = SubResource("ShaderMaterial_nlanv")
+pixel_size = 0.002
+render_priority = 2
+texture = ExtResource("8_nlanv")
+
+[node name="FGShadowGlobal" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
+material_override = SubResource("ShaderMaterial_wcy1s")
+pixel_size = 0.002
+render_priority = 5
+texture = ExtResource("9_lxqo2")
+
+[node name="FGShadowHighlight" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
+material_override = SubResource("ShaderMaterial_cqcbg")
+pixel_size = 0.002
+render_priority = 6
+texture = ExtResource("10_wcy1s")

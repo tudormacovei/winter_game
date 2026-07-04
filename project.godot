@@ -95,3 +95,26 @@ locale/translations_pot_files=PackedStringArray("res://data/dialogue/showcase.di
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+time_of_day={
+"type": "float",
+"value": 0.5
+}
+shadow_global_min_alpha={
+"type": "float",
+"value": 0.15
+}
+shadow_global_max_alpha={
+"type": "float",
+"value": 0.3
+}
+shadow_highlight_min_alpha={
+"type": "float",
+"value": 0.05
+}
+shadow_highlight_max_alpha={
+"type": "float",
+"value": 0.25
+}
