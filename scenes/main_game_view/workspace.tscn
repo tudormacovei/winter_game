@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dhtlwlem7pnm2" path="res://scenes/UI/branch_ring.tscn" id="5_8dlmc"]
 [ext_resource type="PackedScene" uid="uid://w6fvfg6nqa87" path="res://scenes/UI/dialogue_state_balloon/dialogue_state_balloon.tscn" id="5_jwblm"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
-[ext_resource type="Shader" uid="uid://dyg7t2rqjvy1s" path="res://3d_assets/shaders/screen_edge_highlight.gdshader" id="6_8dlmc"]
+[ext_resource type="Shader" path="res://3d_assets/shaders/screen_edge_highlight.gdshader" id="6_8dlmc"]
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]

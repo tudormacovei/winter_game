@@ -60,6 +60,8 @@ var _interaction_start_pending: bool = false
 var _interaction_start_token: int = 0
 
 func _ready():
+	await SceneManager.scene_loaded
+
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
 	workbench.connect("all_objects_completed", _on_all_objects_completed)
@@ -74,6 +76,7 @@ func _ready():
 	current_day_index = 0
 	day_started.emit(0)
 	_play_next_interaction()
+		
 
 	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
 

@@ -2,7 +2,8 @@ extends Node
 
 const ShaderWarmup: GDScript = preload("res://scripts/user_interface/shader_warmup.gd")
 
-var main_scene: PackedScene = preload("res://scenes/main_game_view/workspace.tscn")
+# var main_scene: PackedScene = preload("res://scenes/main_game_view/workspace.tscn")
+var prologue_scene: PackedScene = preload("res://scenes/UI/prologue.tscn")
 
 @onready var settings_panel: VBoxContainer = %Settings
 @onready var settings_button: Button = %SettingsButton
@@ -28,12 +29,13 @@ func _on_settings_pressed() -> void:
 
 
 func _on_start_pressed() -> void:
-	if main_scene:
+	if prologue_scene:
 		# TODO: This should be a general function in game manager.
 		Variables.reset()
-		get_tree().change_scene_to_packed(main_scene)
+		print("MainMenu: Starting game, changing scene to prologue_scene.")
+		SceneManager.change_scene(prologue_scene)
 	else:
-		push_warning("MainMenu: main_scene is not set.")
+		push_warning("MainMenu: prologue_scene is not set.")
 
 
 func _on_exit_pressed() -> void:

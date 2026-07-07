@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8y76hij4eqmb"]
+
+[ext_resource type="Texture2D" uid="uid://57j0274oonyw" path="res://2d_assets/backgrounds/prologue/Prologue_Screen.webp" id="1_j8jgn"]
+
+[node name="Prologue" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(640.5, 360.5)
+scale = Vector2(0.33359376, 0.3337963)
+texture = ExtResource("1_j8jgn")
