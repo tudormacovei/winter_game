@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8y76hij4eqmb"]
+[gd_scene load_steps=3 format=3 uid="uid://b8y76hij4eqmb"]
 
+[ext_resource type="Script" uid="uid://bsb1hhsaa1o36" path="res://scripts/user_interface/prologue.gd" id="1_2kr4h"]
 [ext_resource type="Texture2D" uid="uid://57j0274oonyw" path="res://2d_assets/backgrounds/prologue/Prologue_Screen.webp" id="1_j8jgn"]
 
 [node name="Prologue" type="Node2D"]
+script = ExtResource("1_2kr4h")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

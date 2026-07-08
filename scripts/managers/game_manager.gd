@@ -73,10 +73,23 @@ func _ready():
 	_load_day_resources()
 	_load_character_resources()
 
-	current_day_index = 0
-	day_started.emit(0)
+	var start_day_index: int = int(SceneManager.get_meta("start_day_index", 0))
+	var next_interaction_to_play: int = int(SceneManager.get_meta("next_interaction_to_play", 0))
+
+	current_day_index = clampi(start_day_index, 0, max(0, _day_resources.size() - 1))
+
+	var interaction_count: int = _day_resources[current_day_index].interactions.size()
+	next_interaction_to_play = clampi(next_interaction_to_play, 0, max(0, interaction_count - 1))
+
+	current_interaction_index = next_interaction_to_play - 1
+
+	day_started.emit(current_day_index)
 	_play_next_interaction()
-		
+
+	if SceneManager.has_meta("start_day_index"):
+		SceneManager.remove_meta("start_day_index")
+	if SceneManager.has_meta("next_interaction_to_play"):
+		SceneManager.remove_meta("next_interaction_to_play")
 
 	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
 
