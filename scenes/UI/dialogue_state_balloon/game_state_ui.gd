@@ -7,7 +7,10 @@ enum GameStateUIType {
 	OBJECT,
 }
 
-func show_game_state_ui(ui_type: GameStateUIType) -> void:
+func show_game_state_ui(ui_type: GameStateUIType, delay: float = 0.0) -> void:
+	if delay > 0.0:
+		await get_tree().create_timer(delay).timeout
+
 	var vars: Dictionary = _get_ui_type_variables(ui_type)
 	if vars.is_empty():
 		push_error("GameStateUI:show_game_state_ui Invalid UI type")

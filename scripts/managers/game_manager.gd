@@ -185,7 +185,7 @@ func _try_play_next_interaction():
 	if is_dialogue_running:
 		return
 	if not workbench.is_workbench_empty():
-		ui_manager.try_show_object_state_ui()
+		ui_manager.try_show_object_state_ui(Config.OBJECT_STATE_UI_DIALOGUE_END_DELAY_SECONDS)
 		return
 
 	_play_next_interaction()

@@ -51,8 +51,12 @@ const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
 
 #endregion
 
-# UI Config
+#region UI Config
+
 const DAY_END_SCREEN_SHOW_TIME_SECONDS: float = 4.0
+const OBJECT_STATE_UI_DIALOGUE_END_DELAY_SECONDS: float = 5.0 # Delay before showing the object state UI after a dialogue ends
+
+#endregion
 
 #endregion
 
