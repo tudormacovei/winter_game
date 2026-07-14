@@ -32,8 +32,9 @@ func add_object(object_scene: PackedScene):
 		return null
 	
 	slot.add_child(interactible_object)
-	interactible_object.global_position = slot.global_position
+	GameState.new_object_on_workbench.emit()
 
+	interactible_object.global_position = slot.global_position
 	interactible_object.connect("object_completed", _on_object_completed)
 	interactible_object.connect("object_state_changed", _on_object_state_changed)
 	interactible_object.connect("object_pending_completion_changed", _on_object_pending_completion_changed)

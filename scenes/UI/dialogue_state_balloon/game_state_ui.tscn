@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://w6fvfg6nqa87"]
+[gd_scene load_steps=15 format=3 uid="uid://w6fvfg6nqa87"]
 
 [ext_resource type="Script" uid="uid://bshjtdv8suyvg" path="res://scenes/UI/dialogue_state_balloon/game_state_ui.gd" id="1_tqgde"]
 [ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_jfqd4"]
@@ -96,10 +96,26 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(1.25, 1.25), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_tqgde"]
+resource_name = "object_state_ui_show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ObjectStateUI/MarginContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.25, 1.25), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gshre"]
 _data = {
 &"RESET": SubResource("Animation_mbtwg"),
-&"dialogue_state_ui_show": SubResource("Animation_800au")
+&"dialogue_state_ui_show": SubResource("Animation_800au"),
+&"object_state_ui_show": SubResource("Animation_tqgde")
 }
 
 [node name="GameStateUI" type="CanvasLayer"]
@@ -110,20 +126,23 @@ script = ExtResource("1_tqgde")
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 mouse_filter = 2
 theme = SubResource("Theme_qq3yp")
 
 [node name="MarginContainer" type="MarginContainer" parent="DialogueStateUI"]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.5
-offset_left = 1110.0
-offset_top = 45.0
-offset_right = 1230.0
-offset_bottom = 145.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
 pivot_offset = Vector2(60, 50)
 
 [node name="PanelContainer" type="PanelContainer" parent="DialogueStateUI/MarginContainer"]
@@ -133,6 +152,50 @@ mouse_filter = 1
 theme = ExtResource("2_jfqd4")
 
 [node name="StatusLabel" type="RichTextLabel" parent="DialogueStateUI/MarginContainer/PanelContainer"]
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_k25rk")
+theme_override_fonts/bold_font = ExtResource("4_1bmgs")
+theme_override_fonts/bold_italics_font = ExtResource("5_o1vwq")
+theme_override_fonts/italics_font = ExtResource("5_o1vwq")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ObjectStateUI" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+theme = SubResource("Theme_qq3yp")
+
+[node name="MarginContainer" type="MarginContainer" parent="ObjectStateUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 140.0
+offset_bottom = -20.0
+grow_vertical = 0
+pivot_offset = Vector2(60, 50)
+
+[node name="PanelContainer" type="PanelContainer" parent="ObjectStateUI/MarginContainer"]
+clip_children = 2
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("2_jfqd4")
+
+[node name="StatusLabel" type="RichTextLabel" parent="ObjectStateUI/MarginContainer/PanelContainer"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1

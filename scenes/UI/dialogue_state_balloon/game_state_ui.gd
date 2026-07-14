@@ -4,7 +4,7 @@ extends CanvasLayer
 
 enum GameStateUIType {
 	DIALOGUE,
-	# TODO[ziana]: Add object game state UI
+	OBJECT,
 }
 
 func show_game_state_ui(ui_type: GameStateUIType) -> void:
@@ -34,8 +34,13 @@ func _get_ui_type_variables(ui_type: GameStateUIType) -> Dictionary:
 	match ui_type:
 		GameStateUIType.DIALOGUE:
 			return {
-				"root_node": $DialogueStateUI,
+				"root_node": %DialogueStateUI,
 				"show_anim_name": "dialogue_state_ui_show",
+			}
+		GameStateUIType.OBJECT:
+			return {
+				"root_node": %ObjectStateUI,
+				"show_anim_name": "object_state_ui_show",
 			}
 
 	return {}

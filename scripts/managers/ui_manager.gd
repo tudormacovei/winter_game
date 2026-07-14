@@ -28,7 +28,9 @@ func _ready() -> void:
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
 		GameState.connect("dialogue_changed", Callable(self, "_on_dialogue_changed"))
-	
+	if GameState.has_signal("new_object_on_workbench"):
+		GameState.connect("new_object_on_workbench", Callable(self, "_on_new_object_on_workbench"))
+
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
 
@@ -65,6 +67,10 @@ func hide_balloon_layer() -> void:
 		balloon_layer.balloon.hide()
 	else:
 		push_warning("UI Manager: Trying to hide invalid balloon layer or balloon.")
+
+func try_show_object_state_ui() -> void:
+	if _game_state_ui and camera._camera_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+		_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.OBJECT)
 
 #region Screen Highlight
 
@@ -135,8 +141,11 @@ func _on_camera_focus_changed(current_focus) -> void:
 	if current_focus == CameraControl.CameraFocus.WORK_AREA:
 		hide_balloon_layer()
 	
-	if _game_state_ui and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		_game_state_ui.hide_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
+	if _game_state_ui:
+		if current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+			_game_state_ui.hide_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
+		else:
+			_game_state_ui.hide_game_state_ui(_game_state_ui.GameStateUIType.OBJECT)
 
 	show_screen_highlight()
 
@@ -147,6 +156,9 @@ func _on_camera_rotation_completed(current_focus) -> void:
 func _on_dialogue_changed() -> void:
 	if _game_state_ui and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
 		_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
+
+func _on_new_object_on_workbench() -> void:
+	try_show_object_state_ui()
 
 #endregion
 

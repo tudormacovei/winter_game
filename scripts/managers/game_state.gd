@@ -12,8 +12,6 @@ signal first_rotate_on_object
 signal first_sticker_cleansed_on_object
 @warning_ignore("unused_signal")
 signal object_completed
-@warning_ignore("unused_signal")
-signal player_died
 
 # Emitted when:
 # - dialogue starts typing after a pause
@@ -21,11 +19,17 @@ signal player_died
 @warning_ignore("unused_signal")
 signal dialogue_changed
 
+@warning_ignore("unused_signal")
+signal player_died
+
+@warning_ignore("unused_signal")
+signal new_object_on_workbench
+
 func wait_for(signal_name: String) -> void:
 	if not has_signal(signal_name):
 		Utils.debug_error("GameState: No valid signal with name: " + signal_name)
 		return
-	await self [signal_name]
+	await self[signal_name]
 
 func do_scripted_event(event_name: String) -> void:
 	self.call(event_name)
