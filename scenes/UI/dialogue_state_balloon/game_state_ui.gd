@@ -13,6 +13,9 @@ func show_game_state_ui(ui_type: GameStateUIType) -> void:
 		push_error("GameStateUI:show_game_state_ui Invalid UI type")
 		return
 
+	if vars["root_node"].visible:
+		return
+
 	var margin_container: MarginContainer = vars["root_node"].get_node("MarginContainer")
 	margin_container.scale = Vector2.ZERO
 	
