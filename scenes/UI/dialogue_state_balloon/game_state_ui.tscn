@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://w6fvfg6nqa87"]
 
-[ext_resource type="Script" uid="uid://bshjtdv8suyvg" path="res://scenes/UI/dialogue_state_balloon/dialogue_state_balloon.gd" id="1_mbtwg"]
-[ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_axx63"]
-[ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="3_swkt5"]
-[ext_resource type="FontFile" uid="uid://b4wicr355a63g" path="res://2d_assets/fonts/avara/Avara-Bold.otf" id="4_5g416"]
-[ext_resource type="FontFile" uid="uid://do1cr3dldia4n" path="res://2d_assets/fonts/avara/Avara-BoldItalic.otf" id="5_jmmue"]
+[ext_resource type="Script" uid="uid://bshjtdv8suyvg" path="res://scenes/UI/dialogue_state_balloon/game_state_ui.gd" id="1_tqgde"]
+[ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_jfqd4"]
+[ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="3_k25rk"]
+[ext_resource type="FontFile" uid="uid://b4wicr355a63g" path="res://2d_assets/fonts/avara/Avara-Bold.otf" id="4_1bmgs"]
+[ext_resource type="FontFile" uid="uid://do1cr3dldia4n" path="res://2d_assets/fonts/avara/Avara-BoldItalic.otf" id="5_o1vwq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -99,21 +99,22 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gshre"]
 _data = {
 &"RESET": SubResource("Animation_mbtwg"),
-&"dialogue_status_pop_in": SubResource("Animation_800au")
+&"dialogue_state_ui_show": SubResource("Animation_800au")
 }
 
-[node name="DialogueStateBalloon" type="CanvasLayer"]
+[node name="GameStateUI" type="CanvasLayer"]
 layer = 100
-script = ExtResource("1_mbtwg")
+script = ExtResource("1_tqgde")
 
-[node name="Balloon" type="Control" parent="."]
+[node name="DialogueStateUI" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 theme = SubResource("Theme_qq3yp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon"]
+[node name="MarginContainer" type="MarginContainer" parent="DialogueStateUI"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -125,21 +126,20 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(60, 50)
 
-[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="DialogueStateUI/MarginContainer"]
 clip_children = 2
 layout_mode = 2
 mouse_filter = 1
-theme = ExtResource("2_axx63")
+theme = ExtResource("2_jfqd4")
 
-[node name="StatusLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer"]
-unique_name_in_owner = true
+[node name="StatusLabel" type="RichTextLabel" parent="DialogueStateUI/MarginContainer/PanelContainer"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
-theme_override_fonts/normal_font = ExtResource("3_swkt5")
-theme_override_fonts/bold_font = ExtResource("4_5g416")
-theme_override_fonts/bold_italics_font = ExtResource("5_jmmue")
-theme_override_fonts/italics_font = ExtResource("5_jmmue")
+theme_override_fonts/normal_font = ExtResource("3_k25rk")
+theme_override_fonts/bold_font = ExtResource("4_1bmgs")
+theme_override_fonts/bold_italics_font = ExtResource("5_o1vwq")
+theme_override_fonts/italics_font = ExtResource("5_o1vwq")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
 text = "!"
@@ -147,8 +147,8 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon"]
-root_node = NodePath("../MarginContainer/PanelContainer")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../DialogueStateUI/MarginContainer/PanelContainer")
 libraries = {
 &"": SubResource("AnimationLibrary_gshre")
 }

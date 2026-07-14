@@ -11,8 +11,7 @@ extends Node
 @onready var _death_screen := %DeathScreen
 @onready var _day_end_screen_label: Label = %DayEndScreen.get_node("%DayCompleteText")
 @onready var _death_screen_label: Label = %DeathScreen.get_node("%DeathText")
-# @onready var _dialogue_view := %DialogueView NOTE: This is not used anymore
-@onready var _dialogue_state_balloon: CanvasLayer = %DialogueStateBalloon
+@onready var _game_state_ui: CanvasLayer = %GameStateUI
 
 var balloon_layer: CanvasLayer = null
 
@@ -20,15 +19,15 @@ var balloon_layer: CanvasLayer = null
 
 func _ready() -> void:
 	if camera and camera.has_signal("camera_focus_changed"):
-		camera.connect("camera_focus_changed", Callable(self , "_on_camera_focus_changed"))
+		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
-		camera.connect("camera_rotation_completed", Callable(self , "_on_camera_rotation_completed"))
+		camera.connect("camera_rotation_completed", Callable(self, "_on_camera_rotation_completed"))
 	if GameState.has_signal("player_died"):
-		GameState.connect("player_died", Callable(self , "show_death_screen"))
+		GameState.connect("player_died", Callable(self, "show_death_screen"))
 
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
-		GameState.connect("dialogue_changed", Callable(self , "_on_dialogue_changed"))
+		GameState.connect("dialogue_changed", Callable(self, "_on_dialogue_changed"))
 	
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
@@ -39,8 +38,8 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 	# Don't show Dialogue UI in workbench, instead show Dialogue State UI
 	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
 		call_deferred("hide_balloon_layer")
-		if _dialogue_state_balloon:
-			_dialogue_state_balloon.show_state_balloon()
+		if _game_state_ui:
+			_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
 
 func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
@@ -136,8 +135,8 @@ func _on_camera_focus_changed(current_focus) -> void:
 	if current_focus == CameraControl.CameraFocus.WORK_AREA:
 		hide_balloon_layer()
 	
-	if _dialogue_state_balloon and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		_dialogue_state_balloon.hide()
+	if _game_state_ui and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+		_game_state_ui.hide_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
 
 	show_screen_highlight()
 
@@ -146,8 +145,8 @@ func _on_camera_rotation_completed(current_focus) -> void:
 		balloon_layer.balloon.show()
 
 func _on_dialogue_changed() -> void:
-	if _dialogue_state_balloon and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
-		_dialogue_state_balloon.show_state_balloon()
+	if _game_state_ui and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
+		_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
 
 #endregion
 
