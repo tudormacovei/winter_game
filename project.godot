@@ -100,21 +100,21 @@ renderer/rendering_method.mobile="gl_compatibility"
 
 time_of_day={
 "type": "float",
-"value": 0.5
+"value": 1.0
 }
 shadow_global_min_alpha={
 "type": "float",
-"value": 0.15
+"value": 0.1
 }
 shadow_global_max_alpha={
 "type": "float",
-"value": 0.3
+"value": 0.55
 }
 shadow_highlight_min_alpha={
 "type": "float",
-"value": 0.05
+"value": 0.3
 }
 shadow_highlight_max_alpha={
 "type": "float",
-"value": 0.25
+"value": 0.2
 }
