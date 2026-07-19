@@ -61,7 +61,7 @@ unique_name_in_owner = true
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(428.5, 184.5)
+position = Vector2(1, 1)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]

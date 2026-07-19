@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddaf67iv4x4t2"
-path="res://.godot/imported/Micah_NPC1.webp-78f87c801251f441d3272baa07cd6e2b.ctex"
+uid="uid://b5riaqrt83max"
+path="res://.godot/imported/Micah_Upset_NPC1.webp-ecc7c9bcf3a01ad63008362c7e927dda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/Micah_NPC1.webp"
-dest_files=["res://.godot/imported/Micah_NPC1.webp-78f87c801251f441d3272baa07cd6e2b.ctex"]
+source_file="res://2d_assets/characters/Micah_NPC1/Micah_Upset_NPC1.webp"
+dest_files=["res://.godot/imported/Micah_Upset_NPC1.webp-ecc7c9bcf3a01ad63008362c7e927dda.ctex"]
 
 [params]
 
