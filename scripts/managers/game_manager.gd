@@ -116,7 +116,6 @@ func _load_character_resources():
 					push_warning("Character resource '%s' has duplicate id '%s' and will be skipped." % [f, resource.character_id])
 					continue
 				
-				# TODO: When switching to character_id in dialogue, make that the key and do sprite display based on that instead of display_name 
 				_character_dict[resource.display_name] = resource
 				print("GameManager: Loaded character '%s' from file '%s'" % [resource.character_id, f])
 			elif resource:
@@ -124,7 +123,6 @@ func _load_character_resources():
 
 #endregion
 
-# TODO[ziana]: Integrate time of day changes after an interaction ends
 func _play_next_interaction():
 	_interaction_start_token += 1
 	var current_start_token = _interaction_start_token

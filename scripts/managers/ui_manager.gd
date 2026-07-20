@@ -15,8 +15,6 @@ extends Node
 
 var balloon_layer: CanvasLayer = null
 
-# TODO: Show dialogue state bubble when in workspace view
-
 func _ready() -> void:
 	if camera and camera.has_signal("camera_focus_changed"):
 		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
