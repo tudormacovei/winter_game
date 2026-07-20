@@ -86,7 +86,7 @@ func _on_object_interactible(is_interactible: bool, obj: InteractibleObject) -> 
 
 func _on_object_completed(_object_name: String, _is_special: bool, completed_stickers: int, total_stickers: int) -> void:
 	var missed_stickers := total_stickers - completed_stickers
-	if missed_stickers <= 0:
+	if debug_disable_drain or missed_stickers <= 0:
 		return
 	var penalty := minf(missed_stickers * hp_penalty_per_missed_sticker, hp_penalty_cap_per_object)
 	max_health = maxf(0.0, max_health - penalty)
