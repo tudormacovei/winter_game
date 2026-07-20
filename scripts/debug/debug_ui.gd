@@ -18,7 +18,7 @@ var health_manager: HealthManager = null
 #region Debug UI State Variables
 
 #NOTE: Needed for persistent values. Otherwise they would reset every frame.
-var general_tab_day_number := ["1"]
+var general_tab_day_number := ["0"]
 var general_tab_disable_interaction_delay := [false]
 var general_tab_disable_death_state := [false]
 var general_tab_disable_health_drain := [false]
@@ -38,8 +38,8 @@ func _draw_general_tab():
 
 	ImGui.Text("General Information")
 
-	ImGui.Text("Current Day: %d" % game_manager.debug_get_current_day_number())
-	ImGui.Text("Current Interaction: %d" % game_manager.debug_get_current_interaction_number())
+	ImGui.Text("Current Day: %d" % game_manager.debug_get_current_day_index())
+	ImGui.Text("Current Interaction: %d" % game_manager.debug_get_current_interaction_index())
 	ImGui.Text("Current Dialogue: %s" % game_manager.debug_get_current_dialogue())
 
 	ImGui.Separator()
@@ -64,7 +64,7 @@ func _draw_general_tab():
 	
 	ImGui.SetNextItemWidth(80)
 	if ImGui.InputInt("Day Number", general_tab_day_number):
-		general_tab_day_number[0] = max(general_tab_day_number[0], 1)
+		general_tab_day_number[0] = max(general_tab_day_number[0], 0)
 	ImGui.SameLine()
 	if ImGui.Button("Start day"):
 		game_manager.debug_start_day(general_tab_day_number[0])

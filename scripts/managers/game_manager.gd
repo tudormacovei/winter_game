@@ -286,10 +286,10 @@ func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: floa
 
 var debug_disable_interaction_delay: bool = false
 
-func debug_get_current_day_number() -> int:
-	return current_day_index + 1
+func debug_get_current_day_index() -> int:
+	return current_day_index
 
-func debug_get_current_interaction_number() -> int:
+func debug_get_current_interaction_index() -> int:
 	return current_interaction_index
 
 func debug_get_current_dialogue() -> String:
@@ -328,12 +328,12 @@ func debug_play_next_interaction():
 	_play_next_interaction()
 
 func debug_start_day(day_number: int):
-	if day_number < 1 or day_number > _day_resources.size():
-		Utils.debug_alert("Debug: Invalid day number %d. Must be between 1 and %d" % [day_number, _day_resources.size()])
+	if day_number < 0 or day_number >= _day_resources.size():
+		Utils.debug_alert("Debug: Invalid day number %d. Must be between 0 and %d" % [day_number, _day_resources.size() - 1])
 		return
 
 	ui_manager.debug_hide_game_end_screen()
-	current_day_index = day_number - 1
+	current_day_index = day_number
 	day_started.emit(current_day_index)
 	current_interaction_index = -1
 
