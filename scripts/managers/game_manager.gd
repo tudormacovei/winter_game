@@ -70,9 +70,9 @@ func _ready():
 
 	_load_day_resources()
 	_load_character_resources()
+	_restore_progress_from_save()
 
-	current_day_index = 0
-	day_started.emit(0)
+	day_started.emit(current_day_index)
 	_play_next_interaction()
 
 	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
@@ -122,6 +122,25 @@ func _load_character_resources():
 				push_warning("Character resource '%s' is not a valid CharacterDefinition and will not be considered." % f)
 
 #endregion
+
+func _restore_progress_from_save() -> void:
+	current_day_index = 0
+	current_interaction_index = -1
+	if not SaveManager.does_save_exist():
+		return
+
+	var saved_day: int = SaveManager.get_saved_day_index()
+	if saved_day >= 0 and saved_day < _day_resources.size():
+		current_day_index = saved_day
+	else:
+		Utils.debug_error("GameManager: Saved day index %d is invalid. Resetting to day 0." % saved_day)
+
+	var saved_interaction: int = SaveManager.get_saved_interaction_index()
+	if saved_interaction >= 0:
+		var max_interactions: int = _day_resources[current_day_index].interactions.size() - 1
+		current_interaction_index = clampi(saved_interaction - 1, -1, max(max_interactions, 0)) # Subtract 1 to account for _play_next_interaction() incrementing it
+	else:
+		Utils.debug_error("GameManager: Saved interaction index %d is invalid. Resetting to interaction 0." % saved_interaction)
 
 func _play_next_interaction():
 	_interaction_start_token += 1
@@ -178,7 +197,7 @@ func _play_next_interaction():
 
 	_interaction_start_pending = false
 	SaveManager.save_game(current_day_index, current_interaction_index)
-	print("GameManager: Starting day %d interaction %d" % [current_day_index + 1, current_interaction_index])
+	print("GameManager: Starting day %d interaction %d" % [current_day_index, current_interaction_index])
 
 # Next interaction is played when dialogue ends and there are no more objects on the workbench
 func _try_play_next_interaction():

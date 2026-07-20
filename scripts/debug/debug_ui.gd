@@ -44,8 +44,8 @@ func _draw_general_tab():
 
 	ImGui.Separator()
 
-	var last_save_day := SaveManager.debug_get_day_index()
-	var last_save_interaction := SaveManager.debug_get_interaction_index()
+	var last_save_day := SaveManager.get_saved_day_index()
+	var last_save_interaction := SaveManager.get_saved_interaction_index()
 	if last_save_day == -1 or last_save_interaction == -1:
 		ImGui.TextColored(WarningColor, "No save data found.")
 	else:

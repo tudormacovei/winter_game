@@ -54,8 +54,7 @@ text = "Settings"
 [node name="ExitToMenuButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Exit to Menu
-(will reset game progress)"
+text = "Exit to Menu"
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2

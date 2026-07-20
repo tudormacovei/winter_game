@@ -78,7 +78,13 @@ text = "                                 "
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
-text = "Start Game "
+text = "Start new game "
+
+[node name="ContinueGameButton" type="Button" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
 unique_name_in_owner = true
@@ -90,7 +96,7 @@ text = "Settings"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
-text = "Exit Game"
+text = "Exit game"
 
 [node name="BlankLabelForWidth" type="Label" parent="ColorRect/MarginContainerExterior/VBoxContainer/MarginContainer/HBoxContainer/Main"]
 layout_mode = 2
