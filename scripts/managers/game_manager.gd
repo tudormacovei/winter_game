@@ -138,6 +138,7 @@ func _play_next_interaction():
 		current_interaction_index = 0
 
 		if current_day_index >= _day_resources.size():
+			SaveManager.save_game(current_day_index, current_interaction_index)
 			print("GameManager: All days completed!")
 			ui_manager.show_game_end_screen()
 			return
@@ -176,6 +177,7 @@ func _play_next_interaction():
 		_add_object_to_workbench(object_scene)
 
 	_interaction_start_pending = false
+	SaveManager.save_game(current_day_index, current_interaction_index)
 	print("GameManager: Starting day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 
 # Next interaction is played when dialogue ends and there are no more objects on the workbench

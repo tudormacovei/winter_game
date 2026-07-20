@@ -94,6 +94,30 @@ func reset():
 	
 	state_changed.emit("")
 
+#region Save/Load
+
+## Returns all non-local variables: global and special object
+func get_all_globals() -> Dictionary:
+	var result: Dictionary = {}
+	for key in variables.keys():
+		if _local_variables_keys.has(key):
+			continue
+		result[key] = variables[key]
+	
+	return result
+
+func load_all_globals(loaded_variables: Dictionary) -> void:
+	for key in loaded_variables.keys():
+		if _local_variables_keys.has(key):
+			Utils.debug_error("VariableManager: Attempted to load a local variable '%s'. Ignoring." % key)
+			continue
+			
+		variables[key] = loaded_variables[key]
+	
+	state_changed.emit("")
+
+#endregion
+
 #region Signals
 
 func _on_dialogue_ended(_resource):

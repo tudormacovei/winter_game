@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://d1dogk2c3ulva"
 
 Config="*res://scripts/config.gd"
 Utils="*res://scripts/utils.gd"
+SaveManager="*res://scripts/managers/save_manager.gd"
 AudioManager="*res://scripts/managers/audio_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DialogueFuncs="*res://scripts/dialogue_funcs.gd"
