@@ -29,7 +29,7 @@ func save_game(day_index: int, interaction_index: int) -> void:
 	data[DAY_INDEX_KEY] = day_index
 	data[INTERACTION_INDEX_KEY] = interaction_index
 
-	file.store_string(JSON.stringify(data))
+	file.store_string(var_to_str(data))
 	print("SaveManager: Saving game at day %d, interaction %d" % [day_index, interaction_index])
 
 	file.close()
@@ -45,7 +45,7 @@ func load_game() -> bool:
 		return false
 
 	var content := file.get_as_text()
-	var parsed = JSON.parse_string(content)
+	var parsed = str_to_var(content)
 	data = parsed if typeof(parsed) == TYPE_DICTIONARY else {}
 
 	var vars_to_load: Dictionary = data.duplicate()
@@ -61,7 +61,7 @@ func reset_save() -> void:
 	if FileAccess.file_exists(SAVE_PATH):
 		var dir := DirAccess.open(SAVE_DIR)
 		if dir == null:
-			Utils.debug_error("SaveManager: Failed to open user:// to reset save.")
+			Utils.debug_error("SaveManager: Failed to open directory to reset save.")
 			return
 
 		var error := dir.remove(SAVE_FILE_NAME)
