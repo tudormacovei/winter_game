@@ -28,7 +28,7 @@ resource_name = "StickerMaterial"
 render_priority = 0
 shader = ExtResource("4_e2fqs")
 shader_parameter/albedo_texture = ExtResource("2_wntlq")
-shader_parameter/roughness = 0.5
+shader_parameter/roughness = 0.0
 shader_parameter/progress = 0.0
 shader_parameter/sweep_gradient = SubResource("GradientTexture1D_olray")
 
