@@ -21,7 +21,7 @@ size = Vector3(8.72464, 1, 8.894104)
 [sub_resource type="BoxMesh" id="BoxMesh_qyrgi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3085"]
-albedo_color = Color(0.13561687, 0.13561687, 0.13561687, 1)
+albedo_color = Color(0.41960785, 0.35686275, 0.26666668, 1)
 
 [node name="WorkbenchView" type="Node3D" node_paths=PackedStringArray("object_slots")]
 script = ExtResource("1_qyrgi")
@@ -29,13 +29,13 @@ object_slots = [NodePath("QuarantineZone/ObjectSlot1"), NodePath("QuarantineZone
 transition_curve = SubResource("Curve_qyrgi")
 
 [node name="WorkbenchTexture" type="Sprite3D" parent="."]
-transform = Transform3D(0.73555946, 0, 0, 0, 1.1920929e-07, 1.0000013, 0, -1.0000013, 1.1920929e-07, -0.36016318, -0.01, 0)
+transform = Transform3D(0.73555946, 0, 0, 0, 1.1920929e-07, 1.0000013, 0, -1.0000013, 1.1920929e-07, -0.37734362, -0.01, 0)
 pixel_size = 0.0007
 texture = ExtResource("2_qyrgi")
 
 [node name="WorkbenchTexture2" type="Sprite3D" parent="."]
 transform = Transform3D(-0.73555946, -1.1746878e-07, 1.0421607e-14, 0, 1.6017967e-07, 1.0000013, -6.430465e-08, 1.3436863, -1.1920929e-07, 1.2933023, -0.23556206, 0)
-modulate = Color(0.69965345, 0.69965345, 0.69965345, 1)
+modulate = Color(0.8474744, 0.84747446, 0.84747446, 1)
 pixel_size = 0.0007
 texture = ExtResource("2_qyrgi")
 
@@ -112,17 +112,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6242914, 0, 0.08356601)
 shape = SubResource("BoxShape3D_y3085")
 
 [node name="TableEdge" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.018323775, 0, 0, 0, 0.0319283, 0, 0, 0, 1.5146476, 0.62262, -0.012622697, 0)
+transform = Transform3D(0.018323775, 0, 0, 0, 0.0319283, 0, 0, 0, 1.5146476, 0.62262, -0.025174243, 0)
+mesh = SubResource("BoxMesh_qyrgi")
+surface_material_override/0 = SubResource("StandardMaterial3D_y3085")
+
+[node name="TableEdge2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.018323775, 0, 0, 0, 0.0319283, 0, 0, 0, 1.5146476, -1.3458439, -0.0040539335, 0)
 mesh = SubResource("BoxMesh_qyrgi")
 surface_material_override/0 = SubResource("StandardMaterial3D_y3085")
 
 [node name="WickerBasket" parent="." instance=ExtResource("3_qyrgi")]
-transform = Transform3D(1.1010028, 0, 0, 0, 1, 0, 0, 0, 1.1010028, 0.98768926, -0.19772843, 0.004236102)
+transform = Transform3D(1.1010028, 0, 0, 0, 1, 0, 0, 0, 1.1010028, 1.0418783, -0.19772843, 0.004236102)
 
 [node name="BasketLid" parent="." instance=ExtResource("4_y3085")]
 unique_name_in_owner = true
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0.98973554, 0.015214782, 0.0032504909)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 1.0439247, 0.015214782, 0.0032504909)
 
 [node name="BasketLidOpenTransform" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1.1, 0, 0, 0, 1.0958141, 0.0958713, 0, -0.0958713, 1.0958141, 0.98973554, -0.0052034967, -0.5893425)
+transform = Transform3D(1.1, 0, 0, 0, 1.0958141, 0.0958713, 0, -0.0958713, 1.0958141, 1.0439247, -0.0052034967, -0.5893425)
