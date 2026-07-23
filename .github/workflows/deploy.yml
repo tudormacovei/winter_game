@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   export-web:
@@ -31,8 +32,8 @@ jobs:
         uses: Ayowel/butler-to-itch@v1.2.0
         with:
           butler_key: ${{ secrets.BUTLER_CREDENTIALS }}
-          itch_user: tudormacovei
-          itch_game: wintergameproject
+          itch_user: zianatudose
+          itch_game: winter-game-dev-build
           version: ${{ github.sha }}
           files: |
             ${{ steps.export.outputs.archive_directory }}/*.zip
