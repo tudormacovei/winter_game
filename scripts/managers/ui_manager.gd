@@ -49,10 +49,18 @@ func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen.hide()
 
 func show_death_screen() -> void:
-	if not debug_disable_death_screen:
-		_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
-		_death_screen.show()
-		get_tree().paused = true
+	if debug_disable_death_screen:
+		return
+		
+	if _game_state_ui:
+		_game_state_ui.hide_all_game_state_ui()
+
+	hide_balloon_layer()
+
+	_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
+	_death_screen.show()
+
+	get_tree().paused = true
 
 func show_game_end_screen() -> void:
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE

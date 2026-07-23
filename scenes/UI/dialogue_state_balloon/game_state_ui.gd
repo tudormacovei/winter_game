@@ -33,6 +33,10 @@ func hide_game_state_ui(ui_type: GameStateUIType) -> void:
 
 	vars["root_node"].hide()
 
+func hide_all_game_state_ui() -> void:
+	for ui_type in GameStateUIType.values():
+		hide_game_state_ui(ui_type)
+
 func _get_ui_type_variables(ui_type: GameStateUIType) -> Dictionary:
 	match ui_type:
 		GameStateUIType.DIALOGUE:
