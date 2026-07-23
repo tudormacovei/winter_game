@@ -1,18 +1,18 @@
 @tool
 class_name BranchRing extends Node2D
 
-@export var branch_texture: Texture2D : set = _set_branch_texture
-@export var start_radius: float = 450.0 : set = _set_start_radius # Radius of the 16:9 oval where branches sit when fully hidden = at FULL HP
-@export var end_radius: float = 200.0 : set = _set_end_radius # Radius of the oval when fully revealed = at LOW HP
-@export var branch_count: int = 12 : set = _set_branch_count
-@export var branch_scale: float = 0.15 : set = _set_branch_scale
-@export var health_window: Vector2 = Vector2(0.95, 0.50) : set = _set_health_window
+@export var branch_texture: Texture2D: set = _set_branch_texture
+@export var start_radius: float = 450.0: set = _set_start_radius # Radius of the 16:9 oval where branches sit when fully hidden = at FULL HP
+@export var end_radius: float = 200.0: set = _set_end_radius # Radius of the oval when fully revealed = at LOW HP
+@export var branch_count: int = 12: set = _set_branch_count
+@export var branch_scale: float = 0.15: set = _set_branch_scale
+@export var health_window: Vector2 = Vector2(0.95, 0.05): set = _set_health_window
 
 # Pixels of ring shift per pixel of mouse offset from screen center.
 @export var parallax_strength: float = 0.0
 
 # Editor-only preview knob. At runtime, HealthManager drives set_health_normalized() directly.
-@export_range(0.0, 1.0, 0.01) var preview_health: float = 1.0 : set = _set_preview_health
+@export_range(0.0, 1.0, 0.01) var preview_health: float = 1.0: set = _set_preview_health
 
 const PARALLAX_SMOOTHING_RATE: float = 8.0
 
@@ -48,7 +48,7 @@ func _rebuild_branches() -> void:
 	for i in branch_count:
 		var angle: float = TAU * i / branch_count
 		var start_pos := Vector2(cos(angle) * start_radius * aspect, sin(angle) * start_radius)
-		var end_pos   := Vector2(cos(angle) * end_radius * aspect, sin(angle) * end_radius)
+		var end_pos := Vector2(cos(angle) * end_radius * aspect, sin(angle) * end_radius)
 
 		var sprite := Sprite2D.new()
 		sprite.texture = branch_texture

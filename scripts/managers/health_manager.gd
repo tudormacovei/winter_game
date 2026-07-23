@@ -68,7 +68,7 @@ func _set_health(value: float) -> void:
 func _die() -> void:
 	_is_dead = true
 	set_process(false) # stops drain, regen
-	push_warning("Player HP reached 0")
+	print("Player HP reached 0")
 	GameState.player_died.emit()
 
 
