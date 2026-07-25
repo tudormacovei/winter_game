@@ -1,7 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0ows3vg8n3gk"]
+[gd_scene load_steps=8 format=3 uid="uid://c0ows3vg8n3gk"]
 
 [ext_resource type="Texture2D" uid="uid://dqqog4lfb3012" path="res://2d_assets/backgrounds/death/death_screen.webp" id="1_jcrgr"]
 [ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="2_2n4oe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2n4oe"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.16470589, 0.12941177, 0.13333334, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4w52"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.11764706, 0.08627451, 0.09019608, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrt7s"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.19966345, 0.16409835, 0.16007765, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0yij"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ele4j"]
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.16409835, 0.12835406, 0.13335153, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="DeathScreen" type="Control"]
 z_index = 4
@@ -12,19 +68,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640.5, 360.5)
 scale = Vector2(0.334, 0.334)
 texture = ExtResource("1_jcrgr")
 
 [node name="DeathText" type="Label" parent="."]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 519.0
-offset_top = 130.0
-offset_right = 755.0
-offset_bottom = 199.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -425.0
+offset_top = 635.0
+offset_right = 425.0
+offset_bottom = 704.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.48759842, 0.40347946, 0.41147256, 1)
 theme_override_fonts/font = ExtResource("2_2n4oe")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 25
 text = "YOU DIED"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueGameButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1055.0
+offset_top = 31.0
+offset_right = 1213.0
+offset_bottom = 75.0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.4862745, 0.40392157, 0.4117647, 1)
+theme_override_colors/font_focus_color = Color(0.4862745, 0.40392157, 0.4117647, 1)
+theme_override_colors/font_pressed_color = Color(0.36862746, 0.29803923, 0.30588236, 1)
+theme_override_colors/font_hover_color = Color(0.58431375, 0.47058824, 0.48235294, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.36862746, 0.29803923, 0.30588236, 1)
+theme_override_fonts/font = ExtResource("2_2n4oe")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_2n4oe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g4w52")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qrt7s")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_h0yij")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ele4j")
+text = "TRY AGAIN"
+icon_alignment = 1
