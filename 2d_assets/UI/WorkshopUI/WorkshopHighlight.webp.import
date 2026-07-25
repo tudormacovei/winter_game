@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b22gfirq058ha"
-path="res://.godot/imported/WorkshopHighlight.webp-0b6ebd9722be1bd4c111dac838726d3b.ctex"
+path="res://.godot/imported/WorkshopHighlight.webp-193a10786478a166521f59bc9f45a9a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/UI/WorkshopUI/WorkshopHighlight.webp"
-dest_files=["res://.godot/imported/WorkshopHighlight.webp-0b6ebd9722be1bd4c111dac838726d3b.ctex"]
+source_file="res://2d_assets/UI/WorkshopUI/WorkshopHighlight.webp"
+dest_files=["res://.godot/imported/WorkshopHighlight.webp-193a10786478a166521f59bc9f45a9a8.ctex"]
 
 [params]
 

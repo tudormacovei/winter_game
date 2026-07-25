@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdc07h63m41bu"
-path="res://.godot/imported/WorkshopChoice.webp-ab93a8f441991683ebdb4c8eb1958bba.ctex"
+uid="uid://ni6bbm8mqcc5"
+path="res://.godot/imported/DialogueText.webp-157af4c1627cef24a0c7e70513816e2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/UI/WorkshopUI/WorkshopChoice.webp"
-dest_files=["res://.godot/imported/WorkshopChoice.webp-ab93a8f441991683ebdb4c8eb1958bba.ctex"]
+source_file="res://2d_assets/UI/WorkshopUI/DialogueText.webp"
+dest_files=["res://.godot/imported/DialogueText.webp-157af4c1627cef24a0c7e70513816e2c.ctex"]
 
 [params]
 
