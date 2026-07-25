@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0ows3vg8n3gk"]
+[gd_scene load_steps=9 format=3 uid="uid://c0ows3vg8n3gk"]
 
+[ext_resource type="Script" uid="uid://bkax5wqkb1c00" path="res://scripts/user_interface/death_screen.gd" id="1_g4w52"]
 [ext_resource type="Texture2D" uid="uid://dqqog4lfb3012" path="res://2d_assets/backgrounds/death/death_screen.webp" id="1_jcrgr"]
 [ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="2_2n4oe"]
 
@@ -67,6 +68,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_g4w52")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640.5, 360.5)
@@ -93,11 +95,12 @@ vertical_alignment = 1
 
 [node name="ContinueGameButton" type="Button" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 0
-offset_left = 1055.0
-offset_top = 31.0
-offset_right = 1213.0
-offset_bottom = 75.0
+offset_left = 1057.0
+offset_top = 29.0
+offset_right = 1215.0
+offset_bottom = 73.0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.4862745, 0.40392157, 0.4117647, 1)
 theme_override_colors/font_focus_color = Color(0.4862745, 0.40392157, 0.4117647, 1)
