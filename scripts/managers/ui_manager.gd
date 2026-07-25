@@ -36,7 +36,7 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 	self.balloon_layer = new_balloon_layer
 
 	# Don't show Dialogue UI in workbench, instead show Dialogue State UI
-	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
+	if camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
 		call_deferred("hide_balloon_layer")
 		if _game_state_ui:
 			_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
