@@ -22,7 +22,7 @@ func _ready() -> void:
 	start_button.pressed.connect(_on_start_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
-	CursorManager.register_controls([start_button, settings_button, exit_button])
+	CursorManager.register_controls([start_button, settings_button, continue_button, exit_button])
 
 	continue_button.disabled = not SaveManager.does_save_exist()
 
