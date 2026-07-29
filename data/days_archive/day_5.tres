@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=21 format=3 uid="uid://bj13kkf7ghsl4"]
+
+[ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_0jsgj"]
+[ext_resource type="Resource" uid="uid://dnjv2qqfanwuo" path="res://data/dialogue/NPC_1/NPC_1_1.dialogue" id="2_i5144"]
+[ext_resource type="Resource" uid="uid://dg7byaup6bjsr" path="res://data/dialogue/NPC_2/NPC_2_1.dialogue" id="3_rss5p"]
+[ext_resource type="PackedScene" uid="uid://bov6fm3d5y6xm" path="res://scenes/object_manipulation/objects/flask.tscn" id="4_o4cmm"]
+[ext_resource type="Resource" uid="uid://dc2tolseshfqd" path="res://data/dialogue/NPC_3/NPC_3_1.dialogue" id="5_tmpuc"]
+[ext_resource type="PackedScene" uid="uid://bxmo5x5kvp8tq" path="res://scenes/object_manipulation/objects/chess_set.tscn" id="6_80dl6"]
+[ext_resource type="PackedScene" uid="uid://bl5cie1nbmjtb" path="res://scenes/object_manipulation/objects/book_01.tscn" id="7_15nm7"]
+[ext_resource type="PackedScene" uid="uid://d2sa4je13i7jc" path="res://scenes/object_manipulation/objects/milk_carton_variant_01.tscn" id="8_234pa"]
+[ext_resource type="Resource" uid="uid://dqfkyjuyeryi8" path="res://data/dialogue/NPC_2/NPC_2_2.dialogue" id="9_f57kv"]
+[ext_resource type="PackedScene" uid="uid://gfjoau0fs0gt" path="res://scenes/object_manipulation/objects/milk_carton_variant_02.tscn" id="10_77fxj"]
+[ext_resource type="Resource" uid="uid://bu00kv7gx3usw" path="res://data/dialogue/NPC_1/NPC_1_2.dialogue" id="11_q5pyp"]
+[ext_resource type="Resource" uid="uid://bnvprtkx16co" path="res://data/dialogue/NPC_1/NPC_1_3.dialogue" id="12_6okvd"]
+[ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="13_2hfvs"]
+[ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="14_uqxvw"]
+
+[sub_resource type="Resource" id="Resource_7tgdb"]
+script = ExtResource("1_0jsgj")
+dialogue = ExtResource("2_i5144")
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[sub_resource type="Resource" id="Resource_p4oql"]
+script = ExtResource("1_0jsgj")
+dialogue = ExtResource("3_rss5p")
+objects = Array[PackedScene]([ExtResource("4_o4cmm")])
+start_delay_seconds = 3.0
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[sub_resource type="Resource" id="Resource_l4lrq"]
+script = ExtResource("1_0jsgj")
+dialogue = ExtResource("5_tmpuc")
+objects = Array[PackedScene]([ExtResource("6_80dl6"), ExtResource("7_15nm7"), ExtResource("8_234pa")])
+start_delay_seconds = 4.0
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[sub_resource type="Resource" id="Resource_q24my"]
+script = ExtResource("1_0jsgj")
+dialogue = ExtResource("9_f57kv")
+objects = Array[PackedScene]([ExtResource("10_77fxj")])
+start_delay_seconds = 3.0
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[sub_resource type="Resource" id="Resource_o05bc"]
+script = ExtResource("1_0jsgj")
+dialogue = ExtResource("11_q5pyp")
+objects = Array[PackedScene]([ExtResource("4_o4cmm")])
+start_delay_seconds = 4.0
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[sub_resource type="Resource" id="Resource_f0opt"]
+script = ExtResource("1_0jsgj")
+dialogue = ExtResource("12_6okvd")
+objects = Array[PackedScene]([ExtResource("13_2hfvs")])
+start_delay_seconds = 3.0
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
+[resource]
+script = ExtResource("14_uqxvw")
+day_id = 5
+interactions = Array[ExtResource("1_0jsgj")]([SubResource("Resource_7tgdb"), SubResource("Resource_p4oql"), SubResource("Resource_l4lrq"), SubResource("Resource_q24my"), SubResource("Resource_o05bc"), SubResource("Resource_f0opt")])
+metadata/_custom_type_script = "uid://bta87oci6xlf5"
