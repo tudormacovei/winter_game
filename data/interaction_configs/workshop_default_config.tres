@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InteractionViewDefinition" load_steps=2 format=3 uid="uid://douhk2njjw7k8"]
+
+[ext_resource type="Script" uid="uid://c2xpl2eysoink" path="res://scripts/systems/interactions/interaction_config_definition.gd" id="1_cfytr"]
+
+[resource]
+script = ExtResource("1_cfytr")
+scene_name = "DialogueView"
+metadata/_custom_type_script = "uid://c2xpl2eysoink"

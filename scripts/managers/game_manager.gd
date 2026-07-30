@@ -42,8 +42,9 @@ static func get_sticker_spawn_config(difficulty: int) -> Dictionary:
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
 @onready var health_manager: HealthManager = %HealthManager
-@onready var character_node := get_node("/root/Workspace/CameraSpace/DialogueView/DialogueCharacterTexture")
+@onready var character_node := get_node("/root/Workspace/CameraSpace/InteractionConfigController/DialogueView/DialogueCharacterTexture")
 @onready var time_manager := %TimeManager
+@onready var interaction_config_controller: InteractionConfigController = %InteractionConfigController
 
 var _day_resources: Array[DayDefinition] = []
 var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
@@ -180,6 +181,8 @@ func _play_next_interaction():
 		return
 
 	_update_time_of_day()
+
+	interaction_config_controller.apply_config(interaction.config)
 
 	# Wait for start delay
 	if not (OS.is_debug_build() and debug_disable_interaction_delay):

@@ -8,6 +8,9 @@
 class_name InteractionDefinition
 extends Resource
 
+const DEFAULT_CONFIG_RESOURCE := preload("res://data/interaction_configs/workshop_default_config.tres")
+
 @export var dialogue: Resource
 @export var objects: Array[PackedScene]
 @export var start_delay_seconds: float = 1 # Delay before starting the interaction
+@export var config: Resource = DEFAULT_CONFIG_RESOURCE

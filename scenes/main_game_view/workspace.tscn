@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=24 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
+[ext_resource type="Script" uid="uid://cj2xxumsftfuv" path="res://scripts/controllers/interaction_config_controller.gd" id="13_oneno"]
+[ext_resource type="PackedScene" uid="uid://cr0u622abvq0x" path="res://scenes/main_game_view/prologue_view.tscn" id="14_nf02i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdvrf"]
 shader = ExtResource("6_8dlmc")
@@ -61,13 +63,14 @@ unique_name_in_owner = true
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(1, 1)
+position = Vector2(433.5, 297.5)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
 end_radius = 80.0
 branch_count = 20
 branch_scale = 0.3
+health_window = Vector2(0.95, 0.5)
 parallax_strength = 0.02
 
 [node name="BranchRing2" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
@@ -77,6 +80,7 @@ start_radius = 500.0
 end_radius = 100.0
 branch_count = 14
 branch_scale = 0.4
+health_window = Vector2(0.95, 0.5)
 parallax_strength = 0.05
 
 [node name="BranchRing3" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
@@ -86,6 +90,7 @@ start_radius = 600.0
 end_radius = 150.0
 branch_count = 10
 branch_scale = 0.5
+health_window = Vector2(0.95, 0.5)
 parallax_strength = 0.07
 
 [node name="ScreenHighlightCanvas" type="CanvasLayer" parent="UI"]
@@ -144,9 +149,19 @@ texture = ExtResource("9_7nw64")
 
 [node name="CameraSpace" type="Node3D" parent="."]
 
-[node name="DialogueView" parent="CameraSpace" instance=ExtResource("1_w2y3b")]
+[node name="InteractionConfigController" type="Node3D" parent="CameraSpace"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 2.9802319e-08, 0, -2.9802319e-08, 1, 0, 1.6842041, -1.6700333)
+transform = Transform3D(1, 0, 0, 0, 1, 1.4901161e-08, 0, 0, 1, 0, 0, 0)
+script = ExtResource("13_oneno")
+
+[node name="DialogueView" parent="CameraSpace/InteractionConfigController" instance=ExtResource("1_w2y3b")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 5.9604645e-08, 0, -2.9802322e-08, 1, 0, 1.6842042, -1.6700335)
+
+[node name="PrologueView" parent="CameraSpace/InteractionConfigController" instance=ExtResource("14_nf02i")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 4.4703484e-08, 0, 0, 1, 0, 1.6842042, -1.6700335)
+visible = false
 
 [node name="WorkbenchView" parent="CameraSpace" instance=ExtResource("2_ckfyi")]
 unique_name_in_owner = true
