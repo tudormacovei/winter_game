@@ -1,6 +1,10 @@
 class_name InteractionConfigController
 extends Node3D
 
+var current_config: InteractionConfigDefinition = null
+
+var _camera: CameraControl = null
+
 func apply_config(config: Resource) -> void:
 	if config is InteractionConfigDefinition:
 		config = config as InteractionConfigDefinition
@@ -8,7 +12,17 @@ func apply_config(config: Resource) -> void:
 		Utils.debug_error("InteractionConfigController: Config is invalid")
 		return
 
+	current_config = config
 	_apply_scene_by_name(config.scene_name)
+	_apply_camera_rules(config.is_camera_locked)
+	
+func _apply_camera_rules(is_locked: bool) -> void:
+	# NOTE: We lazily resolve the camera because otherwise the scene tree is not ready yet :/
+	_resolve_camera()
+	if _camera:
+		_camera.set_locked_to_dialogue(is_locked)
+	else:
+		get_tree().root.call_deferred("_apply_camera_rules", is_locked)
 
 
 func _apply_scene_by_name(scene_name: String) -> void:
@@ -26,3 +40,14 @@ func _apply_scene_by_name(scene_name: String) -> void:
 
 	if not success:
 		Utils.debug_error("InteractionConfigController: Could not find scene '%s' to apply." % scene_name)
+
+
+#region Helpers
+
+func _resolve_camera() -> void:
+	if _camera:
+		return
+
+	_camera = %Camera3D
+
+#endregion

@@ -52,6 +52,7 @@ var _quarantine_exit_elapsed: float = 0.0 # in seconds
 var _quarantine_tween: Tween
 var _vertical_dwell_elapsed: float = 0.0 # in seconds
 var _pending_transition_to_dialogue: bool = false
+var _is_locked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,6 +61,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if _is_locked:
+		return
+
 	handle_rotation(delta)
 	_handle_quarantine_proximity(delta)
 	_handle_vertical_proximity(delta)
@@ -85,6 +89,11 @@ func handle_rotation(delta: float):
 		_rotation_tracker = 0.0
 		camera_rotation_completed.emit(_camera_focus)
 
+func set_locked_to_dialogue(is_locked: bool) -> void:
+	_is_locked = is_locked
+	if is_locked:
+		_apply_locked_focus(CameraFocus.DIALOGUE_AREA)
+
 # begins a rotation from the current camera_focus to target_focus (WORK_AREA or DIALOGUE_AREA)
 func _start_rotation_to(target_focus: CameraFocus) -> void:
 	if not can_enter_dialogue_view and target_focus == CameraFocus.DIALOGUE_AREA:
@@ -102,6 +111,22 @@ func _is_camera_animating() -> bool:
 	return _camera_state != CameraState.STATIONARY
 
 
+func _apply_locked_focus(focus: CameraFocus) -> void:
+	if _camera_focus == focus:
+		return
+
+	_camera_focus = focus
+	if _camera_focus == CameraFocus.DIALOGUE_AREA:
+		rotation_degrees.x = DIALOGUE_ROTATION
+	elif _camera_focus == CameraFocus.WORK_AREA:
+		rotation_degrees.x = WORK_AREA_ROTATION
+	elif _camera_focus == CameraFocus.QUARANTINE_VIEW:
+		rotation_degrees.x = WORK_AREA_ROTATION
+		position.x = _base_x + quarantine_x_offset
+
+	_camera_state = CameraState.STATIONARY
+
+
 func is_at_rest_in_workbench_view() -> bool:
 	return _camera_state == CameraState.STATIONARY and _camera_focus == CameraFocus.WORK_AREA
 
@@ -111,7 +136,7 @@ func is_at_rest_at_table() -> bool:
 
 
 func _handle_quarantine_proximity(delta: float) -> void:
-	if not can_enter_quarantine_view or _is_camera_animating():
+	if _is_locked or not can_enter_quarantine_view or _is_camera_animating():
 		_quarantine_dwell_elapsed = 0.0
 		_quarantine_exit_elapsed = 0.0
 		return
@@ -142,7 +167,7 @@ func _handle_quarantine_proximity(delta: float) -> void:
 
 
 func _handle_vertical_proximity(delta: float) -> void:
-	if not can_enter_dialogue_view or _is_camera_animating():
+	if _is_locked or not can_enter_dialogue_view or _is_camera_animating():
 		_vertical_dwell_elapsed = 0.0
 		return
 
