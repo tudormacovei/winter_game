@@ -68,7 +68,7 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 	Shopkeeper: [#sprite=worried]Oh Goddess. They could be anywhere. [do Variables.set_var("fourfive", 1)]
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why
 - Micah's helping her find a surprise gift for your birthday. [if Variables.get_var("knows_of_gift") == true]
-	Shopkeeper: [#sprite=worried]Uh, I'm guessing she asked you to keep it a secret. [do Variables.set_char_var("told_of_gift", true)]
+	Shopkeeper: [#sprite=worried]Uh, I'm guessing she asked you to keep it a secret. [do Variables.set_var("told_of_gift", true)]
 	Shopkeeper: [#sprite=worried]Doesn't matter. Think I know where they went. 
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why
 - (LIE) No idea. Sorry. 

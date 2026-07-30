@@ -31,7 +31,7 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 			Sarah: [#sprite=upset]Leave me alone or I'll scream so hard the whole village will be here in seconds.[do DialogueFuncs.play_sfx("sfx_door_slam")]
 			- Brat. => END 
 			- ... => END 
-elif Variables.get_char_var("told_of gift") == true
+elif Variables.get_var("told_of_gift") == true
 	Sarah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...
 	Sarah: [#sprite=upset]You told dad about the gift. 
 	Sarah: [#sprite=upset]He tried to hide it but he's the worst liar in the world. 
@@ -61,7 +61,7 @@ elif Variables.get_char_var("told_of gift") == true
 			Sarah: [#sprite=happy]Oh. That's good. 
 			Sarah: [#sprite=upset]But I've got other stuff on my mind right now.
 			Sarah: [#sprite=upset]... => next 
-elif Variables.get_char_var("told_of gift") == false
+elif Variables.get_var("told_of_gift") == false
 	Sarah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]... 
 	- Morning. 
 		Sarah: Uh, morning. 
