@@ -4,7 +4,7 @@ do Variables.add_local("nosy", false)
 => start
 
 ~ start
-Mary: [wait=1]Oh. Good day to you. 
+Mary: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]Oh. Good day to you. 
 Mary: Wasn't expecting to see a new face here. 
 - Good day. 
 	Mary: Is Duncan here? => duncan
@@ -67,8 +67,8 @@ Mary: Wasn't expecting to see a new face here.
 ~ sarah
 - Uh, sure. 
 	Mary: Appreciate it. Farewell. 
-	- See you around. => END 
-	- Goodbye. => END 
+	- See you around. => END1 
+	- Goodbye. => END1 
 - She's already left with Micah.
 	Mary: Oh. 
 	Mary: I don't like that kid. At least she's not alone.
@@ -78,68 +78,69 @@ Mary: Wasn't expecting to see a new face here.
 		Mary: Tell her anyway, when she comes back, will you?
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
-			- See you around. => END 
-			- Goodybe. => END 
+			- See you around. => END1 
+			- Goodybe. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
-			- See you around. => END 
-			- Goodbye. => END 
+			- See you around. => END1 
+			- Goodbye. => END1 
 	- Not sure, but they're definitely up to something. [if Variables.get_var("knows_of_gift") == false]
 		Mary: Good lord. 
 		Mary: Well, it could be nothing. At least I hope so. 
 		Mary: Tell her anyway, when she comes back, will you?
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
-			- See you around. => END 
-			- Goodybe. => END 
+			- See you around. => END1 
+			- Goodybe. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
-			- See you around. => END 
-			- Goodbye. => END 
+			- See you around. => END1 
+			- Goodbye. => END1 
 	- They're getting a gift for Duncan. [if Variables.get_var("knows_of_gift") == true]
 		Mary: What a sweet, sweet child she is. 
 		Mary: Well, it could be nothing. At least I hope so. 
 		Mary: Tell her anyway, when she comes back, will you?
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
-			- See you around. => END 
-			- Goodybe. => END 
+			- See you around. => END1 
+			- Goodybe. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
-			- See you around. => END 
-			- Goodbye. => END 
+			- See you around. => END1 
+			- Goodbye. => END1 
 	- They just said they'd be back before nighftfall. 
 		Mary: That's a ways off. 
 		Mary: Well, it could be nothing. At least I hope so. 
 		Mary: Tell her anyway, when she comes back, will you?
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
-			- See you around. => END 
-			- Goodybe. => END 
+			- See you around. => END1 
+			- Goodybe. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
-			- See you around. => END 
-			- Goodbye. => END 
+			- See you around. => END1 
+			- Goodbye. => END1 
 - Thought this doesn't concern me. [if Variables.get_var("nosy") == true] 
 	Mary: ...
 	Mary: Pleasure talking to you. Farewell. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
-	- See you. => END 
-	- Pleasure was all mine. => END 
+	- See you. => END1 
+	- Pleasure was all mine. => END1 
 	- I'm just messing. I'll tell her. 
 		Mary: ...Appreciate it. Goodbye. [do Variables.mod_char_var("NPC_3", "relationship", 1)]
-		- See you around. => END
-		- Goodbye. => END  
+		- See you around. => END1
+		- Goodbye. => END1  
 	- (WHISPER) Bitch. 
 		Mary: I'm sorry, I didn't quite catch that. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
-		- I didn't say anything. Goodbye. => END 
+		- I didn't say anything. Goodbye. 
+			Mary: ...[do DialogueFuncs.play_sfx("sfx_door_slam")] => END
 		- I said you're a bitch. 
-			Mary: Lovely. => END 
+			Mary: Lovely. [do DialogueFuncs.play_sfx("sfx_door_slam")] => END 
 	- (OUT LOUD) Bitch. 
-		Mary: You don't know the half of it. [do Variables.mod_char_var("NPC_3", "relationship", -1)] => END 
+		Mary: You don't know the half of it. [do Variables.mod_char_var("NPC_3", "relationship", -1)][do DialogueFuncs.play_sfx("sfx_door_slam")]  => END
 - Why?
 	if Variables.get_var("nosy" == true)
 		Mary: You sure ask a lot of questions. 
@@ -148,32 +149,33 @@ Mary: Wasn't expecting to see a new face here.
 			Mary: From your endless barrage of fucking questions. Good lord. 
 			Mary: You've been here a day. Are you trying to break the village record? 
 			Mary: Just tell her to stay here. Farewell.
-			- Goodbye. => END
+			- Goodbye. => END1
 			- I'm simply curious by nature. 
 				Mary: It killed the cat. It will obliterate you around here.
 				- Don't you worry about me. 
-					Mary: I won't. => END 
+					Mary: I won't.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 				- What are you talking about? 
 					Mary: ... [do Variables.mod_char_var("NPC_3", "relationship", -1)]
-					Mary: That's quite enough. I'm leaving. Goodbye. => END 
+					Mary: That's quite enough. I'm leaving. Goodbye.[do DialogueFuncs.play_sfx("sfx_door_slam")] => END
 		- Okay then. 
 			Mary: Appreciate it. Farewell. 
-			- See you around. => END 
-			- Goodbye. => END 
+			- See you around. => END1 
+			- Goodbye. => END1 
 		- Too bad this doesn't concern me. 
 			Mary: ...
 			Mary: Pleasure talking to you. Farewell. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
-			- See you. => END 
-			- Pleasure was all mine. => END 
+			- See you. => END1 
+			- Pleasure was all mine. => END1 
 			- I'm just messing. I'll tell her. 
-				Mary: ...Appreciate it. Goodbye. [do Variables.mod_char_var("NPC_3", "relationship", 1)] => END 
+				Mary: ...Appreciate it. Goodbye. [do Variables.mod_char_var("NPC_3", "relationship", 1)][do DialogueFuncs.play_sfx("sfx_door_close")] => END
 			- (WHISPER) Bitch. 
 				Mary: I'm sorry, I didn't quite catch that. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
-				- I didn't say anything. Goodbye. => END 
+				- I didn't say anything. Goodbye. 
+					Mary: ...[do DialogueFuncs.play_sfx("sfx_door_slam")] => END
 				- I said you're a bitch. 
-					Mary: Lovely. => END 
+					Mary: Lovely.[do DialogueFuncs.play_sfx("sfx_door_slam")] => END
 			- (OUT LOUD) Bitch. 
-				Mary: You don't know the half of it. [do Variables.mod_char_var("NPC_3", "relationship", -1)] => END 
+				Mary: You don't know the half of it.[do Variables.mod_char_var("NPC_3", "relationship", -1)][do DialogueFuncs.play_sfx("sfx_door_slam")] => END
 	else
 		Mary: To keep her safe. Just in case. 
 		- Safe from what?
@@ -181,16 +183,20 @@ Mary: Wasn't expecting to see a new face here.
 			Mary: That's all I'll say. Just do it, please. 
 			- Okay. I will. 
 				Mary: Appreciate it. Farewell. 
-				- See you around. => END 
-				- Goodbye. => END 
+				- See you around. => END1 
+				- Goodbye. => END1 
 			- Don't wanna scare her for no reason. 
 				Mary: ...Very well. I'll try and find her father, then.
 				Mary: Farewell. 
-				- See you around. => END 
-				- Goodbye. => END 
+				- See you around. => END1 
+				- Goodbye. => END1 
 		- Alright. Will do. 
 			Mary: Appreciate it. Farewell.
-			- See you around. => END 
-			- Goodbye. => END 
+			- See you around. => END1 
+			- Goodbye. => END1 
+
+~ END1
+Mary: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+
 => END
 

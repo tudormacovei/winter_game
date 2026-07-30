@@ -3,11 +3,12 @@
 => start
 
 ~ start
-[wait=1]...Dad, where are you?
-...
+...Dad, where are you?
+...[do DialogueFuncs.play_sfx("sfx_door_open")]
 Sarah: [wait=1]...Oh. Hello. 
 Sarah: You seen my father?
-Sarah: I heard him come in late last night. I'm a light sleeper. I could even hear you snore.
+Sarah: I heard him come in late last night. I'm a light sleeper. 
+Sarah: [#sprite=happy][do DialogueFuncs.play_sfx("sfx_giggle")]I could even hear you snore.
 Sarah: But then he left again... and didn't come back.
 - Haven't seen him since yesterday, myself. 
 	Sarah: Hmm. Wonder what he's up to. => drink
@@ -23,29 +24,29 @@ Sarah: I'm starting to get worried.
 - The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=6] 
 	Sarah: I'm sure She is. But it's a bit more complicated than that. => hope
 - Isn't the Goddess supposed to take care of him? Him being a Gift-bearer and whatnot? [if Variables.get_var("religious_fervour") <= 5]
-	Sarah: That's not how it works. Gift-bearers don't get special treatment. => hope
+	Sarah: [#sprite=upset]That's not how it works. Gift-bearers don't get special treatment. => hope
 
 ~ what
-Sarah: How can you be sure? You just got here. 
-Sarah: You don't know the first thing about us. 
+Sarah: [#sprite=upset]How can you be sure? You just got here. 
+Sarah: [#sprite=upset]You don't know the first thing about us. 
 - I was just trying to comfort you. 
-	Sarah: I don't want comfort. I want to find him. => hope
+	Sarah: [#sprite=upset]I don't want comfort. I want to find him. => hope
 - You're right. I've no idea if he's fine or not. 
 	Sarah: Oh, this is bad. => hope
 - I don't know. It's just a thing you say. 
-	Sarah: I hate it when adults just say things. => hope
+	Sarah: [#sprite=upset]I hate it when adults just say things. => hope
 - I'm the Goddess's chosen one. If I say he's fine, then he's fine. [if Variables.get_var("religious_fervour") >=6]
-	Sarah: Uh huh. That's definitely not how it works. => hope
+	Sarah: [#sprite=upset]Uh huh. That's definitely not how it works. => hope
 
 ~ help
-Sarah: Appreciate it, but how would you help, exactly?
+Sarah: [#sprite=upset]Appreciate it, but how would you help, exactly?
 Sarah: There isn't a nook or cranny in this village I'm not familiar with. 
-Sarah: You may think I'm some worthless little girl, but I'm not. 
+Sarah: [#sprite=upset]You may think I'm some worthless little girl, but I'm not. 
 - I don't think you're worthless. I'm just trying to help. 
-	Sarah: Well, you can't. Plus, I'm managing just fine. => hope
+	Sarah: [#sprite=upset]Well, you can't. Plus, I'm managing just fine. => hope
 - Confident, are we? 
-	Sarah: Laugh all you want. 
-	Sarah: You don't know what it was like. => anyway3
+	Sarah: [#sprite=upset]Laugh all you want. 
+	Sarah: [#sprite=upset]You don't know what it was like. => anyway3
 - How so?
 	Sarah: I make sure he doesn't drink anymore. 
 	Sarah: He's had some serious problems with it in the past. => anyway1
@@ -58,18 +59,18 @@ Sarah: Oh, I really hope he didn't go drinking.
 	Sarah: He's had some serious problems with it in the past. => anyway1
 
 ~ beat
-Sarah: What? No! Of course not!
-Sarah: Why would you think that?
+Sarah: [#sprite=upset]What? No! Of course not!
+Sarah: [#sprite=upset]Why would you think that?
 Sarah: He's the sweetest, most caring dad in the world. He loves me more than anything. 
 Sarah: He'd never lay a hand on me. 
 - Just asking. 
-	Sarah: Weird thing to ask. 
+	Sarah: [#sprite=upset]Weird thing to ask. 
 	- Not really. 
-		Sarah: Yes really. You won't find that kind of thing here. The Goddess is strictly against it. => children
+		Sarah: [#sprite=upset]Yes really. You won't find that kind of thing here. The Goddess is strictly against it. => children
 	- Guess so. 
-		Sarah: You won't find that kind of thing here, you know. The Goddess is strictly against it. => children
+		Sarah: [#sprite=upset]You won't find that kind of thing here, you know. The Goddess is strictly against it. => children
 - Lots of heavy drinkers are also violent. That's all. 
-	Sarah: Yeah, well, you won't find that kind of thing here. => children
+	Sarah: [#sprite=upset]Yeah, well, you won't find that kind of thing here. => children
 - Got some bad experiences with it myself. Just wanted to make sure. 
 	Sarah: Oh, I'm sorry to hear that. 
 	Sarah: But no. Like I said, he would never. 
@@ -82,7 +83,7 @@ Sarah: But that's never happened here, cause no ever does it.
 - Good to know. => anyway2
 - Built yourselves a proper little utopia here, have you?
 	Sarah: Not sure what you mean by utopia. But we didn't build anything. It's all the work of the Goddess. 
-	Sarah: She loves us and She takes care of us. We're all indebted to Her for life. => anyway2
+	Sarah: [#sprite=happy]She loves us and She takes care of us. We're all indebted to Her for life. => anyway2
 	
 ~ anyway1
 Sarah: He'd get so drunk sometimes he couldn't find his way home at night. Used to find him in some ditch in the morning, passed out. 
@@ -97,16 +98,16 @@ Sarah: I've been watching him.
 	Sarah: Course he is. And there's more than this one reason for it. 
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful 
 - That's fucked. 
-	Sarah: Language. 
+	Sarah: [#sprite=upset]Language. 
 	Sarah: It's fine. It's all in the past, anyway. 
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - Uhh... I'm really not sure what to say to that. 
 	Sarah: Don't worry. You don't have to say anything. 
-	Sarah: Adults rarely know what to say.
+	Sarah: [#sprite=upset]Adults rarely know what to say.
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - I don't need to know all that. 
-	Sarah: You're the one who asked. 
-	Sarah: Quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micah2
+	Sarah: [#sprite=upset]You're the one who asked. 
+	Sarah: [#sprite=upset]Quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micah2
 
 ~ anyway2
 Sarah: Anyway, he's been clean three months now. Not a single sip.
@@ -120,7 +121,7 @@ Sarah: I've been watching him.
 - You shouldn't have to do that at your age. 
 	Sarah: It's fine. I don't mind. 
 	Sarah: He takes care of me, I take care of him. 
-	Sarah: Plus, I'm almost an adult. 
+	Sarah: [#sprite=happy]Plus, I'm almost an adult. 
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - Lay off him a bit, eh? 
 	Sarah: Can't do that. It was the Goddess who told him to stop. If he drinks again, he's in trouble. => vengeful
@@ -136,15 +137,15 @@ Sarah: ...
 	Sarah: Course he is. And there's more than this one reason for it. 
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful 
 - That's fucked. 
-	Sarah: Language. 
+	Sarah: [#sprite=upset]Language. 
 	Sarah: It's fine. It's all in the past, anyway. 
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - Uhh... I'm really not sure what to say to that. 
 	Sarah: Don't worry. You don't have to say anything. 
-	Sarah: Adults rarely know what to say.
+	Sarah: [#sprite=upset]Adults rarely know what to say.
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - I don't need to know all that. 
-	Sarah: You're quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micah2
+	Sarah: [#sprite=upset]You're quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micah2
 	
 ~ vengeful 
 - The Goddess is vengeful, isn't She?
@@ -152,15 +153,15 @@ Sarah: ...
 	Sarah: She's whatever She needs to be. 
 	Sarah: It's not for us to question Her. 
 	- If you say so. 
-		Sarah: It's not so because I say so. It is so because She says so. => micah
+		Sarah: [#sprite=upset]It's not so because I say so. It is so because She says so. => micah
 	- You're wise for your age. [if Variables.get_var("religious_fervour") >= 6]
-		Sarah: Course I am. [do Variables.mod_var("religious_fervour", 1)] => micah
+		Sarah: [#sprite=happy]Course I am. [do Variables.mod_var("religious_fervour", 1)] => micah
 	- Guess you're right. 
-		Sarah: Course I am. => micah
+		Sarah: [#sprite=happy]Course I am. => micah
 	- Eh, not sure how I feel about that. 
 		Sarah: You'll see the light, eventually. 
 	- That's... not how it should work. [if Variables.get_var("religious_fervour") <= 5]
-		Sarah: Who are you to say? You should know your place. => micah
+		Sarah: [#sprite=upset]Who are you to say? You should know your place. => micah
 - What kind of trouble?
 	Sarah: I don't know. It's not for me to say. 
 	Sarah: But it sure won't be pretty. She very rarely gives orders directly to us, mortals, individually. 
@@ -174,82 +175,82 @@ Sarah: ...
 		Sarah: Anyway, that's our business. => micah
 
 ~ micah
-Micah: [wait=1.5]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
+Micah: [wait=1.5][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
 Sarah: Micah! Have you seen my father? He didn't come home last night.
 Micah: Sure have. He's with the Elders. No idea why, though. He was with 'em late into the night. 
 Micah: I tried to listen in but couldn't hear shit. 
-Micah: ...Uh, sorry.
+Micah: [#sprite=upset]...Uh, sorry.
 Micah: He just up and left at one point. He seemed angry.
 Micah: He came back this morning. He's still there, now. I think.
-Sarah: Oh thank the Goddess. I was starting to get worried. 
-Sarah: Thought he started drinking again. I'll have a word with him tonight. 
-Sarah: Anyway, I'm ready. Shall we?
-Micah: Uh, sure. 
+Sarah: [#sprite=happy]Oh thank the Goddess. I was starting to get worried. 
+Sarah: [#sprite=upset]Thought he started drinking again. I'll have a word with him tonight. 
+Sarah: [#sprite=happy]Anyway, I'm ready. Shall we?
+Micah: [#sprite=happy]Uh, sure. 
 - Where are you two going?
 	Micah: Uh, we can't tell you. [do Variables.set_var("knows_of_gift", true)]
-	Sarah: Sure we can. You can keep a secret, can't you?
+	Sarah: [#sprite=happy]Sure we can. You can keep a secret, can't you?
 	Sarah: My dad's birthday is coming up in a few days. Micah's helping me get him a surprise gift. 
-	Sarah: It's gonna be really cool. But I can't tell you what it is yet. I don't trust you quite enough.
-	Sarah: But since you're Gifted and all, you might help cleanse it right before we give it to him. Have the Goddess bless it through you!
-	Sarah: What do you say?
+	Sarah: [#sprite=happy]It's gonna be really cool. But I can't tell you what it is yet. I don't trust you quite enough.
+	Sarah: [#sprite=happy]But since you're Gifted and all, you might help cleanse it right before we give it to him. Have the Goddess bless it through you!
+	Sarah: [#sprite=happy]What do you say?
 	- Sure thing. 
-		Sarah: Awesome. Thanks! [do Variables.set_char_var("NPC_2", "relationship", 3)]
-		Sarah: Anyway, see you later. 
+		Sarah: [#sprite=happy]Awesome. Thanks! [do Variables.set_char_var("NPC_2", "relationship", 3)]
+		Sarah: [#sprite=happy]Anyway, see you later. 
 		Sarah: If dad shows up tell him I'm with Micah, and that I'll be back before nightfall. And make him go sleep! 
-		Sarah: And if you mention the surprise, you're dead!
-		Micah: See you later, fake 'Keeper!
+		Sarah: [#sprite=upset]And if you mention the surprise, you're dead!
+		Micah: [#sprite=happy]See you later, fake 'Keeper! [do DialogueFuncs.play_sfx("sfx_door_close")]
 		- See you. => END
 		- Take care, children. => END
 	- Uh, I've got enough on my plate.
-		Sarah: Doesn't look like it.
-		Sarah: Whatever. He'll just cleanse it himself after we give it to him. [do Variables.set_char_var("NPC_2", "relationship", 1)]
-		Sarah: Let's go, Micah.
-		Micah: ...
+		Sarah: [#sprite=upset]Doesn't look like it.
+		Sarah: [#sprite=upset]Whatever. He'll just cleanse it himself after we give it to him. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+		Sarah: [#sprite=upset]Let's go, Micah.
+		Micah: ...[do DialogueFuncs.play_sfx("sfx_door_close")]
 		- Bye, then. => END
 		- ... => END
 		- Take care. => END
 - Take care. 
-	Sarah: If dad shows up tell him I'm with Micah, and I'll be back before nightfall. And tell him to get some sleep!
-	Sarah: Byeee!
-	Micah: See you later, fake 'Keeper. 
+	Sarah: [#sprite=happy]If dad shows up tell him I'm with Micah, and I'll be back before nightfall. And tell him to get some sleep!
+	Sarah: [#sprite=happy]Byeee!
+	Micah: [#sprite=happy]See you later, fake 'Keeper.[do DialogueFuncs.play_sfx("sfx_door_close")] 
 	- See you. => END
 	- Will do. => END
 - ...
-	Sarah: Hey, if dad shows up tell him I'm with Micah, and I'll be back before nightfall. And tell him to get some sleep!
-	Sarah: Byeee!
-	Micah: See you later, fake 'Keeper. 
+	Sarah: [#sprite=happy]Hey, if dad shows up tell him I'm with Micah, and I'll be back before nightfall. And tell him to get some sleep!
+	Sarah: [#sprite=happy]Byeee!
+	Micah: [#sprite=happy]See you later, fake 'Keeper.[do DialogueFuncs.play_sfx("sfx_door_close")] 
 	- See you. => END
 	- Will do. => END
 	- ... => END
 
 ~ micah2
-Micah: [wait=1.5]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
+Micah: [wait=1.5][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
 Sarah: Micah! Have you seen my father? He didn't come home last night.
 Micah: Sure have. He's with the Elders. No idea why, though. He was with 'em late into the night. 
 Micah: I tried to listen in but couldn't hear shit. 
-Micah: ...Uh, sorry.
+Micah: [#sprite=upset]...Uh, sorry.
 Micah: He just up and left at one point. He seemed angry.
 Micah: He came back this morning. He's still there, now. I think.
-Sarah: Oh thank the Goddess. I was starting to get worried. 
-Sarah: Thought he started drinking again. I'll have a word with him tonight. 
-Sarah: Anyway, I'm ready. Shall we?
-Micah: Uh, sure. 
+Sarah: [#sprite=happy]Oh thank the Goddess. I was starting to get worried. 
+Sarah: [#sprite=happy]Thought he started drinking again. I'll have a word with him tonight. 
+Sarah: [#sprite=happy]Anyway, I'm ready. Shall we?
+Micah: [#sprite=happy]Uh, sure. 
 - Where are you two going?
 	Micah: Uh, we can't tell you.
-	Sarah: Yeah, wouldn't you like to know, prick. 
-	Sarah: If dad shows up tell him I'm with Micah, and I'll be back before nightfall. 
+	Sarah: [#sprite=upset]Yeah, wouldn't you like to know, prick. 
+	Sarah: [#sprite=upset]If dad shows up tell him I'm with Micah, and I'll be back before nightfall.[do DialogueFuncs.play_sfx("sfx_door_slam")] 
 	- See you. => END
 	- Will do. => END 
 	- Brats. => END 
 - Take care. 
-	Sarah: Hey prick, if dad shows up, tell him I'm with Micah, and I'll be back before nightfall. 
-	Micah: See you later, fake 'Keeper. 
+	Sarah: [#sprite=upset]Hey prick, if dad shows up, tell him I'm with Micah, and I'll be back before nightfall. 
+	Micah: [#sprite=upset]See you later, fake 'Keeper.[do DialogueFuncs.play_sfx("sfx_door_slam")]  
 	- See you. => END
 	- Will do. => END 
 	- Brats. => END 
 - ...
-	Sarah: Hey prick, if dad shows up, tell him I'm with Micah, and I'll be back before nightfall. 
-	Micah: See you later, fake 'Keeper. 
+	Sarah: [#sprite=upset]Hey prick, if dad shows up, tell him I'm with Micah, and I'll be back before nightfall. 
+	Micah: [#sprite=upset]See you later, fake 'Keeper.[do DialogueFuncs.play_sfx("sfx_door_slam")]  
 	- See you. => END
 	- Will do. => END
 	- Brats. => END 

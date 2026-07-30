@@ -4,117 +4,123 @@
 
 ~ start
 if Variables.get_char_var("NPC_2", "relationship") == 0
-	Micah: [wait=1]Morning. Here's today's batch. Be seeing you. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
+	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=upset]Morning. Here's today's batch. Be seeing you. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
 	- Why the long face?
-		Micah: ...
-		Micah: You were mean to Sarah yesterday. 
+		Micah: [#sprite=upset]...
+		Micah: [#sprite=upset]You were mean to Sarah yesterday. 
 		- What about it?
-			Micah: ...
-			Micah: If you're ever mean to her again, you'll regret it. 
-			Micah: I mean it. 
+			Micah: [#sprite=upset]...
+			Micah: [#sprite=upset]If you're ever mean to her again, you'll regret it. 
+			Micah: [#sprite=upset]I mean it. 
 			- She your girlfriend or something?
-				Micah: Ew, no!
-				Micah: We're best friends, though. So be careful. 
-				Micah: One word to the Elders, and it will be the end of your stay here. 
+				Micah: [#sprite=upset]Ew, no!
+				Micah: [#sprite=upset]We're best friends, though. So be careful. 
+				Micah: [#sprite=upset]One word to the Elders, and it will be the end of your stay here. 
 				- Noted. 
-					Micah: I'll be going now. Bye.[do Variables.set_char_var("NPC_1", "relationship", 1)] => END 
+					Micah: [#sprite=upset]I'll be going now. Bye.[do Variables.set_char_var("NPC_1", "relationship", 1)] => END1 
 				- Whatever, kid. 
-					Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 0)]
-					Micah: I'll be going now. Bye. => END 
+					Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 0)]
+					Micah: [#sprite=upset]I'll be going now. Bye. => END2 
 			- Okay. Duly noted. 
-				Micah: And apologise to her. She didn't do anything to you. She doesn't deserve it. 
+				Micah: [#sprite=upset]And apologise to her. She didn't do anything to you. She doesn't deserve it. 
 				- Will do. 
-					Micah: I'll be going now. Bye.[do Variables.set_char_var("NPC_1", "relationship", 1)] => END 
+					Micah: [#sprite=upset]I'll be going now. Bye.[do Variables.set_char_var("NPC_1", "relationship", 1)] => END1 
 				- I didn't mean it, you know. 
-					Micah: Uh huh. If you say so. [do Variables.set_char_var("NPC_1", "relationship", 1)]
-					Micah: I'll be going now. Bye. => END 
+					Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+					Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 		- Oh. I'm sorry. 
-			Micah: It's her you should apologise to. Not me. 
+			Micah: [#sprite=upset]It's her you should apologise to. Not me. 
 			- Okay. I will. 
-				Micah: She didn't do anything to you. She doesn't deserve it.
+				Micah: [#sprite=upset]She didn't do anything to you. She doesn't deserve it.
 				- I didn't mean it, you know. 
-					Micah: Uh huh. If you say so. [do Variables.set_char_var("NPC_1", "relationship", 1)]
-					Micah: I'll be going now. Bye. => END 
+					Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+					Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 				- Yeah. Don't know what came over me. 
-					Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 1)]
-					Micah: I'll be going now. Bye. => END 
+					Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 1)]
+					Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 			- She your girlfriend or something? 
-				Micah: Ew, no!
-				Micah: We're best friends, though. So be careful.
-				Micah: One word to the Elders, and it will be the end of your stay here. 
+				Micah: [#sprite=upset]Ew, no!
+				Micah: [#sprite=upset]We're best friends, though. So be careful.
+				Micah: [#sprite=upset]One word to the Elders, and it will be the end of your stay here. 
 				- Noted. 
-					Micah: She didn't do anything to you. She doesn't deserve it. [do Variables.set_char_var("NPC_1", "relationship", 1)]
-					Micah: I'll be going now. Bye. => END 
+					Micah: [#sprite=upset]She didn't do anything to you. She doesn't deserve it. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+					Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 				- Okay. I didn't mean it, you know. 
-					Micah: Uh huh. If you say so. [do Variables.set_char_var("NPC_1", "relationship", 1)]
-					Micah: I'll be going now. Bye. => END 
+					Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+					Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 	- Short and to the point. That's more like it. 
-		Micah: Yeah, whatever. 
-		Micah: ...
-		Micah: You know, if you're ever mean to Sarah again, you'll regret it. 
-		Micah: I mean it. 
+		Micah: [#sprite=upset]Yeah, whatever. 
+		Micah: [#sprite=upset]...
+		Micah: [#sprite=upset]You know, if you're ever mean to Sarah again, you'll regret it. 
+		Micah: [#sprite=upset]I mean it. 
 		- Oh. So that's what this is about. 
-			Micah: Yeah. And also, you should apologise. 
+			Micah: [#sprite=upset]Yeah. And also, you should apologise. 
 			- Okay. I will. 
-				Micah: She didn't do anything to you. She doesn't deserve it. [do Variables.set_char_var("NPC_1", "relationship", 1)]
-				Micah: I'll be going now. Bye. => END 
+				Micah: [#sprite=upset]She didn't do anything to you. She doesn't deserve it. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+				Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 			- Whatever, kid. 
-				Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 0)]
-				Micah: I'll be going now. Bye. => END 
+				Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 0)]
+				Micah: [#sprite=upset]I'll be going now. Bye. => END2 
 		- She your girlfriend or something?
-			Micah: Ew, no!
-			Micah: We're best friends, though. So be careful. 
-			Micah: One word to the Elders, and it will be the end of your stay here. 
+			Micah: [#sprite=upset]Ew, no!
+			Micah: [#sprite=upset]We're best friends, though. So be careful. 
+			Micah: [#sprite=upset]One word to the Elders, and it will be the end of your stay here. 
 			- Noted. 
-				Micah: I'll be going now. Bye.[do Variables.set_char_var("NPC_1", "relationship", 1)] => END 
+				Micah: [#sprite=upset]I'll be going now. Bye.[do Variables.set_char_var("NPC_1", "relationship", 1)] => END1 
 			- Whatever, kid. 
-				Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 0)]
-				Micah: I'll be going now. Bye. => END 
+				Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 0)]
+				Micah: [#sprite=upset]I'll be going now. Bye. => END2 
 		- Okay. Duly noted. 
-			Micah: Also, you should apologise to her. 
+			Micah: [#sprite=upset]Also, you should apologise to her. 
 			- Okay. I will. 
-				Micah: She didn't do anything to you. She doesn't deserve it. [do Variables.set_char_var("NPC_1", "relationship", 1)]
-				Micah: I'll be going now. Bye. => END 
+				Micah: [#sprite=upset]She didn't do anything to you. She doesn't deserve it. [do Variables.set_char_var("NPC_1", "relationship", 1)]
+				Micah: [#sprite=upset]I'll be going now. Bye. => END1 
 			- Whatever, kid. 
-				Micah: ... [do Variables.set_char_var("NPC_1", "relationship", 0)]
-				Micah: I'll be going now. Bye. => END 
+				Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 0)]
+				Micah: [#sprite=upset]I'll be going now. Bye. => END2
 else 
-	Micah: Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
+	Micah: [#sprite=happy]Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
 	Micah: Eh, feel like that's a bit too long maybe. Doesn't quite roll off the tongue. 
-	Micah: I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. 
+	Micah: [#sprite=happy]I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. 
 	- Kinda like it. 
-		Micah: Awesome! I'll tell everyone that's what you want to be called. => next
+		Micah: [#sprite=happy]Awesome! I'll tell everyone that's what you want to be called. => next
 	- Not good at my job? 
-		if Variables.get_var("prog_score_simple_objects") == 100
-			Micah: Nah, I'm just messing. Zero complaints so far. You're doing great. 
-		elif Variables.get_var("prog_score_simple_objects") <= 75
-			Micah: Eh, let's just say some people are not going to be recommending us to their friends and family. 
-			Micah: Don't worry about it, though. What are they gonna do? We've got zero competition. 
-			Micah: Worst case, they'll kick you out for being useless. Haha. 
+		if Variables.get_var("prog_score_simple_objects") >= 98
+			Micah: [#sprite=happy]Nah, I'm just messing. Zero complaints so far. You're doing great. 
+		elif Variables.get_var("prog_score_simple_objects") <= 80
+			Micah: [#sprite=upset]Eh, let's just say some people are not going to be recommending us to their friends and family. 
+			Micah: [#sprite=happy]Don't worry about it, though. What are they gonna do? We've got zero competition. 
+			Micah: [#sprite=happy]Worst case, they'll kick you out for being useless. Haha. 
 			- I'll do better. 
-				Micah: Yeah, that's a good idea. => next
+				Micah: [#sprite=happy]Yeah, that's a good idea. => next
 			- That's... reassuring. 
-				Micah: Hey, that's what I'm here for. => next
+				Micah: [#sprite=happy]Hey, that's what I'm here for. => next
 		else 
 			Micah: Nah, you're doing fine. Missed a spot here and there but people haven't been complaining too much. 
 	- That doesn't make any sense. 
-		Micah: Who said it has to?
-		Micah: You're Keeper now. I'll tell everyone that's what you want to be called. 
-		Micah: It will be our little secret. Deal with it. => next 
+		Micah: [#sprite=upset]Who said it has to?
+		Micah: You're the Keeper now. I'll tell everyone that's what you want to be called. 
+		Micah: [#sprite=happy]Deal with it. => next 
 			
 ~ next
 Micah: Anyway, Sarah's got to stay inside today. Shopkeeper's orders. Not exactly sure why. 
 Micah: I got some errands to run for the Elders so I gotta get going in a minute. Will you tell her I figured out where to get the final piece for her father's gift? 
 - Sure. 
-	Micah: Thanks much!
-	Micah: Gotta go now. See you tomorrow!
-	- See you. => END 
-	- Bye, Micah. => END 
+	Micah: [#sprite=happy]Thanks much!
+	Micah: [#sprite=happy]Gotta go now. See you tomorrow!
+	- See you. => END1 
+	- Bye, Micah. => END1 
 - What is it? 
 	Micah: Can't tell you, Keeper. Sorry. 
-	Micah: Anyway, gotta go now. See you tomorrow!
-	- See you. => END 
-	- Bye, Micah. => END 
+	Micah: [#sprite=happy]Anyway, gotta go now. See you tomorrow!
+	- See you. => END1 
+	- Bye, Micah. => END1 
+
+~ END1
+Micah: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+
+~ END2
+Micah: ...[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", true)] => END 
 
 => END
 

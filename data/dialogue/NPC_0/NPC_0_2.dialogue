@@ -3,7 +3,7 @@
 => start
 
 ~ start
-[wait=1.0]...You get to the Shopkeeper's house and knock. As soon as your knuckles touch the wood, the door opens. He's been expecting you. => END 
+[wait=1.0]...You get to the Shopkeeper's house and knock. As soon as [do DialogueFuncs.play_sfx("sfx_door_open")]your knuckles touch the wood, the door opens. He's been expecting you. => END 
 
 => END
 

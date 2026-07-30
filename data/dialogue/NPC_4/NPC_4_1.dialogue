@@ -3,8 +3,8 @@
 => start
 
 ~ start
-You wake up feeling dizzy. You get out of bed and make your way to the main room. Once there, you take your place behind the work station. You look around for a bit before you start hearing heavy footsteps coming down the stairs.
-Shopkeeper: [wait=1]...Morning, there. I see you're itching to get started. Sleep well?
+...[do DialogueFuncs.play_sfx("sfx_stairs")][wait=9]
+Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]...Morning, there. I see you're itching to get started. Sleep well?
 - Morning. Slept just fine. 
 	Shopkeeper: Good. Wouldn't want you tired on your first day. Especially after such a long journey.[do Variables.set_char_var("NPC_4", "know", true)]
 	- How do you know so much about me already?
@@ -251,12 +251,12 @@ Shopkeeper: ...
 	Shopkeeper: [#sprite=worried]Uh, no, course not. [do Variables.set_char_var("NPC_4", "sacrifice", true)]
 	- Okay. => questions
 	- You sure?
-		Shopkeeper: [#sprite=worried]Sure I'm sure. No sacrifices here. Nope. 
+		Shopkeeper: [#sprite=worried]Sure I'm sure. No sacrifices here.
 		Shopkeeper: [#sprite=worried]None. 
 		- Okay then. => questions
 		- Kind of sounds like you're lying to me.
 			Shopkeeper: [#sprite=worried]Look, there are some things you'll only get to know once you become a full member of the church.  
-			Shopkeeper: [#sprite=worried]But trust me, we don't sacrifice anyone in the traditional sense, and never involuntarily. 
+			Shopkeeper: [#sprite=worried]But trust me, we don't sacrifice anyone in the... traditional sense, and never involuntarily. 
 			Shopkeeper: [#sprite=worried]That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
 			- Okay, I trust you. => questions
 			- Fine. For now. => questions
@@ -354,6 +354,6 @@ Shopkeeper: You can keep practicing, if you so wish. These items are from old ba
 	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here.
 	Shopkeeper: I'll go check up on Sarah while you work. Be right back. => END
 - Think I got it. Let's move on.
-	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back. => END
+	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 
 => END
