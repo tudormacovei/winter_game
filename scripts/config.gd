@@ -64,6 +64,6 @@ const OBJECT_STATE_UI_DIALOGUE_END_DELAY_SECONDS: float = 5.0 # Delay before sho
 
 const DAY_END_SCREEN_MESSAGE: String = "You have completed day %d."
 const GAME_END_SCREEN_MESSAGE: String = "You have completed all days."
-const DEATH_SCREEN_MESSAGE: String = "YOU DIED"
+const DEATH_SCREEN_MESSAGE: String = "She has taken you."
 
 #endregion
