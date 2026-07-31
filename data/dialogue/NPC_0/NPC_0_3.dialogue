@@ -30,10 +30,11 @@ Shopkeeper: I'll see you in the morning.
 	Shopkeeper: [#sprite=worried][wait=0.6]...Have to go. See you tomorrow. 
 	- Sorry I woke her up.
 		Shopkeeper: [#sprite=worried]No harm done. It wasn't you. 
-		Shopkeeper: [#sprite=worried]Good night. => END 
+		Shopkeeper: [#sprite=worried]Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 	- All good?
-		Shopkeeper: [#sprite=worried]Yeah, don't worry about it. Good night. => END
-	- Night. => END
+		Shopkeeper: [#sprite=worried]Yeah, don't worry about it. Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
+	- Night. 
+		Shopkeeper: Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 - Weird welcoming party. 
 	Shopkeeper: Hah. I know. You'll have to forgive me. 
 	Shopkeeper: Hospitality is usually my strong suit. I'll make it up to you. 
@@ -44,9 +45,11 @@ Shopkeeper: I'll see you in the morning.
 	Shopkeeper: [#sprite=worried][wait=0.6]...Have to go. See you tomorrow. 
 	- Sorry I woke her up.
 		Shopkeeper: [#sprite=worried]No harm done. It wasn't you. 
-		Shopkeeper: [#sprite=worried]Good night. => END 
+		Shopkeeper: [#sprite=worried]Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 	- All good?
-		Shopkeeper: [#sprite=worried]Don't worry about it. Good night. => END
-	- Night. => END 
+		Shopkeeper: [#sprite=worried]Don't worry about it. Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
+	- Night.
+		Shopkeeper: Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+
 => END
 
