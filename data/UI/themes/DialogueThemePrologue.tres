@@ -1,0 +1,73 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://tiojdx3ijkaw"]
+
+[ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="1_c50lb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riy72"]
+content_margin_left = 6.0
+content_margin_top = 7.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.0050037727, 0.006012373, 0.005003831, 0.8)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8wpu"]
+content_margin_left = 6.0
+content_margin_top = 7.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.2, 0.21960784, 0.18431373, 0.8)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3403393, 0.34033936, 0.34033924, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urtv6"]
+content_margin_left = 6.0
+content_margin_top = 7.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.09320182, 0.106126174, 0.09320182, 0.8)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_top = 1.0
+expand_margin_right = 5.0
+expand_margin_bottom = 1.0
+
+[resource]
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("1_c50lb")
+Button/styles/disabled = SubResource("StyleBoxFlat_riy72")
+Button/styles/focus = SubResource("StyleBoxFlat_c8wpu")
+Button/styles/hover = SubResource("StyleBoxFlat_c8wpu")
+Button/styles/normal = SubResource("StyleBoxFlat_urtv6")
+Label/fonts/font = ExtResource("1_c50lb")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_urtv6")
