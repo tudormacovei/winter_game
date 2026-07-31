@@ -78,8 +78,6 @@ func _ready():
 	day_started.emit(current_day_index)
 	_play_next_interaction()
 
-	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
-
 	DialogueFuncs.register_game_manager(self)
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)

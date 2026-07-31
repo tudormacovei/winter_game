@@ -12,9 +12,13 @@ func apply_config(config: Resource) -> void:
 		Utils.debug_error("InteractionConfigController: Config is invalid")
 		return
 
+	if current_config == config:
+		return
+
 	current_config = config
 	_apply_scene_by_name(config.scene_name)
 	_apply_camera_rules(config.is_camera_locked)
+	_apply_audio_ambient(config.audio_ambient_file_name)
 	
 func _apply_camera_rules(is_locked: bool) -> void:
 	# NOTE: We lazily resolve the camera because otherwise the scene tree is not ready yet :/
@@ -41,6 +45,8 @@ func _apply_scene_by_name(scene_name: String) -> void:
 	if not success:
 		Utils.debug_error("InteractionConfigController: Could not find scene '%s' to apply." % scene_name)
 
+func _apply_audio_ambient(audio_file_name: String) -> void:
+	AudioManager.play_ambient_stream(audio_file_name)
 
 #region Helpers
 

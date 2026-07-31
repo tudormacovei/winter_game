@@ -9,6 +9,10 @@ var _ambient_player: AudioStreamPlayer
 var _sfx_player: AudioStreamPlayer
 var _sfx_dialogue_letter_player: AudioStreamPlayer
 
+var audio_file_to_volume: Dictionary[String, int] = {
+	"amb_night_sounds": 25,
+}
+
 #region Preloaded Streams
 
 #NOTE: For now, we preload all audio streams. If this becomes a performance issue, we can add a kind of streaming system that loads/unloads as needed.
@@ -23,12 +27,14 @@ func _ready():
 	_create_players()
 
 
-func play_music(stream_name: String):
+func play_ambient_stream(stream_name: String):
 	if not ambient_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No music stream found with name '%s'!" % stream_name)
 		return
 
+	var volume: int = audio_file_to_volume.get(stream_name, 0)
 	_ambient_player.stream = ambient_audio_streams[stream_name]
+	_ambient_player.volume_db = volume
 	_ambient_player.play()
 
 func play_sfx(stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):

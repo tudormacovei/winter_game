@@ -30,7 +30,7 @@ const TIME_OF_DAY_BASE_LERP_SECONDS: float = 6.0 # Baseline duration to transiti
 
 #region Audio Config
 
-const AMBIENT_MUSIC_FILE_NAME: String = "amb_music"
+# NOTE: Ambient music is handled in the interaction config .tres files instead of here
 
 const LETTER_SPOKE_SFX_NAME: String = "sfx_dialogue_letter"
 const LETTER_SPOKE_SFX_VOLUME_DB: float = -16.0

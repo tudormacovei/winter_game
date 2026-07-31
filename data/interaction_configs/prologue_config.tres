@@ -8,4 +8,5 @@ script = ExtResource("1_rhpcv")
 scene_name = "PrologueView"
 is_camera_locked = true
 dialogue_balloon_scene = ExtResource("1_cd5gy")
+audio_ambient_file_name = "amb_night_sounds"
 metadata/_custom_type_script = "uid://c2xpl2eysoink"

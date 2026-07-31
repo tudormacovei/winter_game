@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cvwgh07v8ex7t"
-path="res://.godot/imported/sfx_night_sounds.wav-94fcef068582401912786ac3e594fd53.sample"
+path="res://.godot/imported/amb_night_sounds.wav-45bca1eaa9d7ec7a57a32b92f8ccbeb3.sample"
 
 [deps]
 
-source_file="res://audio_assets/sfx/sfx_night_sounds.wav"
-dest_files=["res://.godot/imported/sfx_night_sounds.wav-94fcef068582401912786ac3e594fd53.sample"]
+source_file="res://audio_assets/ambient/amb_night_sounds.wav"
+dest_files=["res://.godot/imported/amb_night_sounds.wav-45bca1eaa9d7ec7a57a32b92f8ccbeb3.sample"]
 
 [params]
 
