@@ -63,7 +63,7 @@ unique_name_in_owner = true
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(1, 1)
+position = Vector2(407.5, 311.5)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
@@ -104,6 +104,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ScreenFadeCanvas" type="CanvasLayer" parent="UI"]
+unique_name_in_owner = true
+layer = 110
+visible = false
+
+[node name="ScreenFadeColorRect" type="ColorRect" parent="UI/ScreenFadeCanvas"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
 [node name="Managers" type="Node" parent="."]
 
@@ -159,6 +173,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.9604645e-08, 0, -2.9802322e-08, 1, 0, 1
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 4.4703484e-08, 0, 0, 1, 0, 1.6842042, -1.6700335)
 visible = false
+script = null
 
 [node name="WorkbenchView" parent="CameraSpace" instance=ExtResource("2_ckfyi")]
 unique_name_in_owner = true

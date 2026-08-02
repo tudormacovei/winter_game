@@ -13,6 +13,9 @@ extends Node
 @onready var _death_screen_label: Label = %DeathScreen.get_node("%DeathText")
 @onready var _game_state_ui: CanvasLayer = %GameStateUI
 
+@onready var screen_fade_canvas: CanvasLayer = %ScreenFadeCanvas
+@onready var screen_fade_rect: ColorRect = %ScreenFadeColorRect
+
 var balloon_layer: CanvasLayer = null
 
 func _ready() -> void:
@@ -130,6 +133,57 @@ func get_current_screen_highlight_mask() -> int:
 
 #endregion
 
+#region Screen Fade
+
+# TODO[ziana]: Also do fade in/out on day end 
+
+const _SCREEN_FADE_DURATION = 0.5
+var _screen_fade_tween: Tween = null
+
+func fade_to_black(duration: float = _SCREEN_FADE_DURATION) -> void:
+	if not screen_fade_canvas or not screen_fade_rect:
+		Utils.debug_error("UIManager:fade_to_black screen fade UI elements are null!")
+		return
+
+	_set_screen_fade_alpha(0.0)
+	screen_fade_canvas.show()
+	if duration <= 0.0:
+		return
+
+	if _screen_fade_tween:
+		_screen_fade_tween.kill()
+	_screen_fade_tween = create_tween()
+	_screen_fade_tween.tween_method(
+		func(t: float) -> void: _set_screen_fade_alpha(t),
+		0.0, 1.0, duration
+	)
+
+	await _screen_fade_tween.finished
+
+func fade_from_black(duration: float = _SCREEN_FADE_DURATION) -> void:
+	if not screen_fade_canvas or not screen_fade_rect:
+		Utils.debug_error("UIManager:fade_from_black screen fade UI elements are null!")
+		return
+
+	if _screen_fade_tween:
+		_screen_fade_tween.kill()
+	_screen_fade_tween = create_tween()
+	_screen_fade_tween.tween_method(
+		func(t: float) -> void: _set_screen_fade_alpha(t),
+		1.0, 0.0, duration
+	)
+
+	await _screen_fade_tween.finished
+	screen_fade_canvas.hide()
+
+func _set_screen_fade_alpha(alpha: float) -> void:
+	if not screen_fade_rect:
+		Utils.debug_error("UIManager:_set_screen_fade_alpha screen fade rect is null!")
+		return
+
+	screen_fade_rect.color.a = alpha
+
+#endregion
 
 #region Signals
 
