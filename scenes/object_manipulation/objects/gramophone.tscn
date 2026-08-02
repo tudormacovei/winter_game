@@ -99,9 +99,15 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_codvy")
 
 [node name="Gramophone" type="Area3D"]
+transform = Transform3D(0.9998416, 0.017801417, 0, -0.017801417, 0.9998416, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_keaux")
+max_sticker_count = 5
 placement_mesh = SubResource("ArrayMesh_i3fmb")
+sticker_placement_offset = 0.001
+sticker_start_scale = 0.2
+sticker_min_scale_fraction = 0.7
 rng_seed = 0
+preview_difficulty = 6
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
