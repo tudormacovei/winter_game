@@ -10,6 +10,8 @@ const SFX_AUDIO_STREAMS_PATH: String = "res://audio_assets/sfx"
 const AUDIO_BUS_AMBIENT := "Ambient"
 const AUDIO_BUS_SFX := "SFX"
 
+const AMBIENT_MAIN_MENU_STREAM_NAME: String = "amb_main_menu_faded"
+
 const SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX: String = "prog_score_special_object_"
 const SCORE_SIMPLE_OBJECTS_VAR_KEY: String = "prog_score_simple_objects" # NOTE: This needs to be synced with the variable name in global_variables.tres
 const SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR: float = 0.2 # Higher value = score will change quicker based on recent performance. Value should be between 0 and 1.

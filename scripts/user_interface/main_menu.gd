@@ -23,6 +23,7 @@ func _ready() -> void:
 	CursorManager.register_controls([start_button, settings_button, continue_button, exit_button])
 
 	continue_button.disabled = not SaveManager.does_save_exist()
+	AudioManager.play_ambient_stream(Config.AMBIENT_MAIN_MENU_STREAM_NAME)
 
 func _on_settings_pressed() -> void:
 	settings_panel.visible = !settings_panel.visible
