@@ -51,6 +51,9 @@ const END_DAY_SFX_VOLUME_DB: float = -15.0
 const STICKER_BEGIN_PEEL_SFX_NAME: String = "sfx_begin_peel"
 const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
 
+const PLAYER_DEATH_SFX_NAME: String = "sfx_player_death"
+const PLAYER_DEATH_SFX_VOLUME_DB: float = -15.0
+
 #endregion
 
 #region UI Config

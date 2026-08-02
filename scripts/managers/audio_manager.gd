@@ -24,6 +24,7 @@ var sfx_audio_streams: Dictionary = {}
 #endregion 
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS # We don't want audio to pause when the game is paused
 	ambient_audio_streams = _preload_streams(Config.AMBIENT_AUDIO_STREAMS_PATH)
 	sfx_audio_streams = _preload_streams(Config.SFX_AUDIO_STREAMS_PATH)
 	_create_players()
@@ -38,6 +39,9 @@ func play_ambient_stream(stream_name: String):
 	_ambient_player.stream = ambient_audio_streams[stream_name]
 	_ambient_player.volume_db = volume
 	_ambient_player.play()
+
+func stop_ambient():
+	_ambient_player.stop()
 
 func play_sfx(stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
 	_play_sfx(_sfx_player, stream_name, volume_db, pitch_scale)

@@ -154,8 +154,8 @@ func _process(_delta):
 	if game_manager:
 		game_manager.debug_disable_interaction_delay = general_tab_disable_interaction_delay[0]
 	
-	if ui_manager:
-		ui_manager.debug_disable_death_screen = general_tab_disable_death_state[0]
+	if game_manager:
+		game_manager.debug_disable_death = general_tab_disable_death_state[0]
 
 	if health_manager:
 		health_manager.debug_disable_drain = general_tab_disable_health_drain[0]

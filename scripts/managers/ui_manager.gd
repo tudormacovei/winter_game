@@ -20,8 +20,6 @@ func _ready() -> void:
 		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self, "_on_camera_rotation_completed"))
-	if GameState.has_signal("player_died"):
-		GameState.connect("player_died", Callable(self, "show_death_screen"))
 
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
@@ -49,9 +47,6 @@ func show_day_end_screen(day_number: int) -> void:
 	_day_end_screen.hide()
 
 func show_death_screen() -> void:
-	if debug_disable_death_screen:
-		return
-		
 	if _game_state_ui:
 		_game_state_ui.hide_all_game_state_ui()
 
@@ -59,8 +54,6 @@ func show_death_screen() -> void:
 
 	_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
 	_death_screen.show()
-
-	get_tree().paused = true
 
 func show_game_end_screen() -> void:
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
@@ -169,7 +162,6 @@ func _on_new_object_on_workbench() -> void:
 #endregion
 
 #region Debug
-var debug_disable_death_screen: bool = false
 
 func debug_hide_game_end_screen():
 	_day_end_screen.hide()
