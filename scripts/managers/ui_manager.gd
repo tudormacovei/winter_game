@@ -82,8 +82,19 @@ func hide_balloon_layer() -> void:
 		push_warning("UI Manager: Trying to hide invalid balloon layer or balloon.")
 
 func try_show_object_state_ui(delay: float = 0.0) -> void:
-	if _game_state_ui and camera._camera_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.OBJECT, delay)
+	if not _game_state_ui:
+		return
+
+	if camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
+		return
+
+	if delay > 0.0:
+		await get_tree().create_timer(delay).timeout
+
+	if camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
+		return
+
+	_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.OBJECT)
 
 #region Screen Highlight
 

@@ -19,6 +19,8 @@ func show_game_state_ui(ui_type: GameStateUIType, delay: float = 0.0) -> void:
 	if vars["root_node"].visible:
 		return
 
+	hide_all_game_state_ui()
+
 	var margin_container: MarginContainer = vars["root_node"].get_node("MarginContainer")
 	margin_container.scale = Vector2.ZERO
 	
