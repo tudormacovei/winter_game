@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfegigj2pr0lh"]
+[gd_scene load_steps=3 format=3 uid="uid://bfegigj2pr0lh"]
 
 [ext_resource type="Texture2D" uid="uid://b0uv3jm3len1w" path="res://2d_assets/UI/day_end_bg_fullscreen.webp" id="1_dbw7d"]
+[ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="1_x0tkc"]
 
 [node name="DayEndScreen" type="Control"]
 layout_mode = 3
@@ -25,6 +26,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_x0tkc")
 theme_override_font_sizes/font_size = 50
 text = "Day X complete."
 
