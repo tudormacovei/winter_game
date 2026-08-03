@@ -51,6 +51,10 @@ func _apply_scene_by_name(scene_name: String) -> void:
 		Utils.debug_error("InteractionConfigController: Could not find scene '%s' to apply." % scene_name)
 
 func _apply_audio_ambient(audio_file_name: String) -> void:
+	if not audio_file_name or audio_file_name == "":
+		AudioManager.stop_ambient()
+		return
+
 	AudioManager.play_ambient_stream(audio_file_name)
 
 
