@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr0u622abvq0x"]
+[gd_scene load_steps=4 format=3 uid="uid://cr0u622abvq0x"]
 
-[ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_a4kmo"]
 [ext_resource type="Texture2D" uid="uid://57j0274oonyw" path="res://2d_assets/backgrounds/prologue/Prologue_Screen.webp" id="2_di2lh"]
 
 [sub_resource type="Gradient" id="Gradient_isxcp"]
@@ -13,7 +12,6 @@ width = 4400
 height = 3000
 
 [node name="DialogueView" type="Node3D"]
-script = ExtResource("1_a4kmo")
 
 [node name="DialogueBackground" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
