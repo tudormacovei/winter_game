@@ -309,7 +309,7 @@ func _on_player_died():
 	if debug_disable_death:
 		return
 		
-	ui_manager.show_death_screen()
+	await ui_manager.show_death_screen()
 
 	AudioManager.stop_ambient()
 	AudioManager.play_sfx(Config.PLAYER_DEATH_SFX_NAME, Config.PLAYER_DEATH_SFX_VOLUME_DB)

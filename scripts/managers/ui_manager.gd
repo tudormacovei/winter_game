@@ -43,24 +43,35 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 			_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
 
 func show_day_end_screen(day_number: int) -> void:
+	await fade_to_black()
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
 	_day_end_screen.show()
+	await fade_from_black()
+
 	AudioManager.play_sfx(Config.END_DAY_SFX_NAME, Config.END_DAY_SFX_VOLUME_DB)
+	
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
+	
+	await fade_to_black()
 	_day_end_screen.hide()
+	await fade_from_black()
 
 func show_death_screen() -> void:
 	if _game_state_ui:
 		_game_state_ui.hide_all_game_state_ui()
 
 	hide_balloon_layer()
-
+	
+	await fade_to_black(_SCREEN_FADE_TO_DURATION_DEATH)
 	_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
 	_death_screen.show()
+	await fade_from_black()
 
 func show_game_end_screen() -> void:
+	await fade_to_black(_SCREEN_FADE_DURATION_GAME_END)
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
 	_day_end_screen.show()
+	await fade_from_black(_SCREEN_FADE_DURATION_GAME_END)
 
 func hide_balloon_layer() -> void:
 	if balloon_layer and balloon_layer.balloon:
@@ -135,9 +146,9 @@ func get_current_screen_highlight_mask() -> int:
 
 #region Screen Fade
 
-# TODO[ziana]: Also do fade in/out on day end 
-
-const _SCREEN_FADE_DURATION = 0.5
+const _SCREEN_FADE_DURATION = 0.3
+const _SCREEN_FADE_TO_DURATION_DEATH = 2.0
+const _SCREEN_FADE_DURATION_GAME_END = 2
 var _screen_fade_tween: Tween = null
 
 func fade_to_black(duration: float = _SCREEN_FADE_DURATION) -> void:
