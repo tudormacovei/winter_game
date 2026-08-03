@@ -42,6 +42,7 @@ runtime/balloon_path="res://scenes/UI/dialogue_baloon/dialogue_balloon.tscn"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+window/size/mode.release=3
 
 [editor_plugins]
 
