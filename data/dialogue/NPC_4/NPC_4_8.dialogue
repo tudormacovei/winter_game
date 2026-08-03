@@ -26,7 +26,7 @@ if Variables.get_char_var("NPC_4", "express_doubt") == 1
 	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
 elif Variables.get_char_var("NPC_4", "express_doubt") == 2
 	Shopkeeper: [#sprite=worried]I've no idea how you feel about the Goddess, or about our church. 
-	Shopkeeper: [#sprite=worried]But you have to believe me, things are now what they seem. I was wrong. => sacrifices
+	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
 elif Variables.get_char_var("NPC_4", "express_doubt") == 3
 	Shopkeeper: [#sprite=worried]You've expressed doubts about the Goddess and our church before. 
 	Shopkeeper: [#sprite=worried]You were right. Things are not what they seem. I was wrong. => sacrifices
