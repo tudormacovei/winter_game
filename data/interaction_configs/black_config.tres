@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InteractionConfigDefinition" load_steps=3 format=3 uid="uid://c8l484xcc7b1g"]
+
+[ext_resource type="PackedScene" uid="uid://dmuh1q4vws861" path="res://scenes/UI/dialogue_baloon/dialogue_balloon_black.tscn" id="1_vr36x"]
+[ext_resource type="Script" uid="uid://c2xpl2eysoink" path="res://scripts/systems/interactions/interaction_config_definition.gd" id="2_c7pce"]
+
+[resource]
+script = ExtResource("2_c7pce")
+scene_name = "BlackView"
+is_camera_locked = true
+dialogue_balloon_scene = ExtResource("1_vr36x")
+audio_ambient_file_name = ""
+metadata/_custom_type_script = "uid://c2xpl2eysoink"

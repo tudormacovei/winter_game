@@ -71,14 +71,15 @@ func _ready():
 	day_started.connect(health_manager.reset_max_health.unbind(1)) # reset HP needed on day start so debug skips also reset HP
 	day_ended.connect(health_manager.reset_max_health.unbind(1)) # reset HP on day end to remove low-HP effects
 
+	if GameState.has_signal("player_died"):
+		GameState.connect("player_died", Callable(self, "_on_player_died"))
+
 	_load_day_resources()
 	_load_character_resources()
 	_restore_progress_from_save()
 
 	day_started.emit(current_day_index)
 	_play_next_interaction()
-
-	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
 
 	DialogueFuncs.register_game_manager(self)
 	if OS.is_debug_build():
@@ -191,7 +192,7 @@ func _play_next_interaction():
 			return
 
 	# Start the character interaction
-	current_dialogue_balloon = DialogueManager.show_dialogue_balloon(interaction.dialogue, "initialize_local_variables", [GameState])
+	current_dialogue_balloon = DialogueManager.show_dialogue_balloon_scene(interaction.config.dialogue_balloon_scene, interaction.dialogue, "initialize_local_variables", [GameState])
 	ui_manager.set_balloon_layer(current_dialogue_balloon)
 	call_deferred("_deferred_connect_spoke_signal") # NOTE: Nodes inside the dialogue balloon are not created at this point, so we cannot connect signals to them.
 	is_dialogue_running = true
@@ -304,10 +305,21 @@ func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: floa
 		letter_spoke_counter = 0
 		AudioManager.play_sfx_on_letter_spoke()
 
+func _on_player_died():
+	if debug_disable_death:
+		return
+		
+	await ui_manager.show_death_screen()
+
+	AudioManager.stop_ambient()
+	AudioManager.play_sfx(Config.PLAYER_DEATH_SFX_NAME, Config.PLAYER_DEATH_SFX_VOLUME_DB)
+
+	get_tree().paused = true
+
 #endregion
 
 #region Debug
-
+var debug_disable_death: bool = false
 var debug_disable_interaction_delay: bool = false
 
 func debug_get_current_day_index() -> int:

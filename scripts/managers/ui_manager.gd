@@ -13,6 +13,9 @@ extends Node
 @onready var _death_screen_label: Label = %DeathScreen.get_node("%DeathText")
 @onready var _game_state_ui: CanvasLayer = %GameStateUI
 
+@onready var screen_fade_canvas: CanvasLayer = %ScreenFadeCanvas
+@onready var screen_fade_rect: ColorRect = %ScreenFadeColorRect
+
 var balloon_layer: CanvasLayer = null
 
 func _ready() -> void:
@@ -20,8 +23,6 @@ func _ready() -> void:
 		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self, "_on_camera_rotation_completed"))
-	if GameState.has_signal("player_died"):
-		GameState.connect("player_died", Callable(self, "show_death_screen"))
 
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
@@ -42,29 +43,35 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 			_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
 
 func show_day_end_screen(day_number: int) -> void:
+	await fade_to_black()
 	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
 	_day_end_screen.show()
+	await fade_from_black()
+
 	AudioManager.play_sfx(Config.END_DAY_SFX_NAME, Config.END_DAY_SFX_VOLUME_DB)
+	
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
+	
+	await fade_to_black()
 	_day_end_screen.hide()
+	await fade_from_black()
 
 func show_death_screen() -> void:
-	if debug_disable_death_screen:
-		return
-		
 	if _game_state_ui:
 		_game_state_ui.hide_all_game_state_ui()
 
 	hide_balloon_layer()
-
+	
+	await fade_to_black(_SCREEN_FADE_TO_DURATION_DEATH)
 	_death_screen_label.text = Config.DEATH_SCREEN_MESSAGE
 	_death_screen.show()
-
-	get_tree().paused = true
+	await fade_from_black()
 
 func show_game_end_screen() -> void:
+	await fade_to_black(_SCREEN_FADE_DURATION_GAME_END)
 	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
 	_day_end_screen.show()
+	await fade_from_black(_SCREEN_FADE_DURATION_GAME_END)
 
 func hide_balloon_layer() -> void:
 	if balloon_layer and balloon_layer.balloon:
@@ -75,8 +82,19 @@ func hide_balloon_layer() -> void:
 		push_warning("UI Manager: Trying to hide invalid balloon layer or balloon.")
 
 func try_show_object_state_ui(delay: float = 0.0) -> void:
-	if _game_state_ui and camera._camera_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.OBJECT, delay)
+	if not _game_state_ui:
+		return
+
+	if camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
+		return
+
+	if delay > 0.0:
+		await get_tree().create_timer(delay).timeout
+
+	if camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:
+		return
+
+	_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.OBJECT)
 
 #region Screen Highlight
 
@@ -137,6 +155,57 @@ func get_current_screen_highlight_mask() -> int:
 
 #endregion
 
+#region Screen Fade
+
+const _SCREEN_FADE_DURATION = 0.3
+const _SCREEN_FADE_TO_DURATION_DEATH = 2.0
+const _SCREEN_FADE_DURATION_GAME_END = 2
+var _screen_fade_tween: Tween = null
+
+func fade_to_black(duration: float = _SCREEN_FADE_DURATION) -> void:
+	if not screen_fade_canvas or not screen_fade_rect:
+		Utils.debug_error("UIManager:fade_to_black screen fade UI elements are null!")
+		return
+
+	_set_screen_fade_alpha(0.0)
+	screen_fade_canvas.show()
+	if duration <= 0.0:
+		return
+
+	if _screen_fade_tween:
+		_screen_fade_tween.kill()
+	_screen_fade_tween = create_tween()
+	_screen_fade_tween.tween_method(
+		func(t: float) -> void: _set_screen_fade_alpha(t),
+		0.0, 1.0, duration
+	)
+
+	await _screen_fade_tween.finished
+
+func fade_from_black(duration: float = _SCREEN_FADE_DURATION) -> void:
+	if not screen_fade_canvas or not screen_fade_rect:
+		Utils.debug_error("UIManager:fade_from_black screen fade UI elements are null!")
+		return
+
+	if _screen_fade_tween:
+		_screen_fade_tween.kill()
+	_screen_fade_tween = create_tween()
+	_screen_fade_tween.tween_method(
+		func(t: float) -> void: _set_screen_fade_alpha(t),
+		1.0, 0.0, duration
+	)
+
+	await _screen_fade_tween.finished
+	screen_fade_canvas.hide()
+
+func _set_screen_fade_alpha(alpha: float) -> void:
+	if not screen_fade_rect:
+		Utils.debug_error("UIManager:_set_screen_fade_alpha screen fade rect is null!")
+		return
+
+	screen_fade_rect.color.a = alpha
+
+#endregion
 
 #region Signals
 
@@ -169,7 +238,6 @@ func _on_new_object_on_workbench() -> void:
 #endregion
 
 #region Debug
-var debug_disable_death_screen: bool = false
 
 func debug_hide_game_end_screen():
 	_day_end_screen.hide()

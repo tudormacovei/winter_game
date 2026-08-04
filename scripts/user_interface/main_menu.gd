@@ -15,8 +15,6 @@ func _ready() -> void:
 	var warmup: Node = ShaderWarmup.new()
 	add_child(warmup)
 
-	AudioManager.play_music(Config.AMBIENT_MUSIC_FILE_NAME)
-
 	settings_panel.visible = false
 	settings_button.pressed.connect(_on_settings_pressed)
 	start_button.pressed.connect(_on_start_pressed)
@@ -25,6 +23,7 @@ func _ready() -> void:
 	CursorManager.register_controls([start_button, settings_button, continue_button, exit_button])
 
 	continue_button.disabled = not SaveManager.does_save_exist()
+	AudioManager.play_ambient_stream(Config.AMBIENT_MAIN_MENU_STREAM_NAME)
 
 	for button in [start_button, continue_button, settings_button, exit_button]:
 			button.mouse_entered.connect(_on_button_hover.bind(button, true))

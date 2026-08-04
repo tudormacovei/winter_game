@@ -76,8 +76,11 @@ shadow_mesh = SubResource("ArrayMesh_iiu1y")
 
 [node name="Suitcase" type="Area3D"]
 script = ExtResource("1_6cb0b")
-max_sticker_count = 5
+max_sticker_count = 8
 placement_mesh = SubResource("ArrayMesh_axp0a")
+sticker_placement_offset = 0.001
+sticker_start_scale = 0.6
+sticker_min_scale_fraction = 0.6
 rng_seed = 0
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 

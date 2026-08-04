@@ -3,12 +3,6 @@
 => start
 
 ~ start
-[do DialogueFuncs.play_sfx("sfx_night_sounds")]You live in a world ravaged by seemingly random occurrences known as the Cullings, events that have lead to countless gruesome deaths over the past decade. 
-You're on your way to a village that you dreamt about. A self-proclaimed Goddess showed Herself to you in your sleep, assuming the appearance of a crow, and told you to make your way there with haste.
-You abided. Who knows why? Your reasons are your own. 
-After a long and tiring trek in the dark, you finally arrive at the village gates. 
-You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch as you walk towards them. 
-After what feels like too long, they speak.
 ???: [wait=1][speed=0.2][shake rate=10.0 level=2]...
 ???: [speed=0.2][shake rate=10.0 level=2]...Who goes there?
 - I heard this village is a safe haven, untouched by hardship or the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.

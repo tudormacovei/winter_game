@@ -1,24 +1,33 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=11 format=3 uid="uid://crjbbp07kdxig"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=14 format=3 uid="uid://crjbbp07kdxig"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_qajja"]
 [ext_resource type="Resource" uid="uid://dyfx0vcpfwhe6" path="res://data/interaction_configs/prologue_config.tres" id="2_068nm"]
 [ext_resource type="Resource" uid="uid://gqbuiwqdbhkc" path="res://data/dialogue/NPC_0/NPC_0_1.dialogue" id="2_jqotn"]
+[ext_resource type="Resource" uid="uid://c8l484xcc7b1g" path="res://data/interaction_configs/black_config.tres" id="2_wc6rg"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="3_84k3x"]
-[ext_resource type="Resource" uid="uid://b5h0d0vhqf14" path="res://data/dialogue/NPC_0/NPC_0_2.dialogue" id="3_b670m"]
+[ext_resource type="Resource" uid="uid://b45xt0ckntbvk" path="res://data/dialogue/narrations/NAR_NPC_0_1.dialogue" id="3_wc6rg"]
 [ext_resource type="Resource" uid="uid://8c3hp48eb73p" path="res://data/dialogue/NPC_0/NPC_0_3.dialogue" id="4_068nm"]
 [ext_resource type="Resource" uid="uid://douhk2njjw7k8" path="res://data/interaction_configs/workshop_default_config.tres" id="4_dchaq"]
+[ext_resource type="Resource" uid="uid://b5h0d0vhqf14" path="res://data/dialogue/narrations/NAR_NPC_0_2.dialogue" id="6_wc6rg"]
+
+[sub_resource type="Resource" id="Resource_dfv5o"]
+script = ExtResource("1_qajja")
+dialogue = ExtResource("3_wc6rg")
+start_delay_seconds = 2.0
+config = ExtResource("2_wc6rg")
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_3affb"]
 script = ExtResource("1_qajja")
 dialogue = ExtResource("2_jqotn")
-start_delay_seconds = 2.0
 config = ExtResource("2_068nm")
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_dchaq"]
 script = ExtResource("1_qajja")
-dialogue = ExtResource("3_b670m")
+dialogue = ExtResource("6_wc6rg")
 start_delay_seconds = 2.0
+config = ExtResource("2_wc6rg")
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_wc6rg"]
@@ -29,5 +38,5 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [resource]
 script = ExtResource("3_84k3x")
-interactions = Array[ExtResource("1_qajja")]([SubResource("Resource_3affb"), SubResource("Resource_dchaq"), SubResource("Resource_wc6rg")])
+interactions = Array[ExtResource("1_qajja")]([SubResource("Resource_dfv5o"), SubResource("Resource_3affb"), SubResource("Resource_dchaq"), SubResource("Resource_wc6rg")])
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

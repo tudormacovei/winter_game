@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="InteractionConfigDefinition" load_steps=2 format=3 uid="uid://dyfx0vcpfwhe6"]
+[gd_resource type="Resource" script_class="InteractionConfigDefinition" load_steps=3 format=3 uid="uid://dyfx0vcpfwhe6"]
 
+[ext_resource type="PackedScene" uid="uid://c5goiuunkpj8a" path="res://scenes/UI/dialogue_baloon/dialogue_balloon_prologue.tscn" id="1_cd5gy"]
 [ext_resource type="Script" uid="uid://c2xpl2eysoink" path="res://scripts/systems/interactions/interaction_config_definition.gd" id="1_rhpcv"]
 
 [resource]
 script = ExtResource("1_rhpcv")
 scene_name = "PrologueView"
 is_camera_locked = true
+dialogue_balloon_scene = ExtResource("1_cd5gy")
+audio_ambient_file_name = "amb_night_sounds"
 metadata/_custom_type_script = "uid://c2xpl2eysoink"

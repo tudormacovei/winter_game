@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=12 format=3 uid="uid://ww2tat7utudi"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=13 format=3 uid="uid://ww2tat7utudi"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
 [ext_resource type="Resource" uid="uid://bthdoam3ce0u7" path="res://data/dialogue/NPC_4/NPC_4_3.dialogue" id="2_7circ"]
+[ext_resource type="Resource" uid="uid://douhk2njjw7k8" path="res://data/interaction_configs/workshop_default_config.tres" id="2_58or1"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="2_jitoe"]
 [ext_resource type="Resource" uid="uid://b6fuy4pkk2ykv" path="res://data/dialogue/NPC_4/NPC_4_4.dialogue" id="3_7circ"]
 [ext_resource type="PackedScene" uid="uid://bov6fm3d5y6xm" path="res://scenes/object_manipulation/objects/flask.tscn" id="4_ylnnp"]

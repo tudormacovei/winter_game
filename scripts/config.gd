@@ -10,6 +10,8 @@ const SFX_AUDIO_STREAMS_PATH: String = "res://audio_assets/sfx"
 const AUDIO_BUS_AMBIENT := "Ambient"
 const AUDIO_BUS_SFX := "SFX"
 
+const AMBIENT_MAIN_MENU_STREAM_NAME: String = "amb_main_menu_faded"
+
 const SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX: String = "prog_score_special_object_"
 const SCORE_SIMPLE_OBJECTS_VAR_KEY: String = "prog_score_simple_objects" # NOTE: This needs to be synced with the variable name in global_variables.tres
 const SCORE_SIMPLE_OBJECTS_SMOOTHING_FACTOR: float = 0.2 # Higher value = score will change quicker based on recent performance. Value should be between 0 and 1.
@@ -30,7 +32,7 @@ const TIME_OF_DAY_BASE_LERP_SECONDS: float = 6.0 # Baseline duration to transiti
 
 #region Audio Config
 
-const AMBIENT_MUSIC_FILE_NAME: String = "amb_music"
+# NOTE: Ambient music is handled in the interaction config .tres files instead of here
 
 const LETTER_SPOKE_SFX_NAME: String = "sfx_dialogue_letter"
 const LETTER_SPOKE_SFX_VOLUME_DB: float = -16.0
@@ -49,6 +51,9 @@ const END_DAY_SFX_VOLUME_DB: float = -15.0
 const STICKER_BEGIN_PEEL_SFX_NAME: String = "sfx_begin_peel"
 const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
 
+const PLAYER_DEATH_SFX_NAME: String = "sfx_player_death"
+const PLAYER_DEATH_SFX_VOLUME_DB: float = -15.0
+
 #endregion
 
 #region UI Config
@@ -64,6 +69,6 @@ const OBJECT_STATE_UI_DIALOGUE_END_DELAY_SECONDS: float = 5.0 # Delay before sho
 
 const DAY_END_SCREEN_MESSAGE: String = "You have completed day %d."
 const GAME_END_SCREEN_MESSAGE: String = "You have completed all days."
-const DEATH_SCREEN_MESSAGE: String = "YOU DIED"
+const DEATH_SCREEN_MESSAGE: String = "She has taken you."
 
 #endregion

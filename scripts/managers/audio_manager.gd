@@ -9,6 +9,12 @@ var _ambient_player: AudioStreamPlayer
 var _sfx_player: AudioStreamPlayer
 var _sfx_dialogue_letter_player: AudioStreamPlayer
 
+var audio_file_to_volume: Dictionary[String, int] = {
+	"amb_main_menu_faded": 40,
+	"amb_main_game": 35,
+	"amb_night_sounds": 25,
+}
+
 #region Preloaded Streams
 
 #NOTE: For now, we preload all audio streams. If this becomes a performance issue, we can add a kind of streaming system that loads/unloads as needed.
@@ -18,18 +24,24 @@ var sfx_audio_streams: Dictionary = {}
 #endregion 
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS # We don't want audio to pause when the game is paused
 	ambient_audio_streams = _preload_streams(Config.AMBIENT_AUDIO_STREAMS_PATH)
 	sfx_audio_streams = _preload_streams(Config.SFX_AUDIO_STREAMS_PATH)
 	_create_players()
 
 
-func play_music(stream_name: String):
+func play_ambient_stream(stream_name: String):
 	if not ambient_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No music stream found with name '%s'!" % stream_name)
 		return
 
+	var volume: int = audio_file_to_volume.get(stream_name, 0)
 	_ambient_player.stream = ambient_audio_streams[stream_name]
+	_ambient_player.volume_db = volume
 	_ambient_player.play()
+
+func stop_ambient():
+	_ambient_player.stop()
 
 func play_sfx(stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
 	_play_sfx(_sfx_player, stream_name, volume_db, pitch_scale)
