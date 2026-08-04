@@ -26,6 +26,10 @@ func _ready() -> void:
 
 	continue_button.disabled = not SaveManager.does_save_exist()
 
+	for button in [start_button, continue_button, settings_button, exit_button]:
+			button.mouse_entered.connect(_on_button_hover.bind(button, true))
+			button.mouse_exited.connect(_on_button_hover.bind(button, false))
+
 func _on_settings_pressed() -> void:
 	settings_panel.visible = !settings_panel.visible
 
@@ -49,6 +53,16 @@ func _on_continue_pressed() -> void:
 	else:
 		push_warning("MainMenu: main_scene is not set.")
 
+func _on_button_hover(button: Button, is_hovering: bool) -> void:
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUAD)
+	
+	var target_color = Color(0.6, 0.4, 0.2, 1.0) if is_hovering else Color(0.85, 0.78, 0.6, 1.0)
+	var target_scale = Vector2(1.05, 1.05) if is_hovering else Vector2(1.0, 1.0)
+	
+	tween.tween_property(button, "scale", target_scale, 0.15)
+	tween.parallel().tween_property(button, "theme_override_colors/font_color", target_color, 0.2)
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
