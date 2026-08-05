@@ -210,7 +210,7 @@ Micah: [#sprite=happy]That's how things work around here. Not too complicated, b
 		Micah: [#sprite=upset]Uh, not sure I wanna do that.[do Variables.set_char_var("NPC_1", "relationship", 2)] => sarah
 
 ~ sarah
-Micah: Anyway, here's today's bag of items. Where's the Shopkeeper? The real one, I mean? [do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("milk_carton")][do DialogueFuncs.add_object_to_workbench("chess_set")]
+Micah: Anyway, here's today's bag of items. Where's the Shopkeeper? The real one, I mean? [do DialogueFuncs.add_object_to_workbench("suitcase")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
 #add items
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Micah!
 Micah: [#sprite=happy]Oh, hi, Sarah!

@@ -4,7 +4,7 @@
 
 ~ start
 if Variables.get_char_var("NPC_2", "relationship") == 0
-	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=upset]Morning. Here's today's batch. Be seeing you. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
+	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=upset]Morning. Here's today's batch. Be seeing you. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
 	- Why the long face?
 		Micah: [#sprite=upset]...
 		Micah: [#sprite=upset]You were mean to Sarah yesterday. 
@@ -79,7 +79,7 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 				Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 0)]
 				Micah: [#sprite=upset]I'll be going now. Bye. => END2
 else 
-	Micah: [#sprite=happy]Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
+	Micah: [#sprite=happy]Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
 	Micah: Eh, feel like that's a bit too long maybe. Doesn't quite roll off the tongue. 
 	Micah: [#sprite=happy]I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. 
 	- Kinda like it. 

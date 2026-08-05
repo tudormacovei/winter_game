@@ -11,7 +11,7 @@ Shopkeeper: [#sprite=worried]Just keep out of trouble this time. Please.
 Sarah: [#sprite=upset]Course we will. When haven't we?
 Sarah: [#sprite=happy]Anyway, see you later. Bye!
 Micah: [#sprite=happy]Bye, Shopkeeper! Bye, fake 'keeper![do DialogueFuncs.play_sfx("sfx_door_close")]
-Shopkeeper: [wait=1.0][#sprite=laugh]...Devils, the two of them. 
+Shopkeeper: [wait=1.0][#sprite=laugh]Devils, the two of them. 
 Shopkeeper: I see you've met Micah. He's a good kid, eh?
 - He's definitely something. => eh
 - Gets on my nerves, to be honest. => eh
