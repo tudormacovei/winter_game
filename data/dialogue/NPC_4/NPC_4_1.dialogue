@@ -4,7 +4,7 @@
 
 ~ start
 ...[do DialogueFuncs.play_sfx("sfx_stairs")][wait=9]
-Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]...Morning, there. I see you're itching to get started. Sleep well?
+Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see you're itching to get started. Sleep well?
 - Morning. Slept just fine. 
 	Shopkeeper: Good. Wouldn't want you tired on your first day. Especially after such a long journey.[do Variables.set_char_var("NPC_4", "know", true)]
 	- How do you know so much about me already?
@@ -354,6 +354,6 @@ Shopkeeper: You can keep practicing, if you so wish. These items are from old ba
 	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here.
 	Shopkeeper: I'll go check up on Sarah while you work. Be right back. => END
 - Think I got it. Let's move on.
-	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
-
+	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	
 => END

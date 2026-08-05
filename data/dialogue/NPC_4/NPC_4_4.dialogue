@@ -79,7 +79,7 @@ Mary: Wasn't expecting to see a new face here.
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
 			- See you around. => END1 
-			- Goodybe. => END1 
+			- Goodbye. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
@@ -92,7 +92,7 @@ Mary: Wasn't expecting to see a new face here.
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
 			- See you around. => END1 
-			- Goodybe. => END1 
+			- Goodbye. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
@@ -105,7 +105,7 @@ Mary: Wasn't expecting to see a new face here.
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
 			- See you around. => END1 
-			- Goodybe. => END1 
+			- Goodbye. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 
@@ -118,7 +118,7 @@ Mary: Wasn't expecting to see a new face here.
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
 			- See you around. => END1 
-			- Goodybe. => END1 
+			- Goodbye. => END1 
 		- Don't wanna scare her for no reason. 
 			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
 			Mary: Farewell. 

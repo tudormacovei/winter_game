@@ -8,7 +8,7 @@
 - I heard this village is a safe haven, untouched by hardship or the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.
 	???: [speed=0.8][shake rate=10.0 level=2]Not the first to ask. Sure won't be the last. Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
 	???: [speed=0.8][shake rate=10.0 level=2]Will he serve and praise, or will he sow discord and doubt amongst our ranks?
-	???: [wait=1][do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2]...
+	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
 	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you!
 	???: [speed=0.8][shake rate=10.0 level=2]The Goddess and the Elders are all welcoming. They've let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
 	???: [speed=0.8][shake rate=10.0 level=2]Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
@@ -35,7 +35,7 @@
 	???: [speed=0.8][shake rate=10.0 level=2]Your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
 	???: [speed=0.8][shake rate=10.0 level=2]Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
 	???: [speed=0.8][shake rate=10.0 level=2]Does he speak truly? Will he serve and praise You? Or will he sow discord and doubt amongst our ranks?
-	???: [wait=1][do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2]...
+	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
 	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you!
 	???: [speed=0.8][shake rate=10.0 level=2]The Goddess and the Elders are all welcoming. They've let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
 	???: [speed=0.8][shake rate=10.0 level=2]Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
