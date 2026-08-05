@@ -10,7 +10,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xcqvh"]
-size = Vector3(1, 0.225, 1.2)
+size = Vector3(1, 0.6442383, 1.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qyrgi"]
 size = Vector3(13.005558, 1, 8.225739)
@@ -40,9 +40,10 @@ pixel_size = 0.0007
 texture = ExtResource("2_qyrgi")
 
 [node name="DoneArea" type="Area3D" parent="."]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoneArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.063883975, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.14573516, 0)
 shape = SubResource("BoxShape3D_xcqvh")
 
 [node name="FocusPosition" type="Node3D" parent="."]
