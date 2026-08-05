@@ -5,9 +5,14 @@ class_name StickerPeelTimed extends StickerPeel
 
 @export var time_limit: float = 10.0
 
+# Edge glow pulse rate, escalating from min to max as the countdown runs out
+@export var edge_pulse_min_hz: float = 1.0
+@export var edge_pulse_max_hz: float = 3.0
+
 var _time_remaining: float = 0.0
 var _is_timer_running: bool = false
 var _material: ShaderMaterial = null
+var _pulse_phase: float = 0.0 # in cycles [0, 1)
 
 func _ready() -> void:
 	super._ready()
@@ -28,9 +33,17 @@ func _process(delta: float) -> void:
 	if not should_tick:
 		return
 	_time_remaining = max(_time_remaining - delta, 0.0)
+	_advance_pulse_phase(delta)
 	_write_shader_uniforms()
 	if _time_remaining <= 0.0:
 		_fail()
+
+
+# Makes the sticker flash quicker as times goes on
+func _advance_pulse_phase(delta: float) -> void:
+	var progress: float = 1.0 - clamp(_time_remaining / time_limit, 0.0, 1.0)
+	var pulse_hz: float = lerpf(edge_pulse_min_hz, edge_pulse_max_hz, progress)
+	_pulse_phase = fmod(_pulse_phase + pulse_hz * delta, 1.0)
 
 
 func _fail() -> void:
@@ -57,4 +70,5 @@ func _write_shader_uniforms() -> void:
 		return
 	var progress: float = 1.0 - clamp(_time_remaining / time_limit, 0.0, 1.0)
 	_material.set_shader_parameter(&"progress", progress)
+	_material.set_shader_parameter(&"pulse_phase", _pulse_phase)
 	_material.set_shader_parameter(&"failed", 1.0 if state == State.FAILED else 0.0)
