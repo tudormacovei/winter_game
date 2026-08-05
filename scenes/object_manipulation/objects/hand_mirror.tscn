@@ -105,6 +105,7 @@ shadow_mesh = SubResource("ArrayMesh_fbbbo")
 script = ExtResource("1_o3u0s")
 placement_mesh = SubResource("ArrayMesh_y0eon")
 sticker_placement_offset = 0.001
+sticker_start_scale = 0.6
 rng_seed = 0
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 

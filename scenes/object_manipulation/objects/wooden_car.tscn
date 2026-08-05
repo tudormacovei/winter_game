@@ -81,8 +81,7 @@ script = ExtResource("1_t7ygl")
 max_sticker_count = 4
 placement_mesh = SubResource("ArrayMesh_iiagd")
 sticker_placement_offset = 0.001
-sticker_start_scale = 0.6
-sticker_min_scale_fraction = 0.4
+sticker_start_scale = 0.5
 rng_seed = 0
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 
@@ -92,10 +91,3 @@ shape = SubResource("ConcavePolygonShape3D_txoy7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_uxmly")
 skeleton = NodePath("")
-
-[connection signal="mouse_entered" from="MeshInstance3D/@Area3D@29689" to="MeshInstance3D/@Area3D@29689" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/@Area3D@29689" to="MeshInstance3D/@Area3D@29689" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="MeshInstance3D/@Area3D@29790" to="MeshInstance3D/@Area3D@29790" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/@Area3D@29790" to="MeshInstance3D/@Area3D@29790" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="MeshInstance3D/@Area3D@29891" to="MeshInstance3D/@Area3D@29891" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/@Area3D@29891" to="MeshInstance3D/@Area3D@29891" method="_on_mouse_exited"]
