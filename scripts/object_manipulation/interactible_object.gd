@@ -590,7 +590,7 @@ func complete_object():
 		return
 
 	print("Object Completed! Stickers completed: " + str(_completed_stickers) + "/" + str(_sticker_total))
-	AudioManager.play_sfx(Config.OBJECT_COMPLETED_SFX_NAME)
+	AudioManager.play_sfx(Config.OBJECT_COMPLETED_SFX_NAME, Config.OBJECT_COMPLETED_SFX_VOLUME_DB)
 	GameState.object_completed.emit()
 
 	_is_mouse_on_object = false # Prevents timing issues where the mouse is registered as hovering while the object is being freed
