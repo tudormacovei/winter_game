@@ -68,6 +68,7 @@ position = Vector2(1, 1)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
+start_radius = 530.0
 end_radius = 80.0
 branch_count = 20
 branch_scale = 0.3
@@ -76,7 +77,7 @@ parallax_strength = 0.02
 [node name="BranchRing2" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
 modulate = Color(0.80616105, 0.8061606, 0.8061606, 1)
 z_index = 1
-start_radius = 500.0
+start_radius = 550.0
 end_radius = 100.0
 branch_count = 14
 branch_scale = 0.4
@@ -137,6 +138,7 @@ unique_name_in_owner = true
 script = ExtResource("8_sllmx")
 health_drain_per_second = 3.5
 health_restore_per_second = 2.5
+hp_penalty_per_missed_sticker = 7.5
 
 [node name="TimeManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
