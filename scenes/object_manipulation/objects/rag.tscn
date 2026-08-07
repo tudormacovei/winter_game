@@ -79,7 +79,6 @@ is_special_object = true
 max_sticker_count = 0
 placement_mesh = SubResource("ArrayMesh_vjjex")
 rng_seed = 0
-sticker_scene = ExtResource("3_bog5l")
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

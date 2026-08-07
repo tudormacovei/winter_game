@@ -82,6 +82,7 @@ max_sticker_count = 4
 placement_mesh = SubResource("ArrayMesh_iiagd")
 sticker_placement_offset = 0.001
 sticker_start_scale = 0.5
+additional_focus_zoom_percent = 30.0
 rng_seed = 0
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://gfjoau0fs0gt"]
+[gd_scene load_steps=9 format=4 uid="uid://gfjoau0fs0gt"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_erdju"]
 [ext_resource type="ArrayMesh" uid="uid://c62ny1un38v7n" path="res://3d_assets/manipulation_objects/milk_carton/3d_bottle_collider.res" id="1_lapvg"]
-[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="3_rly6t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwpr5"]
 
@@ -70,7 +69,6 @@ data = PackedVector3Array(0.0848, -0.2156, 0.0962, 0.0848, 0.1611, -0.0735, 0.08
 script = ExtResource("1_erdju")
 max_sticker_count = 4
 placement_mesh = SubResource("ArrayMesh_rly6t")
-sticker_scene = ExtResource("3_rly6t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_lapvg")

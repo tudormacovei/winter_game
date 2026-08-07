@@ -20,6 +20,7 @@ const DEBUG_FACE_NORMALS_NAME: String = "DebugPlacementFaceNormals"
 @export var sticker_placement_offset: float = 0.0 # how far stickers stick out from the surface (0 = flush)
 @export var sticker_start_scale: float = 1.0 # scale applied to every new sticker on this object
 @export_range(0.01, 1.0, 0.01) var sticker_min_scale_fraction: float = 0.5 # lowest allowed scale relative to sticker_start_scale
+@export_range(0.0, 100.0, 1.0, "suffix:%") var additional_focus_zoom_percent: float = 0.0 # extra zoom on top of the default during object focus
 @export var rng_seed: int = 1 # Set to 0 to ignore seeed and have run-to-run variation
 @export var preview_difficulty: int = 5 # !!! editor-only: defines difficulty used by the Place Stickers tool button
 

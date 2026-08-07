@@ -44,6 +44,9 @@ var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rot
 var _default_fov: float = 0.0
 var _fov_tween: Tween
 var _dolly_tween: Tween
+var _object_focus_entry_position: Vector3 = Vector3.ZERO
+var _object_focus_entry_fov: float = 0.0
+var _object_focus_active: bool = false
 var can_enter_dialogue_view: bool = true
 var can_enter_quarantine_view: bool = true
 var _base_x: float = 0.0
@@ -108,7 +111,7 @@ func _start_rotation_to(target_focus: CameraFocus) -> void:
 
 
 func _is_camera_animating() -> bool:
-	return _camera_state != CameraState.STATIONARY
+	return _camera_state != CameraState.STATIONARY or _object_focus_active
 
 
 func _apply_locked_focus(focus: CameraFocus) -> void:
@@ -128,11 +131,11 @@ func _apply_locked_focus(focus: CameraFocus) -> void:
 
 
 func is_at_rest_in_workbench_view() -> bool:
-	return _camera_state == CameraState.STATIONARY and _camera_focus == CameraFocus.WORK_AREA
+	return _camera_state == CameraState.STATIONARY and _camera_focus == CameraFocus.WORK_AREA and not _object_focus_active
 
 
 func is_at_rest_at_table() -> bool:
-	return _camera_state == CameraState.STATIONARY and (_camera_focus == CameraFocus.WORK_AREA or _camera_focus == CameraFocus.QUARANTINE_VIEW)
+	return _camera_state == CameraState.STATIONARY and (_camera_focus == CameraFocus.WORK_AREA or _camera_focus == CameraFocus.QUARANTINE_VIEW) and not _object_focus_active
 
 
 func _handle_quarantine_proximity(delta: float) -> void:
@@ -264,14 +267,51 @@ func _on_exit_quarantine_finished() -> void:
 
 
 func tween_fov(target_fov: float, duration: float) -> void:
-	if _fov_tween and _fov_tween.is_valid():
-		_fov_tween.kill()
-	if _dolly_tween and _dolly_tween.is_valid():
-		_dolly_tween.kill()
 	var start_fov := fov
 	var start_pos := position
 	var fov_delta := target_fov - start_fov
 	var target_pos := start_pos + (-basis.z * fov_delta * dolly_zoom_sensitivity)
+	_tween_fov_and_position(target_fov, target_pos, duration)
+
+
+func begin_object_focus(zoom_percent: float, duration: float) -> void:
+	# Save so we can restore on exit w/o drift
+	_object_focus_entry_position = position
+	_object_focus_entry_fov = fov
+	_object_focus_active = true
+
+	var baseline_fov := focused_fov
+	var fov_delta := baseline_fov - _object_focus_entry_fov
+	var camera_forward := -basis.z
+	var default_dolly_distance: float = fov_delta * dolly_zoom_sensitivity
+	
+	# add per-object custom zoom value
+	var extra_zoom: float = max(default_dolly_distance, 0.0) * zoom_percent / 100.0
+	var baseline_position := _object_focus_entry_position + camera_forward * default_dolly_distance
+
+	_tween_fov_and_position(baseline_fov, baseline_position + camera_forward * extra_zoom, duration)
+
+
+func end_object_focus(duration: float) -> void:
+	if not _object_focus_active:
+		return
+	_tween_fov_and_position(_object_focus_entry_fov, _object_focus_entry_position, duration, _finish_object_focus)
+
+
+func _finish_object_focus() -> void:
+	position = _object_focus_entry_position
+	fov = _object_focus_entry_fov
+	_object_focus_active = false
+
+
+func _tween_fov_and_position(target_fov: float, target_position: Vector3, duration: float, on_finished: Callable = Callable()) -> void:
+	if _fov_tween and _fov_tween.is_valid():
+		_fov_tween.kill()
+	if _dolly_tween and _dolly_tween.is_valid():
+		_dolly_tween.kill()
+	# Use absolute targets so interrupted transitions still converge without accumulating offset.
+	var start_fov := fov
+	var start_pos := position
 	var curve_sample := func(t: float) -> float: return focus_fov_curve.sample(t) if focus_fov_curve else t
 	_fov_tween = create_tween()
 	_fov_tween.tween_method(
@@ -280,6 +320,8 @@ func tween_fov(target_fov: float, duration: float) -> void:
 	)
 	_dolly_tween = create_tween()
 	_dolly_tween.tween_method(
-		func(t: float) -> void: position = start_pos.lerp(target_pos, curve_sample.call(t)),
+		func(t: float) -> void: position = start_pos.lerp(target_position, curve_sample.call(t)),
 		0.0, 1.0, duration
 	)
+	if on_finished.is_valid():
+		_dolly_tween.finished.connect(on_finished, CONNECT_ONE_SHOT)

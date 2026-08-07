@@ -448,8 +448,10 @@ func _start_focus_tween(target_local_pos: Vector3, position_curve: Curve, rotati
 
 	var camera := get_viewport().get_camera_3d() as CameraControl
 	if camera:
-		var target_fov := camera.focused_fov if is_focusing else camera._default_fov
-		camera.tween_fov(target_fov, FOCUS_DURATION)
+		if is_focusing:
+			camera.begin_object_focus(_object.additional_focus_zoom_percent, FOCUS_DURATION)
+		else:
+			camera.end_object_focus(FOCUS_DURATION)
 
 	_focus_position_tween = create_tween()
 	_focus_position_tween.tween_method(
@@ -469,7 +471,6 @@ func _start_focus_tween(target_local_pos: Vector3, position_curve: Curve, rotati
 		func(t: float): _object.scale = start_scale.lerp(target_scale, position_sample.call(t)),
 		0.0, 1.0, FOCUS_DURATION
 	)
-
 
 func _nearest_snap_orientation(current: Basis) -> Basis:
 	if _snap_orientations.is_empty():
