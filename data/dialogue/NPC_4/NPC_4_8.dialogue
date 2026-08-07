@@ -36,7 +36,7 @@ if Variables.get_char_var("NPC_4", "sacrifice") == true
 	Shopkeeper: [#sprite=worried]Like I said before, on your first day. The Goddess requires sacrifices to keep our village safe from the Cullings. Human sacrifices. 
 	Shopkeeper: [#sprite=worried]But I didn't lie to you. It's always been voluntary. => goddess
 else 
-	Shopkeeper: [#sprite=worried]This might be hard to believe, but the Goddes requires sacrifices to keep our village safe from the Cullings. Human sacrifices.
+	Shopkeeper: [#sprite=worried]This might be hard to believe, but the Goddess requires sacrifices to keep our village safe from the Cullings. Human sacrifices.
 	Shopkeeper: [#sprite=worried]I know this sounds fucked up. But it's always been voluntary. => goddess
 	
 ~ goddess 
