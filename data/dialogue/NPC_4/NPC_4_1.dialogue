@@ -199,7 +199,7 @@ Shopkeeper: ...
 	Shopkeeper: You'll see. => questions
 - Who are the "Elders"? [if Variables.get_char_var("NPC_4", "elders") == false]
 	Shopkeeper: They're the founders and leaders of our wonderful village and church. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "elders", true)]
-	Shopkeeper: There's five of them, and they're the only ones who can communicate directly with the Goddess, besides me, of course. 
+	Shopkeeper: They're the only ones who can communicate directly with the Goddess, besides me, of course. 
 	Shopkeeper: They're very old, hence the name. They rarely come out of their home. They have underlings and messengers in their service, and that's how they usually communicate the Goddess's will and teachings to us.
 	Shopkeeper: There's a chance you won't ever see them yourself, but it's safer to assume they're aware of your every move. 
 	Shopkeeper: They don't take kindly to meddling newcomers. And they're not known for being forgiving to heretics and blasphemers. 

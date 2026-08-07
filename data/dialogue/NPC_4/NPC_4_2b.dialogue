@@ -124,7 +124,7 @@ Shopkeeper: Think you're up to it?
 - Sure am. 
 	Shopkeeper: [#sprite=laugh]That's the spirit. 
 	Shopkeeper: Might be late by the time I get back, so feel free to go to bed once you're done. 
-	Shopkeeper: See you you tomorrow morning. Good luck. 
+	Shopkeeper: See you tomorrow morning. Good luck. 
 	- See you then. 
 		Shopkeeper: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 	- Thanks. 
