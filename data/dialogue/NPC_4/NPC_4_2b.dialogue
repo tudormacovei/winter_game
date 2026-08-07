@@ -3,22 +3,14 @@
 => start
 
 ~ start
-Shopkeeper: Told you to stop running down the stairs, Sarah. 
-Sarah: Sorry, dad. Micah and I are in a bit of a hurry.
-Shopkeeper: What are the two of you up to now?
-Sarah: [#sprite=happy]It's a secret. You'll see.
-Shopkeeper: [#sprite=worried]Just keep out of trouble this time. Please. 
-Sarah: [#sprite=upset]Course we will. When haven't we?
-Sarah: [#sprite=happy]Anyway, see you later. Bye!
-Micah: [#sprite=happy]Bye, Shopkeeper! Bye, fake 'keeper![do DialogueFuncs.play_sfx("sfx_door_close")]
-Shopkeeper: [wait=1.0][#sprite=laugh]Devils, the two of them. 
-Shopkeeper: I see you've met Micah. He's a good kid, eh?
+Shopkeeper: [wait=1.0][do DialogueFuncs.play_sfx("sfx_door_open")]I see you already got through a few of the objects Micah brought today. Good job.
+Shopkeeper: He's a good kid, eh?
 - He's definitely something. => eh
 - Gets on my nerves, to be honest. => eh
 - Yeah. I kind of like him. => like 
 
 ~ like 
-Shopkeeper: I'm very glad to hear that. Most people don't. 
+Shopkeeper: [#sprite=laugh]I'm very glad to hear that. Most people don't. 
 Shopkeeper: [#sprite=worried]He's had a rough time. His mother died while giving birth, and his dad died himself, recently. 
 Shopkeeper: The Elders took him in. He's one of their messengers, now. 
 Shopkeeper: But he mostly delivers items to us and back to their owners.
@@ -125,7 +117,7 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 	
 
 ~ next
-Shopkeeper: Anyway, I'll let you get started on those new objects Micah brought in. 
+Shopkeeper: Anyway, I'll let you finish up those items. 
 Shopkeeper: Pretty small batch today, and it's the best way to learn, if you ask me. 
 Shopkeeper: I've got some errands to run, so I'll leave you to it. 
 Shopkeeper: Think you're up to it?

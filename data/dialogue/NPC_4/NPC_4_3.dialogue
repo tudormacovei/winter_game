@@ -175,7 +175,7 @@ Sarah: ...
 		Sarah: Anyway, that's our business. => micah
 
 ~ micah
-Micah: [wait=1.5][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")][do DialogueFuncs.add_object_to_workbench("book_01")]
+Micah: [wait=1.5][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Morning, Sarah. Fresh delivery for you, novice. Hahah. You already look like you own the place. [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")]
 Sarah: Micah! Have you seen my father? He didn't come home last night.
 Micah: Sure have. He's with the Elders. No idea why, though. He was with 'em late into the night. 
 Micah: I tried to listen in but couldn't hear shit. 

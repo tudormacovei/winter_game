@@ -217,7 +217,19 @@ Micah: [#sprite=happy]Oh, hi, Sarah!
 Micah: [#sprite=happy]Ready to go?
 Sarah: [#sprite=happy]Of course I am. 
 Sarah: [wait=0.3]...Hello, random, creepy stranger. 
-- Hello, random, creepy girl. => END 
-- Nice to meet you too, Sarah.  => END
+- Hello, random, creepy girl. => hello
+- Nice to meet you too, Sarah.  => hello
+
+~ hello 
+Shopkeeper: Told you to stop running down the stairs, Sarah. 
+Sarah: Sorry, dad. Micah and I are in a bit of a hurry.
+Shopkeeper: What are the two of you up to now?
+Sarah: [#sprite=happy]It's a secret. You'll see.
+Shopkeeper: [#sprite=worried]Just keep out of trouble this time. Please. 
+Sarah: [#sprite=upset]Course we will. When haven't we?
+Sarah: [#sprite=happy]Anyway, see you later. Bye!
+Micah: [#sprite=happy]Bye, Shopkeeper! Bye, fake 'keeper![do DialogueFuncs.play_sfx("sfx_door_close")]
+Shopkeeper: [#sprite=laugh]...Devils, the two of them. 
+Shopkeeper: I'll be right back, if you don't mind. Got to say my prayers for the day.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 
 => END 

@@ -350,7 +350,7 @@ Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around
 Shopkeeper: You can keep practicing, if you so wish. These items are from old batches, anyway. Their owners are long dead. Mostly.
 -  I want to practise a little more. 
 	Shopkeeper: [#sprite=laugh]You're enjoying this, eh? Good. 
-	Shopkeeper: I've got a few more items around the place. Here, you can have them. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")]
+	Shopkeeper: I've got a few more items around the place. Here, you can have them. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")]
 	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here.
 	Shopkeeper: I'll go check up on Sarah while you work. Be right back. => END
 - Think I got it. Let's move on.

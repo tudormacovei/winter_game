@@ -6,7 +6,7 @@
 if Variables.get_var("ending_zero") == true
 	It's the day of the Cullings. The Shopkeeper and Sarah are missing. Micah asked the Elders to banish you from the village, on account of you constantly badmouthing the Goddess ever since you got here. 
 	Given the situation, they accept. They don't need another inconvenience. 
-	You[do DialogueFuncs.play_sfx("sfx_exile")] find yourself outside the village walls as the sky turns red. After a few minutes, you start to feel blisters on your skin. [do DialogueFuncs.play_sfx("sfx_death", -10)]They hurt more than anything you've ever imagined, and you can feel them suck the life out of you. 
+	You[do DialogueFuncs.play_sfx("sfx_exile")] find yourself outside the village walls as the sky turns red. After a few minutes, you start to feel blisters on your skin. [do DialogueFuncs.play_sfx("sfx_death", -10)]You can feel them suck the life out of you. They hurt more than anything you could have ever imagined. 
 	In mere seconds, you're dead. => END 
 else 
 	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Morning, Keeper. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] 
