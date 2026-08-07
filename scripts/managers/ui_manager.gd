@@ -160,6 +160,7 @@ func get_current_screen_highlight_mask() -> int:
 const _SCREEN_FADE_DURATION = 0.3
 const _SCREEN_FADE_TO_DURATION_DEATH = 2.0
 const _SCREEN_FADE_DURATION_GAME_END = 2
+const _SCREEN_FADE_DURATION_INTERACTION_CONFIGS = 0.8
 var _screen_fade_tween: Tween = null
 
 func fade_to_black(duration: float = _SCREEN_FADE_DURATION) -> void:

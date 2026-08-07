@@ -183,7 +183,7 @@ func _play_next_interaction():
 
 	_update_time_of_day()
 
-	interaction_config_controller.apply_config(interaction.config)
+	await interaction_config_controller.apply_config(interaction.config)
 
 	# Wait for start delay
 	if not (OS.is_debug_build() and debug_disable_interaction_delay):

@@ -20,7 +20,7 @@ func apply_config(config: Resource) -> void:
 	_resolve_ui_manager()
 	
 	if current_config:
-		await _ui_manager.fade_to_black()
+		await _ui_manager.fade_to_black(_ui_manager._SCREEN_FADE_DURATION_INTERACTION_CONFIGS)
 	else:
 		await _ui_manager.fade_to_black(0.0)
 
@@ -29,7 +29,7 @@ func apply_config(config: Resource) -> void:
 	_apply_camera_rules(config.is_camera_locked)
 	_apply_audio_ambient(config.audio_ambient_file_name)
 
-	await _ui_manager.fade_from_black()
+	await _ui_manager.fade_from_black(_ui_manager._SCREEN_FADE_DURATION_INTERACTION_CONFIGS)
 	
 func _apply_camera_rules(is_locked: bool) -> void:
 	_camera.set_locked_to_dialogue(is_locked)
