@@ -62,5 +62,5 @@ void fragment() {
 	EMISSION = tex.rgb * brightness;
 	ROUGHNESS = roughness;
 	// Drop alpha when the wave darkens the sticker, but never amplify it above the texture's own alpha.
-	ALPHA = tex.a * min(brightness, 1.0);
+	ALPHA = tex.a * min(brightness, 0.5);
 }

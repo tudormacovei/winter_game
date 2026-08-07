@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dx6mq02u4p4lg"]
+
+[ext_resource type="Texture2D" uid="uid://b6e4cfra2okfl" path="res://2d_assets/spots/Spot1.webp" id="1_fb8xt"]
+
+[resource]
+resource_name = "StickerMaterial"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.76, 0.76, 0.76, 0.5019608)
+albedo_texture = ExtResource("1_fb8xt")
+roughness = 0.5
+emission_enabled = true
+emission_texture = ExtResource("1_fb8xt")
