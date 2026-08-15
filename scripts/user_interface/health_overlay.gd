@@ -6,7 +6,7 @@ func _ready() -> void:
 	position = get_viewport_rect().size / 2.0
 
 
-func set_health_normalized(h: float) -> void:
+func update_health_visualization(health_fraction: float) -> void:
 	for child in get_children():
 		if child is BranchRing:
-			child.set_health_normalized(h)
+			child.update_health_visualization(health_fraction)

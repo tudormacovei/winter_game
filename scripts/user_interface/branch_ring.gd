@@ -6,7 +6,6 @@ class_name BranchRing extends Node2D
 @export var end_radius: float = 200.0: set = _set_end_radius # Radius of the oval when fully revealed = at LOW HP
 @export var branch_count: int = 12: set = _set_branch_count
 @export var branch_scale: float = 0.15: set = _set_branch_scale
-@export var health_window: Vector2 = Vector2(0.95, 0.05): set = _set_health_window
 
 # Pixels of ring shift per pixel of mouse offset from screen center.
 @export var parallax_strength: float = 0.0
@@ -23,7 +22,7 @@ var _end_positions: Array[Vector2] = []
 
 func _ready() -> void:
 	_rebuild_branches()
-	set_health_normalized(preview_health)
+	update_health_visualization(preview_health)
 
 
 func _process(delta: float) -> void:
@@ -35,8 +34,8 @@ func _process(delta: float) -> void:
 
 
 func _rebuild_branches() -> void:
-	for c in _branches:
-		c.queue_free()
+	for branch in _branches:
+		branch.queue_free()
 	_branches.clear()
 	_start_positions.clear()
 	_end_positions.clear()
@@ -47,8 +46,8 @@ func _rebuild_branches() -> void:
 	var aspect: float = 16.0 / 9.0
 	for i in branch_count:
 		var angle: float = TAU * i / branch_count
-		var start_pos := Vector2(cos(angle) * start_radius * aspect, sin(angle) * start_radius)
-		var end_pos := Vector2(cos(angle) * end_radius * aspect, sin(angle) * end_radius)
+		var start_position := Vector2(cos(angle) * start_radius * aspect, sin(angle) * start_radius)
+		var end_position := Vector2(cos(angle) * end_radius * aspect, sin(angle) * end_radius)
 
 		var sprite := Sprite2D.new()
 		sprite.texture = branch_texture
@@ -58,61 +57,59 @@ func _rebuild_branches() -> void:
 		sprite.offset = Vector2(0, branch_texture.get_height() / 2.0)
 
 		# Rotate so texture-up (-Y) points toward screen center (0,0).
-		sprite.rotation = (-end_pos).angle() + PI / 2.0
-		sprite.position = start_pos
+		sprite.rotation = (-end_position).angle() + PI / 2.0
+		sprite.position = start_position
 
 		# Intentionally do NOT set owner!
 		# By not setting owner sprite notes will not get saved into the .tscn file (since they are spawned in-editor for preview)
 		add_child(sprite)
 
 		_branches.append(sprite)
-		_start_positions.append(start_pos)
-		_end_positions.append(end_pos)
+		_start_positions.append(start_position)
+		_end_positions.append(end_position)
 
 
-func set_health_normalized(h: float) -> void:
-	var t: float = clampf(inverse_lerp(health_window.x, health_window.y, h), 0.0, 1.0)
-	for i in _branches.size():
-		_branches[i].position = _start_positions[i].lerp(_end_positions[i], t)
+func update_health_visualization(normalized_health: float) -> void:
+	var movement_fraction: float = 1.0 - clampf(normalized_health, 0.0, 1.0)
+	for branch_index in _branches.size():
+		_branches[branch_index].position = _start_positions[branch_index].lerp(
+			_end_positions[branch_index],
+			movement_fraction
+		)
 
 # The setters below are overriden to ensure the overlay gets rebuilt & visualized in-editor
 
-func _set_branch_texture(v: Texture2D) -> void:
-	branch_texture = v
+func _set_branch_texture(new_texture: Texture2D) -> void:
+	branch_texture = new_texture
 	if is_inside_tree():
 		_rebuild_branches()
-		set_health_normalized(preview_health)
+		update_health_visualization(preview_health)
 
-func _set_start_radius(v: float) -> void:
-	start_radius = v
+func _set_start_radius(new_radius: float) -> void:
+	start_radius = new_radius
 	if is_inside_tree():
 		_rebuild_branches()
-		set_health_normalized(preview_health)
+		update_health_visualization(preview_health)
 
-func _set_end_radius(v: float) -> void:
-	end_radius = v
+func _set_end_radius(new_radius: float) -> void:
+	end_radius = new_radius
 	if is_inside_tree():
 		_rebuild_branches()
-		set_health_normalized(preview_health)
+		update_health_visualization(preview_health)
 
-func _set_branch_count(v: int) -> void:
-	branch_count = v
+func _set_branch_count(new_count: int) -> void:
+	branch_count = new_count
 	if is_inside_tree():
 		_rebuild_branches()
-		set_health_normalized(preview_health)
+		update_health_visualization(preview_health)
 
-func _set_branch_scale(v: float) -> void:
-	branch_scale = v
+func _set_branch_scale(new_scale: float) -> void:
+	branch_scale = new_scale
 	if is_inside_tree():
 		_rebuild_branches()
-		set_health_normalized(preview_health)
+		update_health_visualization(preview_health)
 
-func _set_health_window(v: Vector2) -> void:
-	health_window = v
+func _set_preview_health(new_health: float) -> void:
+	preview_health = new_health
 	if is_inside_tree():
-		set_health_normalized(preview_health)
-
-func _set_preview_health(v: float) -> void:
-	preview_health = v
-	if is_inside_tree():
-		set_health_normalized(preview_health)
+		update_health_visualization(preview_health)

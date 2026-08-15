@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=27 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -30,6 +30,11 @@ shader_parameter/glow_multiplier = 0.50000002375
 shader_parameter/glow_softness = 2.0
 shader_parameter/pulse_speed = 1.50000007125
 shader_parameter/_fade_progress = 1.0
+
+[sub_resource type="Curve" id="Curve_n3br4"]
+bake_resolution = 500
+_data = [Vector2(0, 0), 0.0, 0.5605083, 0, 0, Vector2(0.6182796, 0.43389726), 0.89348406, 0.89348406, 0, 0, Vector2(1, 0.9979637), 2.8072758, 1.5700185, 0, 0]
+point_count = 3
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -141,9 +146,10 @@ metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 [node name="HealthManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
 script = ExtResource("8_sllmx")
-health_drain_per_second = 7.0
+health_drain_per_second = 5.0
 life_loss_before_sound_delay = 0.1
 life_loss_before_candle_delay = 0.5
+visual_health_curve = SubResource("Curve_n3br4")
 
 [node name="TimeManager" type="Node" parent="Managers"]
 unique_name_in_owner = true

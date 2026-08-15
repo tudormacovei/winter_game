@@ -7,13 +7,15 @@ const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 @export var health_drain_per_second: float = 1.5
 @export var life_loss_before_sound_delay: float = 0.2
 @export var life_loss_before_candle_delay: float = 0.4
+@export var visual_health_curve: Curve
 
 @onready var health_overlay: HealthOverlay = %HealthOverlay
 @onready var health_visualization: HealthVisualization = %HealthVisualization
 
 
 var _health: float = STARTING_MAX_HEALTH
-var _visual_health: float = STARTING_MAX_HEALTH
+var _visual_health: float = 1.0
+var _animated_visual_health: float = 1.0
 var _remaining_lives: int = 0
 var _is_losing_life: bool = false
 
@@ -37,6 +39,7 @@ func register_object(obj: InteractibleObject) -> void:
 
 
 func _ready() -> void:
+	assert(visual_health_curve != null, "HealthManager requires a visual health curve.")
 	health_overlay.hide()
 	_initialize_lives()
 	if OS.is_debug_build():
@@ -48,8 +51,14 @@ func _process(delta: float) -> void:
 	if _should_drain():
 		_set_health(_health - health_drain_per_second * delta)
 
-	_visual_health = lerp(_visual_health, _health, 1.0 - exp(-VISUAL_HEALTH_SMOOTHING_RATE * delta))
-	health_overlay.set_health_normalized(_visual_health / STARTING_MAX_HEALTH)
+	var normalized_health := clampf(_health / STARTING_MAX_HEALTH, 0.0, 1.0)
+	_visual_health = clampf(visual_health_curve.sample(normalized_health), 0.0, 1.0)
+	_animated_visual_health = lerp(
+		_animated_visual_health,
+		_visual_health,
+		1.0 - exp(-VISUAL_HEALTH_SMOOTHING_RATE * delta)
+	)
+	health_overlay.update_health_visualization(_animated_visual_health)
 
 
 func _should_drain() -> bool:
