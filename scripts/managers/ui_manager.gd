@@ -4,7 +4,6 @@ class_name UIManager
 extends Node
 
 @onready var camera: CameraControl = %Camera3D
-@onready var health_manager: HealthManager = %HealthManager
 
 # UI Elements
 @onready var _day_end_screen := %DayEndScreen

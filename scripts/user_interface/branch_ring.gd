@@ -11,7 +11,7 @@ class_name BranchRing extends Node2D
 # Pixels of ring shift per pixel of mouse offset from screen center.
 @export var parallax_strength: float = 0.0
 
-# Editor-only preview knob. At runtime, HealthManager drives set_health_normalized() directly.
+# Editor-only health preview
 @export_range(0.0, 1.0, 0.01) var preview_health: float = 1.0: set = _set_preview_health
 
 const PARALLAX_SMOOTHING_RATE: float = 8.0

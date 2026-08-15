@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=26 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cj2xxumsftfuv" path="res://scripts/controllers/interaction_config_controller.gd" id="13_oneno"]
 [ext_resource type="PackedScene" uid="uid://cr0u622abvq0x" path="res://scenes/main_game_view/prologue_view.tscn" id="14_nf02i"]
 [ext_resource type="PackedScene" uid="uid://bqd8veyjgmaye" path="res://scenes/main_game_view/black_view.tscn" id="16_f2mrw"]
+[ext_resource type="PackedScene" uid="uid://xgydsunqt3t6" path="res://scenes/main_game_view/health_visualization.tscn" id="20_n3br4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdvrf"]
 shader = ExtResource("6_8dlmc")
@@ -121,6 +122,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
+[node name="HealthVisualization" parent="UI" instance=ExtResource("20_n3br4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0.51070946, 0.094545975, -0.39791515)
+
 [node name="Managers" type="Node" parent="."]
 
 [node name="UIManager" type="Node" parent="Managers"]
@@ -136,9 +141,7 @@ metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 [node name="HealthManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
 script = ExtResource("8_sllmx")
-health_drain_per_second = 3.5
-health_restore_per_second = 2.5
-hp_penalty_per_missed_sticker = 7.5
+health_drain_per_second = 7.0
 
 [node name="TimeManager" type="Node" parent="Managers"]
 unique_name_in_owner = true

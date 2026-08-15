@@ -5,17 +5,14 @@ const STARTING_MAX_HEALTH: float = 100.0
 const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 
 @export var health_drain_per_second: float = 1.5
-@export var health_restore_per_second: float = 0.75
-@export var hp_penalty_per_missed_sticker: float = 5.0
-@export var hp_penalty_cap_per_object: float = 15.0
 
-@onready var camera: CameraControl = %Camera3D
 @onready var health_overlay: HealthOverlay = %HealthOverlay
+@onready var health_visualization: HealthVisualization = %HealthVisualization
 
 
 var _health: float = STARTING_MAX_HEALTH
 var _visual_health: float = STARTING_MAX_HEALTH
-var max_health: float = STARTING_MAX_HEALTH
+var _remaining_lives: int = 0
 
 # The object currently in focus, will be queried for drain info (does it have stickers?)
 var _focused_object: InteractibleObject = null
@@ -25,9 +22,9 @@ var _focused_object: InteractibleObject = null
 var _is_dead: bool = false
 
 
-func reset_max_health() -> void:
-	max_health = STARTING_MAX_HEALTH
-	_set_health(max_health)
+func reset_health() -> void:
+	_set_health(STARTING_MAX_HEALTH)
+	_reset_lives()
 
 
 ## Register an object spawned on the workbench to connect health drain to object focus & completion
@@ -37,7 +34,8 @@ func register_object(obj: InteractibleObject) -> void:
 
 
 func _ready() -> void:
-	camera.camera_focus_changed.connect(_on_camera_focus_changed)
+	health_overlay.hide()
+	_initialize_lives()
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
 
@@ -46,8 +44,6 @@ func _process(delta: float) -> void:
 	# Either draining or recovering
 	if _should_drain():
 		_set_health(_health - health_drain_per_second * delta)
-	else:
-		_set_health(_health + health_restore_per_second * delta)
 
 	_visual_health = lerp(_visual_health, _health, 1.0 - exp(-VISUAL_HEALTH_SMOOTHING_RATE * delta))
 	health_overlay.set_health_normalized(_visual_health / STARTING_MAX_HEALTH)
@@ -60,38 +56,54 @@ func _should_drain() -> bool:
 
 
 func _set_health(value: float) -> void:
-	_health = clampf(value, 0.0, max_health)
+	_health = clampf(value, 0.0, STARTING_MAX_HEALTH)
 	if _health <= 0.0 and not _is_dead:
+		_use_life()
+
+
+func _initialize_lives() -> void:
+	if health_visualization.get_slot_count() == 0:
+		push_error("HealthManager requires HealthVisualization to have at least one health slot.")
+		set_process(false)
+		return
+	_reset_lives()
+
+
+func _reset_lives() -> void:
+	_remaining_lives = health_visualization.get_slot_count()
+	health_visualization.set_active_slot_count(_remaining_lives)
+
+
+func _use_life() -> void:
+	_remaining_lives = maxi(_remaining_lives - 1, 0)
+	health_visualization.set_active_slot_count(_remaining_lives)
+	if _remaining_lives == 0:
 		_die()
+		return
+	_health = STARTING_MAX_HEALTH
 
 
 func _die() -> void:
 	_is_dead = true
 	set_process(false) # stops drain, regen
-	print("Player HP reached 0")
+	print("HealthManager: no lives remaining, signalling player death")
 	GameState.player_died.emit()
-
-
-func _on_camera_focus_changed(current_focus: CameraControl.CameraFocus) -> void:
-	if current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		_set_health(max_health)
 
 
 func _on_object_interactible(is_interactible: bool, obj: InteractibleObject) -> void:
 	if is_interactible:
 		_focused_object = obj
+		health_overlay.show()
 	elif _focused_object == obj: # guard: a stale unfocus must not clear a newer focus
+		health_overlay.hide()
 		_focused_object = null
 
 
-func _on_object_completed(_object_name: String, _is_special: bool, completed_stickers: int, total_stickers: int) -> void:
-	var missed_stickers := total_stickers - completed_stickers
-	if debug_disable_drain or missed_stickers <= 0:
-		return
-	var penalty := minf(missed_stickers * hp_penalty_per_missed_sticker, hp_penalty_cap_per_object)
-	max_health = maxf(0.0, max_health - penalty)
-	_set_health(_health) # re-clamp to the new ceiling: a zero ceiling will trigger death
-	print("HealthManager: Max health set to %s" % str(snappedf(max_health, 0.1)))
+func _on_object_completed(_object_name: String, _is_special_object: bool, completed_stickers: int, total_stickers: int) -> void:
+	if completed_stickers < total_stickers:
+		_set_health(-0.001) # lose a life if object is not properly cleansed
+	else:
+		_set_health(STARTING_MAX_HEALTH) # regen health if object was fully cleansed
 
 
 #region Debug

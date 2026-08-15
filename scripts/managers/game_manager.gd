@@ -68,8 +68,8 @@ func _ready():
 	workbench.connect("all_objects_completed", _on_all_objects_completed)
 	tree_exiting.connect(_on_tree_exiting)
 
-	day_started.connect(health_manager.reset_max_health.unbind(1)) # reset HP needed on day start so debug skips also reset HP
-	day_ended.connect(health_manager.reset_max_health.unbind(1)) # reset HP on day end to remove low-HP effects
+	day_started.connect(health_manager.reset_health.unbind(1)) # reset HP needed on day start so debug skips also reset HP
+	day_ended.connect(health_manager.reset_health.unbind(1)) # reset HP on day end to remove low-HP effects
 
 	if GameState.has_signal("player_died"):
 		GameState.connect("player_died", Callable(self, "_on_player_died"))
@@ -78,6 +78,8 @@ func _ready():
 	_load_character_resources()
 	_restore_progress_from_save()
 
+	if not health_manager.is_node_ready():
+		await health_manager.ready
 	day_started.emit(current_day_index)
 	_play_next_interaction()
 
