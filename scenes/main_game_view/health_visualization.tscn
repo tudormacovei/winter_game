@@ -118,6 +118,13 @@ transform = Transform3D(1.4504032, 0, 0, 0, 1.4504032, 0, 0, 0, 1.4504032, 0, 0.
 mesh = SubResource("ArrayMesh_h8fmg")
 skeleton = NodePath("")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="candle_01/Flame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00096854253, 0.022177111, 0)
+light_color = Color(0.93797374, 0.5702094, 0.42410716, 1)
+light_energy = 0.25
+shadow_enabled = true
+shadow_bias = 0.01
+
 [node name="candle_02" type="Node3D" parent="."]
 transform = Transform3D(-2.3457696, 0, 1.8701243, 0, 3, 0, -1.8701243, 0, -2.3457696, -0.14285447, -0.05096829, 0.06465425)
 script = ExtResource("1_usne5")
@@ -127,9 +134,14 @@ mesh = SubResource("ArrayMesh_8op1i")
 skeleton = NodePath("")
 
 [node name="Flame" type="MeshInstance3D" parent="candle_02"]
-transform = Transform3D(1.4504032, 0, 0, 0, 1.4504032, 0, 0, 0, 1.4504032, 0, 0.06498224, 0)
+transform = Transform3D(-1.1341039, 0, -0.9041448, 0, 1.4504032, 0, 0.9041448, 0, -1.1341039, 0.00025453418, 0.067072734, 0.00024607405)
 mesh = SubResource("ArrayMesh_h8fmg")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="candle_02/Flame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011522148, 0)
+light_color = Color(0.93797374, 0.5702094, 0.42410716, 1)
+light_energy = 0.25
 
 [node name="candle_03" type="Node3D" parent="."]
 transform = Transform3D(-2.3457696, 0, 1.8701243, 0, 3, 0, -1.8701243, 0, -2.3457696, -0.30491418, -0.028761491, -0.0072995275)
@@ -140,6 +152,11 @@ mesh = SubResource("ArrayMesh_8op1i")
 skeleton = NodePath("")
 
 [node name="Flame" type="MeshInstance3D" parent="candle_03"]
-transform = Transform3D(1.4504032, 0, 0, 0, 1.4504032, 0, 0, 0, 1.4504032, 0, 0.06498224, 0)
+transform = Transform3D(-1.1341039, 0, -0.9041448, 0, 1.4504032, 0, 0.9041448, 0, -1.1341039, 5.1997602e-05, 0.06579729, 4.5657158e-05)
 mesh = SubResource("ArrayMesh_h8fmg")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="candle_03/Flame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011522148, 0)
+light_color = Color(0.93797374, 0.5702094, 0.42410716, 1)
+light_energy = 0.25

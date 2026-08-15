@@ -8,9 +8,11 @@ const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 @export var life_loss_before_sound_delay: float = 0.2
 @export var life_loss_before_candle_delay: float = 0.4
 @export var visual_health_curve: Curve
+@export var environment_lights: Array[Light3D] = []
 
 @onready var health_overlay: HealthOverlay = %HealthOverlay
 @onready var health_visualization: HealthVisualization = %HealthVisualization
+@onready var _world_environment := get_node_or_null("../../WorldEnvironment") as WorldEnvironment
 
 
 var _health: float = STARTING_MAX_HEALTH
@@ -18,6 +20,13 @@ var _visual_health: float = 1.0
 var _animated_visual_health: float = 1.0
 var _remaining_lives: int = 0
 var _is_losing_life: bool = false
+var _environment_light_energies: Array[float] = []
+var _ambient_light_energy: float = 0.0
+var _current_light_energy_multiplier: float = 1.0
+var _environment_lights_tween: Tween = null
+
+var _environment_lights_dim_multiplier: float = 0.25
+var _environment_lights_restore_duration: float = 10.00
 
 # The object currently in focus, will be queried for drain info (does it have stickers?)
 var _focused_object: InteractibleObject = null
@@ -40,6 +49,12 @@ func register_object(obj: InteractibleObject) -> void:
 
 func _ready() -> void:
 	assert(visual_health_curve != null, "HealthManager requires a visual health curve.")
+	assert(not environment_lights.is_empty(), "HealthManager requires at least one environment light.")
+	assert(_world_environment != null, "HealthManager requires the world environment.")
+	for light in environment_lights:
+		assert(light != null, "HealthManager environment lights cannot contain null entries.")
+		_environment_light_energies.append(light.light_energy)
+	_ambient_light_energy = _world_environment.environment.ambient_light_energy
 	health_overlay.hide()
 	_initialize_lives()
 	if OS.is_debug_build():
@@ -105,11 +120,54 @@ func _lose_life() -> void:
 	health_overlay.hide()
 
 	if _remaining_lives == 0:
+		_set_environment_lights_blackout()
 		_die()
 		return
 
+	_start_environment_lights_dim()
+	_start_environment_lights_restore()
 	GameState.is_player_input_locked = false
 	_is_losing_life = false
+
+
+func _start_environment_lights_dim() -> void:
+	_stop_environment_lights_tween()
+	_set_environment_lights_energy_multiplier(_environment_lights_dim_multiplier)
+
+## From a dimmed state, restore the energy of environment lights back to default
+func _start_environment_lights_restore() -> void:
+	_stop_environment_lights_tween()
+	_environment_lights_tween = create_tween()
+	_environment_lights_tween.tween_method(
+		_set_environment_lights_energy_multiplier,
+		_current_light_energy_multiplier,
+		1.0,
+		_environment_lights_restore_duration
+	)
+
+
+func _stop_environment_lights_tween() -> void:
+	if _environment_lights_tween != null and _environment_lights_tween.is_valid():
+		_environment_lights_tween.kill()
+	_environment_lights_tween = null
+
+
+func _set_environment_lights_energy_multiplier(energy_multiplier: float) -> void:
+	_current_light_energy_multiplier = energy_multiplier
+	for light_index in environment_lights.size():
+		environment_lights[light_index].light_energy = (
+			_environment_light_energies[light_index] * energy_multiplier
+		)
+	var ambient_light_multiplier := lerpf(1.0, energy_multiplier, 0.5)
+	_world_environment.environment.ambient_light_energy = _ambient_light_energy * ambient_light_multiplier
+
+
+func _set_environment_lights_blackout() -> void:
+	_stop_environment_lights_tween()
+	_current_light_energy_multiplier = 0.0
+	for light in environment_lights:
+		light.light_energy = 0.0
+	_world_environment.environment.ambient_light_energy = 0.0
 
 
 func _die() -> void:

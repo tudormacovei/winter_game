@@ -37,7 +37,9 @@ _data = [Vector2(0, 0), 0.0, 0.5605083, 0, 0, Vector2(0.6182796, 0.43389726), 0.
 point_count = 3
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
+background_energy_multiplier = 0.0
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.9
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
 
@@ -143,13 +145,14 @@ unique_name_in_owner = true
 script = ExtResource("1_x8h8r")
 metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 
-[node name="HealthManager" type="Node" parent="Managers"]
+[node name="HealthManager" type="Node" parent="Managers" node_paths=PackedStringArray("environment_lights")]
 unique_name_in_owner = true
 script = ExtResource("8_sllmx")
 health_drain_per_second = 5.0
-life_loss_before_sound_delay = 0.1
-life_loss_before_candle_delay = 0.5
+life_loss_before_sound_delay = 0.0
+life_loss_before_candle_delay = 1.0
 visual_health_curve = SubResource("Curve_n3br4")
+environment_lights = [NodePath("../../DirectionalLight3D"), NodePath("../../DirectionalLight3D2")]
 
 [node name="TimeManager" type="Node" parent="Managers"]
 unique_name_in_owner = true
@@ -161,11 +164,11 @@ camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9659259, 5.9158087e-09, -0.2588191, 0.2578759, 0.085295156, 0.96240574, 0.022076022, -0.9963557, 0.082388796, -3.8702822, 1.3785387, 0)
-light_energy = 0.5
+light_energy = 0.4
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.42365292, -0.7597822, 0.49320307, -0.75856656, 3.9338993e-08, 0.6515956, -0.49507076, -0.6501777, -0.5763453, -3.8702822, 1.3785387, 0)
-light_energy = 0.3
+light_energy = 0.2
 
 [node name="DialogueInbetweenTexture" type="Sprite3D" parent="."]
 transform = Transform3D(1.145, 0, 0, 0, 0.9645329, 0.61701035, 0, -0.6170107, 0.9645327, 0, 1.1459852, -0.3619644)
