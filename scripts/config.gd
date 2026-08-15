@@ -43,6 +43,9 @@ const LETTER_SPOKE_FREQUENCY: int = 8 # Play a sound every X letters
 const CAMERA_SWOOSH_SFX_NAME: String = "sfx_camera_swoosh"
 const CAMERA_SWOOSH_VOLUME_DB: float = -20.0
 
+const CANDLE_BLOW_SFX_NAME: String = "sfx_candle_blow"
+const CANDLE_BLOW_SFX_VOLUME_DB: float = 5.0
+
 const OBJECT_COMPLETED_SFX_NAME: String = "sfx_object_completed"
 const OBJECT_COMPLETED_SFX_VOLUME_DB: float = -10.0
 

@@ -142,6 +142,8 @@ metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 unique_name_in_owner = true
 script = ExtResource("8_sllmx")
 health_drain_per_second = 7.0
+life_loss_before_sound_delay = 0.1
+life_loss_before_candle_delay = 0.5
 
 [node name="TimeManager" type="Node" parent="Managers"]
 unique_name_in_owner = true

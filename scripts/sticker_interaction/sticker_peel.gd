@@ -102,6 +102,8 @@ func _process(_delta: float) -> void:
 	_handle_sticker_deform()
 
 func _input(event: InputEvent) -> void:
+	if GameState.is_player_input_locked:
+		return
 	if is_completing:
 		return
 	if event.is_action_pressed("mouse_click_left") and _get_interactible():

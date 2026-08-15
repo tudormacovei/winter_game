@@ -55,6 +55,8 @@ func stop_find_quarantine_tutorial() -> void:
 
 #region Lock Player Actions
 
+var is_player_input_locked: bool = false
+
 enum ActionName {
 	FOCUS_OBJECT,
 	COMPLETE_STICKER,

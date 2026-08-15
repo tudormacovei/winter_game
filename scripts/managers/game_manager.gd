@@ -62,6 +62,7 @@ var _interaction_start_token: int = 0
 
 func _ready():
 	get_tree().paused = false
+	GameState.is_player_input_locked = false
 	
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
@@ -309,6 +310,7 @@ func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: floa
 
 func _on_player_died():
 	if debug_disable_death:
+		GameState.is_player_input_locked = false
 		return
 		
 	await ui_manager.show_death_screen()

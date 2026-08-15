@@ -9,6 +9,8 @@ func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
+	if GameState.is_player_input_locked:
+		return
 	if event.is_action_released("mouse_click_left") and _get_interactible():
 		get_viewport().set_input_as_handled()
 		_complete_sticker()

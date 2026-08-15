@@ -64,7 +64,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if _is_locked:
+	if _is_locked or GameState.is_player_input_locked:
+		_quarantine_dwell_elapsed = 0.0
+		_quarantine_exit_elapsed = 0.0
+		_vertical_dwell_elapsed = 0.0
 		return
 
 	handle_rotation(delta)

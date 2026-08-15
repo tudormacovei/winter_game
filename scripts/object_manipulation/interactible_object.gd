@@ -209,6 +209,9 @@ func _is_point_out_of_bounds(point: Vector3, margin: float) -> bool:
 
 
 func _input(event: InputEvent) -> void:
+	if GameState.is_player_input_locked:
+		return
+
 	if event.is_action_pressed("mouse_click_left"):
 		if _state == State.FOCUSED and _is_mouse_on_object and _stickers_hovered == 0:
 			_mouse_down = true
@@ -244,8 +247,7 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		if _state == State.FOCUSED and not _is_mouse_on_object:
-			_set_state(State.ON_TABLE)
-			_start_focus_tween(Vector3.ZERO, focus_position_curve, focus_rotation_curve, Vector3.ONE, false)
+			defocus()
 			get_viewport().set_input_as_handled()
 			return
 		if _state == State.FOCUSED:
@@ -255,6 +257,9 @@ func _input(event: InputEvent) -> void:
 # Handle interactions for object on the table in unhandled input
 # this is done to first give the focused object the chance to consume the input event
 func _unhandled_input(event: InputEvent) -> void:
+	if GameState.is_player_input_locked:
+		return
+
 	if event.is_action_pressed("mouse_click_left"):
 		if _state == State.ON_TABLE and _is_mouse_on_object:
 			var camera := get_viewport().get_camera_3d() as CameraControl
@@ -281,9 +286,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					return
 
 				_mouse_down = false
-				_set_state(State.FOCUSED)
-				_remove_outline()
-				_start_focus_tween(self.to_local(_focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
+				focus()
 				get_viewport().set_input_as_handled()
 				return
 		_mouse_down = false
@@ -386,6 +389,21 @@ func _set_state(state: State):
 	_update_can_enter_dialogue_view()
 
 	object_state_changed.emit(state)
+
+
+func focus() -> void:
+	if _state != State.ON_TABLE:
+		return
+	_set_state(State.FOCUSED)
+	_remove_outline()
+	_start_focus_tween(self.to_local(_focus_position.global_position), focus_position_curve, focus_rotation_curve, Vector3.ONE * FOCUS_OBJECT_SCALE, true)
+
+
+func defocus() -> void:
+	if _state != State.FOCUSED and _state != State.ROTATING:
+		return
+	_set_state(State.ON_TABLE)
+	_start_focus_tween(Vector3.ZERO, focus_position_curve, focus_rotation_curve, Vector3.ONE, false)
 
 
 ## Dialogue transition is allowed only when the player is not interacting with an object

@@ -5,6 +5,8 @@ const STARTING_MAX_HEALTH: float = 100.0
 const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 
 @export var health_drain_per_second: float = 1.5
+@export var life_loss_before_sound_delay: float = 0.2
+@export var life_loss_before_candle_delay: float = 0.4
 
 @onready var health_overlay: HealthOverlay = %HealthOverlay
 @onready var health_visualization: HealthVisualization = %HealthVisualization
@@ -13,6 +15,7 @@ const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 var _health: float = STARTING_MAX_HEALTH
 var _visual_health: float = STARTING_MAX_HEALTH
 var _remaining_lives: int = 0
+var _is_losing_life: bool = false
 
 # The object currently in focus, will be queried for drain info (does it have stickers?)
 var _focused_object: InteractibleObject = null
@@ -58,7 +61,7 @@ func _should_drain() -> bool:
 func _set_health(value: float) -> void:
 	_health = clampf(value, 0.0, STARTING_MAX_HEALTH)
 	if _health <= 0.0 and not _is_dead:
-		_use_life()
+		_lose_life()
 
 
 func _initialize_lives() -> void:
@@ -74,13 +77,30 @@ func _reset_lives() -> void:
 	health_visualization.set_active_slot_count(_remaining_lives)
 
 
-func _use_life() -> void:
+func _lose_life() -> void:
+	if _is_losing_life:
+		return
+	_is_losing_life = true
+	GameState.is_player_input_locked = true
+	_health = STARTING_MAX_HEALTH
+
+	if is_instance_valid(_focused_object):
+		_focused_object.defocus()
+
+	await get_tree().create_timer(life_loss_before_sound_delay).timeout
+	AudioManager.play_sfx(Config.CANDLE_BLOW_SFX_NAME, Config.CANDLE_BLOW_SFX_VOLUME_DB)
+
+	await get_tree().create_timer(life_loss_before_candle_delay).timeout
 	_remaining_lives = maxi(_remaining_lives - 1, 0)
 	health_visualization.set_active_slot_count(_remaining_lives)
+	health_overlay.hide()
+
 	if _remaining_lives == 0:
 		_die()
 		return
-	_health = STARTING_MAX_HEALTH
+
+	GameState.is_player_input_locked = false
+	_is_losing_life = false
 
 
 func _die() -> void:
@@ -95,7 +115,8 @@ func _on_object_interactible(is_interactible: bool, obj: InteractibleObject) -> 
 		_focused_object = obj
 		health_overlay.show()
 	elif _focused_object == obj: # guard: a stale unfocus must not clear a newer focus
-		health_overlay.hide()
+		if not _is_losing_life:
+			health_overlay.hide()
 		_focused_object = null
 
 
