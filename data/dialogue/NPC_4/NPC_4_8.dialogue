@@ -33,8 +33,12 @@ elif Variables.get_char_var("NPC_4", "express_doubt") == 3
 
 ~ sacrifices
 if Variables.get_char_var("NPC_4", "sacrifice") == true
-	Shopkeeper: [#sprite=worried]Like I said before, on your first day. The Goddess requires sacrifices to keep our village safe from the Cullings. Human sacrifices. 
-	Shopkeeper: [#sprite=worried]But I didn't lie to you. It's always been voluntary. => goddess
+	if Variables.get_char_var("NPC_4", "sacrifice_lie") == true 
+		Shopkeeper: [#sprite=worried]I lied to you on your first day. The Goddess does require human sacrifices to keep our village safe from the Cullings. 
+		Shopkeeper: [#sprite=worried]I know this sounds fucked up. But it's always been voluntary. => goddess
+	else 
+		Shopkeeper: [#sprite=worried]Like I said before, on your first day, the Goddess requires sacrifices to keep our village safe from the Cullings. Human sacrifices. 
+		Shopkeeper: [#sprite=worried]But I didn't lie to you. It's always been voluntary. => goddess
 else 
 	Shopkeeper: [#sprite=worried]This might be hard to believe, but the Goddess requires sacrifices to keep our village safe from the Cullings. Human sacrifices.
 	Shopkeeper: [#sprite=worried]I know this sounds fucked up. But it's always been voluntary. => goddess

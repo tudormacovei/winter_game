@@ -255,7 +255,7 @@ Shopkeeper: ...
 		Shopkeeper: [#sprite=worried]None. 
 		- Okay then. => questions
 		- Kind of sounds like you're lying to me.
-			Shopkeeper: [#sprite=worried]Look, there are some things you'll only get to know once you become a full member of the church.  
+			Shopkeeper: [#sprite=worried]Look, there are some things you'll only get to know once you become a full member of the church. [do Variables.set_char_var("NPC_4", "sacrifice_lie", true)]
 			Shopkeeper: [#sprite=worried]But trust me, we don't sacrifice anyone in the... traditional sense, and never involuntarily. 
 			Shopkeeper: [#sprite=worried]That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
 			- Okay, I trust you. => questions
