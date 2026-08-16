@@ -28,7 +28,8 @@ func _ready() -> void:
 		GameState.connect("dialogue_changed", Callable(self, "_on_dialogue_changed"))
 	if GameState.has_signal("new_object_on_workbench"):
 		GameState.connect("new_object_on_workbench", Callable(self, "_on_new_object_on_workbench"))
-
+	if GameState.has_signal("day_ended"):
+		GameState.connect("day_ended", Callable(self, "_on_day_ended"))
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
 
@@ -235,6 +236,9 @@ func _on_dialogue_changed() -> void:
 func _on_new_object_on_workbench() -> void:
 	try_show_object_state_ui()
 
+func _on_day_ended(day_index: int) -> void:
+	_game_state_ui.hide_all_game_state_ui()
+	
 #endregion
 
 #region Debug
