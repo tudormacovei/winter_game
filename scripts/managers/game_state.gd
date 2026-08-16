@@ -20,6 +20,11 @@ signal object_completed
 signal dialogue_changed
 
 @warning_ignore("unused_signal")
+signal day_ended(day_index: int)
+@warning_ignore("unused_signal")
+signal day_started(day_index: int)
+
+@warning_ignore("unused_signal")
 signal player_died
 
 @warning_ignore("unused_signal")
