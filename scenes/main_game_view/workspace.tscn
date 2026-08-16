@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=30 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
 [ext_resource type="Script" uid="uid://dc8g3d4q4npc0" path="res://scripts/managers/health_manager.gd" id="8_sllmx"]
 [ext_resource type="Texture2D" uid="uid://crxinxv1ugvo6" path="res://2d_assets/other/Workshopinbetween.webp" id="9_7nw64"]
+[ext_resource type="Script" uid="uid://bnrbkgsmm0woj" path="res://scripts/user_interface/focus_blink.gd" id="9_x6kvn"]
+[ext_resource type="Shader" uid="uid://dvmylgus15uri" path="res://3d_assets/shaders/object_focus_blink.gdshader" id="10_nyxyu"]
 [ext_resource type="Script" uid="uid://cj2xxumsftfuv" path="res://scripts/controllers/interaction_config_controller.gd" id="13_oneno"]
 [ext_resource type="PackedScene" uid="uid://cr0u622abvq0x" path="res://scenes/main_game_view/prologue_view.tscn" id="14_nf02i"]
 [ext_resource type="PackedScene" uid="uid://bqd8veyjgmaye" path="res://scenes/main_game_view/black_view.tscn" id="16_f2mrw"]
@@ -30,6 +32,12 @@ shader_parameter/glow_multiplier = 0.50000002375
 shader_parameter/glow_softness = 2.0
 shader_parameter/pulse_speed = 1.50000007125
 shader_parameter/_fade_progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oos78"]
+shader = ExtResource("10_nyxyu")
+shader_parameter/eye_open_amount = 1.0
+shader_parameter/vertical_point_distance = 2.0
+shader_parameter/horizontal_point_distance = 1.45
 
 [sub_resource type="Curve" id="Curve_n3br4"]
 bake_resolution = 500
@@ -133,6 +141,25 @@ color = Color(0, 0, 0, 0)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0.51070946, 0.094545975, -0.39791515)
 
+[node name="FocusBlinkCanvas" type="CanvasLayer" parent="UI"]
+unique_name_in_owner = true
+
+[node name="FocusBlinkRectangle" type="ColorRect" parent="UI/FocusBlinkCanvas"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_oos78")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("9_x6kvn")
+vertical_point_distance = 2.0
+horizontal_point_distance = 1.45
+blink_duration = 0.5
+
 [node name="Managers" type="Node" parent="."]
 
 [node name="UIManager" type="Node" parent="Managers"]
@@ -149,8 +176,8 @@ metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 unique_name_in_owner = true
 script = ExtResource("8_sllmx")
 health_drain_per_second = 5.0
-life_loss_before_sound_delay = 0.0
-life_loss_before_candle_delay = 1.0
+life_loss_before_sound_delay = 0.35
+life_loss_before_candle_delay = 2.1
 visual_health_curve = SubResource("Curve_n3br4")
 environment_lights = [NodePath("../../DirectionalLight3D"), NodePath("../../DirectionalLight3D2")]
 

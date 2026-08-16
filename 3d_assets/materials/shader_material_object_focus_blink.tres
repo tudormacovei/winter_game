@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://3d_assets/shaders/object_focus_blink.gdshader" id="1_object_focus_blink"]
+
+[resource]
+resource_name = "ObjectFocusBlink"
+shader = ExtResource("1_object_focus_blink")
+shader_parameter/eye_open_amount = 1.0
+shader_parameter/vertical_point_distance = 3.0
+shader_parameter/horizontal_point_distance = 4.0

@@ -11,6 +11,9 @@ extends Node
 @onready var _day_end_screen_label: Label = %DayEndScreen.get_node("%DayCompleteText")
 @onready var _death_screen_label: Label = %DeathScreen.get_node("%DeathText")
 @onready var _game_state_ui: CanvasLayer = %GameStateUI
+@onready var _workbench: Workbench = %WorkbenchView
+@onready var _focus_blink: FocusBlink = %FocusBlinkRectangle
+@onready var _health_overlay: HealthOverlay = %HealthOverlay
 
 @onready var screen_fade_canvas: CanvasLayer = %ScreenFadeCanvas
 @onready var screen_fade_rect: ColorRect = %ScreenFadeColorRect
@@ -18,10 +21,17 @@ extends Node
 var balloon_layer: CanvasLayer = null
 
 func _ready() -> void:
+	assert(_focus_blink != null, "UIManager requires the FocusBlink.")
+	assert(_health_overlay != null, "UIManager requires the HealthOverlay.")
+	_focus_blink.blink_closed.connect(_on_blink_closed)
+	_health_overlay.hide()
+
 	if camera and camera.has_signal("camera_focus_changed"):
 		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self, "_on_camera_rotation_completed"))
+	if _workbench:
+		_workbench.object_focus_changed.connect(_on_object_focus_changed)
 
 	GameState.ui_manager = self
 	if GameState.has_signal("dialogue_changed"):
@@ -239,6 +249,18 @@ func _on_new_object_on_workbench() -> void:
 func _on_day_ended(day_index: int) -> void:
 	_game_state_ui.hide_all_game_state_ui()
 	
+func _on_object_focus_changed(is_focused: bool) -> void:
+	if _focus_blink:
+		_focus_blink.blink_once(is_focused)
+
+
+func _on_blink_closed(is_focused: bool) -> void:
+	if is_focused:
+		_health_overlay.show()
+	else:
+		_health_overlay.hide()
+
+
 #endregion
 
 #region Debug

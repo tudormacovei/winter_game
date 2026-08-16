@@ -7,11 +7,13 @@ extends Node3D
 @export var transition_curve: Curve
 @export var transition_duration: float = 0.3
 signal all_objects_completed()
+signal object_focus_changed(is_focused: bool)
 
 var _tween: Tween
 var _dim_tween: Tween
+var _is_object_focused: bool = false
 const FOCUS_DIM_ALPHA: float = 0.6
-const FOCUS_DIM_DURATION: float = 0.25
+const FOCUS_DIM_DURATION: float = 0.4
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
 
 @onready var _basket_lid: Node3D = %BasketLid
@@ -91,6 +93,10 @@ func _on_object_completed(_object_name: String, _is_special_object: bool, _compl
 func _on_object_state_changed(state: InteractibleObject.State) -> void:
 	var focused := state == InteractibleObject.State.FOCUSED or state == InteractibleObject.State.ROTATING
 	_set_background_dim(focused)
+	if focused == _is_object_focused:
+		return
+	_is_object_focused = focused
+	object_focus_changed.emit(focused)
 
 func _on_object_pending_completion_changed(is_pending_completion: bool) -> void:
 	_set_basket_open(is_pending_completion)

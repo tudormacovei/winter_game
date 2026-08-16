@@ -55,7 +55,6 @@ func _ready() -> void:
 		assert(light != null, "HealthManager environment lights cannot contain null entries.")
 		_environment_light_energies.append(light.light_energy)
 	_ambient_light_energy = _world_environment.environment.ambient_light_energy
-	health_overlay.hide()
 	_initialize_lives()
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
@@ -117,7 +116,6 @@ func _lose_life() -> void:
 	await get_tree().create_timer(life_loss_before_candle_delay).timeout
 	_remaining_lives = maxi(_remaining_lives - 1, 0)
 	health_visualization.set_active_slot_count(_remaining_lives)
-	health_overlay.hide()
 
 	if _remaining_lives == 0:
 		_set_environment_lights_blackout()
@@ -180,10 +178,7 @@ func _die() -> void:
 func _on_object_interactible(is_interactible: bool, obj: InteractibleObject) -> void:
 	if is_interactible:
 		_focused_object = obj
-		health_overlay.show()
 	elif _focused_object == obj: # guard: a stale unfocus must not clear a newer focus
-		if not _is_losing_life:
-			health_overlay.hide()
 		_focused_object = null
 
 
