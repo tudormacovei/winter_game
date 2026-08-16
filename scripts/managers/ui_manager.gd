@@ -6,9 +6,8 @@ extends Node
 @onready var camera: CameraControl = %Camera3D
 
 # UI Elements
-@onready var _day_end_screen := %DayEndScreen
+@onready var _day_end_controller := %DayEndScreen
 @onready var _death_screen := %DeathScreen
-@onready var _day_end_screen_label: Label = %DayEndScreen.get_node("%DayCompleteText")
 @onready var _death_screen_label: Label = %DeathScreen.get_node("%DeathText")
 @onready var _game_state_ui: CanvasLayer = %GameStateUI
 @onready var _workbench: Workbench = %WorkbenchView
@@ -54,8 +53,8 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 
 func show_day_end_screen(day_number: int) -> void:
 	await fade_to_black()
-	_day_end_screen_label.text = Config.DAY_END_SCREEN_MESSAGE % day_number
-	_day_end_screen.show()
+	_day_end_controller.set_text(day_number)
+	_day_end_controller.show()
 	await fade_from_black()
 
 	AudioManager.play_sfx(Config.END_DAY_SFX_NAME, Config.END_DAY_SFX_VOLUME_DB)
@@ -63,7 +62,7 @@ func show_day_end_screen(day_number: int) -> void:
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
 	
 	await fade_to_black()
-	_day_end_screen.hide()
+	_day_end_controller.hide()
 	await fade_from_black()
 
 func show_death_screen() -> void:
@@ -79,8 +78,8 @@ func show_death_screen() -> void:
 
 func show_game_end_screen() -> void:
 	await fade_to_black(_SCREEN_FADE_DURATION_GAME_END)
-	_day_end_screen_label.text = Config.GAME_END_SCREEN_MESSAGE
-	_day_end_screen.show()
+	_day_end_controller.set_game_end_text()
+	_day_end_controller.show()
 	await fade_from_black(_SCREEN_FADE_DURATION_GAME_END)
 
 func hide_balloon_layer() -> void:
@@ -266,6 +265,6 @@ func _on_blink_closed(is_focused: bool) -> void:
 #region Debug
 
 func debug_hide_game_end_screen():
-	_day_end_screen.hide()
+	_day_end_controller.hide()
 
 #endregion
