@@ -149,7 +149,18 @@ func _restore_progress_from_save() -> void:
 	else:
 		Utils.debug_error("GameManager: Saved interaction index %d is invalid. Resetting to interaction 0." % saved_interaction)
 
+func _check_stale_interaction_start(token: int) -> bool:
+	var stale: bool = token != _interaction_start_token
+	if stale:
+		_interaction_start_pending = false
+		print("GameManager: Stale interaction start.")
+		
+	return stale
+
 func _play_next_interaction():
+	if _interaction_start_pending:
+		return
+
 	_interaction_start_token += 1
 	var current_start_token = _interaction_start_token
 	_interaction_start_pending = true
@@ -164,34 +175,39 @@ func _play_next_interaction():
 		current_interaction_index = 0
 
 		if current_day_index >= _day_resources.size():
+			_interaction_start_pending = false
 			SaveManager.save_game(current_day_index, current_interaction_index)
 			print("GameManager: All days completed!")
 			ui_manager.show_game_end_screen()
 			return
 
 		await ui_manager.show_day_end_screen(current_day_index)
-		if current_start_token != _interaction_start_token:
+		if _check_stale_interaction_start(current_start_token):
 			return
 
 		day_started.emit(current_day_index)
 
 	var interaction = _day_resources[current_day_index].interactions[current_interaction_index]
 	if not interaction:
+		_interaction_start_pending = false
 		Utils.debug_error("Interaction data is invalid for day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 		return
 	
 	if not interaction.dialogue:
+		_interaction_start_pending = false
 		Utils.debug_error("Dialogue is invalid for day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 		return
 
 	_update_time_of_day()
 
 	await interaction_config_controller.apply_config(interaction.config)
+	if _check_stale_interaction_start(current_start_token):
+		return
 
 	# Wait for start delay
 	if not (OS.is_debug_build() and debug_disable_interaction_delay):
 		await get_tree().create_timer(interaction.start_delay_seconds).timeout
-		if current_start_token != _interaction_start_token:
+		if _check_stale_interaction_start(current_start_token):
 			return
 
 	# Start the character interaction
@@ -210,7 +226,7 @@ func _play_next_interaction():
 
 # Next interaction is played when dialogue ends and there are no more objects on the workbench
 func _try_play_next_interaction():
-	if is_dialogue_running:
+	if is_dialogue_running or _interaction_start_pending:
 		return
 	if not workbench.is_workbench_empty():
 		ui_manager.try_show_object_state_ui(Config.OBJECT_STATE_UI_DIALOGUE_END_DELAY_SECONDS)
@@ -348,9 +364,10 @@ func debug_play_next_interaction():
 		Utils.debug_alert("Debug: Cannot play next interaction. All days have been completed.")
 		return
 	
-	if _interaction_start_pending:
-		_interaction_start_token += 1
-		print("Debug: Cancelling pending interaction...")
+	_interaction_start_pending = false
+	_interaction_start_token += 1
+	is_dialogue_running = false
+	print("Debug: Cancelling pending interaction...")
 
 	if not workbench.is_workbench_empty():
 		workbench.reset_workbench()
@@ -358,7 +375,7 @@ func debug_play_next_interaction():
 	#NOTE: Dialogue balloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached.
 	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
 	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
-		print("Debug: Skipping to next interaction...")
+		print("Debug: Skipping to next interaction. Cleaning dialogue state...")
 		
 		current_dialogue_balloon.queue_free()
 		DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
