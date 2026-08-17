@@ -169,19 +169,19 @@ func _play_next_interaction():
 		# Fire day_ended before showing end-of-day UI, to have a clean screen
 		GameState.day_ended.emit(current_day_index)
 
-		current_day_index += 1
-		current_interaction_index = 0
-
-		if current_day_index >= _day_resources.size():
+		if current_day_index + 1 >= _day_resources.size():
 			_interaction_start_pending = false
-			SaveManager.save_game(current_day_index, current_interaction_index)
+			SaveManager.save_game(current_day_index + 1, 0)
 			print("GameManager: All days completed!")
 			ui_manager.show_game_end_screen()
 			return
 
-		await ui_manager.show_day_end_screen(current_day_index)
+		await ui_manager.show_day_end_screen(_day_resources[current_day_index])
 		if _check_stale_interaction_start(current_start_token):
 			return
+
+		current_day_index += 1
+		current_interaction_index = 0
 
 		GameState.day_started.emit(current_day_index)
 

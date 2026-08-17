@@ -51,9 +51,9 @@ func set_balloon_layer(new_balloon_layer: CanvasLayer):
 		if _game_state_ui:
 			_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.DIALOGUE)
 
-func show_day_end_screen(day_number: int) -> void:
+func show_day_end_screen(day_definition: DayDefintion) -> void:
 	await fade_to_black()
-	_day_end_controller.set_text(day_number)
+	_day_end_controller.set_text(day_definition)
 	_day_end_controller.show()
 	await fade_from_black()
 

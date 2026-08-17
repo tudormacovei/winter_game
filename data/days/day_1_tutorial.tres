@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=12 format=3 uid="uid://bkalsjow3at4j"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=16 format=3 uid="uid://bkalsjow3at4j"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_cy22h"]
 [ext_resource type="Resource" uid="uid://chbsj8qc2fjip" path="res://data/dialogue/NPC_4/NPC_4_2.dialogue" id="2_cy22h"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://b0t0brhtu4abo" path="res://data/dialogue/NPC_4/NPC_4_2b.dialogue" id="5_av7cm"]
 [ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="7_80xpy"]
 [ext_resource type="PackedScene" uid="uid://bov6fm3d5y6xm" path="res://scenes/object_manipulation/objects/flask.tscn" id="7_ufrix"]
+[ext_resource type="Script" uid="uid://c7bswthq27a8q" path="res://scripts/systems/variables/variable_predicate_definition.gd" id="8_56kry"]
+[ext_resource type="Script" uid="uid://bps1w10vos4x1" path="res://scripts/systems/day_end/narrative_text_definition.gd" id="9_v13ve"]
 
 [sub_resource type="Resource" id="Resource_l22pw"]
 script = ExtResource("1_cy22h")
@@ -26,8 +28,24 @@ dialogue = ExtResource("5_av7cm")
 objects = Array[PackedScene]([ExtResource("7_ufrix"), ExtResource("7_80xpy")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
+[sub_resource type="Resource" id="Resource_hqsg4"]
+script = ExtResource("8_56kry")
+is_always_true = false
+method = 1
+method_arguments = ["NPC_4", "relationship"]
+operator = 1
+compare_value = 1.0
+metadata/_custom_type_script = "uid://c7bswthq27a8q"
+
+[sub_resource type="Resource" id="Resource_rm8ga"]
+script = ExtResource("9_v13ve")
+text = "Narrative text: Duncan hates you..."
+predicate = SubResource("Resource_hqsg4")
+metadata/_custom_type_script = "uid://bps1w10vos4x1"
+
 [resource]
 script = ExtResource("3_l22pw")
 day_id = 1
 interactions = Array[ExtResource("1_cy22h")]([SubResource("Resource_l22pw"), SubResource("Resource_fw5tm"), SubResource("Resource_2s1b6")])
+narrative_text = SubResource("Resource_rm8ga")
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

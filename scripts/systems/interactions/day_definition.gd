@@ -10,6 +10,7 @@ const InteractionResource := preload("res://scripts/systems/interactions/interac
 
 @export var day_id: int # ID is auto-set based on filename convention
 @export var interactions: Array[InteractionResource] = []
+@export var narrative_text: NarrativeTextDefinition = null
 
 func _validate_property(property: Dictionary) -> void:
 	_update_id_from_filename()
