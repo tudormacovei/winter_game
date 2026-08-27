@@ -48,6 +48,8 @@ static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.0 # full revolutions when d
 static var ROTATION_SNAP_DURATION: float = 0.2
 static var FOCUS_DURATION: float = 0.25
 static var FOCUS_OBJECT_SCALE: float = 0.3
+const SOFT_MOUSE_RADII: Array[float] = [0.0, 0.005, 0.01, 0.02] # screen-width fractions
+const SOFT_MOUSE_RAY_COUNTS: Array[int] = [1, 9, 12, 15]
 
 #region Game State 
 
@@ -69,8 +71,8 @@ var _drag_start_pos: Vector2 = Vector2.ZERO
 var _mouse_down: bool = false
 
 var _rotation_sensitivity: float = 0.0 # radians per pixel, set in _ready
-var _stickers_hovered: int = 0
-var _hovered_stickers: Array[Sticker] = []
+var _selected_sticker: Sticker = null # selection logic is always running in the background, this is the sticker that would get captured on click
+var _captured_sticker: Sticker = null # sticker player is currently interacting with
 var _snap_tween: Tween
 var _focus_position_tween: Tween
 var _focus_rotation_tween: Tween
@@ -112,6 +114,121 @@ func _process(_delta: float) -> void:
 	# wait for player to place object on table before complete
 	if _is_pending_completion and _state == State.ON_TABLE:
 		complete_object()
+
+
+func _physics_process(_delta: float) -> void:
+	if GameState.is_player_input_locked:
+		_cancel_mouse_input()
+		_set_selected_sticker(null)
+		return
+	if _state != State.FOCUSED and _state != State.ROTATING:
+		_set_selected_sticker(null)
+		return
+	if is_instance_valid(_captured_sticker):
+		_set_selected_sticker(_captured_sticker)
+	else:
+		_captured_sticker = null
+		_soft_mouse_select()
+
+## A more lenient selection: as long as the sticker is within a certain radius of the click, it will work
+func _soft_mouse_select() -> Sticker:
+	var camera := get_viewport().get_camera_3d()
+	if camera == null or camera.far <= 0.0:
+		_set_selected_sticker(null)
+		return null
+
+	var viewport_size := get_viewport().get_visible_rect().size # refetch per tick in case of window resize
+	var mouse_position := get_viewport().get_mouse_position()
+	var closestSticker: Sticker = null
+	for ring_index in SOFT_MOUSE_RADII.size():
+		var radius := SOFT_MOUSE_RADII[ring_index] * viewport_size.x
+		var ray_count := SOFT_MOUSE_RAY_COUNTS[ring_index]
+		for ray_index in ray_count:
+			var screen_position := mouse_position
+			if radius > 0.0:
+				var angle := TAU * float(ray_index) / float(ray_count)
+				screen_position += Vector2(cos(angle), sin(angle)) * radius
+			if screen_position.x < 0.0 or screen_position.y < 0.0 or screen_position.x >= viewport_size.x or screen_position.y >= viewport_size.y:
+				continue # out of viewport bounds
+			closestSticker = _sticker_search_raycast(screen_position, camera)
+			if closestSticker != null:
+				break
+		if closestSticker != null:
+			break
+
+	_set_selected_sticker(closestSticker)
+	return closestSticker
+
+
+func _sticker_search_raycast(screen_position: Vector2, camera: Camera3D) -> Sticker:
+	if _object == null:
+		return null
+
+	var origin := camera.project_ray_origin(screen_position)
+	var direction := camera.project_ray_normal(screen_position)
+	var query := PhysicsRayQueryParameters3D.create(origin, origin + direction * camera.far)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+
+	# TODO: if we run into performance issues we could restrict this raycast to only work on the focused object
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return null
+
+	var collider := hit["collider"] as Node
+	if not (collider is Sticker):
+		return null
+	var sticker := collider as Sticker
+	if not _object.is_ancestor_of(sticker) or not sticker.is_interactible():
+		return null
+	return sticker
+
+
+func _set_selected_sticker(sticker: Sticker) -> void:
+	if sticker != null and not is_instance_valid(sticker):
+		sticker = null
+	if _selected_sticker == sticker: # previous sticker equals new sticker, early return
+		return
+
+	var previous_sticker := _selected_sticker
+	_selected_sticker = sticker
+	if is_instance_valid(previous_sticker):
+		previous_sticker.set_deselected()
+	if is_instance_valid(_selected_sticker):
+		_selected_sticker.set_selected()
+
+
+func _handle_mouse_input(event: InputEvent) -> void:
+	if not event is InputEventMouse:
+		return
+
+	var sticker: Sticker = null
+	if is_instance_valid(_captured_sticker):
+		sticker = _captured_sticker
+	elif is_instance_valid(_selected_sticker):
+		sticker = _selected_sticker
+	else:
+		_captured_sticker = null
+		return
+
+	var consumed := sticker.handle_mouse_input(event)
+	if event.is_action_pressed("mouse_click_left") and consumed:
+		_captured_sticker = sticker
+		_set_selected_sticker(sticker)
+	if event.is_action_released("mouse_click_left") and _captured_sticker == sticker:
+		_captured_sticker = null
+	if consumed:
+		get_viewport().set_input_as_handled()
+
+
+func _cancel_mouse_input() -> void:
+	if not is_instance_valid(_captured_sticker):
+		_captured_sticker = null
+		return
+
+	var sticker := _captured_sticker
+	_captured_sticker = null
+	sticker.cancel_mouse_input()
 
 
 func _return_object_in_bounds() -> void:
@@ -213,7 +330,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("mouse_click_left"):
-		if _state == State.FOCUSED and _is_mouse_on_object and _stickers_hovered == 0:
+		if _state == State.FOCUSED and _is_mouse_on_object and _selected_sticker == null:
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
 		elif _state == State.FOCUSED and not _is_mouse_on_object:
@@ -246,12 +363,14 @@ func _input(event: InputEvent) -> void:
 			_start_snap_tween()
 			get_viewport().set_input_as_handled()
 			return
-		if _state == State.FOCUSED and not _is_mouse_on_object:
+		if _state == State.FOCUSED and not _is_mouse_on_object and _captured_sticker == null:
 			defocus()
 			get_viewport().set_input_as_handled()
 			return
 		if _state == State.FOCUSED:
 			_mouse_down = false # click on focused object without crossing rotation threshold
+
+	_handle_mouse_input(event)
 
 
 # Handle interactions for object on the table in unhandled input
@@ -327,8 +446,6 @@ func _on_stickers_placed() -> void:
 			_sticker_total += 1
 			child.sticker_completed.connect(_on_sticker_completed)
 			object_interactible.connect(child._on_object_interactible_change)
-			child.sticker_mouse_entered.connect(_on_sticker_mouse_entered)
-			child.sticker_mouse_exited.connect(_on_sticker_mouse_exited)
 			child.tree_exiting.connect(_on_sticker_tree_exiting.bind(child))
 	has_stickers_remaining_changed.emit(_sticker_total > 0)
 	_set_state(State.ON_TABLE)
@@ -364,6 +481,9 @@ func set_spawn_data(focus_position: Node3D, on_table_neutral_position: Node3D, o
 func _set_state(state: State):
 	if _state != state:
 		CursorManager.clear_requests()
+	if state != State.FOCUSED and state != State.ROTATING:
+		_cancel_mouse_input()
+		_set_selected_sticker(null)
 	_state = state
 	#print("Set state to " + str(state))
 	if state == State.FOCUSED or state == State.ROTATING:
@@ -516,22 +636,11 @@ static func _build_snap_orientations() -> Array[Basis]:
 	return results
 
 
-func _on_sticker_mouse_entered(sticker: Sticker) -> void:
-	if _hovered_stickers.has(sticker):
-		return
-	_hovered_stickers.append(sticker)
-	_stickers_hovered += 1
-
-
-func _on_sticker_mouse_exited(sticker: Sticker) -> void:
-	if not _hovered_stickers.has(sticker):
-		return
-	_hovered_stickers.erase(sticker)
-	_stickers_hovered = max(0, _stickers_hovered - 1)
-
-
 func _on_sticker_tree_exiting(sticker: Sticker) -> void:
-	_on_sticker_mouse_exited(sticker)
+	if _captured_sticker == sticker:
+		_cancel_mouse_input()
+	if _selected_sticker == sticker:
+		_selected_sticker = null
 
 
 func _handle_drag():

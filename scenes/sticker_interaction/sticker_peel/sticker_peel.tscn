@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://db5tk7oq8hmu1" path="res://2d_assets/spots/Spot2.webp" id="3_oxt4s"]
 [ext_resource type="Texture2D" uid="uid://b4pski8bbfv0d" path="res://2d_assets/spots/Spot3.webp" id="4_f5str"]
 [ext_resource type="Texture2D" uid="uid://ce3xncx1s8kb0" path="res://2d_assets/spots/Spot4.webp" id="5_oxt4s"]
-[ext_resource type="Material" uid="uid://dx6mq02u4p4lg" path="res://3d_assets/stickers/standard_peel_sticker_material.tres" id="7_f5str"]
 
 [sub_resource type="Curve" id="Curve_60khh"]
 _data = [Vector2(0, 0), 0.0, 0.8351724, 0, 0, Vector2(1, 1), 1.6415541, 0.0, 0, 0]
@@ -15,6 +14,16 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_yniim"]
 _data = [Vector2(0, 0), 0.0, -0.03255444, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oxt4s"]
+resource_name = "StickerMaterial"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.76, 0.76, 0.76, 0.5019608)
+albedo_texture = ExtResource("2_62jyo")
+roughness = 0.5
+emission_enabled = true
+emission_texture = ExtResource("2_62jyo")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yniim"]
 size = Vector3(2, 0.1, 2)
@@ -32,11 +41,8 @@ metadata/_custom_type_script = "uid://drjjrpjcijbet"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_60khh")
-surface_material_override/0 = ExtResource("7_f5str")
+surface_material_override/0 = SubResource("StandardMaterial3D_oxt4s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 shape = SubResource("BoxShape3D_yniim")
-
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

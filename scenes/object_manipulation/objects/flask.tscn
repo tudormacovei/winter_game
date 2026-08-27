@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://bov6fm3d5y6xm"]
+[gd_scene load_steps=12 format=4 uid="uid://bov6fm3d5y6xm"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_yaw7h"]
 [ext_resource type="Material" uid="uid://dk01j1kj7dpr2" path="res://3d_assets/manipulation_objects/flask/flask_body.tres" id="2_q27o4"]
-[ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="5_70irm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwsxr"]
 
@@ -126,7 +125,6 @@ script = ExtResource("1_yaw7h")
 max_sticker_count = 6
 placement_mesh = SubResource("ArrayMesh_1qj3i")
 rng_seed = 0
-sticker_scene = ExtResource("5_70irm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13211387, 0)
@@ -137,10 +135,3 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13211387, 0)
 shape = SubResource("ConcavePolygonShape3D_q27o4")
-
-[connection signal="mouse_entered" from="MeshInstance3D/StickerPeel" to="MeshInstance3D/StickerPeel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/StickerPeel" to="MeshInstance3D/StickerPeel" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="MeshInstance3D/@Area3D@72349" to="MeshInstance3D/@Area3D@72349" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/@Area3D@72349" to="MeshInstance3D/@Area3D@72349" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="MeshInstance3D/@Area3D@72395" to="MeshInstance3D/@Area3D@72395" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/@Area3D@72395" to="MeshInstance3D/@Area3D@72395" method="_on_mouse_exited"]

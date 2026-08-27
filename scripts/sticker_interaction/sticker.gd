@@ -26,8 +26,8 @@ var _is_object_interactible := false
 var _surface_material_duplicated: bool = false
 
 signal sticker_completed()
-signal sticker_mouse_entered(sticker: Sticker)
-signal sticker_mouse_exited(sticker: Sticker)
+signal sticker_selected(sticker: Sticker)
+signal sticker_deselected(sticker: Sticker)
 
 func _ready() -> void:
 	_pick_and_apply_texture()
@@ -99,26 +99,37 @@ func _complete_sticker():
 	sticker_completed.emit()
 	queue_free()
 
-func _input(_event: InputEvent) -> void:
-	# Child classes implement specific interactions
-	pass
-
 func _on_object_interactible_change(is_interactible: bool):
 	_is_object_interactible = is_interactible
 	$CollisionShape3D.disabled = !is_interactible or state != State.ACTIVE
+	if not is_interactible:
+		set_deselected()
 	CursorManager.refresh()
 	CursorManager.clear_requests()
 
-func _on_mouse_entered() -> void:
+func is_interactible() -> bool:
+	return state == State.ACTIVE and _is_object_interactible
+
+func set_selected() -> void:
+	if _is_mouse_on_object:
+		return
 	_is_mouse_on_object = true
-	sticker_mouse_entered.emit(self)
+	sticker_selected.emit(self)
 	if _is_object_interactible:
 		CursorManager.request_cursor(CursorManager.CursorType.HOVER)
 
-func _on_mouse_exited() -> void:
+func set_deselected() -> void:
+	if not _is_mouse_on_object:
+		return
 	_is_mouse_on_object = false
-	sticker_mouse_exited.emit(self)
+	sticker_deselected.emit(self)
 	CursorManager.release_cursor(CursorManager.CursorType.HOVER)
+
+func handle_mouse_input(_event: InputEvent) -> bool:
+	return false
+
+func cancel_mouse_input() -> void:
+	pass
 
 # true if sticker can be interacted with, false otherwise
 func _get_interactible() -> bool:
@@ -127,6 +138,4 @@ func _get_interactible() -> bool:
 	if _is_mouse_on_object and debug_enabled:
 		return true
 
-	if _is_mouse_on_object and _is_object_interactible:
-		return true
-	return false
+	return _is_mouse_on_object and is_interactible()

@@ -57,6 +57,3 @@ shape = SubResource("BoxShape3D_yniim")
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_7yb5f")
 surface_material_override/0 = SubResource("ShaderMaterial_ab3cd")
-
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

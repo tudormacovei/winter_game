@@ -39,7 +39,7 @@ func _ready() -> void:
 	# get middle dimension, which is smallest '2D' dimension of the sticker (since thickness is 0, and that's the smallest 3D dimension)
 	var sticker_size: float = dims[1]
 	peel_radius = sticker_size * 0.1 # radius of the cylinder used for peeling: smaller values have a tighter peel
-	max_peel_distance = sticker_size * 1.5
+	max_peel_distance = sticker_size * 1.25
 
 func _complete_fraction() -> float:
 	# returns the % that a sticker is completed
@@ -101,22 +101,24 @@ func _apply_deform_at_amplitude(amplitude: float) -> void:
 func _process(_delta: float) -> void:
 	_handle_sticker_deform()
 
-func _input(event: InputEvent) -> void:
+func handle_mouse_input(event: InputEvent) -> bool:
 	if GameState.is_player_input_locked:
-		return
+		return false
 	if is_completing:
-		return
+		return false
+	if event is InputEventMouseButton and event.canceled:
+		cancel_mouse_input()
+		return true
 	if event.is_action_pressed("mouse_click_left") and _get_interactible():
 		if _rollback_tween and _rollback_tween.is_running():
 			_rollback_tween.kill()
 		CursorManager.request_cursor(CursorManager.CursorType.GRAB)
-		get_viewport().set_input_as_handled()
 		is_peeling = true
 		AudioManager.play_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME, Config.STICKER_BEGIN_PEEL_SFX_VOLUME_DB)
 		mouse_start = get_viewport().get_mouse_position()
 		mouse_current = mouse_start
+		return true
 	if event.is_action_released("mouse_click_left") and is_peeling:
-		get_viewport().set_input_as_handled()
 		mouse_current = get_viewport().get_mouse_position()
 		var fraction := _complete_fraction()
 		is_peeling = false
@@ -126,6 +128,15 @@ func _input(event: InputEvent) -> void:
 		else:
 			_start_rollback()
 		CursorManager.release_cursor(CursorManager.CursorType.GRAB)
+		return true
+	return false
+
+func cancel_mouse_input() -> void:
+	if not is_peeling:
+		return
+	is_peeling = false
+	_start_rollback()
+	CursorManager.release_cursor(CursorManager.CursorType.GRAB)
 
 ## Override in subclasses to add additional completion criteria (e.g. drag direction).
 func _passes_completion_check(fraction: float) -> bool:
