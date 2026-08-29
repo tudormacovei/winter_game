@@ -21,7 +21,12 @@ func set_text(day_definition) -> void:
 	else:
 		_narrative_label.hide()
 
-	# TODO[ziana]: Implement performance text
+	# Show performance text
+	if day_definition.performance_text != null:
+		_performance_label.text = day_definition.performance_text.get_text_for_score(Variables.get_var(Config.SCORE_SIMPLE_OBJECTS_VAR_KEY))
+		_performance_label.show()
+	else:
+		_performance_label.hide()
 
 # TODO: This is meant to be a temporary visual until game end is implemented
 func set_game_end_text() -> void:

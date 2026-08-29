@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="PerformanceTextDefinition" load_steps=7 format=3 uid="uid://b6c38plae5b8y"]
+
+[ext_resource type="Script" uid="uid://c7ak3t2a1ou7o" path="res://scripts/systems/day_end/performance_text_pool.gd" id="1_g2qyg"]
+[ext_resource type="Script" uid="uid://daeq0aujnigce" path="res://scripts/systems/day_end/performance_text_definition.gd" id="1_qi4u2"]
+
+[sub_resource type="Resource" id="Resource_t41v3"]
+script = ExtResource("1_g2qyg")
+max_value = 30
+texts = Array[String](["#1 Score between 0-30", "#2 Score between 0-30"])
+metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
+
+[sub_resource type="Resource" id="Resource_0v33d"]
+script = ExtResource("1_g2qyg")
+min_value = 31
+max_value = 60
+texts = Array[String](["#1 Score between 31-61", "#2 Score between 31-61"])
+metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
+
+[sub_resource type="Resource" id="Resource_5euer"]
+script = ExtResource("1_g2qyg")
+min_value = 61
+max_value = 90
+texts = Array[String](["#1 Score between 61-90", "#2 Score between 61-90"])
+metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
+
+[sub_resource type="Resource" id="Resource_cc4r3"]
+script = ExtResource("1_g2qyg")
+min_value = 91
+texts = Array[String](["#1 Score between 91-100", "#2 Score between 91-100"])
+metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
+
+[resource]
+script = ExtResource("1_qi4u2")
+pools = Array[ExtResource("1_g2qyg")]([SubResource("Resource_t41v3"), SubResource("Resource_0v33d"), SubResource("Resource_5euer"), SubResource("Resource_cc4r3")])
+metadata/_custom_type_script = "uid://daeq0aujnigce"
