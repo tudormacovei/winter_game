@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=6 format=3 uid="uid://crydwu6jjloem"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=7 format=3 uid="uid://crydwu6jjloem"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_ucw6y"]
 [ext_resource type="Resource" uid="uid://do1jglohotqhs" path="res://data/dialogue/NPC_4/NPC_4_9.dialogue" id="2_lev5u"]
 [ext_resource type="Resource" uid="uid://douhk2njjw7k8" path="res://data/interaction_configs/workshop_default_config.tres" id="2_nr3kf"]
+[ext_resource type="Resource" uid="uid://b6c38plae5b8y" path="res://data/performance_texts/default_performance_text.tres" id="4_0f7r7"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="4_b6olo"]
 
 [sub_resource type="Resource" id="Resource_nr3kf"]
@@ -15,4 +16,5 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 script = ExtResource("4_b6olo")
 day_id = 4
 interactions = Array[ExtResource("1_ucw6y")]([SubResource("Resource_nr3kf")])
+performance_text = ExtResource("4_0f7r7")
 metadata/_custom_type_script = "uid://bta87oci6xlf5"
