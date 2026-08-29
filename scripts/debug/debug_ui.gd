@@ -26,6 +26,7 @@ var dialogue_tab_vars_search_text := [""]
 var dialogue_tab_set_var_key := [""]
 var dialogue_tab_set_var_value := [""]
 var visual_tab_time_of_day := [0.0]
+var general_tab_show_soft_select_rays := [false]
 
 #endregion
 
@@ -70,7 +71,8 @@ func _draw_general_tab():
 		game_manager.debug_start_day(general_tab_day_number[0])
 
 	ImGui.Separator()
-	ImGui.Text("Health")
+	ImGui.Text("Object Interaction")
+	ImGui.Checkbox("Show soft select rays (red: miss, blue: object, green: sticker)", general_tab_show_soft_select_rays)
 	if health_manager == null:
 		ImGui.TextColored(WarningColor, "Health Manager not found. Cannot display health debug options.")
 	else:

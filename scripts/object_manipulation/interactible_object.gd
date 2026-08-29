@@ -34,6 +34,22 @@ enum State {
 	RETURNING,
 }
 
+# What the soft select system is currently targeting (it does not mean an interaction was triggered)
+# Refreshes every physics tick, only while the object is focused
+enum SoftSelectTarget {
+	NONE,
+	OBJECT,
+	STICKER,
+}
+
+# What the player is currently grabbing, only used in focused mode
+enum CurrentlyGrabbed {
+	NONE, # the grab action is not held
+	STICKER, # a sticker accepted the grab and receives all mouse events until release
+	OBJECT, # the grab landed on the object. Rotation starts after the drag threshold
+	MISS, # the grab missed the object. A release that also misses defocuses
+}
+
 var _object: ObjectWithStickers = null
 var _state := State.ON_TABLE
 var _is_mouse_on_object := false
@@ -43,13 +59,14 @@ var _is_pending_completion := false
 var _original_mesh: Mesh = null
 
 static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # object scale on mouse hover
-static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width before a press becomes a drag
-static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.0 # full revolutions when dragging across the viewport width
+static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width before a grab becomes a drag (prevents jitter)
+static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.25 # full revolutions when dragging across the viewport width
 static var ROTATION_SNAP_DURATION: float = 0.2
 static var FOCUS_DURATION: float = 0.25
 static var FOCUS_OBJECT_SCALE: float = 0.3
-const SOFT_MOUSE_RADII: Array[float] = [0.0, 0.005, 0.01, 0.02] # screen-width fractions
-const SOFT_MOUSE_RAY_COUNTS: Array[int] = [1, 9, 12, 15]
+const SOFT_SELECT_RADII: Array[float] = [0.0, 0.005, 0.01, 0.02, 0.03, 0.04] # screen-width fractions
+const SOFT_SELECT_RAY_COUNTS: Array[int] = [1, 9, 12, 15, 18, 21]
+const STICKER_RING_COUNT: int = 4 # the first X rings select a sticker, the outer rings detect the object only (player has to be more precise when selecting a sticker than the object)
 
 #region Game State 
 
@@ -68,11 +85,13 @@ const _RETURN_IN_BOUNDS_ITERATION_CAP: int = 12
 
 var _drag_threshold_px: float = 0.0
 var _drag_start_pos: Vector2 = Vector2.ZERO
-var _mouse_down: bool = false
+var _mouse_down: bool = false # for table mode only! Focused mode uses _currently_grabbed.
 
 var _rotation_sensitivity: float = 0.0 # radians per pixel, set in _ready
-var _selected_sticker: Sticker = null # selection logic is always running in the background, this is the sticker that would get captured on click
-var _captured_sticker: Sticker = null # sticker player is currently interacting with
+var _soft_select_target := SoftSelectTarget.NONE # result of the last soft select
+var _selected_sticker: Sticker = null # the sticker a grab would land on, refreshed every physics tick. While a sticker is grabbed this is frozen and is the grabbed sticker!
+var _currently_grabbed := CurrentlyGrabbed.NONE # what type of object is currently grabbed? Dictates how we process input
+var _soft_select_debug_markers: SoftSelectRayDebugMarkers = null
 var _snap_tween: Tween
 var _focus_position_tween: Tween
 var _focus_rotation_tween: Tween
@@ -108,6 +127,9 @@ func _ready() -> void:
 	_drag_threshold_px = get_viewport().get_visible_rect().size.x * DRAG_THRESHOLD_FRACTION
 	_rotation_sensitivity = TAU * ROTATION_REVOLUTIONS_PER_WIDTH / get_viewport().get_visible_rect().size.x
 
+	_soft_select_debug_markers = SoftSelectRayDebugMarkers.new()
+	add_child(_soft_select_debug_markers)
+
 
 func _process(_delta: float) -> void:
 	_handle_drag()
@@ -119,30 +141,37 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if GameState.is_player_input_locked:
 		_cancel_mouse_input()
-		_set_selected_sticker(null)
+		_clear_soft_select()
+		_currently_grabbed = CurrentlyGrabbed.NONE
 		return
 	if _state != State.FOCUSED and _state != State.ROTATING:
-		_set_selected_sticker(null)
+		_clear_soft_select()
 		return
-	if is_instance_valid(_captured_sticker):
-		_set_selected_sticker(_captured_sticker)
-	else:
-		_captured_sticker = null
-		_soft_mouse_select()
+	if _currently_grabbed == CurrentlyGrabbed.STICKER:
+		return # the grabbed sticker stays selected until the grab ends
+	_soft_select_target = _soft_select()
 
-## A more lenient selection: as long as the sticker is within a certain radius of the click, it will work
-func _soft_mouse_select() -> Sticker:
+
+#region Soft Select
+
+## Casts rays in rings around the cursor, so an imprecise click still works.
+## A sticker hit always wins over an object hit
+func _soft_select() -> SoftSelectTarget:
+	_soft_select_debug_markers.clear_markers()
 	var camera := get_viewport().get_camera_3d()
 	if camera == null or camera.far <= 0.0:
 		_set_selected_sticker(null)
-		return null
+		return SoftSelectTarget.NONE
 
 	var viewport_size := get_viewport().get_visible_rect().size # refetch per tick in case of window resize
 	var mouse_position := get_viewport().get_mouse_position()
-	var closestSticker: Sticker = null
-	for ring_index in SOFT_MOUSE_RADII.size():
-		var radius := SOFT_MOUSE_RADII[ring_index] * viewport_size.x
-		var ray_count := SOFT_MOUSE_RAY_COUNTS[ring_index]
+	var is_object_hit := false
+	for ring_index in SOFT_SELECT_RADII.size():
+		var is_sticker_ring := ring_index < STICKER_RING_COUNT
+		if not is_sticker_ring and is_object_hit:
+			break # the sticker rings already hit the object, so the outer rings are skipped
+		var radius := SOFT_SELECT_RADII[ring_index] * viewport_size.x
+		var ray_count := SOFT_SELECT_RAY_COUNTS[ring_index]
 		for ray_index in ray_count:
 			var screen_position := mouse_position
 			if radius > 0.0:
@@ -150,17 +179,26 @@ func _soft_mouse_select() -> Sticker:
 				screen_position += Vector2(cos(angle), sin(angle)) * radius
 			if screen_position.x < 0.0 or screen_position.y < 0.0 or screen_position.x >= viewport_size.x or screen_position.y >= viewport_size.y:
 				continue # out of viewport bounds
-			closestSticker = _sticker_search_raycast(screen_position, camera)
-			if closestSticker != null:
-				break
-		if closestSticker != null:
-			break
+			
+			var hit := _soft_select_raycast(screen_position, camera)
+			var hit_sticker: Sticker = hit.node as Sticker if hit != null else null
+			if hit_sticker != null and (not is_sticker_ring or not _is_sticker_facing_camera(hit_sticker, camera)):
+				hit_sticker = null # any sticker in an object-only ring counts as an object hit
+			_show_soft_select_ray_debug_marker(camera, screen_position, hit, hit_sticker)
 
-	_set_selected_sticker(closestSticker)
-	return closestSticker
+			if hit == null:
+				continue
+			if hit_sticker != null:
+				_set_selected_sticker(hit_sticker)
+				return SoftSelectTarget.STICKER
+			is_object_hit = true
+
+	_set_selected_sticker(null)
+	return SoftSelectTarget.OBJECT if is_object_hit else SoftSelectTarget.NONE
 
 
-func _sticker_search_raycast(screen_position: Vector2, camera: Camera3D) -> Sticker:
+## Casts one ray. Returns a hit on the object or on one of its interactible stickers, null otherwise.
+func _soft_select_raycast(screen_position: Vector2, camera: Camera3D) -> SoftSelectRayHit:
 	if _object == null:
 		return null
 
@@ -171,17 +209,40 @@ func _sticker_search_raycast(screen_position: Vector2, camera: Camera3D) -> Stic
 	query.collide_with_bodies = false
 
 	# TODO: if we run into performance issues we could restrict this raycast to only work on the focused object
-	var hit := get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
+	var physics_hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if physics_hit.is_empty():
 		return null
 
-	var collider := hit["collider"] as Node
-	if not (collider is Sticker):
+	var collider := physics_hit["collider"] as Node
+	var is_object := collider == _object
+	var is_sticker := collider is Sticker and _object.is_ancestor_of(collider) and (collider as Sticker).is_interactible()
+	if not is_object and not is_sticker:
 		return null
-	var sticker := collider as Sticker
-	if not _object.is_ancestor_of(sticker) or not sticker.is_interactible():
-		return null
-	return sticker
+	return SoftSelectRayHit.new(collider, physics_hit["position"])
+
+
+## A sticker on the side of the object is not a valid target.
+func _is_sticker_facing_camera(sticker: Sticker, camera: Camera3D) -> bool:
+	var sticker_normal := sticker.global_basis.y.normalized() # stickers are placed with their local Y along the surface normal
+	var direction_toward_camera := camera.global_basis.z # opposite of the camera forward axis
+	return sticker_normal.dot(direction_toward_camera) >= cos(deg_to_rad(30.0)) # exclude stickers that do not face the camera
+
+
+## A hit is marked at its hit position, a miss is marked along the ray at the depth of this object's origin
+func _show_soft_select_ray_debug_marker(camera: Camera3D, screen_position: Vector2, hit: SoftSelectRayHit, hit_sticker: Sticker) -> void:
+	if hit == null:
+		var object_depth := (global_position - camera.global_position).dot(-camera.global_basis.z)
+		var miss_position := camera.project_position(screen_position, object_depth)
+		_soft_select_debug_markers.add_marker(camera, screen_position, miss_position, SoftSelectRayDebugMarkers.Result.MISS)
+		return
+	var result: SoftSelectRayDebugMarkers.Result = SoftSelectRayDebugMarkers.Result.STICKER if hit_sticker != null else SoftSelectRayDebugMarkers.Result.OBJECT
+	_soft_select_debug_markers.add_marker(camera, screen_position, hit.position, result)
+
+
+func _clear_soft_select() -> void:
+	_set_selected_sticker(null)
+	_soft_select_target = SoftSelectTarget.NONE
+	_soft_select_debug_markers.clear_markers()
 
 
 func _set_selected_sticker(sticker: Sticker) -> void:
@@ -197,38 +258,46 @@ func _set_selected_sticker(sticker: Sticker) -> void:
 	if is_instance_valid(_selected_sticker):
 		_selected_sticker.set_selected()
 
+#endregion
 
-func _handle_mouse_input(event: InputEvent) -> void:
-	if not event is InputEventMouse:
+
+#region Grab
+# When a player clicks while in focus mode, we say that they are attempting to grab
+# The player can grab the object in order to rotate it, the sticker in order to peel it, or they can grab the space around the object to exit focus mode
+
+## Returns true when the sticker can be interacted with
+func _try_grab_selected_sticker(event: InputEvent) -> bool:
+	if not is_instance_valid(_selected_sticker):
+		return false
+	return _selected_sticker.handle_mouse_input(event)
+
+
+## Sends motion and release events to the grabbed sticker.
+func _forward_mouse_input_to_grabbed_sticker(event: InputEvent) -> void:
+	if is_instance_valid(_selected_sticker):
+		_selected_sticker.handle_mouse_input(event)
+
+
+## Rotation starts after the cursor moves past the drag threshold and continues until release.
+func _handle_object_grab_motion(event: InputEventMouseMotion) -> void:
+	if _state == State.ROTATING:
+		_apply_rotation_delta(event.relative)
 		return
-
-	var sticker: Sticker = null
-	if is_instance_valid(_captured_sticker):
-		sticker = _captured_sticker
-	elif is_instance_valid(_selected_sticker):
-		sticker = _selected_sticker
-	else:
-		_captured_sticker = null
-		return
-
-	var consumed := sticker.handle_mouse_input(event)
-	if event.is_action_pressed("mouse_click_left") and consumed:
-		_captured_sticker = sticker
-		_set_selected_sticker(sticker)
-	if event.is_action_released("mouse_click_left") and _captured_sticker == sticker:
-		_captured_sticker = null
-	if consumed:
-		get_viewport().set_input_as_handled()
+	if _state == State.FOCUSED and get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
+		_set_state(State.ROTATING)
+		_apply_rotation_delta(event.relative)
 
 
+#endregion
+
+
+## Ends a sticker grab without a release: the sticker rolls back its peel.
 func _cancel_mouse_input() -> void:
-	if not is_instance_valid(_captured_sticker):
-		_captured_sticker = null
+	if _currently_grabbed != CurrentlyGrabbed.STICKER:
 		return
-
-	var sticker := _captured_sticker
-	_captured_sticker = null
-	sticker.cancel_mouse_input()
+	_currently_grabbed = CurrentlyGrabbed.NONE
+	if is_instance_valid(_selected_sticker):
+		_selected_sticker.cancel_mouse_input()
 
 
 func _return_object_in_bounds() -> void:
@@ -325,27 +394,36 @@ func _is_point_out_of_bounds(point: Vector3, margin: float) -> bool:
 	return false
 
 
+# Handles focused mode interaction (and the DRAGGING release) in _input so that the focused object gets the event first
 func _input(event: InputEvent) -> void:
 	if GameState.is_player_input_locked:
 		return
 
-	if event.is_action_pressed("mouse_click_left"):
-		if _state == State.FOCUSED and _is_mouse_on_object and _selected_sticker == null:
-			_mouse_down = true
-			_drag_start_pos = get_viewport().get_mouse_position()
-		elif _state == State.FOCUSED and not _is_mouse_on_object:
-			get_viewport().set_input_as_handled()
+	# Grab starts: what did the player grab? 
+	# The soft select target may change later, the grab does not change while LMB is still pressed!
+	if event.is_action_pressed("mouse_click_left") and _state == State.FOCUSED:
+		match _soft_select_target:
+			SoftSelectTarget.STICKER:
+				if _try_grab_selected_sticker(event):
+					_currently_grabbed = CurrentlyGrabbed.STICKER
+				else:
+					_currently_grabbed = CurrentlyGrabbed.OBJECT # the sticker said no, the object behind it says yes
+			SoftSelectTarget.OBJECT:
+				_currently_grabbed = CurrentlyGrabbed.OBJECT
+			SoftSelectTarget.NONE:
+				_currently_grabbed = CurrentlyGrabbed.MISS
+		_drag_start_pos = get_viewport().get_mouse_position()
+		get_viewport().set_input_as_handled()
+		return
 
+	# Grab is held: stickers get the raw events, the object gets rotated
 	if event is InputEventMouseMotion:
-		# FOCUSED drag: if crossed threshold: start rotating
-		if _mouse_down and _state == State.FOCUSED:
-			if get_viewport().get_mouse_position().distance_to(_drag_start_pos) > _drag_threshold_px:
-				_mouse_down = false
-				_set_state(State.ROTATING)
-				_apply_rotation_delta(event.relative)
-		# ROTATING: apply rotation every frame
-		elif _state == State.ROTATING:
-			_apply_rotation_delta(event.relative)
+		match _currently_grabbed:
+			CurrentlyGrabbed.STICKER:
+				_forward_mouse_input_to_grabbed_sticker(event)
+			CurrentlyGrabbed.OBJECT:
+				_handle_object_grab_motion(event)
+		return
 
 	if event.is_action_released("mouse_click_left"):
 		if _state == State.DRAGGING:
@@ -357,20 +435,23 @@ func _input(event: InputEvent) -> void:
 				_set_state(State.ON_TABLE)
 			get_viewport().set_input_as_handled()
 			return
-		if _state == State.ROTATING:
-			_mouse_down = false
-			_set_state(State.FOCUSED)
-			_start_snap_tween()
-			get_viewport().set_input_as_handled()
-			return
-		if _state == State.FOCUSED and not _is_mouse_on_object and _captured_sticker == null:
-			defocus()
-			get_viewport().set_input_as_handled()
-			return
-		if _state == State.FOCUSED:
-			_mouse_down = false # click on focused object without crossing rotation threshold
 
-	_handle_mouse_input(event)
+		# Grab ends: ensure what was grabbed is notified of the grab end
+		if _currently_grabbed != CurrentlyGrabbed.NONE:
+			match _currently_grabbed:
+				CurrentlyGrabbed.STICKER:
+					_forward_mouse_input_to_grabbed_sticker(event) # the sticker decides if the peel succeeded
+				CurrentlyGrabbed.OBJECT: # handle grab end for rotation directly
+					if _state == State.ROTATING:
+						_set_state(State.FOCUSED)
+						_start_snap_tween()
+					# else: a click on the object that never crossed the drag threshold did nothing, so don't change state
+				CurrentlyGrabbed.MISS:
+					if _soft_select_target == SoftSelectTarget.NONE:
+						defocus()
+					# a miss that ends on the object is not an intended miss (probably), so stay focused
+			_currently_grabbed = CurrentlyGrabbed.NONE
+			get_viewport().set_input_as_handled()
 
 
 # Handle interactions for object on the table in unhandled input
@@ -480,10 +561,11 @@ func set_spawn_data(focus_position: Node3D, on_table_neutral_position: Node3D, o
 
 func _set_state(state: State):
 	if _state != state:
-		CursorManager.clear_requests()
+		CursorManager.clear_requests() # self-heal cursor state by resetting on object state change
 	if state != State.FOCUSED and state != State.ROTATING:
 		_cancel_mouse_input()
-		_set_selected_sticker(null)
+		_clear_soft_select()
+		_currently_grabbed = CurrentlyGrabbed.NONE
 	_state = state
 	#print("Set state to " + str(state))
 	if state == State.FOCUSED or state == State.ROTATING:
@@ -637,9 +719,8 @@ static func _build_snap_orientations() -> Array[Basis]:
 
 
 func _on_sticker_tree_exiting(sticker: Sticker) -> void:
-	if _captured_sticker == sticker:
-		_cancel_mouse_input()
 	if _selected_sticker == sticker:
+		_cancel_mouse_input() # no effect unless this sticker is grabbed
 		_selected_sticker = null
 
 
@@ -745,3 +826,13 @@ func _place_object_on_xz_plane(object: Node3D):
 	# TODO: get the world space transform matrix of the object and multiply it with the object BBOX
 	# bug is most likely caused by object bbox being in local coords
 	global_position.y = bbox.size.y / 2
+
+
+## Result of one soft select ray that hit the object or one of its stickers.
+class SoftSelectRayHit:
+	var node: Node # _object or one of its stickers
+	var position: Vector3 # world space hit position
+
+	func _init(hit_node: Node, hit_position: Vector3) -> void:
+		node = hit_node
+		position = hit_position

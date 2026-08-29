@@ -19,7 +19,7 @@ enum State { ACTIVE, FAILED }
 @export var locked_texture_index: int = 0 : set = _set_locked_texture_index
 
 var state: State = State.ACTIVE
-var _is_mouse_on_object := false
+var _is_selected := false
 var _is_object_interactible := false
 # Track if Surface 0's material has already been duplicated for this instance,
 # so we don't unnecessarily double-duplicate. (for example, directional stickers already duplicate the material instance to set per-object material parameters)
@@ -111,17 +111,17 @@ func is_interactible() -> bool:
 	return state == State.ACTIVE and _is_object_interactible
 
 func set_selected() -> void:
-	if _is_mouse_on_object:
+	if _is_selected:
 		return
-	_is_mouse_on_object = true
+	_is_selected = true
 	sticker_selected.emit(self)
 	if _is_object_interactible:
 		CursorManager.request_cursor(CursorManager.CursorType.HOVER)
 
 func set_deselected() -> void:
-	if not _is_mouse_on_object:
+	if not _is_selected:
 		return
-	_is_mouse_on_object = false
+	_is_selected = false
 	sticker_deselected.emit(self)
 	CursorManager.release_cursor(CursorManager.CursorType.HOVER)
 
@@ -135,7 +135,7 @@ func cancel_mouse_input() -> void:
 func _get_interactible() -> bool:
 	if state != State.ACTIVE:
 		return false
-	if _is_mouse_on_object and debug_enabled:
+	if _is_selected and debug_enabled:
 		return true
 
-	return _is_mouse_on_object and is_interactible()
+	return _is_selected and is_interactible()

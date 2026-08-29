@@ -112,7 +112,6 @@ func handle_mouse_input(event: InputEvent) -> bool:
 	if event.is_action_pressed("mouse_click_left") and _get_interactible():
 		if _rollback_tween and _rollback_tween.is_running():
 			_rollback_tween.kill()
-		CursorManager.request_cursor(CursorManager.CursorType.GRAB)
 		is_peeling = true
 		AudioManager.play_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME, Config.STICKER_BEGIN_PEEL_SFX_VOLUME_DB)
 		mouse_start = get_viewport().get_mouse_position()
@@ -127,7 +126,6 @@ func handle_mouse_input(event: InputEvent) -> bool:
 			_start_completion()
 		else:
 			_start_rollback()
-		CursorManager.release_cursor(CursorManager.CursorType.GRAB)
 		return true
 	return false
 
@@ -136,7 +134,6 @@ func cancel_mouse_input() -> void:
 		return
 	is_peeling = false
 	_start_rollback()
-	CursorManager.release_cursor(CursorManager.CursorType.GRAB)
 
 ## Override in subclasses to add additional completion criteria (e.g. drag direction).
 func _passes_completion_check(fraction: float) -> bool:

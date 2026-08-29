@@ -1,7 +1,7 @@
 ## Manages the mouse cursor appearance throughout the game.
 ## Registered as an AutoLoad.
-## Cursor state is determined by a priority queue: the highest priority active request wins.
-## Priority order (highest to lowest): GRAB > HOVER > DEFAULT
+## GRAB is always shown while the left mouse button is held. The button state is polled each frame.
+## Otherwise the highest priority active request wins. Priority order (highest to lowest): HOVER > DEFAULT
 extends Node
 
 enum CursorType {
@@ -20,20 +20,19 @@ const CURSOR_OFFSET: Vector2 = Vector2(7, 7)
 var _requests: Dictionary = {
 	CursorType.DEFAULT: 1, # DEFAULT always has a baseline request
 	CursorType.HOVER: 0,
-	CursorType.GRAB: 0
 }
+var _is_left_mouse_button_held := false
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_ALWAYS # to work during pause
 	_apply_highest()
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				request_cursor(CursorType.GRAB)
-			else:
-				release_cursor(CursorType.GRAB)
+## Watch input & apply grab texture on left-click hold
+func _process(_delta: float) -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) == _is_left_mouse_button_held:
+		return # early return, grab texture was already applied, no need to re-apply it
+	_is_left_mouse_button_held = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	_apply_highest()
 
 ## Add a cursor request. The highest priority active request will be displayed.
 func request_cursor(cursor_type: CursorType) -> void:
@@ -62,7 +61,7 @@ func clear_requests() -> void:
 	_apply_highest()
 
 ## Re-evaluate what's under the cursor by injecting a mouse motion event.
-## Call after content moves under a stationary cursor (camera pan, rotation end, etc.)
+## Call after content changes and you are not sure the mouse has moved (camera pan, object defocus, etc.)
 func refresh() -> void:
 	get_viewport().set_input_as_handled()
 	var event := InputEventMouseMotion.new()
@@ -70,12 +69,13 @@ func refresh() -> void:
 	event.global_position = event.position
 	Input.parse_input_event(event)
 
+## Applies the highest-prio mouse texture that was requested
 func _apply_highest() -> void:
-	#print("GRAB: " + str(_requests[CursorType.GRAB]))
-	#print("HOVER: " + str(_requests[CursorType.HOVER]))
-	#print("DEFAULT: " + str(_requests[CursorType.DEFAULT]))
+	if _is_left_mouse_button_held:
+		_apply_cursor(CursorType.GRAB)
+		return
 	# Iterate from highest to lowest priority
-	for cursor_type in [CursorType.GRAB, CursorType.HOVER, CursorType.DEFAULT]:
+	for cursor_type in [CursorType.HOVER, CursorType.DEFAULT]:
 		if _requests[cursor_type] > 0:
 			_apply_cursor(cursor_type)
 			return
