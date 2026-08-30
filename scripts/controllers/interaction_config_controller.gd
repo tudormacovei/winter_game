@@ -46,9 +46,20 @@ func _apply_scene_by_name(scene_name: String) -> void:
 			success = true
 		else:
 			child.visible = false
+			var animator := child.find_child("CharacterAnimator", true, false) as CharacterAnimator
+			if animator:
+				animator.clear() # view is hidden, stop computing animations
 
 	if not success:
 		Utils.debug_error("InteractionConfigController: Could not find scene '%s' to apply." % scene_name)
+
+
+## The character animator of the visible view, null when the view has none
+func get_character_animator() -> CharacterAnimator:
+	for child in get_children():
+		if child.visible:
+			return child.find_child("CharacterAnimator", true, false) as CharacterAnimator
+	return null
 
 func _apply_audio_ambient(audio_file_name: String) -> void:
 	if not audio_file_name or audio_file_name == "":

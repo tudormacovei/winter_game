@@ -228,8 +228,8 @@ Sarah: [#sprite=happy]It's a secret. You'll see.
 Shopkeeper: [#sprite=worried]Just keep out of trouble this time. Please. 
 Sarah: [#sprite=upset]Course we will. When haven't we?
 Sarah: [#sprite=happy]Anyway, see you later. Bye!
-Micah: [#sprite=happy]Bye, Shopkeeper! Bye, fake 'keeper![do DialogueFuncs.play_sfx("sfx_door_close")]
-Shopkeeper: [#sprite=laugh]...Devils, the two of them. 
+Micah: [#sprite=happy]Bye, Shopkeeper! Bye, fake 'keeper!
+Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_close")][do! DialogueFuncs.exit_characters(["Sarah", "Micah"])][#sprite=laugh]...Devils, the two of them. 
 Shopkeeper: I'll be right back, if you don't mind. Got to say my prayers for the day.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 
 => END 

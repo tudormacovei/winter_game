@@ -5,7 +5,6 @@ extends Node
 
 
 const DayDefinition := preload("res://scripts/systems/interactions/day_definition.gd")
-const CharacterDefinition := preload("res://scripts/systems/interactions/character_definition.gd")
 
 # Sticker spawning configuration.
 # STICKER_TYPES is the global asset registry; DIFFICULTY_TABLE maps difficulty to indices into STICKER_TYPES
@@ -40,12 +39,12 @@ static func get_sticker_spawn_config(difficulty: int) -> Dictionary:
 @onready var workbench := %WorkbenchView
 @onready var ui_manager := %UIManager
 @onready var health_manager: HealthManager = %HealthManager
-@onready var character_node := get_node("/root/Workspace/CameraSpace/InteractionConfigController/DialogueView/DialogueCharacterTexture")
 @onready var time_manager := %TimeManager
 @onready var interaction_config_controller: InteractionConfigController = %InteractionConfigController
 
 var _day_resources: Array[DayDefinition] = []
-var _character_dict: Dictionary = {} # Key: character_id, Value: CharacterDefinition
+var _character_dict: Dictionary = {} # Key: display_name, Value: CharacterDefinition
+var _character_animator: CharacterAnimator = null # animator of the current interaction's view, null when the view has none
 
 var current_day_index: int = -1
 var current_interaction_index: int = -1
@@ -91,6 +90,19 @@ func _ready():
 func dialogue_add_object_to_workbench(object_name: String):
 	_add_object_to_workbench(load(Config.OBJECTS_SCENES_PATH + "/" + object_name + ".tscn"))
 
+func dialogue_exit_characters(display_names: Array):
+	if _character_animator == null:
+		Utils.debug_error("GameManager: Character animator not loaded. Aborting character exit for '%s'. This should not happen" % str(display_names))
+		return
+	var characters: Array[CharacterDefinition] = []
+	for display_name in display_names:
+		var character: CharacterDefinition = _character_dict.get(display_name)
+		if character == null:
+			Utils.debug_error("GameManager: Dialogue asked unknown character '%s' to exit" % display_name)
+			continue
+		characters.append(character)
+	_character_animator.exit_characters(characters)
+
 #endregion
 
 #region Data Loading Functions
@@ -117,12 +129,12 @@ func _load_character_resources():
 	for f in files:
 			var resource = load(Config.CHARACTER_RESOURCES_PATH + f)
 			if resource and resource is CharacterDefinition:
-				if resource.character_id in _character_dict:
-					push_warning("Character resource '%s' has duplicate id '%s' and will be skipped." % [f, resource.character_id])
+				if resource.display_name in _character_dict:
+					push_warning("Character resource '%s' has duplicate display name '%s' and will be skipped." % [f, resource.display_name])
 					continue
 				
 				_character_dict[resource.display_name] = resource
-				print("GameManager: Loaded character '%s' from file '%s'" % [resource.character_id, f])
+				print("GameManager: Loaded character '%s' from file '%s'" % [resource.display_name, f])
 			elif resource:
 				push_warning("Character resource '%s' is not a valid CharacterDefinition and will not be considered." % f)
 
@@ -202,6 +214,10 @@ func _play_next_interaction():
 	if _check_stale_interaction_start(current_start_token):
 		return
 
+	_character_animator = interaction_config_controller.get_character_animator()
+	if _character_animator:
+		_character_animator.exit_all() # characters of the previous interaction leave first. Every character enters on its first spoken line
+
 	# Wait for start delay
 	if not (OS.is_debug_build() and debug_disable_interaction_delay):
 		await get_tree().create_timer(interaction.start_delay_seconds).timeout
@@ -254,8 +270,11 @@ func _add_object_to_workbench(object_scene: PackedScene):
 func _deferred_connect_spoke_signal():
 	if current_dialogue_balloon and current_dialogue_balloon.dialogue_label:
 		current_dialogue_balloon.dialogue_label.connect("spoke", _on_dialogue_letter_spoke)
+		if _character_animator:
+			# character animations skip together with the text
+			current_dialogue_balloon.dialogue_label.connect("skipped_typing", _character_animator.skip_animations)
 		return
-		
+
 	call_deferred("_deferred_connect_spoke_signal") # Try again if dialogue label is not available yet
 
 #endregion
@@ -294,26 +313,30 @@ func _on_all_objects_completed():
 
 func _on_dialogue_ended(_resource):
 	is_dialogue_running = false
-	character_node.texture = null
+	if _character_animator:
+		_character_animator.exit_all()
 	_try_play_next_interaction()
 
 func _on_dialogue_line_started(dialogue_line):
-	# Set character sprite
+	if _character_animator == null:
+		return
+
+	# A dialogue line without a speaker is considered narration
 	if dialogue_line.character.is_empty():
-		character_node.texture = null
+		_character_animator.set_narration()
 		return
 
-	if not _character_dict.has(dialogue_line.character):
+	var character: CharacterDefinition = _character_dict.get(dialogue_line.character)
+	if character == null:
 		Utils.debug_error("GameManager: Dialogue line references unknown character '%s'" % dialogue_line.character)
-		character_node.texture = null
+		_character_animator.set_narration()
 		return
-		
-	var sprite_to_set = _character_dict[dialogue_line.character].default_sprite
-	var sprite_change_tag = dialogue_line.get_tag_value(Config.DIALOGUE_TAGS.SPRITE_CHANGE)
-	if sprite_change_tag:
-		sprite_to_set = _character_dict[dialogue_line.character].alt_sprites[sprite_change_tag]
+	if not _character_animator.has_sprite_for(character):
+		_character_animator.set_narration()
+		return
 
-	character_node.texture = sprite_to_set
+	var expression_tag: String = dialogue_line.get_tag_value(Config.DIALOGUE_TAGS.SPRITE_CHANGE)
+	_character_animator.set_speaker(character, expression_tag)
 
 var letter_spoke_counter = 0
 func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: float):
@@ -327,6 +350,8 @@ func _on_player_died():
 		GameState.is_player_input_locked = false
 		return
 		
+	if _character_animator:
+		_character_animator.clear()
 	await ui_manager.show_death_screen()
 
 	AudioManager.stop_ambient()
@@ -365,6 +390,8 @@ func debug_play_next_interaction():
 	_interaction_start_pending = false
 	_interaction_start_token += 1
 	is_dialogue_running = false
+	if _character_animator:
+		_character_animator.clear()
 	print("Debug: Cancelling pending interaction...")
 
 	if not workbench.is_workbench_empty():

@@ -17,6 +17,15 @@ func add_object_to_workbench(object_name: String):
 func play_sfx(sfx_name: String, volume_db: float = 0.0):
 	AudioManager.play_sfx(sfx_name, volume_db)
 
+## Makes characters present in the scene leave the scene simultaneously
+## Call the function like this: [do! DialogueFuncs.exit_characters(["Micah", "Sarah"])]
+func exit_characters(display_names: Array):
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot exit characters. Inform Prog team of error!")
+		return
+
+	game_manager.dialogue_exit_characters(display_names)
+
 ## Returns false is the object is not special or if the object has not been completed
 func has_completed_special_object(object_name: String) -> bool:
 	return Variables.has(Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name)

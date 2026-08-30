@@ -1,5 +1,5 @@
 ## Holds all data about a specific NPC
-class_name CharacterDefintion
+class_name CharacterDefinition
 extends Resource
 
 @export var character_id: String
