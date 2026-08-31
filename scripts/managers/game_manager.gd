@@ -208,6 +208,14 @@ func _play_next_interaction():
 		Utils.debug_error("Dialogue is invalid for day %d interaction %d" % [current_day_index + 1, current_interaction_index])
 		return
 
+	# Skip interaction if its predicate evaluates to false
+	var pred = interaction.predicate
+	if pred != null and (pred is VariablePredicate and not pred.evaluate()):
+		_interaction_start_pending = false
+		print("GameManager: Skipping day %d interaction %d due to predicate." % [current_day_index, current_interaction_index])
+		_play_next_interaction()
+		return
+
 	_update_time_of_day()
 
 	await interaction_config_controller.apply_config(interaction.config)
