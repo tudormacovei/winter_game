@@ -44,7 +44,7 @@ metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_hem1m"]
 script = ExtResource("10_m45ib")
-text = "Narrative text, always shows up!"
+text_true = "Narrative text, always shows up!"
 predicate = SubResource("Resource_m45ib")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 

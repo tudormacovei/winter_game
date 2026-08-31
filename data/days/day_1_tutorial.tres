@@ -34,13 +34,14 @@ script = ExtResource("8_56kry")
 is_always_true = false
 method = 1
 method_arguments = ["NPC_4", "relationship"]
-operator = 1
+operator = 4
 compare_value = 1.0
 metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_rm8ga"]
 script = ExtResource("9_v13ve")
-text = "Narrative text: Duncan hates you..."
+text_true = "Duncan hates you!"
+text_false = "Duncan doesn't hate you!"
 predicate = SubResource("Resource_hqsg4")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 

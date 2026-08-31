@@ -4,5 +4,9 @@
 class_name NarrativeTextDefinition
 extends Resource
 
-@export var text: String = ""
+## Shown if the predicate evaluates to true
+@export var text_true: String = ""
+## Shown if the predicate evaluates to false. Unused if predicate is always true.
+@export var text_false: String = ""
+## If left empty, the narrative text is not shown
 @export var predicate: VariablePredicate = VariablePredicate.new()
