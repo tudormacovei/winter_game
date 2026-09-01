@@ -3,24 +3,25 @@
 => start
 
 ~ start
-???: [wait=1][speed=0.2][shake rate=10.0 level=2]...
-???: [speed=0.2][shake rate=10.0 level=2]...Who goes there?
-- I heard this village is a safe haven, untouched by hardship or the Cullings. Things are worse than ever out there. I've traveled far. I want to settle here.
-	???: [speed=0.8][shake rate=10.0 level=2]Not the first to ask. Sure won't be the last. Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
+???: [wait=1][speed=0.2][shake rate=10.0 level=2]...Who goes there?
+- I'm looking for a place to stay. I've nowhere else to go. 
+	???: [speed=0.8][shake rate=10.0 level=2]Our village is untouched by hardship. You're not the first to ask. 
+	???: [speed=0.8][shake rate=10.0 level=2]Sure won't be the last. 
+	???: [speed=0.8][shake rate=10.0 level=2]Oh, Goddess, merciful, almighty and wise, what shall I do with this one? 
 	???: [speed=0.8][shake rate=10.0 level=2]Will he serve and praise, or will he sow discord and doubt amongst our ranks?
 	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
-	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you!
-	???: [speed=0.8][shake rate=10.0 level=2]The Goddess and the Elders are all welcoming. They've let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you, stranger!
+	???: [speed=0.8][shake rate=10.0 level=2]The Goddess and our Elders are benevolent. They've let almost everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
 	???: [speed=0.8][shake rate=10.0 level=2]Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
-	???: [speed=0.8][shake rate=10.0 level=2]But you, you got here [speed=0.1]just in time... 
-	???: [speed=0.8][shake rate=10.0 level=2]And you're bearing Her Gift, are you? What a blessed day. 
+	???: [speed=0.8][shake rate=10.0 level=2]But you, you were handpicked by the Goddess Herself... 
+	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your eyes? What a blessed day. What joy. 
 	- That's... great!
 		???: [speed=0.8][shake rate=10.0 level=2]So it is. 
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but
 	- Praise be!
 		???: [speed=0.8][shake rate=10.0 level=2]Praise be indeed!
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but
-	- Your Goddess showed Herself to me in my sleep and told me to come here. Of course she'd let me in.
+	- Your Goddess showed Herself to me in my sleep. Of course she'd let me in. I'm Her chosen one.
 		???: [speed=0.8][shake rate=10.0 level=2]The Goddess very rarely speaks to us mortals. You've been blessed. 
 		???: [speed=0.8][shake rate=10.0 level=2]Doubly so, since She's also bestowed Her Gift upon you. 
 		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride.
@@ -31,16 +32,17 @@
 		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your ignorant attitude. => but
 	- Gift? What Gift?
 		???: [speed=0.8][shake rate=10.0 level=2]All will be revealed in due time. It's not for me to explain. => but
-- I heard this is the birthing place of the Church of the one true Goddess. I'd like to join. 
-	???: [speed=0.8][shake rate=10.0 level=2]Your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
-	???: [speed=0.8][shake rate=10.0 level=2]Oh, Goddess, merciful, almighty, and wise, what shall I do with this one?
-	???: [speed=0.8][shake rate=10.0 level=2]Does he speak truly? Will he serve and praise You? Or will he sow discord and doubt amongst our ranks?
+- Your Goddess told me to come here. I want to join your church. 
+	???: [speed=0.8][shake rate=10.0 level=2]Do you speak truly?
+	???: [speed=0.8][shake rate=10.0 level=2]If so, your reasons are pure. Many come here out of desperation and fear. [do Variables.mod_var("religious_fervour", 1)]
+	???: [speed=0.8][shake rate=10.0 level=2]Oh, Goddess, merciful, almighty, and wise, is this indeed one of your chosen?
+	???: [speed=0.8][shake rate=10.0 level=2]Will he serve and praise, or are his twisted intentions hidden behind this pious facade?
 	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
-	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you!
-	???: [speed=0.8][shake rate=10.0 level=2]The Goddess and the Elders are all welcoming. They've let everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you, stranger!
+	???: [speed=0.8][shake rate=10.0 level=2]The Goddess and our Elders are benevolent. They've let almost everyone in so far, provided they're willing to leave their earthly possessions and sinful ways behind.
 	???: [speed=0.8][shake rate=10.0 level=2]Very soon, that won't be possible anymore. There just isn't enough space, food, or water. It saddens us all. Deeply so. 
-	???: [speed=0.8][shake rate=10.0 level=2]But you, you got here [speed=0.1]just in time... 
-	???: [speed=0.8][shake rate=10.0 level=2]And you're bearing Her Gift, are you? What a blessed day. 
+	???: [speed=0.8][shake rate=10.0 level=2]But you, you were handpicked by the Goddess Herself...
+	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your eyes? What a blessed day. What joy. 
 	- That's... great!
 		???: [speed=0.8][shake rate=10.0 level=2]So it is. 
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but1
@@ -49,7 +51,7 @@
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too. => but1
 	- Gift? What Gift?
 		???: [speed=0.8][shake rate=10.0 level=2]Don't worry about it right now. All will be revealed in due time. => but1
-	- Yes. She showed Herself to me in my sleep. Told me to come here. I am Her chosen one. 
+	- Indeed. I'm Her chosen one. 
 		#add global variable, add new dialogue option in tutorial section
 		???: [speed=0.8][shake rate=10.0 level=2]The Goddess very rarely speaks to us mortals. You've been blessed. 
 		???: [speed=0.8][shake rate=10.0 level=2]Doubly so, since She's also bestowed Her Gift upon you. 
