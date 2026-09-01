@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b0hpo1ghk4qju"]
+
+[ext_resource type="Shader" uid="uid://rih4bu70fukp" path="res://3d_assets/shaders/character_crosshatch_fill.gdshader" id="1_fjcsu"]
+[ext_resource type="Texture2D" uid="uid://btd58hhg7k6ym" path="res://2d_assets/characters/Micah_NPC1/Micah_Happy_NPC1.webp" id="2_va2l3"]
+
+[resource]
+render_priority = 3
+shader = ExtResource("1_fjcsu")
+shader_parameter/texture_albedo = ExtResource("2_va2l3")
+shader_parameter/reveal_bottom_percentage = 0.0
+shader_parameter/reveal_top_percentage = 0.0
+shader_parameter/reveal_softness_percentage = 93.84800445778
+shader_parameter/spawn_chance_percentage = 100.0
+shader_parameter/edge_margin_percentage = 5.0
+shader_parameter/sprite_visibility = 1.0
+shader_parameter/stamp_color = Color(0.7, 0.7, 0.7, 0.5019608)
+shader_parameter/line_count = 6
+shader_parameter/line_thickness_pixels = 3.00000011875
+shader_parameter/cell_size_pixels = 24.00000095
+shader_parameter/stamp_width_ratio = 1.0
+shader_parameter/stamp_length_ratio = 2.0
+shader_parameter/stamps_per_cell = 5
+shader_parameter/rotation_range_degrees = 30.000001425
+shader_parameter/seed_change_interval_seconds = 0.25000001117647996

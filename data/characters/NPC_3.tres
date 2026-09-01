@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=4 format=3 uid="uid://nqu2cn85wnfe"]
+[gd_resource type="Resource" script_class="CharacterDefinition" load_steps=4 format=3 uid="uid://nqu2cn85wnfe"]
 
 [ext_resource type="Texture2D" uid="uid://b1xr6nnrbhgtb" path="res://2d_assets/characters/Mary_NPC3_alt.webp" id="1_lwnuu"]
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_w4k2y"]
@@ -15,4 +15,5 @@ default_sprite = SubResource("CompressedTexture2D_7xo4u")
 alt_sprites = Dictionary[String, Texture2D]({
 "alt_clothes": ExtResource("1_lwnuu")
 })
+speaking_push_distance = 0.3
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

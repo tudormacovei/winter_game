@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=5 format=3 uid="uid://bjj82tmucy6m0"]
+[gd_resource type="Resource" script_class="CharacterDefinition" load_steps=5 format=3 uid="uid://bjj82tmucy6m0"]
 
 [ext_resource type="Texture2D" uid="uid://bbl1oeutas260" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_Worried_NPC4.webp" id="1_vrbln"]
 [ext_resource type="Texture2D" uid="uid://34h1lhi0hmjm" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_Laughing_NPC4.webp" id="2_ul8vy"]
@@ -14,4 +14,5 @@ alt_sprites = Dictionary[String, Texture2D]({
 "laugh": ExtResource("2_ul8vy"),
 "worried": ExtResource("1_vrbln")
 })
+speaking_push_distance = 0.3
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
