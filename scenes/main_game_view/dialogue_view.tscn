@@ -118,20 +118,20 @@ speaking_exit_duration = 0.3
 compaction_slide_duration = 0.4
 
 [node name="CharacterSprite1" type="Sprite3D" parent="CharacterAnimator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -3.92)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -4.3)
 material_override = ExtResource("13_cqcbg")
 pixel_size = 0.002
 render_priority = 3
 texture = ExtResource("14_cqcbg")
 
 [node name="CharacterSprite2" type="Sprite3D" parent="CharacterAnimator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3.921)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.3)
 material_override = ExtResource("13_cqcbg")
 pixel_size = 0.002
 render_priority = 3
 
 [node name="CharacterSprite3" type="Sprite3D" parent="CharacterAnimator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -3.922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -4.3)
 material_override = ExtResource("13_cqcbg")
 pixel_size = 0.002
 render_priority = 3

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=5 format=3 uid="uid://d0g4y7qnfxc0"]
+[gd_resource type="Resource" script_class="CharacterDefinition" load_steps=5 format=3 uid="uid://d0g4y7qnfxc0"]
 
 [ext_resource type="Texture2D" uid="uid://bntoteeteh7k1" path="res://2d_assets/characters/Sarah_NPC2/Sarah_NPC2.webp" id="1_f0jpx"]
 [ext_resource type="Texture2D" uid="uid://dyny0iv3r07qp" path="res://2d_assets/characters/Sarah_NPC2/Sarah_Happy_NPC2.webp" id="1_l0yv7"]
@@ -15,4 +15,5 @@ alt_sprites = Dictionary[String, Texture2D]({
 "happy": ExtResource("1_l0yv7"),
 "upset": ExtResource("2_8tcyf")
 })
+speaking_push_distance = 0.6
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

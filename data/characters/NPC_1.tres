@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterDefintion" load_steps=5 format=3 uid="uid://c3pfis3nstlxn"]
+[gd_resource type="Resource" script_class="CharacterDefinition" load_steps=5 format=3 uid="uid://c3pfis3nstlxn"]
 
 [ext_resource type="Texture2D" uid="uid://btd58hhg7k6ym" path="res://2d_assets/characters/Micah_NPC1/Micah_Happy_NPC1.webp" id="1_3ava7"]
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_454m6"]
@@ -15,4 +15,5 @@ alt_sprites = Dictionary[String, Texture2D]({
 "happy": ExtResource("1_3ava7"),
 "upset": ExtResource("2_4ubrl")
 })
+speaking_push_distance = 0.8
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

@@ -22,12 +22,8 @@ enum LookState { ABSENT, IDLE, SPEAKING }
 
 # The speaker steps forward on z to draw in front of the other characters
 # For some reason render priority is not working????) TODO: change to render prio or some other type of sprite ordering
-const _SPEAKING_POSITION_OFFSET := Vector3(0.0, 0.0, 0.005) # in front when speaking
+const _SPEAKING_POSITION_OFFSET := Vector3(0.0, 0.0, 0.39) # in front when speaking
 const _IDLE_POSITION_OFFSET := Vector3(0.0, -0.2, 0.0) # lower when idle
-
-# Share of its own push that the speaker steps aside by
-# TODO: this sprite movement system is still hacky, worth improving at one point
-const _SPEAKER_PUSH_FRACTION := 0.75
 
 # Store the look of the sprites in these material properties, because the crosshatch is drawn by the shader
 const _TEXTURE_ALBEDO_PROPERTY := "shader_parameter/texture_albedo"
@@ -54,6 +50,7 @@ const _LOOK_VALUES := {
 }
 
 var _slots: Array[Slot] = []
+var _primary_slot_default_position: Vector3
 
 # Animation queue
 var _queue: Array[Callable] = [] # each Callable in the queue represents one animation, the animations in the queue play sequentially (not in parallel)
@@ -61,6 +58,7 @@ var _running_tween: Tween = null
 
 
 func _ready() -> void:
+	_primary_slot_default_position = slot_sprite_1.position
 	for sprite in [slot_sprite_1, slot_sprite_2, slot_sprite_3]:
 		# Each sprite gets its own copy of the material so that shader params like texture and crosshatch fill percentage can differ per sprite
 		if sprite.material_override != null:
@@ -205,8 +203,9 @@ func _exit_characters_animation(characters: Array[CharacterDefinition]) -> Tween
 		var exit_duration := _tween_slot_look(tween, slot, LookState.ABSENT, 0.0)
 		_tween_position(tween, slot, speaking_exit_duration, 0.0) # a leaving speaker drops as it dissolves
 		tween.tween_callback(_hide_sprite.bind(slot.sprite)).set_delay(exit_duration)
-		slot.character = null
 		last_exit_end = maxf(last_exit_end, exit_duration)
+	for slot in leaving_slots:
+		slot.character = null
 	_compact_slots(tween, last_exit_end)
 	return tween
 
@@ -292,32 +291,16 @@ func _tween_position(tween: Tween, slot: Slot, duration: float, delay: float) ->
 	position_tweener.set_delay(delay).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 
-## Where the character of a slot stands. The speaker gets extra space on the x-axis
+## Where the sprite of a slot should be placed
 func _target_position(slot: Slot) -> Vector3:
-	var speaker := _speaking_slot()
-	if speaker == null:
-		return slot.idle_position
-	var push_distance: float = speaker.character.speaking_push_distance
-	if slot == speaker:
-		return slot.speaking_position + Vector3(_speaker_push_direction(speaker) * push_distance * _SPEAKER_PUSH_FRACTION, 0.0, 0.0)
-	var push_direction := signf(slot.idle_position.x - speaker.idle_position.x)
-	return slot.idle_position + Vector3(push_direction * push_distance, 0.0, 0.0)
-
-
-## The direction the speaker steps aside in, opposite to the one it pushes the others in
-func _speaker_push_direction(speaker: Slot) -> float:
-	var speaker_is_leftmost := true
-	var speaker_is_rightmost := true
-	for slot in _occupied_slots():
-		if slot == speaker:
-			continue
-		if slot.idle_position.x < speaker.idle_position.x:
-			speaker_is_leftmost = false
-		else:
-			speaker_is_rightmost = false
-	if speaker_is_leftmost == speaker_is_rightmost: # alone, or others on both sides
-		return 0.0
-	return -1.0 if speaker_is_leftmost else 1.0
+	var sprite_position := _primary_slot_default_position
+	if _slots[2].character != null:
+		var right_slot_half_width := _slots[2].character.speaking_push_distance * 0.5
+		sprite_position.x -= right_slot_half_width * 0.5
+	if slot != _slots[0]:
+		var separation := (_slots[0].character.speaking_push_distance + slot.character.speaking_push_distance) * 0.5
+		sprite_position.x += -separation if slot == _slots[1] else separation
+	return sprite_position + (_SPEAKING_POSITION_OFFSET if slot.look_state == LookState.SPEAKING else _IDLE_POSITION_OFFSET)
 
 #endregion
 
@@ -378,9 +361,6 @@ func _set_sprite_look(sprite: Sprite3D, state: LookState) -> void:
 		_set_look_property(sprite, property, look_values[property])
 
 
-## The texture is a look property too: an override material does not receive the sprite
-## texture on its own. A sprite without the crosshatch material stays a plain, always
-## visible sprite, so both helpers do nothing
 func _set_look_property(sprite: Sprite3D, property: String, value: Variant) -> void:
 	var material := sprite.material_override as ShaderMaterial
 	if material == null:
@@ -391,18 +371,13 @@ func _set_look_property(sprite: Sprite3D, property: String, value: Variant) -> v
 #endregion
 
 
-## Slots are our ground truth for where the characters should be placed
-## Slots are stationary (the positions never change, to prevent drift). Characters are swapped between slots when the slots compact.
+## Sprite slot: which character is placed where on the screen, and with what sprite look
 class Slot:
-	var idle_position: Vector3
-	var speaking_position: Vector3
 	var character: CharacterDefinition = null # null = empty slot
 	var sprite: Sprite3D
 	var look_state := CharacterAnimator.LookState.ABSENT
 
 	func _init(slot_sprite: Sprite3D) -> void:
-		idle_position = slot_sprite.position + CharacterAnimator._IDLE_POSITION_OFFSET
-		speaking_position = slot_sprite.position + CharacterAnimator._SPEAKING_POSITION_OFFSET
 		sprite = slot_sprite
 
 	func is_empty() -> bool:

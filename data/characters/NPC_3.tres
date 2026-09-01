@@ -15,5 +15,5 @@ default_sprite = SubResource("CompressedTexture2D_7xo4u")
 alt_sprites = Dictionary[String, Texture2D]({
 "alt_clothes": ExtResource("1_lwnuu")
 })
-speaking_push_distance = 0.3
+speaking_push_distance = 1.5
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
