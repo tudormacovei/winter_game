@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InteractionConfigDefinition" load_steps=3 format=3 uid="uid://dmwp6htfuxwno"]
+
+[ext_resource type="PackedScene" uid="uid://ddlsuyhloknm7" path="res://scenes/UI/dialogue_baloon/dialogue_balloon_goddess.tscn" id="1_5mlmj"]
+[ext_resource type="Script" uid="uid://c2xpl2eysoink" path="res://scripts/systems/interactions/interaction_config_definition.gd" id="2_p6tn7"]
+
+[resource]
+script = ExtResource("2_p6tn7")
+scene_name = "GoddessView"
+is_camera_locked = true
+dialogue_balloon_scene = ExtResource("1_5mlmj")
+audio_ambient_file_name = ""
+metadata/_custom_type_script = "uid://c2xpl2eysoink"

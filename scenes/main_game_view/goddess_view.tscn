@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqs1r87mv2qfj"]
+
+[ext_resource type="Texture2D" uid="uid://de5n3f8htw4fg" path="res://2d_assets/backgrounds/goddess/Goddess_View.webp" id="1_vl7hu"]
+
+[sub_resource type="Gradient" id="Gradient_isxcp"]
+offsets = PackedFloat32Array(0.1307054)
+colors = PackedColorArray(0.83137256, 0.23137255, 0.22745098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_08sga"]
+gradient = SubResource("Gradient_isxcp")
+width = 4400
+height = 3000
+
+[node name="DialogueView" type="Node3D"]
+
+[node name="DialogueBackground" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
+pixel_size = 0.002
+texture = ExtResource("1_vl7hu")
+
+[node name="DialogueMargins" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1205673e-05, 0.014213324, -4.1992593)
+sorting_offset = -2.0
+pixel_size = 0.002
+render_priority = -1
+texture = SubResource("GradientTexture2D_08sga")
