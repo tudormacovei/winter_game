@@ -163,6 +163,7 @@ func _restore_progress_from_save() -> void:
 	if saved_interaction >= 0:
 		var max_interactions: int = _day_resources[current_day_index].interactions.size() - 1
 		current_interaction_index = clampi(saved_interaction - 1, -1, max(max_interactions, 0)) # Subtract 1 to account for _play_next_interaction() incrementing it
+		_update_time_of_day(true) # Restore time of day to the saved interaction's progress without lerping
 	else:
 		Utils.debug_error("GameManager: Saved interaction index %d is invalid. Resetting to interaction 0." % saved_interaction)
 
@@ -265,14 +266,21 @@ func _try_play_next_interaction():
 
 #region Helper Functions
 
-func _update_time_of_day():
+func _update_time_of_day(force_no_lerp: bool = false):
 	if not time_manager:
 		return
+	
+	var day_def: DayDefinition = _day_resources[current_day_index]
 
-	var total_interactions: int = _day_resources[current_day_index].interactions.size()
+	var start_time: float = day_def.get_start_time()
+
+	var total_interactions: int = day_def.interactions.size()
 	var day_progress: float = float(current_interaction_index) / max(1, total_interactions - 1)
-	var do_lerp: bool = current_interaction_index > 0 # Don't lerp on the first interaction
-	time_manager.set_target_time_of_day(day_progress, do_lerp)
+
+	# TODO: First interaction of a day TOD change pops in. Instead, do it during EOD screen to hide it from the player.
+	var do_lerp: bool = !force_no_lerp and current_interaction_index > 0 # Don't lerp on the first interaction
+
+	time_manager.set_target_time_of_day(day_progress, do_lerp, start_time)
 
 func _add_object_to_workbench(object_scene: PackedScene):
 	var object = workbench.add_object(object_scene)

@@ -17,7 +17,7 @@ func _ready() -> void:
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
 
-func set_target_time_of_day(day_progress: float, do_lerp: bool = true) -> void:
+func set_target_time_of_day(day_progress: float, do_lerp: bool = true, start_time: float = Config.TIME_OF_DAY_START) -> void:
 	const ERROR_MARGIN: float = 0.0001
 
 	if _active_tween:
@@ -25,7 +25,7 @@ func set_target_time_of_day(day_progress: float, do_lerp: bool = true) -> void:
 		_active_tween = null
 
 	# Map day progress to time of day (take into account actual start time of day)
-	var target_time = lerp(Config.TIME_OF_DAY_START, 1.0, day_progress)
+	var target_time = lerp(clampf(start_time, 0.0, 1.0), 1.0, day_progress)
 
 	var delta = abs(target_time - _current_time_of_day)
 	if not do_lerp or delta <= ERROR_MARGIN:
