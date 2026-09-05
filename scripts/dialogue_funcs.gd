@@ -14,6 +14,14 @@ func add_object_to_workbench(object_name: String):
 
 	game_manager.dialogue_add_object_to_workbench(object_name)
 
+## Returns number of objects in the workbench that still need to be cleansed / completed
+func get_object_count() -> int:
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot get object count. Inform Prog team of error!")
+		return -1
+
+	return game_manager.dialogue_get_object_count()
+
 func play_sfx(sfx_name: String, volume_db: float = 0.0):
 	AudioManager.play_sfx(sfx_name, volume_db)
 
