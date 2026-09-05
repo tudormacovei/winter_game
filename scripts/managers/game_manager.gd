@@ -90,6 +90,13 @@ func _ready():
 func dialogue_add_object_to_workbench(object_name: String):
 	_add_object_to_workbench(load(Config.OBJECTS_SCENES_PATH + "/" + object_name + ".tscn"))
 
+func dialogue_get_object_count() -> int:
+	if not workbench:
+		Utils.debug_error("GameManager: Workbench not ready. Cannot count active objects.")
+		return -1
+
+	return workbench.get_object_count()
+
 func dialogue_exit_characters(display_names: Array):
 	if _character_animator == null:
 		Utils.debug_error("GameManager: Character animator not loaded. Aborting character exit for '%s'. This should not happen" % str(display_names))
