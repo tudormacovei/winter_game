@@ -1,8 +1,8 @@
 class_name CameraControl
 extends Camera3D
 
-var DIALOGUE_ROTATION = 0.0
-var WORK_AREA_ROTATION = -80.0
+const DIALOGUE_ROTATION: float = 0.0
+const WORK_AREA_ROTATION: float = -80.0
 
 @export var focused_fov: float = 40.0
 @export var focus_fov_curve: Curve
@@ -21,13 +21,7 @@ var WORK_AREA_ROTATION = -80.0
 @export_group("Dialogue View Transition")
 @export var vertical_zone_fraction: float = 0.10
 @export var vertical_dwell_time: float = 0.5
-@export var vertical_transition_time = 0.6
-
-enum CameraState {
-	STATIONARY,
-	ROTATING,
-	MOVING,
-}
+@export var vertical_transition_time: float = 0.6
 
 enum CameraFocus {
 	DIALOGUE_AREA,
@@ -38,29 +32,24 @@ enum CameraFocus {
 signal camera_focus_changed(current_focus)
 signal camera_rotation_completed(current_focus)
 
-var _camera_state = CameraState.STATIONARY
-var _camera_focus = CameraFocus.DIALOGUE_AREA
-var _rotation_tracker = 0.0 # values from 0 to 1, tracks where we are in the rotation animation
-var _default_fov: float = 0.0
-var _fov_tween: Tween
-var _dolly_tween: Tween
-var _object_focus_entry_position: Vector3 = Vector3.ZERO
-var _object_focus_entry_fov: float = 0.0
+var _camera_focus: CameraFocus = CameraFocus.DIALOGUE_AREA
+var _transition_tween: Tween
+var _zoom_tween: Tween
 var _object_focus_active: bool = false
 var can_enter_dialogue_view: bool = true
 var can_enter_quarantine_view: bool = true
-var _base_x: float = 0.0
+var _starting_position: Vector3 = Vector3.ZERO
+var _starting_fov: float = 0.0
 var _quarantine_dwell_elapsed: float = 0.0 # in seconds
 var _quarantine_exit_elapsed: float = 0.0 # in seconds
-var _quarantine_tween: Tween
 var _vertical_dwell_elapsed: float = 0.0 # in seconds
 var _pending_transition_to_dialogue: bool = false
 var _is_locked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_default_fov = fov
-	_base_x = position.x
+	_starting_position = position
+	_starting_fov = fov
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -70,75 +59,60 @@ func _process(delta: float) -> void:
 		_vertical_dwell_elapsed = 0.0
 		return
 
-	handle_rotation(delta)
 	_handle_quarantine_proximity(delta)
 	_handle_vertical_proximity(delta)
 
-# smoothes out a value between 0 and 1
-# function is symmetrical with respect to (0.5, 0.5)
-func symmetrical_smooth(x: float):
-	return (sin(x * PI - PI / 2) + 1) / 2.0
-
-func handle_rotation(delta: float):
-	if _camera_state != CameraState.ROTATING:
-		return
-	
-	var animation_increment = delta / vertical_transition_time
-	_rotation_tracker += animation_increment
-	var begin_rotation = DIALOGUE_ROTATION if _camera_focus == CameraFocus.WORK_AREA else WORK_AREA_ROTATION
-	var end_rotation = WORK_AREA_ROTATION if _camera_focus == CameraFocus.WORK_AREA else DIALOGUE_ROTATION
-	var new_rotation = lerpf(begin_rotation, end_rotation, symmetrical_smooth(_rotation_tracker))
-	$".".rotation_degrees.x = new_rotation
-	
-	if _rotation_tracker >= 1.0:
-		_camera_state = CameraState.STATIONARY
-		_rotation_tracker = 0.0
-		camera_rotation_completed.emit(_camera_focus)
-
 func set_locked_to_dialogue(is_locked: bool) -> void:
 	_is_locked = is_locked
-	if is_locked:
-		_apply_locked_focus(CameraFocus.DIALOGUE_AREA)
-
-# begins a rotation from the current camera_focus to target_focus (WORK_AREA or DIALOGUE_AREA)
-func _start_rotation_to(target_focus: CameraFocus) -> void:
-	if not can_enter_dialogue_view and target_focus == CameraFocus.DIALOGUE_AREA:
+	if not is_locked:
 		return
-	# interrupting an in-progress rotation toward the opposite target: reverse by complementing the tracker
-	if _camera_state == CameraState.ROTATING:
-		_rotation_tracker = 1.0 - _rotation_tracker
-	_camera_state = CameraState.ROTATING
-	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
+	if _transition_tween:
+		_transition_tween.kill()
+	_pending_transition_to_dialogue = false
+	_camera_focus = CameraFocus.DIALOGUE_AREA
+	rotation_degrees.x = DIALOGUE_ROTATION
+	position.x = _starting_position.x
+
+func _transition_to(target_focus: CameraFocus) -> void:
+	if target_focus == CameraFocus.DIALOGUE_AREA and not can_enter_dialogue_view:
+		return
+	if _transition_tween:
+		_transition_tween.kill()
+
+	var previous_focus := _camera_focus
 	_camera_focus = target_focus
+	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
 	camera_focus_changed.emit(_camera_focus)
+
+	_transition_tween = create_tween()
+	if target_focus == CameraFocus.DIALOGUE_AREA or previous_focus == CameraFocus.DIALOGUE_AREA:
+		var target_rotation := DIALOGUE_ROTATION if target_focus == CameraFocus.DIALOGUE_AREA else WORK_AREA_ROTATION
+		_transition_tween.tween_property(self, "rotation_degrees:x", target_rotation, vertical_transition_time).set_trans(Tween.TRANS_SINE)
+	else:
+		var target_x := _starting_position.x + quarantine_x_offset if target_focus == CameraFocus.QUARANTINE_VIEW else _starting_position.x
+		var tweener := _transition_tween.tween_property(self, "position:x", target_x, quarantine_transition_time)
+		if quarantine_transition_curve:
+			tweener.set_custom_interpolator(quarantine_transition_curve.sample)
+	_transition_tween.finished.connect(_on_transition_finished)
+
+
+func _on_transition_finished() -> void:
+	camera_rotation_completed.emit(_camera_focus)
+	if _pending_transition_to_dialogue:
+		_pending_transition_to_dialogue = false
+		_transition_to(CameraFocus.DIALOGUE_AREA)
 
 
 func _is_camera_animating() -> bool:
-	return _camera_state != CameraState.STATIONARY or _object_focus_active
-
-
-func _apply_locked_focus(focus: CameraFocus) -> void:
-	if _camera_focus == focus:
-		return
-
-	_camera_focus = focus
-	if _camera_focus == CameraFocus.DIALOGUE_AREA:
-		rotation_degrees.x = DIALOGUE_ROTATION
-	elif _camera_focus == CameraFocus.WORK_AREA:
-		rotation_degrees.x = WORK_AREA_ROTATION
-	elif _camera_focus == CameraFocus.QUARANTINE_VIEW:
-		rotation_degrees.x = WORK_AREA_ROTATION
-		position.x = _base_x + quarantine_x_offset
-
-	_camera_state = CameraState.STATIONARY
+	return (_transition_tween != null and _transition_tween.is_running()) or _object_focus_active
 
 
 func is_at_rest_in_workbench_view() -> bool:
-	return _camera_state == CameraState.STATIONARY and _camera_focus == CameraFocus.WORK_AREA and not _object_focus_active
+	return not _is_camera_animating() and _camera_focus == CameraFocus.WORK_AREA
 
 
 func is_at_rest_at_table() -> bool:
-	return _camera_state == CameraState.STATIONARY and (_camera_focus == CameraFocus.WORK_AREA or _camera_focus == CameraFocus.QUARANTINE_VIEW) and not _object_focus_active
+	return not _is_camera_animating() and (_camera_focus == CameraFocus.WORK_AREA or _camera_focus == CameraFocus.QUARANTINE_VIEW)
 
 
 func _handle_quarantine_proximity(delta: float) -> void:
@@ -155,7 +129,7 @@ func _handle_quarantine_proximity(delta: float) -> void:
 			_quarantine_dwell_elapsed += delta
 			if _quarantine_dwell_elapsed >= quarantine_dwell_time:
 				_quarantine_dwell_elapsed = 0.0
-				_enter_quarantine()
+				_transition_to(CameraFocus.QUARANTINE_VIEW)
 		else:
 			_quarantine_dwell_elapsed = 0.0
 	elif _camera_focus == CameraFocus.QUARANTINE_VIEW:
@@ -167,7 +141,7 @@ func _handle_quarantine_proximity(delta: float) -> void:
 			_quarantine_exit_elapsed += delta
 			if _quarantine_exit_elapsed >= quarantine_exit_grace:
 				_quarantine_exit_elapsed = 0.0
-				_exit_quarantine()
+				_transition_to(CameraFocus.WORK_AREA)
 		else:
 			_quarantine_exit_elapsed = 0.0
 
@@ -188,7 +162,7 @@ func _handle_vertical_proximity(delta: float) -> void:
 				_vertical_dwell_elapsed += delta
 				if _vertical_dwell_elapsed >= vertical_dwell_time:
 					_vertical_dwell_elapsed = 0.0
-					_start_rotation_to(CameraFocus.WORK_AREA)
+					_transition_to(CameraFocus.WORK_AREA)
 			else:
 				_vertical_dwell_elapsed = 0.0
 		CameraFocus.WORK_AREA:
@@ -196,7 +170,7 @@ func _handle_vertical_proximity(delta: float) -> void:
 				_vertical_dwell_elapsed += delta
 				if _vertical_dwell_elapsed >= vertical_dwell_time:
 					_vertical_dwell_elapsed = 0.0
-					_start_rotation_to(CameraFocus.DIALOGUE_AREA)
+					_transition_to(CameraFocus.DIALOGUE_AREA)
 			else:
 				_vertical_dwell_elapsed = 0.0
 		CameraFocus.QUARANTINE_VIEW:
@@ -207,124 +181,36 @@ func _handle_vertical_proximity(delta: float) -> void:
 				_vertical_dwell_elapsed += delta
 				if _vertical_dwell_elapsed >= vertical_dwell_time:
 					_vertical_dwell_elapsed = 0.0
-					# position and rotation must never animate simultaneously, so chain transitions
-					_enter_dialogue_from_quarantine_chained()
+					_pending_transition_to_dialogue = true
+					_transition_to(CameraFocus.WORK_AREA)
 			else:
 				_vertical_dwell_elapsed = 0.0
 
 
-func _enter_dialogue_from_quarantine_chained() -> void:
-	_pending_transition_to_dialogue = true
-	_exit_quarantine()
-
-
-func _enter_quarantine() -> void:
-	var start_x := position.x
-	var target_x := _base_x + quarantine_x_offset
-	if _quarantine_tween and _quarantine_tween.is_valid():
-		_quarantine_tween.kill()
-	_camera_state = CameraState.MOVING
-	_camera_focus = CameraFocus.QUARANTINE_VIEW
-	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
-	camera_focus_changed.emit(_camera_focus)
-	var sample := func(t: float) -> float: return quarantine_transition_curve.sample(t) if quarantine_transition_curve else t
-	_quarantine_tween = create_tween()
-	_quarantine_tween.tween_method(
-		func(t: float) -> void: position.x = lerpf(start_x, target_x, sample.call(t)),
-		0.0, 1.0, quarantine_transition_time
-	)
-	_quarantine_tween.tween_callback(_on_enter_quarantine_finished)
-
-
-func _on_enter_quarantine_finished() -> void:
-	_camera_state = CameraState.STATIONARY
-	camera_rotation_completed.emit(_camera_focus)
-
-
-func _exit_quarantine() -> void:
-	var start_x := position.x
-	var target_x := _base_x
-	if _quarantine_tween and _quarantine_tween.is_valid():
-		_quarantine_tween.kill()
-	_camera_state = CameraState.MOVING
-	_camera_focus = CameraFocus.WORK_AREA
-	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME, Config.CAMERA_SWOOSH_VOLUME_DB)
-	camera_focus_changed.emit(_camera_focus)
-	var sample := func(t: float) -> float: return quarantine_transition_curve.sample(t) if quarantine_transition_curve else t
-	_quarantine_tween = create_tween()
-	_quarantine_tween.tween_method(
-		func(t: float) -> void: position.x = lerpf(start_x, target_x, sample.call(t)),
-		0.0, 1.0, quarantine_transition_time
-	)
-	_quarantine_tween.tween_callback(_on_exit_quarantine_finished)
-
-
-func _on_exit_quarantine_finished() -> void:
-	_camera_state = CameraState.STATIONARY
-	camera_rotation_completed.emit(_camera_focus)
-
-	# Check if we have to complete the chain of transitions back to dialogue
-	if _pending_transition_to_dialogue:
-		_pending_transition_to_dialogue = false
-		_start_rotation_to(CameraFocus.DIALOGUE_AREA)
-
-
-func tween_fov(target_fov: float, duration: float) -> void:
-	var start_fov := fov
-	var start_pos := position
-	var fov_delta := target_fov - start_fov
-	var target_pos := start_pos + (-basis.z * fov_delta * dolly_zoom_sensitivity)
-	_tween_fov_and_position(target_fov, target_pos, duration)
-
-
 func begin_object_focus(zoom_percent: float, duration: float) -> void:
-	# Save so we can restore on exit w/o drift
-	_object_focus_entry_position = position
-	_object_focus_entry_fov = fov
 	_object_focus_active = true
-
-	var baseline_fov := focused_fov
-	var fov_delta := baseline_fov - _object_focus_entry_fov
+	var target_position := _starting_position + Vector3(quarantine_x_offset if _camera_focus == CameraFocus.QUARANTINE_VIEW else 0.0, 0.0, 0.0)
 	var camera_forward := -basis.z
-	var default_dolly_distance: float = fov_delta * dolly_zoom_sensitivity
-	
+	var default_dolly_distance: float = (focused_fov - _starting_fov) * dolly_zoom_sensitivity
 	# add per-object custom zoom value
 	var extra_zoom: float = max(default_dolly_distance, 0.0) * zoom_percent / 100.0
-	var baseline_position := _object_focus_entry_position + camera_forward * default_dolly_distance
-
-	_tween_fov_and_position(baseline_fov, baseline_position + camera_forward * extra_zoom, duration)
+	_tween_fov_and_position(focused_fov, target_position + camera_forward * (default_dolly_distance + extra_zoom), duration)
 
 
 func end_object_focus(duration: float) -> void:
 	if not _object_focus_active:
 		return
-	_tween_fov_and_position(_object_focus_entry_fov, _object_focus_entry_position, duration, _finish_object_focus)
+	var target_position := _starting_position + Vector3(quarantine_x_offset if _camera_focus == CameraFocus.QUARANTINE_VIEW else 0.0, 0.0, 0.0)
+	_tween_fov_and_position(_starting_fov, target_position, duration)
+	_zoom_tween.finished.connect(func() -> void: _object_focus_active = false)
 
 
-func _finish_object_focus() -> void:
-	position = _object_focus_entry_position
-	fov = _object_focus_entry_fov
-	_object_focus_active = false
-
-
-func _tween_fov_and_position(target_fov: float, target_position: Vector3, duration: float, on_finished: Callable = Callable()) -> void:
-	if _fov_tween and _fov_tween.is_valid():
-		_fov_tween.kill()
-	if _dolly_tween and _dolly_tween.is_valid():
-		_dolly_tween.kill()
-	# Use absolute targets so interrupted transitions still converge without accumulating offset.
-	var start_fov := fov
-	var start_pos := position
-	var curve_sample := func(t: float) -> float: return focus_fov_curve.sample(t) if focus_fov_curve else t
-	_fov_tween = create_tween()
-	_fov_tween.tween_method(
-		func(t: float) -> void: fov = lerpf(start_fov, target_fov, curve_sample.call(t)),
-		0.0, 1.0, duration
-	)
-	_dolly_tween = create_tween()
-	_dolly_tween.tween_method(
-		func(t: float) -> void: position = start_pos.lerp(target_position, curve_sample.call(t)),
-		0.0, 1.0, duration
-	)
-	if on_finished.is_valid():
-		_dolly_tween.finished.connect(on_finished, CONNECT_ONE_SHOT)
+func _tween_fov_and_position(target_fov: float, target_position: Vector3, duration: float) -> void:
+	if _zoom_tween:
+		_zoom_tween.kill()
+	_zoom_tween = create_tween().set_parallel(true)
+	var fov_tweener := _zoom_tween.tween_property(self, "fov", target_fov, duration)
+	var position_tweener := _zoom_tween.tween_property(self, "position", target_position, duration)
+	if focus_fov_curve:
+		fov_tweener.set_custom_interpolator(focus_fov_curve.sample)
+		position_tweener.set_custom_interpolator(focus_fov_curve.sample)
