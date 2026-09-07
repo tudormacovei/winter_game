@@ -87,10 +87,10 @@ surface_material_override/0 = ExtResource("4_x3nip")
 surface_material_override/1 = ExtResource("5_fx3wn")
 
 [node name="StickerPeelDirectional" parent="." instance=ExtResource("5_vgrbn")]
-transform = Transform3D(0.46910822, 2.2710472e-08, 0.5195551, 0.5195551, -2.0505372e-08, -0.46910822, 0, 0.7, -3.059797e-08, 0.14325827, -0.0075838193, 0.070588306)
+transform = Transform3D(0.46910822, 2.2710472e-08, 0.5195551, 0.5195551, -2.0505372e-08, -0.46910822, 0, 0.7, -3.059797e-08, 0.14325827, -0.0075838193, 0.06987004)
 
 [node name="StickerPeelDirectional2" parent="." instance=ExtResource("5_vgrbn")]
-transform = Transform3D(-0.39998585, 0, 0.0033649653, 0, 0.4, 0, -0.0033649653, 0, -0.39998585, -0.105672985, 0.16832577, 0.032217205)
+transform = Transform3D(-0.39998585, 0, 0.0033649653, 0, 0.4, 0, -0.0033649653, 0, -0.39998585, -0.105672985, 0.15886302, 0.032217205)
 
 [node name="StickerPeelDirectional3" parent="." instance=ExtResource("5_vgrbn")]
-transform = Transform3D(-0.39998585, 0, 0.0033649653, 0.0033649653, -1.7484556e-08, 0.39998585, 1.470873e-10, 0.4, 1.7483936e-08, -0.1778508, -0.038525414, -0.07257107)
+transform = Transform3D(0.39998588, 3.4967872e-08, 0.003364965, -0.0033649656, 1.719038e-08, 0.39998582, 3.4822023e-08, -0.4, 1.7483933e-08, -0.1778508, -0.038525414, -0.069458604)
