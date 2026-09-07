@@ -302,10 +302,6 @@ func _cancel_mouse_input() -> void:
 
 
 func _return_object_in_bounds() -> void:
-	if _is_pending_completion:
-		_is_pending_completion = false
-		object_pending_completion_changed.emit(false)
-
 	# Each iteration shoves the candidate out of whichever offending box requires the smallest displacement.
 	# One iteration is enough in the common case, the loop only matters when out of bounds boxes overlap (bound corners)
 	var candidate := self.global_position
@@ -511,14 +507,19 @@ func _on_object_mouse_exited() -> void:
 func _on_object_area_entered(area: Area3D) -> void:
 	# wait for player to place the object on the table before completing it
 	if area == _object_completed_area:
-		_is_pending_completion = true
-		object_pending_completion_changed.emit(true)
+		_set_pending_completion(true)
 
 
 func _on_object_area_exited(area: Area3D) -> void:
 	if area == _object_completed_area and not is_queued_for_deletion():
-		_is_pending_completion = false
-		object_pending_completion_changed.emit(false)
+		_set_pending_completion(false)
+
+
+func _set_pending_completion(is_pending: bool) -> void:
+	if _is_pending_completion == is_pending:
+		return
+	_is_pending_completion = is_pending
+	object_pending_completion_changed.emit(is_pending)
 
 
 func _on_stickers_placed() -> void:
@@ -819,6 +820,7 @@ func _return_to(target_global_position: Vector3) -> void:
 
 
 func _on_return_finished() -> void:
+	_set_pending_completion(_object.overlaps_area(_object_completed_area))
 	_set_state(State.ON_TABLE)
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it
