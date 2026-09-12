@@ -6,7 +6,7 @@
 #you can barely see part of Micah through the window for a second, and then you can hear the door open but you can't see anyone; after a few seconds, you can see his head pop up from under the table; he sneaked up on you.
 #sound effect needed
 ...[do DialogueFuncs.play_sfx("sfx_door_open", -20)][wait=3]
-Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare", -12.0)]Raagh!
+Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 - You scared the shit out of me. 
 	Micah: [#sprite=happy]Hahaha! Got you. 
 	- Don't ever do that again.

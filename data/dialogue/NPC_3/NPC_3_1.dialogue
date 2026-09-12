@@ -47,7 +47,7 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 						Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- At the risk of being untoward, how are you feeling, otherwise? => branch_next
 			- Goodbye, Mary. 
 				Mary: Farewell, Keeper. 
@@ -58,10 +58,10 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- I was just trying to be nice, Mary.
 		Mary: I'd say I appreciate it, but like I said, time is short. May I have my watch back?
 		- No, you may not. It's not done yet. => branch_no
@@ -96,7 +96,7 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 							[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 						- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 							Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-							[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+							[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- So, at the risk of being untoward, how are you feeling, Mary? => branch_next
 				- Goodbye, Mary.
 					Mary: Farewell, Keeper. 
@@ -107,10 +107,10 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 			- Changed my mind, actually. You can't have the watch. 
 				Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 				- May the Goddess have mercy on your soul. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 					Mary: ...
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- Why do you want it? => branch_why
 	- Jeez, I'm definitely not going to miss you. 
 		Mary: Can't say I much care about that anymore. Give me the watch. 
@@ -127,10 +127,10 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 			- Changed my mind, actually. You can't have the watch. 
 				Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 				- May the Goddess have mercy on your soul. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 					Mary: ...
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- No. I haven't cleansed it yet. 
 			Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -142,10 +142,10 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 		- Don't much care for your tone, myself. 
 			Mary: I don't have time for this. Shame on you. Keep the watch. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - (LIE) I cleansed it already.  => branch_lie_1
 - (LIE) I can't seem to find it. Must have misplaced it. 
 	Mary: ... [do Variables.set_char_var("NPC_3", "lied", true)]
@@ -180,17 +180,17 @@ Mary: [do DialogueFuncs.play_sfx("sfx_door_open")][do DialogueFuncs.play_sfx("sf
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- It will. Goodbye, Mary. 
 			Mary: Farewell, Keeper. [do Variables.set_char_var("NPC_3", "watch_state", 4)] 
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- You know I can't do that.  => branch_no_lie
 	- I can't promise anything.  
 		Mary: Just... think about it, will you? For me. 
@@ -234,7 +234,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Good enough, indeed. How are you feeling otherwise, Mary? => branch_next 
 	- It will. Goodbye, Mary.
 		Mary: Farewell, Keeper. 
@@ -242,10 +242,10 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 	- Changed my mind, actually. You can't have the watch. 
 		Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- May the Goddess have mercy on your soul. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 			Mary: ...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I'll just tell them it's cleansed. That way, you'll be able to have it with you at the ceremony as well. 
 	Mary: I can't have you risk your neck for me, Keeper. They'll know. They always do...
 	- Don't worry about it, Mary. I'll handle it. I have to give it to them myself, so it has to stay here with me until tonight. But I'll give it to them untouched. You have my word. 
@@ -341,17 +341,17 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- It will. Goodbye, Mary. [do Variables.set_char_var("NPC_3", "watch_state", 4)]
 			Mary: Farewell, Keeper. 
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- You know I can't do that.  => branch_no_lie
 	- I can't promise anything.  
 		Mary: Just... think about it, will you? For me.
@@ -393,7 +393,7 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Good enough, indeed. How are you feeling otherwise? => branch_next 
 	- It will. Goodbye, Mary. 
 		Mary: Farewell, Keeper. 
@@ -401,10 +401,10 @@ Mary: I did some thinking. I'd rather Henry's watch stayed as it is, even if tha
 	- Changed my mind, actually. You can't have the watch. 
 		Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- May the Goddess have mercy on your soul. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 			Mary: ...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I'll just tell them it's cleansed. That way, you'll be able to have it at the ceremony. 
 	Mary: I can't have you risk your neck for me, Keeper. They'll know. They always do...
 	- Don't worry, Mary. I'll handle it. I have to give it to them myself, once I find it, so it has to stay here with me. But I'll give it to them untouched. You have my word.
@@ -504,7 +504,7 @@ Mary: Consider it my final wish.
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END 
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END 
 		- How are you feeling, otherwise? => branch_next 
 		- Goodbye then, Mary.
 			Mary: Farewell, Keeper. 
@@ -512,10 +512,10 @@ Mary: Consider it my final wish.
 	- Changed my mind, actually. You can't have the watch. 
 		Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- May the Goddess have mercy on your soul. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 			Mary: ...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I said no, Mary. I have to rid it of its evil. 
 	Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 	- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -523,7 +523,7 @@ Mary: Consider it my final wish.
 		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 		Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-		[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+		[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - Why does it matter so much to not have it cleansed?
 	Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 	Mary: *Her FACE turns REFLECTIVE
@@ -560,7 +560,7 @@ Mary: Consider it my final wish.
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- The watch stays with me until it's cleansed. 
 			Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -568,19 +568,19 @@ Mary: Consider it my final wish.
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- Why the secrecy? 
 			Mary: I asked you a simple thing, Keeper. As a friend. You then ask me all these questions... [do Variables.set_char_var("NPC_3", "relationship", 2)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			Mary: You don't know death like I do. It's been living in my home for months, gnawing at what's left of my soul. 
 			Mary: And tonight, I'm finally meeting it head on. I just wanted it to be on my own terms. 
 			Mary: No matter. Keep the watch. Do what you will. Farewell. 
 			- Mary, wait... 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- The answer is still no, Mary. 
 		Mary: Guess you're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -588,7 +588,7 @@ Mary: Consider it my final wish.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 			Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Okay. Consider it a favour, given the circumstances.  I assume you brought a replacement for the ceremony? 
 		Mary: Here's an old rag of mine. Should suffice. Do what you will with it. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)]
 		- Yeah, that should work. Here's your watch.
@@ -615,7 +615,7 @@ Mary: Consider it my final wish.
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 						Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- How are you feeling otherwise, Mary? => branch_next 
 			- Goodbye, Mary. 
 				Mary: Farewell, Keeper. 
@@ -623,10 +623,10 @@ Mary: Consider it my final wish.
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 
 ~ branch_no_lie
 Mary: Please, Keeper. It's the last thing I have of his. I don't want it tinkered with in any way. 
@@ -662,7 +662,7 @@ Mary: Consider it my final wish.
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 					- How are you feeling, otherwise? => branch_next 
 					- Goodbye then, Mary.
 						Mary: Farewell. 
@@ -674,10 +674,10 @@ Mary: Consider it my final wish.
 	- Changed my mind, actually. You can't have the watch. 
 		Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- May the Goddess have mercy on your soul. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 			Mary: ...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I said no, Mary. I have to rid it of its evil once I find it. 
 	Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 	- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -685,7 +685,7 @@ Mary: Consider it my final wish.
 		[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 	- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 		Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-		[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+		[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - Why does it matter so much to not have it cleansed?
 	Mary: I despise the practice, Keeper. It dawned on me just now, as my time on this Earth nears its end. 
 	Mary: *Her FACE turns REFLECTIVE 
@@ -722,7 +722,7 @@ Mary: Consider it my final wish.
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye.
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- The watch stays with me until it's cleansed. 
 			Mary: You're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -730,19 +730,19 @@ Mary: Consider it my final wish.
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- Why the secrecy? 
 			Mary: I asked you a simple thing, Keeper. As a friend. You then ask me all these questions... [do Variables.set_char_var("NPC_3", "relationship", 2)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			Mary: You don't know death like I do. It's been living in my home for months, gnawing at what's left of my soul. 
 			Mary: And tonight, I'm finally meeting it head on. I just wanted it to be on my own terms. 
 			Mary: No matter. Keep the watch. Do what you will. Farewell. 
 			- Mary, wait... 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- I'm sorry, Mary. May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)]
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- The answer is still no, Mary. 
 		Mary: Guess you're just as brainwashed as the rest of them, aren't you? No matter. I've made my peace with the fact. Keep it. [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- I'm sorry, Mary. May the Goddess have mercy on your soul. 
@@ -750,7 +750,7 @@ Mary: Consider it my final wish.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 			Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Okay. Consider it a favour, given the circumstances. I assume you brought a replacement for the ceremony? 
 		Mary: Here's an old rag of mine. Should suffice. Do what you will with it. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 5)]
 		- Yeah, that should work. I'll have Micah bring the watch over, once I find it.
@@ -778,7 +778,7 @@ Mary: Consider it my final wish.
 						[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 						Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Goodbye. [do Variables.set_char_var("NPC_3", "relationship", 1)]
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- How are you feeling otherwise? => branch_next 
 			- Goodbye then, Mary.
 				Mary: Farewell, Keeper. 
@@ -786,10 +786,10 @@ Mary: Consider it my final wish.
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		
 		
 ~ branch_lie_1
@@ -813,10 +813,10 @@ Mary: Might as well go ahead and use it for the ceremony now.
 				Mary: I don't have time for these games. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)]
 				Mary: Farewell. 
 				- May the Goddess have mercy on your soul. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 					Mary: ...
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- May the Goddess have mercy on your soul.
 				Mary: Don't much care whether she does or not. Farewell, Keeper. 
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
@@ -833,10 +833,10 @@ Mary: Might as well go ahead and use it for the ceremony now.
 	- Changed my mind, actually. You can't have the watch. 
 		Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 		- May the Goddess have mercy on your soul. 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 			Mary: ...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I can't do that. I have to give the ceremonial item directly to the Elders. 
 	Mary: I know the rules, Keeper. I'm asking you to make an exception.
 	- Like I said. Can't do it. No exceptions when it comes to the ceremonies. 
@@ -847,7 +847,7 @@ Mary: Might as well go ahead and use it for the ceremony now.
 			[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 			Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Fine. Given the circumstances. I'll give it to you. But you need to bring me a replacement for the ceremony. 
 		Mary: I brought an old rag of mine. Should suffice. Do what you will with it. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 4)]
 		- Yeah, that should work. Here's the watch.
@@ -865,10 +865,10 @@ Mary: Might as well go ahead and use it for the ceremony now.
 					Mary: I don't have time for these games. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)]
 					Mary: Farewell. 
 					- May the Goddess have mercy on your soul. 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 						Mary: ...
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- May the Goddess have mercy on your soul.
 					Mary: Don't much care whether she does or not. Farewell, Keeper. 
 					[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
@@ -885,10 +885,10 @@ Mary: Might as well go ahead and use it for the ceremony now.
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I didn't get around to it yet, actually. Don't know why I lied. 
 	Mary: ... [do Variables.set_char_var("NPC_3", "thinks_watch_is_fixed", false)]
 	Mary: Okay then. Give it to me.
@@ -896,12 +896,12 @@ Mary: Might as well go ahead and use it for the ceremony now.
 		Mary: I don't have time for this. I don't know if you're making fun of me or if you're just incompetent. [do Variables.set_char_var("NPC_3", "watch_state", 1)] [do Variables.set_char_var("NPC_3", "relationship", 1)]
 		Mary: Eiter way, shame on you. Keep the watch. Farewell. 
 		- Mary, wait...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- I'm sorry, Mary. May the Goddess have mercy on your soul. [do Variables.set_char_var("NPC_3", "relationship", 2)]
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 			Mary: ...
-			[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+			[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Can't do that. Gotta cleanse it first. 
 		Mary: I know the rules, Keeper. I'm asking you to make an exception.
 		- Like I said. Can't do it. No exceptions when it comes to the ceremonies. 
@@ -912,7 +912,7 @@ Mary: Might as well go ahead and use it for the ceremony now.
 				[do DialogueFuncs.play_sfx("sfx_door_close")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 				Mary: Your lack of humanity makes the thought of leaving this Earth a bit easier to bear. You'll get your due. Farewell. [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- Fine. I'll give it to you. Given the circumstances. But you need to bring me a replacement for the ceremony. 
 			Mary: Here's an old rag of mine. Should suffice. Do what you will with it. [do Variables.set_char_var("NPC_3", "watch_state", 2)] [do Variables.set_char_var("NPC_3", "relationship", 3)]
 			- Yeah, that should work. Here's the watch. 
@@ -920,29 +920,29 @@ Mary: Might as well go ahead and use it for the ceremony now.
 				- May I ask why you don't want the watch cleansed? 
 					Mary: I hate being lied to, Keeper. Especially today. So no, you may not. Farewell. 
 					- Mary, wait...
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 					- I'm sorry, Mary. May the Goddess have mercy on your soul. 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 						Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- How are you feeling otherwise, Mary?
 					Mary: I hate being lied to, Keeper. Not sure I want to spend my last few hours talking to you after that whole farce. Farewell. 
 					- Mary, wait...
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 					- I'm sorry, Mary. May the Goddess have mercy on your soul. 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 					- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 						Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-						[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+						[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- Changed my mind, actually. You can't have the watch. 
 				Mary: ...
 				Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 				- May the Goddess have mercy on your soul. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 					Mary: ...
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	- Alright. I assume you brought a replacement for the ceremony, then. 
 		Mary: Here's an old rag of mine. Should suffice. Do what you will with it. [do Variables.set_char_var("NPC_3", "relationship", 3)] [do Variables.set_char_var("NPC_3", "watch_state", 2)]
 		- Yeah, that should work. Here's your watch. 
@@ -950,28 +950,28 @@ Mary: Might as well go ahead and use it for the ceremony now.
 			- May I ask why you don't want the watch cleansed? 
 				Mary: I hate being lied to, Keeper. Especially so today. No, you may not. Farewell. 
 				- Mary, wait...
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- I'm sorry, Mary. May the Goddess have mercy on your soul. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- How are you feeling otherwise, Mary?
 				Mary: I hate being lied to, Keeper. Not sure I want to spend my last few hours talking to you after that whole farce. Farewell. 
 				- Mary, wait...
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- I'm sorry, Mary. May the Goddess have mercy on your soul. 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 				- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 					Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)] 
-					[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+					[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		- Changed my mind, actually. You can't have the watch. 
 			Mary: I don't have time for this. Shame on you. [do Variables.set_char_var("NPC_3", "relationship", 1)] [do Variables.set_char_var("NPC_3", "watch_state", 1)]
 			- May the Goddess have mercy on your soul. 
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 			- You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul.
 				Mary: ...
-				[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+				[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 		
 ~ branch_next
 Mary: To be completely honest, I thought I'd be more at peace. 
@@ -1392,12 +1392,12 @@ Mary: I'll be going now, Keeper. I want to be by myself.
 ~ branch_bad
 Mary: Just keep the watch, Keeper. I want to be by myself for however long I have left. Farewell. [do Variables.set_char_var("NPC_3", "watch_state", 1)] [do Variables.set_char_var("NPC_3", "relationship", 2)]
 - Goodbye, Mary. 
-	[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+	[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - I'm sorry, Mary. May the Goddess have mercy on your soul.
-	[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+	[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - You're a blasphemer. May the Goddess's wrath reshape and cleanse your body as it was unable to cleanse your soul. 
 	Mary: ... [do Variables.set_char_var("NPC_3", "relationship", 1)]
-	[do DialogueFuncs.play_sfx("sfx_door_slam", -6)]... => END
+	[do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 	
 ~ branch_no_henry
 if Variables.get_char_var("NPC_3", "relationship") == 6

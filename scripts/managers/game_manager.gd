@@ -363,7 +363,7 @@ func _on_player_died():
 	await ui_manager.show_death_screen()
 
 	AudioManager.stop_ambient()
-	AudioManager.play_sfx(Config.PLAYER_DEATH_SFX_NAME, Config.PLAYER_DEATH_SFX_VOLUME_DB)
+	AudioManager.play_sfx(Config.PLAYER_DEATH_SFX_NAME)
 
 	get_tree().paused = true
 

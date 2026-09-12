@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="SfxConfig" load_steps=2 format=3 uid="uid://db3ll6dr02nkl"]
+
+[ext_resource type="Script" uid="uid://m7iwtk0hww6q" path="res://scripts/systems/audio/sfx_config.gd" id="1_sfxcfg"]
+
+[resource]
+script = ExtResource("1_sfxcfg")
+volumes_db = Dictionary[String, float]({
+"sfx_begin_peel": -10.0,
+"sfx_camera_swoosh": -20.0,
+"sfx_candle_blow": 5.0,
+"sfx_clock_ticking": -15.0,
+"sfx_crow": 0.0,
+"sfx_death": -10.0,
+"sfx_dialogue_letter": -16.0,
+"sfx_door_close": 0.0,
+"sfx_door_open": 0.0,
+"sfx_door_slam": -6.0,
+"sfx_end_peel": -10.0,
+"sfx_exile": 0.0,
+"sfx_footsteps": 0.0,
+"sfx_giggle": 0.0,
+"sfx_item_drop": 0.0,
+"sfx_jumpscare": -12.0,
+"sfx_object_completed": -10.0,
+"sfx_player_death": -15.0,
+"sfx_rag": 0.0,
+"sfx_sarah_cry_1": 0.0,
+"sfx_sarah_cry_2": 0.0,
+"sfx_shh": 0.0,
+"sfx_sniff": 0.0,
+"sfx_stairs": 0.0,
+"sfx_watch_tick": 0.0,
+"sfx_woman_scream": 0.0
+})

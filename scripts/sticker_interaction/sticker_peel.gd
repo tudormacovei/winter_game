@@ -113,7 +113,7 @@ func handle_mouse_input(event: InputEvent) -> bool:
 		if _rollback_tween and _rollback_tween.is_running():
 			_rollback_tween.kill()
 		is_peeling = true
-		AudioManager.play_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME, Config.STICKER_BEGIN_PEEL_SFX_VOLUME_DB)
+		AudioManager.play_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)
 		mouse_start = get_viewport().get_mouse_position()
 		mouse_current = mouse_start
 		return true
@@ -122,7 +122,7 @@ func handle_mouse_input(event: InputEvent) -> bool:
 		var fraction := _complete_fraction()
 		is_peeling = false
 		if _passes_completion_check(fraction):
-			AudioManager.play_sfx(Config.STICKER_END_PEEL_SFX_NAME, Config.STICKER_END_PEEL_SFX_VOLUME_DB)
+			AudioManager.play_sfx(Config.STICKER_END_PEEL_SFX_NAME)
 			_start_completion()
 		else:
 			_start_rollback()

@@ -14,8 +14,13 @@ func add_object_to_workbench(object_name: String):
 
 	game_manager.dialogue_add_object_to_workbench(object_name)
 
-func play_sfx(sfx_name: String, volume_db: float = 0.0):
-	AudioManager.play_sfx(sfx_name, volume_db)
+## Plays an SFX by name. [param volume_offset_db] nudges this one playback
+## louder/quieter than the sound's configured base volume.
+## Use this sparingly - for a rare, one-off dramatic beat only. If a sound
+## should sound different every time it plays, change its volume in
+## res://data/audio/sfx_config.tres instead, so all SFX stay consistent.
+func play_sfx(sfx_name: String, volume_offset_db: float = 0.0):
+	AudioManager.play_sfx(sfx_name, volume_offset_db)
 
 ## Makes characters present in the scene leave the scene simultaneously
 ## Call the function like this: [do! DialogueFuncs.exit_characters(["Micah", "Sarah"])]

@@ -7,6 +7,7 @@ const OBJECTS_SCENES_PATH: String = "res://scenes/object_manipulation/objects"
 
 const AMBIENT_AUDIO_STREAMS_PATH: String = "res://audio_assets/ambient"
 const SFX_AUDIO_STREAMS_PATH: String = "res://audio_assets/sfx"
+const SFX_CONFIG_PATH: String = "res://data/audio/sfx_config.tres" # SfxConfig resource, editable in the Inspector - holds every SFX's base volume
 const AUDIO_BUS_AMBIENT := "Ambient"
 const AUDIO_BUS_SFX := "SFX"
 
@@ -35,30 +36,25 @@ const TIME_OF_DAY_BASE_LERP_SECONDS: float = 6.0 # Baseline duration to transiti
 # NOTE: Ambient music is handled in the interaction config .tres files instead of here
 
 const LETTER_SPOKE_SFX_NAME: String = "sfx_dialogue_letter"
-const LETTER_SPOKE_SFX_VOLUME_DB: float = -16.0
 const LETTER_SPOKE_MAX_PITCH_SCALE: float = 1.3
 const LETTER_SPOKE_MIN_PITCH_SCALE: float = 0.7
 const LETTER_SPOKE_FREQUENCY: int = 8 # Play a sound every X letters
 
 const CAMERA_SWOOSH_SFX_NAME: String = "sfx_camera_swoosh"
-const CAMERA_SWOOSH_VOLUME_DB: float = -20.0
 
 const CANDLE_BLOW_SFX_NAME: String = "sfx_candle_blow"
-const CANDLE_BLOW_SFX_VOLUME_DB: float = 5.0
 
 const OBJECT_COMPLETED_SFX_NAME: String = "sfx_object_completed"
-const OBJECT_COMPLETED_SFX_VOLUME_DB: float = -10.0
 
 const END_DAY_SFX_NAME: String = "sfx_clock_ticking"
-const END_DAY_SFX_VOLUME_DB: float = -15.0
 
 const STICKER_BEGIN_PEEL_SFX_NAME: String = "sfx_begin_peel"
-const STICKER_BEGIN_PEEL_SFX_VOLUME_DB: float = -10.0
 const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
-const STICKER_END_PEEL_SFX_VOLUME_DB: float = -10.0
 
 const PLAYER_DEATH_SFX_NAME: String = "sfx_player_death"
-const PLAYER_DEATH_SFX_VOLUME_DB: float = -15.0
+
+
+## add const for door slam
 
 #endregion
 
