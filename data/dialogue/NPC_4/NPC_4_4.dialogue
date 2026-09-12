@@ -196,7 +196,10 @@ Mary: Wasn't expecting to see a new face here.
 			- Goodbye. => END1 
 
 ~ END1
-Mary: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+if DialogueFuncs.get_object_count() == 0:
+	Mary: You sure are quick with those objects... [do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+else:
+	Mary: Good luck with your cleansing... [do DialogueFuncs.play_sfx("sfx_door_close")] => END
 
 => END
 

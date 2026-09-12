@@ -47,7 +47,6 @@ enum CurrentlyGrabbed {
 	NONE, # the grab action is not held
 	STICKER, # a sticker accepted the grab and receives all mouse events until release
 	OBJECT, # the grab landed on the object. Rotation starts after the drag threshold
-	MISS, # the grab missed the object. A release that also misses defocuses
 }
 
 var _object: ObjectWithStickers = null
@@ -91,6 +90,7 @@ var _rotation_sensitivity: float = 0.0 # radians per pixel, set in _ready
 var _soft_select_target := SoftSelectTarget.NONE # result of the last soft select
 var _selected_sticker: Sticker = null # the sticker a grab would land on, refreshed every physics tick. While a sticker is grabbed this is frozen and is the grabbed sticker!
 var _currently_grabbed := CurrentlyGrabbed.NONE # what type of object is currently grabbed? Dictates how we process input
+var _grab_started_on_object := false # used to tell if a click should be used for defocusing an object or not
 var _soft_select_debug_markers: SoftSelectRayDebugMarkers = null
 var _snap_tween: Tween
 var _focus_position_tween: Tween
@@ -143,6 +143,7 @@ func _physics_process(_delta: float) -> void:
 		_cancel_mouse_input()
 		_clear_soft_select()
 		_currently_grabbed = CurrentlyGrabbed.NONE
+		_grab_started_on_object = false
 		return
 	if _state != State.FOCUSED and _state != State.ROTATING:
 		_clear_soft_select()
@@ -301,10 +302,6 @@ func _cancel_mouse_input() -> void:
 
 
 func _return_object_in_bounds() -> void:
-	if _is_pending_completion:
-		_is_pending_completion = false
-		object_pending_completion_changed.emit(false)
-
 	# Each iteration shoves the candidate out of whichever offending box requires the smallest displacement.
 	# One iteration is enough in the common case, the loop only matters when out of bounds boxes overlap (bound corners)
 	var candidate := self.global_position
@@ -402,6 +399,7 @@ func _input(event: InputEvent) -> void:
 	# Grab starts: what did the player grab? 
 	# The soft select target may change later, the grab does not change while LMB is still pressed!
 	if event.is_action_pressed("mouse_click_left") and _state == State.FOCUSED:
+		_grab_started_on_object = _soft_select_target != SoftSelectTarget.NONE
 		match _soft_select_target:
 			SoftSelectTarget.STICKER:
 				if _try_grab_selected_sticker(event):
@@ -411,7 +409,7 @@ func _input(event: InputEvent) -> void:
 			SoftSelectTarget.OBJECT:
 				_currently_grabbed = CurrentlyGrabbed.OBJECT
 			SoftSelectTarget.NONE:
-				_currently_grabbed = CurrentlyGrabbed.MISS
+				_currently_grabbed = CurrentlyGrabbed.OBJECT
 		_drag_start_pos = get_viewport().get_mouse_position()
 		get_viewport().set_input_as_handled()
 		return
@@ -445,12 +443,10 @@ func _input(event: InputEvent) -> void:
 					if _state == State.ROTATING:
 						_set_state(State.FOCUSED)
 						_start_snap_tween()
-					# else: a click on the object that never crossed the drag threshold did nothing, so don't change state
-				CurrentlyGrabbed.MISS:
-					if _soft_select_target == SoftSelectTarget.NONE:
+					elif not _grab_started_on_object and _soft_select_target == SoftSelectTarget.NONE:
 						defocus()
-					# a miss that ends on the object is not an intended miss (probably), so stay focused
 			_currently_grabbed = CurrentlyGrabbed.NONE
+			_grab_started_on_object = false
 			get_viewport().set_input_as_handled()
 
 
@@ -511,14 +507,19 @@ func _on_object_mouse_exited() -> void:
 func _on_object_area_entered(area: Area3D) -> void:
 	# wait for player to place the object on the table before completing it
 	if area == _object_completed_area:
-		_is_pending_completion = true
-		object_pending_completion_changed.emit(true)
+		_set_pending_completion(true)
 
 
 func _on_object_area_exited(area: Area3D) -> void:
 	if area == _object_completed_area and not is_queued_for_deletion():
-		_is_pending_completion = false
-		object_pending_completion_changed.emit(false)
+		_set_pending_completion(false)
+
+
+func _set_pending_completion(is_pending: bool) -> void:
+	if _is_pending_completion == is_pending:
+		return
+	_is_pending_completion = is_pending
+	object_pending_completion_changed.emit(is_pending)
 
 
 func _on_stickers_placed() -> void:
@@ -566,6 +567,7 @@ func _set_state(state: State):
 		_cancel_mouse_input()
 		_clear_soft_select()
 		_currently_grabbed = CurrentlyGrabbed.NONE
+		_grab_started_on_object = false
 	_state = state
 	#print("Set state to " + str(state))
 	if state == State.FOCUSED or state == State.ROTATING:
@@ -818,6 +820,7 @@ func _return_to(target_global_position: Vector3) -> void:
 
 
 func _on_return_finished() -> void:
+	_set_pending_completion(_object.overlaps_area(_object_completed_area))
 	_set_state(State.ON_TABLE)
 
 # Ensures the objects sits on top of the XZ plane, with no geometry sticking out below it

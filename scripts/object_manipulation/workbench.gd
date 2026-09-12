@@ -55,6 +55,15 @@ func is_workbench_empty() -> bool:
 				return false
 	return true
 
+func get_object_count() -> int:
+	var count: int = 0
+	for slot in object_slots:
+		for child in slot.get_children():
+			if not child.is_queued_for_deletion():
+				count += 1
+				
+	return count
+
 func _get_next_free_slot() -> Node3D:
 	for slot in object_slots:
 		if slot.get_child_count() == 0:

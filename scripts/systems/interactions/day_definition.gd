@@ -8,10 +8,21 @@ extends Resource
 
 const InteractionResource := preload("res://scripts/systems/interactions/interaction_definition.gd")
 
-@export var day_id: int # ID is auto-set based on filename convention
+## ID is auto-set based on filename convention "day_<number>.tres"
+@export var day_id: int
+
 @export var interactions: Array[InteractionResource] = []
+
 @export var narrative_text: NarrativeTextDefinition = null
 @export var performance_text: PerformanceTextDefinition = null
+
+## Optional override for the first interaction starting time of day. If below 0, will use default config value.
+@export_range(-1.0, 1.0) var start_time: float = -1.0
+
+func get_start_time() -> float:
+	if start_time < 0.0:
+		return Config.TIME_OF_DAY_START
+	return clampf(start_time, 0.0, 1.0)
 
 func _validate_property(property: Dictionary) -> void:
 	_update_id_from_filename()

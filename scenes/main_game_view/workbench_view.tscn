@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6279883, 0, -0.03865695)
 shape = SubResource("BoxShape3D_y3085")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="ObjectOutOfBoundsArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6242914, 0, 0.08356601)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.952491, 0, 0.08356601)
 shape = SubResource("BoxShape3D_y3085")
 
 [node name="TableEdge" type="MeshInstance3D" parent="."]

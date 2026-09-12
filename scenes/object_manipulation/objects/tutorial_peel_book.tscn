@@ -113,10 +113,10 @@ skeleton = NodePath("")
 transform = Transform3D(0.78, 0, 0, 0, -3.409488e-08, -0.78, 0, 0.78, -3.409488e-08, 0.15235078, 0.27209118, 0.09298882)
 
 [node name="StickerPeel2" parent="MeshInstance3D" instance=ExtResource("3_3knps")]
-transform = Transform3D(0.675, 0, 0, 0, -2.9505188e-08, -0.675, 0, 0.675, -2.9505188e-08, -0.1455796, 0.21165797, -0.094400436)
+transform = Transform3D(-0.675, 5.9010375e-08, 0, 2.5794254e-15, 2.9505188e-08, -0.675, -5.9010375e-08, -0.675, -2.9505188e-08, -0.1455796, 0.21165797, -0.094400436)
 
 [node name="StickerPeel3" parent="MeshInstance3D" instance=ExtResource("3_3knps")]
-transform = Transform3D(-1.9670125e-08, 0.45000002, -1.9670123e-08, 0, -1.9670123e-08, -0.45000002, -0.45000002, -1.9670125e-08, 8.5980853e-16, -0.21465313, 0.080225006, -0.02347976)
+transform = Transform3D(-1.9670125e-08, -0.45000002, -1.9670123e-08, 1.7196166e-15, 1.9670123e-08, -0.45000002, 0.45000002, -1.9670125e-08, 8.5980843e-16, -0.21465313, 0.080225006, -0.02347976)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.14780009, 0)

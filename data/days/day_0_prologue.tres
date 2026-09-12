@@ -52,4 +52,5 @@ metadata/_custom_type_script = "uid://bps1w10vos4x1"
 script = ExtResource("3_84k3x")
 interactions = Array[ExtResource("1_qajja")]([SubResource("Resource_dfv5o"), SubResource("Resource_3affb"), SubResource("Resource_dchaq"), SubResource("Resource_wc6rg")])
 narrative_text = SubResource("Resource_hem1m")
+start_time = 1.0
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

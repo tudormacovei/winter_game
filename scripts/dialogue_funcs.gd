@@ -22,6 +22,15 @@ func add_object_to_workbench(object_name: String):
 func play_sfx(sfx_name: String, volume_offset_db: float = 0.0):
 	AudioManager.play_sfx(sfx_name, volume_offset_db)
 
+	
+## Returns number of objects in the workbench that still need to be cleansed / completed
+func get_object_count() -> int:
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot get object count. Inform Prog team of error!")
+		return -1
+
+	return game_manager.dialogue_get_object_count()
+
 ## Makes characters present in the scene leave the scene simultaneously
 ## Call the function like this: [do! DialogueFuncs.exit_characters(["Micah", "Sarah"])]
 func exit_characters(display_names: Array):
