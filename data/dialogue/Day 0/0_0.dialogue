@@ -12,8 +12,8 @@ do Variables.add_local("questions", 0)
 => start
 
 ~ start
-You went to bed early tonight, feeling especially tired after a long day at work.
-Staring at the ceiling, hours passed you by. It's way past midnight, now. You're almost asleep, half-thinking, half-dreaming. 
+You went to bed early tonight, feeling especially tired for no particular reason. Long day at work, perhaps?
+Staring at the ceiling, you didn't move an inch as hours passed you by. It's way past midnight, now. You're almost asleep, half-thinking, half-dreaming. 
 What about? => about
 
 ~ about
@@ -26,13 +26,15 @@ What about? => about
 	Another friend. A dog. Gone too soon. 
 	Your parents loved you. They did all they could, but you resented them for it.
 	Eh, you can't blame yourself. You were young. Kids are pricks. 
+	For the first time in forever, you're able to push the guilt aside.
 	What else? => about
 - My family. [if Variables.get_var("family") == false]
 	Mom. Dad. Two older brothers. A sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
-	Voices. Whispers. Screams. A handful of blurred faces and hushed voices. Can you really not remember them? 
+	Voices. Whispers. Screams. A handful of blurred faces and hushed voices. 
 	They call to you. It gets louder and quieter in equal measure. 
 	Shame on you, they say. Then they leave. 
-	You've had this dream before, a few times. But these people mean nothing to you, now. 
+	Can you really not remember them? 
+	You've had this dream before, a few times. But these people mean nothing to you, now.
 	What else? => about
 - The day it all began. [if Variables.get_var("day") == false]
 	The day all what began?[do Variables.set_var("day", true)][do Variables.mod_var("dreams", 1)]
@@ -41,23 +43,25 @@ What about? => about
 	Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
 	You were too young to understand what was happening. Or to remember much else. 
 	The Cullings, as people have fittingly named them, have been occuring periodically ever since. 
-	You were placed in foster care, then left the day you turned eighteen. That's it. 
+	You were placed in foster care, then left the day you turned eighteen. That's about it. Right?
 	What else? => about
 - Yesterday. [if Variables.get_var("yday") == false]
 	The usual. Helped around any way you could. Got paid for it. Came home.[do Variables.set_var("yday", true)][do Variables.mod_var("dreams", 1)]
 	Watched some TV. A new tape your coworker gave you. Some old show from way back when, about a serial killer heartthrob. Complete non-sense. 
-	It was nice of her, either way. 
+	It was nice of her, though. She's always nice to you. Always greets you with a smile.  
+	Got through a couple of episodes, then went to bed. 
 	...Or was that the day before?
+	Maybe it was a dream you had.
 	You try your heardest to remember. You can't. 
-	Today will be the same. 
 	What else? => about
-- Just... stop. [if Variables.get_var("dreams") >= 2]
+- Just... stop. Give in. [if Variables.get_var("dreams") >= 2]
 
 
 ~ dream
 It all feels rather... generic. Impersonal. These thoughts, or dreams, leave you cold and empty. No twitching muscles, no elevated heart-rate, no sweat.
 Are these bland memories really yours? 
-[speed=0.6]It's all brought to a stop by... something. A gust of wind you can barely feel. 
+[speed=0.6]They're all brought to a stop by... something. A gust of wind you can barely feel. 
+[speed=0.6]You try to cling to them but they're... gone, somehow. 
 [speed=0.6]It's cold, all of a sudden. Colder than you've ever felt.
 [speed=0.6]Are you awake now?
 - Yes.
