@@ -1,0 +1,175 @@
+~ initialize_local_variables
+do Variables.add_local("childhood", false)
+do Variables.add_local("family", false)
+do Variables.add_local("day", false)
+do Variables.add_local("yday", false)
+do Variables.add_local("dreams", 0)
+do Variables.add_local("fingers", false)
+do Variables.add_local("toes", false)
+do Variables.add_local("breathe", false)
+do Variables.add_local("eyes", false)
+do Variables.add_local("questions", 0)
+=> start
+
+~ start
+You went to bed early tonight, feeling especially tired after a long day at work.
+Staring at the ceiling, hours passed you by. It's way past midnight, now. You're almost asleep, half-thinking, half-dreaming. 
+What about? => about
+
+~ about
+...
+- My childhood. [if Variables.get_var("childhood") == false]
+	Memories forgotten, unwillingly unearthed.[do Variables.set_var("childhood", true)][do Variables.mod_var("dreams", 1)]
+	Buildings, larger than life. Planes, cars, buses, loud. Food you wouldn't eat. Leftovers?
+	A friend? Just not a very good one. Wouldn't ever let you play with their toys.
+	Were you poor? No. Not really. But it sure felt that way. 
+	Another friend. A dog. Gone too soon. 
+	Your parents loved you. They did all they could, but you resented them for it.
+	Eh, you can't blame yourself. You were young. Kids are pricks. 
+	What else? => about
+- My family. [if Variables.get_var("family") == false]
+	Mom. Dad. Two older brothers. A sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
+	Voices. Whispers. Screams. A handful of blurred faces and hushed voices. Can you really not remember them? 
+	They call to you. It gets louder and quieter in equal measure. 
+	Shame on you, they say. Then they leave. 
+	You've had this dream before, a few times. But these people mean nothing to you, now. 
+	What else? => about
+- The day it all began. [if Variables.get_var("day") == false]
+	The day all what began?[do Variables.set_var("day", true)][do Variables.mod_var("dreams", 1)]
+	Oh. Right. 
+	You vaguely remember crows filling up the sky. Could barely see anything anymore. Your parents thought it was an eclipse. 
+	Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
+	You were too young to understand what was happening. Or to remember much else. 
+	The Cullings, as people have fittingly named them, have been occuring periodically ever since. 
+	You were placed in foster care, then left the day you turned eighteen. That's it. 
+	What else? => about
+- Yesterday. [if Variables.get_var("yday") == false]
+	The usual. Helped around any way you could. Got paid for it. Came home.[do Variables.set_var("yday", true)][do Variables.mod_var("dreams", 1)]
+	Watched some TV. A new tape your coworker gave you. Some old show from way back when, about a serial killer heartthrob. Complete non-sense. 
+	It was nice of her, either way. 
+	...Or was that the day before?
+	You try your heardest to remember. You can't. 
+	Today will be the same. 
+	What else? => about
+- Just... stop. [if Variables.get_var("dreams") >= 2]
+
+
+~ dream
+It all feels rather... generic. Impersonal. These thoughts, or dreams, leave you cold and empty. No twitching muscles, no elevated heart-rate, no sweat.
+Are these bland memories really yours? 
+[speed=0.6]It's all brought to a stop by... something. A gust of wind you can barely feel. 
+[speed=0.6]It's cold, all of a sudden. Colder than you've ever felt.
+[speed=0.6]Are you awake now?
+- Yes.
+	[speed=0.6]How can you be sure? => react
+- No. 
+	[speed=0.6]That's right. You aren't. Wake up. => react 
+- I... don't know?
+	[speed=0.6]Time to find out. => react
+
+~ react
+[speed=0.6]...
+- Flex your fingers. [if Variables.get_var("fingers") == false]
+	[speed=0.6]You can't. [do Variables.set_var("fingers", true)][do Variables.mod_var("questions", 1)] => react
+- Move your toes. [if Variables.get_var("toes") == false]
+	[speed=0.6]Nothing happens. [do Variables.set_var("toes", true)][do Variables.mod_var("questions", 1)] => react
+- Breathe. [if Variables.get_var("questions") >= 3]
+	[speed=0.6]You're not breathing anymore. 
+	- Panic. 
+		[speed=0.6]You can't. => hours
+	- Relax. 
+		[speed=0.6]You can't.
+		- Panic. 
+			[speed=0.6]Can't do that either. => hours
+- Open your eyes. [if Variables.get_var("questions") >= 2 && Variables.get_var("eyes") == false]
+	[speed=0.6]The eyelids give way. Your eyes are open now. [do Variables.set_var("eyes", true)][do Variables.mod_var("questions", 1)]
+	[speed=0.6]It doesn't change a thing, however. Everything around you is shrouded in darkness, your vision as useless as it was when they were closed. 
+	- Look around. 
+		[speed=0.6]Your eyes move freely. Your head, however, is firmly stuck in place. Everything is darkness. 
+		- Cry for help. 
+			[speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
+			[speed=0.6]Nobody could hear you, anyway. => react
+		- Keep your mouth shut. 
+			[speed=0.6]Finally, something you can do. => react
+	- Cry for help. 
+		[speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
+		[speed=0.6]Nobody could hear you, anyway. => react
+	
+~ hours
+[speed=0.2]...Minutes which might as well be hours pass. The cold is as numbing as the paralyzing fear. 
+[speed=0.6]All of a sudden, you hear a sound. [do DialogueFuncs.play_sfx("sfx_crow_goddess")]A caw. And then another. 
+The cold subsides. It is replaced by warmth and peacefulness.
+Your paralysis demon took their sweet time to show up. A... crow? 
+A one-eyed crow. It lands on your thigh. => hello
+
+~ hello
+Crow: It's so good to finally meet you, Keeper.
+- Am I... dead?
+	Crow: Not quite, my child. 
+	Crow: Death shall have no dominion over you any longer. 
+	Crow: You shall know happiness and power the likes of which feeble human minds can scarcely fathom. 
+	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
+	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
+	- I...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+	- Uh...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+- Who are you?
+	Crow: I am your Father, child. Your long lost Brothers.
+	Crow: I'm your buried little Sister, your Best Friend and your Lover. 
+	Crow: I am the Pup you lost when you were four. The Deer Carcass you saw on the side of the road when you were ten. 
+	Crow: Most of all, I am your Mother. The Mother of all things, and of all beings. 
+	Crow: And I am here to make you mine now, mind and flesh.
+	- I...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+	- Uh...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+- What the hell is happening?
+	Crow: You were lost, and now you're found. 
+	Crow: Darkness imprisoned you so that I could set you free. 
+	Crow: Through your dreams, I found a way. 
+	Crow: You are not who you were ten minutes ago. 
+	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
+	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
+	- I...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+	- Uh...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+- That's not my name. 
+	Crow: It isn't. It's much more important than that. 
+	Crow: It's who you are now, or at least, who you soon will be. 
+	Crow: Your name is of no importance anymore, for you are, indeed, reborn. You are cleansed, and you are freed.  
+	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
+	- I...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+	- Uh...
+		You try to speak, but no words come out. 
+		Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+		
+~ fear
+Crow: I sense your fear, dearest Keeper. Give in to the light, to the warmth that is now washing over you. 
+Crow: I've been watching you. I know you. I know your soul. Your mind and body may be forged anew, but your soul is something I've no sway over. 
+Crow: But I must trust it with my life, for I have no other choice. 
+Crow: I'm here to set you on your path. To guide, as I've done twice before, as I will four times more.  
+Crow: I bestow upon you my Gift of Sight. You shall see things where others cannot. Use it wisely, and with love.
+Crow: Go to a village up in the mountains. The village all these lowly heretics speak falsehoods about. 
+Crow: Go to (village name, game name?). My home. My church.
+Crow: A place untouched by the Cullings, where a third one shall grow, a third one shall die, a third one shall live, and a third one shall fly. 
+#potential pop up: hmmm, that doesnt quite add up...
+Crow: It's up to you now, child. I need you, just as you will soon need me. 
+Crow: Do not let me down, for I am your Goddess and I won't allow it. 
+Crow: We will meet again, soon enough. Be at peace. 
+...
+She's gone. 
+Who are you? 
+Are you going to [shake rate=10.0 level=2]obey?
+You have no choice, for now. 
+On to (village name, title card drop).
+=> END

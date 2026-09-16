@@ -1,0 +1,141 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+???: [wait=1][speed=0.2][shake rate=10.0 level=2]Who...ahh... who goes there?
+- (OBEY) The Goddess told me to come here. I want to join your church. 
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, you speak truly, stranger? [do Variables.mod_var("religious_fervour", 1)]
+	???: [speed=0.8][shake rate=10.0 level=2]If so, your reasons are pure... Many come here out of desperation and fear, you know... 
+	???: [speed=0.8][shake rate=10.0 level=2]Revolting, wretched lowlifes... Putrid leeches, the lot of them...
+	???: [speed=0.8][shake rate=10.0 level=2]If it were up to me, ahh, I'd set them all on fire...
+	#angry sound
+	???: [speed=0.8][shake rate=10.0 level=2]Alas, The Goddess and our Elders are benevolent... They let almost everyone in, provided they're willing to leave their earthly possessions and sinful ways behind.
+	???: [speed=0.8][shake rate=10.0 level=2]It is not my place to pass judgment, ahh, no, no, no...
+	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for her momentary lapse of faith...
+	???: [speed=0.8][shake rate=10.0 level=2]But that's for later. Now, there's the matter of you...
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty, and wise, is this indeed one of your chosen?
+	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, or are their twisted intentions hidden behind this pious facade?
+	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
+	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]...Fortune smiles upon you, stranger!
+	???: [speed=0.8][shake rate=10.0 level=2]Very soon, we won't be able to let people in anymore... There just isn't enough space, food, or water... It saddens us all, ahh, deeply so...
+	???: [speed=0.8][shake rate=10.0 level=2]No one more saddened than I am... ahh, hee, hee...
+	???: [speed=0.8][shake rate=10.0 level=2]But you, ahh, you were handpicked by the Goddess Herself...
+	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your eyes? What a blessed day. What joy! 
+	- That's, uh, great, I guess. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is! 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... => but1
+	- Praise be!
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... => but1
+	- Indeed. I am Her chosen one. 
+		#add global variable, add new dialogue option in tutorial section
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... 
+		???: [speed=0.8][shake rate=10.0 level=2]Twice over, since She's also bestowed Her Gift upon you...
+		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
+		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but1 
+- (LIE) I just stumbled upon this place. I'm a weary traveler. I need a place to stay. 
+	???: [speed=0.8][shake rate=10.0 level=2]Our village is untouched by hardship... You're not the first to ask... 
+	???: [speed=0.8][shake rate=10.0 level=2]Sure won't be the last... 
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty and wise, what shall I do with this one? 
+	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, or will they live as leeches and sow discord and doubt amongst our ranks?
+	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
+	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]Ahh, why lie to me, stranger?
+	???: [speed=0.8][shake rate=10.0 level=2]My feelings are hurt, now... Do I not look like someone you can trust? 
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, alas, I have to put this to rest... I am not one to forget, but I am one to forgive, as the Goddess tells us we should... 
+	???: [speed=0.8][shake rate=10.0 level=2]She sent you here! That's not something you can hide, you foolish creature! 
+	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your deceitful eyes? Ahh, what a blessed day... What joy!
+	- That's, uh, great, I guess. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is!  
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too...
+		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
+	- Praise be!
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too...
+		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
+	- Okay, you got me. Your Goddess showed Herself to me in my sleep. I'm Her chosen one.
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... 
+		???: [speed=0.8][shake rate=10.0 level=2]Twice over, since She's also bestowed Her Gift upon you...
+		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
+		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but1 
+		???: [speed=0.8][shake rate=10.0 level=2]...And you've already sinned once, today. => but
+	- Whatever you say. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, she speaks through me... I'm a mere vessel... 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... 
+		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your ignorant attitude and untruthful, slimy nature. => but
+	- Sorry I lied to you. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, it's all in the past, all of it... 
+		???: [speed=0.8][shake rate=10.0 level=2]Besides, when one lies, one does harm only unto themselves... 
+		???: [speed=0.8][shake rate=10.0 level=2]Seek penance! Repent! => but
+- (RESIST) I need to find out what's happening to me, and I think the answers lie inside your village. 
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so, stranger?
+	???: [speed=0.8][shake rate=10.0 level=2]...And what answers might those be? 
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, it is not my place to ask, no, no, no...
+	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for her vain curiosity...
+	???: [speed=0.8][shake rate=10.0 level=2]But that's for later. Now, there's the matter of you...
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty and wise, what shall I do with this one? 
+	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, in their search for, ahh, answers, or will they sow discord and doubt amongst our ranks?
+	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
+	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]Ahh, why didn't you tell me, stranger?
+	???: [speed=0.8][shake rate=10.0 level=2]She sent you here! That's not something you can hide, you foolish creature! 
+	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your eyes? Ahh, what a blessed day... What joy!
+	- That's, uh, great, I guess. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is!  
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too... => but
+	- Praise be!
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too... => but
+	- Okay, you got me. She did send me here. But that's not why I came.
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so...?
+		???: [speed=0.8][shake rate=10.0 level=2]You're awful sure of yourself...
+		???: [speed=0.8][shake rate=10.0 level=2]Nothing ever happens without her say-so, ahh, you best remember that...
+		???: [speed=0.8][shake rate=10.0 level=2]You best get that right into your feeble, filthy brain, you hear me? => but
+	- Whatever you say. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, she speaks through me... I'm a mere vessel... 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... 
+		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your ignorant attitude. => but
+
+	
+~ but
+???: [speed=0.8][shake rate=10.0 level=2]Anyway, you're hungry, tired, and in desperate need of a bath... 
+???: [speed=0.8][shake rate=10.0 level=2]First things first... To your left, there's a charred hole. 
+???: [speed=0.8][shake rate=10.0 level=2]I'll need you to drop all your possessions in there. [speed=0.25]Ahh, ahh, your clothes, too... 
+???: [speed=0.8][shake rate=10.0 level=2]No outside items are allowed in the village, for they are sinful, and wrong!
+???: [speed=0.8][shake rate=10.0 level=2]Here's a robe to cover yourself, should you need it... Once you're in, we'll give you a new change of clothes.
+- So be it. => go
+- That's absurd.
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, a small price to pay for salvation!
+	- Fine. I did come all this way. => go 
+	- Just... turn around. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, whatever you need, whatever you need... => go 
+	- Salvation does sound good. => go
+	- This place better be everything it's made out to be.
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, it sure is... And so, so much more... => go
+		
+~ but1
+???: [speed=0.8][shake rate=10.0 level=2]Anyway, you're hungry, tired, and, ahh, in desperate need of a bath... 
+???: [speed=0.8][shake rate=10.0 level=2]First things first... To your left, there's a charred hole. 
+???: [speed=0.8][shake rate=10.0 level=2]I'll need you to drop all your possessions in there. [speed=0.25]Ahh, ahh, your clothes, too... 
+???: [speed=0.8][shake rate=10.0 level=2]No outside items are allowed in the village, for they are sinful, and wrong!
+???: [speed=0.8][shake rate=10.0 level=2]Here's a robe to cover yourself, should you need it... Once you're in, we'll give you a new change of clothes.
+- So be it. => go 
+- Happy to oblige. => go
+- That's absurd.
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, a small price to pay for salvation!
+	- Fine. I did come all this way. => go 
+	- Just... turn around. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, whatever you need, whatever you need... => go 
+	- Salvation does sound good. => go
+		
+~ go
+#maybe screen with hole
+???: [wait=1.0][speed=0.8][shake rate=10.0 level=2]...Now that that's over with, ahh, let's get you to your new home! 
+???: [speed=0.8][shake rate=10.0 level=2]You'll be staying at the Shopkeeper's house, on account of your Gift... He's Gifted himself, and I'm sure he's better, ahh, suited to explain how it works than any of us are...
+???: [speed=0.8][shake rate=10.0 level=2]He's been in need of an apprentice since forever, anyway... 
+???: [speed=0.8][shake rate=10.0 level=2]I'll lead you to his house. Just knock and tell him you're Gifted, and that, ahh, Joan let you in, with the Goddess's blessing... 
+???: [speed=0.8][shake rate=10.0 level=2]May the Goddess guide your every step, hee, hee!
+- Goodbye, Joan. => END 
+- ... => END 
+		
+=> END
+
