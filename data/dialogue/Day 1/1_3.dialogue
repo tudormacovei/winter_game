@@ -146,7 +146,7 @@ Shopkeeper: ...
 - Were you waiting for me last night? Didn't even get to properly knock before you opened the door. [if Variables.get_char_var("NPC_4", "wait") == false]
 	Shopkeeper: [#sprite=worried]Oh, well, uh, kind of. I'm sorry if that was weird. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "wait", true)]
 	Shopkeeper: It's just that I've known for a while someone bearing the Gift would come, and yesterday I felt this urge to look out the window right before you came into view.
-	Shopkeeper: And there you were. As soon as I saw you, I somehow knew it was you. Can't explain it more than that, though I wish I could.
+	Shopkeeper: And there you were. As soon as I saw you, I somehow knew it was you. Can't explain it any more than that, though I wish I could.
 	Shopkeeper: Plus, I didn't want your knocking to wake Sarah up, truth be told. She's a light sleeper. 
 	- To be honest, I, myself, kind of knew this was your house even before Joan pointed it to me.
 		Shopkeeper: There you have it. => questions2
@@ -207,7 +207,7 @@ Shopkeeper: ...
 	- That's... fucked up. 
 		Shopkeeper: [#sprite=worried]Salvation comes at a cost. => questions2
 - Kind of feels like I'm joining a cult. [if Variables.get_char_var("NPC_4", "cult") == false]
-	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "cult", true)]
+	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)][do Variables.set_char_var("NPC_4", "cult", true)]
 	Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
 	Shopkeeper: There are some practices and beliefs which might seem... odd, especially to an outsider.
 	Shopkeeper: Way I see it, at least they've got a purpose.
@@ -228,7 +228,7 @@ Shopkeeper: ...
 			- We'll see. 
 				Shopkeeper: [#sprite=worried]Understandable. Guess I'll have to prove my worth first.[do Variables.set_char_var("NPC_4", "relationship", 2)] => questions2
 	- Still feels weird. 
-		Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.[do Variables.mod_var("religious_fervour", -1)] => questions2
+		Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.[do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions2
 - What was your daughter talking about last night, with the dreams and everything? [if Variables.get_char_var("NPC_4", "dream") == false]
 	Shopkeeper: [#sprite=worried]That's... complicated. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "dream", true)]
 	Shopkeeper: [#sprite=worried]She used to have nightmares every night a while back. It was a hard time for her. For us. 
@@ -258,6 +258,25 @@ Shopkeeper: ...
 			Shopkeeper: [#sprite=worried]That's all I can say for now. I could get in trouble for saying more, so please, drop it for now. 
 			- Okay, I trust you. => questions2
 			- Fine, I'll drop it for now. => questions2
+- I think your Goddess brainwashed me. [if Variables.get_char_var("NPC_4", "brainwash") == false]
+	Shopkeeper: That can't be right. She'd never do that. [do Variables.set_char_var("NPC_4", "brainwash", true)][do Variables.mod_char_var("NPC_4", "questions", 1)]
+	Shopkeeper: What makes you say that?
+	- Nevermind. Forget it. 
+		Shopkeeper: If you so wish. Just trust me, I know what I'm talking about.
+		Shopkeeper: She wouldn't. => questions2
+	- I can't remember anything that happened before She visited me. 
+		Shopkeeper: Look, perhaps you were in... an accident, or something. Hit your head, or got hit by a car, or the like. Lost your memories. 
+		Shopkeeper: The Goddess looks out for those in need. For those who are lost. Suffering. 
+		Shopkeeper: Think about it. It makes much more sense than her "brainwashing" you. 
+		- I guess that's a possibility. 
+			Shopkeeper: The past is the past. Perhaps you'd be dead if it wasn't for Her. 
+			Shopkeeper: I'm sure I would...
+			Shopkeeper: You've been given a second chance. Cherish it. Embrace it.
+			Shopkeeper: Life is worth living. Especially as part of Her family. => questions2
+		- I really don't think that's the case. 
+			Shopkeeper: Look, give it some time. Think about it. Do some soul-searching. [do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
+			Shopkeeper: I'm sure the answers lie in there, somewhere.
+			Shopkeeper: But you've been given a second chance. Don't take it for granted. => questions2
 - That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
 	Shopkeeper: Alright then. I'm heading out. Good luck. 
 	- Thanks. 

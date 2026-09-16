@@ -3,9 +3,7 @@
 => start
 
 ~ start
-Weeks pass. You're on your way to (village name).
-After a long and tiring trek in the dark, you finally arrive at the village gates. 
-You can barely make someone's eyes out through what you can only assume is a sliding peephole. They watch as you walk towards them. 
-...After what feels like too long, they speak.
+A feeble mind: [wait=1.0]You get to the Shopkeeper's house and knock. As soon as [do DialogueFuncs.play_sfx("sfx_door_open")]your knuckles touch the wood, the door opens. He's been expecting you. => END 
+
 => END
 

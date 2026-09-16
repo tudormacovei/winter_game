@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=20 format=3 uid="uid://crjbbp07kdxig"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=23 format=3 uid="uid://crjbbp07kdxig"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_qajja"]
 [ext_resource type="Resource" uid="uid://dyfx0vcpfwhe6" path="res://data/interaction_configs/prologue_config.tres" id="2_068nm"]
@@ -6,12 +6,14 @@
 [ext_resource type="Resource" uid="uid://c8l484xcc7b1g" path="res://data/interaction_configs/black_config.tres" id="2_wc6rg"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="3_84k3x"]
 [ext_resource type="Resource" uid="uid://dog1gmxlpovwx" path="res://data/dialogue/Day 0/0_0.dialogue" id="3_m45ib"]
-[ext_resource type="Resource" uid="uid://b45xt0ckntbvk" path="res://data/dialogue/Day 0/0_1_NAR.dialogue" id="3_wc6rg"]
+[ext_resource type="Resource" uid="uid://b45xt0ckntbvk" path="res://data/dialogue/Day 0/0_0_NAR.dialogue" id="3_wc6rg"]
 [ext_resource type="Resource" uid="uid://douhk2njjw7k8" path="res://data/interaction_configs/workshop_default_config.tres" id="4_dchaq"]
-[ext_resource type="Resource" uid="uid://b5h0d0vhqf14" path="res://data/dialogue/Day 0/0_2_NAR.dialogue" id="6_wc6rg"]
+[ext_resource type="Resource" uid="uid://b5h0d0vhqf14" path="res://data/dialogue/Day 0/0_1_NAR.dialogue" id="6_wc6rg"]
 [ext_resource type="Resource" uid="uid://8c3hp48eb73p" path="res://data/dialogue/Day 0/0_2.dialogue" id="8_wc6rg"]
 [ext_resource type="Script" uid="uid://c7bswthq27a8q" path="res://scripts/systems/variables/variable_predicate_definition.gd" id="9_dfv5o"]
 [ext_resource type="Script" uid="uid://bps1w10vos4x1" path="res://scripts/systems/day_end/narrative_text_definition.gd" id="10_m45ib"]
+[ext_resource type="Script" uid="uid://c7ak3t2a1ou7o" path="res://scripts/systems/day_end/performance_text_pool.gd" id="12_fki0i"]
+[ext_resource type="Script" uid="uid://daeq0aujnigce" path="res://scripts/systems/day_end/performance_text_definition.gd" id="13_d7dfo"]
 
 [sub_resource type="Resource" id="Resource_fki0i"]
 script = ExtResource("1_qajja")
@@ -51,13 +53,18 @@ metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_hem1m"]
 script = ExtResource("10_m45ib")
-text_true = "Narrative text, always shows up!"
+text_true = "You've arrived"
 predicate = SubResource("Resource_m45ib")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
+
+[sub_resource type="Resource" id="Resource_eoefp"]
+script = ExtResource("13_d7dfo")
+metadata/_custom_type_script = "uid://daeq0aujnigce"
 
 [resource]
 script = ExtResource("3_84k3x")
 interactions = Array[ExtResource("1_qajja")]([SubResource("Resource_fki0i"), SubResource("Resource_dfv5o"), SubResource("Resource_3affb"), SubResource("Resource_dchaq"), SubResource("Resource_wc6rg")])
 narrative_text = SubResource("Resource_hem1m")
+performance_text = SubResource("Resource_eoefp")
 start_time = 1.0
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

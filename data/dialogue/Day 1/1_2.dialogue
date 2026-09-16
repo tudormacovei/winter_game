@@ -27,12 +27,13 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 			Micah: [#sprite=happy]Oh, don't worry. You will. 
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 	- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-		Micah: [#sprite=upset]Uh huh. If you say so. 
+		Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-	- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+	- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 		Micah: Yeah, we get more and more people coming here for that same reason.
 		Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
-		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
+		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+	- I think your Goddess brainwashed me and sent me here. 
 	- I asked first.
 		Micah: [#sprite=upset]Fine. Pretty sure I know who you are, anyway. 
 		Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper, once the old man kicks the bucket. 

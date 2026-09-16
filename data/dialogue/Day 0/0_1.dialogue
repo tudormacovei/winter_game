@@ -30,12 +30,12 @@
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... => but1
 	- Indeed. I am Her chosen one. 
 		#add global variable, add new dialogue option in tutorial section
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... [do Variables.mod_var("religious_fervour", 1)]
 		???: [speed=0.8][shake rate=10.0 level=2]Twice over, since She's also bestowed Her Gift upon you...
 		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
 		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but1 
 - (LIE) I just stumbled upon this place. I'm a weary traveler. I need a place to stay. 
-	???: [speed=0.8][shake rate=10.0 level=2]Our village is untouched by hardship... You're not the first to ask... 
+	???: [speed=0.8][shake rate=10.0 level=2]Our village is untouched by hardship... You're not the first to ask... [do Variables.set_var("lied_to_joan", true)]
 	???: [speed=0.8][shake rate=10.0 level=2]Sure won't be the last... 
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty and wise, what shall I do with this one? 
 	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, or will they live as leeches and sow discord and doubt amongst our ranks?
@@ -54,7 +54,7 @@
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too...
 		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
 	- Okay, you got me. Your Goddess showed Herself to me in my sleep. I'm Her chosen one.
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... [do Variables.mod_var("religious_fervour", 1)]
 		???: [speed=0.8][shake rate=10.0 level=2]Twice over, since She's also bestowed Her Gift upon you...
 		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
 		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but1 
@@ -68,7 +68,7 @@
 		???: [speed=0.8][shake rate=10.0 level=2]Besides, when one lies, one does harm only unto themselves... 
 		???: [speed=0.8][shake rate=10.0 level=2]Seek penance! Repent! => but
 - (RESIST) I need to find out what's happening to me, and I think the answers lie inside your village. 
-	???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so, stranger?
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so, stranger? [do Variables.mod_var("religious_fervour", -1)]
 	???: [speed=0.8][shake rate=10.0 level=2]...And what answers might those be? 
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, it is not my place to ask, no, no, no...
 	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for her vain curiosity...
@@ -86,7 +86,7 @@
 		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
 		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too... => but
 	- Okay, you got me. She did send me here. But that's not why I came.
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so...?
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so...? [do Variables.mod_var("religious_fervour", -1)]
 		???: [speed=0.8][shake rate=10.0 level=2]You're awful sure of yourself...
 		???: [speed=0.8][shake rate=10.0 level=2]Nothing ever happens without her say-so, ahh, you best remember that...
 		???: [speed=0.8][shake rate=10.0 level=2]You best get that right into your feeble, filthy brain, you hear me? => but
