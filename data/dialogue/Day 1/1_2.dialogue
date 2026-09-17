@@ -6,9 +6,9 @@
 #you can barely see part of Micah through the window for a second, and then you can hear the door open but you can't see anyone; after a few seconds, you can see his head pop up from under the table; he sneaked up on you.
 #sound effect needed
 ...[do DialogueFuncs.play_sfx("sfx_door_open", -20)][wait=3]
-Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
+Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha. 
 - You scared the shit out of me. 
-	Micah: [#sprite=happy]Hahaha! Got you. 
+	Micah: [#sprite=happy]Haha! Got you. 
 	- Don't ever do that again.
 		Micah: [#sprite=happy]Can't promise anything. Sneaking up on people is kind of my thing. => whothehell
 	- Sure did. Prepare for retaliation!
@@ -16,15 +16,16 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 		Micah: [#sprite=upset]But I've never heard of this one. So you might wanna double check that. 
 		Micah: [#sprite=happy]Either way, I'm always prepared for everything! => whothehell
 - Who the hell are you?
-	Micah: [#sprite=upset]Who the hell are YOU?
+	Micah: [#sprite=upset]Who the hell are [shake rate=10.0 level=2]YOU?
 	- I'm the Shopkeeper's new apprentice. 
 		Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
-		Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
-		- You Gifted yourself?
+		Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself, once the old man kicks the bucket.
+		- Ambitious, aren't you? You Gifted yourself?
 			Micah: Not yet. But I'm The Goddess's most devoted follower. There's no way She won't give it to me too, someday.
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-		- I'd like to see you try.
-			Micah: [#sprite=happy]Oh, don't worry. You will. 
+		- That's not nice.
+			Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk. 
+			Micah: Besides, death is natural and normal and cool and everything. 
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 	- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 		Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
@@ -34,11 +35,23 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 		Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 	- I think your Goddess brainwashed me and sent me here. 
+		Micah: Uh, you hit your head or something?
+		Micah: What do you mean brainwashed?
+		Micah: Is that even a thing? How would She even do that?
+		Micah: You're weird. 
+		- It means She made me forget stuff in order to serve Her without question. 
+			Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+			Micah: But I still don't think that's a thing. You should get your head checked. 
+			Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+		- ...Forget it.
+			Micah: I won't. I never forget anything. I'll carry it with me till the day I die. 
+			Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 	- I asked first.
 		Micah: [#sprite=upset]Fine. Pretty sure I know who you are, anyway. 
 		Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper, once the old man kicks the bucket. 
 		- That's not nice.
-			Micah: Oh, the old man doesn't mind. He's not a sourpuss. That's how we usually talk. 
+			Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk. 
+			Micah: Besides, death is natural and normal and cool and everything.
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 		- Ambitious, aren't you? You Gifted too?
 			Micah: Not yet. But I'm the Goddess's most devoted follower. There's no way She won't give it to me too.
@@ -54,32 +67,46 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 			Micah: [#sprite=upset]Anyway. Who the hell are you? 
 			- I'm the Shopkeeper's new apprentice. Who are you?
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
-				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
-				- You Gifted yourself?
+				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself, once the old man kicks the bucket.  
+				- Ambitious, aren't you? You Gifted yourself?
 					Micah: Not yet. But I'm The Goddess's most devoted follower. There's no way She won't give it to me too, someday.
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-				- I'd like to see you try.
-					Micah: [#sprite=happy]Oh, don't worry. You will. 
+				- That's not nice.
+					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
+					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-				Micah: [#sprite=upset]Uh huh. If you say so. 
+				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
+			- I think your Goddess brainwashed me and sent me here. 
+				Micah: Uh, you hit your head or something?
+				Micah: What do you mean brainwashed?
+				Micah: Is that even a thing? How would She even do that?
+				Micah: You're weird. 
+				- It means She made me forget stuff in order to serve Her without question. 
+					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: But I still don't think that's a thing. You should get your head checked. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+				- ...Forget it.
+					Micah: I won't. I never forget anything. I'll carry it with me till the day I die. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 		- You're right. I really wish I was a "pagaron" like you.
 			Micah: [#sprite=upset]Hmm. You're weird. 
 			Micah: [#sprite=happy]In a funny way. 
 			Micah: Who the hell are you, anyway?
 			- I'm the Shopkeeper's new apprentice. Who are you?
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
-				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
-				- You Gifted yourself?
+				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself, once the old man kicks the bucket. 
+				- Ambitious, aren't you? You Gifted yourself?
 					Micah: Not yet. But I'm The Goddess's most devoted follower. There's no way She won't give it to me too, someday.
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-				- I'd like to see you try.
-					Micah: [#sprite=happy]Oh, don't worry. You will. 
+				- That's not nice.
+					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
+					Micah: Besides, death is natural and normal and cool and everything. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: [#sprite=upset]Uh huh. If you say so. 
@@ -87,19 +114,32 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
-				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
+				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+			- I think your Goddess brainwashed me and sent me here. 
+				Micah: Uh, you hit your head or something?
+				Micah: What do you mean brainwashed?
+				Micah: Is that even a thing? How would She even do that?
+				Micah: You're weird. 
+				- It means She made me forget stuff in order to serve Her without question. 
+					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: But I still don't think that's a thing. You should get your head checked. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+				- ...Forget it.
+					Micah: I won't. I never forget anything. I'll carry it with me till the day I die. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 	- That's mean. 
 		Micah: I was taught to always speak the truth. It is what it is. 
 		- Whatever. Who the hell are you, anyway?
 			Micah: [#sprite=upset]Who the hell are YOU?
 			- I'm the Shopkeeper's new apprentice. 
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
-				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
-				- You Gifted yourself?
+				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself, once the old man kicks the bucket. 
+				- Ambitious, aren't you? You Gifted yourself?
 					Micah: Not yet. But I'm The Goddess's most devoted follower. There's no way She won't give it to me too, someday.
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 				- I'd like to see you try.
-					Micah: [#sprite=happy]Oh, don't worry. You will. 
+					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
+					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: Uh huh. If you say so. 
@@ -108,26 +148,40 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
+			- I think your Goddess brainwashed me and sent me here. 
+				Micah: Uh, you hit your head or something?
+				Micah: What do you mean brainwashed?
+				Micah: Is that even a thing? How would She even do that?
+				Micah: You're weird. 
+				- It means She made me forget stuff in order to serve Her without question. 
+					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: But I still don't think that's a thing. You should get your head checked. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+				- ...Forget it.
+					Micah: I won't. I never forget anything. I'll carry it with me till the day I die. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 			- I asked first.
 				Micah: [#sprite=upset]Fine. Pretty sure I know who you are, anyway. 
-				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper, once the old man kicks the bucket. 
+				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper, once the old man kicks the bucket.
 				- That's not nice.
-					Micah: Oh, the old man doesn't mind. He's not a sourpuss. That's how we usually talk. 
+					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
+					Micah: Besides, death is natural and normal and cool and everything. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 				- Ambitious, aren't you? You Gifted too?
 					Micah: Not yet. But I'm the Goddess's most devoted follower. There's no way She won't give it to me too.
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 		- Sometimes it's better to shut up. Take it from me. 
-			Micah: [#sprite=happy]Eh, agree then disagree, or however you say it. 
+			Micah: [#sprite=happy]Eh, agree then disagree, or whatever. 
 			Micah: [#sprite=upset]Anyway, who the hell are you? 
 			- I'm the Shopkeeper's new apprentice. Who are you?
 				Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
-				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
-				- You Gifted yourself?
+				Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself, once the old man kicks the bucket. 
+				- Ambitious, aren't you? You Gifted yourself?
 					Micah: Not yet. But I'm The Goddess's most devoted follower. There's no way She won't give it to me too, someday.
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-				- I'd like to see you try.
-					Micah: [#sprite=happy]Oh, don't worry. You will. 
+				- That's not nice.
+					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
+					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
 				Micah: [#sprite=upset]Uh huh. If you say so. 
@@ -136,25 +190,50 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh!
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
+			- I think your Goddess brainwashed me and sent me here. 
+				Micah: Uh, you hit your head or something?
+				Micah: What do you mean brainwashed?
+				Micah: Is that even a thing? How would She even do that?
+				Micah: You're weird. 
+				- It means She made me forget stuff in order to serve Her without question. 
+					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: But I still don't think that's a thing. You should get your head checked. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+				- ...Forget it.
+					Micah: I won't. I never forget anything. I'll carry it with me till the day I die. 
+					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 
 ~ whothehell
 Micah: Anyway, who the hell are you?
 - I'm the Shopkeeper's new apprentice. Who are you?
 	Micah: Oh, finally. Perhaps the old man won't be complaining all day anymore. 
-	Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself. I'll steal your job from you when I grow up. 
+	Micah: [#sprite=happy]I'm the delivery boy. Future shopkeeper myself, once the old man kicks the bucket. 
 	- You Gifted yourself?
 		Micah: Not yet. But I'm The Goddess's most devoted follower. There's no way She won't give it to me too, someday.
 		Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-	- I'd like to see you try.
-		Micah: [#sprite=happy]Oh, don't worry. You will. 
+	- That's not nice.
+		Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
+		Micah: Besides, death is natural and normal and cool and everything. 
 		Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
 - I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-	Micah: [#sprite=upset]Uh huh. If you say so. 
+	Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
 	Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 	Micah: Yeah, we get more and more people coming here for that same reason.
 	Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 	Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
+- I think your Goddess brainwashed me and sent me here. 
+	Micah: Uh, you hit your head or something?
+	Micah: What do you mean brainwashed?
+	Micah: Is that even a thing? How would She even do that?
+	Micah: You're weird. 
+	- It means She made me forget stuff in order to serve Her without question. 
+		Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+		Micah: But I still don't think that's a thing. You should get your head checked. 
+		Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
+	- ...Forget it.
+		Micah: I won't. I never forget anything. I'll carry it with me till the day I die. 
+		Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 
 ~ stupid
 Micah: [#sprite=happy]That's how things work around here. Not too complicated, but think it might take you a while to get used to it, considering your... shortcomings. 
@@ -164,9 +243,9 @@ Micah: [#sprite=happy]That's how things work around here. Not too complicated, b
 		Micah: Don't worry about it too much. I'm just messing around. 
 		Micah: [#sprite=happy]Mostly. 
 		- Tone it down a bit. I'm not your playmate.
-			Micah: Okay. Sorry.[do Variables.set_char_var("NPC_1", "relationship", 2)] => sarah
+			Micah: Okay. Sorry.[do Variables.mod_char_var("NPC_1", "relationship", -1)] => sarah
 		- It's alright. I'm just playing along. 
-			Micah: [#sprite=happy]Hm. I might just end up liking you. [do Variables.set_char_var("NPC_1", "relationship", 4)]
+			Micah: [#sprite=happy]Hm. I might just end up liking you. [do Variables.mod_char_var("NPC_1", "relationship", 1)]
 			Micah: [#sprite=happy]And you could sure use me as a friend, you know. 
 			Micah: We'll see, though. I'm picky when it comes to friends. 
 			- Time will tell. 
@@ -174,49 +253,48 @@ Micah: [#sprite=happy]That's how things work around here. Not too complicated, b
 			- What an honour. 
 				Micah: [#sprite=happy]Hahah. Damn right. => sarah
 	- Whatever, kid. 
-		Micah: [#sprite=upset]I'm not a kid. I'm eleven. You stop being a kid when you're ten. [do Variables.set_char_var("NPC_1", "relationship", 2)]
+		Micah: [#sprite=upset]I'm not a kid. I'm eleven. You stop being a kid when you're ten. [do Variables.mod_char_var("NPC_1", "relationship", -1)]
 		Micah: Anyway, I'm just messing around. Don't take me too seriously. => sarah
 	- You think I'm stupid?
 		Micah: [#sprite=happy]Hahah, yeah. 
 		- Watch yourself. I'm not your playmate.
 			Micah: Hey, I'm just messing. Sorry.
 			- Yeah, tone it down in the future.
-				Micah: Okay. I will.[do Variables.set_char_var("NPC_1", "relationship", 2)] => sarah
+				Micah: Okay. I will.[do Variables.mod_char_var("NPC_1", "relationship", -1)] => sarah
 			- Don't worry about it too much. I overreacted a bit. 
 				Micah: [#sprite=happy]That's alright. Give and forget, as the saying goes. => sarah
 		- Hey, don't judge a book by its cover. 
 			Micah: [#sprite=upset]Don't much like books. Not sure what that has to do with anything.
-			Micah: [#sprite=upset]Guess you really aren't all that bright. 
+			Micah: [#sprite=upset]You really aren't all that bright, huh? 
 			- ...
 				Micah: [#sprite=happy]Cat got your tongue? 
 				Micah: I'm just messing around.
 				Micah: [#sprite=happy]Mostly. => sarah
 			- Guess so.
-				Micah: [#sprite=happy]Hahaha. => sarah
+				Micah: [#sprite=happy]Hahaha.[do Variables.mod_char_var("NPC_1", "relationship", 1)] => sarah
 			- You sure like to talk a lot. 
 				Micah: [#sprite=happy]Sure do. You'll get used to it.
 				Micah: [#sprite=happy]Or not. => sarah
 		- Eh, guess I am.
-			Micah: Nah, you're alright. I was just playing around.[do Variables.set_char_var("NPC_1", "relationship", 4)] => sarah
+			Micah: Nah, you're alright. I was just playing around.[do Variables.mod_char_var("NPC_1", "relationship", 1)] => sarah
 - You're a mischievous one, aren't you?
 	Micah: Not sure what that means, but people call me many things, so yeah, probably. 
 	Micah: I'm just messing around though. 
 	Micah: [#sprite=happy]Mostly. 
 	- You're funny. I like you. 
-		Micah: [#sprite=happy]Haha. Awesome. [do Variables.set_char_var("NPC_1", "relationship", 4)]
+		Micah: [#sprite=happy]Haha. Awesome. [do Variables.mod_char_var("NPC_1", "relationship", 1)]
 		Micah: Adults usually think I'm annoying. => sarah
 	- Careful not to mess with the wrong person sometime. 
 		Micah: Eh, I'll be fine. => sarah 
 	- You should tone it down a bit. 
-		Micah: [#sprite=upset]Uh, not sure I wanna do that.[do Variables.set_char_var("NPC_1", "relationship", 2)] => sarah
+		Micah: [#sprite=upset]Uh, not sure I wanna do that.[do Variables.mod_char_var("NPC_1", "relationship", -1)] => sarah
 
 ~ sarah
 Micah: Anyway, here's today's bag of items. Where's the Shopkeeper? The real one, I mean? [do DialogueFuncs.add_object_to_workbench("suitcase")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
-#add items
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Micah!
-Micah: [#sprite=happy]Oh, hi, Sarah!
-Micah: [#sprite=happy]Ready to go?
-Sarah: [#sprite=happy]Of course I am. 
+Micah: [#sprite=happy]Oh, hi, Sarah...
+Micah: [#sprite=happy]You ready to go?
+Sarah: [#sprite=happy]Of course. 
 Sarah: [wait=0.3]...Hello, random, creepy stranger. 
 - Hello, random, creepy girl. => hello
 - Nice to meet you too, Sarah.  => hello
@@ -226,11 +304,11 @@ Shopkeeper: Told you to stop running down the stairs, Sarah.
 Sarah: Sorry, dad. Micah and I are in a bit of a hurry.
 Shopkeeper: What are the two of you up to now?
 Sarah: [#sprite=happy]It's a secret. You'll see.
-Shopkeeper: [#sprite=worried]Just keep out of trouble this time. Please. 
+Shopkeeper: [#sprite=worried]Just keep out of trouble this time, please. 
 Sarah: [#sprite=upset]Course we will. When haven't we?
 Sarah: [#sprite=happy]Anyway, see you later. Bye!
 Micah: [#sprite=happy]Bye, Shopkeeper! Bye, fake 'keeper!
 Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_close")][do! DialogueFuncs.exit_characters(["Sarah", "Micah"])][#sprite=laugh]...Devils, the two of them. 
-Shopkeeper: I'll be right back, if you don't mind. Got to say my prayers for the day.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+Shopkeeper: I'll be right back, if you don't mind. Got to say my prayers for the day.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 
 => END 

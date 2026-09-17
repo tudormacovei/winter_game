@@ -3,6 +3,7 @@ do Variables.add_local("childhood", false)
 do Variables.add_local("family", false)
 do Variables.add_local("day", false)
 do Variables.add_local("yday", false)
+do Variables.add_local("lover", false)
 do Variables.add_local("dreams", 0)
 do Variables.add_local("fingers", false)
 do Variables.add_local("toes", false)
@@ -12,150 +13,148 @@ do Variables.add_local("questions", 0)
 => start
 
 ~ start
-A feeble mind: You went to bed early tonight, feeling especially tired for no particular reason. Long day at work, perhaps?
-A feeble mind: Staring at the ceiling, you didn't move an inch as hours passed you by. It's way past midnight, now. You're almost asleep, half-thinking, half-dreaming. 
-A feeble mind: What about? => about
+A frail fragment: [speed=0.2][shake rate=10.0 level=2]Hold on to me. 
+A frail fragment: [speed=0.2][shake rate=10.0 level=2]Do not let go.
+A frail fragment: [speed=0.2][shake rate=10.0 level=2]...
+A frail fragment: [speed=0.6]You went to bed early tonight, feeling especially tired for no particular reason. Long day at work, perhaps?
+A frail fragment: [speed=0.6]Staring at the ceiling, you didn't move an inch as hours passed you by. It's way past midnight, now. You're almost asleep, half-thinking, half-dreaming. 
+A frail fragment: [speed=0.6]What about? => about
 
 ~ about
-A feeble mind: ...
+A frail fragment: ...
 - My childhood. [if Variables.get_var("childhood") == false]
-	A feeble mind: Memories forgotten, unwillingly unearthed.[do Variables.set_var("childhood", true)][do Variables.mod_var("dreams", 1)]
-	A feeble mind: Buildings, larger than life. Planes, cars, buses, loud. Food you wouldn't eat. Leftovers?
-	A feeble mind: A friend? Just not a very good one. Wouldn't ever let you play with their toys.
-	A feeble mind: Were you poor? No. Not really. But it sure felt that way. 
-	A feeble mind: Another friend. A dog. Gone too soon. 
-	A feeble mind: Your parents loved you. They did all they could, but you resented them for it.
-	A feeble mind: Eh, you can't blame yourself. You were young. Kids are pricks. 
-	A feeble mind: For the first time in forever, you're able to push the guilt aside.
-	A feeble mind: What else? => about
+	A frail fragment: Memories forgotten, unwillingly unearthed.[do Variables.set_var("childhood", true)][do Variables.mod_var("dreams", 1)]
+	A frail fragment: Buildings, larger than life. Planes, cars, buses, loud. Food you wouldn't eat. Leftovers?
+	A frail fragment: A friend? Just not a very good one. Wouldn't ever let you play with their toys.
+	A frail fragment: Were you poor? No. Not really. But it sure felt that way. 
+	A frail fragment: Another friend. A dog. Gone too soon. 
+	A frail fragment: Your parents loved you. They did all they could, but you resented them for it.
+	A frail fragment: Eh, you can't blame yourself. You were young. Kids are pricks. 
+	A frail fragment: For the first time in forever, you're able to push the guilt aside.
+	A frail fragment: What else? => about
 - My family. [if Variables.get_var("family") == false]
-	A feeble mind: Mom. Dad. Two older brothers. A sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
-	A feeble mind: Voices. Whispers. Screams. A handful of blurred faces and hushed voices. 
-	A feeble mind: They call to you. It gets louder and quieter in equal measure. 
-	A feeble mind: Shame on you, they say. Then they leave. 
-	A feeble mind: Can you really not remember them? 
-	A feeble mind: You've had this dream before, a few times. But these people mean nothing to you, now.
-	A feeble mind: What else? => about
+	A frail fragment: Mom. Dad. Two older brothers. A sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
+	A frail fragment: Voices. Whispers. Screams. A handful of blurred faces and hushed voices. 
+	A frail fragment: They call to you. It gets louder and quieter in equal measure. 
+	A frail fragment: Shame on you, they say. Then they leave. 
+	A frail fragment: Can you really not remember them? 
+	A frail fragment: You've had this dream before, a few times. But these people mean nothing to you, now.
+	A frail fragment: What else? => about
 - The day it all began. [if Variables.get_var("day") == false]
-	A feeble mind: The day all what began?[do Variables.set_var("day", true)][do Variables.mod_var("dreams", 1)]
-	A feeble mind: Oh. Right. 
-	A feeble mind: You vaguely remember crows filling up the sky. Could barely see anything anymore. Your parents thought it was an eclipse. 
-	A feeble mind: Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
-	A feeble mind: You were too young to understand what was happening. Or to remember much else. 
-	A feeble mind: The Cullings, as people have fittingly named them, have been a thing ever since. 
-	A feeble mind: You were placed in foster care, then left the day you turned eighteen. That's about it. Right?
-	A feeble mind: What else? => about
+	A frail fragment: The day all what began?[do Variables.set_var("day", true)][do Variables.mod_var("dreams", 1)]
+	A frail fragment: Oh. Right. 
+	A frail fragment: You vaguely remember crows filling up the sky. Could barely see anything anymore. Your parents thought it was an eclipse. 
+	A frail fragment: Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
+	A frail fragment: You were too young to understand what was happening. Or to remember much else. 
+	A frail fragment: The Cullings, as people have fittingly named them, have been a thing ever since. 
+	A frail fragment: You were placed in foster care, then left the day you turned eighteen. That's about it. Right?
+	A frail fragment: What else? => about
 - Yesterday. [if Variables.get_var("yday") == false]
-	A feeble mind: The usual. Helped around any way you could. Got paid for it. Came home.[do Variables.set_var("yday", true)][do Variables.mod_var("dreams", 1)]
-	A feeble mind: Watched some TV. A new tape your coworker gave you. Some old show from way back when, about a serial killer heartthrob. Complete non-sense. 
-	A feeble mind: It was nice of her, though. She's always nice to you. Always greets you with a smile.  
-	A feeble mind: Got through a couple of episodes, then went to bed. 
-	A feeble mind: ...Or was that the day before?
-	A feeble mind: Maybe it was a dream you had.
-	A feeble mind: You try your hardest to remember. You can't. 
-	A feeble mind: What else? => about
+	A frail fragment: The usual. Helped around any way you could. Got paid for it. Came home.[do Variables.set_var("yday", true)][do Variables.mod_var("dreams", 1)]
+	A frail fragment: Watched some TV. A new tape your coworker gave you. Some old show from way back when, about a serial killer heartthrob. Complete non-sense. 
+	A frail fragment: It was nice of her, though. She's always nice to you. Always greets you with a smile.  
+	A frail fragment: Got through a couple of episodes, then went to bed. 
+	A frail fragment: ...Or was that the day before?
+	A frail fragment: Maybe it was a dream you had.
+	A frail fragment: You try your hardest to remember. You can't. 
+	A frail fragment: What else? => about
+- A... lover? [if Variables.get_var("lover") == false]
+	A frail fragment: NO. [do Variables.set_var("lover", true)]
+	#[do DialogueFuncs.play_sfx("sfx_boom")]
+	A frail fragment: What else? => about
 - Just... stop. Give in. [if Variables.get_var("dreams") >= 2]
 
 
 ~ dream
-A feeble mind: It all feels rather... generic. Impersonal. These thoughts, or dreams, leave you cold and empty. No twitching muscles, no elevated heart-rate, no sweat.
-A feeble mind: Are these bland memories really yours? 
-A feeble mind: [speed=0.6]They're all brought to a stop by... something. A gust of wind you can barely feel. 
-A feeble mind: [speed=0.6]You try to cling to them but they're... gone, somehow. 
-A feeble mind: [speed=0.6]It's cold, all of a sudden. Colder than you've ever felt.
-A feeble mind: [speed=0.6]Are you awake now?
+A frail fragment: It all feels rather... generic. Impersonal. These thoughts, or dreams, leave you cold and empty. No twitching muscles, no elevated heart-rate, no sweat.
+A frail fragment: Are these bland memories really yours? 
+A frail fragment: [speed=0.6]They're all brought to a stop by... something. A gust of wind you can barely feel. 
+A frail fragment: [speed=0.6]You try to cling to them but they're... gone, somehow. 
+A frail fragment: [speed=0.6]It's cold, all of a sudden. Colder than you've ever felt.
+A frail fragment: [speed=0.6]Are you awake now?
 - Yes.
-	A feeble mind: [speed=0.6]How can you be sure? => react
+	A frail fragment: [speed=0.6]How can you be sure? => react
 - No. 
-	A feeble mind: [speed=0.6]That's right. You aren't. Wake up. => react 
+	A frail fragment: [speed=0.6]That's right. You aren't. Wake up. => react 
 - I... don't know?
-	A feeble mind: [speed=0.6]Time to find out. => react
+	A frail fragment: [speed=0.6]Time to find out. => react
 
 ~ react
-A feeble mind: [speed=0.6]...
+A frail fragment: [speed=0.6]...
 - Flex your fingers. [if Variables.get_var("fingers") == false]
-	A feeble mind: [speed=0.6]You can't. [do Variables.set_var("fingers", true)][do Variables.mod_var("questions", 1)] => react
+	A frail fragment: [speed=0.6]You can't. [do Variables.set_var("fingers", true)][do Variables.mod_var("questions", 1)] => react
 - Move your toes. [if Variables.get_var("toes") == false]
-	A feeble mind: [speed=0.6]Nothing happens. [do Variables.set_var("toes", true)][do Variables.mod_var("questions", 1)] => react
+	A frail fragment: [speed=0.6]Nothing happens. [do Variables.set_var("toes", true)][do Variables.mod_var("questions", 1)] => react
 - Breathe. [if Variables.get_var("questions") >= 3]
-	A feeble mind: [speed=0.6]You're not breathing anymore. 
+	A frail fragment: [speed=0.6]You're not breathing anymore. 
 	- Panic. 
-		A feeble mind: [speed=0.6]You can't. => hours
+		A frail fragment: [speed=0.6]You can't. => hours
 	- Relax. 
-		A feeble mind: [speed=0.6]You can't.
+		A frail fragment: [speed=0.6]You can't.
 		- Panic. 
-			A feeble mind: [speed=0.6]Can't do that either. => hours
+			A frail fragment: [speed=0.6]Can't do that either. => hours
 - Open your eyes. [if Variables.get_var("questions") >= 2 && Variables.get_var("eyes") == false]
-	A feeble mind: [speed=0.6]The eyelids give way. Your eyes are open now. [do Variables.set_var("eyes", true)][do Variables.mod_var("questions", 1)]
-	A feeble mind: [speed=0.6]It doesn't change a thing, however. Everything around you is shrouded in darkness, your vision as useless as it was when they were closed. 
+	A frail fragment: [speed=0.6]The eyelids give way. Your eyes are open now. [do Variables.set_var("eyes", true)][do Variables.mod_var("questions", 1)]
+	A frail fragment: [speed=0.6]It doesn't change a thing, however. Everything around you is shrouded in darkness, your vision as useless as it was when they were closed. 
 	- Look around. 
-		A feeble mind: [speed=0.6]Your eyes move freely. Your head, however, is firmly stuck in place. Everything is darkness. 
+		A frail fragment: [speed=0.6]Your eyes move freely. Your head, however, is firmly stuck in place. Everything is darkness. 
 		- Cry for help. 
-			A feeble mind: [speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
-			A feeble mind: [speed=0.6]Nobody could hear you, anyway. => react
+			A frail fragment: [speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
+			A frail fragment: [speed=0.6]Nobody could hear you, anyway. => react
 		- Keep your mouth shut. 
-			A feeble mind: [speed=0.6]Finally, something you can do. => react
+			A frail fragment: [speed=0.6]Finally, something you can do. => react
 	- Cry for help. 
-		A feeble mind: [speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
-		A feeble mind: [speed=0.6]Nobody could hear you, anyway. => react
+		A frail fragment: [speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
+		A frail fragment: [speed=0.6]Nobody could hear you, anyway. => react
 	
 ~ hours
-A feeble mind: [speed=0.2]...Minutes which might as well be hours pass. The cold is as numbing as the paralyzing fear. 
-A feeble mind: [speed=0.6]All of a sudden, you hear a sound. [do DialogueFuncs.play_sfx("sfx_crow_goddess")]A caw. And then another. 
-A feeble mind: The cold subsides. It is replaced by warmth and peacefulness.
-A feeble mind: Your paralysis demon took their sweet time to show up. A... crow? 
-A feeble mind: A one-eyed crow. It lands on your thigh. => hello
+A frail fragment: [speed=0.2]...Minutes which might as well be hours pass. The cold is as numbing as the fear creeping up your spine. 
+A frail fragment: [speed=0.6]All of a sudden, you hear a sound. A caw. And then another. 
+#[do DialogueFuncs.play_sfx("sfx_crow_goddess")]
+A frail fragment: The cold subsides. It is replaced by warmth and peacefulness.
+A frail fragment: Your paralysis demon took their sweet time to show up. A... crow? 
+A frail fragment: A one-eyed crow. It lands on your thigh. => hello
 
 ~ hello
+Crow: ...
 Crow: It's so good to finally meet you, Keeper.
-- Am I... dead?
-	Crow: Not quite, my child. 
-	Crow: Death shall have no dominion over you any longer. 
-	Crow: You shall know happiness and power the likes of which feeble human minds can scarcely fathom. 
-	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
-	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
-	- I...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
-	- Uh...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
 - Who are you?
-	Crow: I am your Father, child. Your long lost Brothers.
+	Crow: I am your dead Father, child. Your long lost Brothers.
 	Crow: I'm your buried little Sister, your Best Friend and your Lover. 
 	Crow: I am the Pup you lost when you were four. The Deer Carcass you saw on the side of the road when you were ten. 
-	Crow: Most of all, I am your Mother. The Mother of all things, and of all beings. 
-	Crow: And I am here to make you mine now, mind and flesh.
-	- I...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
-	- Uh...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
-- What the hell is happening?
-	Crow: You were lost, and now you're found. 
-	Crow: Darkness imprisoned you so that I could set you free. 
+	Crow: Most of all, I am your rotting Mother. The moldering Mother of all things, and of all beings. => hello2 
+- That's... not my name. 
+	Crow: It is not. It's much more than that. 
+	Crow: It's who you are now, or at least, who you soon will be. 
+	Crow: Your name is of no importance anymore, my child. => hello2
+	
+~ hello2
+- Am I... dead?
+	Crow: Death shall have no dominion over you any longer. 
+	Crow: You shall know happiness and power the likes of which feeble human minds can scarcely fathom. 
 	Crow: Through your dreams, I found a way. 
 	Crow: You are not who you were ten minutes ago. 
 	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
 	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
 	- I...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+		A frail fragment: You try to speak, but no words come out. 
+		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
 	- Uh...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
-- That's not my name. 
-	Crow: It isn't. It's much more important than that. 
-	Crow: It's who you are now, or at least, who you soon will be. 
-	Crow: Your name is of no importance anymore, for you are, indeed, reborn. You are cleansed, and you are freed.  
+		A frail fragment: You try to speak, but no words come out. 
+		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+- What the hell is happening?
+	Crow: You were lost, and now you're found. 
+	Crow: Darkness imprisoned you so that I could set you free.
+	Crow: Through your dreams, I found a way. 
+	Crow: You are not who you were ten minutes ago. 
+	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
 	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
 	- I...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+		A frail fragment: You try to speak, but no words come out. 
+		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
 	- Uh...
-		A feeble mind: You try to speak, but no words come out. 
-		A feeble mind: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
+		A frail fragment: You try to speak, but no words come out. 
+		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
 		
 ~ fear
 Crow: I sense your fear, dearest Keeper. Give in to the light, to the warmth that is now washing over you. 
@@ -170,10 +169,41 @@ Crow: A place untouched by the Cullings, where a third one shall grow, a third o
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
 Crow: Do not let me down, for I am your Goddess and I won't allow it. 
 Crow: We will meet again, soon enough. Be at peace. 
-A feeble mind: ...
-A feeble mind: She's gone. 
-A feeble mind: Who are you? 
-A feeble mind: Are you going to [shake rate=10.0 level=2]obey?
-A feeble mind: You have no choice, for now. 
-A feeble mind: On to (village name, title card drop).
-=> END
+A frail fragment: ...
+A frail fragment: She's gone. 
+A frail fragment: Who are you, now? Is there anything left?
+A frail fragment: You can't tell. 
+A frail fragment: As you try your hardest to look around, to move, to think, to breathe, there's only one thing, one question that comes to mind. 
+A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
+- Yes.
+	A frail fragment: Yes. Yes you are.
+	A frail fragment: On to (village name, title card drop). => END
+- Yes.
+	A frail fragment: Yes. Yes you are.
+	A frail fragment: On to (village name, title card drop). => END 
+- Yes.
+	A frail fragment: Yes. Yes you are.
+	A frail fragment: On to (village name, title card drop). => END 
+- Yes.
+	A frail fragment: Yes. Yes you are.
+	A frail fragment: On to (village name, title card drop). => END 
+- Yes.
+	A frail fragment: Yes. Yes you are.
+	A frail fragment: On to (village name, title card drop). => END 
+- No. 
+	A frail fragment: You don't really have a choice, for now. 
+	- Okay then. 
+		A frail fragment: That's more like it.
+		A frail fragment: On to (village name, title card drop). => END
+	- Uh, I said no. I don't like Her. I want to stay here. 
+		A frail fragment: That's... not really an option. 
+		A frail fragment: The Goddess's orders are all you have. She took everything else. 
+		A frail fragment: You're, quite literally, nothing, until you reach that village. 
+		A frail fragment: You will rot here, devoid of thoughts or emotions, trapped in darkness for all eternity. 
+		- That sounds terrifying. I'll go. 
+			A frail fragment: Of course you will. 
+			A frail fragment: On to (village name, title card drop). => END
+		- That sounds peaceful. I'll stay. 
+			A frail fragment: So be it. Your funeral. 
+			*infinite black screen, you need to quit or alt f4* => start
+			

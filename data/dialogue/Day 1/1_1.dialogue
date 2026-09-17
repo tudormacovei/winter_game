@@ -202,16 +202,16 @@ Shopkeeper: ...
 		Shopkeeper: You'll have to see it to believe it. Perhaps, if you're a doubter now, those doubts will vanish then. 
 		Shopkeeper: The Cullings are our Goddess's work. 
 		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: Sounds brutal, I know. But we, as a species, have been ruthless ourselves to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we, ourselves, have been ruthless ourselves to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
 		Shopkeeper: Something had to be done. 
 		- I've seen countless people die horrible deaths. I can tell you, it is not worth it.  
-			Shopkeeper: Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions
+			Shopkeeper: [#sprite=worried]Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions
 		- We had it coming. Hopefully some good comes out of it. 
-			Shopkeeper: Time will tell. Either way, it's how things are now and we have to adjust to it.[do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions
+			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it.[do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions
 	- Could it be that She's the one causing them, then?
 		Shopkeeper: She sure is. It's a well known fact around here. 
 		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we ourselves, as a species, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we ourselves, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
 		Shopkeeper: Something had to be done. 
 		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
 			Shopkeeper: [#sprite=worried]Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions
@@ -234,7 +234,7 @@ Shopkeeper: ...
 	- That's... fucked up. 
 		Shopkeeper: [#sprite=worried]Salvation comes at a cost.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions
 - Kind of feels like I'm joining a cult. [if Variables.get_char_var("NPC_4", "cult") == false && Variables.get_var("religious_fervour") <= 6]
-	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "cult", true)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
+	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "cult", true)][do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
 	Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
 	Shopkeeper: There are some practices and beliefs which might seem... odd, especially to an outsider.
 	Shopkeeper: Way I see it, at least they've got a purpose.
@@ -284,13 +284,13 @@ Shopkeeper: ...
 			- Okay, I trust you. => questions
 			- Fine. For now. => questions
 - I think your Goddess brainwashed me. [if Variables.get_char_var("NPC_4", "brainwash") == false]
-	Shopkeeper: That can't be right. She'd never do that. [do Variables.set_char_var("NPC_4", "brainwash", true)][do Variables.mod_char_var("NPC_4", "questions", 1)]
+	Shopkeeper: That can't be right. She wouldn't. [do Variables.set_char_var("NPC_4", "brainwash", true)][do Variables.mod_char_var("NPC_4", "questions", 1)]
 	Shopkeeper: What makes you say that?
 	- Nevermind. Forget it. 
 		Shopkeeper: If you so wish. Just trust me, I know what I'm talking about.
-		Shopkeeper: She wouldn't. => questions
+		Shopkeeper: She would never. => questions
 	- I can't remember anything that happened before She visited me. 
-		Shopkeeper: Look, perhaps you were in... an accident, or something. Hit your head, or got hit by a car, or the like. Lost your memories. 
+		Shopkeeper: Look, perhaps you were in... an accident, or something. Hit your head, or got run over by a car, or the like. Lost your memories. These things happen. 
 		Shopkeeper: The Goddess looks out for those in need. For those who are lost. Suffering. 
 		Shopkeeper: Think about it. It makes much more sense than her "brainwashing" you. 
 		- I guess that's a possibility. 
@@ -393,9 +393,14 @@ Shopkeeper: You can keep practicing, if you so wish. These items are from old ba
 -  I want to practise a little more. 
 	Shopkeeper: [#sprite=laugh]You're enjoying this, eh? Good. 
 	Shopkeeper: I've got a few more items around the place. Here, you can have them. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")]
-	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here.
-	Shopkeeper: I'll go check up on Sarah while you work. Be right back. => END
+	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here. => wow
 - Think I got it. Let's move on.
-	Shopkeeper: Alright then. I'll go check up on Sarah real quick, she should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
-	
+	Shopkeeper: Alright then. I'll go check up on Sarah real quick, if you don't mind. She should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+
+~ wow
+if DialogueFuncs.get_object_count() == 0
+	Shopkeeper: Oh, wow, you're quick. Looks like I'm already the second best cleanser in town. Well done.
+	Shopkeeper: I'll go check up on Sarah real quick, if you don't mind. She should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+else
+	Shopkeeper: I'll go check up on Sarah while you work, if you don't mind. She should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 => END

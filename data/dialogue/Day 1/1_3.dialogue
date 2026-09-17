@@ -10,14 +10,14 @@ Shopkeeper: He's a good kid, eh?
 - Yeah. I kind of like him. => like 
 
 ~ like 
-Shopkeeper: [#sprite=laugh]I'm very glad to hear that. Most people don't. 
+Shopkeeper: [#sprite=laugh]I'm very glad to hear that. Most people don't. [do Variables.mod_char_var("NPC_4", "relationship", 1)]
 Shopkeeper: [#sprite=worried]He's had a rough time. His mother died while giving birth, and his dad died himself, recently. 
 Shopkeeper: The Elders took him in. He's one of their messengers, now. 
 Shopkeeper: But he mostly delivers items to us and back to their owners.
 Shopkeeper: Comes here every morning, so you'll be seeing a lot of him. 
 Shopkeeper: I'm just glad Sarah has someone her age to hang around with. 
 - Sarah seems nice. => nice
-- You seem to really care about her. => nice 
+- You really care about her, don't you? => nice 
 
 ~ eh
 Shopkeeper: Eh, you'll get used to him. 
@@ -27,7 +27,24 @@ Shopkeeper: But he mostly delivers items to us and back to their owners.
 Shopkeeper: Comes here every morning, so you'll be seeing a lot of him. 
 Shopkeeper: I'm just glad Sarah has someone her age to hang around with. 
 - Sarah seems nice. => nice
-- You seem to really care about her. => nice
+- You really care about her, don't you? => nice
+- She'd probably be better off without him. => mean
+
+~ mean
+Shopkeeper: That's... simply not true.  [do Variables.set_char_var("NPC_4", "relationship", 1)]
+Shopkeeper: Hells, he's a kid. You barely met him. 
+Shopkeeper: And how would you know what's best for my Sarah? You barely got here. 
+- Okay. Sorry. 
+	Shopkeeper: Just... be nice, yeah? He's like a son to me.[do Variables.set_char_var("NPC_4", "relationship", 2)] => next
+- Whatever. 
+	Shopkeeper: ... => next2
+- Fuck him. And fuck Sarah, too. 
+	Shopkeeper: ...
+	A feeble fragment: [wait=1]You see the Shopkeeper's fist closing in on your face. Repeatedly. 
+	A feeble fragment: Blood drips down your nose. It fills your mouth, and reaches your chin. Your neck. 
+	A feeble fragment: He grabs your hair and smashes your face on the counter until you feel nothing anymore.
+	A feeble fragment: The last thing you see is an infected red milk carton. Then, you die. 
+	*death screen* => start
 
 ~ nice
 Shopkeeper: Oh, she's an angel. 
@@ -57,7 +74,7 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 				Shopkeeper: And those two can very often be the same thing, at the end of the day. => next
 			- Just want to make sure you're not brainwashing the child. 
 				Shopkeeper: [#sprite=worried]I can only hope your attitude will change, once you feel the Goddess's warmth. [do Variables.mod_var("religious_fervour", -1)]
-				Shopkeeper: [#sprite=worried]If not, may She have mercy and help you find the light, for I won't. I can't. [do Variables.set_char_var("NPC_4", "relationship", 1)] => next
+				Shopkeeper: [#sprite=worried]If not, may She have mercy and help you find the light, for I won't. I can't. [do Variables.set_char_var("NPC_4", "relationship", 1)] => next2
 - She a true believer? [if Variables.get_var("religious_fervour") >= 6]
 	Shopkeeper: Course she is. 
 	Shopkeeper: I've been teaching her the ways of our Goddess ever since she was born. 
@@ -84,12 +101,12 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 				Shopkeeper: It is.[do Variables.mod_var("religious_fervour", 1)][do Variables.set_char_var("NPC_4", "relationship", 1)] 
 				Shopkeeper: Not that it's any of your business. 
 				Shopkeeper: [#sprite=worried]Tread carefully. I'd do literally anything to protect her.
-				Shopkeeper: [#sprite=worried]I mean it. => next
+				Shopkeeper: [#sprite=worried]I mean it. => next2
 - You two don't look that much alike. 
 	Shopkeeper: [#sprite=worried]...Yeah. She gets her looks from her mother. 
 	Shopkeeper: [#sprite=laugh]Thankfully. 
 	- Don't sell yourself short. 
-		Shopkeeper: [#sprite=laugh]Hahaha. Flattery does work on me, can't lie.[do Variables.set_char_var("NPC_4", "relationship", 4)] => next
+		Shopkeeper: [#sprite=laugh]Hahaha. Flattery does work on me, can't lie.[do Variables.mod_char_var("NPC_4", "relationship", 1)] => next
 	- What happened to her?
 		Shopkeeper: [#sprite=worried]Don't really wanna talk about it, if you don't mind. 
 		- Of course. I understand.
@@ -99,7 +116,7 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 			Shopkeeper: [#sprite=worried]And I'd appreciate it if you didn't pry further. [do Variables.set_char_var("NPC_4", "relationship", 1)] 
 			- Okay. Sorry. 
 				Shopkeeper: Don't worry about it. [do Variables.set_char_var("NPC_4", "relationship", 2)] => next
-			- Fine. => next
+			- Fine. => next2
 - She's lucky to have you. 
 	Shopkeeper: [#sprite=laugh]Hah, nowhere near as lucky as I am to have her.
 	Shopkeeper: But thank you. I often wonder if I'm doing right by her. 
@@ -112,7 +129,7 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 	- I'm sure she appreciates it. 
 		Shopkeeper: [#sprite=worried]She's too pure not to. [do Variables.set_char_var("NPC_4", "relationship", 4)] => next
 	- That comes dangerously close to blasphemy. [if Variables.get_var("religious_fervour") >= 5]
-		Shopkeeper: [#sprite=worried]... [do Variables.set_char_var("NPC_4", "relationship", 2)]
+		Shopkeeper: [#sprite=worried]... [do Variables.mod_var("religious_fervour", 1)][do Variables.set_char_var("NPC_4", "relationship", 2)]
 		Shopkeeper: [#sprite=worried]You're right. Forgive me. => next
 	
 
@@ -139,8 +156,16 @@ Shopkeeper: Think you're up to it?
 		Shopkeeper: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 - Think I wanna ask some questions, now, after all. [if Variables.get_char_var("NPC_4", "questions") == 0]
 	Shopkeeper: Oh, good. Shoot. => questions2 
-
-
+	
+~ next2
+Shopkeeper: Anyway, I'll let you finish up those items. 
+Shopkeeper: I've got some errands to run, so I'll leave you to it. 
+Shopkeeper: Might be late by the time I get back. See you tomorrow morning. 
+- See you.
+	Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
+- Actually, I wanted to ask you something...
+	Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_slam")]... => END 
+	
 ~ questions2
 Shopkeeper: ... 
 - Were you waiting for me last night? Didn't even get to properly knock before you opened the door. [if Variables.get_char_var("NPC_4", "wait") == false]
@@ -149,9 +174,15 @@ Shopkeeper: ...
 	Shopkeeper: And there you were. As soon as I saw you, I somehow knew it was you. Can't explain it any more than that, though I wish I could.
 	Shopkeeper: Plus, I didn't want your knocking to wake Sarah up, truth be told. She's a light sleeper. 
 	- To be honest, I, myself, kind of knew this was your house even before Joan pointed it to me.
-		Shopkeeper: There you have it. => questions2
+		Shopkeeper: There you have it. The Goddess works in ways unknown to us. => questions2
+	- No harm, no foul.
+		Shopkeeper: Appreciate it. => questions2
 	- Err, not sure how I feel about that. 
-		Shopkeeper: I know I'm being odd again. But it's the truth. => questions2
+		Shopkeeper: I know, I'm being odd again. But it's the truth.
+		- Just tone it down a bit, yeah?
+			Shopkeeper: [#sprite=worried]Duly noted. Already said I would. [do Variables.mod_char_var("NPC_4", "relationship", -1)] => questions2
+		- Guess I gotta get used to it, then. 
+			Shopkeeper: [#sprite=worried]Like I said, I'll try to make it easier on you. => questions2
 - How do you know so much about me already? [if Variables.get_char_var("NPC_4", "know") == false]
 	Shopkeeper: Your arrival was heralded by the Elders. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "know", true)]
 	Shopkeeper: They told me someone bearing the Gift would soon come to help me around with the shop. Goddess knows I could use it.
@@ -175,26 +206,26 @@ Shopkeeper: ...
 		Shopkeeper: You'll have to see it to believe it. Perhaps, if you're a doubter now, those doubts will vanish then. 
 		Shopkeeper: The Cullings are our Goddess's work. 
 		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: Sounds brutal, I know. But we, as a species, have been ruthless ourselves to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we, ourselves, have been ruthless ourselves to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
 		Shopkeeper: Something had to be done. 
 		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
-			Shopkeeper: Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way. => questions2
+			Shopkeeper: [#sprite=worried]Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions2
 		- We had it coming. Hopefully some good comes out of it. 
-			Shopkeeper: Time will tell. Either way, it's how things are now and we have to adjust to it. => questions2
+			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it.[do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions2
 	- Could it be that She's the one causing them, then?
 		Shopkeeper: She sure is. It's a well known fact around here. 
 		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we ourselves, as a species, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we ourselves, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
 		Shopkeeper: Something had to be done. 
 		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
-			Shopkeeper:[#sprite=worried] Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way. => questions2
+			Shopkeeper: [#sprite=worried]Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions2
 		- We had it coming. Hopefully some good comes out of it. 
-			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it. => questions2
+			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it.[do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions2
 - So, what's the deal with our so called Gift? [if Variables.get_char_var("NPC_4", "gift") == false]
 	Shopkeeper: I'll explain it once we start working. It will be easier for you to understand. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "gift", true)]
 	Shopkeeper: The gist of it is, we get visions from the Goddess from time to time, and we can see more than other people can. 
 	Shopkeeper: You'll see. => questions2
-- Who are the "Elders"? [if Variables.get_char_var("NPC_4", "elders") == false]
+- Who are these "Elders"? [if Variables.get_char_var("NPC_4", "elders") == false]
 	Shopkeeper: They're the founders and leaders of our wonderful village and church. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "elders", true)]
 	Shopkeeper: There's five of them, and they're the only ones who can communicate directly with the Goddess, besides me, of course. 
 	Shopkeeper: They're very old, hence the name. They rarely come out of their home. They have underlings and messengers in their service, and that's how they usually communicate the Goddess's will and teachings to us.
@@ -205,7 +236,7 @@ Shopkeeper: ...
 	Shopkeeper: Sounds worse than it is. All you have to do is not speak against or openly defy our Goddess. 
 	- Sounds simple enough. => questions2
 	- That's... fucked up. 
-		Shopkeeper: [#sprite=worried]Salvation comes at a cost. => questions2
+		Shopkeeper: [#sprite=worried]Salvation comes at a cost.[do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions2
 - Kind of feels like I'm joining a cult. [if Variables.get_char_var("NPC_4", "cult") == false]
 	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)][do Variables.set_char_var("NPC_4", "cult", true)]
 	Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
@@ -224,9 +255,9 @@ Shopkeeper: ...
 			Shopkeeper: [#sprite=worried]The Elders, not so much. I'd appreciate it if this and any further such mistakes on my part stayed between us.
 			Shopkeeper: You scratch my back, I'll scratch yours, eh?
 			- Sure thing. 
-				Shopkeeper: Appreciate it.[do Variables.set_char_var("NPC_4", "relationship", 4)] => questions2
+				Shopkeeper: Appreciate it.[do Variables.mod_char_var("NPC_4", "relationship", 1)] => questions2
 			- We'll see. 
-				Shopkeeper: [#sprite=worried]Understandable. Guess I'll have to prove my worth first.[do Variables.set_char_var("NPC_4", "relationship", 2)] => questions2
+				Shopkeeper: [#sprite=worried]Understandable. Guess I'll have to prove my worth first.[do Variables.mod_char_var("NPC_4", "relationship", -1)] => questions2
 	- Still feels weird. 
 		Shopkeeper: I get it. I do. Just give it a bit of time. Besides, you've got me to help you settle in.[do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions2
 - What was your daughter talking about last night, with the dreams and everything? [if Variables.get_char_var("NPC_4", "dream") == false]
@@ -283,5 +314,6 @@ Shopkeeper: ...
 		Shopkeeper: ... [do DialogueFuncs.play_sfx("sfx_door_close")] => END
 	- See you tomorrow. 
 		Shopkeeper: ... [do DialogueFuncs.play_sfx("sfx_door_close")] => END
+
 => END
 
