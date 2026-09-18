@@ -1,0 +1,40 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+Shopkeeper: [do DialogueFuncs.play_sfx("sfx_shh")]Shh. Quiet. My daughter's asleep. 
+Shopkeeper: She's been helping me out all day and I'd hate for us to wake her up with our chatter. 
+Shopkeeper: Anyway, you're finally here! You sure took your time. 
+Shopkeeper: I know who you are and why you've come. The Goddess told me everything. 
+Shopkeeper: Except for your name. What shall I call you?
+- I'm not sure...
+	Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")]...Dad? What's going on? Who is that? => dad 
+- Keeper, something...
+	Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")]...Dad? What's going on? Who is that? => dad 
+- I can't remember...
+	Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")]...Dad? What's going on? Who is that? => dad 
+	
+~ dad
+Shopkeeper: Hells. Go back to sleep, darling. Everything's fine. 
+Sarah: [#sprite=upset][do DialogueFuncs.play_sfx("sfx_sniff")]I've had one of those dreams again... They're back. 
+Shopkeeper: [#sprite=worried]Back to bed. I'm right behind you. 
+Shopkeeper: [#sprite=worried][wait=0.6]...Have to go. That there's your room. I've readied a change of clothes and a warm bath for you. 
+Shopkeeper: Make sure to get some sleep. Tomorrow we wake early. 
+Shopkeeper: See you then. 
+- Sorry I woke her up.
+	Shopkeeper: [#sprite=worried]No harm done. It wasn't you. 
+	Shopkeeper: [#sprite=worried]Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+- Weird welcoming party. 
+	Shopkeeper: [#sprite=worried]Hah. I know. You'll have to forgive me. Hospitality is usually my strong suit.
+	Shopkeeper: I'll make it up to you, I promise. Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+- But I have so many questions. 
+	Shopkeeper: And I'll answer each and every one of them as best I can. 
+	Shopkeeper: But it will have to wait until tomorrow. Forgive me. 
+	Shopkeeper: Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END  
+- Night. 
+	Shopkeeper: Good night.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+
+
+=> END
+

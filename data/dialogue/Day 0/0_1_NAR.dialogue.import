@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b5h0d0vhqf14"
+path="res://.godot/imported/0_1_NAR.dialogue-9cd0b4ddf5589cd9931f64b39c6f24d9.tres"
+
+[deps]
+
+source_file="res://data/dialogue/Day 0/0_1_NAR.dialogue"
+dest_files=["res://.godot/imported/0_1_NAR.dialogue-9cd0b4ddf5589cd9931f64b39c6f24d9.tres"]
+
+[params]
+
+defaults=true
