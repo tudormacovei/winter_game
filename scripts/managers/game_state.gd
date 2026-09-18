@@ -28,6 +28,12 @@ signal day_started(day_index: int)
 signal player_died
 
 @warning_ignore("unused_signal")
+signal life_lost
+
+@warning_ignore("unused_signal")
+signal day_end_screen_shown
+
+@warning_ignore("unused_signal")
 signal new_object_on_workbench
 
 func wait_for(signal_name: String) -> void:

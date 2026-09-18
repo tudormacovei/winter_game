@@ -57,7 +57,7 @@ func show_day_end_screen(day_definition: DayDefintion) -> void:
 	_day_end_controller.show()
 	await fade_from_black()
 
-	AudioManager.play_sfx(Config.END_DAY_SFX_NAME)
+	GameState.emit_signal("day_end_screen_shown")
 	
 	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
 	

@@ -72,6 +72,12 @@ func _ready():
 	if GameState.has_signal("player_died"):
 		GameState.connect("player_died", Callable(self, "_on_player_died"))
 
+	if GameState.has_signal("life_lost"):
+		GameState.connect("life_lost", Callable(self, "_on_life_lost"))
+
+	if GameState.has_signal("day_end_screen_shown"):
+		GameState.connect("day_end_screen_shown", Callable(self, "_on_day_end_screen_shown"))
+
 	_load_day_resources()
 	_load_character_resources()
 	_restore_progress_from_save()
@@ -367,6 +373,12 @@ func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: floa
 	if letter_spoke_counter % Config.LETTER_SPOKE_FREQUENCY == 0:
 		letter_spoke_counter = 0
 		AudioManager.play_sfx_on_letter_spoke()
+
+func _on_life_lost():
+	AudioManager.play_sfx(Config.CANDLE_BLOW_SFX_NAME)
+
+func _on_day_end_screen_shown():
+	AudioManager.play_sfx(Config.END_DAY_SFX_NAME)
 
 func _on_player_died():
 	if debug_disable_death:

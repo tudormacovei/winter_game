@@ -111,7 +111,7 @@ func _lose_life() -> void:
 		_focused_object.defocus()
 
 	await get_tree().create_timer(life_loss_before_sound_delay).timeout
-	AudioManager.play_sfx(Config.CANDLE_BLOW_SFX_NAME)
+	GameState.emit_signal("life_lost")
 
 	await get_tree().create_timer(life_loss_before_candle_delay).timeout
 	_remaining_lives = maxi(_remaining_lives - 1, 0)
