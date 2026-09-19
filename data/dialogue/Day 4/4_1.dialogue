@@ -73,7 +73,7 @@ You watch through the window. You see people gathered around a body, near the ga
 Through a small gap, you're able to see Duncan's body, laying on the ground, deformed and dry, as the Culling sucks the final breath of life out of his body.
 They almost made it. But the Goddess got to him first. 
 It's the first time ever that the Cullings have taken someone's life inside of the village. 
-[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]Sarah's crying. Her fate is still in question. => END 
+[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]You hear Sarah crying. Her fate is still in question. => END 
 
 ~ final2
 [wait=3]The sky turns red. The Culling has oficially begun. 
@@ -83,7 +83,7 @@ You watch through the window. You see people gathered around a body, near the sa
 Through a small gap, you're able to see Duncan's body, laying on the ground, deformed and dry, as the Culling sucks the final breath of life out of his body. 
 He didn't make it to his execution. The Goddess got to him first. 
 It's the first time ever that the Cullings have taken someone's life inside of the village. 
-[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]Sarah's crying. Her fate is still in question. => END 
+[do DialogueFuncs.play_sfx("sfx_sarah_cry_1")]You hear Sarah crying. Her fate is still in question. => END 
 
 
 => END

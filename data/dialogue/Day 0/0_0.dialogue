@@ -46,7 +46,7 @@ A frail fragment: ...
 	A frail fragment: You vaguely remember crows filling up the sky. Could barely see anything anymore. Your parents thought it was an eclipse. 
 	A frail fragment: Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
 	A frail fragment: You were too young to understand what was happening. Or to remember much else. 
-	A frail fragment: The Cullings, as people have fittingly named them, have been a thing ever since. 
+	A frail fragment: The Cullings, as people have fittingly named them, have been a threat ever since. 
 	A frail fragment: You were placed in foster care, then left the day you turned eighteen. That's about it. Right?
 	A frail fragment: What else? => about
 - Yesterday. [if Variables.get_var("yday") == false]
@@ -59,8 +59,7 @@ A frail fragment: ...
 	A frail fragment: You try your hardest to remember. You can't. 
 	A frail fragment: What else? => about
 - A... lover? [if Variables.get_var("lover") == false]
-	A frail fragment: NO. [do Variables.set_var("lover", true)]
-	#[do DialogueFuncs.play_sfx("sfx_boom")]
+	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom")]NO. [do Variables.set_var("lover", true)]
 	A frail fragment: What else? => about
 - Just... stop. Give in. [if Variables.get_var("dreams") >= 2]
 
@@ -109,8 +108,7 @@ A frail fragment: [speed=0.6]...
 	
 ~ hours
 A frail fragment: [speed=0.2]...Minutes which might as well be hours pass. The cold is as numbing as the fear creeping up your spine. 
-A frail fragment: [speed=0.6]All of a sudden, you hear a sound. A caw. And then another. 
-#[do DialogueFuncs.play_sfx("sfx_crow_goddess")]
+A frail fragment: [speed=0.6]All of a sudden, you hear a sound.[do DialogueFuncs.play_sfx("sfx_crow_goddess")] A caw. And then another. 
 A frail fragment: The cold subsides. It is replaced by warmth and peacefulness.
 A frail fragment: Your paralysis demon took their sweet time to show up. A... crow? 
 A frail fragment: A one-eyed crow. It lands on your thigh. => hello
@@ -163,7 +161,7 @@ Crow: But I must trust it with my life, for I have no other choice.
 Crow: I'm here to set you on your path. To guide, as I've done twice before, as I will four times more.  
 Crow: I bestow upon you my Gift of Sight. You shall see things where others cannot. Use it wisely, and with love.
 Crow: Go to a village up in the mountains. The village all these lowly heretics speak falsehoods about. 
-Crow: Go to (village name, game name?). My Home. My Church.
+Crow: Go to (village name, game name?), where dwell the founders of my Church. A haven for my children. 
 Crow: A place untouched by the Cullings, where a third one shall grow, a third one shall die, a third one shall live, and a third one shall fly. 
 #potential pop up: hmmm, that doesnt quite add up...
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
