@@ -168,6 +168,13 @@ func _set_environment_lights_blackout() -> void:
 	_world_environment.environment.ambient_light_energy = 0.0
 
 
+## Forces player death immediately, bypassing the normal life-loss flow.
+func kill_player() -> void:
+	if _is_dead:
+		return
+	_die()
+
+
 func _die() -> void:
 	_is_dead = true
 	set_process(false) # stops drain, regen
