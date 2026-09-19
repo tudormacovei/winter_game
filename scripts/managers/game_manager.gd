@@ -103,6 +103,10 @@ func dialogue_get_object_count() -> int:
 
 	return workbench.get_object_count()
 
+## Immediately triggers player death, bypassing the normal life-loss flow.
+func dialogue_kill_player():
+	health_manager.kill_player()
+
 func dialogue_exit_characters(display_names: Array):
 	if _character_animator == null:
 		Utils.debug_error("GameManager: Character animator not loaded. Aborting character exit for '%s'. This should not happen" % str(display_names))

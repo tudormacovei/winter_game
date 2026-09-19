@@ -40,6 +40,15 @@ func exit_characters(display_names: Array):
 
 	game_manager.dialogue_exit_characters(display_names)
 
+## Immediately kills the player, bypassing the normal life-loss flow.
+## Call the function like this: [do! DialogueFuncs.kill_player()]
+func kill_player():
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot kill player. Inform Prog team of error!")
+		return
+
+	game_manager.dialogue_kill_player()
+
 ## Returns false is the object is not special or if the object has not been completed
 func has_completed_special_object(object_name: String) -> bool:
 	return Variables.has(Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name)
