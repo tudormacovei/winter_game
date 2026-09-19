@@ -18,14 +18,21 @@ enum MethodName {GET_VAR, GET_CHAR_VAR}
 @export var method: MethodName = MethodName.GET_VAR
 @export var method_arguments: Array = []
 @export var operator: Operator = Operator.GREATER
-@export var compare_value: float = 0.0
+@export var compare_value: Variant
 
 func evaluate() -> bool:
 	if is_always_true:
 		return true
 		
 	var method_name = _get_method(method)
+
 	var variable = Variables.callv(method_name, method_arguments)
+	if variable == null:
+		Utils.debug_error("VariablePredicate: Method %s returned null. Check method arguments." % method_name)
+		return false
+	if typeof(variable) != typeof(compare_value):
+		Utils.debug_error("VariablePredicate: Variable type %s does not match compare value type %s Compaarison might be innacurate." % [typeof(variable), typeof(compare_value)])
+
 	match operator:
 		Operator.GREATER: return variable > compare_value
 		Operator.LESS: return variable < compare_value

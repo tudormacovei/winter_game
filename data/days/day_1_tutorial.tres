@@ -35,7 +35,7 @@ is_always_true = false
 method = 1
 method_arguments = ["NPC_4", "relationship"]
 operator = 4
-compare_value = 1.0
+compare_value = 0
 metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_rm8ga"]
