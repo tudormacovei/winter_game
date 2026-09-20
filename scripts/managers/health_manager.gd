@@ -6,7 +6,8 @@ const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 
 @export var health_drain_per_second: float = 1.5
 @export var life_loss_before_sound_delay: float = 0.2
-@export var life_loss_before_candle_delay: float = 0.4
+@export var life_loss_before_wind_delay: float = 0.5 # from the sound to the gust
+@export var life_loss_before_candle_delay: float = 1.6 # from the gust start to the candle being turned off
 @export var visual_health_curve: Curve
 @export var environment_lights: Array[Light3D] = []
 
@@ -112,6 +113,9 @@ func _lose_life() -> void:
 
 	await get_tree().create_timer(life_loss_before_sound_delay).timeout
 	GameState.emit_signal("life_lost")
+
+	await get_tree().create_timer(life_loss_before_wind_delay).timeout
+	GameState.add_wind_gust.emit(Wind.GustKind.BLOW_OUT)
 
 	await get_tree().create_timer(life_loss_before_candle_delay).timeout
 	_remaining_lives = maxi(_remaining_lives - 1, 0)

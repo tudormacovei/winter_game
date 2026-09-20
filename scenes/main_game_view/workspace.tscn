@@ -48,9 +48,11 @@ point_count = 3
 [sub_resource type="Environment" id="Environment_8pwe6"]
 background_energy_multiplier = 0.0
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.9
+ambient_light_energy = 0.0
+ssao_radius = 7.03
+ssao_intensity = 10.0
 
-[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_jt3v7"]
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nyxyu"]
 
 [sub_resource type="Curve" id="Curve_x8h8r"]
 _data = [Vector2(0, 0), 0.0, 3.032672, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -81,7 +83,7 @@ unique_name_in_owner = true
 
 [node name="HealthOverlay" type="Node2D" parent="UI"]
 unique_name_in_owner = true
-position = Vector2(480, 288.5)
+position = Vector2(1, 1)
 script = ExtResource("4_sllmx")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
@@ -140,7 +142,7 @@ color = Color(0, 0, 0, 0)
 
 [node name="HealthVisualization" parent="UI" instance=ExtResource("20_n3br4")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0.51070946, 0.094545975, -0.39791515)
+transform = Transform3D(1, 0, 0, 0, 0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0.43384045, 0.09492143, -0.39362368)
 
 [node name="FocusBlinkCanvas" type="CanvasLayer" parent="UI"]
 unique_name_in_owner = true
@@ -178,7 +180,6 @@ unique_name_in_owner = true
 script = ExtResource("8_sllmx")
 health_drain_per_second = 5.0
 life_loss_before_sound_delay = 0.35
-life_loss_before_candle_delay = 2.1
 visual_health_curve = SubResource("Curve_n3br4")
 environment_lights = [NodePath("../../DirectionalLight3D"), NodePath("../../DirectionalLight3D2")]
 
@@ -188,15 +189,53 @@ script = ExtResource("7_vfkcj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8pwe6")
-camera_attributes = SubResource("CameraAttributesPhysical_jt3v7")
+camera_attributes = SubResource("CameraAttributesPractical_nyxyu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9659259, 5.9158087e-09, -0.2588191, 0.2578759, 0.085295156, 0.96240574, 0.022076022, -0.9963557, 0.082388796, -3.8702822, 1.3785387, 0)
-light_energy = 0.4
+visible = false
+light_energy = 0.2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3703506, 1.8719339, 0.2009579)
+light_color = Color(0.84, 0.74956, 0.68039995, 1)
+light_energy = 0.5
+light_size = 0.2
+distance_fade_begin = 1.0
+distance_fade_shadow = 3.0
+distance_fade_length = 1.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8582145, 1.2235415, 0.20095788)
+light_color = Color(0.84, 0.74956, 0.68039995, 1)
+light_energy = 0.5
+light_size = 0.2
+distance_fade_begin = 1.0
+distance_fade_shadow = 3.0
+distance_fade_length = 1.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038318634, 1.9449807, -0.11496185)
+light_color = Color(0.84, 0.53536, 0.3024, 1)
+light_energy = 0.2
+light_size = 0.2
+distance_fade_begin = 1.0
+distance_fade_shadow = 3.0
+distance_fade_length = 1.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20078361, 1.2336766, -0.27737314)
+light_color = Color(0.84, 0.53536, 0.3024, 1)
+light_energy = 0.5
+light_size = 0.2
+distance_fade_begin = 1.0
+distance_fade_shadow = 3.0
+distance_fade_length = 1.0
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.42365292, -0.7597822, 0.49320307, -0.75856656, 3.9338993e-08, 0.6515956, -0.49507076, -0.6501777, -0.5763453, -3.8702822, 1.3785387, 0)
-light_energy = 0.2
+visible = false
+light_energy = 0.1
 
 [node name="DialogueInbetweenTexture" type="Sprite3D" parent="."]
 transform = Transform3D(1.145, 0, 0, 0, 0.9645329, 0.61701035, 0, -0.6170107, 0.9645327, 0, 1.1459852, -0.3619644)

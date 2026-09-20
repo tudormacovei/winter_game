@@ -156,6 +156,7 @@ func _enter_animation(character: CharacterDefinition, expression_tag: String) ->
 	slot.sprite.position = _target_position(slot)
 	_set_sprite_look(slot.sprite, LookState.ABSENT)
 	slot.sprite.visible = true
+	GameState.add_wind_gust.emit(Wind.GustKind.DOOR) # animate the candles when a character enters (the draft from the door)! this is just being fancy so we can remove it if it is buggy
 
 	var tween := create_tween().set_parallel(true)
 	_tween_speaker_change(tween, slot)
@@ -196,6 +197,7 @@ func _exit_characters_animation(characters: Array[CharacterDefinition]) -> Tween
 			leaving_slots.append(slot)
 	if leaving_slots.is_empty():
 		return null
+	GameState.add_wind_gust.emit(Wind.GustKind.DOOR) # the door opens
 
 	var tween := create_tween().set_parallel(true)
 	var last_exit_end := 0.0

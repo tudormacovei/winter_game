@@ -36,6 +36,10 @@ signal day_end_screen_shown
 @warning_ignore("unused_signal")
 signal new_object_on_workbench
 
+# A push of air in the room that moves the candle flames. The Wind node holds the push and duration of each kind
+@warning_ignore("unused_signal")
+signal add_wind_gust(kind: Wind.GustKind)
+
 func wait_for(signal_name: String) -> void:
 	if not has_signal(signal_name):
 		Utils.debug_error("GameState: No valid signal with name: " + signal_name)
