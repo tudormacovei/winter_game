@@ -15,13 +15,13 @@ var audio_file_to_volume: Dictionary[String, int] = {
 	"amb_night_sounds": 25,
 }
 
-#NOTE: SFX volume config, editable in the Inspector at res://data/audio/sfx_config.tres.
+# NOTE: SFX volume config, editable in the Inspector at res://data/audio/sfx_config.tres.
 # Should only be read by the AudioManager.
 var sfx_config: SfxConfig
 
 #region Preloaded Streams
 
-#NOTE: For now, we preload all audio streams. If this becomes a performance issue, we can add a kind of streaming system that loads/unloads as needed.
+# NOTE: For now, we preload all audio streams. If this becomes a performance issue, we can add a kind of streaming system that loads/unloads as needed.
 var ambient_audio_streams: Dictionary = {}
 var sfx_audio_streams: Dictionary = {}
 
@@ -48,21 +48,33 @@ func play_ambient_stream(stream_name: String):
 func stop_ambient():
 	_ambient_player.stop()
 
-
 func play_sfx(stream_name: String, volume_offset_db: float = 0.0):
 	if not sfx_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
 		return
 
-	var base_volume_db: float = 0.0
-	if sfx_config.volumes_db.has(stream_name):
-		base_volume_db = sfx_config.volumes_db[stream_name]
-	else:
-		Utils.debug_error("AudioManager: No volume configured for SFX '%s' in %s, playing at 0dB." % [stream_name, Config.SFX_CONFIG_PATH])
-	
-	_play_sfx(_sfx_player, stream_name, base_volume_db + volume_offset_db)
+	var volume_db := _get_sfx_volume(stream_name)
+	_play_sfx(_sfx_player, stream_name, volume_db + volume_offset_db)
 
+## Play a single SFX and await its completion
+func play_sfx_and_wait(stream_name: String, volume_offset_db: float = 0.0) -> void:
+	if not sfx_audio_streams.has(stream_name):
+		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
+		return
 
+	var volume_db := _get_sfx_volume(stream_name)
+
+	# Use a plain AudioStreamPlayer to reliably await completion
+	var temp_player := AudioStreamPlayer.new()
+	temp_player.bus = Config.AUDIO_BUS_SFX
+	temp_player.stream = sfx_audio_streams[stream_name]
+	temp_player.volume_db = volume_db + volume_offset_db
+	add_child(temp_player)
+	temp_player.play()
+
+	await temp_player.finished
+
+	temp_player.queue_free()
 	
 func play_sfx_on_letter_spoke():
 	var random_pitch = randf_range(Config.LETTER_SPOKE_MIN_PITCH_SCALE, Config.LETTER_SPOKE_MAX_PITCH_SCALE)
@@ -70,8 +82,17 @@ func play_sfx_on_letter_spoke():
 	
 func set_bus_volume(bus_name: String, volume_db: float):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), volume_db)
-	
-func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):	
+
+func _get_sfx_volume(stream_name: String) -> float:
+	var base_volume_db: float = 0.0
+	if sfx_config and sfx_config.volumes_db.has(stream_name):
+		base_volume_db = sfx_config.volumes_db[stream_name]
+	else:
+		Utils.debug_error("AudioManager: No volume configured for SFX '%s' in %s, volume set to 0dB." % [stream_name, Config.SFX_CONFIG_PATH])
+
+	return base_volume_db
+
+func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
 	var sfx = sfx_audio_streams[stream_name]
 	var playback = stream_player.get_stream_playback()
 	playback.play_stream(sfx, 0, volume_db, pitch_scale, 0, stream_player.bus)

@@ -14,15 +14,18 @@ func add_object_to_workbench(object_name: String):
 
 	game_manager.dialogue_add_object_to_workbench(object_name)
 
-## Plays an SFX by name. [param volume_offset_db] nudges this one playback
-## louder/quieter than the sound's configured base volume.
+## Plays an SFX by name. [param volume_offset_db] nudges this one playback louder/quieter than the sound's configured base volume.
 ## Use this sparingly - for a rare, one-off dramatic beat only. If a sound
 ## should sound different every time it plays, change its volume in
 ## res://data/audio/sfx_config.tres instead, so all SFX stay consistent.
 func play_sfx(sfx_name: String, volume_offset_db: float = 0.0):
 	AudioManager.play_sfx(sfx_name, volume_offset_db)
 
-	
+# TODO[ziana]: Pause the dialogue and transitions to a black screen to play an SFX. Transitions back when SFX finishes playing. 
+## Pause the dialogue to play an SFX. Resume when SFX finishes playing. 
+func play_sfx_and_wait(sfx_name: String, volume_offset_db: float = 0.0) -> void:
+	await AudioManager.play_sfx_and_wait(sfx_name, volume_offset_db)
+
 ## Returns number of objects in the workbench that still need to be cleansed / completed
 func get_object_count() -> int:
 	if game_manager == null:
