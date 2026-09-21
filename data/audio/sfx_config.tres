@@ -6,10 +6,12 @@
 script = ExtResource("1_sfxcfg")
 volumes_db = Dictionary[String, float]({
 "sfx_begin_peel": -10.0,
+"sfx_boom": 0.0,
 "sfx_camera_swoosh": -20.0,
 "sfx_candle_blow": 5.0,
 "sfx_clock_ticking": -15.0,
 "sfx_crow": 0.0,
+"sfx_crow_goddess": 0.0,
 "sfx_death": -10.0,
 "sfx_dialogue_letter": -16.0,
 "sfx_door_close": 0.0,
