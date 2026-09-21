@@ -29,6 +29,7 @@ func _ready() -> void:
 		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
 	if camera and camera.has_signal("camera_rotation_completed"):
 		camera.connect("camera_rotation_completed", Callable(self, "_on_camera_rotation_completed"))
+	
 	if _workbench:
 		_workbench.object_focus_changed.connect(_on_object_focus_changed)
 
@@ -39,6 +40,10 @@ func _ready() -> void:
 		GameState.connect("new_object_on_workbench", Callable(self, "_on_new_object_on_workbench"))
 	if GameState.has_signal("day_ended"):
 		GameState.connect("day_ended", Callable(self, "_on_day_ended"))
+	
+	if DialogueFuncs:
+		DialogueFuncs.register_ui_manager(self)
+
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)
 
@@ -170,6 +175,7 @@ const _SCREEN_FADE_DURATION = 0.3
 const _SCREEN_FADE_TO_DURATION_DEATH = 2.0
 const _SCREEN_FADE_DURATION_GAME_END = 2
 const _SCREEN_FADE_DURATION_INTERACTION_CONFIGS = 0.8
+const _SCREEN_FADE_DURATION_DIALOGUE_SFX = 0.2
 var _screen_fade_tween: Tween = null
 
 func fade_to_black(duration: float = _SCREEN_FADE_DURATION) -> void:
