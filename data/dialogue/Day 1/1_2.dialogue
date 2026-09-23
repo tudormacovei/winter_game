@@ -27,10 +27,10 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 			Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk. 
 			Micah: Besides, death is natural and normal and cool and everything. 
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-	- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-		Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
+	- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+		Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-	- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+	- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 		Micah: Yeah, we get more and more people coming here for that same reason.
 		Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
@@ -75,8 +75,8 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 				Micah: Yeah, we get more and more people coming here for that same reason.
@@ -108,8 +108,8 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-				Micah: [#sprite=upset]Uh huh. If you say so. 
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 				Micah: Yeah, we get more and more people coming here for that same reason.
@@ -141,8 +141,8 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-				Micah: Uh huh. If you say so. 
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+				Micah: Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 				Micah: Yeah, we get more and more people coming here for that same reason.
@@ -183,8 +183,8 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-				Micah: [#sprite=upset]Uh huh. If you say so. 
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 				Micah: Yeah, we get more and more people coming here for that same reason.
@@ -215,8 +215,8 @@ Micah: Anyway, who the hell are you?
 		Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 		Micah: Besides, death is natural and normal and cool and everything. 
 		Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-- I'm the Goddess's chosen one. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") == 6]
-	Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour"), 1]
+- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+	Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 	Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 - Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 5]
 	Micah: Yeah, we get more and more people coming here for that same reason.

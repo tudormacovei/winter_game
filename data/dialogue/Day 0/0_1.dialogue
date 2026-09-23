@@ -4,15 +4,17 @@
 
 ~ start
 ???: [wait=1][speed=0.2][shake rate=10.0 level=2]Who...ahh... who goes there?
-- (OBEY) The Goddess told me to come here. I want to join your church. 
+A frail fragment: She smells rancid...
+- (OBEY) The Goddess told me to come here. I want to join your, uh, church. 
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, you speak truly, stranger? [do Variables.mod_var("religious_fervour", 1)]
 	???: [speed=0.8][shake rate=10.0 level=2]If so, your reasons are pure... Many come here out of desperation and fear, you know... 
 	???: [speed=0.8][shake rate=10.0 level=2]Revolting, wretched lowlifes... Putrid leeches, the lot of them...
-	???: [speed=0.8][shake rate=10.0 level=2]If it were up to me, ahh, I'd set them all on fire...
+	???: [speed=0.8][shake rate=10.0 level=2]If it were up to me, ahh, I'd burn them all... 
 	#angry sound
+	A frail fragment: Uhh...
 	???: [speed=0.8][shake rate=10.0 level=2]Alas, The Goddess and our Elders are benevolent... They let almost everyone in, provided they're willing to leave their earthly possessions and sinful ways behind.
 	???: [speed=0.8][shake rate=10.0 level=2]It is not my place to pass judgment, ahh, no, no, no...
-	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for her momentary lapse of faith...
+	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for this momentary lapse of faith... great punishment awaits...
 	???: [speed=0.8][shake rate=10.0 level=2]But that's for later. Now, there's the matter of you...
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty, and wise, is this indeed one of your chosen?
 	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, or are their twisted intentions hidden behind this pious facade?
@@ -23,17 +25,16 @@
 	???: [speed=0.8][shake rate=10.0 level=2]But you, ahh, you were handpicked by the Goddess Herself...
 	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your eyes? What a blessed day. What joy! 
 	- That's, uh, great, I guess. 
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is! 
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... => but1
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is! [do Variables.mod_var("religious_fervour", -1)]
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And She will provide and care for you, too... => but
 	- Praise be!
 		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... => but1
-	- Indeed. I am Her chosen one. 
-		#add global variable, add new dialogue option in tutorial section
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... [do Variables.mod_var("religious_fervour", 1)]
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And She will provide and care for you, too... => but
+	- Indeed. I am Her Chosen One. 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 		???: [speed=0.8][shake rate=10.0 level=2]Twice over, since She's also bestowed Her Gift upon you...
 		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
-		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but1 
+		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but
 - (LIE) I just stumbled upon this place. I'm a weary traveler. I need a place to stay. 
 	???: [speed=0.8][shake rate=10.0 level=2]Our village is untouched by hardship... You're not the first to ask... [do Variables.set_var("lied_to_joan", true)]
 	???: [speed=0.8][shake rate=10.0 level=2]Sure won't be the last... 
@@ -41,27 +42,24 @@
 	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, or will they live as leeches and sow discord and doubt amongst our ranks?
 	???: [do DialogueFuncs.play_sfx("sfx_crow")][speed=0.8][shake rate=10.0 level=2].[wait=1].[wait=0.5].
 	???: [wait=1.5][speed=0.8][shake rate=10.0 level=2]Ahh, why lie to me, stranger?
+	A frail fragment: Oh no. 
 	???: [speed=0.8][shake rate=10.0 level=2]My feelings are hurt, now... Do I not look like someone you can trust? 
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, alas, I have to put this to rest... I am not one to forget, but I am one to forgive, as the Goddess tells us we should... 
 	???: [speed=0.8][shake rate=10.0 level=2]She sent you here! That's not something you can hide, you foolish creature! 
 	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your deceitful eyes? Ahh, what a blessed day... What joy!
-	- That's, uh, great, I guess. 
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is!  
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too...
+	- (LIE) Uh, praise be!
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed! 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And She will provide and care for you, too...
 		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
-	- Praise be!
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too...
-		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
-	- Okay, you got me. Your Goddess showed Herself to me in my sleep. I'm Her chosen one.
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... [do Variables.mod_var("religious_fervour", 1)]
+	- Okay, you got me. Your Goddess showed Herself to me in my sleep. I'm Her Chosen One.
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, the Goddess very rarely speaks to us mortals. You've been blessed... [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 		???: [speed=0.8][shake rate=10.0 level=2]Twice over, since She's also bestowed Her Gift upon you...
 		???: [speed=0.8][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
-		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but1 
+		???: [speed=0.8][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... 
 		???: [speed=0.8][shake rate=10.0 level=2]...And you've already sinned once, today. => but
 	- Whatever you say. 
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, she speaks through me... I'm a mere vessel... 
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, She speaks through me... I'm a mere vessel... [do Variables.mod_var("religious_fervour", -1)]
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And She will provide and care for you, too... 
 		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your ignorant attitude and untruthful, slimy nature. => but
 	- Sorry I lied to you. 
 		???: [speed=0.8][shake rate=10.0 level=2]Ahh, it's all in the past, all of it... 
@@ -71,7 +69,9 @@
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so, stranger? [do Variables.mod_var("religious_fervour", -1)]
 	???: [speed=0.8][shake rate=10.0 level=2]...And what answers might those be? 
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, it is not my place to ask, no, no, no...
-	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for her vain curiosity...
+	???: [speed=0.8][shake rate=10.0 level=2]Sinful old Joan will have to atone, punish herself for her vain curiosity... great punishment awaits...
+	#angry sound
+	A frail fragment: Okay...
 	???: [speed=0.8][shake rate=10.0 level=2]But that's for later. Now, there's the matter of you...
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty and wise, what shall I do with this one? 
 	???: [speed=0.8][shake rate=10.0 level=2]Will they serve and praise, in their search for, ahh, answers, or will they sow discord and doubt amongst our ranks?
@@ -81,18 +81,18 @@
 	???: [speed=0.8][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your eyes? Ahh, what a blessed day... What joy!
 	- That's, uh, great, I guess. 
 		???: [speed=0.8][shake rate=10.0 level=2]Ahh, so it is!  
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too... => but
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And She will provide and care for you, too... => but
 	- Praise be!
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed!
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And she will provide and care for you, too... => but
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, praise be, indeed! [do Variables.mod_var("religious_fervour", 1)]
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us. And She will provide and care for you, too... => but
 	- Okay, you got me. She did send me here. But that's not why I came.
 		???: [speed=0.8][shake rate=10.0 level=2]Ahh, is that so...? [do Variables.mod_var("religious_fervour", -1)]
 		???: [speed=0.8][shake rate=10.0 level=2]You're awful sure of yourself...
-		???: [speed=0.8][shake rate=10.0 level=2]Nothing ever happens without her say-so, ahh, you best remember that...
+		???: [speed=0.8][shake rate=10.0 level=2]Nothing ever happens without Her say-so, ahh, you best remember that...
 		???: [speed=0.8][shake rate=10.0 level=2]You best get that right into your feeble, filthy brain, you hear me? => but
 	- Whatever you say. 
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, she speaks through me... I'm a mere vessel... 
-		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And she will provide and care for you, too... 
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, She speaks through me... I'm a mere vessel... 
+		???: [speed=0.8][shake rate=10.0 level=2]She provides and cares for us all. And She will provide and care for you, too... 
 		???: [speed=0.8][shake rate=10.0 level=2]...In spite of your ignorant attitude. => but
 
 	
@@ -100,42 +100,56 @@
 ???: [speed=0.8][shake rate=10.0 level=2]Anyway, you're hungry, tired, and in desperate need of a bath... 
 ???: [speed=0.8][shake rate=10.0 level=2]First things first... To your left, there's a charred hole. 
 ???: [speed=0.8][shake rate=10.0 level=2]I'll need you to drop all your possessions in there. [speed=0.25]Ahh, your, ahh, clothes, too... 
+A frail fragment: No. No way. 
 ???: [speed=0.8][shake rate=10.0 level=2]No outside items are allowed in the village, for they are sinful, and wrong!
 ???: [speed=0.8][shake rate=10.0 level=2]Here's a robe to cover yourself, should you need it... Once you're in, we'll give you a new change of clothes.
-- So be it. => go
+A frail fragment: Don't do it. 
+- So be it.
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee... => go
+- Happy to oblige. [if Variables.get_var("religious_fervour") > 5] 
+	???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee... => go
 - That's absurd.
 	???: [speed=0.8][shake rate=10.0 level=2]Ahh, a small price to pay for salvation!
-	- Fine. I did come all this way. => go 
+	- Fine. Salvation does sound good. And I did come all this way.
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee... => go
 	- Just... turn around. 
 		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, whatever you need, whatever you need... => go 
-	- Salvation does sound good. => go
-	- This place better be everything it's made out to be.
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, it sure is... And so, so much more... => go
-		
-~ but1
-???: [speed=0.8][shake rate=10.0 level=2]Anyway, you're hungry, tired, and, ahh, in desperate need of a bath... 
-???: [speed=0.8][shake rate=10.0 level=2]First things first... To your left, there's a charred hole. 
-???: [speed=0.8][shake rate=10.0 level=2]I'll need you to drop all your possessions in there. [speed=0.25]Ahh, your, ahh, clothes, too... 
-???: [speed=0.8][shake rate=10.0 level=2]No outside items are allowed in the village, for they are sinful, and wrong!
-???: [speed=0.8][shake rate=10.0 level=2]Here's a robe to cover yourself, should you need it... Once you're in, we'll give you a new change of clothes.
-- So be it. => go 
-- Happy to oblige. => go
-- That's absurd.
-	???: [speed=0.8][shake rate=10.0 level=2]Ahh, a small price to pay for salvation!
-	- Fine. I did come all this way. => go 
-	- Just... turn around. 
-		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, whatever you need, whatever you need... => go 
-	- Salvation does sound good. => go
+	- This place better be everything it's made out to be. [if Variables.get_var("religious_fervour") < 6]
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, it sure is... And so, so much more... => go 
+	- Alright. If the Goddess wills it. [if Variables.get_var("religious_fervour") > 5]
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, She sure does... => go
+	- No. No way. [if Variables.get_var("religious_fervour") < 5]
+		???: [speed=0.8][shake rate=10.0 level=2]Ahh, why break my heart? 
+		???: [speed=0.8][shake rate=10.0 level=2]The Chosen do not get special treatment, no, of course not...
+		???: [speed=0.8][shake rate=10.0 level=2]I cannot let you in unless you obey...
+		???: [speed=0.8][shake rate=10.0 level=2]The Goddess shall forsake you and strike you down, mark my words!
+		- Okay. Fine. If it's so important.
+			???: [speed=0.8][shake rate=10.0 level=2]Ahh, hee, hee, there we go, there we go... => go
+		- I won't. You're creepy and disgusting. 
+			???: [speed=0.8][shake rate=10.0 level=2]Ahh, ahh, what did you say to me?!
+			#angry sound
+			???: [speed=0.8][shake rate=10.0 level=2]You foul, slimy, creature...
+			???: [speed=0.8][shake rate=10.0 level=2]You're not allowed to speak like that to me... oh, no, no, no...
+			???: [speed=0.8][shake rate=10.0 level=2]You have gravely sinned... retribution awaits...
+			???: [speed=0.8][shake rate=10.0 level=2]In the name of The Goddess and of all that is holy, I sentence you to death, you filthy insect!
+			A frail fragment: RUN!
+			- Run.
+				A frail fragment: As you turn around, you catch a glimpse of the village doors opening. [do Variables.set_var("0_1_death", 1)] => END 
+			- Fight her. 
+				A frail fragment: Terrible idea. [do Variables.set_var("0_1_death", 2)] => END 
+				
+			
 		
 ~ go
 #maybe screen with hole
-???: [wait=1.0][speed=0.8][shake rate=10.0 level=2][do DialogueFuncs.play_sfx_and_wait("sfx_undress_clothes")]...Now that that's over with, ahh, let's get you to your new home! 
+???: [wait=1.0][speed=0.8][shake rate=10.0 level=2][do DialogueFuncs.play_sfx_and_wait("sfx_undress_clothes")]...Now that that's over with, ahh, come closer, let's get you to your new home! 
+A frail fragment: Her smell is unbearable...
 ???: [speed=0.8][shake rate=10.0 level=2]You'll be staying at the Shopkeeper's house, on account of your Gift... He's Gifted himself, and I'm sure he's better, ahh, suited to explain how it works than any of us are...
 ???: [speed=0.8][shake rate=10.0 level=2]He's been in need of an apprentice since forever, anyway... 
 ???: [speed=0.8][shake rate=10.0 level=2]I'll lead you to his house. Just knock and tell him you're Gifted, and that, ahh, Joan let you in, with the Goddess's blessing... 
 ???: [speed=0.8][shake rate=10.0 level=2]Welcome to (village name). May the Goddess guide your every step, hee, hee! (another option for title card drop)
 - Goodbye, Joan. => END 
 - ... => END 
-		
+
 => END
 

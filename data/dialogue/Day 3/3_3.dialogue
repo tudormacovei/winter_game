@@ -21,13 +21,13 @@ Shopkeeper: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=worried
 		#door close
 ~ next 
 Shopkeeper: [#sprite=worried]Look. I need your help. Desperately. 
-if Variables.get_char_var("NPC_4", "express_doubt") == 1
+if Variables.get_char_var("NPC_4", "express_doubt") <= 4
 	Shopkeeper: [#sprite=worried]You seem like you're already quite devoted to the Goddess and to our church. 
 	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
-elif Variables.get_char_var("NPC_4", "express_doubt") == 2
+elif Variables.get_char_var("NPC_4", "express_doubt") == 5
 	Shopkeeper: [#sprite=worried]I've no idea how you feel about the Goddess, or about our church. 
 	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
-elif Variables.get_char_var("NPC_4", "express_doubt") == 3
+elif Variables.get_char_var("NPC_4", "express_doubt") >= 6
 	Shopkeeper: [#sprite=worried]You've expressed doubts about the Goddess and our church before. 
 	Shopkeeper: [#sprite=worried]You were right. Things are not what they seem. I was wrong. => sacrifices
 

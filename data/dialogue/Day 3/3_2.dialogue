@@ -39,7 +39,7 @@ elif Variables.get_var("told_of_gift") == true
 	- I was trying to help. He was worried about you, and wanted to know where you were. 
 		Sarah: [#sprite=upset]...
 		Sarah: Urgh. You could have just invented something. 
-		Sarah: But at least your intentions were good.
+		Sarah: But at least your intentions were good. [do Variables.set_char_var("NPC_2", "relationship", 4)]
 		- Micah said to tell you he figured out how to get the last piece.  
 			Sarah: [#sprite=happy]Oh. That's good. 
 			Sarah: But I've got other stuff on my mind right now. 
@@ -48,7 +48,7 @@ elif Variables.get_var("told_of_gift") == true
 			Sarah: Doesn't matter now. Got more important things to worry about. 
 			Sarah: ... => next 
 	- Come on, it's not that big of a deal. 
-		Sarah: [#sprite=upset]Not that big of a deal? 
+		Sarah: [#sprite=upset]Not that big of a deal? [do Variables.set_char_var("NPC_2", "relationship", 3)]
 		Sarah: [#sprite=upset]Who are you to say? 
 		Sarah: [#sprite=upset]Unbelievable. Thought you were cool. 
 		- He'll still appreciate it, you know. 

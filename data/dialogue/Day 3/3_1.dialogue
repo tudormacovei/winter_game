@@ -81,30 +81,45 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 else 
 	Micah: [#sprite=happy]Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
 	Micah: Eh, feel like that's a bit too long maybe. Doesn't quite roll off the tongue. 
-	Micah: [#sprite=happy]I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. 
-	- Kinda like it. 
-		Micah: [#sprite=happy]Awesome! I'll tell everyone that's what you want to be called. => next
-	- Not good at my job? 
-		if Variables.get_var("prog_score_simple_objects") >= 98
-			Micah: [#sprite=happy]Nah, I'm just messing. Zero complaints so far. You're doing great. 
-		elif Variables.get_var("prog_score_simple_objects") <= 80
-			Micah: [#sprite=upset]Eh, let's just say some people are not going to be recommending us to their friends and family. 
-			Micah: [#sprite=happy]Don't worry about it, though. What are they gonna do? We've got zero competition. 
-			Micah: [#sprite=happy]Worst case, they'll kick you out for being useless. Haha. 
-			- I'll do better. 
-				Micah: [#sprite=happy]Yeah, that's a good idea. => next
-			- That's... reassuring. 
-				Micah: [#sprite=happy]Hey, that's what I'm here for. => next
-		else 
-			Micah: Nah, you're doing fine. Missed a spot here and there but people haven't been complaining too much. 
-	- That doesn't make any sense. 
-		Micah: [#sprite=upset]Who said it has to?
-		Micah: You're the Keeper now. I'll tell everyone that's what you want to be called. 
-		Micah: [#sprite=happy]Deal with it. => next 
-			
+	Micah: You got a name?
+	- Uh, not really... 
+		Micah: How can you not have a name? Everyone has a name. => name
+	- I can't remember it. 
+		Micah: You forgot your own name? Hahah. That's dumb. => name
+	
+~ name
+Micah: [#sprite=happy] I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. 
+- Kinda like it. 
+	Micah: [#sprite=happy]Awesome! I'll tell everyone that's what you want to be called. => next
+- That doesn't make any sense. 
+	Micah: [#sprite=upset]Who said it has to?
+	Micah: You're the Keeper now. I'll tell everyone it's what you want to be called. 
+	Micah: [#sprite=happy]Deal with it. => next 
+- I've heard that before...
+	Micah: Huh? What d'you mean?
+	- Nevermind. Forget it.
+		Micah: You're being weird again. => next
+	- The Goddess. That's what She called me when we first met.
+		Micah: Huh... that's interesting. Unless you're lying.
+		Micah: But that's all the proof you need that it's a really good name. => next
+		
 ~ next
-Micah: Anyway, Sarah's got to stay inside today. Shopkeeper's orders. Not exactly sure why. 
-Micah: I got some errands to run for the Elders so I gotta get going in a minute. Will you tell her I figured out where to get the final piece for her father's gift? 
+if Variables.get_var("prog_score_simple_objects") >= 98
+	Micah: [#sprite=happy]Anyway, I was just messing. You're doing a bang-up job. Zero complaints so far. => next1
+elif Variables.get_var("prog_score_simple_objects") <= 80
+	Micah: [#sprite=upset]Anyway, like I was saying, people aren't happy. I doubt they'll be recommending us to their friends and family. 
+	Micah: [#sprite=happy]Don't worry about it too much, though. What are they gonna do? We've got zero competition. 
+	Micah: [#sprite=happy]Worst case, they'll kick you out for being useless. Haha. 
+	- I'll do better. 
+		Micah: [#sprite=happy]Yeah, that's a good idea. => next1
+	- That's... reassuring. 
+		Micah: [#sprite=happy]Hey, that's what I'm here for. => next1
+else 
+	Micah: Anyway, I was just messing. You missed a spot here and there, apparently, but people haven't been complaining too much. Good job. => next1
+	
+~ next1
+Micah: Oh, and I'm supposed to let you know that Sarah's got to stay inside today. Shopkeeper's orders. Not exactly sure why. 
+Micah: I've got some errands to run for the Elders so I gotta get going in a minute. Will you tell her I figured out where to get the final piece for her father's gift? 
 - Sure. 
 	Micah: [#sprite=happy]Thanks much!
 	Micah: [#sprite=happy]Gotta go now. See you tomorrow!

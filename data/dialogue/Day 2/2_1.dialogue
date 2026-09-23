@@ -21,9 +21,9 @@ Sarah: Don't remember him being gone for a whole night since he stopped.
 Sarah: I'm starting to get worried. 
 - I'm sure he's fine. => what
 - I can help you look for him, if you want. => help
-- The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=6] 
+- The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=5] 
 	Sarah: I'm sure She is. But it's a bit more complicated than that. => hope
-- Isn't the Goddess supposed to take care of him? Him being a Gift-bearer and whatnot? [if Variables.get_var("religious_fervour") <= 5]
+- Isn't the Goddess supposed to take care of him? Him being a Gift-bearer and whatnot? [if Variables.get_var("religious_fervour") <=6]
 	Sarah: [#sprite=upset]That's not how it works. Gift-bearers don't get special treatment. => hope
 
 ~ what
@@ -35,8 +35,8 @@ Sarah: [#sprite=upset]You don't know the first thing about us.
 	Sarah: Oh, this is bad. => hope
 - I don't know. It's just a thing you say. 
 	Sarah: [#sprite=upset]I hate it when adults just say things. => hope
-- I'm the Goddess's chosen one. If I say he's fine, then he's fine. [if Variables.get_var("religious_fervour") >=6]
-	Sarah: [#sprite=upset]Uh huh. That's definitely not how it works. => hope
+- I'm the Goddess's Chosen One. If I say he's fine, then he's fine. [if Variables.get_var("religious_fervour") >=6]
+	Sarah: [#sprite=upset]Uh huh. That's definitely not how it works.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)] => hope
 
 ~ help
 Sarah: [#sprite=upset]Appreciate it, but how would you help, exactly?
@@ -154,14 +154,14 @@ Sarah: ...
 	Sarah: It's not for us to question Her. 
 	- If you say so. 
 		Sarah: [#sprite=upset]It's not so because I say so. It is so because She says so. => micah
-	- You're wise for your age. [if Variables.get_var("religious_fervour") >= 6]
+	- You're wise for your age. [if Variables.get_var("religious_fervour") >= 5]
 		Sarah: [#sprite=happy]Course I am. [do Variables.mod_var("religious_fervour", 1)] => micah
 	- Guess you're right. 
 		Sarah: [#sprite=happy]Course I am. => micah
 	- Eh, not sure how I feel about that. 
-		Sarah: You'll see the light, eventually. 
-	- That's... not how it should work. [if Variables.get_var("religious_fervour") <= 5]
-		Sarah: [#sprite=upset]Who are you to say? You should know your place. => micah
+		Sarah: You'll see the light, eventually. => micah
+	- That's... not how it should work. [if Variables.get_var("religious_fervour") <= 6]
+		Sarah: [#sprite=upset]Who are you to say? You should know your place.[do Variables.mod_var("religious_fervour", -1)] => micah
 - What kind of trouble?
 	Sarah: I don't know. It's not for me to say. 
 	Sarah: But it sure won't be pretty. She very rarely gives orders directly to us, mortals, individually. 
@@ -194,7 +194,7 @@ Micah: [#sprite=happy]Uh, sure.
 	Sarah: [#sprite=happy]But since you're Gifted and all, you might help cleanse it right before we give it to him. Have the Goddess bless it through you!
 	Sarah: [#sprite=happy]What do you say?
 	- Sure thing. 
-		Sarah: [#sprite=happy]Awesome. Thanks! [do Variables.set_char_var("NPC_2", "relationship", 3)]
+		Sarah: [#sprite=happy]Awesome. Thanks! [do Variables.mod_char_var("NPC_2", "relationship", 1)]
 		Sarah: [#sprite=happy]Anyway, see you later. 
 		Sarah: If dad shows up tell him I'm with Micah, and that I'll be back before nightfall. And make him go sleep! 
 		Sarah: [#sprite=upset]And if you mention the surprise, you're dead!
@@ -203,7 +203,7 @@ Micah: [#sprite=happy]Uh, sure.
 		- Take care, children. => END
 	- Uh, I've got enough on my plate.
 		Sarah: [#sprite=upset]Doesn't look like it.
-		Sarah: [#sprite=upset]Whatever. He'll just cleanse it himself after we give it to him. [do Variables.set_char_var("NPC_2", "relationship", 1)]
+		Sarah: [#sprite=upset]Whatever. He'll just cleanse it himself after we give it to him. [do Variables.mod_char_var("NPC_2", "relationship", -1)]
 		Sarah: [#sprite=upset]Let's go, Micah.
 		Micah: ...[do DialogueFuncs.play_sfx("sfx_door_close")]
 		- Bye, then. => END

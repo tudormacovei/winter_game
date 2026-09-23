@@ -13,6 +13,7 @@ do Variables.add_local("questions", 0)
 => start
 
 ~ start
+A frail fragment: [speed=0.2][shake rate=10.0 level=2]Something's happening. 
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]Hold on to me. 
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]Do not let go.
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]...
@@ -24,12 +25,12 @@ A frail fragment: [speed=0.6]What about? => about
 A frail fragment: ...
 - My childhood. [if Variables.get_var("childhood") == false]
 	A frail fragment: Memories forgotten, unwillingly unearthed.[do Variables.set_var("childhood", true)][do Variables.mod_var("dreams", 1)]
-	A frail fragment: Buildings, larger than life. Planes, cars, buses, loud. Food you wouldn't eat. Leftovers?
+	A frail fragment: Buildings, larger than life. Planes, cars, buses, all so loud. 
+	A frail fragment: Food you wouldn't eat, in a house whose sounds and smells you loathed.
 	A frail fragment: A friend? Just not a very good one. Wouldn't ever let you play with their toys.
-	A frail fragment: Were you poor? No. Not really. But it sure felt that way. 
 	A frail fragment: Another friend. A dog. Gone too soon. 
+	A frail fragment: Were you poor? Not really. But it sure felt that way. 
 	A frail fragment: Your parents loved you. They did all they could, but you resented them for it.
-	A frail fragment: Eh, you can't blame yourself. You were young. Kids are pricks. 
 	A frail fragment: For the first time in forever, you're able to push the guilt aside.
 	A frail fragment: What else? => about
 - My family. [if Variables.get_var("family") == false]
@@ -38,12 +39,12 @@ A frail fragment: ...
 	A frail fragment: They call to you. It gets louder and quieter in equal measure. 
 	A frail fragment: Shame on you, they say. Then they leave. 
 	A frail fragment: Can you really not remember them? 
-	A frail fragment: You've had this dream before, a few times. But these people mean nothing to you, now.
+	A frail fragment: You've had this dream before, a few times. But these people and their words mean nothing to you, now.
 	A frail fragment: What else? => about
 - The day it all began. [if Variables.get_var("day") == false]
 	A frail fragment: The day all what began?[do Variables.set_var("day", true)][do Variables.mod_var("dreams", 1)]
 	A frail fragment: Oh. Right. 
-	A frail fragment: You vaguely remember crows filling up the sky. Could barely see anything anymore. Your parents thought it was an eclipse. 
+	A frail fragment: You vaguely remember crows filling up the sky. Could barely see anything anymore. Your brothers thought, excitedly, that it was a solar eclipse. 
 	A frail fragment: Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
 	A frail fragment: You were too young to understand what was happening. Or to remember much else. 
 	A frail fragment: The Cullings, as people have fittingly named them, have been a threat ever since. 
@@ -59,7 +60,7 @@ A frail fragment: ...
 	A frail fragment: You try your hardest to remember. You can't. 
 	A frail fragment: What else? => about
 - A... lover? [if Variables.get_var("lover") == false]
-	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom")]NO. [do Variables.set_var("lover", true)]
+	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom")][speed=0.2][shake rate=10.0 level=2]NO. [do Variables.set_var("lover", true)]
 	A frail fragment: What else? => about
 - Just... stop. Give in. [if Variables.get_var("dreams") >= 2]
 
@@ -98,12 +99,12 @@ A frail fragment: [speed=0.6]...
 	- Look around. 
 		A frail fragment: [speed=0.6]Your eyes move freely. Your head, however, is firmly stuck in place. Everything is darkness. 
 		- Cry for help. 
-			A frail fragment: [speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
+			A frail fragment: [speed=0.6]Your mouth is sewn-shut. Your vocal cords are a thing of the past. 
 			A frail fragment: [speed=0.6]Nobody could hear you, anyway. => react
 		- Keep your mouth shut. 
 			A frail fragment: [speed=0.6]Finally, something you can do. => react
 	- Cry for help. 
-		A frail fragment: [speed=0.6]Your mouth can't open. Your vocal cords are a thing of the past. 
+		A frail fragment: [speed=0.6]Your mouth is sewn-shut. Your vocal cords are a thing of the past. 
 		A frail fragment: [speed=0.6]Nobody could hear you, anyway. => react
 	
 ~ hours
@@ -111,7 +112,7 @@ A frail fragment: [speed=0.2]...Minutes which might as well be hours pass. The c
 A frail fragment: [speed=0.6]All of a sudden, you hear a sound.[do DialogueFuncs.play_sfx("sfx_crow_goddess")] A caw. And then another. 
 A frail fragment: The cold subsides. It is replaced by warmth and peacefulness.
 A frail fragment: Your paralysis demon took their sweet time to show up. A... crow? 
-A frail fragment: A one-eyed crow. It lands on your thigh. => hello
+A frail fragment: A... one-eyed crow. It lands on your thigh. => hello
 
 ~ hello
 Crow: ...
@@ -120,7 +121,7 @@ Crow: It's so good to finally meet you, Keeper.
 	Crow: I am your dead Father, child. Your long lost Brothers.
 	Crow: I'm your buried little Sister, your Best Friend and your Lover. 
 	Crow: I am the Pup you lost when you were four. The Deer Carcass you saw on the side of the road when you were ten. 
-	Crow: Most of all, I am your rotting Mother. The moldering Mother of all things, and of all beings. => hello2 
+	Crow: Most importantly, I am your rotting Mother. The moldering Mother of all things, and of all beings. => hello2 
 - That's... not my name. 
 	Crow: It is not. It's much more than that. 
 	Crow: It's who you are now, or at least, who you soon will be. 
@@ -133,7 +134,7 @@ Crow: It's so good to finally meet you, Keeper.
 	Crow: Through your dreams, I found a way. 
 	Crow: You are not who you were ten minutes ago. 
 	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
-	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
+	Crow: But do not grieve your former self, for you are mine now, mind and flesh. 
 	- I...
 		A frail fragment: You try to speak, but no words come out. 
 		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
@@ -160,10 +161,10 @@ Crow: I've been watching you. I know you. I know your soul. Your mind and body m
 Crow: But I must trust it with my life, for I have no other choice. 
 Crow: I'm here to set you on your path. To guide, as I've done twice before, as I will four times more.  
 Crow: I bestow upon you my Gift of Sight. You shall see things where others cannot. Use it wisely, and with love.
-Crow: Go to a village up in the mountains. The village all these lowly heretics speak falsehoods about. 
-Crow: Go to (village name, game name?), where dwell the founders of my Church. A haven for my children. 
-Crow: A place untouched by the Cullings, where a third one shall grow, a third one shall die, a third one shall live, and a third one shall fly. 
-#potential pop up: hmmm, that doesnt quite add up...
+Crow: Go to the village up in the mountains. The village all these lowly heretics speak falsehoods about. 
+Crow: Go to (village name, game name?). A haven for my children, where dwell your new brothers and sisters.
+Crow: A place untouched by the Cullings, where a third shall grow, a third shall die, a third shall live, and a third shall fly. 
+A frail fragment: Hmm, that doesn't quite add up...
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
 Crow: Do not let me down, for I am your Goddess and I won't allow it. 
 Crow: We will meet again, soon enough. Be at peace. 
@@ -189,7 +190,7 @@ A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 	A frail fragment: Yes. Yes you are.
 	A frail fragment: On to (village name, title card drop). => END 
 - No. 
-	A frail fragment: You don't really have a choice, for now. 
+	A frail fragment: You don't have much of a choice, for now. 
 	- Okay then. 
 		A frail fragment: That's more like it.
 		A frail fragment: On to (village name, title card drop). => END
@@ -198,10 +199,10 @@ A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 		A frail fragment: The Goddess's orders are all you have. She took everything else. 
 		A frail fragment: You're, quite literally, nothing, until you reach that village. 
 		A frail fragment: You will rot here, devoid of thoughts or emotions, trapped in darkness for all eternity. 
-		- That sounds terrifying. I'll go. 
+		- Sounds terrifying. I'll go. 
 			A frail fragment: Of course you will. 
 			A frail fragment: On to (village name, title card drop). => END
-		- That sounds peaceful. I'll stay. 
-			A frail fragment: So be it. Your funeral. 
-			*infinite black screen, you need to quit or alt f4* => start
+		- Sounds peaceful. I'll stay. 
+			A frail fragment: So be it. Your funeral. *infinite black screen, you need to quit or alt f4, achievement pops up named Blissful Oblivion - Unlocked hidden ending 1* 
+			do DialogueFuncs.kill_player()
 			
