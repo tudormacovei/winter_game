@@ -2,13 +2,15 @@ class_name HealthManager
 extends Node
 
 const STARTING_MAX_HEALTH: float = 100.0
-const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 
-@export var health_drain_per_second: float = 1.5
+# Health amounts are in percent of max health
+@export var drain_percent: float = 10.0
+@export var drain_interval: float = 2.0
+@export var drain_courtesy_delay: float = 2.0 # time from the start of a focus to first health drain
+@export var object_success_gain_percent: float = 25.0
 @export var life_loss_before_sound_delay: float = 0.2
 @export var life_loss_before_wind_delay: float = 0.5 # from the sound to the gust
 @export var life_loss_before_candle_delay: float = 1.6 # from the gust start to the candle being turned off
-@export var visual_health_curve: Curve
 @export var environment_lights: Array[Light3D] = []
 
 @onready var health_overlay: HealthOverlay = %HealthOverlay
@@ -17,8 +19,7 @@ const VISUAL_HEALTH_SMOOTHING_RATE: float = 6.0
 
 
 var _health: float = STARTING_MAX_HEALTH
-var _visual_health: float = 1.0
-var _animated_visual_health: float = 1.0
+var _drain_timer: float = 0.0
 var _remaining_lives: int = 0
 var _is_losing_life: bool = false
 var _environment_light_energies: Array[float] = []
@@ -29,7 +30,7 @@ var _environment_lights_tween: Tween = null
 var _environment_lights_dim_multiplier: float = 0.25
 var _environment_lights_restore_duration: float = 10.00
 
-# The object currently in focus, will be queried for drain info (does it have stickers?)
+# Health ALWAYS drains while an object is in focus
 var _focused_object: InteractibleObject = null
 
 # Flag to ensure player death event fires only once. 
@@ -38,18 +39,19 @@ var _is_dead: bool = false
 
 
 func reset_health() -> void:
-	_set_health(STARTING_MAX_HEALTH)
+	_health = STARTING_MAX_HEALTH
+	health_overlay.set_health(1.0, false)
 	_reset_lives()
 
 
 ## Register an object spawned on the workbench to connect health drain to object focus & completion
 func register_object(obj: InteractibleObject) -> void:
-	obj.object_interactible.connect(_on_object_interactible.bind(obj))
+	obj.object_state_changed.connect(_on_object_state_changed.bind(obj))
+	obj.sticker_completed.connect(_on_sticker_completed)
 	obj.object_completed.connect(_on_object_completed)
 
 
 func _ready() -> void:
-	assert(visual_health_curve != null, "HealthManager requires a visual health curve.")
 	assert(not environment_lights.is_empty(), "HealthManager requires at least one environment light.")
 	assert(_world_environment != null, "HealthManager requires the world environment.")
 	for light in environment_lights:
@@ -62,30 +64,22 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Either draining or recovering
-	if _should_drain():
-		_set_health(_health - health_drain_per_second * delta)
-
-	var normalized_health := clampf(_health / STARTING_MAX_HEALTH, 0.0, 1.0)
-	_visual_health = clampf(visual_health_curve.sample(normalized_health), 0.0, 1.0)
-	_animated_visual_health = lerp(
-		_animated_visual_health,
-		_visual_health,
-		1.0 - exp(-VISUAL_HEALTH_SMOOTHING_RATE * delta)
-	)
-	health_overlay.update_health_visualization(_animated_visual_health)
+	if not is_instance_valid(_focused_object) or debug_disable_drain:
+		return
+	_drain_timer -= delta
+	if _drain_timer <= 0.0:
+		_drain_timer += drain_interval
+		_change_health(-drain_percent)
 
 
-func _should_drain() -> bool:
-	if debug_disable_drain:
-		return false
-	return is_instance_valid(_focused_object) and _focused_object.has_stickers_remaining()
-
-
-func _set_health(value: float) -> void:
-	_health = clampf(value, 0.0, STARTING_MAX_HEALTH)
+func _change_health(percent: float) -> void:
+	await health_overlay.fade_in()
+	_health = clampf(_health + percent / 100.0 * STARTING_MAX_HEALTH, 0.0, STARTING_MAX_HEALTH)
+	health_overlay.set_health(_health / STARTING_MAX_HEALTH, true)
+	# To lose the life after the animation, move this below fade_out
 	if _health <= 0.0 and not _is_dead:
 		_lose_life()
+	await health_overlay.fade_out()
 
 
 func _initialize_lives() -> void:
@@ -106,7 +100,6 @@ func _lose_life() -> void:
 		return
 	_is_losing_life = true
 	GameState.is_player_input_locked = true
-	_health = STARTING_MAX_HEALTH
 
 	if is_instance_valid(_focused_object):
 		_focused_object.defocus()
@@ -126,6 +119,8 @@ func _lose_life() -> void:
 		_die()
 		return
 
+	_health = STARTING_MAX_HEALTH
+	health_overlay.set_health(1.0, false)
 	_start_environment_lights_dim()
 	_start_environment_lights_restore()
 	GameState.is_player_input_locked = false
@@ -186,18 +181,30 @@ func _die() -> void:
 	GameState.player_died.emit()
 
 
-func _on_object_interactible(is_interactible: bool, obj: InteractibleObject) -> void:
-	if is_interactible:
+func _on_object_state_changed(state: InteractibleObject.State, obj: InteractibleObject) -> void:
+	var is_focused := state == InteractibleObject.State.FOCUSED or state == InteractibleObject.State.ROTATING
+	if is_focused:
+		if _focused_object != obj:
+			_drain_timer = drain_courtesy_delay
 		_focused_object = obj
 	elif _focused_object == obj: # guard: a stale unfocus must not clear a newer focus
 		_focused_object = null
 
 
+func _on_sticker_completed(health_gain_percent: float) -> void:
+	# ensure we don't get a health drain right after a health gain, would look weird
+	# TODO: Note this is a spot that we might need to tune for difficulty
+	_drain_timer = drain_interval
+	_change_health(health_gain_percent)
+
+
 func _on_object_completed(_object_name: String, _is_special_object: bool, completed_stickers: int, total_stickers: int) -> void:
 	if completed_stickers < total_stickers:
-		_set_health(-0.001) # lose a life if object is not properly cleansed
+		if not _is_dead:
+			GameState.is_player_input_locked = true
+		_change_health(-100.0)
 	else:
-		_set_health(STARTING_MAX_HEALTH) # regen health if object was fully cleansed
+		_change_health(object_success_gain_percent)
 
 
 #region Debug

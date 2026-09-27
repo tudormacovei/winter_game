@@ -9,11 +9,7 @@ signal object_interactible(is_interactible: bool)
 signal object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int)
 signal object_state_changed(state: State)
 signal object_pending_completion_changed(is_pending: bool)
-
-# Fires after:
-# - initial sticker placement finishes
-# - stickers get peeled of the object (sticker completion)
-signal has_stickers_remaining_changed(has_remaining: bool)
+signal sticker_completed(health_gain_percent: float)
 
 # Setup variables, set before node enters scene tree
 var _focus_position: Node3D
@@ -526,29 +522,20 @@ func _on_stickers_placed() -> void:
 	for child in Utils.get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
-			child.sticker_completed.connect(_on_sticker_completed)
+			child.sticker_completed.connect(_on_sticker_completed.bind(child))
 			object_interactible.connect(child._on_object_interactible_change)
 			child.tree_exiting.connect(_on_sticker_tree_exiting.bind(child))
-	has_stickers_remaining_changed.emit(_sticker_total > 0)
 	_set_state(State.ON_TABLE)
 
 
-## Returns true if the object still has stickers left to peel.
-## Works correctly for both special objects & objects with automated sticker placement. [br]
-## Note: If called BEFORE sticker placement finishes, returns FALSE
-func has_stickers_remaining() -> bool:
-	return _completed_stickers < _sticker_total
-
-
-func _on_sticker_completed():
+func _on_sticker_completed(sticker: Sticker):
 	if not _has_player_cleansed_sticker:
 		_has_player_cleansed_sticker = true
 		GameState.first_sticker_cleansed_on_object.emit()
 
 	_completed_stickers += 1
 	print("Completed " + str(_completed_stickers) + " stickers!")
-	if _completed_stickers >= _sticker_total:
-		has_stickers_remaining_changed.emit(false)
+	sticker_completed.emit(sticker.health_gain_percent)
 
 
 # Set all data needed for correct functionality

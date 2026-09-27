@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=32 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -24,6 +24,15 @@
 [ext_resource type="PackedScene" uid="uid://xgydsunqt3t6" path="res://scenes/main_game_view/health_visualization.tscn" id="20_n3br4"]
 [ext_resource type="PackedScene" uid="uid://bqs1r87mv2qfj" path="res://scenes/main_game_view/goddess_view.tscn" id="20_nyxyu"]
 
+[sub_resource type="Curve" id="Curve_n3br4"]
+bake_resolution = 500
+_data = [Vector2(0, 0), 0.0, 0.5605083, 0, 0, Vector2(0.5806452, 0.4320196), 0.89348406, 0.89348406, 0, 0, Vector2(1, 0.98), 1.9109588, 1.5700185, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_nyxyu"]
+_data = [Vector2(0, 0), 0.0, 2.4277542, 0, 0, Vector2(0.10606061, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.017951654, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdvrf"]
 shader = ExtResource("6_8dlmc")
 shader_parameter/edges_enabled_mask = 2
@@ -39,11 +48,6 @@ shader = ExtResource("10_nyxyu")
 shader_parameter/eye_open_amount = 1.0
 shader_parameter/vertical_point_distance = 2.0
 shader_parameter/horizontal_point_distance = 1.45
-
-[sub_resource type="Curve" id="Curve_n3br4"]
-bake_resolution = 500
-_data = [Vector2(0, 0), 0.0, 0.5605083, 0, 0, Vector2(0.6182796, 0.43389726), 0.89348406, 0.89348406, 0, 0, Vector2(1, 0.9979637), 2.8072758, 1.5700185, 0, 0]
-point_count = 3
 
 [sub_resource type="Environment" id="Environment_8pwe6"]
 background_energy_multiplier = 0.0
@@ -85,10 +89,14 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(1, 1)
 script = ExtResource("4_sllmx")
+visual_health_curve = SubResource("Curve_n3br4")
+gain_tint = Color(0.28000003, 0.8, 0.28000003, 1)
+loss_tint = Color(1, 0, 0, 1)
+tint_curve = SubResource("Curve_nyxyu")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
 start_radius = 530.0
-end_radius = 80.0
+end_radius = 40.0
 branch_count = 20
 branch_scale = 0.3
 parallax_strength = 0.02
@@ -97,7 +105,7 @@ parallax_strength = 0.02
 modulate = Color(0.80616105, 0.8061606, 0.8061606, 1)
 z_index = 1
 start_radius = 550.0
-end_radius = 100.0
+end_radius = 60.0
 branch_count = 14
 branch_scale = 0.4
 parallax_strength = 0.05
@@ -106,7 +114,7 @@ parallax_strength = 0.05
 modulate = Color(0.6337567, 0.6337568, 0.6337567, 1)
 z_index = 2
 start_radius = 600.0
-end_radius = 150.0
+end_radius = 110.0
 branch_count = 10
 branch_scale = 0.5
 parallax_strength = 0.07
@@ -178,9 +186,7 @@ metadata/_custom_type_script = "uid://dyhn8xx75acn4"
 [node name="HealthManager" type="Node" parent="Managers" node_paths=PackedStringArray("environment_lights")]
 unique_name_in_owner = true
 script = ExtResource("8_sllmx")
-health_drain_per_second = 5.0
 life_loss_before_sound_delay = 0.35
-visual_health_curve = SubResource("Curve_n3br4")
 environment_lights = [NodePath("../../DirectionalLight3D"), NodePath("../../DirectionalLight3D2")]
 
 [node name="TimeManager" type="Node" parent="Managers"]

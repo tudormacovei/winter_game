@@ -32,7 +32,7 @@ colors = PackedColorArray(0.3254902, 0, 0, 1, 0.8901961, 1, 0.8980392, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_olray"]
 gradient = SubResource("Gradient_wntlq")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2fqs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppkbr"]
 resource_name = "StickerMaterial"
 render_priority = 0
 shader = ExtResource("4_e2fqs")
@@ -62,4 +62,4 @@ shape = SubResource("BoxShape3D_yniim")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 mesh = ExtResource("2_ppkbr")
-surface_material_override/0 = SubResource("ShaderMaterial_e2fqs")
+surface_material_override/0 = SubResource("ShaderMaterial_ppkbr")

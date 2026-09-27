@@ -17,6 +17,7 @@ enum State { ACTIVE, FAILED }
 # 	- useful for extra control on special objects that do not have randomized sticker placement
 @export var randomize_texture: bool = true : set = _set_randomize_texture
 @export var locked_texture_index: int = 0 : set = _set_locked_texture_index
+@export var health_gain_percent: float = 10.0
 
 var state: State = State.ACTIVE
 var _is_selected := false

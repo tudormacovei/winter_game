@@ -23,7 +23,6 @@ func _ready() -> void:
 	assert(_focus_blink != null, "UIManager requires the FocusBlink.")
 	assert(_health_overlay != null, "UIManager requires the HealthOverlay.")
 	_focus_blink.blink_closed.connect(_on_blink_closed)
-	_health_overlay.hide()
 
 	if camera and camera.has_signal("camera_focus_changed"):
 		camera.connect("camera_focus_changed", Callable(self, "_on_camera_focus_changed"))
@@ -266,10 +265,7 @@ func _on_object_focus_changed(is_focused: bool) -> void:
 
 
 func _on_blink_closed(is_focused: bool) -> void:
-	if is_focused:
-		_health_overlay.show()
-	else:
-		_health_overlay.hide()
+	_health_overlay.set_is_focused(is_focused) # the closed eye hides the instant switch
 
 
 #endregion
