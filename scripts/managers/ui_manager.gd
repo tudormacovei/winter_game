@@ -87,6 +87,12 @@ func show_game_end_screen() -> void:
 	_day_end_controller.show()
 	await fade_from_black(_SCREEN_FADE_DURATION_GAME_END)
 
+func show_balloon_layer() -> void:
+	if balloon_layer and balloon_layer.balloon:
+		balloon_layer.balloon.show()
+	else:
+		push_warning("UI Manager: Trying to show invalid balloon layer or balloon.")
+
 func hide_balloon_layer() -> void:
 	if balloon_layer and balloon_layer.balloon:
 		# NOTE: It's important that we specifically show / hide the balloon_layer.balloon variable instead of 
@@ -241,8 +247,8 @@ func _on_camera_focus_changed(current_focus) -> void:
 	show_screen_highlight()
 
 func _on_camera_rotation_completed(current_focus) -> void:
-	if balloon_layer and current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
-		balloon_layer.balloon.show()
+	if current_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
+		show_balloon_layer()
 
 func _on_dialogue_changed() -> void:
 	if _game_state_ui and camera._camera_focus != CameraControl.CameraFocus.DIALOGUE_AREA:

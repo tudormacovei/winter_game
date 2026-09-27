@@ -26,18 +26,21 @@ func play_sfx(sfx_name: String, volume_offset_db: float = 0.0):
 
 ## Pause the dialogue to play an SFX. Resume when SFX finishes playing. 
 ## If [param transition_to_black] is true, the screen will fade to black before playing the SFX, and fade back in after the SFX finishes playing.
-## !!! WARNING !!! Only call at the start of a dialogue line, before any text is displayed. 
-## Otherwise, bugs are introduced if player rapidly clicks to advance dialogue.
+## !!! WARNING !!! Only call outside dialogue lines, on a newline, as a function. Otherwise, bugs are introduced if player rapidly clicks to advance dialogue.
 func play_sfx_and_wait(sfx_name: String, volume_offset_db: float = 0.0, transition_to_black: bool = false) -> void:
 	assert(ui_manager != null, "DialogueFuncs:play_sfx_and_wait UI manager not registered!")
 
 	if transition_to_black:
 		await ui_manager.fade_to_black(ui_manager._SCREEN_FADE_DURATION_DIALOGUE_SFX)
+	else:
+		ui_manager.hide_balloon_layer()
 	
 	await AudioManager.play_sfx_and_wait(sfx_name, volume_offset_db)
 
 	if transition_to_black:
 		await ui_manager.fade_from_black(ui_manager._SCREEN_FADE_DURATION_DIALOGUE_SFX)
+	else:
+		ui_manager.show_balloon_layer()
 
 ## Returns number of objects in the workbench that still need to be cleansed / completed
 func get_object_count() -> int:
