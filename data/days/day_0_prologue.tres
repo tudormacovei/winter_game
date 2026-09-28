@@ -64,12 +64,16 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_m45ib"]
 script = ExtResource("9_dfv5o")
-compare_value = null
+is_always_true = false
+method_arguments = ["religious_fervour"]
+operator = 3
+compare_value = 5
 metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_hem1m"]
 script = ExtResource("10_m45ib")
-text_true = "You've arrived in one piece. Praise be!"
+text_true = "My sweet, little, obedient child. You've arrived. "
+text_false = "Now, now. Be good, my child. Stop resisting. "
 predicate = SubResource("Resource_m45ib")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 

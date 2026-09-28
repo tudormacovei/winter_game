@@ -33,15 +33,15 @@ metadata/_custom_type_script = "uid://dnsly0bq77weo"
 script = ExtResource("8_56kry")
 is_always_true = false
 method = 1
-method_arguments = ["NPC_4", "relationship"]
-operator = 4
+method_arguments = ["NPC_4", "brainwash"]
+operator = 2
 compare_value = 0
 metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_rm8ga"]
 script = ExtResource("9_v13ve")
-text_true = "Duncan hates you!"
-text_false = "Duncan doesn't hate you!"
+text_true = "Sarah is beautiful, isn't she? Be good to her. "
+text_false = "I would never brainwash you, my child. Stop doubting me. "
 predicate = SubResource("Resource_hqsg4")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 

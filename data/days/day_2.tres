@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=15 format=3 uid="uid://ww2tat7utudi"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=17 format=3 uid="uid://ww2tat7utudi"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
 [ext_resource type="Resource" uid="uid://bthdoam3ce0u7" path="res://data/dialogue/Day 2/2_1.dialogue" id="2_7circ"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bxmo5x5kvp8tq" path="res://scenes/object_manipulation/objects/chess_set.tscn" id="6_nc8js"]
 [ext_resource type="PackedScene" uid="uid://bi86d7ommko47" path="res://scenes/object_manipulation/objects/suitcase.tscn" id="8_d7lul"]
 [ext_resource type="Resource" uid="uid://b6c38plae5b8y" path="res://data/performance_texts/default_performance_text.tres" id="10_d7lul"]
+[ext_resource type="Script" uid="uid://bps1w10vos4x1" path="res://scripts/systems/day_end/narrative_text_definition.gd" id="10_tthvx"]
 
 [sub_resource type="Resource" id="Resource_uxq47"]
 script = ExtResource("1_5ihi8")
@@ -31,9 +32,14 @@ dialogue = ExtResource("5_ylnnp")
 objects = Array[PackedScene]([ExtResource("6_nc8js"), ExtResource("8_d7lul"), ExtResource("4_ylnnp")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
+[sub_resource type="Resource" id="Resource_dj84q"]
+script = ExtResource("10_tthvx")
+metadata/_custom_type_script = "uid://bps1w10vos4x1"
+
 [resource]
 script = ExtResource("2_jitoe")
 day_id = 2
 interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_uxq47"), SubResource("Resource_ylnnp"), SubResource("Resource_62crh")])
+narrative_text = SubResource("Resource_dj84q")
 performance_text = ExtResource("10_d7lul")
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

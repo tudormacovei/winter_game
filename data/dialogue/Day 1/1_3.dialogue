@@ -54,14 +54,14 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 	Shopkeeper: I'd be careful throwing that word around, if I were you. 
 	Shopkeeper: People here prefer "church".
 	Shopkeeper: But yes. Of course she is. 
-	Shopkeeper: Not a full member yet, though. She's too young. You can only become one once you're sixteen. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_dobut", 1)]
+	Shopkeeper: Not a full member yet, though. She's too young. You can only become one once you're sixteen. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
 	- Good. => next
 	- Is that what she wants?
 		Shopkeeper: It's what's right. 
 		Shopkeeper: And what's needed. 
 		- If you say so. => next
 		- Sounds more like it's what's needed, rather than what's right.
-			Shopkeeper: It's both. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_dobut", 1)]
+			Shopkeeper: It's both. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
 			Shopkeeper: [#sprite=worried]...
 			Shopkeeper: You're new here. You seem smart. 
 			Shopkeeper: So be careful with what you say and who you say it to. 
@@ -74,19 +74,19 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 				Shopkeeper: Which I answered truthfully. 
 				Shopkeeper: And those two can very often be the same thing, at the end of the day. => next
 			- Just want to make sure you're not brainwashing the child. 
-				Shopkeeper: [#sprite=worried]I can only hope your attitude will change, once you feel the Goddess's warmth. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_dobut", 1)]
+				Shopkeeper: [#sprite=worried]I can only hope your attitude will change, once you feel the Goddess's warmth. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
 				Shopkeeper: [#sprite=worried]If not, may She have mercy and help you find the light, for I won't. I can't. [do Variables.mod_char_var("NPC_4", "relationship", -2)] => next2
 - She a true believer? [if Variables.get_var("religious_fervour") >= 5]
 	Shopkeeper: Course she is. 
 	Shopkeeper: I've been teaching her the ways of our Goddess ever since she was born. 
-	Shopkeeper: She's not a full member yet, though. She's too young. Can only become one once she's sixteen. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_dobut", -1)]
+	Shopkeeper: She's not a full member yet, though. She's too young. Can only become one once she's sixteen. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)]
 	- Good. => next 
 	- Is that what she wants?
 		Shopkeeper: It's what's right. 
 		Shopkeeper: [#sprite=worried]And what's needed. 
 		- It sure is. => next
 		- Don't you think she should only do it if she wants to?
-			Shopkeeper: That's... not exactly how things work around here. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_dobut", 1)]
+			Shopkeeper: That's... not exactly how things work around here. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
 			Shopkeeper: [#sprite=worried]...
 			Shopkeeper: You're new here. You seem smart. 
 			Shopkeeper: So be careful with what you say and who you say it to. 
@@ -99,7 +99,7 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 				Shopkeeper: Which I answered truthfully. 
 				Shopkeeper: And those two can very often be the same thing, at the end of the day. => next 
 			- Just want to make sure her faith is genuine. 
-				Shopkeeper: It is.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_dobut", -1)][do Variables.set_char_var("NPC_4", "relationship", 1)] 
+				Shopkeeper: It is.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)][do Variables.set_char_var("NPC_4", "relationship", 1)] 
 				Shopkeeper: Not that it's any of your business. 
 				Shopkeeper: [#sprite=worried]Tread carefully. I'd do literally anything to protect her.
 				Shopkeeper: [#sprite=worried]I mean it. => next2
@@ -130,7 +130,7 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 	- I'm sure she appreciates it. 
 		Shopkeeper: [#sprite=worried]She's too kind not to. [do Variables.mod_char_var("NPC_4", "relationship", 1)] => next
 	- That comes dangerously close to blasphemy. [if Variables.get_var("religious_fervour") >= 5]
-		Shopkeeper: [#sprite=worried]... [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_dobut", -1)][do Variables.mod_char_var("NPC_4", "relationship", -1)]
+		Shopkeeper: [#sprite=worried]... [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)][do Variables.mod_char_var("NPC_4", "relationship", -1)]
 		Shopkeeper: [#sprite=worried]You're right. Forgive me. => next
 	
 
