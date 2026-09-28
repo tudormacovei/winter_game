@@ -50,8 +50,8 @@ func _ready() -> void:
 		return # non-gameplay context (e.g. shader warmup)
 	
 	# because object owner is set by InteractibleObject after our _ready returns, %GameManager can't resolve yet.
-	# we defer the function call to ensure it runs after the owner is in place
-	call_deferred("_place_stickers_runtime")
+	# we wait for the next frame with this fancy connection below (wait for this object to spawn and be placed so we have correct transforms for the stickers)
+	get_tree().process_frame.connect(_place_stickers_runtime, CONNECT_ONE_SHOT)
 
 
 func _place_stickers_runtime() -> void:

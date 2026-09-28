@@ -52,18 +52,18 @@ func do_scripted_event(event_name: String) -> void:
 #region Scripted Events 
 
 # NOTE: If more scripted events are needed, a better system should be implemented to handle them
-var is_tutorial_find_quarantine_enabled: bool = false
+var is_tutorial_find_workbench_enabled: bool = false
 
-func start_find_quarantine_tutorial() -> void:
+func start_find_workbench_tutorial() -> void:
 	if not ui_manager:
-		Utils.debug_error("GameState:start_find_quarantine_tutorial UIManager is not set!")
+		Utils.debug_error("GameState:start_find_workbench_tutorial UIManager is not set!")
 		return
 
-	is_tutorial_find_quarantine_enabled = true
+	is_tutorial_find_workbench_enabled = true
 	ui_manager.show_screen_highlight()
 
-func stop_find_quarantine_tutorial() -> void:
-	is_tutorial_find_quarantine_enabled = false
+func stop_find_workbench_tutorial() -> void:
+	is_tutorial_find_workbench_enabled = false
 	ui_manager.hide_screen_highlight()
 
 #endregion

@@ -18,9 +18,12 @@ var _object_completed_area: Area3D
 var _out_of_bounds_area: Area3D
 var _object_scene: PackedScene # ObjectWithStickers scene to load
 const RETURN_TWEEN_DURATION: float = 0.2
+const SPAWN_HEIGHT: float = 2.0 # height off of the table at which to spawn the objects (out of view obv)
+const SPAWN_STAGGER: float = 0.4 # stagger object spawns to make it look cool
 @export var outline_material: Material
 @export var focus_position_curve: Curve
 @export var focus_rotation_curve: Curve
+@export var spawn_duration: float = 0.8
 
 enum State {
 	ON_TABLE,
@@ -48,6 +51,7 @@ enum CurrentlyGrabbed {
 var _object: ObjectWithStickers = null
 var _state := State.ON_TABLE
 var _is_mouse_on_object := false
+var _is_blocking_dialogue_view := false
 var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
 var _is_pending_completion := false
@@ -92,7 +96,9 @@ var _snap_tween: Tween
 var _focus_position_tween: Tween
 var _focus_rotation_tween: Tween
 var _focus_scale_tween: Tween
+var _spawn_tween: Tween # driver of animation of object spawn
 static var _snap_orientations: Array[Basis] = []
+static var _next_spawn_time: float = 0.0 # for stagger of multi-object spawn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -111,6 +117,13 @@ func _ready() -> void:
 	add_child(_object)
 	_object.owner = get_tree().current_scene
 	_place_object_on_xz_plane(_object)
+
+	_object.position.y = SPAWN_HEIGHT
+	var now := Time.get_ticks_msec() / 1000.0
+	var spawn_delay := maxf(_next_spawn_time - now, 0.0)
+	_next_spawn_time = now + spawn_delay + SPAWN_STAGGER
+	_spawn_tween = create_tween()
+	_spawn_tween.tween_property(_object, "position:y", 0.0, spawn_duration).set_delay(spawn_delay).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	
 	_object.mouse_entered.connect(_on_object_mouse_entered)
 	_object.mouse_exited.connect(_on_object_mouse_exited)
@@ -455,7 +468,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_click_left"):
 		if _state == State.ON_TABLE and _is_mouse_on_object:
 			var camera := get_viewport().get_camera_3d() as CameraControl
-			if camera == null or not camera.is_at_rest_at_table():
+			if camera == null or not camera.is_at_rest_in_workbench_view():
 				return
 			_mouse_down = true
 			_drag_start_pos = get_viewport().get_mouse_position()
@@ -470,7 +483,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("mouse_click_left"):
 		var camera := get_viewport().get_camera_3d() as CameraControl
 		if _state == State.ON_TABLE and _mouse_down and _is_mouse_on_object:
-			# object focus can only happen while in workbench view, NOT quarantine view
+			# object focus can only happen while in workbench view
 			if camera and camera.is_at_rest_in_workbench_view():
 				if GameState.is_action_locked[GameState.ActionName.FOCUS_OBJECT]:
 					_mouse_down = false
@@ -571,12 +584,11 @@ func _set_state(state: State):
 		if not _has_player_dragged_object:
 			_has_player_dragged_object = true
 			GameState.first_drag_on_object.emit()
+		_spawn_tween.kill() # if you start dragging the object during the spawn anim, kill the spawn anim
+		_object.position.y = 0.0
 	if state == State.ON_TABLE:
 		_place_object_on_xz_plane(_object)
 
-	var camera := get_viewport().get_camera_3d() as CameraControl
-	if camera:
-		camera.can_enter_quarantine_view = state != State.FOCUSED and state != State.ROTATING
 	_update_can_enter_dialogue_view()
 
 	object_state_changed.emit(state)
@@ -599,10 +611,13 @@ func defocus() -> void:
 
 ## Dialogue transition is allowed only when the player is not interacting with an object
 func _update_can_enter_dialogue_view() -> void:
+	var is_blocking := _state != State.ON_TABLE or _is_mouse_on_object
+	if not (is_blocking or _is_blocking_dialogue_view):
+		return # hacky way to make sure we require an object that was !previously blocking! to unblock
+	_is_blocking_dialogue_view = is_blocking
 	var camera := get_viewport().get_camera_3d() as CameraControl
-	if camera == null:
-		return
-	camera.can_enter_dialogue_view = _state == State.ON_TABLE and not _is_mouse_on_object
+	if camera:
+		camera.can_enter_dialogue_view = not is_blocking
 
 
 func _set_object_interactible(is_interactible: bool) -> void:
@@ -654,6 +669,8 @@ func _start_focus_tween(target_local_pos: Vector3, position_curve: Curve, rotati
 		_focus_scale_tween.kill()
 	if _snap_tween and _snap_tween.is_valid():
 		_snap_tween.kill()
+	if _spawn_tween and _spawn_tween.is_valid():
+		_spawn_tween.kill()
 
 	var camera := get_viewport().get_camera_3d() as CameraControl
 	if camera:

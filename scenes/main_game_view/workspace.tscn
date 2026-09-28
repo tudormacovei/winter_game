@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=31 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -61,10 +61,6 @@ ssao_intensity = 10.0
 [sub_resource type="Curve" id="Curve_x8h8r"]
 _data = [Vector2(0, 0), 0.0, 3.032672, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="Curve" id="Curve_usvo5"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5738095, 0.25745022), 1.2669338, 1.2669338, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [node name="Workspace" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364816, 0.9848077, 0, 0, 0)
@@ -245,6 +241,7 @@ light_energy = 0.1
 
 [node name="DialogueInbetweenTexture" type="Sprite3D" parent="."]
 transform = Transform3D(1.145, 0, 0, 0, 0.9645329, 0.61701035, 0, -0.6170107, 0.9645327, 0, 1.1459852, -0.3619644)
+modulate = Color(0.70242256, 0.7024225, 0.7024225, 1)
 pixel_size = 0.0005
 texture = ExtResource("9_7nw64")
 
@@ -291,10 +288,6 @@ fov = 40.0
 script = ExtResource("1_jt3v7")
 focused_fov = 55.0
 focus_fov_curve = SubResource("Curve_x8h8r")
-quarantine_entry_zone_fraction = 0.1
-quarantine_exit_zone_fraction = 0.45
-quarantine_x_offset = -1.2
-quarantine_transition_curve = SubResource("Curve_usvo5")
 vertical_zone_fraction = 0.15
 vertical_dwell_time = 0.2
 vertical_transition_time = 0.5

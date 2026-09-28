@@ -159,17 +159,14 @@ func hide_screen_highlight() -> void:
 	screen_highlight_canvas.hide()
 
 func get_current_screen_highlight_mask() -> int:
-	# For now, edge highlighting is only enabled for finding the quarantine during tutorial
+	# For now, edge highlighting is only enabled for finding the workbench during tutorial
 	# This can be expanded in the future for other use cases 
-	if not GameState.is_tutorial_find_quarantine_enabled:
+	if not GameState.is_tutorial_find_workbench_enabled:
 		return ScreenHighlightEdge.NONE
 	
 	if camera._camera_focus == CameraControl.CameraFocus.DIALOGUE_AREA:
 		return ScreenHighlightEdge.BOTTOM
 	
-	if camera._camera_focus == CameraControl.CameraFocus.WORK_AREA:
-		return ScreenHighlightEdge.LEFT
-		
 	return ScreenHighlightEdge.NONE
 
 #endregion

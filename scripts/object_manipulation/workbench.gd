@@ -11,7 +11,7 @@ signal object_focus_changed(is_focused: bool)
 
 var _tween: Tween
 var _dim_tween: Tween
-var _is_object_focused: bool = false
+var _focused_object: InteractibleObject = null
 const FOCUS_DIM_ALPHA: float = 0.6
 const FOCUS_DIM_DURATION: float = 0.4
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
@@ -38,7 +38,7 @@ func add_object(object_scene: PackedScene):
 
 	interactible_object.global_position = slot.global_position
 	interactible_object.connect("object_completed", _on_object_completed)
-	interactible_object.connect("object_state_changed", _on_object_state_changed)
+	interactible_object.connect("object_state_changed", _on_object_state_changed.bind(interactible_object))
 	interactible_object.connect("object_pending_completion_changed", _on_object_pending_completion_changed)
 	return interactible_object
 
@@ -99,12 +99,12 @@ func _on_object_completed(_object_name: String, _is_special_object: bool, _compl
 		print("Workbench: All objects completed")
 		emit_signal("all_objects_completed")
 
-func _on_object_state_changed(state: InteractibleObject.State) -> void:
+func _on_object_state_changed(state: InteractibleObject.State, obj: InteractibleObject) -> void:
 	var focused := state == InteractibleObject.State.FOCUSED or state == InteractibleObject.State.ROTATING
+	if focused == (_focused_object == obj):
+		return # no focus change for this object
+	_focused_object = obj if focused else null
 	_set_background_dim(focused)
-	if focused == _is_object_focused:
-		return
-	_is_object_focused = focused
 	object_focus_changed.emit(focused)
 
 func _on_object_pending_completion_changed(is_pending_completion: bool) -> void:
