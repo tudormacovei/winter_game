@@ -88,7 +88,7 @@ else
 		Micah: You forgot your own name? Hahah. That's dumb. => name
 	
 ~ name
-Micah: [#sprite=happy] I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. 
+Micah: [#sprite=happy] I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. [do Variables.set_var("name", true)]
 - Kinda like it. 
 	Micah: [#sprite=happy]Awesome! I'll tell everyone that's what you want to be called. => next
 - That doesn't make any sense. 

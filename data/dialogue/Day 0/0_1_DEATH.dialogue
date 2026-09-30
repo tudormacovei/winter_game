@@ -9,7 +9,7 @@ if Variables.get_var("0_1_death") == 1
 	A frail fragment: She picks you up like you weigh nothing, and spins you around. Her smell is unbearable. 
 	A frail fragment: As life seeps out of you, the last thing you see is her slimy eyes as she leans in for a kiss. 
 	A frail fragment: As her lips touch yours, you die. 
-	The screen is a close up of her eyes, unlocked achievement Joan's wrath - hidden ending 2, this ending soft locks you for now
+	The screen is a close up of her eyes, unlocked achievement Joan's Wrath - hidden ending 2, this ending soft locks you for now
 	do DialogueFuncs.kill_player()
 elif Variables.get_var("0_1_death") == 2
 	A frail fragment: You see her leap at you with almost inhuman speed. 
@@ -18,7 +18,7 @@ elif Variables.get_var("0_1_death") == 2
 	A frail fragment: You feel a sharp pang of pain as she slashes again. And again. 
 	A frail fragment: She then digs into your sides and picks you up like you weigh nothing. You feel her breath as she leans in. The smell is unbearable.
 	A frail fragment: As her lips touch yours, you die. 
-	Unlocked achievement Joan's wrath - hidden ending 2, this ending soft locks you for now
+	Unlocked achievement Joan's Wrath - hidden ending 2, this ending soft locks you for now
 	do DialogueFuncs.kill_player()
 	
 	

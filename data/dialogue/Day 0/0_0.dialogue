@@ -14,8 +14,7 @@ do Variables.add_local("questions", 0)
 
 ~ start
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]Something's happening. 
-A frail fragment: [speed=0.2][shake rate=10.0 level=2]Hold on to me. 
-A frail fragment: [speed=0.2][shake rate=10.0 level=2]Do not let go.
+A frail fragment: [speed=0.2][shake rate=10.0 level=2]Hold on to me. Do not let go.
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]...
 A frail fragment: [speed=0.6]You went to bed early tonight, feeling especially tired for no particular reason. Long day at work, perhaps?
 A frail fragment: [speed=0.6]Staring at the ceiling, you didn't move an inch as hours passed you by. It's way past midnight, now. You're almost asleep, half-thinking, half-dreaming. 
@@ -164,7 +163,7 @@ Crow: I bestow upon you my Gift of Sight. You shall see things where others cann
 Crow: Go to the village up in the mountains. The village all these lowly heretics speak falsehoods about. 
 Crow: Go to (village name, game name?). A haven for my children, where dwell your new brothers and sisters.
 Crow: A place untouched by the Cullings, where a third shall grow, a third shall die, a third shall live, and a third shall fly. 
-A frail fragment: Hmm, that doesn't quite add up...
+#A frail fragment: Hmm, that doesn't quite add up...
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
 Crow: Do not let me down, for I am your Goddess and I won't allow it. 
 Crow: We will meet again, soon enough. Be at peace. 

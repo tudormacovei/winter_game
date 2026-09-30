@@ -1,4 +1,5 @@
 ~ initialize_local_variables
+do Variables.add_local("danger", false)
 
 => start
 
@@ -8,29 +9,39 @@ if Variables.get_var("ending_zero") == true
 	A frail fragment: Given the situation, they accept. They don't need another inconvenience. 
 	A frail fragment: You[do DialogueFuncs.play_sfx("sfx_exile")] find yourself outside the village walls as the sky turns red. After a few minutes, you start to feel blisters on your skin. [do DialogueFuncs.play_sfx("sfx_death")]You can feel them suck the life out of you. They hurt more than anything you could have ever imagined. 
 	A frail fragment: In mere seconds, you're dead. 
-	Achievement Brats - Unlock hidden ending 4
+	Achievement Brats - Unlock hidden ending 4, soft lock for now
 	do DialogueFuncs.kill_player() 
-else 
-	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Morning, Keeper. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] 
-	Micah: Everything alright? Have you seen Sarah, or the Shopkeeper? 
-	- They said they're going for a walk in the forest. 
-		Micah: Oh. Okay. => next
-	- Nope. No idea where they might be. 
-		Micah: Oh. Okay. => next 
-	- Micah, the Shopkeeper's gone mad. He's trying to smuggle Sarah out of the village. You need to tell the Elders. 
-		Micah: [#sprite=upset]What do you mean, smuggle? 
-		- I mean he's running away with her. If you don't tell the Elders, you might never see her again. 
-			Micah: [#sprite=upset]Uh, I find that hard to believe. 
-			- Just trust me. And trust the Elders. They'll know what to do. => micah
-			- It's for her own good, Micah. Pray to the Goddess and see what She says. => micah
-		- I mean he's running away with her, even though the Goddess told them to stay. 
-			Micah: [#sprite=upset]Uh, I find that hard to believe. 
-			- Just trust me. And trust the Elders. They'll know what to do. => micah
-			- It's for her own good, Micah. Pray to the Goddess and see what She says. => micah
-	- The Shopkeeper is a heretic. He's disobeying the Goddess's will. You need to tell the Elders. [if Variables.get_var("religious_fervour") >= 5]
+elif Variables.get_var("name") == true
+	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Morning, Keeper. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] => everything
+else
+	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Morning. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] => everything
+
+~ everything
+Micah: Everything alright? Have you seen Sarah, or the Shopkeeper? 
+- They said they're going for a walk in the forest. 
+	Micah: Oh. Okay. => next
+- Nope. No idea where they might be. 
+	Micah: Oh. Okay. => next 
+- Micah, the Shopkeeper's gone mad. He's trying to smuggle Sarah out of the village. You need to tell the Elders. 
+	Micah: [#sprite=upset]What do you mean, smuggle? 
+	- I mean he's running away with her. If you don't tell the Elders, you might never see her again. 
 		Micah: [#sprite=upset]Uh, I find that hard to believe. 
 		- Just trust me. And trust the Elders. They'll know what to do. => micah
-		- It's for the good of the village, Micah. Pray to the Goddess and see what She says. => micah
+		- It's for her own good, Micah. Pray to the Goddess and see what She says. => micah
+	- I mean he's running away with her, even though the Goddess told them to stay. 
+		Micah: [#sprite=upset]Uh, I find that hard to believe. 
+		- Just trust me. And trust the Elders. They'll know what to do. => micah
+		- It's for her own good, Micah. Pray to the Goddess and see what She says. => micah
+- The Shopkeeper is a heretic. He's disobeying the Goddess's will. You need to tell the Elders. [if Variables.get_var("religious_fervour") >= 6]
+	Micah: [#sprite=upset]Uh, I find that hard to believe. 
+	Micah: [#sprite=upset]What's going on?
+	- Just trust me. And trust the Elders. They'll know what to do. => micah
+	- It's for the good of the village, Micah. Pray to the Goddess and you'll see that I'm right. => micah
+	- Do as I say if you want to see Sarah again. 
+		Micah: What do you mean? Is she in danger? 
+		- Not if you go right now. => micah
+		- Yes. Grave danger. 
+			Micah: Oh, Goddess. [do Variables.set_var("danger", true)] => micah	
 		
 ~ next
 Micah: I'll just leave this here then. Give it to Sarah when she comes back.
@@ -44,29 +55,22 @@ Micah: I'll just leave this here then. Give it to Sarah when she comes back.
 - Will do. 
 	Micah: Thanks. I'll be going now. Looks like it might be a Culling day. 
 	Micah: [#sprite=happy]Get ready for a huge delivery tomorrow morning, haha. 
-	Micah: See ya.[do DialogueFuncs.play_sfx("sfx_door_close")] => final1
-	
+	Micah: See ya.[do DialogueFuncs.play_sfx("sfx_door_close")] => final1 
+
 	
 ~ micah
-Micah: Uhh, okay. I'll go tell them then. 
+Micah: Uhh, okay. Okay.
+Micah: What do I do?
+Micah: Okay. The Elders. Right. I'll go tell them. They'll know what to do. 
 Micah: [#sprite=upset]...
 Micah: You sure?
-- Yeah. I'm sure. And hurry up. 
+- Yeah. I'm sure. Hurry up. 
 	Micah: Okay. I'm going. 
-	Micah: Uh, see ya.[do DialogueFuncs.play_sfx("sfx_door_close")] => final2 
-- Actually, nevermind.
-	Micah: [#sprite=upset]...I'm confused. 
-	- I was just messing with you. 
-		Micah: Uh, okay. 
-		Micah: [#sprite=upset]You're very weird. 
-		Micah: Anyway, gotta go now. 
-		Micah: See ya.[do DialogueFuncs.play_sfx("sfx_door_close")] => final1
-	- Yeah. Me too. Just go about your day, okay? 
-		Micah: Uh, okay. 
-		Micah: [#sprite=upset]You're very weird. 
-		Micah: Anyway, gotta go now. 
-		Micah: See ya.[do DialogueFuncs.play_sfx("sfx_door_close")] => final1
-
+	Micah: Uh, bye.[do DialogueFuncs.play_sfx("sfx_door_close")] => final2 
+- No. But I don't know what else to do. 
+	Micah: Uh, okay. I'm going. 
+	Micah: Bye.[do DialogueFuncs.play_sfx("sfx_door_close")] => final2 
+	
 
 ~ final1
 [wait=3]The sky turns red. The Culling has oficially begun. 
