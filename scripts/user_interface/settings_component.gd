@@ -31,7 +31,7 @@ func _update_component() -> void:
 func _update_slider(slider: HSlider) -> void:
 	var bus: String = slider_to_bus_mapping[slider]
 	slider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(bus))
-
+	
 func _on_music_volume_changed(value: float) -> void:
 	AudioManager.set_bus_volume(slider_to_bus_mapping[music_volume_slider], value)
 

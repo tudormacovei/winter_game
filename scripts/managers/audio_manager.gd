@@ -10,7 +10,7 @@ var sfx_audio_players: Dictionary[String, AudioStreamPlayer] = {}
 var _sfx_dialogue_letter_player: AudioStreamPlayer
 
 var audio_file_to_volume: Dictionary[String, int] = {
-	"amb_main_menu_faded": 40,
+	"amb_main_menu_faded": 30,
 	"amb_main_game": 25,
 	"amb_night_sounds": 25,
 }
