@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://w6fvfg6nqa87"]
+[gd_scene load_steps=15 format=3 uid="uid://c07jco4evj1ib"]
 
 [ext_resource type="Script" uid="uid://bshjtdv8suyvg" path="res://scenes/UI/dialogue_state_balloon/game_state_ui.gd" id="1_tqgde"]
 [ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="2_jfqd4"]
@@ -124,7 +124,6 @@ script = ExtResource("1_tqgde")
 
 [node name="DialogueStateUI" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
