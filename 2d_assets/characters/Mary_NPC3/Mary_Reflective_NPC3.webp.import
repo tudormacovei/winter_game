@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1xr6nnrbhgtb"
-path="res://.godot/imported/Mary_NPC3_alt.webp-7a031214bc02fe00c39dd37368105d5c.ctex"
+uid="uid://bunm27ay0k2qv"
+path="res://.godot/imported/Mary_Reflective_NPC3.webp-d2edb63eb91571bc179eed6d7c166c2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/characters/Mary_NPC3_alt.webp"
-dest_files=["res://.godot/imported/Mary_NPC3_alt.webp-7a031214bc02fe00c39dd37368105d5c.ctex"]
+source_file="res://2d_assets/characters/Mary_NPC3/Mary_Reflective_NPC3.webp"
+dest_files=["res://.godot/imported/Mary_Reflective_NPC3.webp-d2edb63eb91571bc179eed6d7c166c2d.ctex"]
 
 [params]
 
