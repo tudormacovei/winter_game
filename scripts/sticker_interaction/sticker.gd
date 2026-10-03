@@ -37,7 +37,8 @@ func _ready() -> void:
 # Pick the active texture and bind it to the per-instance material.
 func _pick_and_apply_texture() -> void:
 	if spot_textures.is_empty():
-		return # keep the scene's default material — no override
+		print("Sticker %s has no spot textures configured" % get_path())
+		return
 	var chosen: Texture2D
 	if randomize_texture and not Engine.is_editor_hint():
 		chosen = spot_textures[randi() % spot_textures.size()]

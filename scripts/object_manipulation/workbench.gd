@@ -12,7 +12,7 @@ signal object_focus_changed(is_focused: bool)
 var _tween: Tween
 var _dim_tween: Tween
 var _focused_object: InteractibleObject = null
-const FOCUS_DIM_ALPHA: float = 0.6
+const FOCUS_DIM_ALPHA: float = 0.9
 const FOCUS_DIM_DURATION: float = 0.4
 const _interactible_object_scene = preload("res://scenes/object_manipulation/interactible_object.tscn")
 
@@ -25,14 +25,13 @@ func _process(_delta: float) -> void:
 
 # adds a new object to the workbench
 func add_object(object_scene: PackedScene):
-	var interactible_object: InteractibleObject = _interactible_object_scene.instantiate()
-	interactible_object.set_spawn_data($FocusPosition, $OnTableNeutralPosition, $DoneArea, %ObjectOutOfBoundsArea, object_scene)
-	
 	var slot = _get_next_free_slot()
 	if slot == null:
-		interactible_object.queue_free()
 		return null
-	
+
+	var interactible_object: InteractibleObject = _interactible_object_scene.instantiate()
+	interactible_object.set_spawn_data($FocusPosition, $OnTableNeutralPosition, $DoneArea, %ObjectOutOfBoundsArea, object_scene)
+		
 	slot.add_child(interactible_object)
 	GameState.new_object_on_workbench.emit()
 

@@ -109,6 +109,7 @@ rng_seed = 0
 metadata/_custom_type_script = "uid://e3dmkdmghks6"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("ConcavePolygonShape3D_b4gg1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

@@ -130,7 +130,7 @@ func _ready() -> void:
 	_object.area_entered.connect(_on_object_area_entered)
 	_object.area_exited.connect(_on_object_area_exited)
 
-	# Stickers are placed asynchronously — wait for the signal before scanning
+	# Stickers are placed asynchronously, wait for the signal before scanning
 	_object.stickers_placed.connect(_on_stickers_placed)
 
 	_drag_threshold_px = get_viewport().get_visible_rect().size.x * DRAG_THRESHOLD_FRACTION
@@ -231,14 +231,13 @@ func _soft_select_raycast(screen_position: Vector2, camera: Camera3D) -> SoftSel
 	return SoftSelectRayHit.new(collider, physics_hit["position"])
 
 
-## A sticker on the side of the object is not a valid target.
+## A sticker that is not facing the camera is not a valid target for grab
 func _is_sticker_facing_camera(sticker: Sticker, camera: Camera3D) -> bool:
 	var sticker_normal := sticker.global_basis.y.normalized() # stickers are placed with their local Y along the surface normal
 	var direction_toward_camera := camera.global_basis.z # opposite of the camera forward axis
 	return sticker_normal.dot(direction_toward_camera) >= cos(deg_to_rad(30.0)) # exclude stickers that do not face the camera
 
 
-## A hit is marked at its hit position, a miss is marked along the ray at the depth of this object's origin
 func _show_soft_select_ray_debug_marker(camera: Camera3D, screen_position: Vector2, hit: SoftSelectRayHit, hit_sticker: Sticker) -> void:
 	if hit == null:
 		var object_depth := (global_position - camera.global_position).dot(-camera.global_basis.z)
@@ -301,7 +300,7 @@ func _handle_object_grab_motion(event: InputEventMouseMotion) -> void:
 #endregion
 
 
-## Ends a sticker grab without a release: the sticker rolls back its peel.
+## Process a cancellation of mouse input (possibly mid-peel)
 func _cancel_mouse_input() -> void:
 	if _currently_grabbed != CurrentlyGrabbed.STICKER:
 		return
@@ -312,28 +311,26 @@ func _cancel_mouse_input() -> void:
 
 func _return_object_in_bounds() -> void:
 	# Each iteration shoves the candidate out of whichever offending box requires the smallest displacement.
-	# One iteration is enough in the common case, the loop only matters when out of bounds boxes overlap (bound corners)
+	# Usually one push is enough, the loop only matters when out of bounds boxes overlap (bound corners)
 	var candidate := self.global_position
-	var converged := false
+	var found_in_bounds_position := false
 	for _i in _RETURN_IN_BOUNDS_ITERATION_CAP:
-		var push := _smallest_push_to_safe(candidate)
+		var push := _smallest_push_to_in_bounds(candidate)
 		if push == Vector3.ZERO:
-			converged = true
+			found_in_bounds_position = true
 			break
 		candidate += push
 
-	if not converged:
-		# Geometric search could not find a safe point, fall back to the neutral position
-		push_warning("InteractibleObject: bounds recovery did not converge; returning to neutral position")
+	if not found_in_bounds_position:
+		push_warning("InteractibleObject: could not find in-bounds position from current position, returning to neutral position!")
 		candidate = _on_table_neutral_position.global_position
 
 	_return_to(candidate)
 
 
-# Among all out-of-bounds boxes the point violates, returns the smalles world-space displacement vector
-# that exits one box by `OUT_OF_BOUNDS_MARGIN`.
-# Returns `Vector3.ZERO` when the point is already safe.
-func _smallest_push_to_safe(point: Vector3) -> Vector3:
+# Among all out-of-bounds boxes the point is inside of, returns the smallest world-space translation vector that exits one box by `OUT_OF_BOUNDS_MARGIN`
+# If point is in-bounds, returns `Vector3.ZERO`
+func _smallest_push_to_in_bounds(point: Vector3) -> Vector3:
 	const EPSILON: float = 0.0001
 	var best_push := Vector3.ZERO
 	var best_magnitude_sq := INF
@@ -639,7 +636,7 @@ func _apply_rotation_delta(delta: Vector2) -> void:
 
 func _start_snap_tween() -> void:
 	# orthonormalize first: repeated rotate() calls accumulate float drift
-	# preserve scale — orthonormalized() strips it by normalizing axis vectors to unit length
+	# preserve scale separately, since orthonormalized() strips it by normalizing axis vectors to unit length
 	var current_scale := _object.scale
 	_object.basis = _object.basis.orthonormalized()
 	_object.scale = current_scale
@@ -719,7 +716,7 @@ static func _build_snap_orientations() -> Array[Basis]:
 		for z_axis in cardinals:
 			if abs(y_axis.dot(z_axis)) > 0.001:
 				continue
-			var x_axis := y_axis.cross(z_axis).normalized()
+			var x_axis := y_axis.cross(z_axis).normalized() 
 			results.append(Basis(x_axis, y_axis, z_axis))
 	return results
 

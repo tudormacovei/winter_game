@@ -124,7 +124,7 @@ curve = SubResource("Curve_smoke")
 
 [sub_resource type="Gradient" id="Gradient_id1eu"]
 offsets = PackedFloat32Array(0, 0.15, 0.5, 1)
-colors = PackedColorArray(1, 0.95, 0.6, 0, 1, 0.95, 0.6, 0.35, 1, 0.5, 0.15, 0.35, 0.8, 0.2, 0.05, 0)
+colors = PackedColorArray(1, 0.95, 0.6, 0, 0.25, 0.57500005, 1, 0.34901962, 1, 0.5, 0.15, 0.35, 0.8, 0.2, 0.05, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dwfnq"]
 gradient = SubResource("Gradient_id1eu")
@@ -196,8 +196,8 @@ draw_pass_1 = SubResource("RibbonTrailMesh_smoke")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="candle_01"]
 transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -0.00013, 0.08722, 0.00062)
-light_color = Color(0.93797374, 0.5702094, 0.42410716, 1)
-light_energy = 0.5
+light_color = Color(0.94, 0.70735, 0.42299998, 1)
+light_energy = 0.3
 light_size = 0.005
 shadow_enabled = true
 
@@ -235,8 +235,8 @@ draw_pass_1 = SubResource("RibbonTrailMesh_smoke")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="candle_02"]
 transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -0.00013, 0.08722, 0.00062)
-light_color = Color(0.93797374, 0.5702094, 0.42410716, 1)
-light_energy = 0.5
+light_color = Color(0.9411765, 0.7058824, 0.42352942, 1)
+light_energy = 0.3
 light_size = 0.005
 shadow_enabled = true
 
@@ -274,8 +274,8 @@ draw_pass_1 = SubResource("RibbonTrailMesh_smoke")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="candle_03"]
 transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -0.000274, 0.085113, 0.000464)
-light_color = Color(0.93797374, 0.5702094, 0.42410716, 1)
-light_energy = 0.5
+light_color = Color(0.9411765, 0.7058824, 0.42352942, 1)
+light_energy = 0.3
 light_size = 0.005
 
 [node name="Flame" type="GPUParticles3D" parent="candle_03"]

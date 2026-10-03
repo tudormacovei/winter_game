@@ -3,5 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://ba4517h7ti5rb" path="res://3d_assets/manipulation_objects/hand_mirror/handmirror_texture.webp" id="1_cd5eb"]
 
 [resource]
-albedo_color = Color(0.20990813, 0.20990813, 0.2099081, 1)
+albedo_color = Color(0.92, 0.84226, 0.8004, 1)
 albedo_texture = ExtResource("1_cd5eb")

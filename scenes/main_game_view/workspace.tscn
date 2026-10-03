@@ -218,7 +218,7 @@ distance_fade_length = 1.0
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038318634, 1.9449807, -0.11496185)
-light_color = Color(0.84, 0.53536, 0.3024, 1)
+light_color = Color(0.79604495, 0.9113913, 0.8622213, 1)
 light_energy = 0.2
 light_size = 0.2
 distance_fade_begin = 1.0
@@ -226,9 +226,9 @@ distance_fade_shadow = 3.0
 distance_fade_length = 1.0
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20078361, 1.2336766, -0.27737314)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0.2692757, 1.4218494, 0.2256136)
 light_color = Color(0.84, 0.53536, 0.3024, 1)
-light_energy = 0.5
+light_energy = 0.7
 light_size = 0.2
 distance_fade_begin = 1.0
 distance_fade_shadow = 3.0
@@ -278,7 +278,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9848076, -0.17364818, 0, 0.17364815, 0.984
 [node name="WorkbenchBackground" type="Sprite3D" parent="CameraSpace/WorkbenchView"]
 unique_name_in_owner = true
 transform = Transform3D(0.075, 0, 0, 0, -3.278354e-09, -0.075, 0, 0.075, -3.2783543e-09, 0, 0.69604945, -2.0743899e-08)
-modulate = Color(1, 1, 1, 0)
+modulate = Color(0, 0.20000005, 1, 0)
 texture = ExtResource("3_7nw64")
 
 [node name="Camera3D" type="Camera3D" parent="CameraSpace"]
