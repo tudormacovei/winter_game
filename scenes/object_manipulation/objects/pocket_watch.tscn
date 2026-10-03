@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbtjvs1r8hkw7"]
+[gd_scene load_steps=5 format=3 uid="uid://cbtjvs1r8hkw7"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_q2uq3"]
 [ext_resource type="ArrayMesh" uid="uid://cx7ab6fdmf23i" path="res://3d_assets/manipulation_objects/pocket_watch/pocket_watch.tres" id="2_18cvm"]
-[ext_resource type="Material" uid="uid://c446nr8v15a0s" path="res://3d_assets/manipulation_objects/pocket_watch/WatchMaterial.tres" id="3_303oh"]
-[ext_resource type="Material" uid="uid://bcdlm858plgmn" path="res://3d_assets/manipulation_objects/pocket_watch/WatchGlassMaterial.tres" id="4_c581r"]
 [ext_resource type="PackedScene" uid="uid://i5qiolqusxix" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn" id="5_c581r"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_18cvm"]
@@ -17,8 +15,6 @@ rng_seed = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_18cvm")
-surface_material_override/0 = ExtResource("3_303oh")
-surface_material_override/1 = ExtResource("4_c581r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 visible = false
