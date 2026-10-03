@@ -79,13 +79,13 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 				Micah: [#sprite=upset]... [do Variables.set_char_var("NPC_1", "relationship", 0)]
 				Micah: [#sprite=upset]I'll be going now. Bye. => END2
 else 
-	Micah: [#sprite=happy]Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("book_01")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
+	Micah: [#sprite=happy]Morning, fake 'keeper! [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_01")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
 	Micah: Eh, feel like that's a bit too long maybe. Doesn't quite roll off the tongue. 
 	Micah: You got a name?
 	- Uh, not really... 
 		Micah: How can you not have a name? Everyone has a name. => name
 	- I can't remember it. 
-		Micah: You forgot your own name? Hahah. That's dumb. => name
+		Micah: You forgot your own name? Hahah. That's so dumb. => name
 	
 ~ name
 Micah: [#sprite=happy] I'll just call you Keeper. Duncan's the Shopkeeper, cause it's his shop, and you're the Keeper, cause you're new here and not as good at your job. [do Variables.set_var("name", true)]
@@ -105,18 +105,84 @@ Micah: [#sprite=happy] I'll just call you Keeper. Duncan's the Shopkeeper, cause
 		
 ~ next
 if Variables.get_var("prog_score_simple_objects") >= 98
-	Micah: [#sprite=happy]Anyway, I was just messing. You're doing a bang-up job. Zero complaints so far. => next1
+	Micah: [#sprite=happy]Anyway, I was just messing. You're doing a bang-up job. Zero complaints so far. 
+	Micah: [#sprite=happy]Which is why I'm going to trust you with something special! => car
 elif Variables.get_var("prog_score_simple_objects") <= 80
 	Micah: [#sprite=upset]Anyway, like I was saying, people aren't happy. I doubt they'll be recommending us to their friends and family. 
 	Micah: [#sprite=happy]Don't worry about it too much, though. What are they gonna do? We've got zero competition. 
 	Micah: [#sprite=happy]Worst case, they'll kick you out for being useless. Haha. 
 	- I'll do better. 
-		Micah: [#sprite=happy]Yeah, that's a good idea. => next1
+		Micah: [#sprite=happy]Yeah, that's a good idea. 
+		Micah: Anyway, I brought this toy car my dad gave me before he, uh...
+		Micah: Back when I was a kid. 
+		Micah: It's been acting really weird lately. Shifting around the room by itself. Talking to me in his voice. That sort of thing.
+		Micah: I think it needs cleansing. I'll probably just wait and have the real Shopkeeper do it, though, since you, uh, kind of suck at it.
+		- Why did you bother telling me, then?
+			Micah: Huh. Don't know. That's a good question! 
+			Micah: Forget I said anything. => next1
+		- I can do it. Really. => really
 	- That's... reassuring. 
-		Micah: [#sprite=happy]Hey, that's what I'm here for. => next1
+		Micah: [#sprite=happy]Hey, that's what I'm here for.
+		Micah: Anyway, I brought this toy car my dad gave me before he, uh...
+		Micah: Back when I was a kid. 
+		Micah: It's been acting really weird lately. Shifting around the room by itself. Talking to me in his voice. That sort of thing.
+		Micah: I think it needs cleansing. I'll probably just wait and have the real Shopkeeper do it, though, since you, uh, kind of suck at it.
+		- Why did you bother telling me, then?
+			Micah: Huh. Don't know. That's a good question! 
+			Micah: Forget I said anything. => next1
+		- I can do it. Really. => really
 else 
-	Micah: Anyway, I was just messing. You missed a spot here and there, apparently, but people haven't been complaining too much. Good job. => next1
+	Micah: Anyway, I was just messing. You missed a spot here and there, apparently, but people haven't been complaining too much. Good job.
+	Micah: Hope I'm not making a mistake, but I'm going to trust you with something special! => car 
 	
+~ car
+Micah: [#sprite=happy]Here it is.[do DialogueFuncs.add_object_to_workbench("wooden_car")]
+Micah: It's a, uh, toy car. Cool, isn't it?
+Micah: I don't play with it anymore, of course. That's for children.
+Micah: But my dad made it for me before he, uh...
+Micah: It's the last thing he gave me, two years ago. Back when I was a kid.
+Micah: I'm giving it to you cause, uh, it's been acting a bit weird lately. Shifting around the room by itself. Talking to me in his voice. That sort of thing. 
+Micah: I want you to, uh, cleanse it for me, please. If you can. 
+Micah: You must not tell anyone about it, though. People around here arent't really that into, uh, cars, you know. Them being sinful and all. I kept it hidden until now.
+Micah: I'm sure the Goddess doesn't mind, though. It's just a wooden toy, right?
+- Sure. I'll help. 
+	Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
+- Uh, Micah, that's a lot of spots.
+	Micah: Yeaaah, that makes sense. 
+	- Okay. I'll do it. 
+		Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
+	- I think you should burn it. 
+		Micah: Nuh-uh! No way!
+		Micah: Look, just think about it. If you're not going to do it, just put it in the basket as it is. I'll just ask the Shopkeeper to help instead, or something. => next1
+- The Goddess would want you to burn it. [if Variables.get_var("religious_fervour") >= 5]
+	Micah: Nuh-uh! No way!
+	Micah: It means too much to me. She wouldn't.
+	Micah: Look, just think about it. If you're not going to do it, just put it in the basket as it is. I'll just ask the Shopkeeper to help instead, or something. => next1
+
+~ really
+if Variables.get_var("prog_score_simple_objects") <=70
+	Micah: Uh, sorry but I really doubt that. Hahah. 
+	Micah: Forget I said anything! => next1 
+else
+	Micah: Hmmmmm.
+	Micah: You sure?
+	- Sure I'm sure. 
+		Micah: Okay. Why not. Here it is. [do DialogueFuncs.add_object_to_workbench("wooden_car")]
+		Micah: Just make sure you don't tell anyone about it. People around here aren't exactly into, uh, cars, you know. Them being sinful and all. I kept it hidden until now.
+		Micah: I'm sure the Goddess doesn't mind, though. It's just a wooden toy, right?
+		- Yeah. I'll do my best. 
+			Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
+		- Uh, Micah, that's a lot of spots.
+			Micah: Yeaaah, that makes sense. 
+			- Okay. I'll do it. 
+				Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
+			- I think you should burn it. 
+				Micah: Nuh-uh! No way!
+				Micah: Look, just think about it. If you're not going to do it, just put it in the basket as it is. I'll just ask the Shopkeeper to help instead, or something. => next1
+	- Maybe?
+		Micah: Not the answer I was looking for. Sorry!
+		Micah: Forget I said anything. => next1 
+
 ~ next1
 Micah: Oh, and I'm supposed to let you know that Sarah's got to stay inside today. Shopkeeper's orders. Not exactly sure why. 
 Micah: I've got some errands to run for the Elders so I gotta get going in a minute. Will you tell her I figured out where to get the final piece for her father's gift? 

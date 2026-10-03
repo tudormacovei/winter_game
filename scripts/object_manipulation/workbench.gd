@@ -63,6 +63,14 @@ func get_object_count() -> int:
 				
 	return count
 
+func get_first_object() -> InteractibleObject:
+	for slot in object_slots:
+		for child in slot.get_children():
+			if child is InteractibleObject and not child.is_queued_for_deletion():
+				return child
+
+	return null
+
 func _get_next_free_slot() -> Node3D:
 	for slot in object_slots:
 		if slot.get_child_count() == 0:

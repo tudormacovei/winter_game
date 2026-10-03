@@ -59,7 +59,7 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 		Shopkeeper: I'm guessing Sarah's the one who told you. Any idea where she is? => next
 	- Sarah told me about it. She was worried you were out drinking again. 
 		Shopkeeper: [#sprite=worried]Oh, poor child. 
-		Shopkeeper: [#sprite=worried]I'm sorry. I came on too strong. I've had a rought day, and it's a sensitive subject. 
+		Shopkeeper: [#sprite=worried]I'm sorry. I came on too strong. I've had a rough day, and it's a sensitive subject. 
 		Shopkeeper: [#sprite=worried]We can talk about it sometime. Just not now. 
 		Shopkeeper: Any idea where she is? => next
 	

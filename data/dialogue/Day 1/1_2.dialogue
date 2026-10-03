@@ -37,7 +37,7 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 	- I think your Goddess brainwashed me and sent me here. 
 		Micah: Uh, you hit your head or something?
 		Micah: What do you mean brainwashed?
-		Micah: Is that even a thing? How would She even do that?
+		Micah: Is that even a thing? How would She even get in there?
 		Micah: You're weird. 
 		- It means She made me forget stuff in order to serve Her without question. 
 			Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
@@ -85,7 +85,7 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 			- I think your Goddess brainwashed me and sent me here. 
 				Micah: Uh, you hit your head or something?
 				Micah: What do you mean brainwashed?
-				Micah: Is that even a thing? How would She even do that?
+				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
 					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
@@ -118,7 +118,7 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 			- I think your Goddess brainwashed me and sent me here. 
 				Micah: Uh, you hit your head or something?
 				Micah: What do you mean brainwashed?
-				Micah: Is that even a thing? How would She even do that?
+				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
 					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
@@ -151,7 +151,7 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 			- I think your Goddess brainwashed me and sent me here. 
 				Micah: Uh, you hit your head or something?
 				Micah: What do you mean brainwashed?
-				Micah: Is that even a thing? How would She even do that?
+				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
 					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
@@ -193,7 +193,7 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 			- I think your Goddess brainwashed me and sent me here. 
 				Micah: Uh, you hit your head or something?
 				Micah: What do you mean brainwashed?
-				Micah: Is that even a thing? How would She even do that?
+				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
 					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
@@ -225,7 +225,7 @@ Micah: Anyway, who the hell are you?
 - I think your Goddess brainwashed me and sent me here. 
 	Micah: Uh, you hit your head or something?
 	Micah: What do you mean brainwashed?
-	Micah: Is that even a thing? How would She even do that?
+	Micah: Is that even a thing? How would She even get in there?
 	Micah: You're weird. 
 	- It means She made me forget stuff in order to serve Her without question. 
 		Micah: That sounds kinda awesome. I wanna get brainwwashed too. 

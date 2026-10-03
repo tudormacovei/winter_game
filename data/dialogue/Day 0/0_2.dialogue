@@ -3,7 +3,7 @@
 => start
 
 ~ start
-Shopkeeper: [do DialogueFuncs.play_sfx("sfx_shh")]Shh. Quiet. My daughter's asleep. 
+Shopkeeper: [do DialogueFuncs.play_sfx("sfx_shh")]Shh. Be quiet. My daughter's asleep. 
 Shopkeeper: She's been helping me out all day and I'd hate for us to wake her up with our chatter. 
 Shopkeeper: Anyway, you're finally here! You sure took your time. 
 Shopkeeper: I know who you are and why you've come. The Goddess told me everything. 

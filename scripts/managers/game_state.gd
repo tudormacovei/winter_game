@@ -1,5 +1,6 @@
 extends Node
 
+@onready var game_manager: GameManager = null
 @onready var ui_manager: UIManager = null
 
 # Signals are emitted in relevant places in the codebase according to player actions so they are not used in this file
@@ -65,6 +66,51 @@ func start_find_workbench_tutorial() -> void:
 func stop_find_workbench_tutorial() -> void:
 	is_tutorial_find_workbench_enabled = false
 	ui_manager.hide_screen_highlight()
+
+# Pulse object with a delay until the player focuses on it. If the player focuses on it before the delay, the pulse will not occur.
+var was_object_focused: bool = false
+var is_object_pulse_active: bool = false
+func start_focus_object_tutorial() -> void:
+	var DELAY_SECONDS = 15.0
+	var workbench: Workbench = game_manager.workbench
+	if not workbench:
+		Utils.debug_error("GameState:start_focus_object_tutorial Workbench is not set!")
+		return
+
+	var object = workbench.get_first_object()
+	if object == null:
+		Utils.debug_alert("GameState:start_focus_object_tutorial No first object found on workbench!")
+		return
+
+	if object.get_state() != InteractibleObject.State.ON_TABLE and object.get_state() != InteractibleObject.State.DRAGGING:
+		Utils.debug_alert("GameState:start_focus_object_tutorial Object is not on table! Cancelling pulse.")
+		return
+
+	was_object_focused = false
+	is_object_pulse_active = false
+	object.object_state_changed.connect(Callable(self, "_helper_on_object_focus_for_pulse").bind(object), CONNECT_PERSIST)
+
+	await get_tree().create_timer(DELAY_SECONDS).timeout
+
+	if was_object_focused:
+		return # Player already focused on the object, no need to start the pulse
+
+	if is_instance_valid(object):
+		is_object_pulse_active = true
+		object.start_outline_scale_pulse()
+
+func _helper_on_object_focus_for_pulse(new_state: InteractibleObject.State, object: InteractibleObject) -> void:
+	if not is_instance_valid(object):
+		return
+
+	if new_state == InteractibleObject.State.FOCUSED:
+		was_object_focused = true
+
+		if is_object_pulse_active:
+			is_object_pulse_active = false
+			object.end_outline_scale_pulse()
+		
+		object.object_state_changed.disconnect(Callable(self, "_helper_on_object_focus_for_pulse").bind(object))
 
 #endregion
 
