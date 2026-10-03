@@ -2,7 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bhfh6rxc87nol"
+uid="uid://cpxwrgrckjeyj"
 path="res://.godot/imported/sfx_begin_peel.wav-eddec0388b31c664d6c84ff6ece6dd37.sample"
 
 [deps]
@@ -18,7 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop_mode=0
+edit/loop_mode=2
 edit/loop_begin=0
-edit/loop_end=-1
+edit/loop_end=-3
 compress/mode=2
