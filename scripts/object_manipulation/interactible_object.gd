@@ -749,7 +749,7 @@ func _handle_drag():
 
 
 func _apply_outline():
-	var mesh_instance := _object.get_child(0) as MeshInstance3D
+	var mesh_instance := _object._find_mesh_instance()
 	if mesh_instance == null:
 		return
 	if outline_material == null:
