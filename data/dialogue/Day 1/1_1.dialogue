@@ -107,41 +107,30 @@ Shopkeeper: Want the long version or the short one?
 	Shopkeeper: Though most people can't see said spots, their side effects can be felt by anyone. Using, interacting with or looking at an infected object can cause madness, ilness, and violent urges.
 	Shopkeeper: Sometimes, people can even hear the object talking to them, inciting them to violence. No wonder they go mad. 
 	Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
-	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. 
-	#tutorial start
-	Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_workbench_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_workbench_tutorial")]
-	#tutorial: look down, move objects
-	Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
-	#tutorial: focus mode, rotate 
-	Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
-	Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
-	Shopkeeper: Some of the side effects will stay with you till you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. You'll see.
-	Shopkeeper: Generally speaking, though, you'll be mostly fine after a short break. And then you're back to peeling.
-	Shopkeeper: Speaking of, let's try peeling the evil off this one. 
-	Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do lock_player_action("complete_sticker", false)] [do wait_for("first_sticker_cleansed_on_object")] 
-	#tutorial: managing your health, peeling 
-	Shopkeeper: Well done. Rid it of all corruption spots and then put it in the basket, to your right. [do lock_player_action("complete_object", false)] [do wait_for("object_completed")] => normal_spots_complete_check
+	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
 - Short version, please. 
 	Shopkeeper: Perfectly understandable. Life is short.
 	Shopkeeper: The Cullings are the work of the Goddess. As you well know, they happen once every few weeks or months when the sky turns red. 
 	Shopkeeper: Some people die gruesome deaths, and some items become infected. 
 	Shopkeeper: The infection on the items is usually invisible to the human eye. That's where we come in.
 	Shopkeeper: As Gift-bearers, we're able to see the spots of corruption and cleanse the items of their evil. 
-	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. 
-	#tutorial start
-	Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_workbench_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_workbench_tutorial")]
-	#tutorial: look down, move objects
-	Shopkeeper: [do! do_scripted_event("start_focus_object_tutorial")]Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
-	#tutorial: focus mode, rotate 
-	Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
-	Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
-	Shopkeeper: Some of the side effects will stay with you till you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. You'll see.
-	Shopkeeper: Generally speaking, though, you'll be mostly fine after a short break. And then you're back to peeling.
-	Shopkeeper: Speaking of, let's try peeling the evil off this one. 
-	Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do lock_player_action("complete_sticker", false)] [do wait_for("first_sticker_cleansed_on_object")] 
-	#tutorial: managing your health, peeling 
-	Shopkeeper: Well done. Rid it of all corruption spots and then put it in the basket, to your right. [do lock_player_action("complete_object", false)] [do wait_for("object_completed")] => normal_spots_complete_check
-	#tutorial: done zone
+	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
+
+~ gameplay_tutorial
+#tutorial start
+Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_workbench_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_workbench_tutorial")]
+#tutorial: look down, move objects
+Shopkeeper: [do! do_scripted_event("start_focus_object_tutorial")]Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
+#tutorial: focus mode, rotate 
+Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
+Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
+Shopkeeper: Some of the side effects will stay with you till you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. You'll see.
+Shopkeeper: Generally speaking, though, you'll be mostly fine after a short break. And then you're back to peeling.
+Shopkeeper: Speaking of, let's try peeling the evil off this one. 
+Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do lock_player_action("complete_sticker", false)] [do wait_for("first_sticker_cleansed_on_object")] 
+#tutorial: managing your health, peeling 
+Shopkeeper: Well done. Rid it of all corruption spots and then put it in the basket, to your right. [do lock_player_action("complete_object", false)] [do wait_for("object_completed")] => normal_spots_complete_check
+#tutorial: done zone
 
 #tutorial: Repeating normal spots object based on player performance 
 ~ normal_spots_complete_check
@@ -152,27 +141,7 @@ if Variables.get_var("prog_score_special_object_tutorial_peel_book") < 100
 	% Shopkeeper: You have to rid it of all corruption spots and then place it in the basket, to your right. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
 	% Shopkeeper: Fully cleanse the object and then put it in the basket, on the right hand side. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
 else 
-	Shopkeeper: That's it. Well done! Now let's try another one. 
-	Shopkeeper: This next one's been tainted longer. Its evil is more frenetic. Some of its spots will move inward when observed for too long, infecting it forever.
-	Shopkeeper: But remember, put it down from time to time. Better it stay as it is than you become infected yourself. Items can be burned, but if the evil gets its hooks in you, you're done for. 
-	Shopkeeper: Give it a go, then put it in the basket. [do DialogueFuncs.add_object_to_workbench("tutorial_timed_milk_carton")] [do wait_for("object_completed")] => timed_spots_complete_check
-	
-#tutorial: Repeating timed spots object based on player performance
-~ timed_spots_complete_check
-if Variables.get_var("prog_score_special_object_tutorial_timed_milk_carton") < 100
-	% Shopkeeper: Yep, this one's trickier. You didn't peel it in time. Give it another go. [do DialogueFuncs.add_object_to_workbench("tutorial_timed_milk_carton")] [do wait_for("object_completed")]  => timed_spots_complete_check
-	% Shopkeeper: And it's gone forever. No harm done. You're still better than I was at first. Again. [do DialogueFuncs.add_object_to_workbench("tutorial_timed_milk_carton")] [do wait_for("object_completed")]  => timed_spots_complete_check
-else 
-	Shopkeeper: Great job. You're a natural, eh? One last thing I want to show you. 
-	Shopkeeper: This item's spots have taken root in a peculiar and particular way. You have to peel it in a certain direction, or it won't budge. Try it. [do DialogueFuncs.add_object_to_workbench("tutorial_directional_chess_set")] [do wait_for("object_completed")] => directional_spots_complete_check
-
-#tutorial: Repeating directional spots object based on player performance
-~ directional_spots_complete_check
-if Variables.get_var("prog_score_special_object_tutorial_directional_chess_set") < 100
-	% Shopkeeper: This one's knotty too. Give it another try. [do DialogueFuncs.add_object_to_workbench("tutorial_directional_chess_set")] [do wait_for("object_completed")] => directional_spots_complete_check
-	% Shopkeeper: Missed a few. If they don't budge, try another way. Again. [do DialogueFuncs.add_object_to_workbench("tutorial_directional_chess_set")] [do wait_for("object_completed")] => directional_spots_complete_check
-else 
-	Shopkeeper: There we go. You got it. => spots_tutorial_end
+	Shopkeeper: Well done! => spots_tutorial_end
 
 ~ spots_tutorial_end
 Shopkeeper: That's it. Our day consists of doing this over and over again, taking short breaks whenever we feel the need, and longer ones once every two or three objects. Safer that way. Easy to get lost in this kind of work. 
