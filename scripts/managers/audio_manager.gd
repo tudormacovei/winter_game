@@ -6,7 +6,7 @@ const SFX_POLYPHONY := 16
 const SFX_DIALOGUE_LETTER_POLYPHONY := 32
 
 var _ambient_player: AudioStreamPlayer
-var _sfx_player: AudioStreamPlayer
+var sfx_audio_players: Dictionary[String, AudioStreamPlayer] = {}
 var _sfx_dialogue_letter_player: AudioStreamPlayer
 
 var audio_file_to_volume: Dictionary[String, int] = {
@@ -48,13 +48,37 @@ func play_ambient_stream(stream_name: String):
 func stop_ambient():
 	_ambient_player.stop()
 
+func pause_sfx(stream_name: String):
+	var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
+	audioPlayer.stream_paused = true
+
+func stop_sfx(stream_name: String):
+	var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
+	audioPlayer.stop()
+	sfx_audio_players.erase(stream_name)
+	audioPlayer.queue_free() 
+
 func play_sfx(stream_name: String, volume_offset_db: float = 0.0):
 	if not sfx_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
 		return
 
 	var volume_db := _get_sfx_volume(stream_name)
-	_play_sfx(_sfx_player, stream_name, volume_db + volume_offset_db)
+	#if stream player already exists for a stream, keep playing it or play a one shot
+	#why keep a reference in array if it's one shot though?
+	if (sfx_audio_players.has(stream_name)) :
+		var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
+		if (audioPlayer.stream_paused):
+			audioPlayer.stream_paused = false
+		else:
+			# one shot
+			_play_sfx(audioPlayer, stream_name, volume_db + volume_offset_db)
+		return
+	
+	#if stream player does not exist, create a new one and add it to the audio players dictionary
+	var newPlayer = _create_polyphonic_stream_player(Config.AUDIO_BUS_SFX, SFX_POLYPHONY)
+	sfx_audio_players.get_or_add(stream_name, newPlayer)
+	_play_sfx(newPlayer, stream_name, volume_db + volume_offset_db)
 
 ## Play a single SFX and await its completion
 func play_sfx_and_wait(stream_name: String, volume_offset_db: float = 0.0) -> void:
@@ -114,7 +138,6 @@ func _create_players():
 	_ambient_player.bus = Config.AUDIO_BUS_AMBIENT
 	add_child(_ambient_player)
 	
-	_sfx_player = _create_polyphonic_stream_player(Config.AUDIO_BUS_SFX, SFX_POLYPHONY)
 	_sfx_dialogue_letter_player = _create_polyphonic_stream_player(Config.AUDIO_BUS_SFX, SFX_DIALOGUE_LETTER_POLYPHONY)
 
 func _create_polyphonic_stream_player(bus_name: String, polyphony: int) -> AudioStreamPlayer:

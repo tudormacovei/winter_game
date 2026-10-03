@@ -122,9 +122,11 @@ func handle_mouse_input(event: InputEvent) -> bool:
 		var fraction := _complete_fraction()
 		is_peeling = false
 		if _passes_completion_check(fraction):
+			AudioManager.stop_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)
 			AudioManager.play_sfx(Config.STICKER_END_PEEL_SFX_NAME)
 			_start_completion()
 		else:
+			AudioManager.stop_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)
 			_start_rollback()
 		return true
 	return false
@@ -133,6 +135,7 @@ func cancel_mouse_input() -> void:
 	if not is_peeling:
 		return
 	is_peeling = false
+	AudioManager.stop_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)
 	_start_rollback()
 
 ## Override in subclasses to add additional completion criteria (e.g. drag direction).

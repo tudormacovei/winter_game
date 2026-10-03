@@ -100,6 +100,7 @@ func _lose_life() -> void:
 		return
 	_is_losing_life = true
 	GameState.is_player_input_locked = true
+	
 
 	if is_instance_valid(_focused_object):
 		_focused_object.defocus()
