@@ -56,8 +56,9 @@ var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
 var _is_pending_completion := false
 var _original_mesh: Mesh = null
+var _outline_stack: int = 0
 
-static var HOVERED_SCALE = Vector3(1.02, 1.02, 1.02) # object scale on mouse hover
+static var HOVERED_SCALE_MULTIPLIER = 1.02 # object scale on mouse hover
 static var DRAG_THRESHOLD_FRACTION: float = 0.008 # fraction of viewport width before a grab becomes a drag (prevents jitter)
 static var ROTATION_REVOLUTIONS_PER_WIDTH: float = 1.25 # full revolutions when dragging across the viewport width
 static var ROTATION_SNAP_DURATION: float = 0.2
@@ -96,6 +97,7 @@ var _snap_tween: Tween
 var _focus_position_tween: Tween
 var _focus_rotation_tween: Tween
 var _focus_scale_tween: Tween
+var _hover_scale_tween: Tween
 var _spawn_tween: Tween # driver of animation of object spawn
 static var _snap_orientations: Array[Basis] = []
 static var _next_spawn_time: float = 0.0 # for stagger of multi-object spawn
@@ -161,6 +163,8 @@ func _physics_process(_delta: float) -> void:
 		return # the grabbed sticker stays selected until the grab ends
 	_soft_select_target = _soft_select()
 
+func get_state() -> State:
+	return _state
 
 #region Soft Select
 
@@ -716,7 +720,7 @@ static func _build_snap_orientations() -> Array[Basis]:
 		for z_axis in cardinals:
 			if abs(y_axis.dot(z_axis)) > 0.001:
 				continue
-			var x_axis := y_axis.cross(z_axis).normalized() 
+			var x_axis := y_axis.cross(z_axis).normalized()
 			results.append(Basis(x_axis, y_axis, z_axis))
 	return results
 
@@ -748,6 +752,32 @@ func _handle_drag():
 	#print("Distance to plane intersect: " + str(distance_to_plane_intersect))
 
 
+func start_outline_scale_pulse() -> void:
+	_apply_outline()
+
+	if _hover_scale_tween and _hover_scale_tween.is_valid():
+		_hover_scale_tween.kill()
+
+	_hover_scale_tween = create_tween()
+	_hover_scale_tween.set_loops()
+
+	var DURATION = 0.7
+	var PULSE_SCALE_MULTIPLIER = 1.1
+	var initial_scale = _object.scale
+
+	_hover_scale_tween.tween_property(_object, "scale", initial_scale * PULSE_SCALE_MULTIPLIER, DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_hover_scale_tween.tween_property(_object, "scale", initial_scale, DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func end_outline_scale_pulse() -> void:
+	_remove_outline()
+
+	if _hover_scale_tween and _hover_scale_tween.is_valid():
+		_hover_scale_tween.kill()
+
+	_object.scale = Vector3.ONE
+
+
 func _apply_outline():
 	var mesh_instance := _object._find_mesh_instance()
 	if mesh_instance == null:
@@ -756,8 +786,9 @@ func _apply_outline():
 		push_error("outline_material not set!")
 		return
 
-	if _original_mesh != null:
-		return # already applied outline
+	_outline_stack += 1
+	if _outline_stack > 1 or _original_mesh != null:
+		return # Already applied outline
 
 	var mesh := mesh_instance.mesh
 	if mesh == null:
@@ -778,10 +809,14 @@ func _apply_outline():
 		new_mat.next_pass = outline_material
 		mesh_clone.surface_set_material(i, new_mat)
 
-	_object.scale = HOVERED_SCALE
+	_object.scale *= HOVERED_SCALE_MULTIPLIER
 
 
 func _remove_outline():
+	_outline_stack -= 1
+	if _outline_stack > 0:
+		return # Don't remove outline if stack is not empty
+
 	# Restore original mesh
 	var mesh_instance := _object.get_child(0) as MeshInstance3D
 	if mesh_instance == null: # 'as' keyword casts to null on type mismatch

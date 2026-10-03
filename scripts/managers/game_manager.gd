@@ -87,6 +87,7 @@ func _ready():
 	GameState.day_started.emit(current_day_index)
 	_play_next_interaction()
 
+	GameState.game_manager = self
 	DialogueFuncs.register_game_manager(self)
 	if OS.is_debug_build():
 		DebugUI.register_debug_target(self)

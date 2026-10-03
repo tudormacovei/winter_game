@@ -131,7 +131,7 @@ Shopkeeper: Want the long version or the short one?
 	#tutorial start
 	Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_workbench_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_workbench_tutorial")]
 	#tutorial: look down, move objects
-	Shopkeeper: Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
+	Shopkeeper: [do! do_scripted_event("start_focus_object_tutorial")]Now pick it up again and give it a proper look. Rotate it around, try to really focus on it. Make sure to put it back down after a few seconds. [do lock_player_action("focus_object", false)] [do wait_for("first_rotate_on_object")] 
 	#tutorial: focus mode, rotate 
 	Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
 	Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
