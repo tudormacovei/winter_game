@@ -34,7 +34,7 @@ var _environment_lights_restore_duration: float = 10.00
 var _focused_object: InteractibleObject = null
 
 # Flag to ensure player death event fires only once. 
-# This flag is not cleared! — recovery from player death should be done via scene reload
+# This flag is not cleared! Recovery from player death should be done via scene reload
 var _is_dead: bool = false
 
 

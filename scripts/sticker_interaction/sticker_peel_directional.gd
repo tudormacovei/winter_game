@@ -57,8 +57,7 @@ func _passes_completion_check(fraction: float) -> bool:
 	return angle_between <= deg_to_rad(angle_width_degrees) * 0.5
 
 
-# Writes wave_direction to the per-instance ShaderMaterial. Cooperates with the base's
-# texture-apply path via _get_or_duplicate_surface_material — only one duplication per instance.
+# Writes wave_direction to the per-instance ShaderMaterial
 func _setup_shader_material() -> void:
 	var mat := _get_or_duplicate_surface_material()
 	if not (mat is ShaderMaterial):

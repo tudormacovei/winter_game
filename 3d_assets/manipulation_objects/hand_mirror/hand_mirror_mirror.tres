@@ -1,6 +1,8 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://d4i7f4gbnw5vg"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d4i7f4gbnw5vg"]
+
+[ext_resource type="Texture2D" uid="uid://ba4517h7ti5rb" path="res://3d_assets/manipulation_objects/hand_mirror/handmirror_texture.webp" id="1_073ea"]
 
 [resource]
-albedo_color = Color(0.49836898, 0.51469886, 0.5146922, 1)
+albedo_texture = ExtResource("1_073ea")
 metallic = 1.0
 roughness = 0.0
