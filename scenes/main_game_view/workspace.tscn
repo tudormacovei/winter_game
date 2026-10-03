@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://qq7fn5km1o4b"]
+[gd_scene load_steps=48 format=3 uid="uid://qq7fn5km1o4b"]
 
 [ext_resource type="Script" uid="uid://d4gvs2ht2gxk6" path="res://scripts/camera_control.gd" id="1_jt3v7"]
 [ext_resource type="PackedScene" uid="uid://ck2v4ahcemn45" path="res://scenes/main_game_view/dialogue_view.tscn" id="1_w2y3b"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://3eha20jds2g7" path="res://scripts/user_interface/health_overlay.gd" id="4_sllmx"]
 [ext_resource type="PackedScene" uid="uid://d36qbqmdyx0mw" path="res://scenes/UI/pause_menu.tscn" id="4_x8h8r"]
 [ext_resource type="PackedScene" uid="uid://dhtlwlem7pnm2" path="res://scenes/UI/branch_ring.tscn" id="5_8dlmc"]
-[ext_resource type="PackedScene" uid="uid://w6fvfg6nqa87" path="res://scenes/UI/dialogue_state_balloon/game_state_ui.tscn" id="5_jwblm"]
+[ext_resource type="PackedScene" uid="uid://c07jco4evj1ib" path="res://scenes/UI/dialogue_state_balloon/game_state_ui.tscn" id="5_jwblm"]
 [ext_resource type="Script" uid="uid://dgcq710oaye20" path="res://scripts/managers/ui_manager.gd" id="5_mp6x8"]
 [ext_resource type="Shader" uid="uid://dyg7t2rqjvy1s" path="res://3d_assets/shaders/screen_edge_highlight.gdshader" id="6_8dlmc"]
 [ext_resource type="Script" uid="uid://dwxx1uwqgpq6b" path="res://scripts/managers/time_manager.gd" id="7_vfkcj"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://bqd8veyjgmaye" path="res://scenes/main_game_view/black_view.tscn" id="16_f2mrw"]
 [ext_resource type="PackedScene" uid="uid://xgydsunqt3t6" path="res://scenes/main_game_view/health_visualization.tscn" id="20_n3br4"]
 [ext_resource type="PackedScene" uid="uid://bqs1r87mv2qfj" path="res://scenes/main_game_view/goddess_view.tscn" id="20_nyxyu"]
+[ext_resource type="Shader" uid="uid://iqjrfvgmk7ot" path="res://3d_assets/shaders/dust_particle.gdshader" id="21_dust0"]
+[ext_resource type="Script" uid="uid://ciug6i05js30y" path="res://scripts/user_interface/dust_mouse_attractor.gd" id="22_dusta"]
 
 [sub_resource type="Curve" id="Curve_n3br4"]
 bake_resolution = 500
@@ -61,6 +63,117 @@ ssao_intensity = 10.0
 [sub_resource type="Curve" id="Curve_x8h8r"]
 _data = [Vector2(0, 0), 0.0, 3.032672, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_dustf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.19101125, 0.8195963), 0.0, 0.0, 0, 0, Vector2(0.32584268, 0.9617325), 0.0, 0.0, 0, 0, Vector2(0.48764044, 0.6730269), 0.0, 0.0, 0, 0, Vector2(0.7685393, 0.9661752), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_dustf"]
+curve = SubResource("Curve_dustf")
+
+[sub_resource type="Gradient" id="Gradient_nyxyu"]
+offsets = PackedFloat32Array(0, 0.16, 0.56941175, 0.6329412, 0.7035294, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.3180198, 0.31801978, 0.31801975, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q3oqp"]
+gradient = SubResource("Gradient_nyxyu")
+
+[sub_resource type="Curve" id="Curve_ur4fc"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 0.58872986), 0.0, 3.747477, 0, 0, Vector2(0.17286652, 0.15264928), 0.0, 0.0, 0, 0, Vector2(0.30415756, 0.37005854), 0.0, 0.0, 0, 0, Vector2(0.4835886, 0.08578634), 0.0, 0.0, 0, 0, Vector2(0.6520788, 0.34819174), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.1713743, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_4eui5"]
+curve = SubResource("Curve_ur4fc")
+
+[sub_resource type="Curve" id="Curve_oos78"]
+_data = [Vector2(0, 0.99436253), 0.0, -2.9589484, 0, 0, Vector2(1, 0), -0.07894405, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ur4fc"]
+curve = SubResource("Curve_oos78")
+
+[sub_resource type="Curve" id="Curve_4eui5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50984687, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2dj5r"]
+curve = SubResource("Curve_4eui5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oos78"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(0.94, 1, 0.01)
+spread = 180.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.03
+gravity = Vector3(0, -0.05, 0)
+damping_min = 50.000004
+damping_max = 100.00001
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_4eui5")
+scale_over_velocity_min = 0.5
+scale_over_velocity_max = 2.0
+scale_over_velocity_curve = SubResource("CurveTexture_ur4fc")
+color = Color(0.64, 0.55786663, 0.41599998, 0.39215687)
+color_ramp = SubResource("GradientTexture1D_q3oqp")
+alpha_curve = SubResource("CurveTexture_dustf")
+turbulence_enabled = true
+turbulence_noise_strength = 0.01
+turbulence_noise_scale = 2.0
+turbulence_noise_speed_random = 0.1
+turbulence_influence_min = 0.05
+turbulence_influence_max = 0.2
+turbulence_initial_displacement_min = 1.490116e-06
+turbulence_initial_displacement_max = 1.490116e-06
+turbulence_influence_over_life = SubResource("CurveTexture_2dj5r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dust0"]
+render_priority = 1
+shader = ExtResource("21_dust0")
+shader_parameter/radius = 1.0
+shader_parameter/falloff_start = 0.32999999262384
+shader_parameter/falloff_strength = 6.20000008493684
+
+[sub_resource type="QuadMesh" id="QuadMesh_4eui5"]
+material = SubResource("ShaderMaterial_dust0")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ur4fc"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1.5, 0.01)
+spread = 180.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.03
+gravity = Vector3(0, -0.05, 0)
+damping_min = 50.000004
+damping_max = 100.00001
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_4eui5")
+scale_over_velocity_min = 0.5
+scale_over_velocity_max = 2.0
+scale_over_velocity_curve = SubResource("CurveTexture_ur4fc")
+color = Color(0.57, 0.50729996, 0.399, 0.2509804)
+color_ramp = SubResource("GradientTexture1D_q3oqp")
+alpha_curve = SubResource("CurveTexture_dustf")
+turbulence_enabled = true
+turbulence_noise_scale = 2.0
+turbulence_noise_speed_random = 0.1
+turbulence_influence_min = 0.020000001
+turbulence_influence_max = 0.05
+turbulence_initial_displacement_min = 1.490116e-06
+turbulence_initial_displacement_max = 1.490116e-06
+turbulence_influence_over_life = SubResource("CurveTexture_2dj5r")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ur4fc"]
+material = SubResource("ShaderMaterial_dust0")
+size = Vector2(0.05, 0.05)
 
 [node name="Workspace" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.98480767, 0.17364818, 0, -0.17364816, 0.9848077, 0, 0, 0)
@@ -291,3 +404,34 @@ focus_fov_curve = SubResource("Curve_x8h8r")
 vertical_zone_fraction = 0.15
 vertical_dwell_time = 0.2
 vertical_transition_time = 0.5
+
+[node name="DustParticles3D_WINDOW" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 1.5362129, 1.2989576, -4.80145)
+top_level = true
+amount = 70
+lifetime = 30.0
+randomness = 0.4
+local_coords = true
+draw_order = 3
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_oos78")
+draw_pass_1 = SubResource("QuadMesh_4eui5")
+
+[node name="DustParticles3D_LARGE" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 1.119, -4.801)
+top_level = true
+amount = 64
+lifetime = 30.0
+randomness = 0.4
+local_coords = true
+draw_order = 3
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_ur4fc")
+draw_pass_1 = SubResource("QuadMesh_ur4fc")
+
+[node name="DustMouseAttractor" type="GPUParticlesAttractorSphere3D" parent="." node_paths=PackedStringArray("dust_particles")]
+strength = 0.0
+radius = 0.5
+script = ExtResource("22_dusta")
+dust_particles = NodePath("../DustParticles3D_WINDOW")
+push_strength = 2.0
