@@ -1,0 +1,14 @@
+~ initialize_local_variables
+=> start
+
+# TODO: Dani - Big narrative pass
+
+~ start
+# Chess set - 1 spot. Book - 3 spots.
+if Variables.get_var("prog_score_special_object_tutorial_directional_book") + Variables.get_var("prog_score_special_object_tutorial_directional_chess_set") <= 130
+	A frail fragment: You suck at directional spots. Do better. => END
+else
+	A frail fragment: You don't suck. Well done. => END
+
+=> END
+

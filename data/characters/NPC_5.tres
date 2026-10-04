@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterDefinition" load_steps=2 format=3 uid="uid://cfb10qr2ygdpe"]
+
+[ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_tday0"]
+
+[resource]
+script = ExtResource("1_tday0")
+character_id = "NPC_5"
+display_name = "A frail fragment"
+speaking_push_distance = 0.0
+metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
