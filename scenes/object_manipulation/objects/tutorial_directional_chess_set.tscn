@@ -76,15 +76,9 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.15223026, 0)
 mesh = SubResource("ArrayMesh_24vgu")
 skeleton = NodePath("")
 
+[node name="StickerPeelDirectional" parent="MeshInstance3D" instance=ExtResource("5_vgrbn")]
+transform = Transform3D(0.67015463, 3.244353e-08, 0.7422216, 0.7422216, -2.9293389e-08, -0.67015463, 0, 1, -4.371139e-08, 0.20465468, 0.20663778, 0.09981435)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.15223026, 0)
 shape = SubResource("ConcavePolygonShape3D_yjwoc")
-
-[node name="StickerPeelDirectional" parent="." instance=ExtResource("5_vgrbn")]
-transform = Transform3D(0.46910822, 2.2710472e-08, 0.5195551, 0.5195551, -2.0505372e-08, -0.46910822, 0, 0.7, -3.059797e-08, 0.14325827, -0.0075838193, 0.06987004)
-
-[node name="StickerPeelDirectional2" parent="." instance=ExtResource("5_vgrbn")]
-transform = Transform3D(-0.39998585, 0, 0.0033649653, 0, 0.4, 0, -0.0033649653, 0, -0.39998585, -0.105672985, 0.15886302, 0.032217205)
-
-[node name="StickerPeelDirectional3" parent="." instance=ExtResource("5_vgrbn")]
-transform = Transform3D(0.39998588, 3.4967872e-08, 0.003364965, -0.0033649656, 1.719038e-08, 0.39998582, 3.4822023e-08, -0.4, 1.7483933e-08, -0.1778508, -0.038525414, -0.069458604)
