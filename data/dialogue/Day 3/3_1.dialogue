@@ -137,7 +137,7 @@ else
 	
 ~ car
 Micah: [#sprite=happy]Here it is.[do DialogueFuncs.add_object_to_workbench("wooden_car")]
-Micah: It's a, uh, toy car. Cool, isn't it?
+Micah: It's a, uh, toy car. Cool, isn't it? [do Variables.set_var("toycar", true)]
 Micah: I don't play with it anymore, of course. That's for children.
 Micah: But my dad made it for me before he, uh...
 Micah: It's the last thing he gave me, two years ago. Back when I was a kid.
@@ -169,7 +169,7 @@ else
 	- Sure I'm sure. 
 		Micah: Okay. Why not. Here it is. [do DialogueFuncs.add_object_to_workbench("wooden_car")]
 		Micah: Just make sure you don't tell anyone about it. People around here aren't exactly into, uh, cars, you know. Them being sinful and all. I kept it hidden until now.
-		Micah: I'm sure the Goddess doesn't mind, though. It's just a wooden toy, right?
+		Micah: I'm sure the Goddess doesn't mind, though. It's just a wooden toy, right? [do Variables.set_var("toycar", true)]
 		- Yeah. I'll do my best. 
 			Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
 		- Uh, Micah, that's a lot of spots.
@@ -180,7 +180,7 @@ else
 				Micah: Nuh-uh! No way!
 				Micah: Look, just think about it. If you're not going to do it, just put it in the basket as it is. I'll just ask the Shopkeeper to help instead, or something. => next1
 	- Maybe?
-		Micah: Not the answer I was looking for. Sorry!
+		Micah: Not the answer I was looking for. Sorry! 
 		Micah: Forget I said anything. => next1 
 
 ~ next1
