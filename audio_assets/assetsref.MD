@@ -11,7 +11,9 @@ This doc contains information regarding the audio files being used throughout th
 + Object complete Audio -> bluezone_bc9207 [GDC sound samples 2024](https://sonniss.com/gameaudiogdc/)
 + Camera angle change swoosh -> Camera Swoosh [Pixabay](https://pixabay.com/sound-effects/search/game/)
 + [sfx_undress_clothes](https://freesound.org/people/drewsimko/sounds/682872/)
-+ freesound_community-four_voices_whispering-6943 -> sticker begin
-+ freesound_community-male-long-sigh-close-101781 -> sticker end
++ sticker begin -> freesound_community-four_voices_whispering-6943  
++ sticker end -> freesound_community-male-long-sigh-close-101781  
++ objects reminder -> whisper, fluisteren [Pixabay](https://pixabay.com/sound-effects/people-whisper-fluisteren-212192/)
++ 
 
 

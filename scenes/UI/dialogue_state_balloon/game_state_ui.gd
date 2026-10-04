@@ -26,7 +26,11 @@ func show_game_state_ui(ui_type: GameStateUIType, delay: float = 0.0) -> void:
 	
 	vars["root_node"].show()
 	anim_player.play(vars["show_anim_name"])
-	AudioManager.play_sfx(Config.NOTIFICATION_POP_UP_SFX_NAME)
+	if (ui_type == GameStateUIType.DIALOGUE):
+		AudioManager.play_sfx(Config.NOTIFICATION_POP_UP_SFX_NAME)
+	elif(ui_type == GameStateUIType.OBJECT):
+		AudioManager.play_sfx(Config.OBJECTS_REMINDER_SFX_NAME)
+
 
 func hide_game_state_ui(ui_type: GameStateUIType) -> void:
 	var vars: Dictionary = _get_ui_type_variables(ui_type)

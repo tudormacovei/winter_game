@@ -7,6 +7,7 @@ const SFX_DIALOGUE_LETTER_POLYPHONY := 32
 
 var _ambient_player: AudioStreamPlayer
 var sfx_audio_players: Dictionary[String, AudioStreamPlayer] = {}
+var sfx_voice_ids: Dictionary[String, int] = {}
 var _sfx_dialogue_letter_player: AudioStreamPlayer
 
 var audio_file_to_volume: Dictionary[String, int] = {
@@ -45,40 +46,47 @@ func play_ambient_stream(stream_name: String):
 	_ambient_player.volume_db = volume
 	_ambient_player.play()
 
+func play_sfx(stream_name: String, volume_offset_db: float = 0.0) -> void:
+	if not sfx_audio_streams.has(stream_name):
+		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
+		return
+
+	var player: AudioStreamPlayer = sfx_audio_players.get(stream_name)
+
+	if player == null:
+		player = AudioStreamPlayer.new()
+		player.bus = Config.AUDIO_BUS_SFX
+		player.stream = sfx_audio_streams[stream_name]
+		add_child(player)
+		player.finished.connect(_on_sfx_finished.bind(stream_name, player))
+		sfx_audio_players[stream_name] = player
+	elif player.stream_paused:
+		player.stream_paused = false   # resume the paused sound
+		return
+
+	player.volume_db = _get_sfx_volume(stream_name) + volume_offset_db
+	player.play()   # restarts from the beginning if already playing, cutting off the previous instance
+	
+
+func _on_sfx_finished(stream_name: String, player: AudioStreamPlayer) -> void:
+	if sfx_audio_players.get(stream_name) == player:
+		sfx_audio_players.erase(stream_name)
+	player.queue_free()
+
 func stop_ambient():
 	_ambient_player.stop()
 
 func pause_sfx(stream_name: String):
 	var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
-	audioPlayer.stream_paused = true
+	if audioPlayer:
+		audioPlayer.stream_paused = true
 
-func stop_sfx(stream_name: String):
-	var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
-	audioPlayer.stop()
+func stop_sfx(stream_name: String) -> void:
+	var player: AudioStreamPlayer = sfx_audio_players.get(stream_name)
+	if player == null:
+		return
 	sfx_audio_players.erase(stream_name)
-	audioPlayer.queue_free() 
-
-func play_sfx(stream_name: String, volume_offset_db: float = 0.0):
-	if not sfx_audio_streams.has(stream_name):
-		Utils.debug_error("AudioManager: No SFX stream found with name '%s'!" % stream_name)
-		return
-
-	var volume_db := _get_sfx_volume(stream_name)
-	#if stream player already exists for a stream, keep playing it or play a one shot
-	#why keep a reference in array if it's one shot though?
-	if (sfx_audio_players.has(stream_name)) :
-		var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
-		if (audioPlayer.stream_paused):
-			audioPlayer.stream_paused = false
-		else:
-			# one shot
-			_play_sfx(audioPlayer, stream_name, volume_db + volume_offset_db)
-		return
-	
-	#if stream player does not exist, create a new one and add it to the audio players dictionary
-	var newPlayer = _create_polyphonic_stream_player(Config.AUDIO_BUS_SFX, SFX_POLYPHONY)
-	sfx_audio_players.get_or_add(stream_name, newPlayer)
-	_play_sfx(newPlayer, stream_name, volume_db + volume_offset_db)
+	player.queue_free()
 
 ## Play a single SFX and await its completion
 func play_sfx_and_wait(stream_name: String, volume_offset_db: float = 0.0) -> void:
@@ -119,7 +127,7 @@ func _get_sfx_volume(stream_name: String) -> float:
 func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db: float = 0.0, pitch_scale: float = 1.0):
 	var sfx = sfx_audio_streams[stream_name]
 	var playback = stream_player.get_stream_playback()
-	playback.play_stream(sfx, 0, volume_db, pitch_scale, 0, stream_player.bus)
+	return playback.play_stream(sfx, 0, volume_db, pitch_scale, 0, stream_player.bus)
 
 func _preload_streams(path: String) -> Dictionary:
 	var streams: Dictionary = {}

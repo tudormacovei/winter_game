@@ -123,7 +123,6 @@ func handle_mouse_input(event: InputEvent) -> bool:
 		is_peeling = false
 		if _passes_completion_check(fraction):
 			AudioManager.stop_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)
-			AudioManager.play_sfx(Config.STICKER_END_PEEL_SFX_NAME)
 			_start_completion()
 		else:
 			AudioManager.stop_sfx(Config.STICKER_BEGIN_PEEL_SFX_NAME)

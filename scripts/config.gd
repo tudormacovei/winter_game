@@ -53,6 +53,7 @@ const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
 
 const PLAYER_DEATH_SFX_NAME: String = "sfx_player_death"
 const NOTIFICATION_POP_UP_SFX_NAME: String = "sfx_notification_ding"
+const OBJECTS_REMINDER_SFX_NAME: String = "sfx_objects_reminder"
 
 
 

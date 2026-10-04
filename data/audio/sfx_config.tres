@@ -23,7 +23,9 @@ volumes_db = Dictionary[String, float]({
 "sfx_giggle": 0.0,
 "sfx_item_drop": 0.0,
 "sfx_jumpscare": -12.0,
+"sfx_notification_ding": 0.0,
 "sfx_object_completed": 10.0,
+"sfx_objects_reminder": -10.0,
 "sfx_player_death": -15.0,
 "sfx_rag": 0.0,
 "sfx_sarah_cry_1": 0.0,
@@ -33,6 +35,5 @@ volumes_db = Dictionary[String, float]({
 "sfx_stairs": 0.0,
 "sfx_undress_clothes": 0.0,
 "sfx_watch_tick": 0.0,
-"sfx_woman_scream": 0.0,
-"sfx_notification_ding": 0.0
+"sfx_woman_scream": 0.0
 })
