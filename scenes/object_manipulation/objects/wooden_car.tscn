@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://civtv21bw3yjt"]
+[gd_scene load_steps=12 format=4 uid="uid://civtv21bw3yjt"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_t7ygl"]
+[ext_resource type="PackedScene" uid="uid://cfle3ykdjwjad" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel_directional.tscn" id="3_t7ygl"]
 [ext_resource type="Texture2D" uid="uid://021i8lebmwvd" path="res://3d_assets/manipulation_objects/wooden_car/woodencar_texture.webp" id="3_txoy7"]
+[ext_resource type="PackedScene" uid="uid://bxkmqhm2g76la" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel_timed.tscn" id="4_t7ygl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqisx"]
 
@@ -82,6 +84,7 @@ data = PackedVector3Array(0.057699997, -0.0392, 0.153, -0.0536, -0.0392, 0.15519
 
 [node name="WoodenCar" type="Area3D"]
 script = ExtResource("1_t7ygl")
+is_special_object = true
 max_sticker_count = 4
 placement_mesh = SubResource("ArrayMesh_iiagd")
 sticker_placement_offset = 0.001
@@ -96,5 +99,87 @@ mesh = SubResource("ArrayMesh_uxmly")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.007, 0)
 visible = false
 shape = SubResource("ConcavePolygonShape3D_txoy7")
+
+[node name="StickerPeelDirectional" parent="." instance=ExtResource("3_t7ygl")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0.0030168742, -0.009462482, -0.14031617)
+
+[node name="StickerPeelDirectional2" parent="." instance=ExtResource("3_t7ygl")]
+transform = Transform3D(0.21634284, 0, 0.3364458, 0, 0.4, 0, -0.3364458, 0, 0.21634284, 0.0046380013, 0.1029171, -0.041623924)
+
+[node name="StickerPeelDirectional3" parent="." instance=ExtResource("3_t7ygl")]
+transform = Transform3D(0.2163428, -3.5390258e-08, -0.3364458, 3.7252903e-09, -0.4, 4.4703484e-08, -0.33644584, -2.9802322e-08, -0.21634284, 0.012133816, -0.04591918, -0.016217537)
+
+[node name="StickerPeelDirectional4" parent="." instance=ExtResource("3_t7ygl")]
+transform = Transform3D(0.26582712, -4.313154e-08, 0.13905373, -3.6620975e-08, -0.3, -2.304585e-08, 0.13905373, 3.4464276e-09, -0.26582712, -0.013530662, -0.04737608, 0.052069478)
+
+[node name="StickerPeelDirectional5" parent="." instance=ExtResource("3_t7ygl")]
+transform = Transform3D(0.17721806, -3.3880546e-08, 0.09270251, -3.019916e-08, -0.2, -1.5363902e-08, 0.09270251, -3.838835e-10, -0.17721806, 0.01442796, -0.04795015, 0.13913703)
+
+[node name="StickerPeelDirectional6" parent="." instance=ExtResource("3_t7ygl")]
+transform = Transform3D(0.06610617, -3.3880543e-08, 0.18875903, -1.1560877e-08, -0.2, -3.184941e-08, 0.18875903, -3.838849e-10, -0.06610617, -0.035331044, -0.04795015, 0.1343523)
+
+[node name="StickerPeelTimed" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-1.620682e-08, 0.4, -6.561146e-09, -0.37076885, -1.7484556e-08, -0.15010153, -0.15010153, 0, 0.37076885, 0.059468023, -0.011217151, 0.01674091)
+
+[node name="StickerPeelTimed2" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-2.858932e-08, -0.4, 2.666832e-08, -0.3748495, 1.7484556e-08, -0.13959894, 0.13959894, -3.4969112e-08, -0.3748495, -0.05756949, -0.011217145, 0.01674091)
+
+[node name="StickerPeelTimed3" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.022345794, -1.9535318e-09, -0.19874774, 1.7484556e-08, -0.2, 4.4472766e-16, -0.19874774, -1.737508e-08, 0.022345794, 0.03256979, -0.04574313, -0.09242255)
+
+[node name="StickerPeelTimed8" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(0.046848606, -1.9535316e-09, -0.19443561, 1.643407e-08, -0.2, 5.9691723e-09, -0.19443561, -1.737508e-08, -0.046848606, -0.027362768, -0.04574313, -0.11871795)
+
+[node name="StickerPeelTimed9" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.1719223, -1.9535316e-09, -0.10218963, 1.05570415e-08, -0.2, -1.39376635e-08, -0.10218963, -1.737508e-08, 0.1719223, -0.015321661, -0.045743145, -0.093019366)
+
+[node name="StickerPeelTimed10" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.16598299, -1.9535324e-09, 0.11157795, -8.0721145e-09, -0.2, -1.5509695e-08, 0.11157795, -1.737508e-08, 0.16598299, 0.03232224, -0.045743145, -0.06228664)
+
+[node name="StickerPeelTimed11" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.1928172, -1.9535307e-09, -0.053117976, 6.498017e-09, -0.2, -1.6232235e-08, -0.053117976, -1.737508e-08, 0.1928172, 0.042175602, -0.045743145, -0.03633958)
+
+[node name="StickerPeelTimed12" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.1928172, -1.9535307e-09, -0.053117976, 6.498017e-09, -0.2, -1.6232235e-08, -0.053117976, -1.737508e-08, 0.1928172, -0.0382576, -0.045743145, 0.0042991824)
+
+[node name="StickerPeelTimed13" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.12960273, -1.9535324e-09, 0.15232572, -1.1967444e-08, -0.2, -1.2747156e-08, 0.15232572, -1.737508e-08, 0.12960273, -0.040186174, -0.045743145, 0.033632033)
+
+[node name="StickerPeelTimed14" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.12960273, -1.9535324e-09, 0.15232572, -1.1967444e-08, -0.2, -1.2747156e-08, 0.15232572, -1.737508e-08, 0.12960273, -0.010625184, -0.045743145, 0.014467891)
+
+[node name="StickerPeelTimed15" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.12960273, -1.9535324e-09, 0.15232572, -1.1967444e-08, -0.2, -1.2747156e-08, 0.15232572, -1.737508e-08, 0.12960273, 0.03947235, -0.045743145, 0.004359534)
+
+[node name="StickerPeelTimed16" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.16955224, -1.9535324e-09, -0.106075615, 1.0871487e-08, -0.2, -1.3693808e-08, -0.106075615, -1.737508e-08, 0.16955224, 0.041784264, -0.046853393, 0.07674958)
+
+[node name="StickerPeelTimed21" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.16955224, -1.9535324e-09, -0.106075615, 1.0871487e-08, -0.2, -1.3693808e-08, -0.106075615, -1.737508e-08, 0.16955224, 0.035845343, -0.048178613, 0.1324682)
+
+[node name="StickerPeelTimed17" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.16955224, -1.9535324e-09, -0.106075615, 1.0871487e-08, -0.2, -1.3693808e-08, -0.106075615, -1.737508e-08, 0.16955224, 0.03696838, -0.046853364, -0.12036402)
+
+[node name="StickerPeelTimed18" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.16955224, -1.9535324e-09, -0.106075615, 1.0871487e-08, -0.2, -1.3693808e-08, -0.106075615, -1.737508e-08, 0.16955224, 0.0046489164, -0.046853364, -0.11771771)
+
+[node name="StickerPeelTimed19" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.18333676, -1.9535333e-09, 0.079922624, -5.1525424e-09, -0.2, -1.6708114e-08, 0.079922624, -1.737508e-08, 0.18333676, 0.0022460502, -0.046853364, -0.07534673)
+
+[node name="StickerPeelTimed20" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(-0.18333676, -1.9535333e-09, 0.079922624, -5.1525424e-09, -0.2, -1.6708114e-08, 0.079922624, -1.737508e-08, 0.18333676, -0.038615145, -0.046853364, -0.07673468)
+
+[node name="StickerPeelTimed4" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(0.39679495, -4.956169e-16, 0.050535023, 4.5281206e-16, -0.4, -3.586862e-15, 0.050535023, 3.5527137e-15, -0.39679495, -0.028396063, -0.04574313, -0.03578481)
+
+[node name="StickerPeelTimed6" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(0.51534384, -5.2453665e-08, -0.30727962, -4.5052786e-08, -0.6, 2.686324e-08, -0.30727962, -4.492521e-16, -0.51534384, -0.005662527, -0.05091303, 0.10339905)
+
+[node name="StickerPeelTimed5" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(0.3422939, -4.9561687e-16, 0.20696594, 1.9097268e-15, -0.4, -3.29662e-15, 0.20696594, 3.5527137e-15, -0.3422939, 0.020642553, -0.04574313, 0.03798211)
+
+[node name="StickerPeelTimed7" parent="." instance=ExtResource("4_t7ygl")]
+transform = Transform3D(0.5922496, 0, 0.53781074, 0, 0.8, 0, -0.53781074, 0, 0.5922496, 0.0008316487, 0.016546056, 0.09069252)

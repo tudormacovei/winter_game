@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://b5nsxc1m463dl"]
+[gd_scene load_steps=11 format=4 uid="uid://b5nsxc1m463dl"]
 
 [ext_resource type="Script" uid="uid://e3dmkdmghks6" path="res://scripts/object_manipulation/object_with_stickers.gd" id="1_keaux"]
 [ext_resource type="Texture2D" uid="uid://cff5a8bqrqtys" path="res://3d_assets/manipulation_objects/gramophone/gramophone_texture.webp" id="2_keaux"]
+[ext_resource type="PackedScene" uid="uid://cfle3ykdjwjad" path="res://scenes/sticker_interaction/sticker_peel/sticker_peel_directional.tscn" id="3_q0wes"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llnib"]
 
@@ -77,6 +78,7 @@ data = PackedVector3Array(0.0255, 0.0541, 0.018, 0.0255, 0.060799997, 0.0179, 0.
 [node name="Gramophone" type="Area3D"]
 transform = Transform3D(0.9998416, 0.017801417, 0, -0.017801417, 0.9998416, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_keaux")
+is_special_object = true
 max_sticker_count = 6
 placement_mesh = SubResource("ArrayMesh_1qpbn")
 sticker_placement_offset = 0.001
@@ -94,3 +96,29 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 visible = false
 shape = SubResource("ConcavePolygonShape3D_q0wes")
+
+[node name="StickerPeelDirectional" parent="." instance=ExtResource("3_q0wes")]
+transform = Transform3D(0.3296141, -0.008899912, 0.37586612, 0.0058680023, 0.4999208, 0.006691411, -0.3759257, 3.0239558e-10, 0.32966635, 0.10864383, 0.004695443, 0.13235849)
+randomize_texture = false
+locked_texture_index = 2
+
+[node name="StickerPeelDirectional6" parent="." instance=ExtResource("3_q0wes")]
+transform = Transform3D(-0.37637195, -0.008899912, 0.3290364, -0.006700417, 0.4999208, 0.005857719, -0.32908857, -4.644601e-13, -0.37643158, 0.10613529, 0.00465078, -0.08190492)
+
+[node name="StickerPeelDirectional2" parent="." instance=ExtResource("3_q0wes")]
+transform = Transform3D(0.47899556, 0.008899912, 0.14312254, 0.008527374, -0.49992076, 0.0025480015, 0.14314522, -4.3507146e-08, -0.47907144, 0.024457742, -0.13932283, 0.10266424)
+
+[node name="StickerPeelDirectional5" parent="." instance=ExtResource("3_q0wes")]
+transform = Transform3D(0.24834159, 0.008899912, -0.43387473, 0.0044211727, -0.49992076, -0.007724096, -0.4339435, -4.3425537e-08, -0.24838093, -0.078584716, -0.14115724, 0.070199594)
+randomize_texture = false
+locked_texture_index = 1
+
+[node name="StickerPeelDirectional3" parent="." instance=ExtResource("3_q0wes")]
+transform = Transform3D(0.25001326, 0.008899912, 0.43291354, 0.0044508595, -0.4999208, 0.0077070277, 0.43298215, -4.4088225e-08, -0.2500529, -0.081980884, -0.14121772, -0.06754307)
+randomize_texture = false
+locked_texture_index = 2
+
+[node name="StickerPeelDirectional4" parent="." instance=ExtResource("3_q0wes")]
+transform = Transform3D(0.4970854, 0.0124599, -0.49269757, 0.008849511, -0.69988906, -0.008771275, -0.49277562, -8.4750354e-08, -0.49716416, 0.06576875, -0.13986029, -0.0303212)
+randomize_texture = false
+locked_texture_index = 2
