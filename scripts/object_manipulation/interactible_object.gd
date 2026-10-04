@@ -55,6 +55,7 @@ var _is_blocking_dialogue_view := false
 var _sticker_total: int = 0 # set at initialization time, then readonly constant
 var _completed_stickers: int = 0
 var _is_pending_completion := false
+var _are_stickers_placed := false
 var _original_mesh: Mesh = null
 var _outline_stack: int = 0
 
@@ -134,6 +135,9 @@ func _ready() -> void:
 
 	# Stickers are placed asynchronously, wait for the signal before scanning
 	_object.stickers_placed.connect(_on_stickers_placed)
+	# Stickers are only visible while focused
+	# TODO: this line blelow seems quite britte, try to fix if you get the time
+	(get_tree().current_scene.get_node("%FocusBlinkRectangle") as FocusBlink).blink_closed.connect(_on_focus_blink_closed)
 
 	_drag_threshold_px = get_viewport().get_visible_rect().size.x * DRAG_THRESHOLD_FRACTION
 	_rotation_sensitivity = TAU * ROTATION_REVOLUTIONS_PER_WIDTH / get_viewport().get_visible_rect().size.x
@@ -145,7 +149,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_handle_drag()
 	# wait for player to place object on table before complete
-	if _is_pending_completion and _state == State.ON_TABLE:
+	if _is_pending_completion and _state == State.ON_TABLE and _are_stickers_placed:
 		complete_object()
 
 
@@ -533,13 +537,25 @@ func _set_pending_completion(is_pending: bool) -> void:
 
 
 func _on_stickers_placed() -> void:
+	# this should be false, but to be safe set stickers to visible if we are in focus mode
+	var is_focused := _state == State.FOCUSED or _state == State.ROTATING
 	for child in Utils.get_all_children(self):
 		if child is Sticker:
 			_sticker_total += 1
 			child.sticker_completed.connect(_on_sticker_completed.bind(child))
 			object_interactible.connect(child._on_object_interactible_change)
 			child.tree_exiting.connect(_on_sticker_tree_exiting.bind(child))
-	_set_state(State.ON_TABLE)
+			child.visible = is_focused
+	_are_stickers_placed = true
+	_set_object_interactible(is_focused) # just in case we are somehow focused
+	if _state == State.ON_TABLE:
+		_place_object_on_xz_plane(_object) # don't fully know why but without this scale is messed up 
+
+
+func _on_focus_blink_closed(_is_focused: bool) -> void:
+	for child in Utils.get_all_children(_object):
+		if child is Sticker:
+			child.visible = _state == State.FOCUSED or _state == State.ROTATING
 
 
 func _on_sticker_completed(sticker: Sticker):
@@ -596,7 +612,7 @@ func _set_state(state: State):
 
 
 func focus() -> void:
-	if _state != State.ON_TABLE:
+	if _state != State.ON_TABLE or not _are_stickers_placed:
 		return
 	_set_state(State.FOCUSED)
 	_remove_outline()

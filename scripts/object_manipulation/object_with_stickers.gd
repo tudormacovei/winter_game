@@ -4,9 +4,11 @@
 class_name ObjectWithStickers extends Area3D
 
 signal stickers_placed()
+signal _placement_frame()
 
 const VALIDATION_DISTANCE_TOLERANCE: float = 1e-6
-const VALIDATION_MAX_ATTEMPTS: int = 50
+const VALIDATION_MAX_ATTEMPTS: int = 100
+const PLACEMENT_ATTEMPTS_PER_FRAME: int = 6
 const STICKER_SHRINK_MULTIPLIER: float = 0.97
 const PROBE_GRID_N: int = 10 # NxN probe grid over the sticker footprint (must be >= 2!)
 const NORMAL_CONSISTENCY_MIN_DOT: float = 0.99 # reject sticker placement if probed normals diverge too much
@@ -44,14 +46,18 @@ var _spawn_debug_button := _editor_spawn_debug_mesh
 var _clear_debug_button := _editor_clear_debug_mesh
 
 func _ready() -> void:
+	set_process(false) # because this is a tool script this would run in editor
 	if Engine.is_editor_hint():
 		return
 	if skip_runtime_init:
 		return # non-gameplay context (e.g. shader warmup)
 	
-	# because object owner is set by InteractibleObject after our _ready returns, %GameManager can't resolve yet.
 	# we wait for the next frame with this fancy connection below (wait for this object to spawn and be placed so we have correct transforms for the stickers)
-	get_tree().process_frame.connect(_place_stickers_runtime, CONNECT_ONE_SHOT)
+	get_tree().process_frame.connect(_place_stickers_runtime, CONNECT_ONE_SHOT) # ! this runs BEFORE _process!
+
+
+func _process(_delta: float) -> void:
+	_placement_frame.emit()
 
 
 func _place_stickers_runtime() -> void:
@@ -60,14 +66,17 @@ func _place_stickers_runtime() -> void:
 		push_warning("ObjectWithStickers: GameManager not found; skipping sticker placement.")
 		stickers_placed.emit()
 		return
-	place_stickers(gm.current_difficulty)
+	set_process(true)
+	await place_stickers(gm.current_difficulty, PLACEMENT_ATTEMPTS_PER_FRAME)
+	set_process(false)
+	stickers_placed.emit()
 
 
 ## Places stickers at random positions on the placement_mesh surface, oriented along face normals.
 ## Count = round(max_sticker_count * fraction), sticker type is uniformly sampled from the eligible list
-func place_stickers(difficulty: int) -> void:
+## attempts_per_frame > 0 spreads the attempts over multiple frames, 0 places everything in one call
+func place_stickers(difficulty: int, attempts_per_frame: int = 0) -> void:
 	if is_special_object:
-		stickers_placed.emit() # Still emit signal so InteractibleObject can proceed with setup
 		return
 
 	if placement_mesh == null:
@@ -85,7 +94,6 @@ func place_stickers(difficulty: int) -> void:
 
 	var stickers_to_spawn_count: int = roundi(max_sticker_count * (cfg["fraction"] as float))
 	if stickers_to_spawn_count <= 0:
-		stickers_placed.emit()
 		return
 
 	var mesh_instance := _find_mesh_instance()
@@ -134,6 +142,7 @@ func place_stickers(difficulty: int) -> void:
 		rng.randomize()
 
 	# Transform placement mesh triangles to world space for ray-triangle validation
+	var mesh_global_transform := mesh_instance.global_transform # ! If placement take multiple frames we have to save the snapshot of the transform and keeping using that
 	var world_triangles: Array = []
 	for tri in triangles:
 		world_triangles.append([
@@ -146,8 +155,8 @@ func place_stickers(difficulty: int) -> void:
 	# Use world-space AABB diagonal so the of the probe ray clears any geometry
 	var probe_ray_height: float = (mesh_instance.global_transform * placement_mesh.get_aabb()).size.length()
 
-	# Read mesh AABB and local transform from a temp sticker once. All eligible sticker scenes
-	# share the same mesh (important!), so these values apply to every candidate.
+	# Read mesh AABB and local transform from a temp sticker once.
+	# All sticker scenes share the same mesh (important!), so these values apply to every candidate
 	var temp_sticker: Node3D = (sticker_types[0] as PackedScene).instantiate()
 	var temp_mesh_inst: MeshInstance3D = temp_sticker.get_node("MeshInstance3D")
 	var mesh_aabb: AABB = temp_mesh_inst.get_aabb()
@@ -162,11 +171,19 @@ func place_stickers(difficulty: int) -> void:
 	var placed_shrink_factors: Array[float] = []
 	var sticker_min_scale: float = sticker_start_scale * sticker_min_scale_fraction
 
+	# have to start blocking or else we would do double work in the 1st tick (since the first call to this function is right before _process)
+	var attempts_this_frame := attempts_per_frame
+
 	# just a fit check first: object instantiation only happens for the candidate that passes both surface and overlap checks
 	for _i in range(stickers_to_spawn_count):
 		var placed := false
 		var shrink_factor: float = sticker_start_scale
 		for _attempt in range(VALIDATION_MAX_ATTEMPTS):
+			if attempts_per_frame > 0 and attempts_this_frame >= attempts_per_frame:
+				attempts_this_frame = 0
+				await _placement_frame
+			attempts_this_frame += 1
+
 			# Pick a random triangle (area-weighted)
 			var tri_index: int = _binary_search(cumulative_areas, rng.randf() * total_area)
 			var a: Vector3 = triangles[tri_index][0]
@@ -188,14 +205,9 @@ func place_stickers(difficulty: int) -> void:
 			sticker_basis = sticker_basis * Basis(Vector3.UP, rng.randf() * TAU)
 			sticker_basis = sticker_basis.scaled(Vector3.ONE * shrink_factor)
 			var candidate_local_transform := Transform3D(sticker_basis, point)
-			var mesh_world_transform := mesh_instance.global_transform * candidate_local_transform * mesh_local_transform
+			var mesh_world_transform := mesh_global_transform * candidate_local_transform * mesh_local_transform
 			var sample_points: Array[Vector3] = [] # stored for debugging
 			var sample_normals: Array[Vector3] = [] # stored for debugging
-
-			# Surface validation: probe the footprint against the placement mesh.
-			if not _validate_sticker_position(mesh_world_transform, mesh_aabb, world_triangles, probe_ray_height, sample_points, sample_normals):
-				shrink_factor = maxf(shrink_factor * STICKER_SHRINK_MULTIPLIER, sticker_min_scale)
-				continue
 
 			# Overlap with previously-placed stickers
 			var too_close := false
@@ -208,11 +220,16 @@ func place_stickers(difficulty: int) -> void:
 				shrink_factor = maxf(shrink_factor * STICKER_SHRINK_MULTIPLIER, sticker_min_scale)
 				continue
 
+			if not _validate_sticker_position(mesh_world_transform, mesh_aabb, world_triangles, probe_ray_height, sample_points, sample_normals):
+				shrink_factor = maxf(shrink_factor * STICKER_SHRINK_MULTIPLIER, sticker_min_scale)
+				continue
+
 			# Instantiate the chosen sticker type with an offset from the face to ensure no Z-fighting
 			var placed_local_transform := Transform3D(sticker_basis, point + outward_normal * sticker_placement_offset)
 			var sticker_scene_pick: PackedScene = sticker_types[rng.randi() % sticker_types.size()] as PackedScene
 			var sticker_instance: Node3D = sticker_scene_pick.instantiate()
 			sticker_instance.transform = placed_local_transform
+			sticker_instance.visible = Engine.is_editor_hint()
 			mesh_instance.add_child(sticker_instance)
 			if Engine.is_editor_hint():
 				var arrow_length: float = maxf(extent_x, extent_z) * shrink_factor * 0.25
@@ -224,8 +241,6 @@ func place_stickers(difficulty: int) -> void:
 			break
 		if not placed:
 			push_warning("ObjectWithStickers: Failed to place sticker %d after %d attempts." % [_i, VALIDATION_MAX_ATTEMPTS])
-
-	stickers_placed.emit()
 
 ## Editor-only: removes auto-placed stickers (children of the MeshInstance3D that are not
 ## the placement debug mesh). Use this before saving the scene.
