@@ -104,6 +104,12 @@ func dialogue_get_object_count() -> int:
 
 	return workbench.get_object_count()
 
+func dialogue_get_max_lives() -> int:
+	return health_manager.get_max_lives()
+
+func dialogue_get_remaining_lives() -> int:
+	return health_manager.get_remaining_lives()
+	
 ## Immediately triggers player death, bypassing the normal life-loss flow.
 func dialogue_kill_player():
 	health_manager.kill_player()

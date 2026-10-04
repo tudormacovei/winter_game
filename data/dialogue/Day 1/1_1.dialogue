@@ -116,6 +116,7 @@ Shopkeeper: Want the long version or the short one?
 	Shopkeeper: As Gift-bearers, we're able to see the spots of corruption and cleanse the items of their evil. 
 	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
 
+# TODO:Dani - Narrative pass over gameplay tutorial
 ~ gameplay_tutorial
 #tutorial start
 Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_workbench_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_workbench_tutorial")]
@@ -137,6 +138,11 @@ Shopkeeper: Well done. Rid it of all corruption spots and then put it in the bas
 if Variables.get_var("prog_score_special_object_tutorial_peel_book") < 100
 	% Shopkeeper: No worries, no one's an expert from the get go. Try again.
 	% Shopkeeper: Almost. You've got it this time. 
+	
+	#tutorial: Keeping track of lives
+	if DialogueFuncs.get_remaining_lives() <= 1
+		% Shopkeeper: You look a little pale. You really need to pay attention to this next object.
+		% Shopkeeper: You don't look too good. Keep going, but be more careful.
 	
 	% Shopkeeper: You have to rid it of all corruption spots and then place it in the basket, to your right. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
 	% Shopkeeper: Fully cleanse the object and then put it in the basket, on the right hand side. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check

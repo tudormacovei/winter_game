@@ -50,6 +50,20 @@ func get_object_count() -> int:
 
 	return game_manager.dialogue_get_object_count()
 
+func get_max_lives() -> int:
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot get max lives. Inform Prog team of error!")
+		return -1
+
+	return game_manager.dialogue_get_max_lives()
+
+func get_remaining_lives() -> int:
+	if game_manager == null:
+		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot get remaining lives. Inform Prog team of error!")
+		return -1
+
+	return game_manager.dialogue_get_remaining_lives()
+
 ## Returns false is the object is not special or if the object has not been completed
 func has_completed_special_object(object_name: String) -> bool:
 	return Variables.has(Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name)
