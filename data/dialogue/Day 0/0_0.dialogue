@@ -160,7 +160,7 @@ Crow: But I must trust it with my life, for I have no other choice.
 Crow: I'm here to set you on your path. To guide, as I've done twice before, as I will four times more.  
 Crow: I bestow upon you my Gift of Sight. You shall see things where others cannot. Use it wisely, and with love.
 Crow: Go to the village up in the mountains. The village all these lowly heretics speak falsehoods about. 
-Crow: Go to (village name, game name?). A haven for my children, where dwell your new brothers and sisters.
+Crow: Go to Sonder's Peak. A haven for my children, where dwell your new brothers and sisters.
 Crow: A place untouched by the Cullings, where a third shall grow, a third shall die, a third shall live, and a third shall fly. 
 A frail fragment: Hmm, that doesn't quite add up...
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
@@ -174,24 +174,24 @@ A frail fragment: As you try your hardest to look around, to move, to think, to 
 A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 - Yes.
 	A frail fragment: Yes. Yes you are.
-	A frail fragment: On to (village name, title card drop). => END
+	A frail fragment: On to Sonder's Peak. => END
 - Yes.
 	A frail fragment: Yes. Yes you are.
-	A frail fragment: On to (village name, title card drop). => END 
+	A frail fragment: On to Sonder's Peak. => END 
 - Yes.
 	A frail fragment: Yes. Yes you are.
-	A frail fragment: On to (village name, title card drop). => END 
+	A frail fragment: On to Sonder's Peak. => END 
 - Yes.
 	A frail fragment: Yes. Yes you are.
-	A frail fragment: On to (village name, title card drop). => END 
+	A frail fragment: On to Sonder's Peak. => END 
 - Yes.
 	A frail fragment: Yes. Yes you are.
-	A frail fragment: On to (village name, title card drop). => END 
+	A frail fragment: On to Sonder's Peak. => END 
 - No. 
 	A frail fragment: You don't have much of a choice, for now. 
 	- Okay then. 
 		A frail fragment: That's more like it.
-		A frail fragment: On to (village name, title card drop). => END
+		A frail fragment: On to Sonder's Peak. => END
 	- Uh, I said no. I don't like Her. I want to stay here. 
 		A frail fragment: That's... not really an option. 
 		A frail fragment: The Goddess's orders are all you have. She took everything else. 
@@ -199,7 +199,7 @@ A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 		A frail fragment: You will rot here, devoid of thoughts or emotions, trapped in darkness for all eternity. 
 		- Sounds terrifying. I'll go. 
 			A frail fragment: Of course you will. 
-			A frail fragment: On to (village name, title card drop). => END
+			A frail fragment: On to Sonder's Peak. => END
 		- Sounds peaceful. I'll stay. 
 			A frail fragment: So be it. Your funeral. *infinite black screen, you need to quit or alt f4, achievement pops up named Blissful Oblivion - Unlocked hidden ending 1* 
 			do DialogueFuncs.kill_player()

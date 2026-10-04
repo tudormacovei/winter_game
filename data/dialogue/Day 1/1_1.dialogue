@@ -23,7 +23,7 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 				Shopkeeper: And that's all I need to know for now.
 				- Fair enough.
 					Shopkeeper: Let's get you started, then. => tutorial 
-				- I'll need a bit more than that.
+				- I'll need a little more than that.
 					Shopkeeper: I'll explain everything, don't worry. => tutorial
 			- Anyway. Let's get to work. 
 				Shopkeeper: Let's. => tutorial 
@@ -94,27 +94,17 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 		Shopkeeper: Of course. And I'll answer each and every one of them, as best I can. => tutorial
 
 ~ tutorial
-Shopkeeper: First things first. I'll need to explain how the Cullings really work. 
-Shopkeeper: Want the long version or the short one?
-- Long version. 
-	Shopkeeper: [#sprite=laugh]I'm starting to like you!
-	Shopkeeper: Besides infecting people with spots of corruption that quite literally suck the life out of them, the Cullings also yield a residual substance that attaches itself to worldly, man-made items. 
-	Shopkeeper: While the manner in which said corruption targets and attaches itself to people or items is seemingly random, there's surely a logic and a purpose to it, known only to the Goddess Herself.
-	Shopkeeper: Whenever the sky turns red in the morning - a harbinger of the Cullings, as you well know - some people die, and some items become corrupted. 
-	Shopkeeper: While the goodwill of our Goddess has fortunately kept us safe from the former, we have not been unaffected by the latter. 
-	Shopkeeper: Interesting thing is, the residual substance that attaches itself to objects is invisible to the human eye. 
-	Shopkeeper: Anyone can see the spots of corruption that cause people to die gruesome deaths. But only a few of us, who have had the good fortune of being blessed by the Goddess with Her Gift of sight, can see the spots of corruption that infect our everyday objects. 
-	Shopkeeper: Though most people can't see said spots, their side effects can be felt by anyone. Using, interacting with or looking at an infected object can cause madness, ilness, and violent urges.
-	Shopkeeper: Sometimes, people can even hear the object talking to them, inciting them to violence. No wonder they go mad. 
-	Shopkeeper: Luckily, you and I can rid the items of their evil. And that's why people send them to us. 
-	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
-- Short version, please. 
-	Shopkeeper: Perfectly understandable. Life is short.
-	Shopkeeper: The Cullings are the work of the Goddess. As you well know, they happen once every few weeks or months when the sky turns red. 
-	Shopkeeper: Some people die gruesome deaths, and some items become infected. 
-	Shopkeeper: The infection on the items is usually invisible to the human eye. That's where we come in.
-	Shopkeeper: As Gift-bearers, we're able to see the spots of corruption and cleanse the items of their evil. 
-	Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
+Shopkeeper: First things first. You need to understand what the Cullings really are. 
+Shopkeeper: [#sprite=laugh]I'm starting to like you! 
+Shopkeeper: There used to be more than nine billion of us out there, you know? An inconceivable, absurd amount. So many, so lustful, and so dependant on the unsustainable, sinful technologies of our ancestors. 
+Shopkeeper: Unchecked, we were on the brink of extinction. The Cullings, scary as they might be, were a Gift from the Goddess. A way for humanity to live on. 
+Shopkeeper: You see, besides infecting certain people with spots of corruption that quite literally suck the life out of them, they also yield a residual substance that attaches itself to worldly, man-made items.
+Shopkeeper: Looking at, tampering with or sitting close to such objects can cause madness, ilness, violent urges, and, in some extreme cases, even death.
+Shopkeeper: Whenever the sky turns red in the morning - a harbinger of the Cullings, as you well know - some people die, and some items become corrupted. Our numbers go down, and so do our chances of repeating the same disastrous mistakes.
+Shopkeeper: We, here, are the Goddess's chosen. She wants us all to live, but She also wants us to become more self-sufficient. Inside our walls, the Cullings only target objects. No one has ever died here because of them.  
+Shopkeeper: But Our Goddess is all-wise. She knows we're hard to please and weak, unable to part with our most prized possessions and go back to the way things were without adjusting to it gradually, over time. 
+Shopkeeper: That's why She's entrusted us Gift-Bearers with the power to cleanse some of these items, so that they they may still be safely used.
+Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
 
 # TODO:Dani - Narrative pass over gameplay tutorial
 ~ gameplay_tutorial
@@ -125,7 +115,9 @@ Shopkeeper: [do! do_scripted_event("start_focus_object_tutorial")]Now pick it up
 #tutorial: focus mode, rotate 
 Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
 Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
-Shopkeeper: Some of the side effects will stay with you till you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. You'll see.
+Shopkeeper: Some of the side effects will stay with you till you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. 
+Shopkeeper: You'll feel it, and there will be signs. The Goddess works in mysterious ways. 
+Shopkeeper: Objects that are tampered with but not cleansed properly will also have an effect. 
 Shopkeeper: Generally speaking, though, you'll be mostly fine after a short break. And then you're back to peeling.
 Shopkeeper: Speaking of, let's try peeling the evil off this one. 
 Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do lock_player_action("complete_sticker", false)] [do wait_for("first_sticker_cleansed_on_object")] 
@@ -141,8 +133,8 @@ if Variables.get_var("prog_score_special_object_tutorial_peel_book") < 100
 	
 	#tutorial: Keeping track of lives
 	if DialogueFuncs.get_remaining_lives() <= 1
-		% Shopkeeper: You look a little pale. You really need to pay attention to this next object.
-		% Shopkeeper: You don't look too good. Keep going, but be more careful.
+		% Shopkeeper: You look very pale. Take care.                           
+		% Shopkeeper: You don't look too hot. Be careful.
 	
 	% Shopkeeper: You have to rid it of all corruption spots and then place it in the basket, to your right. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
 	% Shopkeeper: Fully cleanse the object and then put it in the basket, on the right hand side. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
@@ -162,7 +154,7 @@ Shopkeeper: You can keep practicing, if you so wish. These items are from old ba
 
 ~ wow
 if DialogueFuncs.get_object_count() == 0
-	Shopkeeper: Oh, wow, you're quick. Looks like I'm already the second best cleanser in town. Well done.
+	Shopkeeper: Oh, wow, you're quick. Looks like I'm already the second best in town. Well done.
 	Shopkeeper: I'll go check up on Sarah real quick, if you don't mind. She should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 else
 	Shopkeeper: I'll go check up on Sarah while you work, if you don't mind. She should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END

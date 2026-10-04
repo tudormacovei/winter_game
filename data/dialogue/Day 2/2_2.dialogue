@@ -50,16 +50,16 @@ Mary: Wasn't expecting to see a new face here.
 - You can just tell me. I'll pass on the message. 
 	Mary: Appreciate the offer. But no. 
 	- Come on, I can keep a secret.
-		Mary: It doesn't concern you. Don't be nosy.
-		Mary: It's off-putting. [do Variables.set_var("nosy", true)]
+		Mary: [#sprite=reflective]It doesn't concern you. Don't be nosy.
+		Mary: [#sprite=reflective]It's off-putting. [do Variables.set_var("nosy", true)]
 		Mary: Anyway, tell Sarah to stay in her room today, will you? => sarah
 	- Alright then. 
 		Mary: Tell Sarah to stay in her room today, will you? => sarah
 - Did something happen?
 	Mary: Perhaps. I'm not sure. 
 	- Can't you just tell me?
-		Mary: It doesn't concern you. Don't be nosy.
-		Mary: It's off-putting. [do Variables.set_var("nosy", true)]
+		Mary: [#sprite=reflective]It doesn't concern you. Don't be nosy.
+		Mary: [#sprite=reflective]It's off-putting. [do Variables.set_var("nosy", true)]
 		Mary: Anyway, tell Sarah to stay in her room today, will you? => sarah
 	- Uh, okay. 
 		Mary: Just... tell Sarah to stay in her room today, will you? => sarah
@@ -196,10 +196,7 @@ Mary: Wasn't expecting to see a new face here.
 			- Goodbye. => END1 
 
 ~ END1
-if DialogueFuncs.get_object_count() == 0:
-	Mary: You sure are quick with those objects... [do DialogueFuncs.play_sfx("sfx_door_close")] => END 
-else:
-	Mary: Good luck with your cleansing... [do DialogueFuncs.play_sfx("sfx_door_close")] => END
+	Mary: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 
 => END
 
