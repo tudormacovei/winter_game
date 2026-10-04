@@ -135,29 +135,33 @@ Shopkeeper: She's all I have. Everything I do, I do for her.
 	
 
 ~ next
-Shopkeeper: Anyway, I'll let you finish up those items. 
+Shopkeeper: Anyway, I've got some errands to run. I'll leave you to it. 
 Shopkeeper: Pretty small batch today, and it's the best way to learn, if you ask me. 
-Shopkeeper: I've got some errands to run, so I'll leave you to it. 
+Shopkeeper: Oh, almost forgot! I also have this old, infected gramophone just lying around. I've been meaning to cleanse it forever but I haven't found the time.
+Shopkeeper: It might just be broken, but you should try cleansing it first, see if it helps. Would be nice for Sarah to be able to listen to some music again.
+Shopkeeper: And it's good exercise! 
 Shopkeeper: Think you're up to it?
 - Sure am. 
-	Shopkeeper: [#sprite=laugh]That's the spirit. 
+	Shopkeeper: [#sprite=laugh]That's the spirit. [do DialogueFuncs.add_object_to_workbench("gramophone")]
 	Shopkeeper: Might be late by the time I get back, so feel free to go to bed once you're done. 
 	Shopkeeper: See you tomorrow morning. Good luck. 
 	- See you then. 
 		Shopkeeper: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 	- Thanks. 
 		Shopkeeper: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END
-- Actually, I have some questions I wanted to ask. 
+- Actually, I have some questions I wanted to ask, first. 
 	Shopkeeper: Oh. Right. Shoot. => questions 
+- Think I've had enough for one day. 
+	Shopkeeper: No worries. I understand. [do Variables.set_var("gramophone", false)]
+	Shopkeeper: See you tomorrow morning. Good luck.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
 	
 ~ next2
-Shopkeeper: Anyway, I'll let you finish up those items. [do Variables.set_char_var("NPC_4", "relationship", 2)]
-Shopkeeper: I've got some errands to run, so I'll leave you to it. 
+Shopkeeper: Anyway, I've got some errands to run. I'll leave you to it. [do Variables.set_char_var("NPC_4", "relationship", 2)]
 Shopkeeper: Might be late by the time I get back. See you tomorrow morning. 
 - See you.
 	Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_slam")]... => END
 - Actually, I have some questions I wanted to ask...
-	Shopkeeper: Some other time. 
+	Shopkeeper: I don't feel like talking right now. Some other time.
 	Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_slam")]... => END 
 	
 ~ questions
@@ -286,7 +290,7 @@ Shopkeeper: ...
 			Shopkeeper: I'm sure the answers lie in there, somewhere.
 			Shopkeeper: But you've been given a second chance. Don't take it for granted. => questions
 - That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
-	Shopkeeper: Alright then. I'm heading out. Good luck. 
+	Shopkeeper: Alright then. I'm heading out. Here's the gramophone I mentioned.[do DialogueFuncs.add_object_to_workbench("gramophone")] Good luck. 
 	- Thanks. 
 		Shopkeeper: ... [do DialogueFuncs.play_sfx("sfx_door_close")] => END
 	- See you tomorrow. 

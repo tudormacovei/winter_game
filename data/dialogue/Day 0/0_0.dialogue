@@ -26,8 +26,7 @@ A frail fragment: ...
 	A frail fragment: Memories forgotten, unwillingly unearthed.[do Variables.set_var("childhood", true)][do Variables.mod_var("dreams", 1)]
 	A frail fragment: Buildings, larger than life. Planes, cars, buses, all so loud. 
 	A frail fragment: Food you wouldn't eat, in a house whose sounds and smells you loathed.
-	A frail fragment: A friend? Just not a very good one. Wouldn't ever let you play with their toys.
-	A frail fragment: Another friend. A dog. Gone too soon. 
+	A frail fragment: Loneliness. And then a friend. A dog. Gone too soon. 
 	A frail fragment: Were you poor? Not really. But it sure felt that way. 
 	A frail fragment: Your parents loved you. They did all they could, but you resented them for it.
 	A frail fragment: For the first time in forever, you're able to push the guilt aside.
@@ -36,22 +35,22 @@ A frail fragment: ...
 	A frail fragment: Mom. Dad. Two older brothers. A sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
 	A frail fragment: Voices. Whispers. Screams. A handful of blurred faces and hushed voices. 
 	A frail fragment: They call to you. It gets louder and quieter in equal measure. 
-	A frail fragment: Shame on you, they say. Then they leave. 
-	A frail fragment: Can you really not remember them? 
-	A frail fragment: You've had this dream before, a few times. But these people and their words mean nothing to you, now.
+	A frail fragment: Shame on you, they say. What for? 
+	A frail fragment: They leave. You've had this dream before, a few times. Can you really not remember them? 
+	A frail fragment: These people and their words mean nothing to you, now.
 	A frail fragment: What else? => about
 - The day it all began. [if Variables.get_var("day") == false]
 	A frail fragment: The day all what began?[do Variables.set_var("day", true)][do Variables.mod_var("dreams", 1)]
 	A frail fragment: Oh. Right. 
-	A frail fragment: You vaguely remember crows filling up the sky. Could barely see anything anymore. Your brothers thought, excitedly, that it was a solar eclipse. 
-	A frail fragment: Then they were gone. The sky turned red, a lot of people died, you survived. End of story. 
-	A frail fragment: You were too young to understand what was happening. Or to remember much else. 
-	A frail fragment: The Cullings, as people have fittingly named them, have been a threat ever since. 
-	A frail fragment: You were placed in foster care, then left the day you turned eighteen. That's about it. Right?
+	A frail fragment: You vaguely remember crows filling up the sky. Day became night. Your brothers thought, excitedly, that it was a solar eclipse. 
+	A frail fragment: Then they were all gone. The sky turned red, people died, you survived. End of story. 
+	A frail fragment: You were too young to understand what happened, or to remember much else.
+	A frail fragment: You were placed in foster care, then left the day you turned eighteen. Not much else to it. 
+	A frail fragment: The Cullings, as they were fittingly named, have been a threat ever since. 
 	A frail fragment: What else? => about
 - Yesterday. [if Variables.get_var("yday") == false]
-	A frail fragment: The usual. Helped around any way you could. Got paid for it. Came home.[do Variables.set_var("yday", true)][do Variables.mod_var("dreams", 1)]
-	A frail fragment: Watched some TV. A new tape your coworker gave you. Some old show from way back when, about a serial killer heartthrob. Complete non-sense. 
+	A frail fragment: The usual. Helped around any way you could. Got paid for it, poorly.[do Variables.set_var("yday", true)][do Variables.mod_var("dreams", 1)]
+	A frail fragment: Came home, watched some TV. A new tape your coworker gave you. Some old show from way back when. Serial killer love story. Complete non-sense. 
 	A frail fragment: It was nice of her, though. She's always nice to you. Always greets you with a smile.  
 	A frail fragment: Got through a couple of episodes, then went to bed. 
 	A frail fragment: ...Or was that the day before?
@@ -59,7 +58,7 @@ A frail fragment: ...
 	A frail fragment: You try your hardest to remember. You can't. 
 	A frail fragment: What else? => about
 - A... lover? [if Variables.get_var("lover") == false]
-	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom")][speed=0.2][shake rate=10.0 level=2]NO. [do Variables.set_var("lover", true)]
+	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom")][speed=0.2][shake rate=10.0 level=2]No. [do Variables.set_var("lover", true)]
 	A frail fragment: What else? => about
 - Just... stop. Give in. [if Variables.get_var("dreams") >= 2]
 

@@ -9,15 +9,34 @@ if Variables.get_var("ending_zero") == true
 	A frail fragment: Given the situation, they accept. They don't need another inconvenience. 
 	A frail fragment: You[do DialogueFuncs.play_sfx("sfx_exile")] find yourself outside the village walls as the sky turns red. After a few minutes, you start to feel blisters on your skin. [do DialogueFuncs.play_sfx("sfx_death")]You can feel them suck the life out of you. They hurt more than anything you could have ever imagined. 
 	A frail fragment: In mere seconds, you're dead. 
-	Achievement Brats - Unlock hidden ending 4, soft lock for now
+	Achievement Brats - Unlock hidden main ending 4, takes you back to the main menu
 	do DialogueFuncs.kill_player() 
-elif Variables.get_var("name") == true
-	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Morning, Keeper. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] => everything
+elif Variables.get_var("toycar") == true 
+	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]Morning, Keeper! Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] => car
 else
-	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Morning. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] => everything
+	Micah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...Uh, morning. Got another batch of items for you.[do DialogueFuncs.add_object_to_workbench("flask")][do DialogueFuncs.add_object_to_workbench("milk_carton")] 
+	Micah: Everything alright? => everything
+
+~ car
+if Variables.get_var("prog_score_special_object_wooden_car") == 100 
+	Micah: You cleanse the car yet? [do Variables.mod_char_var("NPC_1", "relationship", 1)]
+	Micah: It feels... just like before. Back when he was alive. 
+	Micah: This is... amazing, Keeper. Thank you so much. 
+	Micah: Is everything alright? => everything
+elif Variables.get_var("prog_score_special_object_wooden_car") == 0
+	Micah: You cleanse the car yet? [do Variables.mod_char_var("NPC_1", "relationship", -1)]
+	Micah: Oh. It feels just as... wrong and heavy as before.
+	Micah: You didn't even touch it, did you?
+	Micah: ... => everything
+else
+	Micah: You cleanse the car yet?
+	Micah: Oh. It still feels... wrong, somehow.
+	Micah: Well. Thanks for trying, at least. Maybe it's just cursed.
+	Micah: Everything alright?  => everything
+
 
 ~ everything
-Micah: Everything alright? Have you seen Sarah, or the Shopkeeper? 
+Micah: Have you seen Sarah, or the Shopkeeper? 
 - They said they're going for a walk in the forest. 
 	Micah: Oh. Okay. => next
 - Nope. No idea where they might be. 

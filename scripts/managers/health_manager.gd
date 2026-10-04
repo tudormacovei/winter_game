@@ -37,6 +37,11 @@ var _focused_object: InteractibleObject = null
 # This flag is not cleared! Recovery from player death should be done via scene reload
 var _is_dead: bool = false
 
+func get_remaining_lives() -> int:
+	return _remaining_lives
+
+func get_max_lives() -> int:
+	return health_visualization.get_slot_count()
 
 func reset_health() -> void:
 	_health = STARTING_MAX_HEALTH
