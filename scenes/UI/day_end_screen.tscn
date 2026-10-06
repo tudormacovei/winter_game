@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfegigj2pr0lh"]
+[gd_scene load_steps=7 format=3 uid="uid://bfegigj2pr0lh"]
 
 [ext_resource type="Script" uid="uid://2vuhk46hr2am" path="res://scripts/controllers/day_end_controller.gd" id="1_d3wmk"]
 [ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="1_x0tkc"]
-[ext_resource type="Texture2D" uid="uid://vnmhstyo0kp1" path="res://2d_assets/UI/day_end_bg_new.webp" id="3_d3wmk"]
+[ext_resource type="Texture2D" uid="uid://kiajyhe4nchf" path="res://scenes/UI/day_end/day_endLEFTBranches.webp" id="3_2buv7"]
+[ext_resource type="Texture2D" uid="uid://6rqadggywmb4" path="res://scenes/UI/day_end/day_endRIGHTBranches.webp" id="4_thg7o"]
+[ext_resource type="Texture2D" uid="uid://gn7ncd2blcr8" path="res://scenes/UI/day_end/day_endRIGHTLeaves.webp" id="5_bgiuo"]
+[ext_resource type="Texture2D" uid="uid://hkxi4mt2sk42" path="res://scenes/UI/day_end/day_endLEFTLeaves.webp" id="6_l86ib"]
 
 [node name="DayEndScreen" type="Control"]
 layout_mode = 3
@@ -12,6 +15,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d3wmk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.036234524, 0.042249933, 0.01696335, 1)
 
 [node name="DayCompleteText" type="Label" parent="."]
 unique_name_in_owner = true
@@ -34,11 +48,6 @@ theme_override_font_sizes/font_size = 50
 text = "Day X"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(640.5, 360.5)
-scale = Vector2(0.33359376, 0.3337963)
-texture = ExtResource("3_d3wmk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -78,3 +87,54 @@ theme_override_font_sizes/font_size = 35
 text = "Lorem ipsum narrative"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BranchesL" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_right = 1966.0
+offset_bottom = 1440.0
+grow_vertical = 2
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("3_2buv7")
+
+[node name="BranchesR" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_right = 1054.0
+offset_bottom = 1440.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("4_thg7o")
+
+[node name="LeavesR" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -399.99994
+offset_top = -2.0
+offset_right = 1054.0
+offset_bottom = 1438.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("5_bgiuo")
+
+[node name="LeavesL" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_right = 1966.0
+offset_bottom = 1440.0
+grow_vertical = 2
+scale = Vector2(0.334, 0.334)
+texture = ExtResource("6_l86ib")
