@@ -4,6 +4,12 @@
 # TODO: Dani - Big narrative pass
 
 ~ start
+
+# NOTE: Need to handle case where these objects have not been completed. BUT this should only happen IN DEBUG! This should never happen in a release build!
+# TODO: Dani - Even though this should never happen, make sure to do a short narrative pass over this as well
+if Variables.has("prog_score_special_object_tutorial_directional_chess_set") == false or Variables.has("prog_score_special_object_tutorial_directional_book") == false:
+	A frail fragment: Very sneaky ;) => END
+
 # Chess set - 1 spot. Book - 3 spots.
 if Variables.get_var("prog_score_special_object_tutorial_directional_book") + Variables.get_var("prog_score_special_object_tutorial_directional_chess_set") <= 130
 	A frail fragment: You suck at directional spots. Do better. => END
