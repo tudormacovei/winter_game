@@ -1,0 +1,14 @@
+~ initialize_local_variables
+=> start
+
+# TODO: Dani - Big narrative pass
+
+~ start
+# Flask - 3 spots. Milk Carton - 2 spots.
+if Variables.get_var("prog_score_special_object_tutorial_timed_flask") + Variables.get_var("prog_score_special_object_tutorial_timed_milk_carton") <= 130
+	A frail fragment: You suck at timed spots. Do better. => END
+else
+	A frail fragment: You don't suck at timed spots. Well done. => END
+
+=> END
+
