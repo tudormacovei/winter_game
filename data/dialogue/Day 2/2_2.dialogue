@@ -142,7 +142,7 @@ Mary: Wasn't expecting to see a new face here.
 	- (OUT LOUD) Bitch. 
 		Mary: You don't know the half of it. [do Variables.mod_char_var("NPC_3", "relationship", -1)][do DialogueFuncs.play_sfx("sfx_door_slam")]  => END
 - Why?
-	if Variables.get_var("nosy" == true)
+	if Variables.get_var("nosy") == true
 		Mary: You sure ask a lot of questions. 
 		Mary: It's to keep her safe. Just in case. 
 		- Safe from what?
