@@ -13,7 +13,7 @@ do Variables.add_local("questions", 0)
 => start
 
 ~ start
-A frail fragment: [speed=0.2][shake rate=10.0 level=2]Something's happening. 
+A frail fragment: [speed=0.2][shake rate=10.0 level=2][do DialogueFuncs.play_sfx("sfx_placeholder_whitenoise")]Something's happening. 
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]Hold on to me. Do not let go.
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]...
 A frail fragment: [speed=0.6]You went to bed early tonight, feeling especially tired for no apparent reason. Long day at work, perhaps?
@@ -34,7 +34,7 @@ A frail fragment: ...
 	A frail fragment: Mom. Dad. Two older brothers and a sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
 	A frail fragment: Voices. Whispers. Screams. A handful of blurred faces and hushed voices. 
 	A frail fragment: They call to you. It gets both louder and quieter, in equal measure. 
-	A frail fragment: Shame on you, they say. But what for? 
+	A frail fragment: Shame on you, they say. What for? 
 	A frail fragment: Then they leave. You recall having this dream before, a few times. Can you really not remember them? 
 	A frail fragment: These people and their harsh words mean nothing to you, now.
 	A frail fragment: What else? => about
