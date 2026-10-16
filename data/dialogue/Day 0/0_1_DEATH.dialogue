@@ -10,7 +10,7 @@ if Variables.get_var("0_1_death") == 1
 	A frail fragment: [do DialogueFuncs.play_sfx("sfx_joan_wheeze")]The last thing you see is her slimy eyes as she leans in. 
 	A frail fragment: Her lips touch yours, and then you die. 
 	The screen is a close up of her eyes, unlocked achievement Joan's Wrath - hidden ending 2, this ending soft locks you for now
-	do DialogueFuncs.kill_player()
+	do DialogueFuncs.kill_player()[wait=3]
 elif Variables.get_var("0_1_death") == 2
 	A frail fragment: You see her leap at you, almost inhumanly quick. 
 	A frail fragment: Before you're able to react, she slashes your eyes with fingernails as sharp as knives. 
@@ -19,7 +19,7 @@ elif Variables.get_var("0_1_death") == 2
 	A frail fragment: She then digs into your sides and picks you up like you weigh nothing.[do DialogueFuncs.play_sfx("sfx_joan_wheeze")] You feel her breath as she leans in. The smell is unbearable.
 	A frail fragment: As her lips touch yours, you die. 
 	Unlocked achievement Joan's Wrath - hidden ending 2, this ending soft locks you for now
-	do DialogueFuncs.kill_player()
+	do DialogueFuncs.kill_player()[wait=3]
 	
 	
 
