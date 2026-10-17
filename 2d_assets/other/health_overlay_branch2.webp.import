@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da1dt4m01b175"
-path="res://.godot/imported/health_overlay_branch.png-e07a9733f0c6ac1d52cedac5efef66ff.ctex"
+uid="uid://bbk2om4oweanh"
+path="res://.godot/imported/health_overlay_branch2.webp-616060d139195c6d9ed11cc939832316.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/other/health_overlay_branch.png"
-dest_files=["res://.godot/imported/health_overlay_branch.png-e07a9733f0c6ac1d52cedac5efef66ff.ctex"]
+source_file="res://2d_assets/other/health_overlay_branch2.webp"
+dest_files=["res://.godot/imported/health_overlay_branch2.webp-616060d139195c6d9ed11cc939832316.ctex"]
 
 [params]
 
