@@ -50,6 +50,7 @@ var current_day_index: int = -1
 var current_interaction_index: int = -1
 var is_dialogue_running: bool = false
 var current_dialogue_balloon = null
+var is_interaction_change_paused: bool = false
 
 # Interaction cancelling variables
 # Starting a new interaction invalidates previous interaction tokens. This is used to cancel pending interactions and only start the most recent one.
@@ -60,6 +61,7 @@ var _interaction_start_token: int = 0
 func _ready():
 	get_tree().paused = false
 	GameState.is_player_input_locked = false
+	is_interaction_change_paused = false
 	
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.connect(_on_dialogue_line_started)
@@ -116,7 +118,8 @@ func dialogue_kill_player(action = DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCR
 		return
 
 	_force_stop_dialogue()
-
+	is_interaction_change_paused = true # NOTE: All interactions result in re-loading the current scene, so this flag is guaranteeed to be reset correctly.
+	
 	if action == DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU:
 		var main_menu_scene: PackedScene = load(Config.MAIN_MENU_SCENE_PATH)
 		get_tree().change_scene_to_packed(main_menu_scene)
@@ -205,6 +208,8 @@ func _check_stale_interaction_start(token: int) -> bool:
 
 func _play_next_interaction():
 	if _interaction_start_pending:
+		return
+	if is_interaction_change_paused:
 		return
 
 	_interaction_start_token += 1
