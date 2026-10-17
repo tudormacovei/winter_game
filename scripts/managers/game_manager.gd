@@ -110,14 +110,20 @@ func dialogue_get_max_lives() -> int:
 func dialogue_get_remaining_lives() -> int:
 	return health_manager.get_remaining_lives()
 
-func dialogue_kill_player():
+func dialogue_kill_player(action = DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN):
 	if debug_disable_death:
 		push_warning("GameManager:dialogue_kill_player Debug disabled death, will skip player kill.")
 		return
 
 	_force_stop_dialogue()
 
-	health_manager.kill_player()
+	if action == DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU:
+		var main_menu_scene: PackedScene = load(Config.MAIN_MENU_SCENE_PATH)
+		get_tree().change_scene_to_packed(main_menu_scene)
+	elif action == DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN:
+		health_manager.kill_player()
+	else:
+		Utils.debug_error("GameManager:dialogue_kill_player Invalid action: %s" % action)
 
 func dialogue_exit_characters(display_names: Array):
 	if _character_animator == null:

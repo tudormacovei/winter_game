@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var main_menu_scene: PackedScene = load("res://scenes/UI/main_menu.tscn")
+var main_menu_scene: PackedScene = load(Config.MAIN_MENU_SCENE_PATH)
 
 @onready var settings_button := %SettingsButton
 @onready var exit_to_menu_button := %ExitToMenuButton
@@ -35,5 +35,5 @@ func _on_exit_to_menu_pressed() -> void:
 		push_warning("PauseMenu: main_menu_scene is not set.")
 
 
-func _on_settings_pressed() ->void:
+func _on_settings_pressed() -> void:
 	%Settings.visible = !%Settings.visible

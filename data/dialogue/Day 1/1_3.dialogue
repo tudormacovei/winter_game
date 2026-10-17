@@ -44,8 +44,8 @@ Shopkeeper: And how would you know what's best for my Sarah? You just got here.
 	A feeble fragment: Blood drips down your nose. It fills your mouth, and reaches your chin. Your neck. 
 	A feeble fragment: He grabs your hair and smashes your face on the counter until you feel nothing anymore.
 	A feeble fragment: The last thing you see is an infected red milk carton. Then, you die. 
-	Unlocked achievement I Said What I Said
-	do DialogueFuncs.kill_player() 
+	Unlocked achievement I Said What I Said [wait=3][do DialogueFuncs.kill_player()] => END 
+# TODO: Dani - Pass on kill_player() calls.
 
 ~ nice
 Shopkeeper: Oh, she's an angel. 

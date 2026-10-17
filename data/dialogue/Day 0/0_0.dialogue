@@ -200,6 +200,7 @@ A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 			A frail fragment: Of course you will. 
 			A frail fragment: On to Sonder's Peak. => END
 		- Sounds peaceful. I'll stay. 
-			A frail fragment: So be it. Your funeral. *infinite black screen, you need to quit or alt f4, achievement pops up named Blissful Oblivion - Unlocked hidden ending 1* 
-			do DialogueFuncs.kill_player()
+			A frail fragment: So be it. Your funeral. *infinite black screen, you need to quit or alt f4, achievement pops up named Blissful Oblivion - Unlocked hidden ending 1* [wait=3][do DialogueFuncs.kill_player()] => END
+# TODO: Dani - Pass on kill_player() calls.
+
 			
