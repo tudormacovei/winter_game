@@ -109,9 +109,14 @@ func dialogue_get_max_lives() -> int:
 
 func dialogue_get_remaining_lives() -> int:
 	return health_manager.get_remaining_lives()
-	
-## Immediately triggers player death, bypassing the normal life-loss flow.
+
 func dialogue_kill_player():
+	if debug_disable_death:
+		push_warning("GameManager:dialogue_kill_player Debug disabled death, will skip player kill.")
+		return
+
+	_force_stop_dialogue()
+
 	health_manager.kill_player()
 
 func dialogue_exit_characters(display_names: Array):
@@ -286,6 +291,13 @@ func _try_play_next_interaction():
 
 #region Helper Functions
 
+func _force_stop_dialogue():
+	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
+		current_dialogue_balloon.queue_free()
+		current_dialogue_balloon = null
+
+	is_dialogue_running = false
+
 func _update_time_of_day(force_no_lerp: bool = false):
 	if not time_manager:
 		return
@@ -332,8 +344,8 @@ func _on_tree_exiting():
 	DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.disconnect(_on_dialogue_line_started)
 
-	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
-		current_dialogue_balloon.queue_free()
+	_force_stop_dialogue()
+	
 	if is_dialogue_running:
 		DialogueManager.dialogue_ended.emit(null) # TODO: would be nice to cleanup calls like this and not call the emit of other objects
 
@@ -411,6 +423,7 @@ func _on_player_died():
 #endregion
 
 #region Debug
+
 var debug_disable_death: bool = false
 var debug_disable_interaction_delay: bool = false
 
@@ -438,7 +451,6 @@ func debug_play_next_interaction():
 	
 	_interaction_start_pending = false
 	_interaction_start_token += 1
-	is_dialogue_running = false
 	if _character_animator:
 		_character_animator.clear()
 	print("Debug: Cancelling pending interaction...")
@@ -450,8 +462,7 @@ func debug_play_next_interaction():
 	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
 	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
 		print("Debug: Skipping to next interaction. Cleaning dialogue state...")
-		
-		current_dialogue_balloon.queue_free()
+		_force_stop_dialogue()
 		DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
 		return # NOTE: Early out since emitting signal above will skip to the next interaction by default
 
