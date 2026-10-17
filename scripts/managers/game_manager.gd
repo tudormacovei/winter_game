@@ -268,7 +268,10 @@ func _play_next_interaction():
 		_add_object_to_workbench(object_scene)
 
 	_interaction_start_pending = false
-	SaveManager.save_game(current_day_index, current_interaction_index)
+
+	if interaction.should_save_on_start:
+		SaveManager.save_game(current_day_index, current_interaction_index)
+		
 	print("GameManager: Starting day %d interaction %d" % [current_day_index, current_interaction_index])
 
 # Next interaction is played when dialogue ends and there are no more objects on the workbench
