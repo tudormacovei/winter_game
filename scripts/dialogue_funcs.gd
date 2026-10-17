@@ -89,5 +89,9 @@ func kill_player(action = KillPlayerAction.SHOW_DEATH_SCREEN) -> void:
 		return
 
 	game_manager.dialogue_kill_player(action)
-	
+
+# TODO: Implement achievement unlocking wrapper. Placeholder for now.
+func unlock_achievement(achievement_name: String):
+	print("DialogueFuncs: Unlocked achievement: " + achievement_name)
+
 #endregion
