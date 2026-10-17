@@ -3,14 +3,20 @@
 => start
 
 ~ start
-???: [wait=1][speed=0.2][shake rate=10.0 level=2]Who...ahh... who goes there?
-A frail fragment: She smells rancid...
+A frail fragment: *joan eyes closed* Consciousness kicks in. You find yourself at the village gates, barely able to stand, feet all swollen and bloody. 
+A frail fragment: Your eyes and your entire body feel heavy, like they haven't known sleep for weeks. You smell horrible. 
+A frail fragment: How long has it been? Have you been walking this whole time, no rest, no food, no water to drink?
+A frail fragment: In spite of everything, you feel something you can't quite understand. A sense of... accomplishment, a warmth that fills you with unprecedented joy.
+A frail fragment: You need nothing. You crave nothing. All you want is to get through those gates. 
+A frail fragment: You can vaguely make someone's eyes out through what you can only assume is a sliding peephole. They watch as you walk towards them. *joan eyes open and blink creepily from time to time*
+A frail fragment: ...After what feels like too long, you hear a sickly, croaking, womanly voice. 
+???: [wait=1][speed=0.6][shake rate=10.0 level=2]Who...ahh... who goes there?
+A frail fragment: She smells rancid... even worse than you do.
 - (OBEY) The Goddess told me to come here. I want to join your, uh, church. 
 	???: [speed=0.6][shake rate=10.0 level=2]Ahh, you speak truly, stranger? [do Variables.mod_var("religious_fervour", 1)]
 	???: [speed=0.6][shake rate=10.0 level=2]If so, your reasons are pure... Many come here out of desperation and fear, you know... 
 	???: [speed=0.6][shake rate=10.0 level=2]Revolting, wretched lowlifes... Putrid leeches, the lot of them...
 	???: [speed=0.6][shake rate=10.0 level=2]If it were up to me, ahh, I'd burn them all... 
-	#angry sound
 	A frail fragment: Uhh...
 	???: [speed=0.6][shake rate=10.0 level=2]Alas, The Goddess and our Elders are benevolent... They let almost everyone in, provided they're willing to leave their earthly possessions and sinful ways behind.
 	???: [speed=0.6][shake rate=10.0 level=2]It is not my place to pass judgment, ahh, no, no, no...

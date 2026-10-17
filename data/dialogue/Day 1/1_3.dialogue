@@ -44,8 +44,8 @@ Shopkeeper: And how would you know what's best for my Sarah? You just got here.
 	A feeble fragment: Blood drips down your nose. It fills your mouth, and reaches your chin. Your neck. 
 	A feeble fragment: He grabs your hair and smashes your face on the counter until you feel nothing anymore.
 	A feeble fragment: The last thing you see is an infected red milk carton. Then, you die. 
-	Unlocked achievement I Said What I Said
-	do DialogueFuncs.kill_player() 
+	Unlocked achievement I Said What I Said [wait=3][do DialogueFuncs.kill_player()] => END 
+# TODO: Dani - Pass on kill_player() calls.
 
 ~ nice
 Shopkeeper: Oh, she's an angel. 
@@ -176,11 +176,7 @@ Shopkeeper: ...
 	- No harm, no foul.
 		Shopkeeper: Appreciate it. => questions
 	- Err, not sure how I feel about that. 
-		Shopkeeper: I know, I'm being odd again. But it's the truth.
-		- Just tone it down a bit, yeah?
-			Shopkeeper: [#sprite=worried]Duly noted. Already said I would. [do Variables.mod_char_var("NPC_4", "relationship", -1)] => questions
-		- Guess I gotta get used to it, then. 
-			Shopkeeper: [#sprite=worried]Like I said, I'll try to make it easier on you. => questions
+		Shopkeeper: I know, I'm being odd again. But it's the truth. => questions
 - How do you know so much about me already? [if Variables.get_char_var("NPC_4", "know") == false]
 	Shopkeeper: Your arrival was heralded by the Elders. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "know", true)]
 	Shopkeeper: They told me someone bearing the Gift would soon come to help me around with the shop. Goddess knows I could use it.
@@ -195,30 +191,23 @@ Shopkeeper: ...
 			Shopkeeper: And that's all I need to know for now. => questions
 		- Interesting. => questions
 	- I see. => questions
-- Is this village really unaffected by the Cullings? [if Variables.get_char_var("NPC_4", "unaffected") == false]
+- Are the villagers really unaffected by the Cullings? [if Variables.get_char_var("NPC_4", "unaffected") == false]
 	Shopkeeper: Sure is. Not a single death, ever since they started occurring all those years ago. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "unaffected", true)]
 	Shopkeeper: The sky does turn red in the morning, heralding a Culling day, and we've had people die just outside our walls. 
 	Shopkeeper: Gruesome, horrific way to go. Glad I've only witnessed it this one time.
 	Shopkeeper: But inside, nothing. Not once. The Goddess cares for and protects us.
 	- How is this possible?
 		Shopkeeper: You'll have to see it to believe it. Perhaps, if you're a doubter now, those doubts will vanish then. 
-		Shopkeeper: The Cullings are our Goddess's work. 
-		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we, ourselves, have been ruthless ourselves to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
+		Shopkeeper: Like I said, the Cullings are punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
+		Shopkeeper: We, however, have nothing to be punished for. We've been loyal to our Goddess, unlike most of the outside sinners. They have to die. We don't.
+		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But they've been ruthless to our planet, our home, driving it to a point where it was nearly uninhabitable anymore. 
 		Shopkeeper: Something had to be done. 
 		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
 			Shopkeeper: [#sprite=worried]Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions
-		- We had it coming. Hopefully some good comes out of it. 
-			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions
-	- Could it be that She's the one causing them, then?
-		Shopkeeper: She sure is. It's a well known fact around here. 
-		Shopkeeper: It is punishment for humanity's sins over the years. And a way to cleanse the Earth and start anew.
-		Shopkeeper: [#sprite=worried]Sounds brutal, I know. But we ourselves, have been ruthless to this planet, our own home, driving it to a point where it was nearly uninhabitable anymore. 
-		Shopkeeper: Something had to be done. 
-		- I've seen countless people die horrible deaths. I can tell you, it is not worth it. 
-			Shopkeeper: [#sprite=worried]Who are we to say, at the end of the day? It's how things are now and we have to adjust to it, either way.[do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)] => questions
-		- We had it coming. Hopefully some good comes out of it. 
-			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now and we have to adjust to it.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions
+		- They had it coming. Hopefully some good comes out of it. 
+			Shopkeeper: [#sprite=worried]Time will tell. Either way, it's how things are now.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => questions
+	- That's... incredible. 
+		Shopkeeper: Sure is. We are blessed. => questions
 - Who are these "Elders"? [if Variables.get_char_var("NPC_4", "elders") == false]
 	Shopkeeper: They're the founders and leaders of our wonderful village and church. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "elders", true)]
 	Shopkeeper: There's five of them, and they're the only ones who can communicate directly with the Goddess, besides me, of course. 
@@ -235,7 +224,7 @@ Shopkeeper: ...
 	Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)][do Variables.set_char_var("NPC_4", "cult", true)]
 	Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
 	Shopkeeper: There are some practices and beliefs which might seem... odd, especially to an outsider.
-	Shopkeeper: Way I see it, at least they've got a purpose.
+	Shopkeeper: Way I see it, at least we've got a purpose.
 	Shopkeeper: Goes a long way, what with the state of the world right now and everything.
 	- Guess I can respect that. 
 		Shopkeeper: Just keep an open mind, yeah? => questions
@@ -289,6 +278,11 @@ Shopkeeper: ...
 			Shopkeeper: Look, give it some time. Think about it. Do some soul-searching. [do Variables.mod_char_var("NPC_4", "express_doubt", 1)][do Variables.mod_var("religious_fervour", -1)]
 			Shopkeeper: I'm sure the answers lie in there, somewhere.
 			Shopkeeper: But you've been given a second chance. Don't take it for granted. => questions
+- What's up with the tree branches and the candles? [if Variables.get_char_var("NPC_4", "candles") == false]
+	Shopkeeper: What do you mean? [do Variables.set_char_var("NPC_4", "candles", true)][do Variables.mod_char_var("NPC_4", "questions", 1)]
+	Shopkeeper: Oh. It must be the Goddess's way of helping you out. Of showing you how much more your body can take. 
+	Shopkeeper: And also to, uh, remind you that She's always watching.
+	Shopkeeper: They're not really there, though. They're in your head. I, myself, see spider webs and bugs. Cool, eh? => questions
 - That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
 	Shopkeeper: Alright then. I'm heading out. Here's the gramophone I mentioned.[do DialogueFuncs.add_object_to_workbench("gramophone")] Good luck. 
 	- Thanks. 

@@ -21,6 +21,10 @@ func _ready():
 
 func get_var(var_name: String) -> Variant:
 	if not variables.has(var_name):
+		if _is_special_object_var(var_name):
+			push_warning("Special object variable '%s' not found! Returning 0. This should only happen in DEBUG mode!" % var_name)
+			return 0
+		
 		Utils.debug_error("Variable '%s' does not exist!" % var_name)
 		return
 		
@@ -85,6 +89,9 @@ func add_or_modify_special_object_var(object_name: String, value: int = 0):
 func _make_char_var_name(character_id: String, var_name: String) -> String:
 	# Character specific variable names are stored as: character_id + "_" + var_name
 	return "%s_%s" % [character_id, var_name]
+
+func _is_special_object_var(var_name: String) -> bool:
+	return var_name.begins_with(Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX)
 
 ## Reset all variables to their initial state
 func reset():

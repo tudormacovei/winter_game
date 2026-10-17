@@ -109,10 +109,21 @@ func dialogue_get_max_lives() -> int:
 
 func dialogue_get_remaining_lives() -> int:
 	return health_manager.get_remaining_lives()
-	
-## Immediately triggers player death, bypassing the normal life-loss flow.
-func dialogue_kill_player():
-	health_manager.kill_player()
+
+func dialogue_kill_player(action = DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN):
+	if debug_disable_death:
+		push_warning("GameManager:dialogue_kill_player Debug disabled death, will skip player kill.")
+		return
+
+	_force_stop_dialogue()
+
+	if action == DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU:
+		var main_menu_scene: PackedScene = load(Config.MAIN_MENU_SCENE_PATH)
+		get_tree().change_scene_to_packed(main_menu_scene)
+	elif action == DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN:
+		health_manager.kill_player()
+	else:
+		Utils.debug_error("GameManager:dialogue_kill_player Invalid action: %s" % action)
 
 func dialogue_exit_characters(display_names: Array):
 	if _character_animator == null:
@@ -268,7 +279,10 @@ func _play_next_interaction():
 		_add_object_to_workbench(object_scene)
 
 	_interaction_start_pending = false
-	SaveManager.save_game(current_day_index, current_interaction_index)
+
+	if interaction.should_save_on_start:
+		SaveManager.save_game(current_day_index, current_interaction_index)
+		
 	print("GameManager: Starting day %d interaction %d" % [current_day_index, current_interaction_index])
 
 # Next interaction is played when dialogue ends and there are no more objects on the workbench
@@ -282,6 +296,13 @@ func _try_play_next_interaction():
 	_play_next_interaction()
 
 #region Helper Functions
+
+func _force_stop_dialogue():
+	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
+		current_dialogue_balloon.queue_free()
+		current_dialogue_balloon = null
+
+	is_dialogue_running = false
 
 func _update_time_of_day(force_no_lerp: bool = false):
 	if not time_manager:
@@ -329,8 +350,8 @@ func _on_tree_exiting():
 	DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
 	DialogueManager.got_dialogue.disconnect(_on_dialogue_line_started)
 
-	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
-		current_dialogue_balloon.queue_free()
+	_force_stop_dialogue()
+	
 	if is_dialogue_running:
 		DialogueManager.dialogue_ended.emit(null) # TODO: would be nice to cleanup calls like this and not call the emit of other objects
 
@@ -408,6 +429,7 @@ func _on_player_died():
 #endregion
 
 #region Debug
+
 var debug_disable_death: bool = false
 var debug_disable_interaction_delay: bool = false
 
@@ -435,7 +457,6 @@ func debug_play_next_interaction():
 	
 	_interaction_start_pending = false
 	_interaction_start_token += 1
-	is_dialogue_running = false
 	if _character_animator:
 		_character_animator.clear()
 	print("Debug: Cancelling pending interaction...")
@@ -447,8 +468,7 @@ func debug_play_next_interaction():
 	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
 	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
 		print("Debug: Skipping to next interaction. Cleaning dialogue state...")
-		
-		current_dialogue_balloon.queue_free()
+		_force_stop_dialogue()
 		DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
 		return # NOTE: Early out since emitting signal above will skip to the next interaction by default
 

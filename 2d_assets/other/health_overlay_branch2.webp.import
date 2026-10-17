@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqb4uefdrimw8"
-path="res://.godot/imported/day_end_bg_small.webp-7bdbad4e9b667bc46889cb07bcd949be.ctex"
+uid="uid://bbk2om4oweanh"
+path="res://.godot/imported/health_overlay_branch2.webp-616060d139195c6d9ed11cc939832316.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_assets/UI/day_end_bg_small.webp"
-dest_files=["res://.godot/imported/day_end_bg_small.webp-7bdbad4e9b667bc46889cb07bcd949be.ctex"]
+source_file="res://2d_assets/other/health_overlay_branch2.webp"
+dest_files=["res://.godot/imported/health_overlay_branch2.webp-616060d139195c6d9ed11cc939832316.ctex"]
 
 [params]
 

@@ -5,6 +5,8 @@ const DAY_RESOURCES_PATH: String = "res://data/days/"
 const CHARACTER_RESOURCES_PATH: String = "res://data/characters/"
 const OBJECTS_SCENES_PATH: String = "res://scenes/object_manipulation/objects"
 
+const MAIN_MENU_SCENE_PATH: String = "res://scenes/UI/main_menu.tscn"
+
 const AMBIENT_AUDIO_STREAMS_PATH: String = "res://audio_assets/ambient"
 const SFX_AUDIO_STREAMS_PATH: String = "res://audio_assets/sfx"
 const SFX_CONFIG_PATH: String = "res://data/audio/sfx_config.tres" # SfxConfig resource, editable in the Inspector - holds every SFX's base volume
@@ -54,7 +56,6 @@ const STICKER_END_PEEL_SFX_NAME: String = "sfx_end_peel"
 const PLAYER_DEATH_SFX_NAME: String = "sfx_player_death"
 const NOTIFICATION_POP_UP_SFX_NAME: String = "sfx_notification_ding"
 const OBJECTS_REMINDER_SFX_NAME: String = "sfx_objects_reminder"
-
 
 
 ## add const for door slam

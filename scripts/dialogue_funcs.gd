@@ -77,13 +77,17 @@ func exit_characters(display_names: Array):
 
 	game_manager.dialogue_exit_characters(display_names)
 
-## Immediately kills the player, bypassing the normal life-loss flow.
-## Call the function like this: [do! DialogueFuncs.kill_player()]
-func kill_player():
+enum KillPlayerAction {
+	SHOW_DEATH_SCREEN,
+	RETURN_TO_MAIN_MENU,
+}
+
+## Call the function like this: [do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN)]
+func kill_player(action = KillPlayerAction.SHOW_DEATH_SCREEN) -> void:
 	if game_manager == null:
 		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot kill player. Inform Prog team of error!")
 		return
 
-	game_manager.dialogue_kill_player()
+	game_manager.dialogue_kill_player(action)
 	
 #endregion

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c3x5l3sxilebm"
+path="res://.godot/imported/4_tutorial_timed.dialogue-655d9050f17cdffb404483dd1c1f92a6.tres"
+
+[deps]
+
+source_file="res://data/dialogue/Day 4/4_tutorial_timed.dialogue"
+dest_files=["res://.godot/imported/4_tutorial_timed.dialogue-655d9050f17cdffb404483dd1c1f92a6.tres"]
+
+[params]
+
+defaults=true

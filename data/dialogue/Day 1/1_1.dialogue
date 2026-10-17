@@ -24,7 +24,7 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 				- Fair enough.
 					Shopkeeper: Let's get you started, then. => tutorial 
 				- I'll need a little more than that.
-					Shopkeeper: I'll explain everything, don't worry. => tutorial
+					Shopkeeper: I'll explain everything later, don't you worry. => tutorial
 			- Anyway. Let's get to work. 
 				Shopkeeper: Let's. => tutorial 
 		- Who are these "Elders"? 
@@ -52,7 +52,7 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 	Shopkeeper: Care to share? [do Variables.set_char_var("NPC_4", "cult", true)]
 	- Not right now, to be honest.
 		Shopkeeper: No worries. Just know I'm here if you wanna talk. And I'm mostly an open book, if you've got any questions. 
-		Shopkeeper: Gotta stick together, us so favoured by the Goddess, eh? People can get as jealous here as anywhere else.
+		Shopkeeper: Gotta stick together, us so favoured by the Goddess, eh? People get as jealous here as anywhere else.
 		- Of course.
 			Shopkeeper: Anyway, let's get you up to speed, eh? => tutorial
 		- Let's just get to work. 
@@ -61,7 +61,7 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 		Shopkeeper: Eh, people here are just like everywhere else. [do Variables.mod_var("religious_fervour", -1)][do Variables.mod_char_var("NPC_4", "express_doubt", 1)]
 		Shopkeeper: Some good apples, some bad ones. Perhaps a few rotten ones here and there. 
 		Shopkeeper: There are some practices and beliefs which might seem... odd, especially to an outsider.
-		Shopkeeper: Way I see it, at least they've got a purpose.
+		Shopkeeper: Way I see it, at least we've got a purpose.
 		Shopkeeper: Goes a long way, what with the state of the world right now and everything.
 		- Guess I can respect that. 
 			Shopkeeper: Just keep an open mind, yeah? 
@@ -77,17 +77,12 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 		Shopkeeper: I'll try to be less spooky from now on, though. Promise. 
 		- To be honest, I, myself, kind of knew this was your house even before Joan pointed it to me.
 			Shopkeeper: There you have it. The Goddess works in ways unknown to us. 
-			Shopkeeper: Let's get started, then. => tutorial
+			Shopkeeper: Anyway. Let's get started. => tutorial
 		- No harm, no foul. 
 			Shopkeeper: Appreciate it. Let's get started, then. => tutorial
 		- Err, not sure how I feel about that. 
 			Shopkeeper: [#sprite=worried]I know, I'm being odd again. But it's the truth.
-			- Just tone it down a bit, yeah?
-				Shopkeeper: [#sprite=worried]Duly noted. Already said I would. [do Variables.mod_char_var("NPC_4", "relationship", -1)]
-				Shopkeeper: Anyway, let's get started. => tutorial
-			- Guess I gotta get used to it, then. 
-				Shopkeeper: [#sprite=worried]Like I said, I'll try to make it easier on you. 
-				Shopkeeper: Anyway, let's get started. => tutorial
+			Shopkeeper: Anyway. Let's get started. => tutorial
 	- Just eager to start serving the Goddess. [if Variables.get_var("religious_fervour") >= 6]
 		Shopkeeper: Oh, no point mucking about, then. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_char_var("NPC_4", "express_doubt", -1)] => tutorial
 	- I'm just slightly confused about everything. Got a bunch of questions.
@@ -95,18 +90,18 @@ Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see yo
 
 ~ tutorial
 Shopkeeper: First things first. You need to understand what the Cullings really are. 
-Shopkeeper: [#sprite=laugh]I'm starting to like you! 
 Shopkeeper: There used to be more than nine billion of us out there, you know? An inconceivable, absurd amount. So many, so lustful, and so dependant on the unsustainable, sinful technologies of our ancestors. 
 Shopkeeper: Unchecked, we were on the brink of extinction. The Cullings, scary as they might be, were a Gift from the Goddess. A way for humanity to live on. 
-Shopkeeper: You see, besides infecting certain people with spots of corruption that quite literally suck the life out of them, they also yield a residual substance that attaches itself to worldly, man-made items.
-Shopkeeper: Looking at, tampering with or sitting close to such objects can cause madness, ilness, violent urges, and, in some extreme cases, even death.
-Shopkeeper: Whenever the sky turns red in the morning - a harbinger of the Cullings, as you well know - some people die, and some items become corrupted. Our numbers go down, and so do our chances of repeating the same disastrous mistakes.
-Shopkeeper: We, here, are the Goddess's chosen. She wants us all to live, but She also wants us to become more self-sufficient. Inside our walls, the Cullings only target objects. No one has ever died here because of them.  
-Shopkeeper: But Our Goddess is all-wise. She knows we're hard to please and weak, unable to part with our most prized possessions and go back to the way things were without adjusting to it gradually, over time. 
-Shopkeeper: That's why She's entrusted us Gift-Bearers with the power to cleanse some of these items, so that they they may still be safely used.
-Shopkeeper: All we gotta do is, quite literally, rip the evil spots off like a bandaid using our feeble hands and fingers. => gameplay_tutorial
+Shopkeeper: You see, besides infecting certain people with spots of corruption that quite literally suck the life out of them, they also target worldly, man-made items.
+Shopkeeper: Looking at, tampering with or sitting close to infected objects can cause madness, ilness, violent urges, and, in some extreme cases, even death.
+Shopkeeper: Whenever the sky turns red in the morning - a harbinger of the Cullings, as you well know - some people die, and some items become corrupted. Our numbers go down, but so do our chances of repeating the same disastrous mistakes.
+Shopkeeper: We, here in the village, are the Goddess's chosen. She wants us all to live, but She also wants us to become more self-sufficient. Less dependant on our products and tools, which are the Cullings' only target inside of our walls. 
+Shopkeeper: No one has ever died here because of the Cullings, you know. We have been blessed.   
+Shopkeeper: But Our Goddess is all-wise. She knows we're still human, weak and hard to please, unable or unwilling to part with our most prized possessions and go back to the way things were without adjusting to it gradually, over time. 
+Shopkeeper: That's why She's entrusted us Gift-Bearers with the power to cleanse some of these items, so that they they may still be safely kept and used. But we have to use our Gift wisely. We can't just cleanse everything. 
+Shopkeeper: That would defeat the purpose, eh? So we have to find a middle ground. A way to keep the villagers happy, while also respecting the Goddess's wishes. Cleanse some, and burn the rest. 
+Shopkeeper: Let me show you how it's done. => gameplay_tutorial
 
-# TODO:Dani - Narrative pass over gameplay tutorial
 ~ gameplay_tutorial
 #tutorial start
 Shopkeeper: [do lock_player_action("complete_object", true)][do lock_player_action("complete_sticker", true)][do lock_player_action("focus_object", true)]There. Look down. There's an infected object on the table. Pick it up and put it down in front of you, for now. [do do_scripted_event("start_find_workbench_tutorial")] [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("first_drag_on_object")] [do do_scripted_event("stop_find_workbench_tutorial")]
@@ -115,9 +110,9 @@ Shopkeeper: [do! do_scripted_event("start_focus_object_tutorial")]Now pick it up
 #tutorial: focus mode, rotate 
 Shopkeeper: Feels weird, eh? Focus on it long enough and you might just die. No, really, I'm not kidding.
 Shopkeeper: You need constant breaks in our line of work. Whenever it starts to hurt, or when you feel like you might be losing it, put the item down. Take a moment to breathe.
-Shopkeeper: Some of the side effects will stay with you till you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. 
-Shopkeeper: You'll feel it, and there will be signs. The Goddess works in mysterious ways. 
-Shopkeeper: Objects that are tampered with but not cleansed properly will also have an effect. 
+Shopkeeper: Some of the side effects will stay with you until you get a good night's sleep. As the day progresses, you'll become more weary and your body's ability to deal with the side-effects will go down. 
+Shopkeeper: You'll feel it, and there will usually be other signs, as well. The Goddess works in mysterious ways. 
+Shopkeeper: Objects that are tampered with but not cleansed properly will also have an effect. You have to be careful. Have too many of them lying around and they might just get to you.  
 Shopkeeper: Generally speaking, though, you'll be mostly fine after a short break. And then you're back to peeling.
 Shopkeeper: Speaking of, let's try peeling the evil off this one. 
 Shopkeeper: Pick it back up, focus on it, and run your fingers over those weird looking spots. Then peel. Remember, take breaks if you feel the need. [do lock_player_action("complete_sticker", false)] [do wait_for("first_sticker_cleansed_on_object")] 
@@ -133,11 +128,11 @@ if Variables.get_var("prog_score_special_object_tutorial_peel_book") < 100
 	
 	#tutorial: Keeping track of lives
 	if DialogueFuncs.get_remaining_lives() <= 1
-		% Shopkeeper: You look very pale. Take care.                           
-		% Shopkeeper: You don't look too hot. Be careful.
+		% Shopkeeper: You look very pale. Take a moment and breathe.                           
+		% Shopkeeper: You don't look too hot. Be careful now.
 	
 	% Shopkeeper: You have to rid it of all corruption spots and then place it in the basket, to your right. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
-	% Shopkeeper: Fully cleanse the object and then put it in the basket, on the right hand side. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
+	% Shopkeeper: Cleanse the object completely and then put it in the basket, on the right hand side. [do DialogueFuncs.add_object_to_workbench("tutorial_peel_book")] [do wait_for("object_completed")] => normal_spots_complete_check
 else 
 	Shopkeeper: Well done! => spots_tutorial_end
 
@@ -145,12 +140,12 @@ else
 Shopkeeper: That's it. Our day consists of doing this over and over again, taking short breaks whenever we feel the need, and longer ones once every two or three objects. Safer that way. Easy to get lost in this kind of work. 
 Shopkeeper: Like I said, make sure you don't get too absorbed in it. Look around, talk to me or to whoever finds themselves in this sorry place, peer out the window, anything. Balance is key. 
 Shopkeeper: You can keep practicing, if you so wish. These items are from old batches, anyway. Their owners are long dead. Mostly.
--  I want to practise a little more. 
-	Shopkeeper: [#sprite=laugh]You're enjoying this, eh? Good. 
-	Shopkeeper: I've got a few more items around the place. Here, you can have them. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")]
+- I want to practise a little more. 
+	Shopkeeper: [#sprite=laugh]You're enjoying this, eh? Good. [do DialogueFuncs.add_object_to_workbench("flask")] [do DialogueFuncs.add_object_to_workbench("milk_carton_variant_02")]
 	Shopkeeper: Just make sure to finish them up before you go to bed. Wouldn't want them just laying around here. => wow
 - Think I got it. Let's move on.
 	Shopkeeper: Alright then. I'll go check up on Sarah real quick, if you don't mind. She should've been up by now. Be right back.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	
 
 ~ wow
 if DialogueFuncs.get_object_count() == 0
