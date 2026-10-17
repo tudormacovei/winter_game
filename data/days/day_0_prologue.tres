@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=24 format=3 uid="uid://crjbbp07kdxig"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=25 format=3 uid="uid://crjbbp07kdxig"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_qajja"]
 [ext_resource type="Resource" uid="uid://dyfx0vcpfwhe6" path="res://data/interaction_configs/prologue_config.tres" id="2_068nm"]
+[ext_resource type="Resource" uid="uid://c5w4jiixvatp7" path="res://data/interaction_configs/prologue_fragment_config.tres" id="2_d7dfo"]
 [ext_resource type="Resource" uid="uid://gqbuiwqdbhkc" path="res://data/dialogue/Day 0/0_1.dialogue" id="2_jqotn"]
 [ext_resource type="Resource" uid="uid://c8l484xcc7b1g" path="res://data/interaction_configs/black_config.tres" id="2_wc6rg"]
 [ext_resource type="Script" uid="uid://bta87oci6xlf5" path="res://scripts/systems/interactions/day_definition.gd" id="3_84k3x"]
@@ -18,7 +19,7 @@
 [sub_resource type="Resource" id="Resource_fki0i"]
 script = ExtResource("1_qajja")
 dialogue = ExtResource("3_m45ib")
-config = ExtResource("2_wc6rg")
+config = ExtResource("2_d7dfo")
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
 [sub_resource type="Resource" id="Resource_3affb"]

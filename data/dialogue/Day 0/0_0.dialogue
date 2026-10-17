@@ -109,7 +109,7 @@ A frail fragment: [speed=0.2]...Minutes which might as well be hours pass. The c
 A frail fragment: [speed=0.6]All of a sudden, you hear a sound.[do DialogueFuncs.play_sfx("sfx_crow_goddess")] A caw. And then another. 
 A frail fragment: The cold subsides. It is replaced by warmth and peacefulness.
 A frail fragment: Your paralysis demon took their sweet time to show up. 
-A frail fragment: A... crow. It lands on your thigh. => hello
+A frail fragment: A... crow. It lands on your thigh. [do! do_scripted_event("show_prologue_crow")] => hello
 
 ~ hello
 Crow: ...
@@ -153,8 +153,8 @@ Crow: It's so good to finally meet you, Keeper.
 		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
 		
 ~ fear
-Crow: I sense your fear, dearest Keeper. Give in to the light, to the warmth that is now washing over you. 
-Crow: I've been watching you. I know you. I know your soul. Your mind and body may be forged anew, but your spirit is something I've no sway over. 
+Crow: I sense your fear, dearest Keeper. Give in to the light, to the warmth that is now washing over you.
+Crow: I've been watching you. [do! do_scripted_event("show_prologue_crow_with_ugly_eye")] I know you. I know your soul. Your mind and body may be forged anew, but your spirit is something I've no sway over. 
 Crow: But I must trust it with my life, for I have no other choice. 
 Crow: I'm here to set you on your path. To guide, as I've done twice before, as I will four times more.  
 Crow: I bestow upon you my Gift. Purification. You shall cleanse what others cannot. Use it wisely, and with love.
@@ -164,7 +164,7 @@ Crow: A place unravaged by the Cullings, where a third shall grow, a third shall
 A frail fragment: That doesn't quite add up...
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
 Crow: Do not let me down, for I am your Goddess and I won't allow it. 
-Crow: We will meet again, soon enough. Be at peace. 
+Crow: We will meet again, soon enough. Be at peace.[do! do_scripted_event("hide_prologue_crow")]
 A frail fragment: ...
 A frail fragment: She's gone. 
 A frail fragment: Who are you, now? Is there anything left of your former self?

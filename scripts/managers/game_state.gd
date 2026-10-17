@@ -112,6 +112,29 @@ func _helper_on_object_focus_for_pulse(new_state: InteractibleObject.State, obje
 		
 		object.object_state_changed.disconnect(Callable(self, "_helper_on_object_focus_for_pulse").bind(object))
 
+#region Prologue Crow
+
+const CrowSpriteName: String = "CrowSprite"
+func show_prologue_crow() -> void:
+	var crow_sprite = _helper_get_prologue_crow_sprite()
+	crow_sprite.show_normal()
+
+func show_prologue_crow_with_ugly_eye() -> void:
+	var crow_sprite = _helper_get_prologue_crow_sprite()
+	crow_sprite.show_ugly_eye()
+
+func hide_prologue_crow() -> void:
+	var crow_sprite = _helper_get_prologue_crow_sprite()
+	crow_sprite.hide_crow()
+
+func _helper_get_prologue_crow_sprite() -> Sprite2D:
+	var crow_sprite = get_tree().current_scene.find_child(CrowSpriteName, true, false) as Sprite2D
+	if crow_sprite == null:
+		Utils.debug_error("GameState: Crow sprite not found in current scene. This should never happen!")
+	return crow_sprite
+
+#endregion
+
 #endregion
 
 #region Lock Player Actions
