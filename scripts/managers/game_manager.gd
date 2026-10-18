@@ -117,8 +117,9 @@ func dialogue_kill_player(action = DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCR
 		push_warning("GameManager:dialogue_kill_player Debug disabled death, will skip player kill.")
 		return
 
-	_force_stop_dialogue()
 	is_interaction_change_paused = true # NOTE: All actions below result in re-loading the current scene, so this flag is guaranteeed to be reset correctly.
+
+	_force_stop_dialogue()
 	
 	if action == DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU:
 		var main_menu_scene: PackedScene = load(Config.MAIN_MENU_SCENE_PATH)
@@ -303,9 +304,17 @@ func _try_play_next_interaction():
 #region Helper Functions
 
 func _force_stop_dialogue():
+	if not is_dialogue_running:
+		return
+
+	# NOTE: Dialogue balloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached.
 	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
 		current_dialogue_balloon.queue_free()
 		current_dialogue_balloon = null
+
+	# NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
+	# TODO: Would be nice to cleanup calls like this and not call the emit of other objects
+	DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
 
 	is_dialogue_running = false
 
@@ -357,9 +366,6 @@ func _on_tree_exiting():
 
 	_force_stop_dialogue()
 	
-	if is_dialogue_running:
-		DialogueManager.dialogue_ended.emit(null) # TODO: would be nice to cleanup calls like this and not call the emit of other objects
-
 func _on_object_completed(object_name: String, is_special_object: bool, completed_stickers: int, total_stickers: int):
 	var sticker_completion_percentage = 100 if total_stickers == 0 else int(float(completed_stickers) / total_stickers * 100)
 	if total_stickers == 0:
@@ -469,13 +475,10 @@ func debug_play_next_interaction():
 	if not workbench.is_workbench_empty():
 		workbench.reset_workbench()
 
-	#NOTE: Dialogue balloon needs to be manually cleaned up. DialogueManager only cleans it up when last dialogue line is reached.
-	#NOTE: Emitting the dialogue ended signal will let other systems cleanup for themselves.
-	if current_dialogue_balloon and not current_dialogue_balloon.is_queued_for_deletion():
+	if is_dialogue_running:
 		print("Debug: Skipping to next interaction. Cleaning dialogue state...")
 		_force_stop_dialogue()
-		DialogueManager.dialogue_ended.emit(_day_resources[current_day_index].interactions[current_interaction_index].dialogue)
-		return # NOTE: Early out since emitting signal above will skip to the next interaction by default
+		return # NOTE: Early out since stopping dialogue will skip to the next interaction by default
 
 	print("Debug: Starting next interaction...")
 	_play_next_interaction()
