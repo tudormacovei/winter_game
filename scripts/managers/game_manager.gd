@@ -118,7 +118,7 @@ func dialogue_kill_player(action = DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCR
 		return
 
 	_force_stop_dialogue()
-	is_interaction_change_paused = true # NOTE: All interactions result in re-loading the current scene, so this flag is guaranteeed to be reset correctly.
+	is_interaction_change_paused = true # NOTE: All actions below result in re-loading the current scene, so this flag is guaranteeed to be reset correctly.
 	
 	if action == DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU:
 		var main_menu_scene: PackedScene = load(Config.MAIN_MENU_SCENE_PATH)
