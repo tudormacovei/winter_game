@@ -8,17 +8,13 @@ Shopkeeper: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=worried
 	Shopkeeper: [#sprite=worried]Tell me where she is. Now. 
 	- She left. Said she's going on a walk. => next
 	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next 
-	- I'm really trying not to get involved. [if Variables.get_char_var("NPC_2", "relationship") == 0]
-		Shopkeeper: [#sprite=worried]Fucking useless. [do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", 1)] => END 
-		#door close
+	- I'm really trying not to get involved. => next
 - She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
 - Relax for a bit. Tell me what's going on. 
 	Shopkeeper: [#sprite=worried]Tell me where she is. Now. 
 	- She left. Said she's going on a walk. => next
 	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
-	- I'm really trying not to get involved. [if Variables.get_char_var("NPC_2", "relationship") == 0]
-		Shopkeeper: [#sprite=worried]Fucking useless. [do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", 1)] => END 
-		#door close
+	- I'm really trying not to get involved. => next
 ~ next 
 Shopkeeper: [#sprite=worried]Look. I need your help. Desperately. 
 if Variables.get_char_var("NPC_4", "express_doubt") <= 4

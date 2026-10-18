@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=27 format=3 uid="uid://bplqoaqlnm5mj"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=24 format=3 uid="uid://bplqoaqlnm5mj"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
 [ext_resource type="Resource" uid="uid://douhk2njjw7k8" path="res://data/interaction_configs/workshop_default_config.tres" id="2_b6olo"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://c7bswthq27a8q" path="res://scripts/systems/variables/variable_predicate_definition.gd" id="8_vccvb"]
 [ext_resource type="Script" uid="uid://bps1w10vos4x1" path="res://scripts/systems/day_end/narrative_text_definition.gd" id="9_k8ees"]
 [ext_resource type="Resource" uid="uid://c1j728px5nys" path="res://data/dialogue/Day 3/3_2_DEATH.dialogue" id="10_4k50r"]
-[ext_resource type="Resource" uid="uid://btodt6ol7f4x0" path="res://data/dialogue/Day 3/3_3_DEATH.dialogue" id="12_gsvuo"]
 
 [sub_resource type="Resource" id="Resource_u0b80"]
 script = ExtResource("1_5ihi8")
@@ -64,21 +63,6 @@ script = ExtResource("1_5ihi8")
 dialogue = ExtResource("5_u0b80")
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
-[sub_resource type="Resource" id="Resource_nfx8t"]
-script = ExtResource("8_vccvb")
-is_always_true = false
-method_arguments = ["ending_zero"]
-compare_value = 0
-metadata/_custom_type_script = "uid://c7bswthq27a8q"
-
-[sub_resource type="Resource" id="Resource_4k50r"]
-script = ExtResource("1_5ihi8")
-dialogue = ExtResource("12_gsvuo")
-predicate = SubResource("Resource_nfx8t")
-config = ExtResource("4_nfx8t")
-should_save_on_start = false
-metadata/_custom_type_script = "uid://dnsly0bq77weo"
-
 [sub_resource type="Resource" id="Resource_txs78"]
 script = ExtResource("8_vccvb")
 is_always_true = false
@@ -96,7 +80,7 @@ metadata/_custom_type_script = "uid://bps1w10vos4x1"
 [resource]
 script = ExtResource("2_jitoe")
 day_id = 3
-interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_u0b80"), SubResource("Resource_teffk"), SubResource("Resource_b6olo"), SubResource("Resource_0xwlc"), SubResource("Resource_3affb"), SubResource("Resource_4k50r")])
+interactions = Array[ExtResource("1_5ihi8")]([SubResource("Resource_u0b80"), SubResource("Resource_teffk"), SubResource("Resource_b6olo"), SubResource("Resource_0xwlc"), SubResource("Resource_3affb")])
 narrative_text = SubResource("Resource_eq0qp")
 performance_text = ExtResource("8_mbtji")
 metadata/_custom_type_script = "uid://bta87oci6xlf5"
