@@ -115,6 +115,9 @@ func try_show_object_state_ui(delay: float = 0.0) -> void:
 
 	_game_state_ui.show_game_state_ui(_game_state_ui.GameStateUIType.OBJECT)
 
+func hide_all_game_state_ui() -> void:
+	_game_state_ui.hide_all_game_state_ui()
+
 #region Screen Highlight
 
 const _SCREEN_HIGHLIGHT_FADE_DURATION = 2.0

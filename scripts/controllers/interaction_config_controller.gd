@@ -28,6 +28,7 @@ func apply_config(config: Resource) -> void:
 	_apply_scene_by_name(config.scene_name)
 	_apply_camera_rules(config.is_camera_locked)
 	_apply_audio_ambient(config.audio_ambient_file_name)
+	_ui_manager.hide_all_game_state_ui()
 
 	await _ui_manager.fade_from_black(_ui_manager._SCREEN_FADE_DURATION_INTERACTION_CONFIGS)
 	
