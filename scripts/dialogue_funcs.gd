@@ -69,7 +69,7 @@ func has_completed_special_object(object_name: String) -> bool:
 	return Variables.has(Config.SCORE_SPECIAL_OBJECT_VAR_KEY_PREFIX + object_name)
 
 ## Makes characters present in the scene leave the scene simultaneously
-## Call the function like this: [do! DialogueFuncs.exit_characters(["Micah", "Sarah"])]
+## NOTE: Call the function like this: [do! DialogueFuncs.exit_characters(["Micah", "Sarah"])]
 func exit_characters(display_names: Array):
 	if game_manager == null:
 		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot exit characters. Inform Prog team of error!")
@@ -82,13 +82,18 @@ enum KillPlayerAction {
 	RETURN_TO_MAIN_MENU,
 }
 
-## Call the function like this: [do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN)]
+## NOTE: Call the function like this: [do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN)]
 func kill_player(action = KillPlayerAction.SHOW_DEATH_SCREEN) -> void:
 	if game_manager == null:
 		Utils.debug_error("DialogueFuncs: Game manager not registered! Cannot kill player. Inform Prog team of error!")
 		return
 
 	game_manager.dialogue_kill_player(action)
+
+## NOTE: Use sparingly. 
+## Ends the current dialogue and starts the next interaction. Does NOT complete existing objects!
+func force_next_interaction():
+	game_manager.dialogue_force_start_next_interaction()
 
 # TODO: Implement achievement unlocking wrapper. Placeholder for now.
 func unlock_achievement(achievement_name: String):

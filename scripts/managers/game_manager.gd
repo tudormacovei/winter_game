@@ -129,6 +129,10 @@ func dialogue_kill_player(action = DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCR
 	else:
 		Utils.debug_error("GameManager:dialogue_kill_player Invalid action: %s" % action)
 
+func dialogue_force_start_next_interaction():
+	_force_stop_dialogue()
+	_play_next_interaction()
+
 func dialogue_exit_characters(display_names: Array):
 	if _character_animator == null:
 		Utils.debug_error("GameManager: Character animator not loaded. Aborting character exit for '%s'. This should not happen" % str(display_names))

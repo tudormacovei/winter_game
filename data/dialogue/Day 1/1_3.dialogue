@@ -39,7 +39,7 @@ Shopkeeper: And how would you know what's best for my Sarah? You just got here.
 - Whatever. 
 	Shopkeeper: ... => next2
 - Fuck him. And fuck Sarah, too. 
-	Shopkeeper: ... [do Variables.set_char_var("NPC_4", "relationship", 1)][do Variables.set_var("1_3_death", 1)] => END 
+	Shopkeeper: ... [do Variables.set_char_var("NPC_4", "relationship", 1)][do Variables.set_var("1_3_death", 1)][wait=1.5][do DialogueFuncs.force_next_interaction()] => END 
 	#problem: objects need to be completed to proceed
 
 ~ nice
