@@ -13,6 +13,7 @@ const DEFAULT_AUDIO_AMBIENT_FILE_NAME: String = "amb_music"
 @export var scene_name: String = DEFAULT_SCENE_NAME
 
 @export var is_camera_locked: bool = false
+@export var show_game_state_ui: bool = false
 
 @export var dialogue_balloon_scene: PackedScene = DEFAULT_DIALOGUE_BALLOON_SCENE
 

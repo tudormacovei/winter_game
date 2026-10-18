@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("1_cfytr")
+show_game_state_ui = true
 audio_ambient_file_name = "amb_main_game"
 metadata/_custom_type_script = "uid://c2xpl2eysoink"

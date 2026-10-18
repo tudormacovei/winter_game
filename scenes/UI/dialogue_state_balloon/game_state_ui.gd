@@ -1,15 +1,16 @@
 extends CanvasLayer
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var interaction_config_controller: InteractionConfigController = %InteractionConfigController
 
 enum GameStateUIType {
 	DIALOGUE,
 	OBJECT,
 }
 
-func show_game_state_ui(ui_type: GameStateUIType, delay: float = 0.0) -> void:
-	if delay > 0.0:
-		await get_tree().create_timer(delay).timeout
+func show_game_state_ui(ui_type: GameStateUIType) -> void:
+	if not interaction_config_controller.current_config.show_game_state_ui:
+		return
 
 	var vars: Dictionary = _get_ui_type_variables(ui_type)
 	if vars.is_empty():
@@ -28,7 +29,7 @@ func show_game_state_ui(ui_type: GameStateUIType, delay: float = 0.0) -> void:
 	anim_player.play(vars["show_anim_name"])
 	if (ui_type == GameStateUIType.DIALOGUE):
 		AudioManager.play_sfx(Config.NOTIFICATION_POP_UP_SFX_NAME)
-	elif(ui_type == GameStateUIType.OBJECT):
+	elif (ui_type == GameStateUIType.OBJECT):
 		AudioManager.play_sfx(Config.OBJECTS_REMINDER_SFX_NAME)
 
 
