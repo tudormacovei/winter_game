@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=17 format=3 uid="uid://bkalsjow3at4j"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=21 format=3 uid="uid://bkalsjow3at4j"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_cy22h"]
 [ext_resource type="Resource" uid="uid://cex4poxg3oae0" path="res://data/dialogue/Day 1/1_2.dialogue" id="2_cy22h"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://wbmtaxw68vkw" path="res://scenes/object_manipulation/objects/milk_carton.tscn" id="7_80xpy"]
 [ext_resource type="PackedScene" uid="uid://bov6fm3d5y6xm" path="res://scenes/object_manipulation/objects/flask.tscn" id="7_ufrix"]
 [ext_resource type="Script" uid="uid://c7bswthq27a8q" path="res://scripts/systems/variables/variable_predicate_definition.gd" id="8_56kry"]
+[ext_resource type="Resource" uid="uid://ceygc6ukksgyu" path="res://data/dialogue/Day 1/1_3_DEATH.dialogue" id="8_hqsg4"]
+[ext_resource type="Resource" uid="uid://c5w4jiixvatp7" path="res://data/interaction_configs/prologue_fragment_config.tres" id="8_rm8ga"]
 [ext_resource type="Script" uid="uid://bps1w10vos4x1" path="res://scripts/systems/day_end/narrative_text_definition.gd" id="9_v13ve"]
 [ext_resource type="Resource" uid="uid://b6c38plae5b8y" path="res://data/performance_texts/default_performance_text.tres" id="10_v13ve"]
 
@@ -29,26 +31,40 @@ dialogue = ExtResource("5_av7cm")
 objects = Array[PackedScene]([ExtResource("7_ufrix"), ExtResource("7_80xpy")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
+[sub_resource type="Resource" id="Resource_dgxg7"]
+script = ExtResource("8_56kry")
+is_always_true = false
+method_arguments = ["1_3_death"]
+compare_value = 0
+metadata/_custom_type_script = "uid://c7bswthq27a8q"
+
+[sub_resource type="Resource" id="Resource_5f7om"]
+script = ExtResource("1_cy22h")
+dialogue = ExtResource("8_hqsg4")
+predicate = SubResource("Resource_dgxg7")
+config = ExtResource("8_rm8ga")
+should_save_on_start = false
+metadata/_custom_type_script = "uid://dnsly0bq77weo"
+
 [sub_resource type="Resource" id="Resource_hqsg4"]
 script = ExtResource("8_56kry")
 is_always_true = false
 method = 1
 method_arguments = ["NPC_4", "brainwash"]
-operator = 2
-compare_value = false
+compare_value = 0
 metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_rm8ga"]
 script = ExtResource("9_v13ve")
-text_true = "Sarah is beautiful, isn't she? Be good to her. "
-text_false = "I would never brainwash you, my child. Stop doubting me. "
+text_true = "I would never brainwash you, my child. Stop doubting me. "
+text_false = "Sarah is beautiful, isn't she? Take good care of her."
 predicate = SubResource("Resource_hqsg4")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 
 [resource]
 script = ExtResource("3_l22pw")
 day_id = 1
-interactions = Array[ExtResource("1_cy22h")]([SubResource("Resource_l22pw"), SubResource("Resource_fw5tm"), SubResource("Resource_2s1b6")])
+interactions = Array[ExtResource("1_cy22h")]([SubResource("Resource_l22pw"), SubResource("Resource_fw5tm"), SubResource("Resource_2s1b6"), SubResource("Resource_5f7om")])
 narrative_text = SubResource("Resource_rm8ga")
 performance_text = ExtResource("10_v13ve")
 metadata/_custom_type_script = "uid://bta87oci6xlf5"

@@ -98,7 +98,7 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 		Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("fourfive", 2)]
 		- See y... => END 
 		- Goodb... => END 
-- Okay. I'll just finish up these items then. 
+- Okay. I'll just finish up these objects then. 
 	Shopkeeper: [#sprite=worried]Appreciate it. I'll make it up to you. 
 	Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")]
 	- See y... => END 

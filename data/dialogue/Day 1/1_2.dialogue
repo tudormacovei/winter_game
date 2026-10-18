@@ -6,7 +6,14 @@
 #you can barely see part of Micah through the window for a second, and then you can hear the door open but you can't see anyone; after a few seconds, you can see his head pop up from under the table; he sneaked up on you.
 #sound effect needed
 ...[do DialogueFuncs.play_sfx("sfx_door_open", -20)][wait=3]
-Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha. 
+if Variables.get_var("showered") == true
+	Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare", -7)]Raagh! => next
+else
+	Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare", -7)]Raagh!
+	Micah: Oh, wow, you stink! => next
+	
+~ next
+Micah: Hahaha. 
 - You scared the shit out of me. 
 	Micah: [#sprite=happy]Haha! Got you. 
 	- Don't ever do that again.
@@ -27,20 +34,20 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 			Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk. 
 			Micah: Besides, death is natural and normal and cool and everything. 
 			Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-	- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+	- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 0]
 		Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-	- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+	- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 1]
 		Micah: Yeah, we get more and more people coming here for that same reason.
 		Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 		Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 	- I think your Goddess brainwashed me and sent me here. 
-		Micah: Uh, you hit your head or something?
+		Micah: Uh, you hit your head or something? [do Variables.mod_char_var("NPC_4", "brainwash", 1)]
 		Micah: What do you mean brainwashed?
 		Micah: Is that even a thing? How would She even get in there?
 		Micah: You're weird. 
 		- It means She made me forget stuff in order to serve Her without question. 
-			Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+			Micah: That sounds kinda awesome. I wanna get brainwashed too. 
 			Micah: But I still don't think that's a thing. You should get your head checked. 
 			Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 		- ...Forget it.
@@ -75,20 +82,20 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 0]
 				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+			- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 1]
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- I think your Goddess brainwashed me and sent me here. 
-				Micah: Uh, you hit your head or something?
+				Micah: Uh, you hit your head or something? [do Variables.mod_char_var("NPC_4", "brainwash", 1)]
 				Micah: What do you mean brainwashed?
 				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
-					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: That sounds kinda awesome. I wanna get brainwashed too. 
 					Micah: But I still don't think that's a thing. You should get your head checked. 
 					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 				- ...Forget it.
@@ -108,20 +115,20 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything. 
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 0]
 				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+			- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 1]
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 			- I think your Goddess brainwashed me and sent me here. 
-				Micah: Uh, you hit your head or something?
+				Micah: Uh, you hit your head or something? [do Variables.mod_char_var("NPC_4", "brainwash", 1)]
 				Micah: What do you mean brainwashed?
-				Micah: Is that even a thing? How would She even get in there?
+				Micah: Is that even a thing? How would She even get in there? 
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
-					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: That sounds kinda awesome. I wanna get brainwashed too. 
 					Micah: But I still don't think that's a thing. You should get your head checked. 
 					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 				- ...Forget it.
@@ -141,20 +148,20 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 0]
 				Micah: Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+			- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 1]
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- I think your Goddess brainwashed me and sent me here. 
-				Micah: Uh, you hit your head or something?
+				Micah: Uh, you hit your head or something? [do Variables.mod_char_var("NPC_4", "brainwash", 1)]
 				Micah: What do you mean brainwashed?
 				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
-					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: That sounds kinda awesome. I wanna get brainwashed too. 
 					Micah: But I still don't think that's a thing. You should get your head checked. 
 					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 				- ...Forget it.
@@ -183,20 +190,20 @@ Micah: [do DialogueFuncs.play_sfx("sfx_jumpscare")]Raagh! Hahaha.
 					Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 					Micah: Besides, death is natural and normal and cool and everything.  
 					Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+			- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 0]
 				Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-			- Just someone running from the Cullings, same as everyone else. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+			- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 1]
 				Micah: Yeah, we get more and more people coming here for that same reason.
 				Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 				Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 			- I think your Goddess brainwashed me and sent me here. 
-				Micah: Uh, you hit your head or something?
+				Micah: Uh, you hit your head or something? [do Variables.mod_char_var("NPC_4", "brainwash", 1)]
 				Micah: What do you mean brainwashed?
 				Micah: Is that even a thing? How would She even get in there?
 				Micah: You're weird. 
 				- It means She made me forget stuff in order to serve Her without question. 
-					Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+					Micah: That sounds kinda awesome. I wanna get brainwashed too. 
 					Micah: But I still don't think that's a thing. You should get your head checked. 
 					Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 				- ...Forget it.
@@ -215,20 +222,20 @@ Micah: Anyway, who the hell are you?
 		Micah: [#sprite=happy]Oh, don't worry, the old man doesn't mind. He's not a sourpuss. That's how we usually talk.
 		Micah: Besides, death is natural and normal and cool and everything. 
 		Micah: Anyway, for now, I'm the one bringing you items every morning. You cleanse them, I take them back the next day. => stupid
-- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 6]
+- I'm the Goddess's Chosen One. I'm here at Her command, serving as an apprentice to the Shopkeeper. [if Variables.get_var("religious_fervour") >= 0]
 	Micah: [#sprite=upset]Uh huh. If you say so. [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)]
 	Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
-- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 5]
+- Just someone running from the Cullings. I work here now. [if Variables.get_var("religious_fervour") <= 1]
 	Micah: Yeah, we get more and more people coming here for that same reason.
 	Micah: [#sprite=upset]Wonder how many of y'all are true believers, though. 
 	Micah: I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid
 - I think your Goddess brainwashed me and sent me here. 
-	Micah: Uh, you hit your head or something?
+	Micah: Uh, you hit your head or something? [do Variables.mod_char_var("NPC_4", "brainwash", 1)]
 	Micah: What do you mean brainwashed?
 	Micah: Is that even a thing? How would She even get in there?
 	Micah: You're weird. 
 	- It means She made me forget stuff in order to serve Her without question. 
-		Micah: That sounds kinda awesome. I wanna get brainwwashed too. 
+		Micah: That sounds kinda awesome. I wanna get brainwashed too. 
 		Micah: But I still don't think that's a thing. You should get your head checked. 
 		Micah: Anyway, I'm the delivery boy. I bring items here every morning. You cleanse them, I take them back the next day. => stupid 
 	- ...Forget it.
@@ -293,15 +300,26 @@ Micah: [#sprite=happy]That's how things work around here. Not too complicated, b
 Micah: Anyway, here's today's bag of items. Where's the Shopkeeper? The real one, I mean? [do DialogueFuncs.add_object_to_workbench("suitcase")][do DialogueFuncs.add_object_to_workbench("hand_mirror")]
 Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=happy]Micah!
 Micah: [#sprite=happy]Oh, hi, Sarah...
-Micah: [#sprite=happy]You ready to go?
+Micah: [#sprite=happy]You, uh, ready to go?
 Sarah: [#sprite=happy]Of course. 
-Sarah: [wait=0.3]...Hello, random, creepy stranger. 
+if Variables.get_var("showered") == true
+	=> showered
+else
+	=> notshowered
+
+~ notshowered
+Sarah: [wait=0.3]...Hello, random, creepy, very stinky stranger that apparently lives here now. 
+- Hello, random, creepy girl. => hello
+- Nice to meet you too, Sarah.  => hello
+	
+~ showered
+Sarah: [wait=0.3]...Hello, random, creepy stranger that apparently lives here now. 
 - Hello, random, creepy girl. => hello
 - Nice to meet you too, Sarah.  => hello
 
 ~ hello 
 Shopkeeper: Told you to stop running down the stairs, Sarah. 
-Sarah: Sorry, dad. Micah and I are in a bit of a hurry.
+Sarah: Micah and I are in a hurry, dad.
 Shopkeeper: What are the two of you up to now?
 Sarah: [#sprite=happy]It's a secret. You'll see.
 Shopkeeper: [#sprite=worried]Just keep out of trouble this time, please. 

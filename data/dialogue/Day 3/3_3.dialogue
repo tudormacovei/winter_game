@@ -9,7 +9,7 @@ Shopkeeper: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=worried
 	- She left. Said she's going on a walk. => next
 	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next 
 	- I'm really trying not to get involved. [if Variables.get_char_var("NPC_2", "relationship") == 0]
-		Shopkeeper: [#sprite=worried]Fucking useless. [do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", true)] => END 
+		Shopkeeper: [#sprite=worried]Fucking useless. [do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", 1)] => END 
 		#door close
 - She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
 - Relax for a bit. Tell me what's going on. 
@@ -17,7 +17,7 @@ Shopkeeper: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=worried
 	- She left. Said she's going on a walk. => next
 	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
 	- I'm really trying not to get involved. [if Variables.get_char_var("NPC_2", "relationship") == 0]
-		Shopkeeper: [#sprite=worried]Fucking useless. [do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", true)] => END 
+		Shopkeeper: [#sprite=worried]Fucking useless. [do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("ending_zero", 1)] => END 
 		#door close
 ~ next 
 Shopkeeper: [#sprite=worried]Look. I need your help. Desperately. 
@@ -28,7 +28,7 @@ elif Variables.get_char_var("NPC_4", "express_doubt") == 5
 	Shopkeeper: [#sprite=worried]I've no idea how you feel about the Goddess, or about our church. 
 	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
 elif Variables.get_char_var("NPC_4", "express_doubt") >= 6
-	Shopkeeper: [#sprite=worried]You've expressed doubts about the Goddess and our church before. 
+	Shopkeeper: [#sprite=worried]You've expressed some doubts about the Goddess and our church before. 
 	Shopkeeper: [#sprite=worried]You were right. Things are not what they seem. I was wrong. => sacrifices
 
 ~ sacrifices
@@ -79,14 +79,14 @@ Shopkeeper: [#sprite=worried]Will you help?
 		Shopkeeper: I can't even begin to tell you how much I appreciate it. => more
 	- I'll sleep on it. 
 		Shopkeeper: [#sprite=worried]Thank you. I know it's a lot to ask. => more
-- Of course I will. [if Variables.get_var("religious_fervour") <= 5]
+- Of course I will. [if Variables.get_var("religious_fervour") <= 1]
 	Shopkeeper: I can't even begin to tell you how much I appreciate it. => more
 - I... can't get involved. I'm sorry. 
 	Shopkeeper: [#sprite=worried]Please. Sleep on it. I know it's a lot to ask. => more
-- You're lucky if I don't turn you in myself tonight. [if Variables.get_var("religious_fervour") >= 5]
+- You're lucky if I don't turn you in myself tonight. [if Variables.get_var("religious_fervour") >= -1]
 	Shopkeeper: [#sprite=worried]Your first instinct is to look out for yourself. I get it. I do. 
 	Shopkeeper: [#sprite=worried]Just sleep on it. Try to find it in your heart to help. => more1
-- May the Goddess strike you both down where you stand, you heretics. [if Variables.get_var("religious_fervour") >= 6]
+- May the Goddess strike you both down where you stand, you heretics. [if Variables.get_var("religious_fervour") >= 1]
 	Shopkeeper: You can't have grown this devoted in such a short time. It's all a sham, and you know it. 
 	Shopkeeper: [#sprite=worried]You're scared. I get it. 
 	Shopkeeper: [#sprite=worried]Just sleep on it. Try to find it in your heart to help. => more1
@@ -96,7 +96,7 @@ Shopkeeper: [#sprite=worried]Will you help?
 	Shopkeeper: And you would, too, in my place. => more1
 
 ~ more 
-Shopkeeper: [#sprite=worried]I need to go find her now. 
+Shopkeeper: [#sprite=worried]I need to go find her now. [do Variables.set_var("help", 1)]
 Shopkeeper: Just act like everything is normal. That's all I ask. 
 Shopkeeper: [#sprite=worried]And if, somehow, we're successful in our escape, please take care of Micah. He has no one. He's alone. He needs you. 
 - I will. 

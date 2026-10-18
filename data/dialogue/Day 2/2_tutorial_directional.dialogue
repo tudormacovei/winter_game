@@ -6,9 +6,9 @@
 ~ start
 # Chess set - 1 spot. Book - 3 spots.
 if Variables.get_var("prog_score_special_object_tutorial_directional_book") + Variables.get_var("prog_score_special_object_tutorial_directional_chess_set") <= 130
-	A frail fragment: You suck at directional spots. Do better. => END
+	A frail fragment: This new kind of corruption's tricky. There's something about the way the spots are glowing... => END
 else
-	A frail fragment: You don't suck. Well done. => END
+	A frail fragment: This new kind of corruption proved to be less difficult than Micah led us to believe... => END
 
 => END
 

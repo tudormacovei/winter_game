@@ -5,28 +5,28 @@
 
 [sub_resource type="Resource" id="Resource_t41v3"]
 script = ExtResource("1_g2qyg")
-max_value = 30
-texts = Array[String](["#1 Score between 0-30", "#2 Score between 0-30"])
+max_value = 50
+texts = Array[String](["Shopkeeper's notes: The villagers are not happy with your output. Remember, the Goddess can't protect you against pitchforks and flames.", "Shopkeeper's notes: The villagers hate you already. So many of their prized possessions, burned to ash and dust. Not a great first impression."])
 metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
 
 [sub_resource type="Resource" id="Resource_0v33d"]
 script = ExtResource("1_g2qyg")
-min_value = 31
-max_value = 60
-texts = Array[String](["#1 Score between 31-61", "#2 Score between 31-61"])
+min_value = 51
+max_value = 80
+texts = Array[String](["Shopkeeper's notes: You're doing great. The villagers are not exactly happy, but they'll manage. The Goddess is pleased.", "Shopkeeper's notes: You've managed to strike a perfect balance in your work. Some of the villagers are unhappy, but it's a price worth paying. Praise be!"])
 metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
 
 [sub_resource type="Resource" id="Resource_5euer"]
 script = ExtResource("1_g2qyg")
-min_value = 61
-max_value = 90
-texts = Array[String](["#1 Score between 61-90", "#2 Score between 61-90"])
+min_value = 81
+max_value = 97
+texts = Array[String](["Shopkeeper's notes: The villagers are happy. Too happy. Cleanse a little less, and burn a little more.", "Shopkeeper's notes: The villagers love you. Your talent is undeniable, but your Gift can be easily taken away. Keeping the Goddess happy is more important. "])
 metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
 
 [sub_resource type="Resource" id="Resource_cc4r3"]
 script = ExtResource("1_g2qyg")
-min_value = 91
-texts = Array[String](["#1 Score between 91-100", "#2 Score between 91-100"])
+min_value = 98
+texts = Array[String](["Shopkeeper's notes: Cleansing every single thing, are we? Against Her orders? The Goddess is not exactly happy with you. Consider this a warning. ", "Shopkeeper's notes: You can't just cleanse everything, remember? Tread carefully. The Goddess will not like this. You don't want to upset Her."])
 metadata/_custom_type_script = "uid://c7ak3t2a1ou7o"
 
 [resource]

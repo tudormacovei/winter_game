@@ -21,6 +21,8 @@ volumes_db = Dictionary[String, float]({
 "sfx_exile": 0.0,
 "sfx_footsteps": 0.0,
 "sfx_giggle": 0.0,
+"sfx_house": 0.0,
+"sfx_house_rain": 0.0,
 "sfx_item_drop": 0.0,
 "sfx_joan_groan": 0.0,
 "sfx_joan_groan2": 0.0,

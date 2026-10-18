@@ -13,7 +13,7 @@ A frail fragment: ...After what feels like too long, you hear a sickly, croaking
 ???: [wait=1][speed=0.6][shake rate=10.0 level=2]Who...ahh... who goes there?
 A frail fragment: She smells rancid... even worse than you do.
 - (OBEY) The Goddess told me to come here. I want to join your, uh, church. 
-	???: [speed=0.6][shake rate=10.0 level=2]Ahh, you speak truly, stranger? [do Variables.mod_var("religious_fervour", 1)]
+	???: [speed=0.6][shake rate=10.0 level=2]Ahh, you speak truly, stranger? [do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("obey_counter", 1)]
 	???: [speed=0.6][shake rate=10.0 level=2]If so, your reasons are pure... Many come here out of desperation and fear, you know... 
 	???: [speed=0.6][shake rate=10.0 level=2]Revolting, wretched lowlifes... Putrid leeches, the lot of them...
 	???: [speed=0.6][shake rate=10.0 level=2]If it were up to me, ahh, I'd burn them all... 
@@ -42,7 +42,7 @@ A frail fragment: She smells rancid... even worse than you do.
 		???: [speed=0.6][shake rate=10.0 level=2]But don't let that turn your reverence and appreciation into vanity and pride!
 		???: [speed=0.6][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... => but
 - (LIE) I just stumbled upon this place. I'm a weary traveler. I need a place to stay. 
-	???: [speed=0.6][shake rate=10.0 level=2]Our village is untouched by hardship... You're not the first to ask... [do Variables.set_var("lied_to_joan", true)]
+	???: [speed=0.6][shake rate=10.0 level=2]Our village is untouched by hardship... You're not the first to ask... [do Variables.set_var("lied_to_joan", true)][do Variables.mod_var("lie_counter", 1)]
 	???: [speed=0.6][shake rate=10.0 level=2]Sure won't be the last... 
 	???: [speed=0.6][shake rate=10.0 level=2]Ahh, Goddess, merciful, almighty and wise, what shall I do with this one? 
 	???: [speed=0.6][shake rate=10.0 level=2]Will they serve and praise, or will they live as leeches and sow discord and doubt amongst our ranks?
@@ -53,8 +53,12 @@ A frail fragment: She smells rancid... even worse than you do.
 	???: [speed=0.6][shake rate=10.0 level=2]Ahh, alas, I have to put this to rest... I am not one to forget, but I am one to forgive, as the Goddess tells us we should... 
 	???: [speed=0.6][shake rate=10.0 level=2]She sent you here! That's not something you can hide, you foolish creature! 
 	???: [speed=0.6][shake rate=10.0 level=2]...And is that the spark of Her Gift I see in your deceitful eyes? Ahh, what a blessed day... What joy!
-	- (LIE) Uh, praise be!
+	- Praise be! [do Variables.mod_var("religious_fervour", 1)]
 		???: [speed=0.6][shake rate=10.0 level=2]Ahh, praise be, indeed! 
+		???: [speed=0.6][shake rate=10.0 level=2]She provides and cares for us. And She will provide and care for you, too...
+		???: [speed=0.6][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
+	- (LIE) Uh, praise be, yay!
+		???: [speed=0.6][shake rate=10.0 level=2]Ahh, praise be, indeed! [do Variables.mod_var("lie_counter", 1)][do DialogueFuncs.unlock_achievement("Do I Not Look Like Someone You Can Trust? - Lie to Joan... twice.")]
 		???: [speed=0.6][shake rate=10.0 level=2]She provides and cares for us. And She will provide and care for you, too...
 		???: [speed=0.6][shake rate=10.0 level=2]...In spite of your untruthful, slimy nature. => but
 	- Okay, you got me. Your Goddess showed Herself to me in my sleep. I'm Her Chosen One.
@@ -64,7 +68,7 @@ A frail fragment: She smells rancid... even worse than you do.
 		???: [speed=0.6][shake rate=10.0 level=2]For if there's one thing Our Blessed Goddess truly hates, ahh, it's arrogance... 
 		???: [speed=0.6][shake rate=10.0 level=2]...And you've already sinned once, today. => but
 	- Whatever you say. 
-		???: [speed=0.6][shake rate=10.0 level=2]Ahh, She speaks through me... I'm a mere vessel... [do Variables.mod_var("religious_fervour", -1)]
+		???: [speed=0.6][shake rate=10.0 level=2]Ahh, She speaks through me... I'm a mere vessel... 
 		???: [speed=0.6][shake rate=10.0 level=2]She provides and cares for us all. And She will provide and care for you, too... 
 		???: [speed=0.6][shake rate=10.0 level=2]...In spite of your ignorant attitude and untruthful, slimy nature. => but
 	- Sorry I lied to you. 
@@ -112,7 +116,7 @@ A frail fragment: No. No way.
 A frail fragment: Don't do it. 
 - So be it.
 	???: [speed=0.6][shake rate=10.0 level=2]Ahh, hee, hee... => go
-- Happy to oblige. [if Variables.get_var("religious_fervour") > 5] 
+- Happy to oblige. [if Variables.get_var("religious_fervour") > 0] 
 	???: [speed=0.6][shake rate=10.0 level=2]Ahh, hee, hee... => go
 - That's absurd.
 	???: [speed=0.6][shake rate=10.0 level=2]Ahh, a small price to pay for salvation!
@@ -120,11 +124,11 @@ A frail fragment: Don't do it.
 		???: [speed=0.6][shake rate=10.0 level=2]Ahh, hee, hee... => go
 	- Just... turn around. 
 		???: [speed=0.6][shake rate=10.0 level=2]Ahh, hee, hee, whatever you need, whatever you need... => go 
-	- This place better be everything it's made out to be. [if Variables.get_var("religious_fervour") < 6]
+	- This place better be everything it's made out to be. [if Variables.get_var("religious_fervour") < 1]
 		???: [speed=0.6][shake rate=10.0 level=2]Ahh, hee, hee, it sure is... And so, so much more... => go 
-	- Alright. If the Goddess wills it. [if Variables.get_var("religious_fervour") > 5]
+	- Alright. If the Goddess wills it. [if Variables.get_var("religious_fervour") > 0]
 		???: [speed=0.6][shake rate=10.0 level=2]Ahh, hee, hee, She sure does... => go
-	- No. No way. [if Variables.get_var("religious_fervour") < 5]
+	- No. No way. [if Variables.get_var("religious_fervour") < 2]
 		???: [speed=0.6][shake rate=10.0 level=2]Ahh, why break my heart? 
 		???: [speed=0.6][shake rate=10.0 level=2]The Chosen do not get special treatment, no, of course not...
 		???: [speed=0.6][shake rate=10.0 level=2]I cannot let you in unless you obey...
@@ -137,15 +141,13 @@ A frail fragment: Don't do it.
 			???: [speed=0.6][shake rate=10.0 level=2]You foul, slimy, creature...
 			???: [speed=0.6][shake rate=10.0 level=2]You're not allowed to speak like that to me... oh, no, no, no...
 			???: [speed=0.6][shake rate=10.0 level=2]You have gravely sinned... retribution awaits...
-			???: [speed=0.6][shake rate=10.0 level=2]In the name of The Goddess and of all that is holy, I sentence you to death, you filthy insect!
+			???: [speed=0.6][shake rate=10.0 level=2]In the name of The Goddess and of all that is holy, I sentence you to death, filth.
 			A frail fragment: RUN!
 			- Run.
 				A frail fragment: As you turn around, you catch a glimpse of the village doors opening. [do Variables.set_var("0_1_death", 1)] => END 
 			- Fight her. 
 				A frail fragment: Terrible idea. [do Variables.set_var("0_1_death", 2)] => END 
 				
-			
-		
 ~ go
 #maybe screen with hole
 do DialogueFuncs.play_sfx_and_wait("sfx_undress_clothes")
@@ -154,7 +156,7 @@ A frail fragment: Her smell is unbearable...
 ???: [speed=0.6][shake rate=10.0 level=2]You'll be staying at the Shopkeeper's house, on account of your Gift... He's Gifted himself, and I'm sure he's better, ahh, suited to explain how it works than any of us are...
 ???: [speed=0.6][shake rate=10.0 level=2]He's been in need of an apprentice since forever, anyway... 
 ???: [speed=0.6][shake rate=10.0 level=2]I'll lead you to his house. Just knock and tell him you're Gifted, and that, ahh, Joan let you in, with the Goddess's blessing... 
-???: [speed=0.6][shake rate=10.0 level=2]Welcome to (village name). May the Goddess guide your every step, hee, hee! (another option for title card drop)
+???: [speed=0.6][shake rate=10.0 level=2]Welcome to Sonder's Peak. May the Goddess guide your every step, hee, hee! (another option for title card drop)
 - Goodbye, Joan. => END 
 - ... => END 
 

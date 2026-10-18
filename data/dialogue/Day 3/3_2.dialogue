@@ -25,7 +25,7 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 		- Uh, okay then. 
 			Sarah: [#sprite=upset]...[do Variables.set_char_var("NPC_2", "relationship", 1)] => next
 		- You're a bit of a rat, aren't you? 
-			Sarah: [#sprite=upset]...[do Variables.set_var("ending_zero", true)]
+			Sarah: [#sprite=upset]...[do Variables.set_var("ending_zero", 1)]
 			Sarah: [#sprite=upset]That's a bit much. 
 			Sarah: [#sprite=upset]I'm going for a walk. 
 			Sarah: [#sprite=upset]Leave me alone or I'll scream so hard the whole village will be here in seconds.[do DialogueFuncs.play_sfx("sfx_door_slam")]

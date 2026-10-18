@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DayDefintion" load_steps=21 format=3 uid="uid://ww2tat7utudi"]
+[gd_resource type="Resource" script_class="DayDefintion" load_steps=22 format=3 uid="uid://ww2tat7utudi"]
 
 [ext_resource type="Script" uid="uid://dnsly0bq77weo" path="res://scripts/systems/interactions/interaction_definition.gd" id="1_5ihi8"]
 [ext_resource type="Resource" uid="uid://bthdoam3ce0u7" path="res://data/dialogue/Day 2/2_1.dialogue" id="2_7circ"]
@@ -45,8 +45,20 @@ dialogue = ExtResource("5_ylnnp")
 objects = Array[PackedScene]([ExtResource("6_nc8js"), ExtResource("8_d7lul"), ExtResource("4_ylnnp")])
 metadata/_custom_type_script = "uid://dnsly0bq77weo"
 
+[sub_resource type="Resource" id="Resource_n33hj"]
+script = ExtResource("11_djq11")
+is_always_true = false
+method = 1
+method_arguments = ["NPC_3", "relationship"]
+operator = 4
+compare_value = 2
+metadata/_custom_type_script = "uid://c7bswthq27a8q"
+
 [sub_resource type="Resource" id="Resource_dj84q"]
 script = ExtResource("10_tthvx")
+text_true = "Mary is among the worst of my flock, a sinner and a blasphemer. You handled the situation well, child. "
+text_false = "Mary is not a true believer. Be careful around her, child. She might try to turn you against Me."
+predicate = SubResource("Resource_n33hj")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 
 [resource]

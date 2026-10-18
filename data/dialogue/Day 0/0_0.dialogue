@@ -13,7 +13,7 @@ do Variables.add_local("questions", 0)
 => start
 
 ~ start
-A frail fragment: [speed=0.2][shake rate=10.0 level=2][do DialogueFuncs.play_sfx("sfx_placeholder_whitenoise")]Something's happening. 
+A frail fragment: [do DialogueFuncs.play_sfx("sfx_house", 6)][speed=0.2][shake rate=10.0 level=2]Something's happening. 
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]Hold on to me. Do not let go.
 A frail fragment: [speed=0.2][shake rate=10.0 level=2]...
 A frail fragment: [speed=0.6]You went to bed early tonight, feeling especially tired for no apparent reason. Long day at work, perhaps?
@@ -32,8 +32,8 @@ A frail fragment: ...
 	A frail fragment: What else? => about
 - My family. [if Variables.get_var("family") == false]
 	A frail fragment: Mom. Dad. Two older brothers and a sister. Younger?[do Variables.set_var("family", true)][do Variables.mod_var("dreams", 1)]
-	A frail fragment: Voices. Whispers. Screams. A handful of blurred faces and hushed voices. 
-	A frail fragment: They call to you. It gets both louder and quieter, in equal measure. 
+	A frail fragment: Whispers. A handful of blurred faces and hushed voices. 
+	A frail fragment: Screams. They call to you. It gets both louder and quieter, in equal measure. 
 	A frail fragment: Shame on you, they say. What for? 
 	A frail fragment: Then they leave. You recall having this dream before, a few times. Can you really not remember them? 
 	A frail fragment: These people and their harsh words mean nothing to you, now.
@@ -65,7 +65,7 @@ A frail fragment: ...
 ~ dream
 A frail fragment: It all feels rather... generic. Impersonal. These thoughts, or dreams, leave you feeling cold and empty. No twitching muscles, no elevated heart-rate, no sweat.
 A frail fragment: Are these bland, faded memories really yours? 
-A frail fragment: [speed=0.6][do DialogueFuncs.play_sfx("sfx_wind")]They're all brought to a stop by... something. A gust of wind you can barely feel. 
+A frail fragment: [speed=0.6][do DialogueFuncs.play_sfx("sfx_wind", -8)]They're all brought to a stop by... something. A gust of wind you can barely feel. 
 A frail fragment: [speed=0.6]You try to cling to them but they're... gone, somehow. 
 A frail fragment: [speed=0.6]It's cold, all of a sudden. Colder than you've ever felt.
 A frail fragment: [speed=0.6]Are you awake now?
@@ -130,7 +130,7 @@ Crow: It's so good to finally meet you, Keeper.
 	Crow: Through your dreams, I found a way. 
 	Crow: You are not who you were ten minutes ago. 
 	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
-	Crow: But do not grieve your former self, for you are mine now, mind and flesh. 
+	Crow: [do! do_scripted_event("show_prologue_crow_with_ugly_eye")]But do not grieve your former self, for you are mine now, mind and flesh. 
 	Crow: And you shall know happiness and power the likes of which feeble human minds can scarcely fathom. 
 	- I...
 		A frail fragment: You try to speak, but no words come out. 
@@ -143,7 +143,7 @@ Crow: It's so good to finally meet you, Keeper.
 	Crow: Through your dreams, I found a way. 
 	Crow: You are not who you were ten minutes ago. 
 	Crow: You are, indeed, reborn. You are cleansed, and you are freed.
-	Crow: But do not grieve your former self, for you are mine now, mind and flesh.
+	Crow: [do! do_scripted_event("show_prologue_crow_with_ugly_eye")]But do not grieve your former self, for you are mine now, mind and flesh.
 	Crow: And you shall know happiness and power the likes of which feeble human minds can scarcely fathom. 
 	- I...
 		A frail fragment: You try to speak, but no words come out. 
@@ -153,8 +153,8 @@ Crow: It's so good to finally meet you, Keeper.
 		A frail fragment: Your thoughts trickle out of your head, one by one. Your mind is gone. => fear
 		
 ~ fear
-Crow: I sense your fear, dearest Keeper. Give in to the light, to the warmth that is now washing over you.
-Crow: I've been watching you. [do! do_scripted_event("show_prologue_crow_with_ugly_eye")] I know you. I know your soul. Your mind and body may be forged anew, but your spirit is something I've no sway over. 
+Crow: [do! do_scripted_event("show_prologue_crow")]I sense your fear, dearest Keeper. Give in to the light, to the warmth that is now washing over you.
+Crow: I've been watching you. I know you. I know your soul. Your mind and body may be forged anew, but your spirit is something I've no sway over. 
 Crow: But I must trust it with my life, for I have no other choice. 
 Crow: I'm here to set you on your path. To guide, as I've done twice before, as I will four times more.  
 Crow: I bestow upon you my Gift. Purification. You shall cleanse what others cannot. Use it wisely, and with love.
@@ -163,8 +163,8 @@ Crow: Go to Sonder's Peak. A haven for my children, where dwell your new brother
 Crow: A place unravaged by the Cullings, where a third shall grow, a third shall die, a third shall live, and a third shall fly. 
 A frail fragment: That doesn't quite add up...
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
-Crow: Do not let me down, for I am your Goddess and I won't allow it. 
-Crow: We will meet again, soon enough. Be at peace.[do! do_scripted_event("hide_prologue_crow")]
+Crow: [do! do_scripted_event("show_prologue_crow_with_ugly_eye")]Do not let me down, for I am your Goddess and I won't allow it. 
+Crow: [do! do_scripted_event("show_prologue_crow")]We will meet again, soon enough. Be at peace.[do! do_scripted_event("hide_prologue_crow")]
 A frail fragment: ...
 A frail fragment: She's gone. 
 A frail fragment: Who are you, now? Is there anything left of your former self?
@@ -200,7 +200,6 @@ A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 			A frail fragment: Of course you will. 
 			A frail fragment: On to Sonder's Peak. => END
 		- Sounds peaceful. I'll stay. 
-			A frail fragment: So be it. Your funeral. *infinite black screen, you need to quit or alt f4, achievement pops up named Blissful Oblivion - Unlocked hidden ending 1* [wait=3][do DialogueFuncs.kill_player()] => END
-# TODO: Dani - Pass on kill_player() calls.
+			A frail fragment: So be it. Your funeral.[wait=3][do DialogueFuncs.unlock_achievement("Blissful Oblivion - Become lost to time and space.")][do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU)]=> END
 
-			
+=> END

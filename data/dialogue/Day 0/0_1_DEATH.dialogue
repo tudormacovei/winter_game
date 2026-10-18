@@ -1,6 +1,5 @@
 ~ initialize_local_variables
 
-# TODO: Dani - Pass on kill_player() calls. For now, they show examples of how to use this function.
 => start
 
 ~ start
@@ -10,9 +9,7 @@ if Variables.get_var("0_1_death") == 1
 	A frail fragment: She picks you up like you weigh nothing and spins you around. The smell of her breath is unbearable.
 	A frail fragment: [do DialogueFuncs.play_sfx("sfx_joan_wheeze")]The last thing you see is her slimy eyes as she leans in. 
 	A frail fragment: Her lips touch yours, and then you die. 
-	The screen is a close up of her eyes, this ending soft locks you for now
-	# Achievement: Hidden ending 2
-	do DialogueFuncs.unlock_achievement("Joan's Wrath")
+	do DialogueFuncs.unlock_achievement("Lips As Soft As Death - Don't kiss and tell!")
 	do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN) 
 	=> END
 elif Variables.get_var("0_1_death") == 2
@@ -22,7 +19,6 @@ elif Variables.get_var("0_1_death") == 2
 	A frail fragment: You feel a sharp pang of pain as she slashes again. And again. 
 	A frail fragment: She then digs into your sides and picks you up like you weigh nothing.[do DialogueFuncs.play_sfx("sfx_joan_wheeze")] You feel her breath as she leans in. The smell is unbearable.
 	A frail fragment: As her lips touch yours, you die.
-	# Achievement: Hidden ending 2
-	do DialogueFuncs.unlock_achievement("Joan's Wrath")
-	do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU)
+	do DialogueFuncs.unlock_achievement("Lips As Soft As Death - Don't kiss and tell!")
+	do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN)
 	=> END

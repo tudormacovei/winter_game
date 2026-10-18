@@ -6,9 +6,9 @@
 ~ start
 # Flask - 3 spots. Milk Carton - 2 spots.
 if Variables.get_var("prog_score_special_object_tutorial_timed_flask") + Variables.get_var("prog_score_special_object_tutorial_timed_milk_carton") <= 130
-	A frail fragment: You suck at timed spots. Do better. => END
+	A frail fragment: Those new corruption spots were very odd... They seemed to become firmly stuck in place after a while.  => END
 else
-	A frail fragment: You don't suck at timed spots. Well done. => END
+	A frail fragment: Is that the best the Cullings can do? Those new corruption spots were nothing special. => END
 
 => END
 

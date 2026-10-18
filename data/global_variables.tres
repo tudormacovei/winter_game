@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=51 format=3 uid="uid://bhar3qttwbojp"]
+[gd_resource type="Resource" script_class="GlobalVariablesDefinition" load_steps=59 format=3 uid="uid://bhar3qttwbojp"]
 
 [ext_resource type="Script" uid="uid://36p5g0q4ta38" path="res://scripts/systems/variables/globals_characters_definition.gd" id="1_cr3hu"]
 [ext_resource type="Script" uid="uid://b0wmtpsurq6bl" path="res://scripts/systems/variables/variable_definition.gd" id="1_vywdb"]
@@ -8,6 +8,18 @@
 script = ExtResource("1_vywdb")
 name = "relationship"
 default_value = 5
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_7iiqd"]
+script = ExtResource("1_vywdb")
+name = "express_doubt"
+default_value = 5
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_dxgj2"]
+script = ExtResource("1_vywdb")
+name = "questions"
+default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_6j24c"]
@@ -20,12 +32,6 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 script = ExtResource("1_vywdb")
 name = "cult"
 default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_dxgj2"]
-script = ExtResource("1_vywdb")
-name = "questions"
-default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_eft0y"]
@@ -58,22 +64,16 @@ name = "dream"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
-[sub_resource type="Resource" id="Resource_7iiqd"]
-script = ExtResource("1_vywdb")
-name = "express_doubt"
-default_value = 5
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_vwav8"]
-script = ExtResource("1_vywdb")
-name = "sacrifice_lie"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
 [sub_resource type="Resource" id="Resource_644ov"]
 script = ExtResource("1_vywdb")
-name = "brainwash"
+name = "brainwashed"
 default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_k24ov"]
+script = ExtResource("1_vywdb")
+name = "brainwash"
+default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_krwdq"]
@@ -82,10 +82,16 @@ name = "candles"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_vwav8"]
+script = ExtResource("1_vywdb")
+name = "sacrifice_lie"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_yreg5"]
 script = ExtResource("1_cr3hu")
 character_id = "NPC_4"
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_fv61s"), SubResource("Resource_6j24c"), SubResource("Resource_l3k17"), SubResource("Resource_dxgj2"), SubResource("Resource_eft0y"), SubResource("Resource_6s65m"), SubResource("Resource_tsadp"), SubResource("Resource_dgxfi"), SubResource("Resource_jtdi1"), SubResource("Resource_7iiqd"), SubResource("Resource_vwav8"), SubResource("Resource_644ov"), SubResource("Resource_krwdq")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_fv61s"), SubResource("Resource_7iiqd"), SubResource("Resource_dxgj2"), SubResource("Resource_6j24c"), SubResource("Resource_l3k17"), SubResource("Resource_eft0y"), SubResource("Resource_6s65m"), SubResource("Resource_tsadp"), SubResource("Resource_dgxfi"), SubResource("Resource_jtdi1"), SubResource("Resource_644ov"), SubResource("Resource_k24ov"), SubResource("Resource_krwdq"), SubResource("Resource_vwav8")])
 metadata/_custom_type_script = "uid://36p5g0q4ta38"
 
 [sub_resource type="Resource" id="Resource_t7f3i"]
@@ -213,6 +219,67 @@ description = "(!) If named is changed, inform Prog (!) Percentage of how well t
 default_value = 50
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_auhmi"]
+script = ExtResource("1_vywdb")
+name = "religious_fervour"
+description = "Depending on how openly devoted the Goddess you are, new dialogue options show up."
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_ag2hq"]
+script = ExtResource("1_vywdb")
+name = "obey_counter"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_sbaam"]
+script = ExtResource("1_vywdb")
+name = "lie_counter"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_xa3mf"]
+script = ExtResource("1_vywdb")
+name = "resist_counter"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_g5l88"]
+script = ExtResource("1_vywdb")
+name = "chosen_one_counter"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_x85g1"]
+script = ExtResource("1_vywdb")
+name = "lied_to_joan"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_ft33b"]
+script = ExtResource("1_vywdb")
+name = "0_1_death"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_s4764"]
+script = ExtResource("1_vywdb")
+name = "joan_name"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_uvc4w"]
+script = ExtResource("1_vywdb")
+name = "showered"
+default_value = false
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
+[sub_resource type="Resource" id="Resource_o08oi"]
+script = ExtResource("1_vywdb")
+name = "1_3_death"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [sub_resource type="Resource" id="Resource_2wlhm"]
 script = ExtResource("1_vywdb")
 name = "prog_is_door_open"
@@ -225,13 +292,6 @@ script = ExtResource("1_vywdb")
 name = "prog_window_background_path"
 description = "(!) If name or default value is changed, inform Prog (!) Path to a shop window background. Will instanly change the window background visible in the shop. Must use path to the _Shop_ version of the window view, NOT the _Full_ version. "
 default_value = "res://2d_assets/backgrounds/window_transitions/Windowview_small.webp"
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_auhmi"]
-script = ExtResource("1_vywdb")
-name = "religious_fervour"
-description = "Depending on how openly devoted the Goddess you are, new dialogue options show up."
-default_value = 5
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_twn5d"]
@@ -255,24 +315,6 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 [sub_resource type="Resource" id="Resource_3as7m"]
 script = ExtResource("1_vywdb")
 name = "ending_zero"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_x85g1"]
-script = ExtResource("1_vywdb")
-name = "lied_to_joan"
-default_value = false
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_g5l88"]
-script = ExtResource("1_vywdb")
-name = "chosen_one"
-default_value = 0
-metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
-
-[sub_resource type="Resource" id="Resource_ft33b"]
-script = ExtResource("1_vywdb")
-name = "0_1_death"
 default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
@@ -294,8 +336,14 @@ name = "toycar"
 default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
+[sub_resource type="Resource" id="Resource_ocn7r"]
+script = ExtResource("1_vywdb")
+name = "help"
+default_value = 0
+metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
+
 [resource]
 script = ExtResource("2_cr3hu")
-definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_auhmi"), SubResource("Resource_twn5d"), SubResource("Resource_ulfmv"), SubResource("Resource_p0qt7"), SubResource("Resource_3as7m"), SubResource("Resource_x85g1"), SubResource("Resource_g5l88"), SubResource("Resource_ft33b"), SubResource("Resource_mkuss"), SubResource("Resource_xpc13"), SubResource("Resource_d6xyu")])
+definitions = Array[ExtResource("1_vywdb")]([SubResource("Resource_c7yuf"), SubResource("Resource_auhmi"), SubResource("Resource_ag2hq"), SubResource("Resource_sbaam"), SubResource("Resource_xa3mf"), SubResource("Resource_g5l88"), SubResource("Resource_x85g1"), SubResource("Resource_ft33b"), SubResource("Resource_s4764"), SubResource("Resource_uvc4w"), SubResource("Resource_o08oi"), SubResource("Resource_2wlhm"), SubResource("Resource_c2bg0"), SubResource("Resource_twn5d"), SubResource("Resource_ulfmv"), SubResource("Resource_p0qt7"), SubResource("Resource_3as7m"), SubResource("Resource_mkuss"), SubResource("Resource_xpc13"), SubResource("Resource_d6xyu"), SubResource("Resource_ocn7r")])
 character_definitions = Array[ExtResource("1_cr3hu")]([SubResource("Resource_yreg5"), SubResource("Resource_h5qkm"), SubResource("Resource_s4nex"), SubResource("Resource_qwwlc")])
 metadata/_custom_type_script = "uid://bfhsr0au341ym"

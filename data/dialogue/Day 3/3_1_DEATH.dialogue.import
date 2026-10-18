@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cvmlckg3qhug8"
+path="res://.godot/imported/3_1_DEATH.dialogue-c0df7ea5a272ee456dfcbb6310ea1fac.tres"
+
+[deps]
+
+source_file="res://data/dialogue/Day 3/3_1_DEATH.dialogue"
+dest_files=["res://.godot/imported/3_1_DEATH.dialogue-c0df7ea5a272ee456dfcbb6310ea1fac.tres"]
+
+[params]
+
+defaults=true

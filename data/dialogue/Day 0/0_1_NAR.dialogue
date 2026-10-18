@@ -3,7 +3,8 @@
 => start
 
 ~ start
-A frail fragment: [wait=1.0]You get to the Shopkeeper's house and knock. As soon as [do DialogueFuncs.play_sfx("sfx_door_open")]your knuckles touch the wood, the door opens. He's been expecting you. => END 
-
+A frail fragment: [wait=1.0]You drift away once more. Your feet take you to the Shopkeeper's house. You feel a sense of dread as you approach.
+A frail fragment: Against your will, you knock. As soon as [do DialogueFuncs.play_sfx("sfx_door_open")]your knuckles touch the wood, the door opens. He's been expecting you.  
+A frail fragment: You go in. Once inside, you're in control again. => END
 => END
 

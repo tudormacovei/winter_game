@@ -61,13 +61,13 @@ script = ExtResource("9_dfv5o")
 is_always_true = false
 method_arguments = ["religious_fervour"]
 operator = 3
-compare_value = 5
+compare_value = 0
 metadata/_custom_type_script = "uid://c7bswthq27a8q"
 
 [sub_resource type="Resource" id="Resource_hem1m"]
 script = ExtResource("10_m45ib")
-text_true = "My sweet, little, obedient child. You've arrived. "
-text_false = "Now, now. Be good, my child. Stop resisting. "
+text_true = "My sweet, little child. You've arrived. "
+text_false = "Now, now, my child. Be good. Stop resisting. "
 predicate = SubResource("Resource_m45ib")
 metadata/_custom_type_script = "uid://bps1w10vos4x1"
 

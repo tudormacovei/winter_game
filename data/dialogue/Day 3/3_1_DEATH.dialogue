@@ -1,0 +1,15 @@
+~ initialize_local_variables
+
+=> start
+
+~ start
+A frail fragment: Two hooded figures come and grab you by the shoulders. You try to resist them but you can't.
+A frail fragment: Micah asked the Elders to banish you from the village, on account of you constantly badmouthing the Goddess ever since you got here. Why would he do this?
+A frail fragment: Either way, they believed him. A Culling day is approaching. They don't need another inconvenience. 
+A frail fragment: You[do DialogueFuncs.play_sfx("sfx_exile")] find yourself outside the village walls as the sky turns red. After a few minutes, you start to feel blisters on your skin. [do DialogueFuncs.play_sfx("sfx_death")]You can feel them suck the life out of you. They hurt more than anything you could have ever imagined. 
+A frail fragment: In mere seconds, you're dead. 
+do DialogueFuncs.unlock_achievement("Brats - Those pesky children...")
+do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU) 
+
+=> END
+
