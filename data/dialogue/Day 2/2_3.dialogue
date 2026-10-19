@@ -12,10 +12,10 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 	Shopkeeper: [#sprite=laugh]I think even Sarah might have forgotten it. 
 	Shopkeeper: Who told you? 
 	- (LIE) Sarah. 
-		Shopkeeper: Interesting. She never calls me that.
+		Shopkeeper: Interesting. She never calls me that.[do Variables.mod_var("lie_counter", 1)]
 		Shopkeeper: Anyway, where is she? => next
 	- (LIE) Micah. 
-		Shopkeeper: [#sprite=laugh]Made a dirty joke, did he? The rascal. 
+		Shopkeeper: [#sprite=laugh]Made a dirty joke, did he? The rascal.[do Variables.mod_var("lie_counter", 1)]
 		Shopkeeper: Anyway, where's Sarah? => next
 	- Mary. 
 		Shopkeeper: [#sprite=worried]Oh? So she was here? 
@@ -72,7 +72,7 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 	Shopkeeper: [#sprite=worried]Doesn't matter. Think I know where they went. 
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why
 - (LIE) No idea. Sorry. 
-	Shopkeeper: [#sprite=worried]Oh Goddess. She could be anywhere. 
+	Shopkeeper: [#sprite=worried]Oh Goddess. She could be anywhere.[do Variables.mod_var("lie_counter", 1)] 
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why 
 	
 ~ why

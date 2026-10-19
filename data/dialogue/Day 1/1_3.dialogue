@@ -40,7 +40,6 @@ Shopkeeper: And how would you know what's best for my Sarah? You just got here.
 	Shopkeeper: ... => next2
 - Fuck him. And fuck Sarah, too. 
 	Shopkeeper: ... [do Variables.set_char_var("NPC_4", "relationship", 1)][do Variables.set_var("1_3_death", 1)][wait=1.5][do DialogueFuncs.force_next_interaction()] => END 
-	#problem: objects need to be completed to proceed
 
 ~ nice
 Shopkeeper: Oh, she's an angel. 
@@ -286,7 +285,7 @@ Shopkeeper: ...
 	Shopkeeper: Oh. It must be the Goddess's way of helping you out. Of showing you how much more your body can take. 
 	Shopkeeper: And also to, uh, remind you that She's always watching.
 	Shopkeeper: They're not really there, though. They're in your head. I, myself, see spider webs and bugs. Cool, eh? => questions
-- That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
+- (MOVE ON) That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
 	Shopkeeper: Alright then. I'm heading out. 
 	- Thanks for clearing things up. 
 		Shopkeeper: Of course. Good luck. [do DialogueFuncs.play_sfx("sfx_door_close")] => END

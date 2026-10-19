@@ -308,7 +308,7 @@ else
 	=> notshowered
 
 ~ notshowered
-Sarah: [wait=0.3]...Hello, random, creepy, very stinky stranger that apparently lives here now. 
+Sarah: [wait=0.3]...Hello, random, creepy, stinky stranger that apparently lives here now. 
 - Hello, random, creepy girl. => hello
 - Nice to meet you too, Sarah.  => hello
 	

@@ -151,7 +151,7 @@ Micah: I'm sure the Goddess doesn't mind, though. It's just a wooden toy, right?
 - Sure. I'll help. 
 	Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
 - Uh, Micah, that's a lot of spots.
-	Micah: Yeaaah, that makes sense. 
+	Micah: Yeaaah, I know.
 	- Okay. I'll do it. 
 		Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
 	- I think you should burn it. 
@@ -176,7 +176,7 @@ else
 		- Yeah. I'll do my best. 
 			Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
 		- Uh, Micah, that's a lot of spots.
-			Micah: Yeaaah, that makes sense. 
+			Micah: Yeaaah, I know. 
 			- Okay. I'll do it. 
 				Micah: Appreciate it, Keeper! I'll come back for it tomorrow. => next1
 			- I think you should burn it. 
