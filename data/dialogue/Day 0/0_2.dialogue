@@ -47,9 +47,9 @@ A frail fragment: [wait=1.5]That was... interesting.
 	A frail fragment: I'm all that's left of you. The real you, I mean. The Goddess couldn't, or perhaps didn't want to, strip your mind completely bare, apparently.
 	A frail fragment: Anyway, I won't be of much use to you. If any. 
 	- Uh, okay. Great.
-		A frail fragment: Yeah. I'm not any happier about it than you are. => frail
+		A frail fragment: I'm not any happier about it than you are. => frail
 	- I'm scared. 
-		A frail fragment: Oh, well, guess I'm scared too, then. => frail 
+		A frail fragment: Well, guess I'm scared too, then. => frail 
 	
 ~ frail
 A frail fragment: Anyway, time to take a bath. 

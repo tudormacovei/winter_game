@@ -1,5 +1,5 @@
 ~ initialize_local_variables
-
+do Variables.add_local("curious", false)
 => start
 
 ~ start
@@ -134,7 +134,7 @@ Shopkeeper: Pretty small batch today, and it's the best way to learn, if you ask
 Shopkeeper: Oh, almost forgot! I also have this old, infected gramophone just lying around. I've been meaning to cleanse it forever but I haven't found the time.
 Shopkeeper: It might just be broken, but you should try cleansing it first, see if it helps. Would be nice for Sarah to be able to listen to some music again. 
 Shopkeeper: Think you're up to it?
-- Sure am. 
+- Sure. 
 	Shopkeeper: [#sprite=laugh]That's the spirit! [do DialogueFuncs.add_object_to_workbench("gramophone")]
 	Shopkeeper: Might be late by the time I get back, so feel free to go to bed once you're done. 
 	Shopkeeper: See you tomorrow morning. 
@@ -161,6 +161,8 @@ Shopkeeper: Might be late by the time I get back. See you tomorrow morning. [do 
 	
 ~ questions
 Shopkeeper: ... 
+- (INTERNALLY) That's... a lot of questions. [if Variables.get_var("curious") == false]
+	A frail fragment: You've always been a very curious individual![do Variables.set_var("curious", true)] => questions
 - Were you waiting for me last night? Didn't even get to properly knock before you opened the door. [if Variables.get_char_var("NPC_4", "wait") == false]
 	Shopkeeper: [#sprite=worried]Oh, well, uh, kind of. I'm sorry if that was weird. [do Variables.mod_char_var("NPC_4", "questions", 1)][do Variables.set_char_var("NPC_4", "wait", true)]
 	Shopkeeper: Been working alone for a long time. Hasn't been ideal, but I got used to it. Forgot how to behave around people, seems like. 

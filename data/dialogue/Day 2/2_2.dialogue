@@ -150,13 +150,7 @@ Mary: Wasn't expecting to see a new face here.
 			Mary: You've been here a day. Are you trying to break the village record? 
 			Mary: Just tell her to stay here. Farewell.
 			- Goodbye. => END1
-			- I'm simply curious by nature. 
-				Mary: It killed the cat. It will obliterate you around here.
-				- Don't you worry about me. 
-					Mary: I won't.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
-				- What are you talking about? 
-					Mary: ... [do Variables.mod_char_var("NPC_3", "relationship", -1)]
-					Mary: That's quite enough. I'm leaving. Goodbye.[do DialogueFuncs.play_sfx("sfx_door_slam")] => END
+			- I'm simply curious by nature. => curious
 		- Okay then. 
 			Mary: Appreciate it. Farewell. 
 			- See you around. => END1 
@@ -194,7 +188,23 @@ Mary: Wasn't expecting to see a new face here.
 			Mary: Appreciate it. Farewell.
 			- See you around. => END1 
 			- Goodbye. => END1 
-
+			
+~ curious
+if Variables.get_char_var("NPC_4", "questions") >= 6
+	Mary: It killed the cat. It will obliterate you around here. [do DialogueFuncs.unlock_achievement("Curious By Nature - Ask a lot of questions in your first two days")]
+	- Don't you worry about me. 
+		Mary: I won't.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
+	- What are you talking about? 
+		Mary: ... [do Variables.mod_char_var("NPC_3", "relationship", -1)] 
+		Mary: That's quite enough. I'm leaving. Goodbye.[do DialogueFuncs.play_sfx("sfx_door_slam")] => END 
+else 
+	Mary: It killed the cat. It will obliterate you around here.
+	- Don't you worry about me. 
+		Mary: I won't.[do DialogueFuncs.play_sfx("sfx_door_close")] => END
+	- What are you talking about? 
+		Mary: ... [do Variables.mod_char_var("NPC_3", "relationship", -1)] 
+		Mary: That's quite enough. I'm leaving. Goodbye.[do DialogueFuncs.play_sfx("sfx_door_slam")] => END 
+		
 ~ END1
 	Mary: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 
