@@ -10,25 +10,21 @@ class_name StickerPeelDirectional extends StickerPeel
 @export var randomization_increment_degrees: float = 90.0  # 90 => uniform pick of N/E/S/W.
 
 func _ready() -> void:
-	super._ready() # base picks + applies the texture (works in both editor and runtime)
+	super._ready() # base picks + applies the spot
 
-	if Engine.is_editor_hint():
-		# Editor preview: skip peel-runtime setup, just push the current angle to the shader.
-		_apply_wave_direction_to_existing_material()
-		return
-
-	if randomize_direction:
+	if randomize_direction and not Engine.is_editor_hint():
 		var increment: float = max(randomization_increment_degrees, 0.001)
 		var steps: int = max(int(round(360.0 / increment)), 1)
 		correct_angle_degrees = float(randi() % steps) * increment
 
-	_setup_shader_material()
+	_apply_wave_direction()
 
 
 func _set_correct_angle_degrees(value: float) -> void:
 	correct_angle_degrees = value
+	# Editor preview: the inspector shows changes to correct_angle_degrees live
 	if Engine.is_editor_hint() and is_inside_tree():
-		_apply_wave_direction_to_existing_material()
+		_apply_wave_direction()
 
 
 # Projects the sticker-local completion angle into world XZ.
@@ -57,17 +53,8 @@ func _passes_completion_check(fraction: float) -> bool:
 	return angle_between <= deg_to_rad(angle_width_degrees) * 0.5
 
 
-# Writes wave_direction to the per-instance ShaderMaterial
-func _setup_shader_material() -> void:
-	var mat := _get_or_duplicate_surface_material()
-	if not (mat is ShaderMaterial):
-		return
-	(mat as ShaderMaterial).set_shader_parameter(&"wave_direction", _wave_direction_uv())
-
-
-# Used at edit time so the inspector preview reflects correct_angle_degrees live.
-func _apply_wave_direction_to_existing_material() -> void:
-	_setup_shader_material()
+func _apply_wave_direction() -> void:
+	set_shader_value(&"wave_direction", _wave_direction_uv())
 
 
 # Wave direction in UV space.

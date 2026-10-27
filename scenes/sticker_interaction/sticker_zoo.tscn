@@ -17,14 +17,6 @@ fov = 50.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.1397089, 0.9901926, 0, -0.9901926, 0.1397089, 0, 2.7823217, 4.628906)
 
-[node name="StickerPeel" parent="." instance=ExtResource("2_pnvr5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11313133, 0, 0.12889123)
-debug_enabled = true
-
-[node name="StickerPeel5" parent="." instance=ExtResource("2_pnvr5")]
-transform = Transform3D(1.7352715, 0, 0.47836447, 0, 1.8, 0, -0.47836447, 0, 1.7352715, -0.34960803, 0, 0.14124155)
-debug_enabled = true
-
 [node name="Label3D2" type="Label3D" parent="."]
 transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.14200428, 0.007941544, 0.26956773)
 text = "Peel Stickers - Omnidirectional"
@@ -40,29 +32,50 @@ text = "Peel Stickers - Timed"
 [node name="Main Title" type="Label3D" parent="."]
 transform = Transform3D(-0.2200454, 2.0985805e-08, 3.8221604e-15, 0, -1.04929025e-08, 1.0002066, 1.923698e-08, 0.24004963, 4.372042e-08, -0.050511286, 0, 0.35691413)
 text = "This is a sticker zoo scene. It allows for visiblity and simple testing of all sticker types.
-Multiple sizes of sticker are present for testing purposes."
+It has one sticker for each combination of sticker type and spot."
 font_size = 20
 
-[node name="StickerPeel2" parent="." instance=ExtResource("3_pnvr5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23663831, -0.0033427477, -0.14538485)
+[node name="StickerPlain1" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.382, 0, 0.13)
 debug_enabled = true
+randomize_spot = false
 
-[node name="StickerPeel4" parent="." instance=ExtResource("3_pnvr5")]
-transform = Transform3D(-0.23187225, 0, 0.4429845, 0, 0.5, 0, -0.4429845, 0, -0.23187225, -0.41471845, -0.0033426285, -0.098181285)
+[node name="StickerPlain2" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.222, 0, 0.13)
 debug_enabled = true
+randomize_spot = false
+locked_spot_index = 1
 
-[node name="StickerPeel6" parent="." instance=ExtResource("3_pnvr5")]
-transform = Transform3D(-0.4386485, 0, 0.23997398, 0, 0.5, 0, -0.23997398, 0, -0.4386485, -0.11189297, -0.0033425987, -0.11128476)
+[node name="StickerPlain3" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.062, 0, 0.13)
 debug_enabled = true
+randomize_spot = false
+locked_spot_index = 2
 
-[node name="StickerPeel3" parent="." instance=ExtResource("3_pnvr5")]
-transform = Transform3D(1.0855962, 0, 0.51135206, 0, 1.2, 0, -0.51135206, 0, 1.0855962, 0.024952024, -0.0033426285, -0.14645699)
+[node name="StickerPlain4" parent="." instance=ExtResource("2_pnvr5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.098, 0, 0.13)
 debug_enabled = true
+randomize_spot = false
+locked_spot_index = 3
 
-[node name="StickerPeelTimed" parent="." instance=ExtResource("4_5muat")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45342547, 0, -0.14163893)
+[node name="StickerDirectionalVeins1" parent="." instance=ExtResource("3_pnvr5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.222, 0, -0.14)
 debug_enabled = true
+randomize_spot = false
 
-[node name="StickerPeelTimed2" parent="." instance=ExtResource("4_5muat")]
-transform = Transform3D(0.6345722, 0, 0.48715314, 0, 0.8, 0, -0.48715314, 0, 0.6345722, 0.28907958, 0, -0.13707764)
+[node name="StickerDirectionalVeins2" parent="." instance=ExtResource("3_pnvr5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.062, 0, -0.14)
 debug_enabled = true
+randomize_spot = false
+locked_spot_index = 1
+
+[node name="StickerTimedVeins1" parent="." instance=ExtResource("4_5muat")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.215, 0, -0.14)
+debug_enabled = true
+randomize_spot = false
+
+[node name="StickerTimedVeins2" parent="." instance=ExtResource("4_5muat")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.375, 0, -0.14)
+debug_enabled = true
+randomize_spot = false
+locked_spot_index = 1

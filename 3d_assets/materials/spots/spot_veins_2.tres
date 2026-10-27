@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://byuvgpkuclysg"]
+
+[ext_resource type="Shader" uid="uid://q8378d1d7rkt" path="res://3d_assets/shaders/sticker.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://bsrf61s41ol1o" path="res://2d_assets/spots/spot_veins_2.webp" id="2_texture"]
+[ext_resource type="Texture2D" uid="uid://cpysntml21e2m" path="res://2d_assets/spots/spot_veins_2_mask.webp" id="3_mask"]
+
+[resource]
+resource_name = "spot_veins_2"
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_texture = ExtResource("2_texture")
+shader_parameter/vein_mask = ExtResource("3_mask")
+shader_parameter/roughness = 0.5
+shader_parameter/albedo_brightness = 1.0

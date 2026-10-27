@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxfby5iyoui4u"
-path.s3tc="res://.godot/imported/Sticker_StickerTextureTransparency.webp-934791fbdad4e2c6ce96a2676245fab4.s3tc.ctex"
+uid="uid://bmijowpogk73y"
+path.s3tc="res://.godot/imported/spot_veins_1_mask.webp-d89c3237b3ef6489cad4a0c7ae630243.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://3d_assets/stickers/Sticker_StickerTextureTransparency.webp"
-dest_files=["res://.godot/imported/Sticker_StickerTextureTransparency.webp-934791fbdad4e2c6ce96a2676245fab4.s3tc.ctex"]
+source_file="res://2d_assets/spots/spot_veins_1_mask.webp"
+dest_files=["res://.godot/imported/spot_veins_1_mask.webp-d89c3237b3ef6489cad4a0c7ae630243.s3tc.ctex"]
 
 [params]
 

@@ -4,7 +4,6 @@ signal warmup_completed
 
 const WARMUP_FRAME_COUNT: int = 30
 const WORKBENCH_VIEW_SCENE: PackedScene = preload("res://scenes/main_game_view/workbench_view.tscn")
-const STICKER_PEEL_SCENE: PackedScene = preload("res://scenes/sticker_interaction/sticker_peel/sticker_peel.tscn")
 const DIALOGUE_VIEW_SCENE: PackedScene = preload("res://scenes/main_game_view/dialogue_view.tscn")
 
 var _frame_counter: int = 0
@@ -62,4 +61,5 @@ func _populate_scenes(viewport: SubViewport) -> void:
 
 	container.add_child(WORKBENCH_VIEW_SCENE.instantiate())
 	container.add_child(DIALOGUE_VIEW_SCENE.instantiate())
-	container.add_child(STICKER_PEEL_SCENE.instantiate())
+	for sticker_scene: PackedScene in GameManager.STICKER_TYPES:
+		container.add_child(sticker_scene.instantiate())
