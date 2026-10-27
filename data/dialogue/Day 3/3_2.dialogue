@@ -7,10 +7,8 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 	Sarah: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")]...
 	- Wanted to say I was sorry for yesterday. 
 		Sarah: [#sprite=upset]You truly sorry or just scared you'll get thrown out? 
-		Sarah: [#sprite=upset]You shouldn't apologise for not caring about my story. Some people care, others don't. It's not something you can control. 
-		Sarah: And I don't mind all that much. Not even sure why I told Micah. 
-		Sarah: Don't worry. He wouldn't hurt a fly. 
-		Sarah: They won't kick you out just cause he tells them to. That'd be stupid. 
+		Sarah: [#sprite=upset]You shouldn't apologise for not caring. Some people do, others don't. It's not something you can control. 
+		Sarah: And I'm fine, really. Not even sure why I wanted to talk to you about it in the first place. 
 		- I do care. Don't know what came over me yesterday. 
 			Sarah: I get it. It's fine. You're probably overwhelmed.[do Variables.set_char_var("NPC_2", "relationship", 2)] 
 			Sarah: Anyway... => next
@@ -18,13 +16,13 @@ if Variables.get_char_var("NPC_2", "relationship") == 0
 			Sarah: [#sprite=upset]...[do Variables.set_char_var("NPC_2", "relationship", 1)] => next
 	- You told Micah I was mean to you. 
 		Sarah: [#sprite=upset]I didn't tell him you were mean. I told him you were cold and indifferent. 
-		Sarah: I guess to him, they're the same thing. 
-		Sarah: I don't mind all that much. Some people care, others don't. It's not something you can control. Not sure why I even told him. 
+		Sarah: I guess to him, they're kind of the same thing. 
+		Sarah: I don't mind all that much. Not sure why I even told him. Some people care, others don't. It's not something you can control. 
 		Sarah: Don't worry. He wouldn't hurt a fly. And he's overestimating his relationship with the Elders. 
-		Sarah: They won't just kick you out cause he tells them to. That'd be stupid. 
+		Sarah: They wouldn't kick you out just cause he told them to. That'd be stupid. 
 		- Uh, okay then. 
 			Sarah: [#sprite=upset]...[do Variables.set_char_var("NPC_2", "relationship", 1)] => next
-		- You're a filthy rat, aren't you? 
+		- You're a filthy rat, aren't you? I should spank you. 
 			Sarah: [#sprite=upset]...[do Variables.set_var("ending_zero", 1)]
 			Sarah: [#sprite=upset]That's a bit much. 
 			Sarah: [#sprite=upset]I'm going for a walk. 
@@ -45,7 +43,7 @@ elif Variables.get_var("told_of_gift") == true
 			Sarah: But I've got other stuff on my mind right now. 
 			Sarah: ... => next 
 		- Sorry. 
-			Sarah: Doesn't matter now. Got more important things to worry about. 
+			Sarah: Well, it doesn't matter now. Got more important things to worry about. 
 			Sarah: ... => next 
 	- Come on, it's not that big of a deal. 
 		Sarah: [#sprite=upset]Not that big of a deal? [do Variables.set_char_var("NPC_2", "relationship", 3)]
@@ -76,13 +74,13 @@ Sarah: Any idea what's going on with my dad?
 Sarah: He forbid me to get out of the house today. He seemed very worried last night. 
 Sarah: He always worries, but this time it's different. He's scaring me. 
 Sarah: If you know anything, please tell me. 
-- He went to see Mary last night. She wanted to tell him something about you. [if Variables.get_var("fourfive") == 2]
-	Sarah: Tell him what? 
+- He went to see Mary last night. She wanted to talk about you. [if Variables.get_var("fourfive") == 2]
+	Sarah: About what, exactly? 
 	- I've no idea. 
 		Sarah: [#sprite=upset]What the hell is going on with everybody? 
 		Sarah: [#sprite=upset]Why's no one telling me anything?
 		Sarah: [#sprite=upset]I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
-	- She seemed worried herself. Told me to tell you to stay in your room. 
+	- She seemed worried herself. Said to tell you to stay in your room. 
 		Sarah: [#sprite=upset]What the hell is going on with everybody? 
 		Sarah: [#sprite=upset]Why is everyone worried about me?
 		Sarah: [#sprite=upset]I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
@@ -90,13 +88,13 @@ Sarah: If you know anything, please tell me.
 	Sarah: Yeah, I asked him about it. 
 	Sarah: He wouldn't tell me anything. Just told me to stay in my room, as a precaution. 
 	Sarah: [#sprite=upset]I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
-- Mary was also worried about you. [if Variables.get_var("fourfive") <= 2]
+- Mary was also worried about you. 
 	Sarah: Why? 
 	- I've no idea. 
 		Sarah: [#sprite=upset]What the hell is going on with everybody? 
 		Sarah: [#sprite=upset]Why's no one telling me anything?
 		Sarah: [#sprite=upset]I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight
-	- I don't know, exactly. Told me to tell you to stay in your room. 
+	- I don't know, exactly. Said to tell you to stay in your room. 
 		Sarah: [#sprite=upset]What the hell is going on with everybody? 
 		Sarah: [#sprite=upset]Why is everyone worried about me?
 		Sarah: [#sprite=upset]I hate it when he does that. When he gets so worried he can't even think or talk straight. => straight

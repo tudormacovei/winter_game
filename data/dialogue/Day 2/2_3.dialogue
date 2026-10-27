@@ -15,27 +15,27 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 		Shopkeeper: Interesting. She never calls me that.[do Variables.mod_var("lie_counter", 1)]
 		Shopkeeper: Anyway, where is she? => next
 	- (LIE) Micah. 
-		Shopkeeper: [#sprite=laugh]Made a dirty joke, did he? The rascal.[do Variables.mod_var("lie_counter", 1)]
+		Shopkeeper: [#sprite=laugh]Made that dirty joke again, did he?[do Variables.mod_var("lie_counter", 1)]
 		Shopkeeper: Anyway, where's Sarah? => next
 	- Mary. 
-		Shopkeeper: [#sprite=worried]Oh? So she was here? 
+		Shopkeeper: [#sprite=worried]Oh? She was here? 
 		Shopkeeper: [#sprite=worried]What did she want?
 		- Said she needed to see you. That it's important. 
 			Shopkeeper: [#sprite=worried]Did she say what it was about?
 			- Not really. 
-				Shopkeeper: [#sprite=worried]Hells. I should probably go look for her. She's not one to leave her house unless it's important. I'm sorry to be leaving you again so soon. 
+				Shopkeeper: [#sprite=worried]Hells. I should probably go see her. She's not one to leave her house unless it's important. I'm sorry to be leaving you again so soon. 
 				Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
 				Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("fourfive", 2)]
 				- See y... => END 
 				- Goodb... => END 
 			- She just said it's about Sarah.
-				Shopkeeper: [#sprite=worried]Oh, hells. Must be important then. I need to go look for her. I'm sorry to be leaving you again so soon. 
+				Shopkeeper: [#sprite=worried]Oh, hells. Must be important then. I need to go see her. I'm sorry to be leaving you again so soon. 
 				Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
 				Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("fourfive", 2)]
 				- See y... => END 
 				- Goodb... => END 
 		- No idea. 
-			Shopkeeper: [#sprite=worried]Hells. I should probably go and look for her. She's not one to leave her house unless it's important.  I'm sorry to be leaving you again so soon. 
+			Shopkeeper: [#sprite=worried]Hells. I should probably go see her. She's not one to leave her house unless it's important.  I'm sorry to be leaving you again so soon. 
 			Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
 			Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("fourfive", 2)]
 			- See y... => END 
@@ -68,11 +68,11 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 	Shopkeeper: [#sprite=worried]Oh Goddess. They could be anywhere. [do Variables.set_var("fourfive", 1)]
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why
 - Micah's helping her find a surprise gift for your birthday. [if Variables.get_var("knows_of_gift") == true]
-	Shopkeeper: [#sprite=worried]Uh, I'm guessing she asked you to keep it a secret. [do Variables.set_var("told_of_gift", true)]
+	Shopkeeper: [#sprite=worried]... And I'm guessing they asked you to keep it a secret. [do Variables.set_var("told_of_gift", true)]
 	Shopkeeper: [#sprite=worried]Doesn't matter. Think I know where they went. 
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why
 - (LIE) No idea. Sorry. 
-	Shopkeeper: [#sprite=worried]Oh Goddess. She could be anywhere.[do Variables.mod_var("lie_counter", 1)] 
+	Shopkeeper: [#sprite=worried]Oh Goddess. She could be anywhere.[do Variables.set_var("fourfive", 1)][do Variables.mod_var("lie_counter", 1)] 
 	Shopkeeper: [#sprite=worried]I need to go look for her. => why 
 	
 ~ why
@@ -87,13 +87,13 @@ Shopkeeper: [#sprite=worried]Won't happen again.
 - Actually, Mary told me she wanted to see you. Said it was important. 
 	Shopkeeper: [#sprite=worried]Oh. Did she say what it was about?
 	- Not really. 
-		Shopkeeper: [#sprite=worried]Hells. I should probably go look for her. She's not one to leave her house unless it's important. I'm sorry to be leaving you again so soon. 
+		Shopkeeper: [#sprite=worried]Hells. I should probably go see her. She's not one to leave her house unless it's important. I'm sorry to be leaving you again so soon. 
 		Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
 		Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("fourfive", 2)]
 		- See y... => END 
 		- Goodb... => END 
 	- She just said it's about Sarah.
-		Shopkeeper: [#sprite=worried]Oh, hells. Must be important then. I need to go look for her. I'm sorry to be leaving you again so soon. 
+		Shopkeeper: [#sprite=worried]Oh, hells. Must be important then. I need to go see her. I'm sorry to be leaving you again so soon. 
 		Shopkeeper: [#sprite=worried]Finish those items up before going to bed, please. I'll make it up to you. 
 		Shopkeeper: [#sprite=worried]Be seeing you.[do DialogueFuncs.play_sfx("sfx_door_slam")][do Variables.set_var("fourfive", 2)]
 		- See y... => END 

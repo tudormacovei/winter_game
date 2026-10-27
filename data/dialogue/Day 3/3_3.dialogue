@@ -14,7 +14,8 @@ Shopkeeper: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=worried
 	Shopkeeper: [#sprite=worried]Tell me where she is. Now. 
 	- She left. Said she's going on a walk. => next
 	- She left. Said she's going to Mary's. [if Variables.get_char_var("NPC_2", "relationship") > 0] => next
-	- I'm really trying not to get involved. => next
+	- I'm really trying not to get involved. => next 
+
 ~ next 
 Shopkeeper: [#sprite=worried]Look. I need your help. Desperately. 
 if Variables.get_char_var("NPC_4", "express_doubt") <= 4
@@ -49,14 +50,14 @@ Shopkeeper: She demands children.
 Shopkeeper: [#sprite=worried]She demands my Sarah...
 Shopkeeper: I didn't take them seriously. I thought it was just another one of their misinterpretations of the Goddess's instructions. She would never ask that of me. 
 if Variables.get_var("fourfive") == 2
-	Shopkeeper: [#sprite=worried]Yesterday, I went to see Mary. She had a dream. She saw Sarah, burned alive. Her visions come true, most of the time. 
+	Shopkeeper: [#sprite=worried]Yesterday, I went to see Mary. She had a dream. She saw Sarah dying on the altar, sacrificed. Her visions come true, most of the time. 
 	Shopkeeper: [#sprite=worried]After, when I found Sarah, she had a look in her eyes. A fiery look, like she knew what was coming. What was supposed to happen. 
 	Shopkeeper: She wasn't scared, though. She seemed... determined.
 	Shopkeeper: [#sprite=worried]Maybe I was seeing things. I tried contacting the Goddess desperately, by way of the Elder Tree in the village square and the Elder Tree here. => cant
 else 
 	Shopkeeper: [#sprite=worried]Yesterday, when I found Sarah, she had a look in her eyes. A fiery look, like she knew what was coming. What was supposed to happen. 
 	Shopkeeper: She wasn't scared, though. She seemed... determined. 
-	Shopkeeper: [#sprite=worried]Maybe I was seeing things. I tried contacting the Goddess desperately, by way of the Elder Tree in the village square and the Elder Tree here. => cant
+	Shopkeeper: [#sprite=worried]Maybe I was seeing things. I tried contacting the Goddess desperately, by way of both the Elder Tree in the village and the one in here. => cant
 	
 ~ cant
 Shopkeeper: She wouldn't answer. I tried for hours. 
