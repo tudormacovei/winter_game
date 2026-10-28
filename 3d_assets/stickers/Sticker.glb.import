@@ -42,7 +42,7 @@ _subresources={
 "StickerMaterial": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://3d_assets/materials/spots/spot_plain_1.tres",
-"use_external/path": "res://3d_assets/materials/spots/spot_plain_1.tres"
+"use_external/path": "uid://d3p4ipx0ee21x"
 }
 },
 "meshes": {

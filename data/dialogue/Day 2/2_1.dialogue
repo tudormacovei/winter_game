@@ -21,7 +21,7 @@ Sarah: Don't remember him being gone for a whole night since he stopped.
 Sarah: I'm starting to get worried. 
 - I'm sure he's fine. => what
 - I can help you look for him, if you want. => help
-- The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=0] 
+- The Goddess is looking out for him. Don't worry. [if Variables.get_var("religious_fervour") >=-1] 
 	Sarah: I'm sure She is. But it's a bit more complicated than that. => hope
 - Isn't the Goddess supposed to take care of him? Him being a Gift-bearer and whatnot? [if Variables.get_var("religious_fervour") <=1]
 	Sarah: [#sprite=upset]That's not how it works. Gift-bearers don't get special treatment. => hope
@@ -35,7 +35,7 @@ Sarah: [#sprite=upset]You don't know the first thing about us.
 	Sarah: Oh, this is bad. => hope
 - I don't know. It's just a thing you say. 
 	Sarah: [#sprite=upset]Ugh, I hate it when adults just say things. => hope
-- I'm the Goddess's Chosen One. If I say he's fine, then he's fine. [if Variables.get_var("religious_fervour") >=1]
+- I'm the Goddess's Chosen One. If I say he's fine, then he's fine. [if Variables.get_var("religious_fervour") >=0]
 	Sarah: [#sprite=upset]Uh-huh. That's definitely not how it works.[do Variables.mod_var("religious_fervour", 1)][do Variables.mod_var("chosen_one", 1)] => hope
 
 ~ help
@@ -145,7 +145,7 @@ Sarah: ...
 	Sarah: [#sprite=upset]Adults rarely know what to say.
 	Sarah: It was the Goddess who told him to stop, you know? So if he drinks again, he's in trouble. => vengeful
 - I don't need to know all that. 
-	Sarah: [#sprite=upset]You're quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micahbad
+	Sarah: [#sprite=upset]Quite heartless, aren't you?[do Variables.set_char_var("NPC_2", "relationship", 0)] => micahbad
 	
 ~ vengeful 
 - The Goddess is quite vengeful, isn't She?

@@ -7,7 +7,7 @@ A frail fragment: [wait=1]You see the Shopkeeper's fist closing in on your face.
 A frail fragment: Blood drips down your nose. It fills your mouth, and reaches your chin. Your neck. 
 A frail fragment: He grabs your hair and smashes your face on the counter until you feel nothing anymore.
 A frail fragment: The last thing you see is a corrupted red milk carton. Then, you die. 
-do DialogueFuncs.unlock_achievement("Did I Stutter? - You hate children, do you?")
+do DialogueFuncs.unlock_achievement("Did I Stutter? - Fuck them kids.")
 do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.SHOW_DEATH_SCREEN)
 => END
 

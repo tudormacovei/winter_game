@@ -18,6 +18,7 @@ Shopkeeper: Except for your name. What shall I call you?
 	Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")]...Dad? What's going on? Who is that? => dad 
 - Uh... how about Joan?
 	Sarah: [do DialogueFuncs.play_sfx("sfx_door_open")][do Variables.set_var("joan_name", true)]...Dad? What's going on? Who is that? => dad 
+
 ~ dad
 Shopkeeper: Hells. Go back to sleep, dearest. Everything's fine. 
 Sarah: [#sprite=upset][do DialogueFuncs.play_sfx("sfx_sniff")]I've had one of those dreams again... They're back. And they're... not happy. 
@@ -43,7 +44,7 @@ Shopkeeper: See you then.
 A frail fragment: [wait=1.5]That was... interesting. 
 - That's one way to put it. => frail
 - What the hell are you, anyway?
-	A frail fragment: I am a frail fragment of a feeble mind. Which is to say, close to nothing, really. 
+	A frail fragment: I am a frail fragment of a shattered mind. Which is to say, close to nothing, really. 
 	A frail fragment: I'm all that's left of you. The real you, I mean. The Goddess couldn't, or perhaps didn't want to, strip your mind completely bare, apparently.
 	A frail fragment: Anyway, I won't be of much use to you. If any. 
 	- Uh, okay. Great.
@@ -62,7 +63,7 @@ A frail fragment: Anyway, time to take a bath.
 		A frail fragment: Phew. Let's go then.
 		A frail fragment: ...[do Variables.set_var("showered", true)][do DialogueFuncs.play_sfx("sfx_door_close")] => END
 	- Nah. 
-		A frail fragment: Your choice. Let's go then.[do DialogueFuncs.unlock_achievement("What's that smell? - Showers are for the weak.")]
+		A frail fragment: Your choice. Let's go then.[do DialogueFuncs.unlock_achievement("What's that smell? - Showers are just... not your thing.")]
 		A frail fragment: ...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
 
 => END

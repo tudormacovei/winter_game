@@ -8,7 +8,7 @@ if Variables.get_var("showered") == true
 	Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. I see you're itching to get started. => next
 else 
 	Shopkeeper: [do DialogueFuncs.play_sfx("sfx_door_open")]Morning, there. Oh, uh, hells, did I forget to mention that bath I prepared for you?
-	Shopkeeper: No matter. I'll prepare another for you tonight. Just have to get through this day first, somehow... There's work to be done! => next
+	Shopkeeper: No matter. I'll prepare another tonight. Just have to get through this day first, somehow... There's work to be done! => next
 
 ~ next
 Shopkeeper: Sleep well?

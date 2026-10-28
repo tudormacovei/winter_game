@@ -287,7 +287,7 @@ Shopkeeper: ...
 	Shopkeeper: Oh. It must be the Goddess's way of helping you out. Of showing you how much more your body can take. 
 	Shopkeeper: And also to, uh, remind you that She's always watching.
 	Shopkeeper: They're not really there, though. They're in your head. I, myself, see spider webs and bugs. Cool, eh? => questions
-- (MOVE ON) That's it, for now. [if Variables.get_char_var("NPC_4", "questions") >= 1]
+- (MOVE ON) That's it, for now.[if Variables.get_char_var("NPC_4", "questions") >= 1]
 	Shopkeeper: Alright then. I'm heading out. 
 	- Thanks for clearing things up. 
 		Shopkeeper: Of course. Good luck. [do DialogueFuncs.play_sfx("sfx_door_close")] => END

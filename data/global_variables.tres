@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 [sub_resource type="Resource" id="Resource_7iiqd"]
 script = ExtResource("1_vywdb")
 name = "express_doubt"
-default_value = 5
+default_value = 0
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_dxgj2"]
@@ -302,8 +302,8 @@ metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_ulfmv"]
 script = ExtResource("1_vywdb")
-name = "fourfive"
-default_value = 0
+name = "saw_mary"
+default_value = false
 metadata/_custom_type_script = "uid://b0wmtpsurq6bl"
 
 [sub_resource type="Resource" id="Resource_p0qt7"]

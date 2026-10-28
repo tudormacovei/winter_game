@@ -18,13 +18,13 @@ Shopkeeper: [wait=1][do DialogueFuncs.play_sfx("sfx_door_open")][#sprite=worried
 
 ~ next 
 Shopkeeper: [#sprite=worried]Look. I need your help. Desperately. 
-if Variables.get_char_var("NPC_4", "express_doubt") <= 4
+if Variables.get_char_var("NPC_4", "express_doubt") <= -1
 	Shopkeeper: [#sprite=worried]You seem like you're already quite devoted to the Goddess and to our church. 
 	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
-elif Variables.get_char_var("NPC_4", "express_doubt") == 5
+elif Variables.get_char_var("NPC_4", "express_doubt") == 0
 	Shopkeeper: [#sprite=worried]I've no idea how you feel about the Goddess, or about our church. 
 	Shopkeeper: [#sprite=worried]But you have to believe me, things are not what they seem. I was wrong. => sacrifices
-elif Variables.get_char_var("NPC_4", "express_doubt") >= 6
+elif Variables.get_char_var("NPC_4", "express_doubt") >= 1
 	Shopkeeper: [#sprite=worried]You've expressed some doubts about the Goddess and our church before. 
 	Shopkeeper: [#sprite=worried]You were right. Things are not what they seem. I was wrong. => sacrifices
 
@@ -49,7 +49,7 @@ Shopkeeper: They told me things are changing. We've grown sinful. Our sacrifices
 Shopkeeper: She demands children. 
 Shopkeeper: [#sprite=worried]She demands my Sarah...
 Shopkeeper: I didn't take them seriously. I thought it was just another one of their misinterpretations of the Goddess's instructions. She would never ask that of me. 
-if Variables.get_var("fourfive") == 2
+if Variables.get_var("saw_mary") == true
 	Shopkeeper: [#sprite=worried]Yesterday, I went to see Mary. She had a dream. She saw Sarah dying on the altar, sacrificed. Her visions come true, most of the time. 
 	Shopkeeper: [#sprite=worried]After, when I found Sarah, she had a look in her eyes. A fiery look, like she knew what was coming. What was supposed to happen. 
 	Shopkeeper: She wasn't scared, though. She seemed... determined.
@@ -97,16 +97,16 @@ Shopkeeper: [#sprite=worried]I need to go find her now. [do Variables.set_var("h
 Shopkeeper: Just act like everything is normal. That's all I ask. 
 Shopkeeper: [#sprite=worried]And if, somehow, we're successful in our escape, please take care of Micah. He has no one. He's alone. He needs you. 
 - I will. 
-	Shopkeeper: Thank you. Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: Thank you. Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => frail
 - ...
 	Shopkeeper: [#sprite=worried]...
-	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => frail
 - I don't know about that. 
 	Shopkeeper: [#sprite=worried]Please. He's a good kid. 
-	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => frail
 - Take care. 
 	Shopkeeper: [#sprite=worried]...
-	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => frail
 
 ~ more1
 Shopkeeper: I need to go find her now. 
@@ -114,12 +114,22 @@ Shopkeeper: Just act like everything is normal. That's all I ask.
 Shopkeeper: And if, somehow, we're successful in our escape, please take care of Micah. He has no one. He's alone. He needs you. 
 - ...
 	Shopkeeper: [#sprite=worried]...
-	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => frail
 - You'll burn in hell. 
-	Shopkeeper: [#sprite=worried]...[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: [#sprite=worried]...[do DialogueFuncs.play_sfx("sfx_door_close")] => frail 
 - You're making a big mistake. 
 	Shopkeeper: [#sprite=worried]You may be right. 
-	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => END 
+	Shopkeeper: [#sprite=worried]Farewell.[do DialogueFuncs.play_sfx("sfx_door_close")] => frail
+		
+~ frail
+A frail fragment: This is a, uh, very delicate situation.
+A frail fragment: You probably don't want to anger the Goddess. You should think this through. 
+- I already have.
+	A frail fragment: Just make sure you don't take this lightly. This could change everything.  
+	A frail fragment: Tomorrow's a big day. => END
+- I sure will. 
+	A frail fragment: Good. This could change everything. 
+	A frail fragment: Tomorrow's a big day. => END
 
 => END
 

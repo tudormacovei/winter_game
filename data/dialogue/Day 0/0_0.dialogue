@@ -57,7 +57,7 @@ A frail fragment: ...
 	A frail fragment: You try your hardest to remember. You can't. 
 	A frail fragment: What else? => about
 - A... lover? [if Variables.get_var("lover") == false]
-	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom")][speed=0.2][shake rate=10.0 level=2]No. [do Variables.set_var("lover", true)]
+	A frail fragment: [do DialogueFuncs.play_sfx("sfx_boom", 3)][speed=0.2][shake rate=10.0 level=2]No. [do Variables.set_var("lover", true)]
 	A frail fragment: What else? => about
 - Just... stop. Give in. [if Variables.get_var("dreams") >= 2]
 
@@ -109,16 +109,16 @@ A frail fragment: [speed=0.2]...Minutes which might as well be hours pass. The c
 A frail fragment: [speed=0.6]All of a sudden, you hear a sound.[do DialogueFuncs.play_sfx("sfx_crow_goddess")] A caw. And then another. 
 A frail fragment: The cold subsides. It is replaced by warmth and peacefulness.
 A frail fragment: Your paralysis demon took their sweet time to show up. 
-A frail fragment: A... crow. It lands on your thigh. [do! do_scripted_event("show_prologue_crow")] => hello
+A frail fragment: It's a... crow. It lands on your thigh. [do! do_scripted_event("show_prologue_crow")] => hello
 
 ~ hello
 Crow: ...
 Crow: It's so good to finally meet you, Keeper.
 - Who are you?
-	Crow: I am your dead Father, child. Your long lost Brothers.
+	Crow: I am your dead Father. Your long lost Brothers.
 	Crow: I'm your buried little Sister, your Best Friend and your Lover. 
 	Crow: I am the Pup you lost when you were four. The Deer Carcass you saw on the side of the road when you were ten. 
-	Crow: Most importantly, I am your rotting Mother. The moldering Mother of all things, and of all beings. => hello2 
+	Crow: Most importantly, my child, I am your rotting Mother. The moldering Mother of all things, and of all beings. => hello2 
 - That's... not my name. 
 	Crow: It is not. It's much more than that. 
 	Crow: It's who you are now, or at least, who you soon will be. 
@@ -160,8 +160,7 @@ Crow: I'm here to set you on your path. To guide, as I've done twice before, as 
 Crow: I bestow upon you my Gift. Purification. You shall cleanse what others cannot. Use it wisely, and with love.
 Crow: Go high up in the mountains, to the village all these lowly heretics speak falsehoods about. 
 Crow: Go to Sonder's Peak. A haven for my children, where dwell your new brothers and sisters.
-Crow: A place unravaged by the Cullings, where a third shall grow, a third shall die, a third shall live, and a third shall fly. 
-A frail fragment: That doesn't quite add up...
+Crow: A place unravaged by the Cullings, where a third was born, a third will grow, and a third shall die.
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
 Crow: [do! do_scripted_event("show_prologue_crow_with_ugly_eye")]Do not let me down, for I am your Goddess and I won't allow it. 
 Crow: [do! do_scripted_event("show_prologue_crow")]We will meet again, soon enough. Be at peace.[do! do_scripted_event("hide_prologue_crow")]
@@ -169,7 +168,7 @@ A frail fragment: ...
 A frail fragment: She's gone. 
 A frail fragment: Who are you, now? Is there anything left of your former self?
 A frail fragment: You can't tell. 
-A frail fragment: As you try your hardest to look around, to move, to think, to breathe, there's only one thing, one question that comes to mind. 
+A frail fragment: You try your hardest to look around, to move, to think, to breathe, but there's only one thing, one question that comes to mind. 
 A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 - Yes.
 	A frail fragment: Yes. Yes you are.
@@ -201,6 +200,6 @@ A frail fragment: Are you going to [shake rate=10.0 level=2]obey?
 			A frail fragment: On to Sonder's Peak. => END
 		- Sounds peaceful. I'll stay. 
 			A frail fragment: So be it. Your funeral.[do DialogueFuncs.unlock_achievement("Blissful Oblivion - Become lost to time and space.")]
-			A frail fragment: ...[wait=5][do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU)]=> END
+			A frail fragment: ...[wait=3][do DialogueFuncs.kill_player(DialogueFuncs.KillPlayerAction.RETURN_TO_MAIN_MENU)]=> END
 
 => END

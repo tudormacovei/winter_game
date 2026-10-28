@@ -14,7 +14,7 @@ Mary: Wasn't expecting to see a new face here.
 ~ duncan
 - Who?
 	Mary: The Shopkeeper. I assume you're his new lackey. 
-	- I only serve the Goddess. [if Variables.get_var("religious_fervour") >= 0]
+	- I only serve the Goddess. [if Variables.get_var("religious_fervour") >= -1]
 		Mary: They got to you quickly, didn't they?[do Variables.mod_var("religious_fervour", 1)]
 		Mary: How fun. You'll fit in nicely. 
 		Mary: Anyway, I don't have time for chit-chat. Please let Duncan know I need to talk to him.
@@ -73,8 +73,20 @@ Mary: Wasn't expecting to see a new face here.
 	Mary: Oh. 
 	Mary: I don't like that kid. At least she's not alone.
 	Mary: Where did they go?
-	- No idea. 
+	- No idea. [if Variables.get_var("knows_of_gift") == false]
 		Mary: Well, it could be nothing. At least I hope so.
+		Mary: Tell her anyway, when she comes back, will you?
+		- Will do. 
+			Mary: Appreciate it. Farewell. 
+			- See you around. => END1 
+			- Goodbye. => END1 
+		- Don't wanna scare her for no reason. 
+			Mary: ...Very well. I'll try and find her father, then. [do Variables.mod_char_var("NPC_3", "relationship", -1)]
+			Mary: Farewell. 
+			- See you around. => END1 
+			- Goodbye. => END1 
+	- (LIE) No idea. [if Variables.get_var("knows_of_gift") == true]
+		Mary: Well, it could be nothing. At least I hope so. [do Variables.mod_var("lie_counter", 1)]
 		Mary: Tell her anyway, when she comes back, will you?
 		- Will do. 
 			Mary: Appreciate it. Farewell. 
@@ -111,7 +123,7 @@ Mary: Wasn't expecting to see a new face here.
 			Mary: Farewell. 
 			- See you around. => END1 
 			- Goodbye. => END1 
-	- They just said they'd be back before nighftfall. 
+	- They said they'd be back before nighftfall. 
 		Mary: That's a ways off. 
 		Mary: Well, it could be nothing. At least I hope so. 
 		Mary: Tell her anyway, when she comes back, will you?

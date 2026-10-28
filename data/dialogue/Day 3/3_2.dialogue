@@ -74,7 +74,7 @@ Sarah: Any idea what's going on with my dad?
 Sarah: He forbid me to get out of the house today. He seemed very worried last night. 
 Sarah: He always worries, but this time it's different. He's scaring me. 
 Sarah: If you know anything, please tell me. 
-- He went to see Mary last night. She wanted to talk about you. [if Variables.get_var("fourfive") == 2]
+- He went to see Mary last night. She wanted to talk about you. [if Variables.get_var("saw_mary") == true]
 	Sarah: About what, exactly? 
 	- I've no idea. 
 		Sarah: [#sprite=upset]What the hell is going on with everybody? 
