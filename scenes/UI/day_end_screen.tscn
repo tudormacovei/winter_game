@@ -37,9 +37,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -204.5
-offset_top = -110.0
-offset_right = 204.5
-offset_bottom = -42.49994
+offset_top = -160.0
+offset_right = 204.50024
+offset_bottom = -92.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.54393804, 0.578704, 0.47096944, 1)
@@ -66,27 +66,29 @@ theme_override_constants/separation = 15
 
 [node name="PerformanceText" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 z_index = 1
+custom_minimum_size = Vector2(474, 24)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.43529412, 0.46666667, 0.36862746, 1)
 theme_override_fonts/font = ExtResource("1_x0tkc")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum performance"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="NarrativeText" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 z_index = 1
+custom_minimum_size = Vector2(474, 24)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.43529412, 0.46666667, 0.36862746, 1)
 theme_override_fonts/font = ExtResource("1_x0tkc")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum narrative"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="BranchesL" type="TextureRect" parent="."]
 layout_mode = 1
