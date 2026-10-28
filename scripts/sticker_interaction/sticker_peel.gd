@@ -26,10 +26,6 @@ var _complete_tween: Tween
 
 func _ready() -> void:
 	super._ready()
-	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
-	if mesh_instance == null:
-		push_warning("StickerPeel: No MeshInstance3D found; cannot compute sticker size.")
-		return
 	var aabb := mesh_instance.get_aabb()
 	var mesh_scale: Vector3 = mesh_instance.global_transform.basis.get_scale()
 	var world_size := aabb.size * mesh_scale
@@ -75,10 +71,6 @@ func _handle_sticker_deform() -> void:
 	# Curl direction is opposite to drag so the peel visually advances with the drag
 	_cylinder_radius = -deform_direction * peel_radius
 	_drag_dir = Vector3(deform_direction.x, 0.0, deform_direction.y).normalized()
-
-	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
-	if mesh_instance == null:
-		return
 
 	if _original_mesh_backup == null:
 		_original_mesh_backup = mesh_instance.mesh
@@ -182,8 +174,7 @@ func _screen_to_plane(screen_pos: Vector2) -> Vector3:
 	return origin + direction * t
 
 func _reset_deform() -> void:
-	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
-	if mesh_instance and _original_mesh_backup:
+	if _original_mesh_backup:
 		mesh_instance.mesh = _original_mesh_backup
 	_original_mesh_backup = null
 	_original_center = Vector3.ZERO
@@ -207,11 +198,6 @@ func _deform_object() -> void:
 	# Skip when self has near-zero scale (end of completion tween):
 	# to_local/to_global would log a Basis::invert error
 	if scale.length_squared() < 1e-6:
-		return
-	
-	var mesh_instance : MeshInstance3D = find_children("*", "MeshInstance3D")[0]
-	if mesh_instance == null:
-		push_warning("No MeshInstance3D found in node subtree; cannot deform.")
 		return
 
 	# Get mesh
@@ -239,37 +225,14 @@ func _deform_object() -> void:
 		var arrays := array_mesh.surface_get_arrays(s)
 		var orig_verts: PackedVector3Array = original_surfaces.get(s, PackedVector3Array()).duplicate()
 
-		# Prepare array for custom data (Curl Ratio)
-		# 4 bytes per vertex (R, G, B, A). We use Red for the ratio.
-		var custom_data := PackedByteArray() 
-		custom_data.resize(orig_verts.size() * 4) 
-
 		# Deform vertex positions: convert local -> world, map to cylinder, convert back to local
 		for i in range(orig_verts.size()):
-			var local_v: Vector3 = orig_verts[i]
-			var world_v: Vector3 = mesh_instance.to_global(local_v)
-
-			var result: Dictionary = _map_to_cylinder(world_v, cylinder_origin, _cylinder_radius)
-			var mapped_world: Vector3 = result["position"]
-			var ratio: float = result["ratio"] # 0.0 to 1.0
-
-			var mapped_local: Vector3 = mesh_instance.to_local(mapped_world)
-			# debugging 
-			orig_verts[i] = mapped_local
-
-			# [Store ratio in Custom Data (Mapped to 0-255 byte)
-			var byte_val := int(clamp(ratio, 0.0, 1.0) * 255.0)
-			var byte_idx := i * 4
-			custom_data[byte_idx] = byte_val     # R channel
-			custom_data[byte_idx + 1] = 0        # G channel
-			custom_data[byte_idx + 2] = 0        # B channel
-			custom_data[byte_idx + 3] = 0        # A channel
+			var world_v: Vector3 = mesh_instance.to_global(orig_verts[i])
+			var mapped_world: Vector3 = _map_to_cylinder(world_v, cylinder_origin, _cylinder_radius)
+			orig_verts[i] = mesh_instance.to_local(mapped_world)
 
 		# Replace the vertex array with the deformed copy
 		arrays[Mesh.ARRAY_VERTEX] = orig_verts
-
-		# Assign Custom Data Array
-		arrays[Mesh.ARRAY_CUSTOM0] = custom_data
 
 		# Add the modified surface
 		new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
@@ -282,7 +245,7 @@ func _deform_object() -> void:
 	# Replace the mesh on the instance with our new deformed mesh
 	mesh_instance.mesh = new_mesh
 
-func _map_to_cylinder(point: Vector3, cylinder_location: Vector3, cylinder_radius: Vector2) -> Dictionary:
+func _map_to_cylinder(point: Vector3, cylinder_location: Vector3, cylinder_radius: Vector2) -> Vector3:
 	var EPS := 1e-6
 
 	# Cylinder Properties
@@ -317,27 +280,23 @@ func _map_to_cylinder(point: Vector3, cylinder_location: Vector3, cylinder_radiu
 	var current_radius: float = radius + thickness
 
 	var final_pos: Vector3
-	var ratio: float = 0.0
 
 	if dist_linear < 0.0:
 		# ZONE A: Before Curl
 		# Move along the Forward direction
 		final_pos = start_of_curl + (forward_dir * dist_linear) + (axis_dir * dist_spine)
-		
+
 		# Apply thickness UP (Opposite to radius_dir)
 		final_pos -= radius_dir * thickness
-		ratio = 0.0
 
 	elif dist_linear <= max_arc_length:
 		# ZONE B: Inside Curl
 		var angle: float = dist_linear / radius
-		
+
 		var rotated_radius_vec := radius_dir.rotated(axis_dir, angle)
-		
+
 		# Reconstruct: Axis + SpineOffset + (RotatedVector * TotalRadius)
 		final_pos = cylinder_location + (axis_dir * dist_spine) + (rotated_radius_vec * current_radius)
-		
-		ratio = dist_linear / max_arc_length 
 
 	else:
 		# ZONE C: After Curl
@@ -348,6 +307,5 @@ func _map_to_cylinder(point: Vector3, cylinder_location: Vector3, cylinder_radiu
 		var end_forward_dir := forward_dir.rotated(axis_dir, max_angle)
 		var excess_dist: float = dist_linear - max_arc_length
 		final_pos = lip_pos + (end_forward_dir * excess_dist)
-		ratio = 1.0
 
-	return {"position": final_pos, "ratio": ratio}
+	return final_pos

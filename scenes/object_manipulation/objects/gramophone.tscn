@@ -99,8 +99,6 @@ shape = SubResource("ConcavePolygonShape3D_q0wes")
 
 [node name="StickerPeelDirectional" parent="." instance=ExtResource("3_q0wes")]
 transform = Transform3D(0.3296141, -0.008899912, 0.37586612, 0.0058680023, 0.4999208, 0.006691411, -0.3759257, 3.0239558e-10, 0.32966635, 0.10864383, 0.004695443, 0.13235849)
-randomize_texture = false
-locked_texture_index = 2
 
 [node name="StickerPeelDirectional6" parent="." instance=ExtResource("3_q0wes")]
 transform = Transform3D(-0.37637195, -0.008899912, 0.3290364, -0.006700417, 0.4999208, 0.005857719, -0.32908857, -4.644601e-13, -0.37643158, 0.10613529, 0.00465078, -0.08190492)
@@ -110,15 +108,9 @@ transform = Transform3D(0.47899556, 0.008899912, 0.14312254, 0.008527374, -0.499
 
 [node name="StickerPeelDirectional5" parent="." instance=ExtResource("3_q0wes")]
 transform = Transform3D(0.24834159, 0.008899912, -0.43387473, 0.0044211727, -0.49992076, -0.007724096, -0.4339435, -4.3425537e-08, -0.24838093, -0.078584716, -0.14115724, 0.070199594)
-randomize_texture = false
-locked_texture_index = 1
 
 [node name="StickerPeelDirectional3" parent="." instance=ExtResource("3_q0wes")]
 transform = Transform3D(0.25001326, 0.008899912, 0.43291354, 0.0044508595, -0.4999208, 0.0077070277, 0.43298215, -4.4088225e-08, -0.2500529, -0.081980884, -0.14121772, -0.06754307)
-randomize_texture = false
-locked_texture_index = 2
 
 [node name="StickerPeelDirectional4" parent="." instance=ExtResource("3_q0wes")]
 transform = Transform3D(0.4970854, 0.0124599, -0.49269757, 0.008849511, -0.69988906, -0.008771275, -0.49277562, -8.4750354e-08, -0.49716416, 0.06576875, -0.13986029, -0.0303212)
-randomize_texture = false
-locked_texture_index = 2

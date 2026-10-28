@@ -41,8 +41,8 @@ _subresources={
 "materials": {
 "StickerMaterial": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://3d_assets/stickers/StickerMaterial.tres",
-"use_external/path": "uid://b80kpwooaakea"
+"use_external/fallback_path": "res://3d_assets/materials/spots/spot_plain_1.tres",
+"use_external/path": "res://3d_assets/materials/spots/spot_plain_1.tres"
 }
 },
 "meshes": {

@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bqwnitemubqva"]
+
+[ext_resource type="Shader" uid="uid://q8378d1d7rkt" path="res://3d_assets/shaders/sticker.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://db5tk7oq8hmu1" path="res://2d_assets/spots/spot_plain_2.webp" id="2_texture"]
+
+[resource]
+resource_name = "spot_plain_2"
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_texture = ExtResource("2_texture")
+shader_parameter/roughness = 0.5
+shader_parameter/albedo_brightness = 0.538
