@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1jjmvhrxx52f"]
+
+[ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="1_cekhe"]
+[ext_resource type="Script" uid="uid://0wtjji0fh0tb" path="res://scenes/UI/dialogue_baloon/response_button.gd" id="2_a26ws"]
+
+[node name="ResponseExample" type="Button"]
+theme = ExtResource("1_cekhe")
+theme_override_constants/h_separation = 4
+alignment = 0
+autowrap_mode = 2
+script = ExtResource("2_a26ws")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_cekhe")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 2

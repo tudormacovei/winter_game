@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dkslymasero84"]
+[gd_scene load_steps=21 format=3 uid="uid://dkslymasero84"]
 
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_3qoir"]
 [ext_resource type="Theme" uid="uid://tiojdx3ijkaw" path="res://data/UI/themes/DialogueThemePrologue.tres" id="2_bf76d"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="6_dscr2"]
 [ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="7_w0yy7"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="8_dd40y"]
+[ext_resource type="PackedScene" uid="uid://b1jjmvhrxx52f" path="res://scenes/UI/dialogue_baloon/response_template.tscn" id="9_4srem"]
 [ext_resource type="Texture2D" uid="uid://77myfp7dnped" path="res://2d_assets/crow/Crow_Prologue.webp" id="9_ol8qm"]
 [ext_resource type="Script" uid="uid://dhul8yibaytl1" path="res://scenes/UI/dialogue_baloon/prologue_fragment/prologue_crow_sprite.gd" id="10_qfikd"]
 [ext_resource type="Texture2D" uid="uid://d2m2uuxn4dvne" path="res://2d_assets/crow/Crow_Prologue_2.webp" id="11_bf76d"]
@@ -227,16 +228,12 @@ theme = ExtResource("7_w0yy7")
 theme_override_constants/separation = 8
 alignment = 1
 script = ExtResource("8_dd40y")
-response_template = NodePath("ResponseExample")
+response_template = NodePath("ResponseTemplate")
 hide_failed_responses = true
 
-[node name="ResponseExample" type="Button" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu"]
+[node name="ResponseTemplate" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu" instance=ExtResource("9_4srem")]
 layout_mode = 2
 theme = ExtResource("2_bf76d")
-theme_override_constants/h_separation = 4
-text = "Response example"
-alignment = 0
-autowrap_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

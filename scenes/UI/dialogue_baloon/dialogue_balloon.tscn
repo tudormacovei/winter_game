@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bktr4eceqgheb"]
+[gd_scene load_steps=17 format=3 uid="uid://bktr4eceqgheb"]
 
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_5sgtx"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_j8juc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_kvndo"]
 [ext_resource type="FontFile" uid="uid://b4wicr355a63g" path="res://2d_assets/fonts/avara/Avara-Bold.otf" id="4_v1ja5"]
 [ext_resource type="FontFile" uid="uid://do1cr3dldia4n" path="res://2d_assets/fonts/avara/Avara-BoldItalic.otf" id="5_dq3cj"]
+[ext_resource type="PackedScene" uid="uid://b1jjmvhrxx52f" path="res://scenes/UI/dialogue_baloon/response_template.tscn" id="8_v1ja5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -203,16 +204,11 @@ theme = ExtResource("2_kvndo")
 theme_override_constants/separation = 8
 alignment = 1
 script = ExtResource("3_kvndo")
-response_template = NodePath("ResponseExample")
+response_template = NodePath("ResponseTemplate")
 hide_failed_responses = true
 
-[node name="ResponseExample" type="Button" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu"]
+[node name="ResponseTemplate" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu" instance=ExtResource("8_v1ja5")]
 layout_mode = 2
-theme = ExtResource("2_kvndo")
-theme_override_constants/h_separation = 4
-text = "Response example"
-alignment = 0
-autowrap_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

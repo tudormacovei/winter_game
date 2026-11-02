@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ub08noqxbxkv"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ub08noqxbxkv"]
 
 [ext_resource type="FontFile" uid="uid://blxv62a7i3y0p" path="res://2d_assets/fonts/avara/Avara-Normal.otf" id="1_c8wpu"]
+[ext_resource type="FontFile" uid="uid://b4wicr355a63g" path="res://2d_assets/fonts/avara/Avara-Bold.otf" id="2_7mhuw"]
+[ext_resource type="FontFile" uid="uid://do1cr3dldia4n" path="res://2d_assets/fonts/avara/Avara-BoldItalic.otf" id="3_331qn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riy72"]
 content_margin_left = 6.0
@@ -77,3 +79,8 @@ RichTextLabel/font_sizes/bold_italics_font_size = 18
 RichTextLabel/font_sizes/italics_font_size = 18
 RichTextLabel/font_sizes/mono_font_size = 18
 RichTextLabel/font_sizes/normal_font_size = 18
+RichTextLabel/fonts/bold_font = ExtResource("2_7mhuw")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_331qn")
+RichTextLabel/fonts/italics_font = ExtResource("3_331qn")
+RichTextLabel/fonts/mono_font = ExtResource("1_c8wpu")
+RichTextLabel/fonts/normal_font = ExtResource("1_c8wpu")

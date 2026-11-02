@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dmuh1q4vws861"]
+[gd_scene load_steps=19 format=3 uid="uid://dmuh1q4vws861"]
 
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_1r1g4"]
 [ext_resource type="Theme" uid="uid://tiojdx3ijkaw" path="res://data/UI/themes/DialogueThemePrologue.tres" id="2_u6u3o"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://ub08noqxbxkv" path="res://data/UI/themes/DialogueTheme.tres" id="7_duk5a"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="8_y61ci"]
 [ext_resource type="Texture2D" uid="uid://57j0274oonyw" path="res://2d_assets/backgrounds/prologue/Prologue_Screen.webp" id="9_2vdy0"]
+[ext_resource type="PackedScene" uid="uid://b1jjmvhrxx52f" path="res://scenes/UI/dialogue_baloon/response_template.tscn" id="9_u6u3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -225,16 +226,12 @@ theme = ExtResource("7_duk5a")
 theme_override_constants/separation = 8
 alignment = 1
 script = ExtResource("8_y61ci")
-response_template = NodePath("ResponseExample")
+response_template = NodePath("ResponseTemplate")
 hide_failed_responses = true
 
-[node name="ResponseExample" type="Button" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu"]
+[node name="ResponseTemplate" parent="Balloon/MarginContainerResponses/VBoxContainer/ResponsesMenu" instance=ExtResource("9_u6u3o")]
 layout_mode = 2
 theme = ExtResource("2_u6u3o")
-theme_override_constants/h_separation = 4
-text = "Response example"
-alignment = 0
-autowrap_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
