@@ -91,6 +91,7 @@ loss_tint = Color(1, 0, 0, 1)
 tint_curve = SubResource("Curve_nyxyu")
 
 [node name="BranchRing1" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
+modulate = Color(0.80784315, 0.80784315, 0.80784315, 1)
 start_radius = 530.0
 end_radius = 40.0
 branch_count = 20
@@ -98,7 +99,7 @@ branch_scale = 0.3
 parallax_strength = 0.02
 
 [node name="BranchRing2" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
-modulate = Color(0.80616105, 0.8061606, 0.8061606, 1)
+modulate = Color(0.63529414, 0.63529414, 0.63529414, 1)
 z_index = 1
 start_radius = 550.0
 end_radius = 60.0
@@ -107,7 +108,7 @@ branch_scale = 0.4
 parallax_strength = 0.05
 
 [node name="BranchRing3" parent="UI/HealthOverlay" instance=ExtResource("5_8dlmc")]
-modulate = Color(0.6337567, 0.6337568, 0.6337567, 1)
+modulate = Color(0.4700758, 0.47007585, 0.47007567, 1)
 z_index = 2
 start_radius = 600.0
 end_radius = 110.0
