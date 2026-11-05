@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgcbni7hj0kvs"
-path.s3tc="res://.godot/imported/WorkshopFG_Shadow2.png-d594f1ca14c85733e0ccc0c4cc69b9c3.s3tc.ctex"
+uid="uid://cxuv1b8d7lfn"
+path.s3tc="res://.godot/imported/WorkshopBG_ShadowGlobal.png-4065c6b4e5936bfb5d183e365e1346a4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://2d_assets/Workshop/WorkshopFG_Shadow2.png"
-dest_files=["res://.godot/imported/WorkshopFG_Shadow2.png-d594f1ca14c85733e0ccc0c4cc69b9c3.s3tc.ctex"]
+source_file="res://2d_assets/Workshop/WorkshopBG_ShadowGlobal.png"
+dest_files=["res://.godot/imported/WorkshopBG_ShadowGlobal.png-4065c6b4e5936bfb5d183e365e1346a4.s3tc.ctex"]
 
 [params]
 

@@ -7,16 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://7xd3rl8sjvrd" path="res://2d_assets/backgrounds/window/WorkshopWindow.webp" id="4_kbq0g"]
 [ext_resource type="Shader" uid="uid://s2h2vbotkkvf" path="res://3d_assets/shaders/window_sky.gdshader" id="5_isxcp"]
 [ext_resource type="Shader" uid="uid://c6ahooeib8ybd" path="res://3d_assets/shaders/workshop_shadow.gdshader" id="7_nlanv"]
-[ext_resource type="Texture2D" uid="uid://ct32448s30da4" path="res://2d_assets/Workshop/WorkshopBG_Shadow2.png" id="8_rlam5"]
-[ext_resource type="Texture2D" uid="uid://cu3t3sye5sj6b" path="res://2d_assets/Workshop/WorkshopBG_Shadow1.png" id="10_ebijb"]
+[ext_resource type="Texture2D" uid="uid://cxuv1b8d7lfn" path="res://2d_assets/Workshop/WorkshopBG_ShadowGlobal.png" id="8_rlam5"]
+[ext_resource type="Texture2D" uid="uid://d4im7mc8loqrt" path="res://2d_assets/Workshop/WorkshopBG_ShadowHighlight.png" id="9_rb8g2"]
 [ext_resource type="Texture2D" uid="uid://25cybc5jvpvx" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_NPC4.webp" id="11_ccikh"]
 [ext_resource type="Script" uid="uid://byb6y503kl5e8" path="res://scripts/user_interface/character_animator.gd" id="12_lxqo2"]
 [ext_resource type="Material" uid="uid://b0hpo1ghk4qju" path="res://3d_assets/materials/character_crosshatch_fill.tres" id="13_cqcbg"]
 [ext_resource type="Texture2D" uid="uid://ddaf67iv4x4t2" path="res://2d_assets/characters/Micah_NPC1/Micah_NPC1.webp" id="14_cqcbg"]
+[ext_resource type="Texture2D" uid="uid://dxpe58nihct0q" path="res://2d_assets/Workshop/WorkshopFG_ShadowGlobal.png" id="15_rlam5"]
 [ext_resource type="Shader" uid="uid://iqjrfvgmk7ot" path="res://3d_assets/shaders/dust_particle.gdshader" id="15_y1sm4"]
 [ext_resource type="Script" uid="uid://ciug6i05js30y" path="res://scripts/user_interface/dust_mouse_attractor.gd" id="16_ccikh"]
-[ext_resource type="Texture2D" uid="uid://c4q7ohyxfdyb3" path="res://2d_assets/Workshop/WorkshopFG_Shadow1.png" id="16_nc11s"]
-[ext_resource type="Texture2D" uid="uid://cgcbni7hj0kvs" path="res://2d_assets/Workshop/WorkshopFG_Shadow2.png" id="18_lb48a"]
+[ext_resource type="Texture2D" uid="uid://bmrw5qpebks3v" path="res://2d_assets/Workshop/WorkshopFG_ShadowHighlight.png" id="16_ebijb"]
 
 [sub_resource type="Gradient" id="Gradient_isxcp"]
 offsets = PackedFloat32Array(0.52364475)
@@ -52,19 +52,19 @@ shader_parameter/shadow_type = 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nlanv"]
 render_priority = 2
 shader = ExtResource("7_nlanv")
-shader_parameter/texture_sampler = ExtResource("10_ebijb")
+shader_parameter/texture_sampler = ExtResource("9_rb8g2")
 shader_parameter/shadow_type = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wcy1s"]
 render_priority = 5
 shader = ExtResource("7_nlanv")
-shader_parameter/texture_sampler = ExtResource("18_lb48a")
+shader_parameter/texture_sampler = ExtResource("15_rlam5")
 shader_parameter/shadow_type = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqcbg"]
 render_priority = 6
 shader = ExtResource("7_nlanv")
-shader_parameter/texture_sampler = ExtResource("16_nc11s")
+shader_parameter/texture_sampler = ExtResource("16_ebijb")
 shader_parameter/shadow_type = 1
 
 [sub_resource type="Curve" id="Curve_y1sm4"]
@@ -217,7 +217,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9304426)
 material_override = SubResource("ShaderMaterial_nlanv")
 pixel_size = 0.002
 render_priority = 2
-texture = ExtResource("10_ebijb")
+texture = ExtResource("9_rb8g2")
 
 [node name="CharacterAnimator" type="Node3D" parent="." node_paths=PackedStringArray("primary_slot", "secondary_slot_1", "secondary_slot_2")]
 unique_name_in_owner = true
@@ -263,14 +263,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.91)
 material_override = SubResource("ShaderMaterial_wcy1s")
 pixel_size = 0.002
 render_priority = 5
-texture = ExtResource("18_lb48a")
+texture = ExtResource("15_rlam5")
 
 [node name="FGShadowHighlight" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.91)
 material_override = SubResource("ShaderMaterial_cqcbg")
 pixel_size = 0.002
 render_priority = 6
-texture = ExtResource("16_nc11s")
+texture = ExtResource("16_ebijb")
 
 [node name="DustParticles3D_WINDOW" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 1.5362129, 1.2989576, -4.80145)

@@ -97,21 +97,21 @@ locale/translations_pot_files=PackedStringArray("res://data/dialogue/showcase.di
 
 time_of_day={
 "type": "float",
-"value": 1.0
+"value": 0.5
 }
 shadow_global_min_alpha={
 "type": "float",
-"value": 0.1
+"value": 0.5
 }
 shadow_global_max_alpha={
 "type": "float",
-"value": 0.55
+"value": 1.0
 }
 shadow_highlight_min_alpha={
 "type": "float",
-"value": 0.3
+"value": 0.7
 }
 shadow_highlight_max_alpha={
 "type": "float",
-"value": 0.2
+"value": 1.0
 }
