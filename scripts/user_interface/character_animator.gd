@@ -4,13 +4,13 @@
 class_name CharacterAnimator
 extends Node3D
 
-enum LookState { ABSENT, IDLE, SPEAKING }
+enum LookState {ABSENT, IDLE, SPEAKING}
 
 # TODO: might be worth changing this to a list?
 @export_group("Sprite Slots")
-@export var slot_sprite_1: Sprite3D
-@export var slot_sprite_2: Sprite3D
-@export var slot_sprite_3: Sprite3D
+@export var primary_slot: Sprite3D
+@export var secondary_slot_1: Sprite3D
+@export var secondary_slot_2: Sprite3D
 
 @export_group("Sprite Animations")
 @export var idle_enter_duration: float = 0.5 # absent -> idle
@@ -50,7 +50,7 @@ const _LOOK_VALUES := {
 }
 
 var _slots: Array[Slot] = []
-var _primary_slot_default_position: Vector3
+var _slot_default_positions: Array[Vector3] = []
 
 # Animation queue
 var _queue: Array[Callable] = [] # each Callable in the queue represents one animation, the animations in the queue play sequentially (not in parallel)
@@ -58,8 +58,8 @@ var _running_tween: Tween = null
 
 
 func _ready() -> void:
-	_primary_slot_default_position = slot_sprite_1.position
-	for sprite in [slot_sprite_1, slot_sprite_2, slot_sprite_3]:
+	for sprite in [primary_slot, secondary_slot_1, secondary_slot_2]:
+		_slot_default_positions.append(sprite.position)
 		# Each sprite gets its own copy of the material so that shader params like texture and crosshatch fill percentage can differ per sprite
 		if sprite.material_override != null:
 			sprite.material_override = sprite.material_override.duplicate()
@@ -151,6 +151,8 @@ func _enter_animation(character: CharacterDefinition, expression_tag: String) ->
 		Utils.debug_error("CharacterAnimator: All %d slots are taken. '%s' is not shown." % [_slots.size(), character.display_name])
 		return null
 
+	slot = _make_primary(slot)
+
 	slot.character = character
 	_apply_expression(slot, expression_tag)
 	slot.sprite.position = _target_position(slot)
@@ -168,6 +170,8 @@ func _set_speaker_animation(character: CharacterDefinition, expression_tag: Stri
 	var slot := _slot_of(character)
 	if slot == null:
 		return _enter_animation(character, expression_tag)
+
+	slot = _make_primary(slot)
 
 	_apply_expression(slot, expression_tag)
 	if slot.look_state == LookState.SPEAKING: # the same character speaks again, only the expression changed
@@ -265,6 +269,13 @@ func _tween_one_look_step(tween: Tween, slot: Slot, next_state: LookState, delay
 	slot.look_state = next_state
 	return duration
 
+func _make_primary(slot: Slot) -> Slot:
+	var primary := _slots[0]
+	if slot == primary:
+		return primary
+	
+	primary.swap_occupant_with(slot)
+	return primary
 
 ## Shifts the present characters toward slot 1, then slides every NPC sprite to its slot
 func _compact_slots(tween: Tween, delay: float) -> void:
@@ -293,16 +304,11 @@ func _tween_position(tween: Tween, slot: Slot, duration: float, delay: float) ->
 	position_tweener.set_delay(delay).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 
-## Where the sprite of a slot should be placed
+## Where the sprite of a slot should be placed	
 func _target_position(slot: Slot) -> Vector3:
-	var sprite_position := _primary_slot_default_position
-	if _slots[2].character != null:
-		var right_slot_half_width := _slots[2].character.speaking_push_distance * 0.5
-		sprite_position.x -= right_slot_half_width * 0.5
-	if slot != _slots[0]:
-		var separation := (_slots[0].character.speaking_push_distance + slot.character.speaking_push_distance) * 0.5
-		sprite_position.x += -separation if slot == _slots[1] else separation
-	return sprite_position + (_SPEAKING_POSITION_OFFSET if slot.look_state == LookState.SPEAKING else _IDLE_POSITION_OFFSET)
+	var sprite_position := _slot_default_positions[_slots.find(slot)]
+	var character_offset := Vector3(slot.character.X_offset, 0.0, 0.0)
+	return sprite_position + character_offset + (_SPEAKING_POSITION_OFFSET if slot.look_state == LookState.SPEAKING else _IDLE_POSITION_OFFSET)
 
 #endregion
 

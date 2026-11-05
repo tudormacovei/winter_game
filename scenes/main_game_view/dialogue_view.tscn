@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ck2v4ahcemn45"]
+[gd_scene load_steps=41 format=3 uid="uid://ck2v4ahcemn45"]
 
 [ext_resource type="Script" uid="uid://lxpdkay2h6h7" path="res://scripts/user_interface/dialogue_view.gd" id="1_isxcp"]
 [ext_resource type="Texture2D" uid="uid://brhi0kh5r17wq" path="res://2d_assets/Workshop/WorkshopBG_Color.webp" id="2_kbq0g"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://c6ahooeib8ybd" path="res://3d_assets/shaders/workshop_shadow.gdshader" id="7_nlanv"]
 [ext_resource type="Texture2D" uid="uid://ct32448s30da4" path="res://2d_assets/Workshop/WorkshopBG_Shadow2.png" id="8_rlam5"]
 [ext_resource type="Texture2D" uid="uid://cu3t3sye5sj6b" path="res://2d_assets/Workshop/WorkshopBG_Shadow1.png" id="10_ebijb"]
+[ext_resource type="Texture2D" uid="uid://25cybc5jvpvx" path="res://2d_assets/characters/Shopkeeper_NPC4/Shopkeeper_NPC4.webp" id="11_ccikh"]
 [ext_resource type="Script" uid="uid://byb6y503kl5e8" path="res://scripts/user_interface/character_animator.gd" id="12_lxqo2"]
 [ext_resource type="Material" uid="uid://b0hpo1ghk4qju" path="res://3d_assets/materials/character_crosshatch_fill.tres" id="13_cqcbg"]
 [ext_resource type="Texture2D" uid="uid://ddaf67iv4x4t2" path="res://2d_assets/characters/Micah_NPC1/Micah_NPC1.webp" id="14_cqcbg"]
@@ -218,36 +219,38 @@ pixel_size = 0.002
 render_priority = 2
 texture = ExtResource("10_ebijb")
 
-[node name="CharacterAnimator" type="Node3D" parent="." node_paths=PackedStringArray("slot_sprite_1", "slot_sprite_2", "slot_sprite_3")]
+[node name="CharacterAnimator" type="Node3D" parent="." node_paths=PackedStringArray("primary_slot", "secondary_slot_1", "secondary_slot_2")]
 unique_name_in_owner = true
 script = ExtResource("12_lxqo2")
-slot_sprite_1 = NodePath("CharacterSprite1")
-slot_sprite_2 = NodePath("CharacterSprite2")
-slot_sprite_3 = NodePath("CharacterSprite3")
+primary_slot = NodePath("PrimarySlot")
+secondary_slot_1 = NodePath("SecondarySlot1")
+secondary_slot_2 = NodePath("SecondarySlot2")
 idle_enter_duration = 0.7
 idle_exit_duration = 1.2
 speaking_enter_duration = 0.4
 speaking_exit_duration = 0.3
 compaction_slide_duration = 0.4
 
-[node name="CharacterSprite1" type="Sprite3D" parent="CharacterAnimator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -4.3)
+[node name="PrimarySlot" type="Sprite3D" parent="CharacterAnimator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48, 0, -4.3)
+material_override = ExtResource("13_cqcbg")
+pixel_size = 0.002
+render_priority = 3
+texture = ExtResource("11_ccikh")
+
+[node name="SecondarySlot1" type="Sprite3D" parent="CharacterAnimator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79066163, 0, -4.3)
 material_override = ExtResource("13_cqcbg")
 pixel_size = 0.002
 render_priority = 3
 texture = ExtResource("14_cqcbg")
 
-[node name="CharacterSprite2" type="Sprite3D" parent="CharacterAnimator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.3)
+[node name="SecondarySlot2" type="Sprite3D" parent="CharacterAnimator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19066161, 0, -4.3)
 material_override = ExtResource("13_cqcbg")
 pixel_size = 0.002
 render_priority = 3
-
-[node name="CharacterSprite3" type="Sprite3D" parent="CharacterAnimator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -4.3)
-material_override = ExtResource("13_cqcbg")
-pixel_size = 0.002
-render_priority = 3
+texture = ExtResource("14_cqcbg")
 
 [node name="DialogueForeground" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.91)

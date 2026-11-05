@@ -15,5 +15,5 @@ alt_sprites = Dictionary[String, Texture2D]({
 "happy": ExtResource("1_3ava7"),
 "upset": ExtResource("2_4ubrl")
 })
-speaking_push_distance = 0.8
+X_offset = 0.0
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"

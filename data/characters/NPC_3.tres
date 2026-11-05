@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1xr6nnrbhgtb" path="res://2d_assets/characters/Mary_NPC3/Mary_NPC3_alt.webp" id="1_lwnuu"]
 [ext_resource type="Script" uid="uid://bupv7jmbcrb2p" path="res://scripts/systems/interactions/character_definition.gd" id="1_w4k2y"]
-[ext_resource type="Texture2D" uid="uid://4ufekl7mocmy" path="res://2d_assets/characters/Mary_NPC3/Mary_LitUp_NPC3.webp" id="2_lwnuu"]
+[ext_resource type="Texture2D" uid="uid://dx3cw5i0h66tw" path="res://2d_assets/characters/Mary_NPC3/Mary_LitUp_NPC3.webp" id="2_lwnuu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7xo4u"]
 load_path = "res://.godot/imported/Mary_NPC3.webp-f100fb19f84e68b806341febeaabf8bd.ctex"
@@ -17,5 +17,5 @@ alt_sprites = Dictionary[String, Texture2D]({
 "alt_clothes": ExtResource("1_lwnuu"),
 "happy": ExtResource("2_lwnuu")
 })
-speaking_push_distance = 1.5
+X_offset = 0.48
 metadata/_custom_type_script = "uid://bupv7jmbcrb2p"
