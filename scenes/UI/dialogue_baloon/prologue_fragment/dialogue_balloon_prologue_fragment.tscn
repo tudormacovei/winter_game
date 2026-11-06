@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dkslymasero84"]
+[gd_scene load_steps=22 format=3 uid="uid://dkslymasero84"]
 
 [ext_resource type="Script" uid="uid://bgqwv3xq0lmns" path="res://scenes/UI/dialogue_baloon/dialogue_balloon.gd" id="1_3qoir"]
 [ext_resource type="Theme" uid="uid://tiojdx3ijkaw" path="res://data/UI/themes/DialogueThemePrologue.tres" id="2_bf76d"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://77myfp7dnped" path="res://2d_assets/crow/Crow_Prologue.webp" id="9_ol8qm"]
 [ext_resource type="Script" uid="uid://dhul8yibaytl1" path="res://scenes/UI/dialogue_baloon/prologue_fragment/prologue_crow_sprite.gd" id="10_qfikd"]
 [ext_resource type="Texture2D" uid="uid://d2m2uuxn4dvne" path="res://2d_assets/crow/Crow_Prologue_2.webp" id="11_bf76d"]
+[ext_resource type="Material" uid="uid://dp6kjbs7bsitj" path="res://3d_assets/materials/shader_material_prologue_crow.tres" id="12_crow"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -240,6 +241,7 @@ unique_name_in_owner = true
 
 [node name="CrowSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+material = ExtResource("12_crow")
 position = Vector2(872.00006, 180)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_ol8qm")

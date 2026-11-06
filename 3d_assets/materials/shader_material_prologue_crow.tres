@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dp6kjbs7bsitj"]
+
+[ext_resource type="Shader" uid="uid://cs1jtjpspxuh5" path="res://3d_assets/shaders/prologue_crow.gdshader" id="1_crow"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kcoaa"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e7raw"]
+noise = SubResource("FastNoiseLite_kcoaa")
+seamless = true
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_crow")
+shader_parameter/wipe_angle = 0.0
+shader_parameter/transition_thickness = 0.10000000475
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_e7raw")
+shader_parameter/noise_strength = 0.30000001425
+shader_parameter/bright_band_color = Color(0.57, 0.7419999, 1, 1)
+shader_parameter/bright_band_width = 0.0800000038
+shader_parameter/middle_band_color = Color(0.3040392, 0.4598751, 0.7018666, 1)
+shader_parameter/middle_band_width = 0.030000001425
+shader_parameter/dark_band_color = Color(0.12, 0.19, 0.3, 1)
+shader_parameter/dark_band_width = 0.0800000038
+shader_parameter/band_blend_width = 0.06000000285
+shader_parameter/visibility_start = 0.0
+shader_parameter/visibility_end = 1.0
+shader_parameter/sprite_switch_progress = 1.0

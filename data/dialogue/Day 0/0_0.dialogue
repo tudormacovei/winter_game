@@ -163,8 +163,8 @@ Crow: Go to Sonder's Peak. A haven for my children, where dwell your new brother
 Crow: A place unravaged by the Cullings, where a third was born, a third will grow, and a third shall die.
 Crow: It's up to you now, child. I need you, just as you will soon need me. 
 Crow: [do! do_scripted_event("show_prologue_crow_with_ugly_eye")]Do not let me down, for I am your Goddess and I won't allow it. 
-Crow: [do! do_scripted_event("show_prologue_crow")]We will meet again, soon enough. Be at peace.[do! do_scripted_event("hide_prologue_crow")]
-A frail fragment: ...
+Crow: [do! do_scripted_event("show_prologue_crow")]We will meet again, soon enough. Be at peace.
+A frail fragment: [do! do_scripted_event("hide_prologue_crow")]...
 A frail fragment: She's gone. 
 A frail fragment: Who are you, now? Is there anything left of your former self?
 A frail fragment: You can't tell. 
