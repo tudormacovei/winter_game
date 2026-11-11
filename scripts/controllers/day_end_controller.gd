@@ -3,6 +3,9 @@ extends Node
 @onready var _day_label: Label = %DayCompleteText
 @onready var _performance_label := %PerformanceText
 @onready var _narrative_label := %NarrativeText
+@onready var _continue_button := %ContinueButton
+
+var _is_waiting_for_continue: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +14,15 @@ func _ready() -> void:
 	
 	_performance_label.hide()
 	_narrative_label.hide()
+
+	CursorManager.register_controls([_continue_button])
+
+func await_continue_press() -> void:
+	_continue_button.disabled = false
+	_is_waiting_for_continue = true
+	await _continue_button.pressed
+	_is_waiting_for_continue = false
+	_continue_button.disabled = true
 
 func set_text(day_definition) -> void:
 	# NOTE: Day end screen acts more like a Day Start screen, so display the next day's number
@@ -39,3 +51,13 @@ func set_game_end_text() -> void:
 	
 	_performance_label.hide()
 	_narrative_label.hide()
+
+#region Debug
+
+func debug_try_press_continue() -> bool:
+	if _is_waiting_for_continue:
+		_continue_button.pressed.emit()
+		return true
+	return false
+
+#endregion

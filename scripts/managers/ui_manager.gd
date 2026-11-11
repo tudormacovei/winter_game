@@ -63,7 +63,7 @@ func show_day_end_screen(day_definition: DayDefintion) -> void:
 
 	GameState.emit_signal("day_end_screen_shown")
 	
-	await get_tree().create_timer(Config.DAY_END_SCREEN_SHOW_TIME_SECONDS).timeout
+	await _day_end_controller.await_continue_press()
 	
 	await fade_to_black()
 	_day_end_controller.hide()
@@ -274,5 +274,8 @@ func _on_blink_closed(is_focused: bool) -> void:
 
 func debug_hide_game_end_screen():
 	_day_end_controller.hide()
+
+func debug_try_continue_day_end_screen() -> bool:
+	return _day_end_controller.debug_try_press_continue()
 
 #endregion

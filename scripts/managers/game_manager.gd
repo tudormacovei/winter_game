@@ -466,6 +466,10 @@ func debug_get_current_dialogue() -> String:
 	return interaction.dialogue.resource_path
 
 func debug_play_next_interaction():
+	if ui_manager.debug_try_continue_day_end_screen():
+		print("Debug: Day end screen continued.")
+		return # The suspended _play_next_interaction() will resume and continues the flow
+
 	if current_day_index >= _day_resources.size():
 		Utils.debug_alert("Debug: Cannot play next interaction. All days have been completed.")
 		return
