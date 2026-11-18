@@ -100,13 +100,21 @@ func play_sfx_and_wait(stream_name: String, volume_offset_db: float = 0.0) -> vo
 	await temp_player.finished
 
 	temp_player.queue_free()
-	
-func play_sfx_on_letter_spoke():
-	var random_pitch = randf_range(Config.LETTER_SPOKE_MIN_PITCH_SCALE, Config.LETTER_SPOKE_MAX_PITCH_SCALE)
-	_play_sfx(_sfx_dialogue_letter_player, Config.LETTER_SPOKE_SFX_NAME, sfx_config.volumes_db.get(Config.LETTER_SPOKE_SFX_NAME, 0.0), random_pitch)
-	
+
 func set_bus_volume(bus_name: String, volume_db: float):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), volume_db)
+
+# Ideally, these should be de-coupled
+#region Specific Audio Events
+
+func on_letter_spoke():
+	var random_pitch = randf_range(Config.LETTER_SPOKE_MIN_PITCH_SCALE, Config.LETTER_SPOKE_MAX_PITCH_SCALE)
+	_play_sfx(_sfx_dialogue_letter_player, Config.LETTER_SPOKE_SFX_NAME, sfx_config.volumes_db.get(Config.LETTER_SPOKE_SFX_NAME, 0.0), random_pitch)
+
+func on_camera_transition():
+	play_sfx(Config.CAMERA_SWOOSH_SFX_NAME)
+
+#endregion
 
 func _get_sfx_volume(stream_name: String) -> float:
 	var base_volume_db: float = 0.0

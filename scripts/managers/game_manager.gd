@@ -419,7 +419,7 @@ func _on_dialogue_letter_spoke(_letter: String, _letter_index: int, _speed: floa
 	letter_spoke_counter += 1
 	if letter_spoke_counter % Config.LETTER_SPOKE_FREQUENCY == 0:
 		letter_spoke_counter = 0
-		AudioManager.play_sfx_on_letter_spoke()
+		AudioManager.on_letter_spoke()
 
 func _on_life_lost():
 	AudioManager.play_sfx(Config.CANDLE_BLOW_SFX_NAME)

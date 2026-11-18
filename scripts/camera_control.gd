@@ -58,7 +58,6 @@ func _transition_to(target_focus: CameraFocus) -> void:
 		_transition_tween.kill()
 
 	_camera_focus = target_focus
-	AudioManager.play_sfx(Config.CAMERA_SWOOSH_SFX_NAME)
 	camera_focus_changed.emit(_camera_focus)
 
 	_transition_tween = create_tween()
@@ -66,6 +65,7 @@ func _transition_to(target_focus: CameraFocus) -> void:
 	_transition_tween.tween_property(self, "rotation_degrees:x", target_rotation, vertical_transition_time).set_trans(Tween.TRANS_SINE)
 	_transition_tween.finished.connect(_on_transition_finished)
 
+	AudioManager.on_camera_transition()
 
 func _on_transition_finished() -> void:
 	camera_rotation_completed.emit(_camera_focus)

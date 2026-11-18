@@ -61,10 +61,13 @@ func show_day_end_screen(day_definition: DayDefintion) -> void:
 	_day_end_controller.show()
 	await fade_from_black()
 
+	camera.set_locked_to_dialogue(true)
 	GameState.emit_signal("day_end_screen_shown")
 	
 	await _day_end_controller.await_continue_press()
 	
+	camera.set_locked_to_dialogue(false)
+
 	await fade_to_black()
 	_day_end_controller.hide()
 	await fade_from_black()
