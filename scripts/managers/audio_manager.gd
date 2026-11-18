@@ -35,7 +35,6 @@ func _ready():
 	sfx_config = ResourceLoader.load(Config.SFX_CONFIG_PATH)
 	_create_players()
 
-
 func play_ambient_stream(stream_name: String):
 	if not ambient_audio_streams.has(stream_name):
 		Utils.debug_error("AudioManager: No music stream found with name '%s'!" % stream_name)
@@ -45,6 +44,9 @@ func play_ambient_stream(stream_name: String):
 	_ambient_player.stream = ambient_audio_streams[stream_name]
 	_ambient_player.volume_db = volume
 	_ambient_player.play()
+
+func stop_ambient():
+	_ambient_player.stop()
 
 func play_sfx(stream_name: String, volume_offset_db: float = 0.0) -> void:
 	if not sfx_audio_streams.has(stream_name):
@@ -61,20 +63,11 @@ func play_sfx(stream_name: String, volume_offset_db: float = 0.0) -> void:
 		player.finished.connect(_on_sfx_finished.bind(stream_name, player))
 		sfx_audio_players[stream_name] = player
 	elif player.stream_paused:
-		player.stream_paused = false   # resume the paused sound
+		player.stream_paused = false # resume the paused sound
 		return
 
 	player.volume_db = _get_sfx_volume(stream_name) + volume_offset_db
-	player.play()   # restarts from the beginning if already playing, cutting off the previous instance
-	
-
-func _on_sfx_finished(stream_name: String, player: AudioStreamPlayer) -> void:
-	if sfx_audio_players.get(stream_name) == player:
-		sfx_audio_players.erase(stream_name)
-	player.queue_free()
-
-func stop_ambient():
-	_ambient_player.stop()
+	player.play() # restarts from the beginning if already playing, cutting off the previous instance
 
 func pause_sfx(stream_name: String):
 	var audioPlayer: AudioStreamPlayer = sfx_audio_players.get(stream_name)
@@ -128,6 +121,11 @@ func _play_sfx(stream_player: AudioStreamPlayer, stream_name: String, volume_db:
 	var sfx = sfx_audio_streams[stream_name]
 	var playback = stream_player.get_stream_playback()
 	return playback.play_stream(sfx, 0, volume_db, pitch_scale, 0, stream_player.bus)
+
+func _on_sfx_finished(stream_name: String, player: AudioStreamPlayer) -> void:
+	if sfx_audio_players.get(stream_name) == player:
+		sfx_audio_players.erase(stream_name)
+	player.queue_free()
 
 func _preload_streams(path: String) -> Dictionary:
 	var streams: Dictionary = {}
